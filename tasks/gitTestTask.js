@@ -1,6 +1,30 @@
 'use strict'
 
-// Uses https://github.com/lambci/git-lambda-layer
+/*  WHAT THIS CODE DEMONSTRATES: during the initialization phase of an AWS
+    Lambda function's invocation ... you can commit the Deployment Package
+    to GitHub. 
+
+Lambda layer        :   https://github.com/lambci/git-lambda-layer
+
+Git repository      :   https://github.com/jerng-org/ruthenium.git
+
+    This repository must BELONG to a (GitHub Organization)
+
+Git branch          :   jerng-machines-writeable
+
+    Set a (Branch Protection Rule) which restricts who can push to 
+    (jerng-machines-writeable), enabling only the user (jerng-machines).
+
+    Meanwhile, set a (Branch Protection Rule) which restricts who can push 
+    to (master), enabling (at least one user)).
+    
+Git user            :   jerng-machines
+
+Environmental variable with password 
+
+                    :   $GITHUB_JERNG_MACHINES_USER_PASSWORD
+
+*/
 
 const mark          = require ( '../modules/mark' )            
 const childProcess  = require('child_process')
