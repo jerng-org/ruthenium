@@ -16,7 +16,7 @@ Git branch          :   jerng-machines-writeable
     (jerng-machines-writeable), enabling only the user (jerng-machines).
 
     Meanwhile, set a (Branch Protection Rule) which restricts who can push 
-    to (master), enabling (at least one user)).
+    to (master), enabling (at least one userx).
     
 Git user            :   jerng-machines
 

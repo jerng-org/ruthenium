@@ -35,6 +35,8 @@ exports.handler = async function () {
     
     return  ruthenium   ( arguments, [  // MIDDLEWARES, execution order
                                 
+        versionControl,
+        
         getHeaders,                 // Values with same key stored as: Array of values
         copyURLParameters,          // Values with same key stored as: CSV string
         getFormData,
@@ -42,7 +44,6 @@ exports.handler = async function () {
         router,
         
         composeResponse,
-        versionControl,
         lastGuard
     ] ) 
     
