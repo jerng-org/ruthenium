@@ -3,8 +3,12 @@
 // require() executes modules; use require.res() to resolve without execution.
 
 // PROJECT
-const mark      = require ( './modules/mark' )            
+const mark      = require ( './modules/mark' )
 mark( `index.js required mark.js`)
+
+const gitCommit = require ( './modules/gitCommit' )            
+mark( `index.js required gitCommit.js`)
+gitCommit ()
 
 const ruthenium = require ( './modules/framework/ruthenium' )
 const wastems   = async ms => { 
@@ -21,7 +25,6 @@ const getFormData               = require (`./modules/middlewares/getFormData.js
 const getHeaders                = require (`./modules/middlewares/getHeaders.js`) 
 const lastGuard                 = require (`./modules/middlewares/lastGuard.js`) 
 const router                    = require (`./modules/middlewares/router.js`) 
-const versionControl            = require (`./modules/middlewares/versionControl.js`) 
 
 // LAMBDA HANDLER
 exports.handler = async function () { 
@@ -35,8 +38,6 @@ exports.handler = async function () {
     
     return  ruthenium   ( arguments, [  // MIDDLEWARES, execution order
                                 
-        versionControl,
-        
         getHeaders,                 // Values with same key stored as: Array of values
         copyURLParameters,          // Values with same key stored as: CSV string
         getFormData,
