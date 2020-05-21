@@ -38,9 +38,6 @@ const router = async ( data ) => {
             case ( 'restful' ):                 // METHOD, &type=M, &thing=N
                 data.RU.signals.taskname = 'restful'    
                 break
-            case ( 'git-test' ):                 
-                data.RU.signals.taskname = 'gitTestTask'    
-                break
             case ( 'file' ):
                 data.RU.signals.taskname = 'sendBlobTask'
                 break

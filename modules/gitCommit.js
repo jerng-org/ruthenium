@@ -41,7 +41,7 @@ const gitCommit = () => { try {
         'git clone -b jerng-machines-writeable https://github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', stdio: 'inherit', cwd: '/tmp' })
 
-    mark ( `gitTestTask.js Cloned into repository ...` )
+    mark ( `gitCommit.js Cloned into repository ...` )
 ///////////////////////////////////////////////////////////////////////////////
 
     notes.rmClonedRepoFiles = childProcess.execSync(
