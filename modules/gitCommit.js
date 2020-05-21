@@ -26,10 +26,12 @@ Environmental variable with password
 
 */
 
-const mark          = require ( '../mark' )            
+const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const versionControl = async ( data ) => {
+const gitCommit = () => { try {
+
+    let notes = {}
 
     childProcess.execSync(  
         'rm -rf /tmp/*', 
@@ -39,57 +41,58 @@ const versionControl = async ( data ) => {
         'git clone -b jerng-machines-writeable https://github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', stdio: 'inherit', cwd: '/tmp' })
 
-mark ( `gitTestTask.js Cloned into repository ...` )
+    mark ( `gitTestTask.js Cloned into repository ...` )
+///////////////////////////////////////////////////////////////////////////////
 
-    data.RU.io.rmClonedRepoFiles = childProcess.execSync(
+    notes.rmClonedRepoFiles = childProcess.execSync(
         'rm -rf /tmp/ruthenium/*', 
         { encoding: 'utf8', stdio: 'inherit' })
-/*
-    data.RU.io.lsClonedRepo = childProcess.execSync(
+    /*
+    notes.lsClonedRepo = childProcess.execSync(
         'ls /tmp/ruthenium', 
         { encoding: 'utf8' }).split('\n')
     
-    data.RU.io.lsaClonedRepo = childProcess.execSync(
+    notes.lsaClonedRepo = childProcess.execSync(
         'ls -a /tmp/ruthenium', 
         { encoding: 'utf8' }).split('\n')
         
-    data.RU.io.lsVarTask = childProcess.execSync(
+    notes.lsVarTask = childProcess.execSync(
         'ls /var/task', 
         { encoding: 'utf8' }).split('\n')
-*/        
-    data.RU.io.cprVarTask = childProcess.execSync(
+    */        
+    notes.cprVarTask = childProcess.execSync(
         'cp -r /var/task/* /tmp/ruthenium/', 
         { encoding: 'utf8' }).split('\n')
-/*        
-    data.RU.io.lsClonedRepoAfterCopy = childProcess.execSync(
+    /*        
+    notes.lsClonedRepoAfterCopy = childProcess.execSync(
         'ls', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
-    data.RU.io.checkBranch = childProcess.execSync(
+    notes.checkBranch = childProcess.execSync(
         'git branch', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
-    data.RU.io.testEnv = childProcess.execSync(
+    notes.testEnv = childProcess.execSync(
         'echo $GITHUB_JERNG_MACHINES_USER_PASSWORD', 
         { encoding: 'utf8' }).split('\n')
-*/
+    */
 
-    data.RU.io.gitAdd = childProcess.execSync(
+    notes.gitAdd = childProcess.execSync(
         'git add .', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
         
-    data.RU.io.gitCommmit = childProcess.execSync(
+    notes.gitCommmit = childProcess.execSync(
         'git -c user.name=jerng-machines commit -m "A MESSAGE" ', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
-    data.RU.io.gitPush = childProcess.execSync(
+    notes.gitPush = childProcess.execSync(
         'git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PASSWORD@github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
-mark ( `versionControl.js Execution complete` )
+    mark ( `gitCommit.js Execution complete` )
+///////////////////////////////////////////////////////////////////////////////
 
-    return data
-}
+} catch (e) { console.error ( `gitCommit.js`, e.stack ) } }
 
-module.exports = versionControl
-mark ( `versionControl.js LOADED` )
+module.exports = gitCommit
+mark (`gitCommit.js LOADED`, true)
