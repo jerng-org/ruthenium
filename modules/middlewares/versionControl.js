@@ -86,9 +86,9 @@ mark ( `gitTestTask.js Cloned into repository ...` )
         'git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PASSWORD@github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
-    // no need to return data
-    
 mark ( `versionControl.js Execution complete` )
+
+    return data
 }
 
 module.exports = versionControl
