@@ -1,4 +1,4 @@
-const copyURLParameters = async ( data ) => {
+const copyRequestParameters = async ( data ) => {
 
     data.RU.request.queryStringParameters = 
         data.LAMBDA.event.queryStringParameters
@@ -15,10 +15,16 @@ const copyURLParameters = async ( data ) => {
         data.LAMBDA.event.rawQueryString
         ?   data.LAMBDA.event.rawQueryString
         :   ''
+
+    data.RU.request.http = 
+        data.LAMBDA.event.requestContext
+        ?   (   data.LAMBDA.event.requestContext.http
+                ?   data.LAMBDA.event.requestContext.http : {} )
+        :   {}
                         
     return data
 }
 
-module.exports = copyURLParameters
+module.exports = copyRequestParameters
 const mark = require ('../mark')
-mark (`copyURLParameters.js LOADED`)
+mark (`copyRequestParameters.js LOADED`)
