@@ -5,7 +5,9 @@ const tasks = {}
 
 const taskFileNames = fs.readdirSync ('/var/task/tasks')
 taskFileNames.forEach ( ( current, index, array ) => {
-    tasks[ current.slice (0, -3) ] = require ( '/var/task/tasks/' + current )
+    if ( current.toLowerCase().slice ( -3 ) == '.js' ) {
+        tasks[ current.slice (0, -3) ] = require ( '/var/task/tasks/' + current )
+    }
 } /* , thisArg */ ) 
 
 
