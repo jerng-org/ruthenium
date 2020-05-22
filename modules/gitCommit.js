@@ -83,7 +83,7 @@ const gitCommit = () => { try {
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
         
     notes.gitCommmit = childProcess.execSync(
-        'git -c user.name=jerng-machines commit -m "A MESSAGE" ', 
+        'git -c user.name=jerng-machines commit -m "?ruthenium=restful&type=schemas ... this now works; file naming and require(path) conventions ugly; FIX NEXT!" ', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
     notes.gitPush = childProcess.execSync(
