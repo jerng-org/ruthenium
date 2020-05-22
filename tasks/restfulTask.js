@@ -1,7 +1,7 @@
 'use strict'
 
 const mark                  = require ( '/var/task/modules/mark' )            
-//const getAllSchemasTask     = require ( '/var/task/tasks/restfulTasks/getAllSchemas.js' )
+const getAllSchemasTask     = require ( '/var/task/tasks/restfulTasks/getAllSchemas.js' )
 
 
 const restfulTask = async ( data ) => {
@@ -80,7 +80,7 @@ switch ( data.RU.request.http.method ) {
                 if ( data.RU.request.queryStringParameters.type == 'schemas' ) {
                 
                     // (schemas) are meta ... i.e. special
-                    //getAllSchemasTask ( data )
+                    getAllSchemasTask ( data )
                 }
                 else {
                     // GET the Virtual TABLE   
