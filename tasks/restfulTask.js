@@ -80,7 +80,7 @@ switch ( data.RU.request.http.method ) {
                 if ( data.RU.request.queryStringParameters.type == 'schemas' ) {
                 
                     // (schemas) are meta ... i.e. special
-                    getAllSchemasTask ( data )
+                    await getAllSchemasTask ( data )
                 }
                 else {
                     // GET the Virtual TABLE   

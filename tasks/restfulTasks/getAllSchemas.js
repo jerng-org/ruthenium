@@ -12,8 +12,8 @@ const getAllSchemasTask = async ( data ) => {
     
     data.RU.response.markupName = 'allSchemasMarkup'
 
-    mark ( `getAllSchemasTask.js EXECUTED` )
+    mark ( `getAllSchemas.js EXECUTED` )
 }
 
 module.exports = getAllSchemasTask
-mark ( `getAllSchemasTask.js LOADED` )
+mark ( `getAllSchemas.js LOADED` )
