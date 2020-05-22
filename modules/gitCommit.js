@@ -11,7 +11,7 @@ Git repository      :   https://github.com/jerng-org/ruthenium.git
     This repository must BELONG to a (GitHub Organization)
 
 Git branch          :   jerng-machines-writeable
-
+x
     Set a (Branch Protection Rule) which restricts who can push to 
     (jerng-machines-writeable), enabling only the user (jerng-machines).
 
@@ -38,16 +38,17 @@ const gitCommit = () => { try {
         { encoding: 'utf8', stdio: 'inherit' })
 
     childProcess.execSync(
-        'git clone -b jerng-machines-writeable https://github.com/jerng-org/ruthenium.git', 
+        'git clone -n --depth 1 -b jerng-machines-writeable https://github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', stdio: 'inherit', cwd: '/tmp' })
 
     mark ( `gitCommit.js Cloned into repository ...` )
 ///////////////////////////////////////////////////////////////////////////////
 
+    /*
     notes.rmClonedRepoFiles = childProcess.execSync(
         'rm -rf /tmp/ruthenium/*', 
         { encoding: 'utf8', stdio: 'inherit' })
-    /*
+    
     notes.lsClonedRepo = childProcess.execSync(
         'ls /tmp/ruthenium', 
         { encoding: 'utf8' }).split('\n')
