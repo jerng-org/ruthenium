@@ -1,7 +1,8 @@
 'use strict'
 
-const mark      = require ( '../modules/mark' )            
-const DDBDC     = require ( '../io/DDBDC.js' )
+const mark                  = require ( '../modules/mark' )            
+const getAllSchemasTask     = require ( './restfulTasks/getAllSchemas.js' )
+
 
 const restfulTask = async ( data ) => {
     
@@ -79,14 +80,7 @@ switch ( data.RU.request.http.method ) {
                 if ( data.RU.request.queryStringParameters.type == 'schemas' ) {
                 
                     // (schemas) are meta ... i.e. special
-                    
-                    data.RU.io.gridSchemasScan = await DDBDC.scan ( {
-                        TableName: 'TEST-APP-GRID-SCHEMAS',
-                        ReturnConsumedCapacity : 'TOTAL'
-                    } ).promise()
-                    
-                    data.RU.response.markupName = 'allSchemasMarkup'
-
+                    getAllSchemasTask ( data )
                 }
                 else {
                     // GET the Virtual TABLE   
