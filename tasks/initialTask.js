@@ -1,16 +1,10 @@
 'use strict'
 
-const mark  = require ( '../modules/mark' )            
-const DDBDC = require ( '../io/DDBDC.js' )
+const mark  = require ( '../modules/mark' )         
 
 const initialTask = async ( data ) => {
-    
-    data.RU.io.gridSchemasScan = await DDBDC.scan ( {
-        TableName: 'TEST-APP-GRID-SCHEMAS',
-        ReturnConsumedCapacity : 'TOTAL'
-    } ).promise()
 
-    mark( `scan COMPLETED` )
+    // UNDEFINED FOR NOW    
 
     // no need to return data
     

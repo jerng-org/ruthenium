@@ -85,7 +85,7 @@ switch ( data.RU.request.http.method ) {
                         ReturnConsumedCapacity : 'TOTAL'
                     } ).promise()
                     
-                    data.RU.response.markupName = 'initialTaskMarkup'
+                    data.RU.response.markupName = 'allSchemasMarkup'
 
                 }
                 else {
