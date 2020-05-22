@@ -3,9 +3,9 @@
 const fs = require ( 'fs' )
 const tasks = {}
 
-const taskFileNames = fs.readdirSync ('tasks')
+const taskFileNames = fs.readdirSync ('/var/task/tasks')
 taskFileNames.forEach ( ( current, index, array ) => {
-    tasks[ current.slice (0, -3) ] = require ( '../../tasks/' + current )
+    tasks[ current.slice (0, -3) ] = require ( '/var/task/tasks/' + current )
 } /* , thisArg */ ) 
 
 
@@ -41,7 +41,7 @@ const router = async ( data ) => {
                     // Batch:       METHOD, &batch=[ 
                     //                          [ { method: type: thing: etc. } ]
                     //                      ]
-                    // Transaction: METHOD, &batch=[], transaction=1 
+                    // Transaction: METHOD, &batch=[], transaction=1  
                 break
             case ( 'file' ):
                 data.RU.signals.taskname = 'sendBlobTask'

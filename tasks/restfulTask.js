@@ -1,6 +1,6 @@
 'use strict'
 
-const mark                  = require ( '../modules/mark' )            
+const mark                  = require ( '/var/task/modules/mark' )            
 const getAllSchemasTask     = require ( '/var/task/tasks/restfulTasks/getAllSchemas.js' )
 
 
