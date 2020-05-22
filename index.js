@@ -2,6 +2,8 @@
 
 // require() executes modules; use require.res() to resolve without execution.
 
+console.table ( ['a','b','c'])
+
 // PROJECT
 const mark      = require ( './modules/mark' )
 mark( `index.js required mark.js`)
