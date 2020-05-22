@@ -5,11 +5,11 @@ const DDBDC     = require ( '../io/DDBDC.js' )
 
 const restfulTask = async ( data ) => {
     
-    if ( data.RU.queryStringParameters.batch ) {
+    if ( data.RU.request.queryStringParameters.batch ) {
         
         // batch
         
-        if ( data.RU.queryStringParameters.transaction ) {
+        if ( data.RU.request.queryStringParameters.transaction ) {
             
             // transactional batch - DEV THIS LAST
         }
