@@ -29,6 +29,8 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
+const commitMessage = `A MESSAGE`
+
 const gitCommit = () => { try {
 
     let notes = {}
@@ -83,7 +85,7 @@ const gitCommit = () => { try {
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
         
     notes.gitCommmit = childProcess.execSync(
-        'git -c user.name=jerng-machines commit -m "?ruthenium=restful&type=schemas ... this now works; file naming and require(path) conventions ugly; FIX NEXT!" ', 
+        `git -c user.name=jerng-machines commit -m "${ commitMessage }" `, 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
     notes.gitPush = childProcess.execSync(
