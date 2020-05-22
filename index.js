@@ -2,10 +2,6 @@
 
 // require() executes modules; use require.res() to resolve without execution.
 
-console.table ( ['a','b','c'])
-
-console.table ( ['a',['c','v','b'],'c'])
-
 // PROJECT
 const mark      = require ( './modules/mark' )
 mark( `index.js required mark.js`)
@@ -24,7 +20,7 @@ mark( `index.js did other things`)
 
 // PROJECT - MIDDLEWARES, lexical order
 const composeResponse           = require (`./modules/middlewares/composeResponse.js`) 
-const copyURLParameters         = require (`./modules/middlewares/copyURLParameters.js`) 
+const copyRequestParameters     = require (`./modules/middlewares/copyRequestParameters.js`) 
 const getFormData               = require (`./modules/middlewares/getFormData.js`) 
 const getHeaders                = require (`./modules/middlewares/getHeaders.js`) 
 const lastGuard                 = require (`./modules/middlewares/lastGuard.js`) 
@@ -43,7 +39,7 @@ exports.handler = async function () {
     return  ruthenium   ( arguments, [  // MIDDLEWARES, execution order
                                 
         getHeaders,                 // Values with same key stored as: Array of values
-        copyURLParameters,          // Values with same key stored as: CSV string
+        copyRequestParameters,          // Values with same key stored as: CSV string
         getFormData,
         
         router,
