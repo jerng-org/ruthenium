@@ -2,9 +2,9 @@
 
 // require() executes modules; use require.res() to resolve without execution.
 
-console.table ( "\n",['a','b','c'])
+console.table ( ['a','b','c'])
 
-console.table ( "\n",['a',['c','v','b'],'c'])
+console.table ( ['a',['c','v','b'],'c'])
 
 // PROJECT
 const mark      = require ( './modules/mark' )
