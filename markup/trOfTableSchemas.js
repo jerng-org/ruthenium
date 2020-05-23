@@ -82,7 +82,7 @@ const trOfTableSchema =  ( item ) => {
                 >
     </fieldset>
 
-    <form method="patch" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes">
+    <form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes&form-method=patch">
     <fieldset   class="toggle-set-2" 
                 style="display:none;"
                 >
