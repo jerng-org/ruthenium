@@ -3,7 +3,7 @@
 const mark      = require ( '../modules/mark' )            
 
 //  Provide a debuggable function name, 
-//  in order to avoid debuggin (function).toString()
+//  in order to avoid debugging (function).toString()
 
 const thisIsMyName = async ( data ) => {
     
