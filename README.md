@@ -1,6 +1,6 @@
 # ruthenium
 
-### Meta
+## Meta
 
 The following nouns are asserted to being equivalent for the purpose of this
 README:
@@ -10,14 +10,14 @@ README:
 -   software design pattern
 -   kit (for brevity)
 
-### Kit
+## Kit
 
 This is meant to be a *language-agnostic* and *runtime-agnostic* kit. This kit
 may be implemented in any / many languages and runtimes.
 
 This kit addresses the complexities of developing *web applications*. 
 
-##### Reference Kit 
+### Reference Kit 
 
 Since the *lingua franca* of the web is ECMAScript, the *reference
 kit* is currently being draughted in ECMAScript.  Since the dominant
@@ -26,15 +26,7 @@ adequately coherent with that. Specifically the reference kit is
 implemented in the NodeJS runtime on AWS Lambda, because well, currently AWS is
 the dominant public cloud (and that's how I ended up developing on it).
 
-### Motivation
-
-I've been building webpages since the year 2000 or thenabouts, and using
-web-development frameworks since 2009, and I hope to god that I won't have to
-redesign another web-development framework after this. Hopefully I'll be able to
-just reimplement the same pattern in whatever language or runtime I need to work
-in henceforth.
-
-##### My Context
+## My Context
 
 This is not expected to be your context.
 
@@ -50,7 +42,15 @@ boring and uncelebrated mess. Probably, so will this one. But for the span of
 their respective lives all frameworks are expected to be useful - I suppose
 frameworks are people too.
 
-##### Reuse in Pedagogy 
+### Motivation
+
+I've been building webpages since the year 2000 or thenabouts, and using
+web-development frameworks since 2009, and I hope to god that I won't have to
+redesign another web-development framework after this. Hopefully I'll be able to
+just reimplement the same pattern in whatever language or runtime I need to work
+in henceforth.
+
+### Reuse in Pedagogy 
 
 I never studied web development as an academic subject. In the process of
 learning how to write frameworks from scratch, I've figured there is just enough
