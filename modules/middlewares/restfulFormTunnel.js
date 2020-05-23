@@ -11,8 +11,8 @@ const mark      = require ( '/var/task/modules/mark' )
 const restfulFormTunnel = async ( data ) => {
     
     mark ( `restfulFormTunnel.js EXECUTED` )
-    
-    /return (data)
+
+    return data
 
 }
 
