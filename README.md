@@ -15,17 +15,16 @@ README:
 This is meant to be a *language-agnostic* and *runtime-agnostic* kit. This kit
 may be implemented in any / many languages and runtimes.
 
-This kit addresses the complexities of developing *web applications*. Since the
-*lingua franca* of the web is ECMAScript, the *reference implementation* is
-currently being draughted in ECMAScript. 
+This kit addresses the complexities of developing *web applications*. 
 
 ## Reference Implementation
 
-Since the dominant runtime for ECMAScript is currently NodeJS, the reference
-implementation is adequately coherent with that. Specifically the reference
-implementation is implemented in the NodeJS runtime on AWS Lambda, because well,
-currently AWS is the dominant public cloud (and that's how I ended up developing
-on it).
+Since the *lingua franca* of the web is ECMAScript, the *reference
+implementation* is currently being draughted in ECMAScript.  Since the dominant
+runtime for ECMAScript is currently NodeJS, the reference implementation is
+adequately coherent with that. Specifically the reference implementation is
+implemented in the NodeJS runtime on AWS Lambda, because well, currently AWS is
+the dominant public cloud (and that's how I ended up developing on it).
 
 ## Motivation
 
