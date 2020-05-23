@@ -7,6 +7,9 @@ const lastGuard = async ( data ) => {
 
 
 
+    const hasStatusCode = data.RU.response.statusCode   ? true : false
+    const hasBody       = data.RU.response.body         ? true : false
+    
     // strict disallowance of errors from any middleware (we can revisit this)
     if ( data.RU.errors.length ) {
         data.RU.responseBeforeLastGuard = data.RU.response
@@ -23,16 +26,11 @@ const lastGuard = async ( data ) => {
             }</code></pre>` 
         }
         console.error (`lastGuard.js detected a middleware error; (data) logged:`, data)
-        return data.RU.response
+        //return data.RU.response
     }
-
-
-
-
-    // strict minimum requirement of a status code OR body
-    const hasStatusCode = data.RU.response.statusCode   ? true : false
-    const hasBody       = data.RU.response.body         ? true : false
+    else
     
+    // strict minimum requirement of a status code OR body
     if ( ! ( hasStatusCode || hasBody ) ) { 
         data.RU.responseBeforeLastGuard = data.RU.response
         data.RU.response = {
@@ -48,26 +46,29 @@ const lastGuard = async ( data ) => {
             }</code></pre>` 
         }
         console.error (`(lastGuard.js) detected neither (statusCode), nor (body) in the (response).`, data)
-        return data.RU.response
+        //return data.RU.response
     }
-    
-    
-
+    else 
 
     // Either a (statusCode) or a (body) or both are in data.RU.response
+    {
+    
+        // OP 1
+        console.log ( data.RU.request.rawPath, data.RU.request.rawQueryString  ) 
+    
+        // OP 2
+        data.RU.response.body = hasBody 
+            ? data.RU.response.body
+            : `(lastGuard.js) finds that (data.RU.response.body) is falsy: (${
+                data.RU.response.body
+                })`
+        
+    }
+
+
+
+    
     //*
-
-    // OP 1
-    console.log ( data.RU.request.rawPath, data.RU.request.rawQueryString  ) 
-
-    // OP 2
-    data.RU.response.body = hasBody 
-        ? data.RU.response.body
-        : `(lastGuard.js) finds that (data.RU.response.body) is falsy: (${
-            data.RU.response.body
-            })`
-
-    // OP 3
     const response = { ... data.RU.response }
 
     if ( typeof data.RU.response.body == 'string' ) {
@@ -81,6 +82,7 @@ const lastGuard = async ( data ) => {
     //*/
     
     return response 
+    
     
     
     
