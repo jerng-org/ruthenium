@@ -35,7 +35,7 @@ const router = async ( data ) => {
         switch ( data.RU.request.queryStringParameters.ruthenium )
         {
             case ( 'initial' ):
-                data.RU.signals.taskname = 'initialTask'
+                data.RU.signals.taskname = 'initial'
                 break
             case ( 'restful' ):                 
                 data.RU.signals.taskname = 'restful'
@@ -46,7 +46,7 @@ const router = async ( data ) => {
                     // Transaction: METHOD, &batch=[], transaction=1  
                 break
             case ( 'file' ):
-                data.RU.signals.taskname = 'sendBlobTask'
+                data.RU.signals.taskname = 'sendBlob'
                 break
             case ( undefined ):
             default:

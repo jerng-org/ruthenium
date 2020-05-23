@@ -1,7 +1,7 @@
 'use strict'
 
 const mark              = require ( '/var/task/modules/mark' )            
-const getAllSchemas     = require ( '/var/task/tasks/restfulTasks/getAllSchemas.js' )
+const getAllSchemas     = require ( '/var/task/tasks/restful/getAllSchemas.js' )
 
 
 const restful = async ( data ) => {
