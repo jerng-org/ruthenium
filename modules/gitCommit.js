@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `-`
+const commitMessage = `added guidance on naming things; tunnelRestfulForms implemented`
 
 const gitCommit = () => { try {
 
