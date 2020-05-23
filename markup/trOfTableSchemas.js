@@ -43,10 +43,11 @@ const trOfTableSchema =  ( item ) => {
         <label for="unlock-table-rename-NAME">
             <h1> ${ item.grid } </h1>
             <button title="click to rename this table" class="button-outline" onclick="return false;"> 
-                <span class="toggle-set-1">
+                <span>
                     <i class="material-icons">lock</i>rename</span>
+                <br>
                 <span class="toggle-set-1" style="display:none;">
-                    lock code: 234806</span>
+                    code: 234806</span>
             </button>
         </label>
         <input  type="text" 
