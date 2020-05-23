@@ -38,7 +38,7 @@ const router = async ( data ) => {
                 data.RU.signals.taskname = 'initialTask'
                 break
             case ( 'restful' ):                 
-                data.RU.signals.taskname = 'restfulTask'
+                data.RU.signals.taskname = 'restful'
                     // Single Item: METHOD, &type=M, &thing=N, &value/s=V
                     // Batch:       METHOD, &batch=[ 
                     //                          [ { method: type: thing: etc. } ]
