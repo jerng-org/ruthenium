@@ -1,6 +1,6 @@
 'use strict'
 
-const mark      = require ( '../modules/mark' )            
+const mark      = require ( '/var/task/modules/mark' )            
 
 //  Provide a debuggable function name, 
 //  in order to avoid debugging (function).toString()
