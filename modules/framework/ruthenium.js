@@ -74,6 +74,23 @@ Ru, and it speaks like the Mandarin Chinese character 入 (rù), "entry", which
 looks like Lambda. No other software appears to be called Ruthenium, so I think 
 we are all set here.
 
+* How to Write Names in this Software Framework *
+
+FILENAMES   follow nodeJS convention    :   so use camelCase
+
+PROPNAMES   should avoid quotation marks:   so use camelCase
+
+OTHERWISE   emphasise readability across encodings   
+
+                                        :   so use kebab-skewer-satay-case
+
+                                Examples:   HTML class names,
+                                            HTTP headers
+                                            
+* How to Write Middleware in this Software Framework *
+
+Wherever the cost is minimal, avoid dependencies between any two middlewares.
+
 * How to Deploy Functions in this Software Framework *
 
 -   ALWAYS use arrow function expressions (AFEs), UNLESS there is a specific 
