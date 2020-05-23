@@ -21,9 +21,10 @@ mark( `index.js did other things`)
 // PROJECT - MIDDLEWARES, lexical order
 const composeResponse           = require (`./modules/middlewares/composeResponse.js`) 
 const copyRequestParameters     = require (`./modules/middlewares/copyRequestParameters.js`) 
-const getFormData               = require (`./modules/middlewares/getFormData.js`) 
-const getHeaders                = require (`./modules/middlewares/getHeaders.js`) 
+const normalizeFormData         = require (`./modules/middlewares/normalizeFormData.js`) 
+const normalizeHeaders          = require (`./modules/middlewares/normalizeHeaders.js`) 
 const lastGuard                 = require (`./modules/middlewares/lastGuard.js`) 
+const restfulFormTunnel         = require (`./modules/middlewares/restfulFormTunnel.js`) 
 const router                    = require (`./modules/middlewares/router.js`) 
 
 // LAMBDA HANDLER
@@ -38,9 +39,11 @@ exports.handler = async function () {
     
     return  ruthenium   ( arguments, [  // MIDDLEWARES, execution order
                                 
-        getHeaders,                 // Values with same key stored as: Array of values
-        copyRequestParameters,          // Values with same key stored as: CSV string
-        getFormData,
+        normalizeHeaders,       // Values with same key stored as: Array of values
+        copyRequestParameters,  // Values with same key stored as: CSV string
+        
+        restfulFormTunnel,
+        normalizeFormData,
         
         router,
         
