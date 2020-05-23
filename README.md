@@ -17,7 +17,7 @@ may be implemented in any / many languages and runtimes.
 
 This kit addresses the complexities of developing *web applications*. 
 
-### Reference Kit 
+##### Reference Kit 
 
 Since the *lingua franca* of the web is ECMAScript, the *reference
 kit* is currently being draughted in ECMAScript.  Since the dominant
@@ -34,15 +34,6 @@ redesign another web-development framework after this. Hopefully I'll be able to
 just reimplement the same pattern in whatever language or runtime I need to work
 in henceforth.
 
-##### Reuse in Pedagogy 
-
-I never studied web development as an academic subject. In the process of
-learning how to write frameworks from scratch, I've figured there is just enough
-material in this for the syllabus of one moderately challenging 200-level
-college course. Credit should be assigned on a weekly basis, of course, with
-adequate warnings to students that if they don't get the first parts write, the
-end result will simply not function. The courses should probably be pass/fail.
-
 ##### My Context
 
 This is not expected to be your context.
@@ -58,3 +49,12 @@ that's the nature of evolution, I suppose. Most of these frameworks will die a
 boring and uncelebrated mess. Probably, so will this one. But for the span of
 their respective lives all frameworks are expected to be useful - I suppose
 frameworks are people too.
+
+##### Reuse in Pedagogy 
+
+I never studied web development as an academic subject. In the process of
+learning how to write frameworks from scratch, I've figured there is just enough
+material in this for the syllabus of one moderately challenging 200-level
+college course. Credit should be assigned on a weekly basis, of course, with
+adequate warnings to students that if they don't get the first parts right, the
+end result will simply not function. The courses should probably be pass/fail.
