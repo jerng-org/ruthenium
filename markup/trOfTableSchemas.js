@@ -21,15 +21,15 @@ const trOfTableSchema =  ( item ) => {
     <blockquote>
 
     <script>
-        const toggler = () => {
+        const toggler = element => {
         
         Array.prototype.forEach.call( 
-            this.querySelectorAll('.toggle-set-1'), 
+            element.querySelectorAll('.toggle-set-1'), 
             e => {
                 const wasVisible = ['','initial'].includes(e.style.display);
                 e.style.display = wasVisible ? 'none' : 'initial';
                 if ( (! wasVisible) ) { 
-                    const input = this.querySelector('#unlock-table-rename-NAME')
+                    const input = element.querySelector('#unlock-table-rename-NAME')
                     input.focus();
                     input.select();
                 };
@@ -39,7 +39,7 @@ const trOfTableSchema =  ( item ) => {
         };
     </script>
 
-    <fieldset onclick="toggler()">
+    <fieldset onclick="toggler(this)">
         <label for="unlock-table-rename-NAME">
             <h1> ${ item.grid } </h1>
             <button title="click to rename this table" class="button-outline" onclick="return false;"> 
