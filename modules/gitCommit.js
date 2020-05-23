@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `A MESSAGE`
+const commitMessage = `lastGuard.js refactored to burp (data) on errors`
 
 const gitCommit = () => { try {
 
