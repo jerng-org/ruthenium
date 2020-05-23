@@ -21,10 +21,10 @@ const trOfTableSchema =  ( item ) => {
     <blockquote>
 
     <script>
-        const toggler = element => {
+        const toggler = ( element, classString ) => {
         
         Array.prototype.forEach.call( 
-            element.querySelectorAll('.toggle-set-1'), 
+            element.querySelectorAll( classString ), 
             e => {
                 const wasVisible = ['','initial'].includes(e.style.display);
                 e.style.display = wasVisible ? 'none' : 'initial';
@@ -39,7 +39,7 @@ const trOfTableSchema =  ( item ) => {
         };
     </script>
 
-    <fieldset onclick="toggler(this)">
+    <fieldset onclick="toggler ( this, '.toggle-set-1' )">
         <label for="unlock-table-rename-NAME">
             <h1> ${ item.grid } </h1>
             <button title="click to rename this table" class="button-outline" onclick="return false;"> 
@@ -57,7 +57,7 @@ const trOfTableSchema =  ( item ) => {
                 oninput="if (this.value==234806) { 
                 
                     this.value = ''
-                    toggler ( this.parentNode )
+                    toggler ( this.parentNode, '.toggle-set-1' )
                     
                     const confirmed = window.confirm('WARNING : renaming the SHOES table will perform an expensive database operation - select CANCEL to reconsider.')
                     if ( confirmed ) 
@@ -77,8 +77,10 @@ const trOfTableSchema =  ( item ) => {
     </fieldset>
 
     <form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes">
-    <fieldset>
-        <label>New Table Name</label>
+    <fieldset   class="toggle-set-2" 
+                style="display:none;"
+                >
+        <label>New Name for this Table</label>
         <input type="text" name="table-rename-shoes">       
         <input type="submit" value="Send PATCH">
     </fieldset>
