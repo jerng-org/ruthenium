@@ -62,12 +62,18 @@ const trOfTableSchema =  ( item ) => {
                     const confirmed = window.confirm('WARNING : renaming the SHOES table will perform an expensive database operation - select CANCEL to reconsider.')
                     if ( confirmed ) 
                     {
+                    
+                        toggler ( this.closest('td'), '.toggle-set-2' )
+
+                        /*
                         const submission = prompt ('Submit a new name for SHOES:')
                         if ( submission ) {
                             alert ('dev: finally POST here ')
                         } else {
                             alert ('dev: cleanup required ')
                         }
+                        */
+                        
                     } else {
     
                         alert ('dev: cleanup required ')
