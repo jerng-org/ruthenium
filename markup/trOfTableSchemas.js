@@ -20,7 +20,9 @@ const trOfTableSchema =  ( item ) => {
     
     <blockquote>
 
-    <fieldset onclick=" 
+    <script>
+        const toggler = () => {
+        
         Array.prototype.forEach.call( 
             this.querySelectorAll('.toggle-set-1'), 
             e => {
@@ -33,7 +35,11 @@ const trOfTableSchema =  ( item ) => {
                 };
             } 
         );
-    ">
+        
+        };
+    </script>
+
+    <fieldset onclick="toggler()">
         <label for="unlock-table-rename-NAME">
             <h1> ${ item.grid } </h1>
             <button title="click to rename this table" class="button-outline" onclick="return false;"> 
@@ -50,7 +56,9 @@ const trOfTableSchema =  ( item ) => {
                 style="display:none;"
                 onclick="(e=>e.stopImmediatePropagation())(event)"
                 oninput="if (this.value==234806) { 
-                    alert ('dev: reset required ')
+                
+                    this.value = ''
+                    
                     const confirmed = window.confirm('WARNING : renaming the SHOES table will perform an expensive database operation - select CANCEL to reconsider.')
                     if ( confirmed ) 
                     {
