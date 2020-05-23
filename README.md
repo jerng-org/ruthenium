@@ -39,7 +39,7 @@ in henceforth.
 This is not expected to be your context.
 
 Consciousness is boring because in the long run, there is only one way to think
-about anything, and local instances are just results of upstream idiosyncracies
+about anything, and local instances are just results of upstream idiosyncrasies
 in the evolution of things that think. Web development is probably the same.
 There will be at the end of time only one correct way to write a web development
 app, because it is the quickest, stripped of cultural nuances. We just don't
