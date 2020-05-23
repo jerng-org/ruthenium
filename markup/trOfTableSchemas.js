@@ -20,9 +20,6 @@ const trOfTableSchema =  ( item ) => {
     
     <blockquote>
 
-<!--    This fieldset does not need a parent form -->    
-
-    <form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes">
     <fieldset onclick=" 
         Array.prototype.forEach.call( 
             this.querySelectorAll('.toggle-set-1'), 
@@ -70,9 +67,8 @@ const trOfTableSchema =  ( item ) => {
                 }"
                 >
     </fieldset>
-    </form>
-    
-    <form>
+
+    <form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes">
     <fieldset>
         <label>New Table Name</label>
         <input type="text" name="table-rename-shoes">       
