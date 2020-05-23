@@ -44,7 +44,6 @@ const trOfTableSchema =  ( item ) => {
             <h1> ${ item.grid } </h1>
             <button title="click to rename this table" class="button-outline" onclick="return false;"> 
                 <span>rename <i class="material-icons">lock</i></span>
-                <br>
                 <span class="toggle-set-1" style="display:none;">
                     code: 234806</span>
             </button>
@@ -58,6 +57,7 @@ const trOfTableSchema =  ( item ) => {
                 oninput="if (this.value==234806) { 
                 
                     this.value = ''
+                    toggler ( this.parentNode )
                     
                     const confirmed = window.confirm('WARNING : renaming the SHOES table will perform an expensive database operation - select CANCEL to reconsider.')
                     if ( confirmed ) 
