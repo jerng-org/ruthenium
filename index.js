@@ -24,7 +24,7 @@ const copyRequestParameters     = require (`./modules/middlewares/copyRequestPar
 const normalizeFormData         = require (`./modules/middlewares/normalizeFormData.js`) 
 const normalizeHeaders          = require (`./modules/middlewares/normalizeHeaders.js`) 
 const lastGuard                 = require (`./modules/middlewares/lastGuard.js`) 
-const restfulFormTunnel         = require (`./modules/middlewares/restfulFormTunnel.js`) 
+const tunnelRestfulForms        = require (`./modules/middlewares/tunnelRestfulForms.js`) 
 const router                    = require (`./modules/middlewares/router.js`) 
 
 // LAMBDA HANDLER
@@ -42,7 +42,7 @@ exports.handler = async function () {
         normalizeHeaders,       // Values with same key stored as: Array of values
         copyRequestParameters,  // Values with same key stored as: CSV string
         
-        restfulFormTunnel,
+        tunnelRestfulForms,
         normalizeFormData,
         
         router,

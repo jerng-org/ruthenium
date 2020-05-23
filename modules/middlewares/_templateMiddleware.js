@@ -9,7 +9,7 @@ const thisIsMyName = async ( data ) => {
     
     mark ( `thisIsMyName.js EXECUTED` )
     
-    return (data)
+    return data
 
 }
 
