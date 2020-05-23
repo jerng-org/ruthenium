@@ -21,7 +21,7 @@ const trOfTableSchema =  ( item ) => {
     <blockquote>
 
     <script>
-        const toggler = ( element, classString ) => {
+        const toggler = ( element, classString, focusSelector ) => {
         
         Array.prototype.forEach.call( 
             element.querySelectorAll( classString ), 
@@ -29,7 +29,7 @@ const trOfTableSchema =  ( item ) => {
                 const wasVisible = ['','initial'].includes(e.style.display);
                 e.style.display = wasVisible ? 'none' : 'initial';
                 if ( (! wasVisible) ) { 
-                    const input = element.querySelector('#unlock-table-rename-NAME')
+                    const input = element.querySelector ( focusSelector )
                     input.focus();
                     input.select();
                 };
@@ -39,7 +39,7 @@ const trOfTableSchema =  ( item ) => {
         };
     </script>
 
-    <fieldset onclick="toggler ( this, '.toggle-set-1' )">
+    <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-table-rename-NAME' )">
         <label for="unlock-table-rename-NAME">
             <h1> ${ item.grid } </h1>
             <button title="click to rename this table" class="button-outline" onclick="return false;"> 
@@ -57,13 +57,13 @@ const trOfTableSchema =  ( item ) => {
                 oninput="if (this.value==234806) { 
                 
                     this.value = ''
-                    toggler ( this.parentNode, '.toggle-set-1' )
+                    toggler ( this.parentNode, '.toggle-set-1', '#unlock-table-rename-NAME' )
                     
                     const confirmed = window.confirm('WARNING : renaming the SHOES table will perform an expensive database operation - select CANCEL to reconsider.')
                     if ( confirmed ) 
                     {
                     
-                        toggler ( this.closest('td'), '.toggle-set-2' )
+                        toggler ( this.closest('td'), '.toggle-set-2', 'input[name=table-rename-shoes]' )
 
                         /*
                         const submission = prompt ('Submit a new name for SHOES:')
