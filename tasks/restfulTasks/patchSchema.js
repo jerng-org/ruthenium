@@ -5,6 +5,7 @@ const DDBDC     = require ( '/var/task/io/DDBDC.js' )
 
 const patchSchemaTask = async ( data ) => {
     
+    // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#update-property
 
 
     mark ( `patchSchema.js EXECUTED` )
