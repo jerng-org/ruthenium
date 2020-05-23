@@ -19,7 +19,10 @@ const trOfTableSchema =  ( item ) => {
     -->        
     
     <blockquote>
-    <form method="post" action="/test-middleware?ruthenium=restful&type=grid&thing=shoes">
+
+<!--    This fieldset does not need a parent form -->    
+
+    <form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes">
     <fieldset onclick=" 
         Array.prototype.forEach.call( 
             this.querySelectorAll('.toggle-set-1'), 
@@ -66,10 +69,17 @@ const trOfTableSchema =  ( item ) => {
                     }
                 }"
                 >
-        <input type="hidden" name="table-rename-shoes" value="newName">       
+    </fieldset>
+    </form>
+    
+    <form>
+    <fieldset>
+        <label>New Table Name</label>
+        <input type="text" name="table-rename-shoes">       
         <input type="submit" value="Send PATCH">
     </fieldset>
     </form>
+    
     </blockquote>
     <!--
     <a class="button" href="https://a.scriptless.webpage" title="rename this table" onclick="return false;">Rename</a> 
