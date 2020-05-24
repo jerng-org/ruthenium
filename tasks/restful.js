@@ -2,6 +2,7 @@
 
 const mark              = require ( '/var/task/modules/mark' )            
 const getAllSchemas     = require ( '/var/task/tasks/restful/getAllSchemas.js' )
+const patchSchema       = require ( '/var/task/tasks/restful/patchSchema.js' )
 
 
 const restful = async ( data ) => {
@@ -78,11 +79,8 @@ switch ( data.RU.request.http.method ) {
             else {
                 
                 if ( data.RU.request.queryStringParameters.type == 'schemas' ) {
-                
-                    // (schemas) are meta ... i.e. special
-                    await getAllSchemas ( data )
-                }
-                else {
+                    await getAllSchemas ( data ) // (schemas) are meta ... i.e. special
+                } else {
                     // GET the Virtual TABLE   
                 }
             } 
@@ -99,6 +97,25 @@ switch ( data.RU.request.http.method ) {
     case ( 'POST' ):
         break
     case ( 'PATCH' ):
+        if ( data.RU.request.queryStringParameters.type ) { 
+            
+            if ( data.RU.request.queryStringParameters.thing ) {
+    
+                // PATCH the Virtual ROW
+            } 
+            else {
+                
+                if ( data.RU.request.queryStringParameters.type == 'schemas' ) {
+                    await patchSchema ( data ) // (schemas) are meta ... i.e. special
+                } else {
+                    // PATCH the Virtual TABLE   
+                }
+            } 
+        } 
+        else {
+            
+            //  ERROR : TYPE not specified
+        }
         break
     default:
 }
