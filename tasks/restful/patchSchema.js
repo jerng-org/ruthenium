@@ -14,7 +14,7 @@ const patchSchemaTask = async ( data ) => {
 
 In general:
 
-    1ryKeys are unique.
+    1ryKeys are unique on base tables, but not on secondary indices.
     
         To get one,     GET ( 1ryKey );
         To get many,    BATCH_GET ( [ 1ryKey ] );
@@ -30,7 +30,7 @@ In general:
 Try again:
 
     TEST-APP-DESKS
-
+    
     1ryPartKey  :   (desk-name)             ->  for (any) desk ...
     1rySortKey  :   (row-id)                ->  pagination via range-query on rows;
     Attribute   :   (column-name1)              or, retrieve (1) entire row;
@@ -48,14 +48,17 @@ Try again:
         put [all columns, of the same time, from all desks] in the same 
         table/GSI, but then we would need to scope queries per-desk, finally
         returning only the relevant row-ids to BATCHGET from the initial table)
-
+        
         (1ryPartKey: desk-name will need a sharding suffix later)
-
-    TEST-APP-DESK-REFLECTION-(type)
+        
+        (1ryPartKey: desk-name_column-name ... perhaps this will also need one)
+        
+    TEST-APP-DESK-(type)-ANALYSIS
     
-    1ryPartKey  :   (desk-name_column-name_row-id)  -> quite sharded
+    1ryPartKey  :   (desk-name#column-name)  -> somewhat sharded
     1rySortKey  :   (value)
-
+    Attribute   :   (row-id)
+    
         So for example. If we wanted to find (entires rows) from a specific desk
         based on a (criteria upon a specific column), then we might:
         
@@ -66,8 +69,8 @@ Try again:
             
             (perhaps do step 2. a few times if we need to find intersections
             and unions)
-
-        3.  Query the DESKS table to batch-get the final data.
+            
+        3.  Query the DESKS table to batch/get the final data.
         
     OK - cool, this looks comprehensive.
     
@@ -75,19 +78,7 @@ Try again:
         Changing (desk-name, column-name) is very expensive.
         Generally inserts are fast, but consistent reflection will be laggy.
         This seems acceptable for the purpose of our prototyping meta-app.
-        
-Overall, the abstraction seems to fail for this reason:
-
-    Structurally, a 1ryKey must be unique. If we store data from multiple 
-    columns of multiple desks together, we need a way to retrieve (data specific
-    to a desk-column), and it may contain redundant data. We then want to be 
-    to do TWO range lookups on our data, FIRST a BEGINSWITH() to scope our
-    dataset to a desk-column, SECOND a RANGE() to scope our data to the relevant
-    subset of rows in that desk-column. But this seems to be impossible. There
-    is no way to efficiently do N>1 range lookups on one table or GSI. An N>1 
-    range lookup will always over-query data on the first lookup, then throw
-    it away on subsequent lookups.
-    
+            
 */            
         },
         
