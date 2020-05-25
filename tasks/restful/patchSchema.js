@@ -11,45 +11,83 @@ const patchSchemaTask = async ( data ) => {
         TableName: 'TEST-APP-GRID-SCHEMAS',
         Key: {
 /*
-- rename GRID to DESK
 
-- rename TEST-APP-GRID-SCHEMAS to TEST-APP-DESK-SCHEMAS
-    - rename 1ryPartKey attribute from (grid) to (desk-name)
-    - rename attribute from (columns) to (column-names)
+In general:
 
-- rename TEST-APP-CELLS's 1PartKey attribute from (grid) to (desk-name)
-    - rename 1rySortKey attribute from (row) to (row-id)
+    1ryKeys are unique.
     
-    - rename GSI-1ryPartKey attribute from (row) to (row-id)
-    - rename GSI-1rySortKey attribute from (column_value) to (column-name#value-head)
-        - 1rySortKey length limit is 1KB, but item size limit is 400KB, so
-          we store the main data in the attribute (value) but its initial 
-          characters as the attribute (value-head)
-        - we project the attribute (value) into the GSI
+        To get one,     GET ( 1ryKey );
+        To get many,    BATCH_GET ( [ 1ryKey ] );
         
-            So we can search the GSI by 
-            
-                (row-id)                -> (all columns)    ->  (values)
-                (column-name)           -> (all rows)       ->  (values)
-                (column-name#value-head)-> (only some rows) ->  (values)
-                
-                type::Number values should be stored as full-precision: 38 chars
-            
-Recap, we may want:
-
-    1ryPartKey  :   (desk-name)             ->  for any desk ...
-    1rySortKey  :   (row-id)                ->  pagination via range-query on rows;
-    Attribute   :   (column-name)               or, retrieve entire row;
-    Attribute   :   (value) 
+    1ryPartKeys consolidated data at the storage layer.
     
-    1ryPartKey  :   (desk-name)             ->  for any desk ...
-    L2rySortKey :   (column-name)           ->  retrieve entire column;
-    PAttributes :   (row-id), (value)
+    1rySortKeys allow quicker querying of ranges.
 
-    G2ryPartKey :   (desk-name#column-name) ->  for any (desk, column) ...
-    G2rySortKey :   (value)                 ->  range-query on value;
-    PAttributes :   (row-id), (desk-name)
+    You want to store data close together for monolithic speed-up, until 
+    partition IO limits are hit, then you want to store data apart (sharding) 
+    for parallelised speed-up.
 
+Try again:
+
+    TEST-APP-DESKS
+
+    1ryPartKey  :   (desk-name)             ->  for (any) desk ...
+    1rySortKey  :   (row-id)                ->  pagination via range-query on rows;
+    Attribute   :   (column-name1)              or, retrieve (1) entire row;
+    Attribute   :   (column-name2) 
+    Attribute   :   (column-nameN)          ->  Here, the SCHEMAS TABLE would
+                                                know the TYPES of each COLUMN,
+                                                however the CELLS TABLE does not.
+    
+        (1ryKey:desk-name,row-id) allows entire rows to be quickly retrieved,
+            and the schema (1ryPartKey:row-id) would achieve little, because 
+            row-ids are unique per-desk. (1ryPartKey:desk-name_row-id) would
+            similarly achieve little.
+            
+        (we just want range queries on column-nameNs, and it would be simple to
+        put [all columns, of the same time, from all desks] in the same 
+        table/GSI, but then we would need to scope queries per-desk, finally
+        returning only the relevant row-ids to BATCHGET from the initial table)
+
+        (1ryPartKey: desk-name will need a sharding suffix later)
+
+    TEST-APP-DESK-REFLECTION-(type)
+    
+    1ryPartKey  :   (desk-name_column-name_row-id)  -> quite sharded
+    1rySortKey  :   (value)
+
+        So for example. If we wanted to find (entires rows) from a specific desk
+        based on a (criteria upon a specific column), then we might:
+        
+        1.  Query the DESK-SCHEMAS table, to find out which table, TX, stores
+            the values for our column of interest.
+            
+        2.  Query TX, using a range-query on (value). Obtain (row-ids).
+            
+            (perhaps do step 2. a few times if we need to find intersections
+            and unions)
+
+        3.  Query the DESKS table to batch-get the final data.
+        
+    OK - cool, this looks comprehensive.
+    
+        (all fields) are stored in 3+N_types places.
+        Changing (desk-name, column-name) is very expensive.
+        Generally inserts are fast, but consistent reflection will be laggy.
+        This seems acceptable for the purpose of our prototyping meta-app.
+        
+Overall, the abstraction seems to fail for this reason:
+
+    Structurally, a 1ryKey must be unique. If we store data from multiple 
+    columns of multiple desks together, we need a way to retrieve (data specific
+    to a desk-column), and it may contain redundant data. We then want to be 
+    to do TWO range lookups on our data, FIRST a BEGINSWITH() to scope our
+    dataset to a desk-column, SECOND a RANGE() to scope our data to the relevant
+    subset of rows in that desk-column. But this seems to be impossible. There
+    is no way to efficiently do N>1 range lookups on one table or GSI. An N>1 
+    range lookup will always over-query data on the first lookup, then throw
+    it away on subsequent lookups.
+    
 */            
         },
         
