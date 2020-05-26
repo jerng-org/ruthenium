@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `stable checkpoint - preparing to make markups async`
+const commitMessage = `-`
 
 const gitCommit = () => { try {
 
