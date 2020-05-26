@@ -29,6 +29,7 @@ const createSchema = async ( data ) => {
     <label      for="schema[desk-name].1">
         
         Columns for this new Desk
+        <h6>Legend:</h6>
 <pre><code>[   
     {   
         name:   STRING,
@@ -45,6 +46,7 @@ const createSchema = async ( data ) => {
     
     <textarea   name="schema[columns]"
                 id="schema[columns].1"
+                style="height:20rem;"
                 placeholder=
 "[   
     {   
