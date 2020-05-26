@@ -104,7 +104,7 @@ const trOfDeskSchemas =   ( item ) => {
                     <ul class="float-left">
                     ${  item['columns'].reduce (  ( acc, column, ind ) => {
                         return   acc +   liOfColumnButtons ( column )
-                    }, 'trOfxx' ) }
+                    }, '' ) }
                     </ul>
                     </h2>
                     <a class="button float-right" href="#">Create Column</a>
