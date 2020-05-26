@@ -5,6 +5,8 @@ const normalizeQueryStringParameters = async ( data ) => {
             data.RU.request.queryStringParameters[ prop ] 
                 = data.RU.request.queryStringParameters[ prop ].split(',')
         }
+        
+        throw Error (`feature dev in normalizeQueryStringParameters.`) 
         /*.forEach (
             
             nameValue => {
