@@ -18,6 +18,7 @@ const createSchema = async ( data ) => {
 <fieldset>
     <label>Name for this new Desk</label>
     <input type="text" name="schema[desk-name]">       
+    <input type="textarea" name="schema[columns]">       
     <input type="submit" value="POST it">
 </fieldset>
 </form>`
