@@ -50,14 +50,21 @@ const router = async ( data ) => {
                     data.RU.signals.taskname = 'sendBlob'
                     break
                 case ( undefined ):
+                    // see below
                 default:
-                    data.RU.signals.redirectRoute = 'initial'
-                    data.RU.request.queryStringParameters.reader[0]
-                        ? data.RU.request.queryStringParameters.reader[0]
-                        : 'human'
+                    // see below
             }
-        } 
-    
+        }
+        
+        //  Either, there was no (ruthenium) queryParameter, 
+        //  or,     there was no matching (case) for the (ruthenium) argument
+        if ( ! data.signals.taskname ) {
+            
+            data.RU.signals.redirectRoute = 'initial'
+            data.RU.request.queryStringParameters.reader[0]
+                ? data.RU.request.queryStringParameters.reader[0]
+                : 'human'
+        }
     }
     
     // Determine the task.
