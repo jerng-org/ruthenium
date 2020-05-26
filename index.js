@@ -41,13 +41,13 @@ exports.handler = async function () {
     return  ruthenium   ( arguments, [  // MIDDLEWARES, execution order
                                 
         copyRequestParameters,          // Query string     values with same key stored as:     CSV string
+        
         normalizeHeaders,               // Cookie header    values with same key stored as:     Array of values
         normalizeQueryStringParameters, // Query string     values with same key stored as:     Array of values
-        
-        tunnelRestfulForms,
         normalizeFormData,              // Form string      values with same name stored as:    Array of values
         
-        router,
+        tunnelRestfulForms,
+                router,
         
         composeResponse,
         lastGuard
