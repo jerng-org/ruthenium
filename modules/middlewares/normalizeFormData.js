@@ -20,7 +20,7 @@ const normalizeHeadersFormData = async ( data ) => {
             
         for ( const name in parsedQueryString ) {
             data.RU.request.formStringParameters[ name ] 
-                = data.RU.request.formStringParameters[ name ].split(',')
+                = parsedQueryString[ name ].split(',')
         }
 
     }
