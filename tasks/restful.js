@@ -7,11 +7,11 @@ const patchSchema       = require ( '/var/task/tasks/restful/patchSchema.js' )
 
 const restful = async ( data ) => {
     
-    if ( data.RU.request.queryStringParameters.batch ) {
+    if ( data.RU.request.queryStringParameters.batch[0] ) {
         
         // batch
         
-        if ( data.RU.request.queryStringParameters.transaction ) {
+        if ( data.RU.request.queryStringParameters.transaction[0] ) {
             
             // transactional batch - DEV THIS LAST
         }
@@ -70,16 +70,16 @@ switch ( data.RU.request.http.method ) {
     case ( 'HEAD' ):
         break
     case ( 'GET' ):
-        if ( data.RU.request.queryStringParameters.type ) { 
+        if ( data.RU.request.queryStringParameters.type[0] ) { 
             
-            if ( data.RU.request.queryStringParameters.thing ) {
+            if ( data.RU.request.queryStringParameters.thing[0] ) {
     
                 // GET the Virtual ROW
             } 
             else {
                 
                 // (schemas) and (forms) are special / meta
-                switch (data.RU.request.queryStringParameters.type) {
+                switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('schemas'):
                         await getAllSchemas ( data ) 
                         break
@@ -104,15 +104,15 @@ switch ( data.RU.request.http.method ) {
     case ( 'POST' ):
         break
     case ( 'PATCH' ):
-        if ( data.RU.request.queryStringParameters.type ) { 
+        if ( data.RU.request.queryStringParameters.type[0] ) { 
             
-            if ( data.RU.request.queryStringParameters.thing ) {
+            if ( data.RU.request.queryStringParameters.thing[0] ) {
     
                 // PATCH the Virtual ROW
             } 
             else {
                 
-                if ( data.RU.request.queryStringParameters.type == 'schemas' ) {
+                if ( data.RU.request.queryStringParameters.type[0] == 'schemas' ) {
                     await patchSchema ( data ) // (schemas) are meta ... i.e. special
                 } else {
                     // PATCH the Virtual TABLE   
