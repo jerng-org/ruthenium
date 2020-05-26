@@ -22,9 +22,9 @@ const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
         <tbody style="vertical-align:top;">
             ${  
                 deskSchemasScan.Items.reduce ( 
-                    async ( accumulator, currentItem, index ) => {
-                        return  (   await accumulator +
-                                    await trOfDeskSchema ( currentItem )
+                     ( accumulator, currentItem, index ) => {
+                        return  (    accumulator +
+                                     trOfDeskSchema ( currentItem )
                                 )
                     }, 
                     Promise.resolve( 'tableOfxx' )  
