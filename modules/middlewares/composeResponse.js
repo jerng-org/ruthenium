@@ -1,12 +1,23 @@
 'use strict'
  
 const fs = require ( 'fs' )
-const markups = {}
+const markups = {
+    forms: {}
+    //schemas : {},
+}
 
-const markupFileNames = fs.readdirSync ('markup')
+
+// THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
+const markupFileNames = fs.readdirSync ('/var/task/markup')
 markupFileNames.forEach ( ( current, index, array ) => {
-    markups[ current.slice (0, -3) ] = require ( '../../markup/' + current )
+    markups[ current.slice (0, -3) ] = require ( '/var/task/markup/' + current )
 } /* , thisArg */ ) 
+const formMarkupFileNames = fs.readdirSync ('/var/task/markup/forms')
+formMarkupFileNames.forEach ( ( current, index, array ) => {
+    markups.[ current.slice (0, -3) ] = require ( '/var/task/markup/forms/' + current )
+} /* , thisArg */ ) 
+
+
 
 const composeResponse = async ( data ) => {
     

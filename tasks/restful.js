@@ -78,11 +78,18 @@ switch ( data.RU.request.http.method ) {
             } 
             else {
                 
-                if ( data.RU.request.queryStringParameters.type == 'schemas' ) {
-                    await getAllSchemas ( data ) // (schemas) are meta ... i.e. special
-                } else {
-                    // GET the Virtual TABLE   
+                // (schemas) and (forms) are special / meta
+                switch (data.RU.request.queryStringParameters.type) {
+                    case ('schemas'):
+                        await getAllSchemas ( data ) 
+                        break
+                    case ('forms'):
+                        
+                        break
+                    default:
+                       // GET the Virtual TABLE   
                 }
+                
             } 
         } 
         else {
