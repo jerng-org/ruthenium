@@ -14,7 +14,7 @@ const createSchema = async ( data ) => {
 
     return `${ htmlIndex }
 
-<form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes">
+<form method="post" action="/test-middleware?ruthenium=restful&type=schemas">
 <fieldset>
     
     <label      for="schema[desk-name].1">
@@ -29,7 +29,6 @@ const createSchema = async ( data ) => {
     <label      for="schema[desk-name].1">
         
         Columns for this new Desk
-
         </label>
     
     <textarea   name="schema[columns]"
