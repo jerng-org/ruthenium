@@ -75,31 +75,32 @@ switch ( data.RU.request.http.method ) {
     
     case ( 'GET' ):
         
-        if (        data.RU.request.queryStringParameters.type 
-                &&  data.RU.request.queryStringParameters.type[0] ) 
+        if (data.RU.request.queryStringParameters.type 
+            &&  data.RU.request.queryStringParameters.type[0] ) 
         { 
-console.warn(`point1`)
-            if (        data.RU.request.queryStringParameters.thing
-                    &&  data.RU.request.queryStringParameters.thing[0] ) 
+            if (data.RU.request.queryStringParameters.thing
+                &&  data.RU.request.queryStringParameters.thing[0] ) 
             {
-console.warn(`point2`)
-                // GET the Virtual ROW
+                switch (data.RU.request.queryStringParameters.type[0]) {
+                    case ('forms'):
+                        // (schemas) and (forms) are special / meta
+                        data.RU.signals.markupName = 'forms/createSchema'
+                        break
+                    default:
+                        // GET the Virtual ROW
+                }
+
             } 
             else 
             {
-console.warn(`point3`)
-                // (schemas) and (forms) are special / meta
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('schemas'):
+                        // (schemas) and (forms) are special / meta
                         await getAllSchemas ( data ) 
-                        break
-                    case ('forms'):
-                        data.RU.signals.markupName = 'forms/createSchema'
                         break
                     default:
                        // GET the Virtual TABLE   
                 }
-console.warn(`point4`)
                 
             } 
         } 
@@ -116,11 +117,11 @@ console.warn(`point4`)
     case ( 'POST' ):
         break
     case ( 'PATCH' ):
-        if (        data.RU.request.queryStringParameters.type
-                &&  data.RU.request.queryStringParameters.type[0] ) 
+        if (data.RU.request.queryStringParameters.type
+            &&  data.RU.request.queryStringParameters.type[0] ) 
         {
-            if (        data.RU.request.queryStringParameters.thing
-                    &&  data.RU.request.queryStringParameters.thing[0] ) 
+            if (data.RU.request.queryStringParameters.thing
+                &&  data.RU.request.queryStringParameters.thing[0] ) 
             {
                 // PATCH the Virtual ROW
             } 
