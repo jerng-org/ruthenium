@@ -78,13 +78,16 @@ switch ( data.RU.request.http.method ) {
         if (        data.RU.request.queryStringParameters.type 
                 &&  data.RU.request.queryStringParameters.type[0] ) 
         { 
+console.warn(`point1`)
             if (        data.RU.request.queryStringParameters.thing
                     &&  data.RU.request.queryStringParameters.thing[0] ) 
             {
+console.warn(`point2`)
                 // GET the Virtual ROW
             } 
             else 
             {
+console.warn(`point3`)
                 // (schemas) and (forms) are special / meta
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('schemas'):
@@ -96,6 +99,7 @@ switch ( data.RU.request.http.method ) {
                     default:
                        // GET the Virtual TABLE   
                 }
+console.warn(`point4`)
                 
             } 
         } 
