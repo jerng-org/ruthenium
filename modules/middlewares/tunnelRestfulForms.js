@@ -16,7 +16,7 @@ const restfulFormTunnel = async ( data ) => {
     if ( 'form-method' in data.RU.request.queryStringParameters ) {
         
         // Is there a more performant (whilst readable) way to write this?
-        switch ( data.RU.request.queryStringParameters['form-method'].toUpperCase() ) {
+        switch ( data.RU.request.queryStringParameters['form-method'][0].toUpperCase() ) {
             
             case ('PUT'):
                 data.RU.request.http.method = 'PUT'
