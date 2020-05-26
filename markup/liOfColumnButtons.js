@@ -1,4 +1,4 @@
-const liOfColumnButtons =   ( column ) => {
+const liOfColumnButtons = async ( column ) => {
     
     let markup = `
         <li>
@@ -16,6 +16,6 @@ const liOfColumnButtons =   ( column ) => {
     return markup
 }
 
-module.exports = liOfColumnButtons
+module.exports  = liOfColumnButtons
 const mark      = require ( '../modules/mark' )            
 mark ( `liOfColumnButtons.js LOADED` )
