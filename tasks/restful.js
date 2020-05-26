@@ -68,7 +68,8 @@ safe
 ******************************************************************************
 *   BROKEN UP TO SUBFOLDER FILES ?
 ******************************************************************************/
-        
+
+try {       
 switch ( data.RU.request.http.method ) {
     case ( 'HEAD' ):
         break
@@ -142,7 +143,7 @@ switch ( data.RU.request.http.method ) {
         break
     default:
 } // switch ( data.RU.request.http.method )
-
+} catch (e) { throw e }
 
 
         
