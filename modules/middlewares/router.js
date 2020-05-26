@@ -60,10 +60,13 @@ const router = async ( data ) => {
         //  or,     there was no matching (case) for the (ruthenium) argument
         if ( ! data.RU.signals.taskname ) {
             
-            data.RU.signals.redirectRoute = 'initial'
-            data.RU.request.queryStringParameters.reader[0]
-                ? data.RU.request.queryStringParameters.reader[0]
-                : 'human'
+            data.RU.signals.redirectRoute = 'initial&reader='
+                +   (   data.RU.request.queryStringParameters.reader
+                        ? data.RU.request.queryStringParameters.reader[0]
+                        : 'human'
+                    
+                    )
+            
         }
     }
     
