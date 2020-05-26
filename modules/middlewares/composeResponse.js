@@ -83,9 +83,9 @@ const composeResponse = async ( data ) => {
 
         }
         else
-        if ( data.RU.response.markupName ) {
+        if ( data.RU.signals.markupName ) {
         
-            if ( data.RU.response.markupName in markups ) {
+            if ( data.RU.signals.markupName in markups ) {
                 
                 // clobber (refine this as above; WIP / TODO )
                 data.RU.response = {
@@ -93,11 +93,11 @@ const composeResponse = async ( data ) => {
                     headers: {
                         'content-type': 'text/html'
                     },
-                    body: await markups [ data.RU.response.markupName ]( data )
+                    body: await markups [ data.RU.signals.markupName ]( data )
                 }
             }
             else {
-                throw   Error (`Could not find (${ data.RU.response.markupName 
+                throw   Error (`Could not find (${ data.RU.signals.markupName 
                         }) in the markups directory. That name was specified at
                         (data.RU.response.markup).`)
             }
