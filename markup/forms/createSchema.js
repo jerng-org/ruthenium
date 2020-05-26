@@ -29,9 +29,23 @@ const createSchema = async ( data ) => {
     <label      for="schema[desk-name].1">
         
         Columns for this new Desk
+        <pre><code>
+[   
+    {   
+        name:   STRING,
+        type:   'string' | 'number' | 'other'
+    },
+    {   
+        name:   STRING,
+        type:   'string' | 'number' | 'other'
+    },
+    ... etc.
+]        
+        </code></pre>
         </label>
     
     <textarea   name="schema[columns]"
+                id="schema[columns].1"
                 placeholder="
 [   
     {   
@@ -43,8 +57,7 @@ const createSchema = async ( data ) => {
         type:   'string' | 'number' | 'other'
     },
     ... etc.
-]"
-                id="schema[columns].1"></textarea>       
+]"></textarea>       
     
     <input      type="submit" 
                 value="POST it">
