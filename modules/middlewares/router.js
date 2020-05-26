@@ -64,9 +64,7 @@ const router = async ( data ) => {
                 +   (   data.RU.request.queryStringParameters.reader
                         ? data.RU.request.queryStringParameters.reader[0]
                         : 'human'
-                    
                     )
-            
         }
     }
     
