@@ -78,9 +78,11 @@ switch ( data.RU.request.http.method ) {
         if (data.RU.request.queryStringParameters.type 
             &&  data.RU.request.queryStringParameters.type[0] ) 
         { 
+console.warn('point 1')                
             if (data.RU.request.queryStringParameters.thing
                 &&  data.RU.request.queryStringParameters.thing[0] ) 
             {
+console.warn('point 2')                
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('forms'):
                         // (schemas) and (forms) are special / meta
@@ -93,6 +95,7 @@ switch ( data.RU.request.http.method ) {
             } 
             else 
             {
+console.warn('point 3')                
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('schemas'):
                         // (schemas) and (forms) are special / meta
