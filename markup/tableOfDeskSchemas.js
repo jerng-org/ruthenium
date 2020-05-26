@@ -23,9 +23,11 @@ const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
             ${  
                 deskSchemasScan.Items.reduce ( 
                async ( accumulator, currentItem, index ) => {
-                    return  await accumulator +
-                            await trOfDeskSchema ( currentItem )
-                }, '' )
+                    return  (   await accumulator +
+                                await trOfDeskSchema ( currentItem )
+                
+                            )
+               }, '' )
             }
         </tbody>
         <tfoot>
