@@ -1,6 +1,6 @@
 const trOfDeskSchema       = require (`../markup/trOfDeskSchemas.js`) 
 
-const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
+const tableOfDeskSchemas   = ( deskSchemasScan ) => {
     
     const markup = `
     <table>
