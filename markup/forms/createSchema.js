@@ -26,7 +26,16 @@ const createSchema = async ( data ) => {
                 name="schema[desk-name]"
                 id="schema[desk-name].1">       
     
-    <textarea   name="schema[columns]"></textarea>       
+    <label      for="schema[desk-name].1">
+        
+        Columns for this new Desk
+        </label>
+    
+    <textarea   name="schema[columns]"
+                placeholder="{
+                    hi
+                }"
+                id="schema[columns].1"></textarea>       
     
     <input      type="submit" 
                 value="POST it">
