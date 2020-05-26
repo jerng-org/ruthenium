@@ -9,7 +9,17 @@ const createSchema = async ( data ) => {
     
     mark ( `createSchema.js EXECUTED` )
 
-    return `SOME MARKUP FORM FOR SCHEMA CREATION`
+    return `
+
+<form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes">
+<fieldset>
+    <label>Name for this new Table</label>
+    <input type="text" name="schema[desk]">       
+    <input type="submit" value="Send PATCH">
+</fieldset>
+</form>`
+    
+    
 }
 
 module.exports = createSchema

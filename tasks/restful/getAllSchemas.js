@@ -17,7 +17,7 @@ const getAllSchemasTask = async ( data ) => {
             break
         case ( 'human' ) :
         default:
-            data.RU.response.markupName = 'allSchemasMarkup'
+            data.RU.signals.markupName = 'allSchemasMarkup'
     }
 
     mark ( `getAllSchemas.js EXECUTED` )
