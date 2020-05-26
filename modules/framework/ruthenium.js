@@ -160,5 +160,15 @@ Wherever the cost is minimal, avoid dependencies between any two middlewares.
     `async` function context. Heuristics: terseness; explicitly state 
     intentions.
 
+* How to Name Data Models in this Software Framework *
+
+Broadly, there are Types and Things. Whenever referring to a Type in English,
+use the plural form. This is in order to deliver the semantics that a Type has
+no meaning outside of the Things which are its individual instances. Types
+therefore are roughly, Platonic Forms.
+
+    Therefore,              "Schemas" refers to the class of things which share
+                            common traits, or schema-ness. A single schema is
+                            simply one such Thing.
 
 */
