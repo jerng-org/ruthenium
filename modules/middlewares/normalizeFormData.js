@@ -15,8 +15,14 @@ const normalizeHeadersFormData = async ( data ) => {
                     .toString ('utf8')
             :   data.LAMBDA.event.body
             
-        data.RU.request.formStringParameters = 
-            querystring.parse ( data.RU.request.rawFormString )
+        const parsedQueryString
+            = querystring.parse ( data.RU.request.rawFormString )
+            
+        for ( const name in parsedQueryString ) {
+            data.RU.request.formStringParameters[ name ] 
+                = data.RU.request.formStringParameters[ name ].split(',')
+        }
+
     }
     
     return data
