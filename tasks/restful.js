@@ -72,15 +72,19 @@ safe
 switch ( data.RU.request.http.method ) {
     case ( 'HEAD' ):
         break
-    case ( 'GET' ):
-        if ( data.RU.request.queryStringParameters.type[0] ) { 
-            
-            if ( data.RU.request.queryStringParameters.thing[0] ) {
     
+    case ( 'GET' ):
+        
+        if (        data.RU.request.queryStringParameters.type 
+                &&  data.RU.request.queryStringParameters.type[0] ) 
+        { 
+            if (        data.RU.request.queryStringParameters.thing
+                    &&  data.RU.request.queryStringParameters.thing[0] ) 
+            {
                 // GET the Virtual ROW
             } 
-            else {
-                
+            else 
+            {
                 // (schemas) and (forms) are special / meta
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('schemas'):
@@ -100,6 +104,7 @@ switch ( data.RU.request.http.method ) {
             //  ERROR : TYPE not specified
         }
         break
+    
     case ( 'PUT' ):
         break
     case ( 'DELETE' ):
@@ -107,14 +112,17 @@ switch ( data.RU.request.http.method ) {
     case ( 'POST' ):
         break
     case ( 'PATCH' ):
-        if ( data.RU.request.queryStringParameters.type[0] ) { 
-            
-            if ( data.RU.request.queryStringParameters.thing[0] ) {
-    
+        if (        data.RU.request.queryStringParameters.type
+                &&  data.RU.request.queryStringParameters.type[0] ) 
+        {
+            if (        data.RU.request.queryStringParameters.thing
+                    &&  data.RU.request.queryStringParameters.thing[0] ) 
+            {
                 // PATCH the Virtual ROW
             } 
             else {
                 
+                // convert to switch/case
                 if ( data.RU.request.queryStringParameters.type[0] == 'schemas' ) {
                     await patchSchema ( data ) // (schemas) are meta ... i.e. special
                 } else {
