@@ -32,7 +32,7 @@ const router = async ( data ) => {
     // Default here
     const defaultDetermineTaskName = () => {
         
-        switch ( data.RU.request.queryStringParameters.ruthenium )
+        switch ( data.RU.request.queryStringParameters.ruthenium[0] )
         {
             case ( 'initial' ):
                 data.RU.signals.taskname = 'initial'
@@ -51,8 +51,8 @@ const router = async ( data ) => {
             case ( undefined ):
             default:
                 data.RU.signals.redirectRoute = 'initial'
-                data.RU.request.queryStringParameters.reader
-                    ? data.RU.request.queryStringParameters.reader
+                data.RU.request.queryStringParameters.reader[0]
+                    ? data.RU.request.queryStringParameters.reader[0]
                     : 'human'
         }
     }
