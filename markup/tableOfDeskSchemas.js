@@ -1,6 +1,6 @@
-const trOfTableSchema       = require (`../markup/trOfTableSchemas.js`) 
+const trOfDeskSchema       = require (`../markup/trOfDeskSchemas.js`) 
 
-const tableOfTableSchemas   = async ( deskSchemasScan ) => {
+const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
     
     const markup = `
     <table>
@@ -8,14 +8,14 @@ const tableOfTableSchemas   = async ( deskSchemasScan ) => {
             <tr>
                 <th colspan="2">
                     <h6>
-                        System is currently aware of ${ deskSchemasScan.Count } Table Schemas
-                        <a class="button float-right" href="#">Create Table</a>
+                        System is currently aware of ${ deskSchemasScan.Count } Desk Schemas
+                        <a class="button float-right" href="#">Create Desk</a>
                     </h6>
     
                 </th>
             </tr>
             <tr>
-                <th><h3>Table Name</h3></th>
+                <th><h3>Desk Name</h3></th>
                 <th><h3>Column Names</h3></th>
             </tr>
         </thead>
@@ -24,14 +24,14 @@ const tableOfTableSchemas   = async ( deskSchemasScan ) => {
                 deskSchemasScan.Items.reduce ( 
                async ( accumulator, currentItem, index ) => {
                     return  accumulator +
-                            await trOfTableSchema ( currentItem )
+                            await trOfDeskSchema ( currentItem )
                 }, '' )
             }
         </tbody>
         <tfoot>
             <tr>
                 <td colspan="2">
-                    <a class="button float-right" href="?ruthenium=restful&type=forms&thing=create-table&reader=human">Create Table</a>
+                    <a class="button float-right" href="?ruthenium=restful&type=forms&thing=create-desk&reader=human">Create Desk</a>
                 </td>
             </tr>
         </tfoot>
@@ -40,6 +40,6 @@ const tableOfTableSchemas   = async ( deskSchemasScan ) => {
     return markup
 }
 
-module.exports  = tableOfTableSchemas
+module.exports  = tableOfDeskSchemas
 const mark      = require ( '../modules/mark' )            
-mark ( `table-of-table-schemas.js LOADED` )
+mark ( `tableOfDeskSchemas.js LOADED` )

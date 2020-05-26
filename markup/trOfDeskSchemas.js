@@ -1,6 +1,6 @@
 const liOfColumnButtons = require (`../markup/liOfColumnButtons.js`) 
 
-const trOfTableSchema =  async ( item ) => {
+const trOfDeskSchemas =  async ( item ) => {
     
     let markup = `
             <tr>
@@ -39,17 +39,17 @@ const trOfTableSchema =  async ( item ) => {
         };
     </script>
 
-    <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-table-rename-NAME' )">
-        <label for="unlock-table-rename-NAME">
+    <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-rename-NAME' )">
+        <label for="unlock-desk-rename-NAME">
             <h1> ${ item['desk-name'] } </h1>
-            <button title="click to rename this table" class="button-outline" onclick="return false;"> 
+            <button title="click to rename this desk" class="button-outline" onclick="return false;"> 
                 <span>rename <i class="material-icons">lock</i></span>
                 <span class="toggle-set-1" style="display:none;">
                     code: 234806</span>
             </button>
         </label>
         <input  type="text" 
-                id="unlock-table-rename-NAME" 
+                id="unlock-desk-rename-NAME" 
                 placeholder="type the code, to unlock this form" 
                 class="toggle-set-1"
                 style="display:none;"
@@ -57,13 +57,13 @@ const trOfTableSchema =  async ( item ) => {
                 oninput="if (this.value==234806) { 
                 
                     this.value = ''
-                    toggler ( this.parentNode, '.toggle-set-1', '#unlock-table-rename-NAME' )
+                    toggler ( this.parentNode, '.toggle-set-1', '#unlock-desk-rename-NAME' )
                     
-                    const confirmed = window.confirm('WARNING : renaming the SHOES table will perform an expensive database operation - select CANCEL to reconsider.')
+                    const confirmed = window.confirm('WARNING : renaming the SHOES desk will perform an expensive database operation - select CANCEL to reconsider.')
                     if ( confirmed ) 
                     {
                     
-                        toggler ( this.closest('td'), '.toggle-set-2', 'input[name=table-rename-shoes]' )
+                        toggler ( this.closest('td'), '.toggle-set-2', 'input[name=desk-rename-shoes]' )
 
                         /*
                         const submission = prompt ('Submit a new name for SHOES:')
@@ -86,15 +86,15 @@ const trOfTableSchema =  async ( item ) => {
     <fieldset   class="toggle-set-2" 
                 style="display:none;"
                 >
-        <label>New Name for this Table</label>
-        <input type="text" name="table-rename-shoes">       
-        <input type="submit" value="Send PATCH">
+        <label>New Name for this Desk</label>
+        <input type="text" name="desk-rename-shoes">       
+        <input type="submit" value="PATCH it">
     </fieldset>
     </form>
     
     </blockquote>
     <!--
-    <a class="button" href="https://a.scriptless.webpage" title="rename this table" onclick="return false;">Rename</a> 
+    <a class="button" href="https://a.scriptless.webpage" title="rename this desk" onclick="return false;">Rename</a> 
     -->
     
     <!----------------------------------------------------------------------------->
@@ -114,6 +114,6 @@ const trOfTableSchema =  async ( item ) => {
     return markup
 }
 
-module.exports  = trOfTableSchema
+module.exports  = trOfDeskSchemas
 const mark      = require ( '../modules/mark' )            
-mark ( `trOfTableSchema.js LOADED` )
+mark ( `trOfDeskSchemas.js LOADED` )

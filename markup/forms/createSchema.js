@@ -16,9 +16,9 @@ const createSchema = async ( data ) => {
 
 <form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes">
 <fieldset>
-    <label>Name for this new Table</label>
+    <label>Name for this new Desk</label>
     <input type="text" name="schema[desk-name]">       
-    <input type="submit" value="Send PATCH">
+    <input type="submit" value="POST it">
 </fieldset>
 </form>`
     
