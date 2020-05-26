@@ -42,7 +42,7 @@ exports.handler = async function () {
                                 
         copyRequestParameters,          // Query string     values with same key stored as: CSV string
         normalizeHeaders,               // Cookie header    values with same key stored as: Array of values
-        //normalizeQueryStringParameters, // Query string     Values with same key stored as: Array of values
+        normalizeQueryStringParameters, // Query string     Values with same key stored as: Array of values
         
         tunnelRestfulForms,
         normalizeFormData,
