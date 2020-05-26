@@ -1,6 +1,6 @@
 const trOfTableSchema       = require (`../markup/trOfTableSchemas.js`) 
 
-const tableOfTableSchemas   = ( gridSchemasScan ) => {
+const tableOfTableSchemas   = ( deskSchemasScan ) => {
     
     const markup = `
     <table>
@@ -8,7 +8,7 @@ const tableOfTableSchemas   = ( gridSchemasScan ) => {
             <tr>
                 <th colspan="2">
                     <h6>
-                        System is currently aware of ${ gridSchemasScan.Count } Table Schemas
+                        System is currently aware of ${ deskSchemasScan.Count } Table Schemas
                         <a class="button float-right" href="#">Create Table</a>
                     </h6>
     
@@ -21,7 +21,7 @@ const tableOfTableSchemas   = ( gridSchemasScan ) => {
         </thead>
         <tbody style="vertical-align:top;">
             ${  
-                gridSchemasScan.Items.reduce ( 
+                deskSchemasScan.Items.reduce ( 
                 ( accumulator, currentItem, index ) => {
                     return  accumulator +
                             trOfTableSchema ( currentItem )
