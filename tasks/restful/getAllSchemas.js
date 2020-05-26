@@ -10,7 +10,15 @@ const getAllSchemasTask = async ( data ) => {
         ReturnConsumedCapacity : 'TOTAL'
     } ).promise()
 
-    data.RU.response.markupName = 'allSchemasMarkup'
+    switch ( data.RU.request.queryStringParameters.reader ) {
+        
+        case ( 'machine' ) :
+            // TODO
+            break
+        case ( 'human' ) :
+        default:
+            data.RU.response.markupName = 'allSchemasMarkup'
+    }
 
     mark ( `getAllSchemas.js EXECUTED` )
 }
