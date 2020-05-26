@@ -58,7 +58,7 @@ const router = async ( data ) => {
         
         //  Either, there was no (ruthenium) queryParameter, 
         //  or,     there was no matching (case) for the (ruthenium) argument
-        if ( ! data.signals.taskname ) {
+        if ( ! data.RU.signals.taskname ) {
             
             data.RU.signals.redirectRoute = 'initial'
             data.RU.request.queryStringParameters.reader[0]
