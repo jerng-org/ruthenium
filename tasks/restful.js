@@ -85,10 +85,12 @@ console.warn('point 1')
 console.warn('point 2')                
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('forms'):
+console.warn('point 2.1')                
                         // (schemas) and (forms) are special / meta
                         data.RU.signals.markupName = 'forms/createSchema'
                         break
                     default:
+console.warn('point 2.2')                
                         // GET the Virtual ROW
                 }
 
@@ -108,6 +110,7 @@ console.warn('point 3')
             } 
         } 
         else {
+console.warn('point 4')                
             
             //  ERROR : TYPE not specified
         }
