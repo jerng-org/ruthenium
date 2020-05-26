@@ -1,4 +1,4 @@
-const liOfColumnButtons =  async ( column ) => {
+const liOfColumnButtons =   ( column ) => {
     
     let markup = `
         <li>
