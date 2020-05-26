@@ -15,10 +15,10 @@ const initialTaskMarkup = async ( data ) => {
         
         htmlIndex 
     
-        + tableOfTableSchemas ( data.RU.io.gridSchemasScan )
+        + tableOfTableSchemas ( data.RU.io.deskSchemasScan )
     
         + ` <h6>initialTaskMarkup.js:</h6>
-            <pre><code>${ JSON.stringify( data.RU.io.gridSchemasScan, null, 4 ) }</code></pre>`
+            <pre><code>${ JSON.stringify( data.RU.io.deskSchemasScan, null, 4 ) }</code></pre>`
     )
 }
 

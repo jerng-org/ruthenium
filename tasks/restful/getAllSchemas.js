@@ -5,8 +5,8 @@ const DDBDC     = require ( '/var/task/io/DDBDC.js' )
 
 const getAllSchemasTask = async ( data ) => {
     
-    data.RU.io.gridSchemasScan = await DDBDC.scan ( {
-        TableName: 'TEST-APP-GRID-SCHEMAS',
+    data.RU.io.deskSchemasScan = await DDBDC.scan ( {
+        TableName: 'TEST-APP-DESK-SCHEMAS',
         ReturnConsumedCapacity : 'TOTAL'
     } ).promise()
 
