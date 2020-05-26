@@ -103,7 +103,7 @@ const trOfDeskSchemas =   ( item ) => {
                     <h2>
                     <ul class="float-left">
                     ${  item['columns'].reduce ( async  ( acc, column, ind ) => {
-                        return   acc +  await liOfColumnButtons ( column )
+                        return  await acc +  await liOfColumnButtons ( column )
                     }, '' ) }
                     </ul>
                     </h2>
