@@ -284,7 +284,6 @@ const mark = ( taskLabel, firstInHandler ) => {
 
     newExecutionContext = false
     
-    global.gc()
 }
 module.exports = mark
 mark (`mark.js LOADED`, true)
