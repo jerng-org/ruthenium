@@ -32,9 +32,18 @@ const createSchema = async ( data ) => {
         </label>
     
     <textarea   name="schema[columns]"
-                placeholder="{
-                    hi
-                }"
+                placeholder="
+[   
+    {   
+        name:   STRING,
+        type:   'string' | 'number' | 'other'
+    },
+    {   
+        name:   STRING,
+        type:   'string' | 'number' | 'other'
+    },
+    ... etc.
+]"
                 id="schema[columns].1"></textarea>       
     
     <input      type="submit" 
