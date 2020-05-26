@@ -102,7 +102,7 @@ const trOfTableSchema =  ( item ) => {
                 <td>
                     <h2>
                     <ul class="float-left">
-                    ${  item['column-names'].reduce (  ( acc, column, ind ) => {
+                    ${  item['columns'].reduce (  ( acc, column, ind ) => {
                         return  acc +  liOfColumnButtons ( column )
                     }, '' ) }
                     </ul>
