@@ -13,7 +13,7 @@ const initialTaskMarkup = async ( data ) => {
         
         htmlIndex 
     
-        //+ await tableOfDeskSchemas ( data.RU.io.deskSchemasScan )
+        + await tableOfDeskSchemas ( data.RU.io.deskSchemasScan )
     
         + ` <h6>initialTaskMarkup.js:</h6>
             <pre><code>${ JSON.stringify( data.RU.io.deskSchemasScan, null, 4 ) }</code></pre>`
