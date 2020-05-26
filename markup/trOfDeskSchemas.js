@@ -1,6 +1,6 @@
 const liOfColumnButtons = require (`../markup/liOfColumnButtons.js`) 
 
-const trOfDeskSchemas =   ( item ) => {
+const trOfDeskSchemas = async ( item ) => {
     
     let markup = `
             <tr>
