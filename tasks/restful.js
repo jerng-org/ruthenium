@@ -7,15 +7,18 @@ const patchSchema       = require ( '/var/task/tasks/restful/patchSchema.js' )
 
 const restful = async ( data ) => {
     
-    if ( data.RU.request.queryStringParameters.batch[0] ) {
-        
+    if (        data.RU.request.queryStringParameters.batch
+            &&  data.RU.request.queryStringParameters.batch[0] ) 
+    {
         // batch
         
-        if ( data.RU.request.queryStringParameters.transaction[0] ) {
-            
+        if (        data.RU.request.queryStringParameters.transaction 
+                &&  data.RU.request.queryStringParameters.transaction[0] ) 
+        {
             // transactional batch - DEV THIS LAST
         }
-        else {
+        else
+        {
             
             // non-transactional batch - DEV THIS SECOND
         }
@@ -125,12 +128,12 @@ switch ( data.RU.request.http.method ) {
         }
         break
     default:
-}
+} // switch ( data.RU.request.http.method )
 
 
 
         
-    }
+    } // non-transactional; single operation; not a batch - DEV THIS FIRST
     
     mark ( `restfulTask.js EXECUTED` )
 }
