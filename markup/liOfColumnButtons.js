@@ -2,7 +2,7 @@ const liOfColumnButtons =  ( column ) => {
     
     let markup = `
         <li>
-            ${ column. }<br>
+            ${ column.name }<br>
             <button title="click to rename this column" 
                     class="button-outline " 
                     onclick="return false;"> 
@@ -10,7 +10,7 @@ const liOfColumnButtons =  ( column ) => {
                     <i class="material-icons">lock</i>rename</span>
             </button>
             <button class="button-outline" onclick="return false;">
-                <i class="material-icons">lock</i>destroy</button>
+                <i class="material-icons">lock</i>destroy</button> 
         </li>`
         
     return markup
