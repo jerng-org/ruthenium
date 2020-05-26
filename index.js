@@ -39,8 +39,8 @@ exports.handler = async function () {
     
     return  ruthenium   ( arguments, [  // MIDDLEWARES, execution order
                                 
-        normalizeHeaders,       // Values with same key stored as: Array of values
         copyRequestParameters,  // Values with same key stored as: CSV string
+        normalizeHeaders,       // Cookie header values with same key stored as: Array of values
         
         tunnelRestfulForms,
         normalizeFormData,

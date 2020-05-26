@@ -51,6 +51,9 @@ const router = async ( data ) => {
             case ( undefined ):
             default:
                 data.RU.signals.redirectRoute = 'initial'
+                data.RU.request.queryStringParameters.reader
+                    ? data.RU.request.queryStringParameters.reader
+                    : 'human'
         }
     }
     
