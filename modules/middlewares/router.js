@@ -32,29 +32,32 @@ const router = async ( data ) => {
     // Default here
     const defaultDetermineTaskName = () => {
         
-        switch ( data.RU.request.queryStringParameters.ruthenium[0] )
-        {
-            case ( 'initial' ):
-                data.RU.signals.taskname = 'initial'
-                break
-            case ( 'restful' ):                 
-                data.RU.signals.taskname = 'restful'
-                    // Single Item: METHOD, &type=M, &thing=N, &value/s=V
-                    // Batch:       METHOD, &batch=[ 
-                    //                          [ { method: type: thing: etc. } ]
-                    //                      ]
-                    // Transaction: METHOD, &batch=[], transaction=1  
-                break
-            case ( 'file' ):
-                data.RU.signals.taskname = 'sendBlob'
-                break
-            case ( undefined ):
-            default:
-                data.RU.signals.redirectRoute = 'initial'
-                data.RU.request.queryStringParameters.reader[0]
-                    ? data.RU.request.queryStringParameters.reader[0]
-                    : 'human'
-        }
+        if (data.RU.request.queryStringParameters.ruthenium) {
+            switch ( data.RU.request.queryStringParameters.ruthenium[0] )
+            {
+                case ( 'initial' ):
+                    data.RU.signals.taskname = 'initial'
+                    break
+                case ( 'restful' ):                 
+                    data.RU.signals.taskname = 'restful'
+                        // Single Item: METHOD, &type=M, &thing=N, &value/s=V
+                        // Batch:       METHOD, &batch=[ 
+                        //                          [ { method: type: thing: etc. } ]
+                        //                      ]
+                        // Transaction: METHOD, &batch=[], transaction=1  
+                    break
+                case ( 'file' ):
+                    data.RU.signals.taskname = 'sendBlob'
+                    break
+                case ( undefined ):
+                default:
+                    data.RU.signals.redirectRoute = 'initial'
+                    data.RU.request.queryStringParameters.reader[0]
+                        ? data.RU.request.queryStringParameters.reader[0]
+                        : 'human'
+            }
+        } 
+    
     }
     
     // Determine the task.
