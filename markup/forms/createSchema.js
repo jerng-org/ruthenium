@@ -29,14 +29,14 @@ const createSchema = async ( data ) => {
     <label      for="schema[desk-name].1">
         
         Columns for this new Desk
-        <h6>Legend:</h6>
-<pre><code>[   
+        
+<pre><h6>Legend:</h6><code>[   
     {   
-        name:   STRING,
+        name:   'stringName1',
         type:   'string' | 'number' | 'other'
     },
     {   
-        name:   STRING,
+        name:   'stringName2',
         type:   'string' | 'number' | 'other'
     },
     ... etc.
