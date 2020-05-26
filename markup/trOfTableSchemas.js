@@ -41,7 +41,7 @@ const trOfTableSchema =  ( item ) => {
 
     <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-table-rename-NAME' )">
         <label for="unlock-table-rename-NAME">
-            <h1> ${ item.grid } </h1>
+            <h1> ${ item['desk-name'] } </h1>
             <button title="click to rename this table" class="button-outline" onclick="return false;"> 
                 <span>rename <i class="material-icons">lock</i></span>
                 <span class="toggle-set-1" style="display:none;">
