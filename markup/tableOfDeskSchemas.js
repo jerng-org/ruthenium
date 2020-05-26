@@ -27,7 +27,7 @@ const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
                                 await trOfDeskSchema ( currentItem )
                 
                             )
-               }, '' )
+               }, 'tableOfxx' )
             }
         </tbody>
         <tfoot>
