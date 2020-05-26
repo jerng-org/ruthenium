@@ -27,7 +27,7 @@ const tableOfDeskSchemas   = ( deskSchemasScan ) => {
                                      trOfDeskSchema ( currentItem )
                                 )
                     }, 
-                    ( 'tableOfxx' )  
+                    ( '' )  
                )
             }
         </tbody>
