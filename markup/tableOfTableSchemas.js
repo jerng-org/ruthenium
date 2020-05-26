@@ -31,7 +31,7 @@ const tableOfTableSchemas   = ( deskSchemasScan ) => {
         <tfoot>
             <tr>
                 <td colspan="2">
-                    <a class="button float-right" href="/test-middleware?ruthenium=restful&type=form&thing=create-table&reader=human">Create Table</a>
+                    <a class="button float-right" href="?ruthenium=restful&type=form&thing=create-table&reader=human">Create Table</a>
                 </td>
             </tr>
         </tfoot>
