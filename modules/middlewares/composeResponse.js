@@ -11,12 +11,15 @@ const markups = {
 const markupFileNames = fs.readdirSync ('/var/task/markup')
 markupFileNames.forEach ( ( current, index, array ) => {
     markups[ current.slice (0, -3) ] = require ( '/var/task/markup/' + current )
-} /* , thisArg */ ) 
+} /* , thisArg */ 
+)
+
 const formMarkupFileNames = fs.readdirSync ('/var/task/markup/forms')
 formMarkupFileNames.forEach ( ( current, index, array ) => {
-    markups.[ current.slice (0, -3) ] = require ( '/var/task/markup/forms/' + current )
-} /* , thisArg */ ) 
-
+    markups.forms[ current.slice (0, -3) ] = require ( '/var/task/markup/forms/' + current )
+} // , thisArg 
+) 
+*/
 
 
 const composeResponse = async ( data ) => {
