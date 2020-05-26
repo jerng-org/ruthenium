@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `previous commit: criticism was flawed - secondary indices do not require unique 1ryKeys`
+const commitMessage = `new DB schema; get all Schemas - request succeeds again`
 
 const gitCommit = () => { try {
 
