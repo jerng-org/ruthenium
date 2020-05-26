@@ -1,6 +1,6 @@
 const liOfColumnButtons = require (`../markup/liOfColumnButtons.js`) 
 
-const trOfTableSchema =  async( item ) => {
+const trOfTableSchema =  async ( item ) => {
     
     let markup = `
             <tr>
@@ -102,7 +102,7 @@ const trOfTableSchema =  async( item ) => {
                 <td>
                     <h2>
                     <ul class="float-left">
-                    ${  item['columns'].reduce (  ( acc, column, ind ) => {
+                    ${  item['columns'].reduce ( async ( acc, column, ind ) => {
                         return  acc +  await liOfColumnButtons ( column )
                     }, '' ) }
                     </ul>
