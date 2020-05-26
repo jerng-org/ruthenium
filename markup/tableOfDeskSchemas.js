@@ -27,7 +27,7 @@ const tableOfDeskSchemas   = ( deskSchemasScan ) => {
                                      trOfDeskSchema ( currentItem )
                                 )
                     }, 
-                    Promise.resolve( 'tableOfxx' )  
+                    ( 'tableOfxx' )  
                )
             }
         </tbody>
