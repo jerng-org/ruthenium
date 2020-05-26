@@ -32,7 +32,7 @@ const router                            = require (`./modules/middlewares/router
 exports.handler = async function () { 
 
     console.log (
-    [ `THINGS TO DO : sessions, cognito, ... `]
+    [ `THINGS TO DO : sessions, cognito, formHelpers, urlHelpers, htmlHelpers, markuplayouts?... `]
     )
 
     
