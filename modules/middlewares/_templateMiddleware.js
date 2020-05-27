@@ -7,7 +7,7 @@ const mark      = require ( '/var/task/modules/mark' )
 
 const thisIsMyName = async ( data ) => {
     
-    mark ( `thisIsMyName.js EXECUTED` )
+    // rutheniumReducer.js will mark() execution, you don't have to
     
     return data
 
