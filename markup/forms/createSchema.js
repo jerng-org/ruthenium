@@ -47,6 +47,20 @@ const createSchema = async ( data ) => {
     ... etc.
 ]"></textarea>       
     
+    <label for="column[type].1">
+    
+        Type of data in this column ('string' and 'number' are efficient):
+        </label>
+    
+    <select id="column[type].1" 
+            name="column[type]">
+            
+        <option value="string">string</option>
+        <option value="number">number</option>
+        <option value="other">other</option>
+
+        </select>
+    
     <input      type="submit" 
                 value="POST it">
 
