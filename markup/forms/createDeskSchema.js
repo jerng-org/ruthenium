@@ -45,7 +45,10 @@ if ( !  (   window['columnDefinitionTemplate']
     
     const relevantTable 
         = this.closest('table')
+
+    console.log('in if')
 }
+    console.log('after if')
 
 // Perform
 relevantTable.append ( newColumnDefinition ) 
