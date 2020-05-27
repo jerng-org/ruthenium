@@ -30,6 +30,9 @@ const createSchema = async ( data ) => {
     <table>
         <tr>
             <td>
+                <i class="material-icons">add_circle_outline</i>
+            </td>
+            <td>
                 <label      for="column[name].all">
                     Add a Column for this new Desk</label>
             </td>
