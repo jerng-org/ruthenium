@@ -49,6 +49,14 @@ if ( !  (   this.columnDefinitionTemplate
 
 // Perform
 this.relevantTable.append ( this.newColumnDefinition ) 
+
+console.log (
+    this.columnDefinitionTemplate, 
+    this.newColumnDefinition,
+    this.relevantTable
+)
+
+
                     ">add_circle_outline</i>
             
             </td>
