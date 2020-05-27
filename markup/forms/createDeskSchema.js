@@ -19,29 +19,35 @@ const createSchema = async ( data ) => {
     
     <label      for="schema[desk-name].1">
         
-        Name for this new Desk
+        Name for this new Desk Schema
         </label>
     
     <input      type="text"  
-                name="schema[desk-name]"
-                id="schema[desk-name].1"
-                placeholder="new desk name">       
+                name="schema[desk-schema-name]"
+                id="schema[desk-schema-name].1"
+                placeholder="new desk schema name">       
     
     <table>
         <tr>
             <td>
                 <i  class="material-icons"
                     onclick="
-                        
-const columnDefinitionTemplate 
-    = document.querySelector ( '#column-definition' )
+// Prepare                    
+if ( !  (   columnDefinitionTemplate 
+        &&  newColumnDefinition
+        &&  relevantTable               ) )
+{
+    const columnDefinitionTemplate 
+        = document.querySelector ( '#column-definition' )
+    
+    const newColumnDefinition 
+        = columnDefinitionTemplate.content.cloneNode ( true )
+    
+    const relevantTable 
+        = this.closest('table')
+}
 
-const newColumnDefinition 
-    = columnDefinitionTemplate.content.cloneNode ( true )
-
-const relevantTable 
-    = this.closest('table')
-
+// Perform
 relevantTable.append ( newColumnDefinition ) 
 
                     ">add_circle_outline</i>
@@ -49,7 +55,7 @@ relevantTable.append ( newColumnDefinition )
             </td>
             <td>
                 <label      for="column[name].all">
-                    Add a Column for this new Desk</label>
+                    Add a Column for this new Desk Schema</label>
             </td>
             <td>
                 <label for="column[type].all">
