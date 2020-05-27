@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `-`
+const commitMessage = `removed Lambda-specific code from ruthenium.js`
 
 const gitCommit = () => { try {
 
