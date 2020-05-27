@@ -7,7 +7,7 @@ const LLoadMetadata = async ( data ) => {
     
     data.RU.metadata = await DDBDC.get ( {
         TableName:              'TEST-APP-STASH',
-        Key:                    'metadata',
+        Key:                    { key: 'metadata' },
         ReturnConsumedCapacity: 'TOTAL'
     } ).promise()
 
