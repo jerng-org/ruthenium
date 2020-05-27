@@ -30,7 +30,22 @@ const createSchema = async ( data ) => {
     <table>
         <tr>
             <td>
-                <i class="material-icons">add_circle_outline</i>
+                <i  class="material-icons"
+                    onclick="
+                        
+const columnDefinitionTemplate 
+    = document.querySelector ( '#column-definition' )
+
+const newColumnDefinition 
+    = columnDefinitionTemplate.content.cloneNode ( true )
+
+const relevantTable 
+    = this.closest('table')
+
+relevantTable.append ( newColumnDefinition ) 
+
+                    ">add_circle_outline</i>
+            
             </td>
             <td>
                 <label      for="column[name].all">
@@ -42,6 +57,9 @@ const createSchema = async ( data ) => {
                     </label>
             </td>
         </tr>
+
+<!---------------------------------------------------------------------------->        
+        <template id="column-definition">
         <tr>
             <td>
                 <i class="material-icons">remove_circle_outline</i>
@@ -61,6 +79,9 @@ const createSchema = async ( data ) => {
                     </select>
             </td>
         </tr>
+        <template>
+<!---------------------------------------------------------------------------->        
+        
     </table>
     
     <input      type="submit" 
