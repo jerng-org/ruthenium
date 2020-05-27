@@ -1,58 +1,40 @@
 'use strict'
-const util      = require ( 'util' )
 const reducer   = require ( './rutheniumReducer.js' )
 
-const ruthenium = async ( LAMBDA_ARGUMENTS, MIDDLEWARE_QUEUE ) => {
+const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     
-    const initialData = Promise.resolve ( { // clunky but more explicit thatn async IIFE
+    const frameworkData = {
+            
+        middlewares:    MIDDLEWARE_QUEUE.map ( m => m.name ),
         
-        LAMBDA: {
-            
-            //  Things we must include because they are principal arguments of 
-            //  Lambda invocation handlers.
-            event:          LAMBDA_ARGUMENTS[0],
-            context:        LAMBDA_ARGUMENTS[1],
-            callback:       LAMBDA_ARGUMENTS[2],
-            
-            //  Things which may not be immediately obvious, which we should
-            //  encourage developers to be aware of.
-            inspectGlobal:  () => util.inspect ( global, { 
-                depth:      Infinity, 
-                showHidden: true
-            } )
-        },
+        request:        {},
         
-        RU: {
-            
-            middlewares:    MIDDLEWARE_QUEUE.map ( m => m.name ),
-            
-            request:        {},
-            
-            signals:        {}, //  inter-middleware communications; 
-                                //
-                                //  for example,
-                                //  to say something about the field 
-                                //  (data.RU.response), instead of messing
-                                //  it up with (data.RU.response.mySignal),
-                                //  you may write (data.RU.signals.mySignal)
-            
-            io:             {}, //  data-sources and data-sinks may go here
-            
-            response:       {},
-            
-            errors:         []  //  stuff errors in here, then continue 
-                                //  to let the next middleware process (data),
-                                //  instead of short-circuiting the entire 
-                                //  queue when a middleware throws an error;
-                                //
-                                //  we WILL later need a mechanism which gives
-                                //  the developer an option to short-circuit,
-                                //  but this is not currently the default
-        }
-    } )
+        signals:        {}, //  inter-middleware communications; 
+                            //
+                            //  for example,
+                            //  to say something about the field 
+                            //  (data.RU.response), instead of messing
+                            //  it up with (data.RU.response.mySignal),
+                            //  you may write (data.RU.signals.mySignal)
+        
+        io:             {}, //  data-sources and data-sinks may go here
+        
+        response:       {},
+        
+        errors:         []  //  stuff errors in here, then continue 
+                            //  to let the next middleware process (data),
+                            //  instead of short-circuiting the entire 
+                            //  queue when a middleware throws an error;
+                            //
+                            //  we WILL later need a mechanism which gives
+                            //  the developer an option to short-circuit,
+                            //  but this is not currently the default
+    }
 
-    // reducer ( getHeaders, initialData  ), non-Promise goes in, Promise comes out
-    // reducer ( getHeaders, business  ), Promise goes in
+    HOST_INITIALIZED_DATA.RU = frameworkData
+
+    const initialData = Promise.resolve ( HOST_INITIALIZED_DATA )
+                        // clunky but more explicit thatn async IIFE
 
     return await MIDDLEWARE_QUEUE.reduce ( reducer , initialData )
 }

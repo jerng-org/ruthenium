@@ -2,6 +2,8 @@
 
 // require() executes modules; use require.res() to resolve without execution.
 
+const util      = require ( 'util' )
+
 // PROJECT
 const mark      = require ( './modules/mark' )
 mark( `index.js required mark.js`)
@@ -35,10 +37,27 @@ exports.handler = async function () {
     [ `THINGS TO DO : test-middleware?ruthenium=restful&type=schemas; sessions, cognito, formHelpers, urlHelpers, htmlHelpers, markuplayouts?... `]
     )
 
-    
     mark( `index.js, first mark in handler`, true )
     
-    return  ruthenium   ( arguments, [  // MIDDLEWARES, execution order
+    const hostInitializedData = {
+        LAMBDA: {
+            //  Things we must include because they are principal arguments of 
+            //  Lambda invocation handlers.
+            event:          arguments[0],
+            context:        arguments[1],
+            callback:       arguments[2],
+            
+            //  Things which may not be immediately obvious, which we should
+            //  encourage developers to be aware of.
+            inspectGlobal:  () => util.inspect ( global, { 
+                depth:      Infinity, 
+                showHidden: true
+            } )
+            
+        }
+    }
+    
+    return  ruthenium   ( hostInitializedData, [  // MIDDLEWARES, execution order
                                 
         // System Integration with AWS Lambda
         LCopyRequestParameters,         // Query string     values with same key stored as:     CSV string

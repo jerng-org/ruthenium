@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `Work on decoupling RU code from LAMBDA.`
+const commitMessage = `-`
 
 const gitCommit = () => { try {
 
