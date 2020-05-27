@@ -1,4 +1,10 @@
-const copyRequestParameters = async ( data ) => {
+const LCopyRequestParameters = async ( data ) => {
+
+    // Maybe move this to firstGuard or something like that - its own .js
+    if (! data.LAMBDA.event.requestContext ) {
+        console.warn (`Are you in the Test Environment? This does not look like a HTTP request event.`)
+        return data
+    }
 
     data.RU.request.queryStringParameters = 
         data.LAMBDA.event.queryStringParameters
@@ -25,6 +31,6 @@ const copyRequestParameters = async ( data ) => {
     return data
 }
 
-module.exports = copyRequestParameters
+module.exports = LCopyRequestParameters
 const mark = require ('../mark')
-mark (`copyRequestParameters.js LOADED`)
+mark (`LCopyRequestParameters.js LOADED`)

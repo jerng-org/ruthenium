@@ -27,11 +27,6 @@ formMarkupFileNames.forEach ( ( current, index, array ) => {
 
 const composeResponse = async ( data ) => {
     
-    if (! data.LAMBDA.event.requestContext ) {
-        console.warn (`Are you in the Test Environment? This does not look like a HTTP request event.`)
-        return data
-    }
-    
     if ( data.RU.response ) {
         
         
@@ -41,7 +36,7 @@ const composeResponse = async ( data ) => {
         if ( data.RU.signals.redirectRoute ) { 
             
             data.RU.signals.redirectRoute 
-                = data.LAMBDA.event.requestContext.http.path
+                = data.RU.request.http.path
                 + '?ruthenium='
                 + data.RU.signals.redirectRoute
             

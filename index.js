@@ -20,11 +20,11 @@ mark( `index.js did other things`)
 
 // PROJECT - MIDDLEWARES, lexical order
 const composeResponse                   = require (`./modules/middlewares/composeResponse.js`) 
-const copyRequestParameters             = require (`./modules/middlewares/copyRequestParameters.js`) 
-const normalizeFormData                 = require (`./modules/middlewares/normalizeFormData.js`) 
-const normalizeHeaders                  = require (`./modules/middlewares/normalizeHeaders.js`) 
-const normalizeQueryStringParameters    = require (`./modules/middlewares/normalizeQueryStringParameters.js`) 
 const lastGuard                         = require (`./modules/middlewares/lastGuard.js`) 
+const LCopyRequestParameters            = require (`./modules/middlewares/LCopyRequestParameters.js`) 
+const LNormalizeFormData                = require (`./modules/middlewares/LNormalizeFormData.js`) 
+const LNormalizeHeaders                 = require (`./modules/middlewares/LNormalizeHeaders.js`) 
+const LNormalizeQueryStringParameters   = require (`./modules/middlewares/LNormalizeQueryStringParameters.js`) 
 const tunnelRestfulForms                = require (`./modules/middlewares/tunnelRestfulForms.js`) 
 const router                            = require (`./modules/middlewares/router.js`) 
 
@@ -32,7 +32,7 @@ const router                            = require (`./modules/middlewares/router
 exports.handler = async function () { 
 
     console.log (
-    [ `THINGS TO DO : sessions, cognito, formHelpers, urlHelpers, htmlHelpers, markuplayouts?... `]
+    [ `THINGS TO DO : test-middleware?ruthenium=restful&type=schemas; sessions, cognito, formHelpers, urlHelpers, htmlHelpers, markuplayouts?... `]
     )
 
     
@@ -40,14 +40,14 @@ exports.handler = async function () {
     
     return  ruthenium   ( arguments, [  // MIDDLEWARES, execution order
                                 
-        copyRequestParameters,          // Query string     values with same key stored as:     CSV string
-        
-        normalizeHeaders,               // Cookie header    values with same key stored as:     Array of values
-        normalizeQueryStringParameters, // Query string     values with same key stored as:     Array of values
-        normalizeFormData,              // Form string      values with same name stored as:    Array of values
+        // System Integration with AWS Lambda
+        LCopyRequestParameters,         // Query string     values with same key stored as:     CSV string
+        LNormalizeHeaders,              // Cookie header    values with same key stored as:     Array of values
+        LNormalizeQueryStringParameters,// Query string     values with same key stored as:     Array of values
+        LNormalizeFormData,             // Form string      values with same name stored as:    Array of values
         
         tunnelRestfulForms,
-                router,
+        router,
         
         composeResponse,
         lastGuard
