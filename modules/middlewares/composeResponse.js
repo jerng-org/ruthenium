@@ -37,7 +37,7 @@ const composeResponse = async ( data ) => {
             
             data.RU.signals.redirectRoute 
                 = data.RU.request.http.path
-                + '?ruthenium='
+                + '?route='
                 + data.RU.signals.redirectRoute
             
             data.RU.response.statusCode =   data.RU.response.statusCode
