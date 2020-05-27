@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `LLoadMetadata.js middleware`
+const commitMessage = `massive messy renaming`
 
 const gitCommit = () => { try {
 
