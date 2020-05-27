@@ -1,7 +1,13 @@
 'use strict'
 
-const mark      = require ( '/var/task/modules/mark' )
-const DDBDC     = require ( '/var/task/io/DDBDC.js' )
+const mark      
+    = require ( '/var/task/modules/mark' )
+
+const DDBDC     
+    = require ( '/var/task/io/DDBDC.js' )
+
+const markup 
+    = require ( '/var/task/tasks/restful/getAllDeskSchemas/markup.js' )
 
 const getAllDeskSchemas = async ( data ) => {
     
@@ -17,11 +23,11 @@ const getAllDeskSchemas = async ( data ) => {
             break
         case ( 'human' ) :
         default:
-            data.RU.signals.markupName = 'allDeskSchemasMarkup'
+            data.RU.response.body = await markup ( data )
     }
 
-    mark ( `getAllDeskSchemas.js EXECUTED` )
+    mark ( `restful/getAllDeskSchemas/index.js EXECUTED` )
 }
 
 module.exports = getAllDeskSchemas
-mark ( `getAllDeskSchemas.js LOADED` )
+mark ( `restful/getAllDeskSchemas/index.js LOADED` )

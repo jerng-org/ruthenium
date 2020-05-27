@@ -1,4 +1,4 @@
-const liOfColumnButtons = async ( column ) => {
+const liOfColumnsInTr = async ( column ) => {
     
     let markup = `
         <li>
@@ -16,6 +16,6 @@ const liOfColumnButtons = async ( column ) => {
     return markup
 }
 
-module.exports  = liOfColumnButtons
-const mark      = require ( '../modules/mark' )            
-mark ( `liOfColumnButtons.js LOADED` )
+module.exports  = liOfColumnsInTr
+const mark      = require ( '/var/task/modules/mark' )            
+mark ( `restful/getAllSchemas/liOfColumnsInTr.js LOADED` )

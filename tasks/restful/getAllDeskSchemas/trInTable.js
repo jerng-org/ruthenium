@@ -1,6 +1,7 @@
-const liOfColumnButtons = require (`../markup/liOfColumnButtons.js`) 
+const liOfColumnsInTr 
+    = require (`/var/task/tasks/restful/getAllDeskSchemas/liOfColumnsInTr.js`) 
 
-const trOfDeskSchemas = async ( item ) => {
+const trInTable = async ( item ) => {
     
     let markup = `
             <tr>
@@ -106,7 +107,7 @@ const trOfDeskSchemas = async ( item ) => {
                         await item['columns'].reduce (  
                             async ( acc, column, ind ) => {
                                 return  await acc + 
-                                        await liOfColumnButtons ( column )
+                                        await liOfColumnsInTr ( column )
                             }, 
                             '' 
                         )
@@ -120,6 +121,6 @@ const trOfDeskSchemas = async ( item ) => {
     return markup
 }
 
-module.exports  = trOfDeskSchemas
-const mark      = require ( '../modules/mark' )            
-mark ( `trOfDeskSchemas.js LOADED` )
+module.exports  = trInTable
+const mark      = require ( '/var/task/modules/mark' )            
+mark ( `restful/getAllDeskSchemas/trInTable.js LOADED` )
