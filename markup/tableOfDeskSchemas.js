@@ -33,7 +33,7 @@ const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
         <tfoot>
             <tr>
                 <td colspan="2">
-                    <a class="button float-right" href="?ruthenium=restful&type=forms&thing=create-desk&reader=human">Create Desk</a>
+                    <a class="button float-right" href="?route=restful&type=forms&thing=create-desk-schema&reader=human">Create Desk</a>
                 </td>
             </tr>
         </tfoot>
