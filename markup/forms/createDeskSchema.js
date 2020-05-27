@@ -32,15 +32,10 @@ const createSchema = async ( data ) => {
             <td>
                 <i  class="material-icons"
                     onclick="
-
-//console.log( columnDefinitionTemplate )
-
-console.log('columnDefinitionTemplate' in window)
-
 // Prepare                    
-if ( !  (   columnDefinitionTemplate 
-        &&  newColumnDefinition
-        &&  relevantTable               ) )
+if ( !  (   window['columnDefinitionTemplate'] 
+        &&  window['newColumnDefinition']
+        &&  window['relevantTable']               ) )
 {
     const columnDefinitionTemplate 
         = document.querySelector ( '#column-definition' )
