@@ -9,7 +9,9 @@ const LLoadMetadata = async ( data ) => {
         TableName:              'TEST-APP-STASH',
         Key:                    { key: 'metadata' },
         ReturnConsumedCapacity: 'TOTAL'
-    } ).promise()
+    } ) 
+    .promise()
+    .Item.value
 
     
     mark ( `LLoadMetadata.js EXECUTED` )
