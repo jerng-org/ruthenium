@@ -24,6 +24,7 @@ mark( `index.js did other things`)
 const composeResponse                   = require (`./modules/middlewares/composeResponse.js`) 
 const lastGuard                         = require (`./modules/middlewares/lastGuard.js`) 
 const LCopyRequestParameters            = require (`./modules/middlewares/LCopyRequestParameters.js`) 
+const LLoadMetadata                     = require (`./modules/middlewares/LLoadMeta.js`) 
 const LNormalizeFormData                = require (`./modules/middlewares/LNormalizeFormData.js`) 
 const LNormalizeHeaders                 = require (`./modules/middlewares/LNormalizeHeaders.js`) 
 const LNormalizeQueryStringParameters   = require (`./modules/middlewares/LNormalizeQueryStringParameters.js`) 
@@ -53,24 +54,27 @@ exports.handler = async function () {
                 depth:      Infinity, 
                 showHidden: true
             } )
-            
         }
     }
     
-    return  ruthenium   ( hostInitializedData, [  // MIDDLEWARES, execution order
+    const middlewares = [  // MIDDLEWARES, execution order
                                 
         // System Integration with AWS Lambda
         LCopyRequestParameters,         // Query string     values with same key stored as:     CSV string
         LNormalizeHeaders,              // Cookie header    values with same key stored as:     Array of values
         LNormalizeQueryStringParameters,// Query string     values with same key stored as:     Array of values
         LNormalizeFormData,             // Form string      values with same name stored as:    Array of values
+        LLoadMetadata,
         
+        // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
         tunnelRestfulForms,
         router,
         
         composeResponse,
         lastGuard
-    ] ) 
+    ]
+    
+    return ruthenium ( hostInitializedData, middlewares ) 
     
 }
 mark (`index.js LOADED`, true)
