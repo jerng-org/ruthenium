@@ -26,26 +26,10 @@ const createSchema = async ( data ) => {
                 name="schema[desk-name]"
                 id="schema[desk-name].1">       
     
-    <label      for="schema[desk-name].1">
+    <label      for="column[name].1">
         
         Columns for this new Desk
         </label>
-    
-    <textarea   name="schema[columns]"
-                id="schema[columns].1"
-                style="height:20rem;"
-                placeholder=
-"[   
-    {   
-        name:   STRING,
-        type:   'string' | 'number' | 'other'
-    },
-    {   
-        name:   STRING,
-        type:   'string' | 'number' | 'other'
-    },
-    ... etc.
-]"></textarea>       
     
     <label for="column[type].1">
     
@@ -55,8 +39,8 @@ const createSchema = async ( data ) => {
     <select id="column[type].1" 
             name="column[type]">
             
-        <option value="string">string</option>
-        <option value="number">number</option>
+        <option value="S">string</option>
+        <option value="N">number</option>
         <option value="other">other</option>
 
         </select>
