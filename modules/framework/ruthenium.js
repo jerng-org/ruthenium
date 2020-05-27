@@ -142,7 +142,7 @@ Wherever the cost is minimal, avoid dependencies between any two middlewares.
     `async` function context. Heuristics: terseness; explicitly state 
     intentions.
 
-* How to Name Data Models in this Software Framework *
+* How to Refer to Data in this Software Framework *
 
 Broadly, there are Types and Things. Whenever referring to a Type in English,
 use the plural form. This is in order to deliver the semantics that a Type has
@@ -153,4 +153,23 @@ therefore are roughly, Platonic Forms.
                             common traits, or schema-ness. A single schema is
                             simply one such Thing.
 
+* How to Write Inline ECMAScript Handlers in this Software Framework *
+
+DOM elements may have [onclick] or other attributes which implicitly attach
+event handler scripts to such elements. For such handlers, whenever possible:
+
+-   Separate code into (prepare) and (perform) stages.
+
+-   Cache the results from (prepare) in the DOM node, via the (this) variable.
+
+    Pseudocode example:     onEvent =   "   // PREPARE
+                                            if (  ! this.preparation ) {
+                                                this.preparation = 'something'        
+                                            }
+                                            
+                                            // PERFORM
+                                            echo this.preparation
+                                        "
+-   We expect this this advice will change when we get around to implementing a 
+    document-wide or global-esque state manager
 */
