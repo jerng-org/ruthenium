@@ -16,8 +16,6 @@ const LLoadMetadata = async ( data ) => {
     
     ).Item.value
     
-    mark ( `LLoadMetadata.js EXECUTED` )
-    
     return data
 
 }
