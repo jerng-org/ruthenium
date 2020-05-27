@@ -34,25 +34,20 @@ const createSchema = async ( data ) => {
                     onclick="
 // Prepare                    
 if ( !  (   this.columnDefinitionTemplate 
-        &&  this.newColumnDefinition
         &&  this.relevantTable               ) )
 {
     this.columnDefinitionTemplate 
         = document.querySelector ( '#column-definition' )
-    
-    this.newColumnDefinition 
-        = columnDefinitionTemplate.content.cloneNode ( true )
     
     this.relevantTable 
         = this.closest('table')
 }
 
 // Perform
-this.relevantTable.append ( this.newColumnDefinition ) 
+this.relevantTable.append ( columnDefinitionTemplate.content.cloneNode ( true ) ) 
 
 console.log (
     this.columnDefinitionTemplate, 
-    this.newColumnDefinition,
     this.relevantTable
 )
 
