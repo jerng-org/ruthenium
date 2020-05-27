@@ -1,8 +1,8 @@
 'use strict'
 
 const mark              = require ( '/var/task/modules/mark' )            
-const getAllSchemas     = require ( '/var/task/tasks/restful/getAllSchemas.js' )
-const patchSchema       = require ( '/var/task/tasks/restful/patchSchema.js' )
+const getAllDeskSchemas = require ( '/var/task/tasks/restful/getAllDeskSchemas.js' )
+const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
 
 const restful = async ( data ) => {
@@ -84,9 +84,9 @@ switch ( data.RU.request.http.method ) {
             {
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('forms'):
-                        // (schemas) and (forms) are special / meta
+                        // (desks) and (forms) are special / meta
                         //data.RU.metadata['desk-data-types'] = ;
-                        data.RU.signals.markupName = 'forms/createSchema'
+                        data.RU.signals.markupName = 'forms/createDeskSchema'
                         break
                     default:
                         // GET the Virtual ROW
@@ -96,9 +96,9 @@ switch ( data.RU.request.http.method ) {
             else 
             {
                 switch (data.RU.request.queryStringParameters.type[0]) {
-                    case ('schemas'):
-                        // (schemas) and (forms) are special / meta
-                        await getAllSchemas ( data ) 
+                    case ('desk-schemas'):
+                        // (desks) and (forms) are special / meta
+                        await getAllDeskSchemas ( data ) 
                         break
                     default:
                        // GET the Virtual TABLE   
@@ -130,8 +130,8 @@ switch ( data.RU.request.http.method ) {
             else {
                 
                 // convert to switch/case
-                if ( data.RU.request.queryStringParameters.type[0] == 'schemas' ) {
-                    await patchSchema ( data ) // (schemas) are meta ... i.e. special
+                if ( data.RU.request.queryStringParameters.type[0] == 'desk-schemas' ) {
+                    await patchDesk ( data ) // (desks) are meta ... i.e. special
                 } else {
                     // PATCH the Virtual TABLE   
                 }

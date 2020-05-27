@@ -28,7 +28,7 @@ const createSchema = async ( data ) => {
     
     <label      for="column[name].1">
         
-        Columns for this new Desk
+        Add a Columns for this new Desk
         </label>
     
     <label for="column[type].1">
