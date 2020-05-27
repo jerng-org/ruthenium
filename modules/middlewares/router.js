@@ -32,8 +32,8 @@ const router = async ( data ) => {
     // Default here
     const defaultDetermineTaskName = () => {
         
-        if (data.RU.request.queryStringParameters.ruthenium) {
-            switch ( data.RU.request.queryStringParameters.ruthenium[0] )
+        if (data.RU.request.queryStringParameters.route) {
+            switch ( data.RU.request.queryStringParameters.route[0] )
             {
                 case ( 'initial' ):
                     data.RU.signals.taskname = 'initial'
@@ -56,8 +56,8 @@ const router = async ( data ) => {
             }
         }
         
-        //  Either, there was no (ruthenium) queryParameter, 
-        //  or,     there was no matching (case) for the (ruthenium) argument
+        //  Either, there was no (route) queryParameter, 
+        //  or,     there was no matching (case) for the (route) argument
         if ( ! data.RU.signals.taskname ) {
             
             data.RU.signals.redirectRoute = 'initial&reader='

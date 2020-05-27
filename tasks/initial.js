@@ -4,7 +4,7 @@ const mark  = require ( '../modules/mark' )
 
 const initialTask = async ( data ) => {
 
-    data.RU.signals.redirectRoute = 'restful&type=schemas&reader=human'
+    data.RU.signals.redirectRoute = 'restful&type=desk-schemas&reader=human'
     
     // no need to return data
     
