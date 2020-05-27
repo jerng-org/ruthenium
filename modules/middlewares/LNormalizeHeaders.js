@@ -1,4 +1,4 @@
-const normalizeHeaders = async ( data ) => {
+const LNormalizeHeaders = async ( data ) => {
 
     if (data.LAMBDA.event.headers) {
         data.RU.request.headers = data.LAMBDA.event.headers
@@ -38,6 +38,6 @@ const normalizeHeaders = async ( data ) => {
     return data
 }
 
-module.exports = normalizeHeaders
+module.exports = LNormalizeHeaders
 const mark = require ('../mark')
-mark (`normalizeHeaders.js LOADED`)
+mark (`LNormalizeHeaders.js LOADED`)
