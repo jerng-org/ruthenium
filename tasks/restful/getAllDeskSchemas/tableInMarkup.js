@@ -1,6 +1,7 @@
-const trOfDeskSchemas      = require (`../markup/trOfDeskSchemas.js`) 
+const trInTable
+    = require (`/var/task/tasks/restful/getAllDeskSchemas/trInTable.js`) 
 
-const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
+const tableInMarkup = async ( deskSchemasScan ) => {
     
     const markup = `
     <table>
@@ -24,7 +25,7 @@ const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
                 await deskSchemasScan.Items.reduce ( 
                     async ( accumulator, currentItem, index ) => {
                         return  await accumulator + 
-                                await trOfDeskSchemas ( currentItem )
+                                await trInTable ( currentItem )
                     }, 
                     ''  
                )
@@ -42,6 +43,6 @@ const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
     return markup
 }
 
-module.exports  = tableOfDeskSchemas
-const mark      = require ( '../modules/mark' )            
-mark ( `tableOfDeskSchemas.js LOADED` )
+module.exports  = tableInMarkup
+const mark      = require ( '/var/task/modules/mark' )            
+mark ( `restful/getAllDeskSchemas/tableInMarkup.js LOADED` )
