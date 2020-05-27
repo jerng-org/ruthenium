@@ -32,7 +32,11 @@ const createSchema = async ( data ) => {
             <td>
                 <i  class="material-icons"
                     onclick="
-console.log(columnDefinitionTemplate, 'columnDefinitionTemplate' in )
+
+console.log( columnDefinitionTemplate )
+
+console.log('columnDefinitionTemplate' in window)
+
 // Prepare                    
 if ( !  (   columnDefinitionTemplate 
         &&  newColumnDefinition
