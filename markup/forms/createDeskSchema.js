@@ -44,6 +44,9 @@ const createSchema = async ( data ) => {
         </tr>
         <tr>
             <td>
+                <i class="material-icons">remove_circle_outline</i>
+            </td>
+            <td>
                 <input      type="text"  
                             name="column[name]"
                             id="column[name].1">       
