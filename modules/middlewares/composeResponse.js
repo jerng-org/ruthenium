@@ -78,6 +78,26 @@ const composeResponse = async ( data ) => {
 
         }
         else
+        if ( data.RU.response.statusCode || data.RU.response.body ) {
+            
+            //  This branch allows the programmer to short-circuit "automatic 
+            //  task-markup-matching" by specifying either the (statusCode) or
+            //  (body) manually.
+            
+            data.RU.response.statusCode = data.RU.response.statusCode
+                ? data.RU.response.statusCode
+                : 200
+                
+            data.RU.response.body = data.RU.response.body
+                ? data.RU.response.body
+                : ''
+                
+            data.RU.response.headers = data.RU.response.headers
+                ? data.RU.response.headers
+                : { 'content-type': 'text/html' }
+                
+        }
+        else
         if ( data.RU.signals.markupName ) {
         
             if ( data.RU.signals.markupName in markups ) {
@@ -94,7 +114,33 @@ const composeResponse = async ( data ) => {
             else {
                 throw   Error (`Could not find (${ data.RU.signals.markupName 
                         }) in the markups directory. That name was specified at
-                        (data.RU.response.markup).`)
+                        (data.RU.response.markup).
+                        
+                        The following may be informative:
+                        ${ JSON.stringify( {
+                            
+                            signals:
+                                data.RU.signals,
+                            
+                            http: 
+                                data.RU.request.http,
+                            
+                            queryStringParameters:
+                                data.RU.request.queryStringParameters,
+                            
+                            formStringParameters:
+                                data.RU.request.formStringParameters,
+                            
+                            headers:
+                                data.RU.request.headers,
+                                
+                            middlewares:
+                                data.RU.middlewares,
+                                
+                            io:
+                                data.RU.io
+                                
+                        } , null, 4 ) }`)
             }
         }
         else

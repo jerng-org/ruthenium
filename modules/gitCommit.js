@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `ruthenium.js : how to write DOM element event handlers`
+const commitMessage = `composeResponse.js : branch to allow short-circuit `
 
 const gitCommit = () => { try {
 
