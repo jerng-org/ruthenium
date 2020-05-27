@@ -32,10 +32,12 @@ const createSchema = async ( data ) => {
             <td>
                 <i  class="material-icons"
                     onclick="
+console.log (this )
+/*
 // Prepare                    
-if ( !  (   window['columnDefinitionTemplate'] 
-        &&  window['newColumnDefinition']
-        &&  window['relevantTable']               ) )
+if ( !  (   columnDefinitionTemplate 
+        &&  newColumnDefinition
+        &&  relevantTable               ) )
 {
     const columnDefinitionTemplate 
         = document.querySelector ( '#column-definition' )
@@ -45,14 +47,11 @@ if ( !  (   window['columnDefinitionTemplate']
     
     const relevantTable 
         = this.closest('table')
-
-    console.log('in if')
 }
-    console.log('after if')
 
 // Perform
 relevantTable.append ( newColumnDefinition ) 
-
+*/
                     ">add_circle_outline</i>
             
             </td>
