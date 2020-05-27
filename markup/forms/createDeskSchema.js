@@ -32,26 +32,23 @@ const createSchema = async ( data ) => {
             <td>
                 <i  class="material-icons"
                     onclick="
-console.log ( [this] )
-/*
 // Prepare                    
-if ( !  (   columnDefinitionTemplate 
-        &&  newColumnDefinition
-        &&  relevantTable               ) )
+if ( !  (   this.columnDefinitionTemplate 
+        &&  this.newColumnDefinition
+        &&  this.relevantTable               ) )
 {
-    const columnDefinitionTemplate 
+    this.columnDefinitionTemplate 
         = document.querySelector ( '#column-definition' )
     
-    const newColumnDefinition 
+    this.newColumnDefinition 
         = columnDefinitionTemplate.content.cloneNode ( true )
     
-    const relevantTable 
+    this.relevantTable 
         = this.closest('table')
 }
 
 // Perform
-relevantTable.append ( newColumnDefinition ) 
-*/
+this.relevantTable.append ( this.newColumnDefinition ) 
                     ">add_circle_outline</i>
             
             </td>
