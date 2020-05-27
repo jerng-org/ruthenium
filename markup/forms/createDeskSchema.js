@@ -24,25 +24,31 @@ const createSchema = async ( data ) => {
     
     <input      type="text"  
                 name="schema[desk-name]"
-                id="schema[desk-name].1">       
+                id="schema[desk-name].1"
+                placeholder="new desk name">       
     
     <table>
         <tr>
             <td>
-                <label      for="column[name].1">
-                    Add a Columns for this new Desk</label>
-                    
+                <label      for="column[name].all">
+                    Add a Column for this new Desk</label>
+            </td>
+            <td>
+                <label for="column[type].all">
+                    Type of data in this Column ('string' and 'number' are efficient)
+                    </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <input      type="text"  
                             name="column[name]"
                             id="column[name].1">       
             </td>
             <td>
-                <label for="column[type].1">
-                    Type of data in this column ('string' and 'number' are efficient):
-                    </label>
-                
                 <select id="column[type].1" 
-                        name="column[type]">
+                        name="column[type]
+                        placeholder="new column name">
                     <option value="S">string</option>
                     <option value="N">number</option>
                     <option value="other">other</option>
