@@ -131,7 +131,7 @@ switch ( data.RU.request.http.method ) {
                 
                 // convert to switch/case
                 if ( data.RU.request.queryStringParameters.type[0] == 'desk-schemas' ) {
-                    await patchDesk ( data ) // (desks) are meta ... i.e. special
+                    await patchDeskSchema ( data ) // (desks) are meta ... i.e. special
                 } else {
                     // PATCH the Virtual TABLE   
                 }
