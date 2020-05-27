@@ -32,25 +32,20 @@ const createSchema = async ( data ) => {
             <td>
                 <i  class="material-icons"
                     onclick="
+                    
 // Prepare                    
 if ( !  (   this.columnDefinitionTemplate 
         &&  this.relevantTable               ) )
 {
+    this.relevantTable = this.closest('table')
+    
     this.columnDefinitionTemplate 
         = document.querySelector ( '#column-definition' )
-    
-    this.relevantTable 
-        = this.closest('table')
 }
 
 // Perform
-this.relevantTable.append ( columnDefinitionTemplate.content.cloneNode ( true ) ) 
-
-console.log (
-    this.columnDefinitionTemplate, 
-    this.relevantTable
-)
-
+this.relevantTable.append ( 
+    columnDefinitionTemplate.content.cloneNode ( true ) ) 
 
                     ">add_circle_outline</i>
             
@@ -70,7 +65,10 @@ console.log (
         <template id="column-definition">
         <tr>
             <td>
-                <i class="material-icons">remove_circle_outline</i>
+                <i  class="material-icons"
+                    onclick=" this.closest('tr').remove()"
+                    >
+                    remove_circle_outline</i>
             </td>
             <td>
                 <input      type="text"  
