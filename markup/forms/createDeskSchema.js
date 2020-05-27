@@ -33,7 +33,7 @@ const createSchema = async ( data ) => {
                 <i  class="material-icons"
                     onclick="
 
-console.log( columnDefinitionTemplate )
+//console.log( columnDefinitionTemplate )
 
 console.log('columnDefinitionTemplate' in window)
 
