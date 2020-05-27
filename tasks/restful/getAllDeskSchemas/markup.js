@@ -27,4 +27,4 @@ const allDeskSchemasMarkup = async ( data ) => {
 }
 
 module.exports  = allDeskSchemasMarkup
-mark ( `resftful/allDeskSchemasMarkup/index.js LOADED` )
+mark ( `restful/allDeskSchemasMarkup/index.js LOADED` )

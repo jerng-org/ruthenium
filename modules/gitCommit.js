@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( './mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `increased filetree proximity of vertically integrated tasks-markups `
+const commitMessage = `made notes for further housekeeping priorities`
 
 const gitCommit = () => { try {
 

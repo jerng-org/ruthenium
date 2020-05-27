@@ -35,7 +35,17 @@ const router                            = require (`./modules/middlewares/router
 exports.handler = async function () { 
 
     console.log (
-    [ `THINGS TO DO : test-middleware?ruthenium=restful&type=schemas; sessions, cognito, formHelpers, urlHelpers, htmlHelpers, markuplayouts?... `]
+        [   `THINGS TO DO :`,
+            `https://www.npmjs.com/package/require-directory`,
+            `utilities/RU module?`,
+            `test-middleware?ruthenium=restful&type=schemas;`,
+            `sessions`, 
+            `cognito`, 
+            `formHelpers`, 
+            `urlHelpers`, 
+            `htmlHelpers`, 
+            `markuplayouts?... `
+        ]
     )
 
     mark( `index.js, first mark in handler`, true )
