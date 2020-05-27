@@ -7,7 +7,7 @@ mark( `index.html READ`)
 
 const tableOfDeskSchemas   = require (`../markup/tableOfDeskSchemas.js`) 
 
-const initialTaskMarkup = async ( data ) => {
+const allDeskSchemasMarkup = async ( data ) => {
 
     return  ( 
         
@@ -20,5 +20,5 @@ const initialTaskMarkup = async ( data ) => {
     )
 }
 
-module.exports  = initialTaskMarkup
-mark ( `initialTaskMarkup.js LOADED` )
+module.exports  = allDeskSchemasMarkup
+mark ( `allDeskSchemasMarkup.js LOADED` )

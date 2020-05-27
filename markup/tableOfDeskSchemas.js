@@ -1,4 +1,4 @@
-const trOfDeskSchema       = require (`../markup/trOfDeskSchemas.js`) 
+const trOfDeskSchemas      = require (`../markup/trOfDeskSchemas.js`) 
 
 const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
     
@@ -24,7 +24,7 @@ const tableOfDeskSchemas   = async ( deskSchemasScan ) => {
                 await deskSchemasScan.Items.reduce ( 
                     async ( accumulator, currentItem, index ) => {
                         return  await accumulator + 
-                                await trOfDeskSchema ( currentItem )
+                                await trOfDeskSchemas ( currentItem )
                     }, 
                     ''  
                )
