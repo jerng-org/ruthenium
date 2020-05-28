@@ -1,35 +1,57 @@
 'use strict'
 
+// JSON.stringify( DATA, null, 4 ).replace(/\\n/g, '\n')
+
 // require() executes modules; use require.res() to resolve without execution.
 
-const util      = require ( 'util' )
+const util      
+    = require ( 'util' )
 
 // PROJECT
-const mark      = require ( './modules/mark' )
-mark( `index.js required mark.js`)
+const mark 
+    = require ( '/var/task/modules/mark' )
+mark( `index.js loaded mark.js`)
 
-const gitCommit = require ( './modules/gitCommit' )            
-mark( `index.js required gitCommit.js`)
+const gitCommit
+    = require ( '/var/task/modules/git-commit' )            
+
 gitCommit ()
 
-const ruthenium = require ( './modules/framework/ruthenium' )
+const ruthenium 
+    = require ( '/var/task/modules/framework/ruthenium' )
+
 const wastems   = async ms => { 
     const start = new Date().getTime() 
     while (new Date().getTime() < start + ms);
 }
-// JSON.stringify( DATA, null, 4 ).replace(/\\n/g, '\n')
-mark( `index.js did other things`)
 
 // PROJECT - MIDDLEWARES, lexical order
-const composeResponse                   = require (`./modules/middlewares/composeResponse.js`) 
-const lastGuard                         = require (`./modules/middlewares/lastGuard.js`) 
-const LCopyRequestParameters            = require (`./modules/middlewares/LCopyRequestParameters.js`) 
-const LLoadMetadata                     = require (`./modules/middlewares/LLoadMetadata.js`) 
-const LNormalizeFormData                = require (`./modules/middlewares/LNormalizeFormData.js`) 
-const LNormalizeHeaders                 = require (`./modules/middlewares/LNormalizeHeaders.js`) 
-const LNormalizeQueryStringParameters   = require (`./modules/middlewares/LNormalizeQueryStringParameters.js`) 
-const tunnelRestfulForms                = require (`./modules/middlewares/tunnelRestfulForms.js`) 
-const router                            = require (`./modules/middlewares/router.js`) 
+const composeResponse
+    = require (`/var/task/modules/middlewares/compose-response.js`) 
+
+const lastGuard
+    = require (`/var/task/modules/middlewares/last-guard.js`) 
+
+const lambdaCopyRequestParameters
+    = require (`/var/task/modules/middlewares/lambda-copy-request-parameters.js`) 
+
+const lambdaLoadMetadata                     
+    = require (`/var/task/modules/middlewares/lambda-load-metadata.js`) 
+
+const lambdaNormalizeFormData                
+    = require (`/var/task/modules/middlewares/lambda-load-form-data.js`) 
+
+const lambdaNormalizeHeaders                 
+    = require (`/var/task/modules/middlewares/lambda-normalize-headers.js`) 
+
+const lambdaNormalizeQueryStringParameters   
+    = require (`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`) 
+
+const tunnelRestfulForms                
+    = require (`/var/task/modules/middlewares/tunnel-restful-forms.js`) 
+
+const router                            
+    = require (`/var/task/modules/middlewares/router.js`) 
 
 // LAMBDA HANDLER
 exports.handler = async function () { 
@@ -70,11 +92,11 @@ exports.handler = async function () {
     const middlewares = [  // MIDDLEWARES, execution order
                                 
         // System Integration with AWS Lambda
-        LCopyRequestParameters,         // Query string     values with same key stored as:     CSV string
-        LNormalizeHeaders,              // Cookie header    values with same key stored as:     Array of values
-        LNormalizeQueryStringParameters,// Query string     values with same key stored as:     Array of values
-        LNormalizeFormData,             // Form string      values with same name stored as:    Array of values
-        LLoadMetadata,
+        lambdaCopyRequestParameters,         // Query string     values with same key stored as:     CSV string
+        lambdaNormalizeHeaders,              // Cookie header    values with same key stored as:     Array of values
+        lambdaNormalizeQueryStringParameters,// Query string     values with same key stored as:     Array of values
+        lambdaNormalizeFormData,             // Form string      values with same name stored as:    Array of values
+        lambdaLoadMetadata,
         
         // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
         tunnelRestfulForms,
@@ -88,4 +110,3 @@ exports.handler = async function () {
     
 }
 mark (`index.js LOADED`, true)
-

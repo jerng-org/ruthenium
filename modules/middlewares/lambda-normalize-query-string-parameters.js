@@ -1,4 +1,4 @@
-const LNormalizeQueryStringParameters = async ( data ) => {
+const lambdaNormalizeQueryStringParameters = async ( data ) => {
 
     if (data.RU.request.queryStringParameters) {
         for ( const prop in data.RU.request.queryStringParameters ) {
@@ -9,7 +9,4 @@ const LNormalizeQueryStringParameters = async ( data ) => {
     }
     return data
 }
-
-module.exports = LNormalizeQueryStringParameters
-const mark = require ('../mark')
-mark (`LNormalizeQueryStringParameters.js LOADED`)
+module.exports = lambdaNormalizeQueryStringParameters

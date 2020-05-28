@@ -1,6 +1,7 @@
 'use strict'
 
-const mark      = require ( '/var/task/modules/mark' )            
+const mark
+    = require ( '/var/task/modules/mark' )            
 
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
@@ -11,8 +12,8 @@ const thisIsMyName = async ( data ) => {
 
     // no need to return (data)
 
-    mark ( `thisIsMyName.js EXECUTED` )
+    mark ( `this-is-my-name.js EXECUTED` )
 }
 
 module.exports = thisIsMyName
-mark ( `thisIsMyName.js LOADED` )
+mark ( `this-is-my-name.js LOADED` )

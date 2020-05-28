@@ -1,5 +1,5 @@
 const liOfColumnsInTr 
-    = require (`/var/task/tasks/restful/getAllDeskSchemas/liOfColumnsInTr.js`) 
+    = require (`/var/task/tasks/restful/get-all-desk-schemas/li-of-columns-in-tr.js`) 
 
 const trInTable = async ( item ) => {
     
@@ -122,5 +122,3 @@ const trInTable = async ( item ) => {
 }
 
 module.exports  = trInTable
-const mark      = require ( '/var/task/modules/mark' )            
-mark ( `restful/getAllDeskSchemas/trInTable.js LOADED` )

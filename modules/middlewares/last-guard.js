@@ -25,7 +25,7 @@ const lastGuard = async ( data ) => {
                 JSON.stringify( data.RU.errors, null, 4 ).replace(/\\n/g, '\n')
             }</code></pre>` 
         }
-        console.error (`lastGuard.js detected a middleware error; (data) logged:`, data)
+        console.error (`(last-guard.js) detected a middleware error; (data) logged:`, data)
         //return data.RU.response
     }
     else
@@ -45,7 +45,7 @@ const lastGuard = async ( data ) => {
                 JSON.stringify( data, null, 4 ).replace(/\\n/g, '\n')
             }</code></pre>` 
         }
-        console.error (`(lastGuard.js) detected neither (statusCode), nor (body) in the (response).`, data)
+        console.error (`(last-guard.js) detected neither (statusCode), nor (body) in the (response).`, data)
         //return data.RU.response
     }
     else 
@@ -59,7 +59,7 @@ const lastGuard = async ( data ) => {
         // OP 2
         data.RU.response.body = hasBody 
             ? data.RU.response.body
-            : `(lastGuard.js) finds that (data.RU.response.body) is falsy: (${
+            : `(last-guard.js) finds that (data.RU.response.body) is falsy: (${
                 data.RU.response.body
                 })`
         
@@ -87,7 +87,4 @@ const lastGuard = async ( data ) => {
     
     
 }
-
 module.exports = lastGuard
-const mark = require ('../mark')
-mark (`lastGuard.js`)

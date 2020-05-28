@@ -1,6 +1,6 @@
 const querystring   = require ( 'querystring' )
 
-const LNormalizeHeadersFormData = async ( data ) => {
+const lambdaNormalizeHeadersFormData = async ( data ) => {
 
     if (    data.LAMBDA.event.headers
             &&  (   data.LAMBDA.event.headers['content-type'] 
@@ -30,6 +30,4 @@ const LNormalizeHeadersFormData = async ( data ) => {
     return data
 }
 
-module.exports  = LNormalizeHeadersFormData
-const mark      = require ( '../mark' )            
-mark ( `LNormalizeHeadersFormData.js LOADED` )
+module.exports  = lambdaNormalizeHeadersFormData

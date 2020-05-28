@@ -18,4 +18,4 @@ const thisIsMyName = async ( data ) => {
 }
 
 module.exports = thisIsMyName
-mark ( `thisIsMyName.js LOADED` )
+mark ( `this-is-my-name.js LOADED` )

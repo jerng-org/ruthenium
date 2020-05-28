@@ -1,10 +1,7 @@
 'use strict'
 
-const mark              
-    = require ( '/var/task/modules/mark' )            
-
 const getAllDeskSchemas 
-    = require ( '/var/task/tasks/restful/getAllDeskSchemas/index.js' )
+    = require ( '/var/task/tasks/restful/get-all-desk-schemas/index.js' )
 
 //const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
@@ -154,8 +151,6 @@ switch ( data.RU.request.http.method ) {
         
     } // non-transactional; single operation; not a batch - DEV THIS FIRST
     
-    mark ( `restfulTask.js EXECUTED` )
 }
 
 module.exports = restful
-mark ( `restful.js LOADED` )

@@ -11,9 +11,9 @@ const blobMimeTypes = {
 }
 
 
-const blobFileNames = fs.readdirSync ('io/blobs')
+const blobFileNames = fs.readdirSync ('/var/task/io/blobs')
 blobFileNames.forEach ( ( current, index, array ) => {
-    blobs[ current ] = fs.readFileSync ( 'io/blobs/' + current )
+    blobs[ current ] = fs.readFileSync ( '/var/task/io/blobs/' + current )
 } /* , thisArg */ ) 
 
 
@@ -29,5 +29,3 @@ const sendBlobTask = async ( data ) => {
 }
 
 module.exports  = sendBlobTask
-const mark      = require ( '../modules/mark' )            
-mark ( `sendBlobTask.js LOADED` )

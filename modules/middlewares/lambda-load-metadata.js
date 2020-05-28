@@ -1,13 +1,13 @@
 'use strict'
 
 const mark      = require ( '/var/task/modules/mark' )            
-const DDBDC     = require ( '/var/task/io/DDBDC.js' )
+const ddbc     = require ( '/var/task/io/ddbc.js' )
 
-const LLoadMetadata = async ( data ) => {
+const lambdaLoadMetadata = async ( data ) => {
     
     data.RU.metadata = ( 
         
-        await DDBDC.get ( {
+        await ddbc.get ( {
             TableName:              'TEST-APP-STASH',
             Key:                    { key: 'metadata' },
             ReturnConsumedCapacity: 'TOTAL'
@@ -19,6 +19,4 @@ const LLoadMetadata = async ( data ) => {
     return data
 
 }
-
-module.exports = LLoadMetadata
-mark ( `LLoadMetadata.js LOADED` )
+module.exports = lambdaLoadMetadata

@@ -1,4 +1,4 @@
-const LCopyRequestParameters = async ( data ) => {
+const lambdaCopyRequestParameters = async ( data ) => {
 
     // Maybe move this to firstGuard or something like that - its own .js
     if (! data.LAMBDA.event.requestContext ) {
@@ -31,6 +31,4 @@ const LCopyRequestParameters = async ( data ) => {
     return data
 }
 
-module.exports = LCopyRequestParameters
-const mark = require ('../mark')
-mark (`LCopyRequestParameters.js LOADED`)
+module.exports = lambdaCopyRequestParameters

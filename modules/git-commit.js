@@ -26,10 +26,10 @@ Environmental variable with password
 
 */
 
-const mark          = require ( './mark' )            
+const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `made notes for further housekeeping priorities`
+const commitMessage = `renaming files to lower-kebab case`
 
 const gitCommit = () => { try {
 

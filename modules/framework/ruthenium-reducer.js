@@ -11,8 +11,6 @@ const rutheniumReducer = async (    DATA_IN_PROMISE,
             
             /* THROWN? This line does not run, if CURRENT_MIDDLEWARE erred */
 
-            mark ( CURRENT_MIDDLEWARE.name + '; middleware executed')
-
             // Validation: as middlewares may return nonsense
             if (        typeof intermediateData == 'object'
                     &&  intermediateData.LAMBDA
@@ -94,6 +92,3 @@ ${
         }
     }
 module.exports = rutheniumReducer
-
-const mark = require ( '../mark.js' )            
-mark (`rutheniumReducer.js LOADED`, true)
