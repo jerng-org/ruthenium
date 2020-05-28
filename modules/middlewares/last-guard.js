@@ -83,6 +83,8 @@ const lastGuard = async ( data ) => {
     data.RU.response = response
     //*/
     
+    console.warn ( data ) 
+    
     return data.RU.response
     
     
