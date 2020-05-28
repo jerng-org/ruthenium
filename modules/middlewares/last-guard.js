@@ -63,12 +63,12 @@ const lastGuard = async ( data ) => {
                 data.RU.response.body
                 })`
         
-    } 
+    }
 
 
 
     
-    /*
+    //*
     const response = { ... data.RU.response }
 
     if ( typeof data.RU.response.body == 'string' ) {
@@ -82,8 +82,6 @@ const lastGuard = async ( data ) => {
     
     data.RU.response = response
     //*/
-    
-    console.warn ( data ) 
     
     return data.RU.response
     

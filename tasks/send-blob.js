@@ -13,11 +13,11 @@ const blobMimeTypes = {
 
 const blobFileNames = fs.readdirSync ('/var/task/io/blobs')
 blobFileNames.forEach ( ( current, index, array ) => {
-    blobs[ current ] = fs.readFileSync ( '/var/task/io/blobs/' + current )
+    blobs[ current ] = fs.readFileSync ( '/var/task/io/blobs/' + current, 'utf' )
 } /* , thisArg */ ) 
 
 
-const sendBlobTask = async ( data ) => {
+const sendBlob = async ( data ) => {
     
     data.RU.signals.sendBlob = {
         'body':         blobs [ data.RU.request.queryStringParameters.file ],
@@ -28,4 +28,4 @@ const sendBlobTask = async ( data ) => {
     // no need to return data
 }
 
-module.exports  = sendBlobTask
+module.exports  = sendBlob
