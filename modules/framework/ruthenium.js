@@ -1,5 +1,5 @@
 'use strict'
-const reducer   = require ( '/var/task/modules/framework/rutheniumReducer.js' )
+const reducer   = require ( '/var/task/modules/framework/ruthenium-reducer.js' )
 
 const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     
