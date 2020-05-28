@@ -11,7 +11,7 @@ const blobMimeTypes = {
     'ruthenium-web-client.mjs':`text/javascript`,
 }
 const stack = (new Error).stack
-console.warn (`DEBT_NOTE`, stack.slice(stack.indexOf('['),stack.indexOf(']')+1 ))
+console.warn (`DEBT_NOTE`, stack.substring( stack.indexOf( '[' ) ) )
 
 const blobFileNames = fs.readdirSync ('/var/task/io/blobs')
 blobFileNames.forEach ( ( current, index, array ) => {
