@@ -1,10 +1,10 @@
 'use strict'
 
 const getAllDeskSchemas 
-    = require ( '/var/task/tasks/restful/get-all-desk-schemas/index.js' )
+    = require ( '/var/task/tasks/restful/desk-schemas-get/index.js' )
 
 const formsDeskSchemasPostMarkup
-    = require ( `/var/task/tasks/restful/forms/desk-schemas-post/` )
+    = require ( `/var/task/tasks/restful/forms/desk-schemas-post/markup.js` )
 
 //const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
