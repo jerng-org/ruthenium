@@ -151,6 +151,202 @@ therefore are roughly, Platonic Forms.
                             common traits, or schema-ness. A single schema is
                             simply one such Thing.
 
+* Mapping Routes to Tasks in this Software Framework *
+
+There exists a middleware (router.js) which maps (request parameters) to (tasks)
+where (tasks) are what we call the (units of work, or business logic, which
+are being requested of the system by the user). A (default mapping) exists in
+(router.js), and a (custom mapping) is explicitly defined as (undefined). As
+long as the (custom mapping) variable is falsy, (router.js) will use the 
+(default mapping).
+
+* How to group Files and Folders in this Software Framework *
+
+FOLDERS ONLY:
+
+    /var/task/     
+     |
+     +- modules/
+     |  |
+     |  +- framework/   
+     |  +- middlewares/ 
+     |
+     +- tasks/      
+     |  |
+     |  +- (a complex task's folder)    
+     |  |  |
+     |  |  +- (subfolders)              
+     |  |
+     |  +- restful/                     
+     |
+     +- markup/ 
+     |
+     +- io/
+        |
+        +- blobs/  
+
+FOLDERS & FILES:
+
+    /var/task/  
+     |
+     +- index.js    
+     +- modules/    
+     |  |
+     |  +- framework/   
+     |  |  |
+     |  |  +- ruthenium.js          
+     |  |  +- ruthenium-reducer.js  
+     |  |
+     |  +- middlewares/ 
+     |     |
+     |     +- HOST_LABEL-*.js           
+     |     +- tunnel-restful-forms.js   
+     |     +- router.js                 
+     |     +- composeResponse.js        
+     |     +- lastGuard.js    
+     |
+     +- tasks/      
+     |  |
+     |  +- (a complex task's folder)    
+     |  |  |
+     |  |  +- index.js                  
+     |  |  +- markup.js
+     |  |  +- x-in-y.js
+     |  |  +- (subfolders)              
+     |  |
+     |  +- (a simple task).js           
+     |  +- restful/                     
+     |  
+     +- markup/ 
+     |  |
+     |  +- (a simple task)-markup.js    
+     |  +- (any other markup name).js   
+     |  
+     +- io/         
+        |
+        +- blobs/  
+
+FOLDERS & FILES, ANNOTATED:
+
+/var/task/      ... is in the Lambda HOST environment, our system folder (~);
+ |
+ +- index.js    ... is in the Lambda HOST environment, the entrypoint for our 
+ |                  system, where HOST_INITIALIZED_DATA and MIDDLEWARES are 
+ |                  configured, and passed by calling (ruthenium.js);
+ |                  HOST_INITIALIZED_DATA is passed as (data.HOST_LABEL)
+ |
+ +- modules/    ... is for (code blocks) which each do specific things;
+ |  |
+ |  +- framework/   ... is where runtime-agnostic abstraction should begin;
+ |  |  |
+ |  |  +- ruthenium.js          ... is called by the HOST environment;
+ |  |  |                            initialises (data.RU);
+ |  |  |
+ |  |  +- ruthenium-reducer.js  ... is called by (ruthenium.js)
+ |  |                               and is responsible for moving data from the
+ |  |                               HOST, through the chain of middlewares, and 
+ |  |                               finally back to the HOST;
+ |  |
+ |  +- middlewares/ ... is where middlewares are stored; but not configured;
+ |     |
+ |     +- HOST_LABEL-*.js           ... such-named middlewares are specific to 
+ |     |                                the HOST;
+ |     |
+ |     +- tunnel-restful-forms.js   ... to support the CULTURE of (restful)
+ |     |                                access, HTML forms are provided with
+ |     |                                a way to signal that they are CULTURALLY
+ |     |                                identified with a HTTP method that is
+ |     |                                other than POST or GET;
+ |     |
+ |     +- router.js                 ... maps (request parameters) to (tasks);
+ |     |                                executes the respective (tasks);
+ |     |
+ |     +- composeResponse.js        ... prepares a generic (data.RU.response) 
+ |     |                                which may require another middleware to 
+ |     |                                make it digestable to the HOST;
+ |     |                                no such middleware is required by the
+ |     |                                Lambda HOST;
+ |     |
+ |     +- lastGuard.js              ... catches errors, and is the framework's
+ |                                      last chance to perform any security 
+ |                                      checks and measures on 
+ |                                      (data.RU.response) before it is handed
+ |                                      back to the HOST;
+ |
+ +- tasks/      ... various generic tasks such as (restful.js) and 
+ |  |               (send-blob.js) are defined here. (initial.js) is also 
+ |  |               defined here, where it basically functions as the homepage
+ |  |               task ... you will probably customise it.
+ |  |
+ |  +- (a complex task's folder)    ... COMPLEX TASKS:
+ |  |  | 
+ |  |  |                                if more than one file is needed for a
+ |  |  |                                (task), please put those files under an 
+ |  |  |                                appropriately named folder;
+ |  |  |
+ |  |  +- index.js                  ... the entry point for this (task) should
+ |  |  |                                be in the folder's (index.js), not to
+ |  |  |                                be confused in this documentation with
+ |  |  |                                the (~/index.js) overall system entry 
+ |  |  |                                point.
+ |  |  |
+ |  |  +- markup.js                 ... the (markup) or (view rendering logic)
+ |  |  |                                should be in the folder's (markup.js)
+ |  |  |
+ |  |  +- x-in-y.js                 ... see 
+ |  |  |                                (~/markup/(any other markup name).js);
+ |  |  |
+ |  |  +- (subfolders)              ... in general, a (task folder) should have
+ |  |                                   no more than seven (7) files;
+ |  |                                   when you find yourself creating the
+ |  |                                   fourth (4th) file in a (task folder), 
+ |  |                                   consider adding a deeper subfolder;
+ |  |
+ |  +- (a simple task).js           ... SIMPLE TASKS:
+ |  |
+ |  |                                   (tasks) defined in (~/tasks) should
+ |  |                                   not locate their respective (markup)
+ |  |                                   files in this folder;
+ |  |                                   (composeResponse.js) will automatically
+ |  |                                   look in the folder (~/markup) for their 
+ |  |                                   corresponding (markup) files;
+ |  |                                   
+ |  |                                   For Example:    if, given a (task) file
+ |  |                                                   (~/tasks/bumble.js),
+ |  |                                   then, (composeResponse.js) will look for
+ |  |                                   (~/markups/bumble-markup.js).
+ |  |
+ |  +- restful/                     ... this (complex task folder) is for the 
+ |                                      (tasks) which are supposed to be
+ |                                      culturally RESTFUL (restfulness is an 
+ |                                      option, not a requirement);
+ |
+ |                      NAMING RESTFUL TASK FILES AND FOLDERS :
+ |
+ |                      (TYPE_PLURAL)-(HTTP method) is the general pattern;
+ |                      E.g. "desk-schemas-get" refers to a (task) which
+ |                      should be mapped to a GET HTTP method, and it should
+ |                      refer to some (data type) which is a desk schema;
+ |   
+ +- markup/ 
+ |  |
+ |  +- (a simple task)-markup.js    ... please read ~/tasks/(a simple task).js;
+ |  |  
+ |  +- (any other markup name).js   ... these constraints are undefined;
+ |                                      it is strongly encouraged that you
+ |                                      derive semantic relevance from file names
+ |                                      for example (child-in-parent.js), 
+ |                                      (descendent-in-ancestor.js), 
+ |                                      (leaf-in-branch.js) with DOM selector
+ |                                      strings referring to nested elements;
+ |
+ +- io/         ... any code pertaining to ex-framework entities such as 
+    |               databases, other HTTP endpoints, other sinks or sources;
+    |               keep reusable code here, and (task)-specific code in 
+    |               (tasks);
+    |
+    +- blobs/   ... static assets / files go here;
+
 * How to Write Inline ECMAScript Handlers in this Software Framework *
 
 DOM elements may have [onclick] or other attributes which implicitly attach

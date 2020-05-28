@@ -146,7 +146,7 @@ const composeResponse = async ( data ) => {
         else
         if ( data.RU.signals.taskname ) {
             
-            data.RU.signals.inferredMarkupName = data.RU.signals.taskname + 'Markup'
+            data.RU.signals.inferredMarkupName = data.RU.signals.taskname + '-markup'
             
             if ( data.RU.signals.inferredMarkupName in markups ) {
                 

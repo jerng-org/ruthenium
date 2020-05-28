@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `renaming files to lower-kebab case`
+const commitMessage = `File & Folder Organisation (DOCS`
 
 const gitCommit = () => { try {
 
