@@ -20,7 +20,7 @@ const getAllDeskSchemas = async ( data ) => {
             break
         case ( 'human' ) :
         default:
-            data.RU.response.body = await markup ( data )
+            data.RU.signals.sendResponse= { body : await markup ( data ) }
     }
 
 }
