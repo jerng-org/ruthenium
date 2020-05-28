@@ -243,16 +243,17 @@ FOLDERS & FILES:
 
 FOLDERS & FILES, ANNOTATED:
 
-/var/task/      ... is in the Lambda HOST environment, our system folder (~);
+/var/task/      ... is in the reference implementation's Lambda HOST 
+ |                  environment, our system folder (~);
  |
  +- index.js    ... is in the Lambda HOST environment, the entrypoint for our 
  |                  system, where HOST_INITIALIZED_DATA and MIDDLEWARES are 
  |                  configured, and passed by calling (ruthenium.js);
- |                  HOST_INITIALIZED_DATA is passed as (data.HOST_LABEL)
+ |                  HOST_INITIALIZED_DATA is passed as (data.HOST_LABEL);
  |
- +- modules/    ... is for (code blocks) which each do specific things;
+ +- modules/    ... is for (code blocks) which each does a specific thing;
  |  |
- |  +- framework/   ... is where runtime-agnostic abstraction should begin;
+ |  +- framework/   ... is where HOST-agnostic abstraction should begin;
  |  |  |
  |  |  +- ruthenium.js          ... is called by the HOST environment;
  |  |  |                            initialises (data.RU);
