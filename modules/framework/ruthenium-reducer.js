@@ -1,4 +1,8 @@
 'use strict'
+
+const mark 
+    = require ( '/var/task/modules/mark' )
+
 const rutheniumReducer = async (    DATA_IN_PROMISE, 
                                     CURRENT_MIDDLEWARE, 
                                     INDEX,
@@ -9,7 +13,10 @@ const rutheniumReducer = async (    DATA_IN_PROMISE,
         try { 
             const intermediateData  = await CURRENT_MIDDLEWARE ( DATA )
             
+            
             /* THROWN? This line does not run, if CURRENT_MIDDLEWARE erred */
+            
+            mark ( `middleware executed: ${ CURRENT_MIDDLEWARE.name }` )
 
             // Validation: as middlewares may return nonsense
             if (        typeof intermediateData == 'object'

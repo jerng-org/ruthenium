@@ -1,10 +1,13 @@
 'use strict'
  
-const fs = require ( 'fs' )
+const fs 
+    = require ( 'fs' )
 const markups = {
     //schemas : {},
 }
 
+const mark 
+    = require ( '/var/task/modules/mark' )
 
 // THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
 const markupFileNames = fs.readdirSync ('/var/task/markup', {
