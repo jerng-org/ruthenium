@@ -63,7 +63,7 @@ const lastGuard = async ( data ) => {
                 data.RU.response.body
                 })`
         
-    }
+    } 
 
 
 
