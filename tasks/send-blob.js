@@ -10,7 +10,7 @@ const blobMimeTypes = {
     'milligram.min.css':`text/css`,
     'ruthenium-web-client.mjs':`text/javascript`,
 }
-console.warn (`DEBT_NOTE`, (new Error).stack[0])
+console.warn (`DEBT_NOTE`, (new Error).stack )
 
 const blobFileNames = fs.readdirSync ('/var/task/io/blobs')
 blobFileNames.forEach ( ( current, index, array ) => {
