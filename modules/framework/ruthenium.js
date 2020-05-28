@@ -1,4 +1,19 @@
 'use strict'
+
+//  Uncertain theoretical proposition about dependency injection :
+//
+//      (ruthenium.js)                                  is the client;
+//
+//          (index.js)                                  is an injector,
+//              (~/modules/middlewares/*)               are its dependencies;
+//
+//          (~/modules/middlewares/router.js)           is another injector,
+//              (~/tasks/*)                             are its dependencies;             
+//
+//          (~/modules/middlewares/composeResponse.js)  is another injector,
+//              (~/markup/*)                            are its dependencies;             
+
+
 const reducer   = require ( '/var/task/modules/framework/ruthenium-reducer.js' )
 
 const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
@@ -346,6 +361,103 @@ FOLDERS & FILES, ANNOTATED:
     |               (tasks);
     |
     +- blobs/   ... static assets / files go here;
+
+* Flow of Business in this Software Framework *
+
+    [ END USER CLIENT   
+    
+    sends a HTTP                                    
+    REQUEST;                                           receives RESPONSE
+                                                                       ]
+    █                                                                   
+    V                                                                  ^
+                                                                       █
+    [ HOST_ENVIRONMENT  receives HTTP REQUEST,                         ^
+                        initializes the data object                    █
+                        (henceforth: DATA),                            ^
+                        configures MIDDLEWARES,                        █
+                        then calls RUTHENIUM on                        ^
+    DATA;                                                              █
+    █                                                                  ^
+    █                       when the HOST_ENVIRONMENT receives the     █        
+    █                                                 returned RESPONSE,
+    █                       it then does as it will                   
+    █                       and sends it back to the END USER CLIENT   ]
+    █                                                                   
+    V                                                                  ^
+                                                                       █
+    [ RUTHENIUM         appends to DATA,                               ^
+                        then calls REDUCER on                          █
+    DATA ]                                                             ^
+    █                                                                  █
+    V                                                                  █
+                                                                       █
+    [ REDUCER           refers to DATA,                                █
+                        iterates through MIDDLEWARES, passing          █
+                                                                       █
+        DATA                                                           █
+        █                                                              █
+        V                                                              █
+                                                                       █
+        [ MIDDLEWARE #1 ingests DATA,                                  █
+                        operates on DATA,                              █
+                        then returns                                   █
+                                                                       █
+        DATA ] [ REDUCER does some checks and iteratively passes on    █
+        DATA ]                                                         █
+        █                                                              █
+        V                                                              █
+                                                                       █
+        [ MIDDLEWARE #2 ingests DATA,                                  █
+                        operates on DATA,                              █
+                        then returns                                   █
+                                                                       █
+        DATA ] [ REDUCER does some checks and iteratively passes on    █
+        DATA ]                                                         ^
+        █                                                              █
+        V                                                              ^
+                                                                       █
+        [ MIDDLEWARE #N is the ROUTER                                  ^
+                                                                       █
+                        which ingests DATA,                            █
+                        operates on DATA,                              █
+                                                                       █
+               ████████████████████████████████████████████████        █
+               █                                              █        █
+               █ The ROUTER passes DATA to a                  █        █
+               █ TASK,   by REFERENCE,                        █        █
+               █         so DATA does NOT need to be returned █        █
+               █                                              █        █
+               █     The TASK may further pass DATA to        █        ^
+               █     sub-TASKS or                             █        █
+               █     a MARKUP                                 █        ^
+               █                                              █        █
+               █         The MARKUP may further pass DATA to  █        ^
+               █         sub-MARKUPS                          █        █
+               █                                              █        █
+               ████████████████████████████████████████████████        █
+                                                                       █
+                        then returns                                   █
+                                                                       █
+        DATA ] [ REDUCER does some checks and iteratively passes on    █
+        DATA ]                                                         █
+        █                                                              █
+        V                                                              █
+                                                                       █
+        [ MIDDLEWARE #N+1   ingests DATA,                              █
+                            operates on DATA,                          █
+                            then returns                               █
+        DATA ] [ REDUCER does some checks and iteratively passes on    █
+        DATA ]                                                         █
+        █                                                              █
+        V                                                              ^
+                                                                       █
+        [ REDUCER   runs out of middlewares to run operations on DATA, ^
+                    then returns a                                     █
+    REPONSE ]                                                          ^
+    █                                                                  █
+    ███████>█████>█████>█████>█████>█████>█████>█████>█████>█████>██████
+  
 
 * How to Write Inline ECMAScript Handlers in this Software Framework *
 
