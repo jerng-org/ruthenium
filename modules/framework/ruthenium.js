@@ -1,5 +1,5 @@
 'use strict'
-const reducer   = require ( './rutheniumReducer.js' )
+const reducer   = require ( '/var/task/modules/framework/rutheniumReducer.js' )
 
 const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     
@@ -40,9 +40,6 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
 }
 module.exports = ruthenium
 
-const mark      = require ( '../mark.js' )            
-mark (`ruthenium.js LOADED`, true)
-
 /*
 
 * How this Software Framework was Named *
@@ -58,9 +55,10 @@ we are all set here.
 
 * How to Write Names in this Software Framework *
 
-FILENAMES   follow nodeJS convention    :   so use camelCase
-
+VARNAMES,
 PROPNAMES   should avoid quotation marks:   so use camelCase
+
+FILENAMES   follow nodeJS convention    :   so use kebab-skewer-satay-case
 
 OTHERWISE   emphasise readability across encodings   
 

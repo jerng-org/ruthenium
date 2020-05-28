@@ -97,7 +97,4 @@ const router = async ( data ) => {
     
     return data
 }
-
 module.exports = router
-const mark      = require ( '../mark' )            
-mark ( `router.js LOADED` )

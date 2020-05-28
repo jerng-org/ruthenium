@@ -15,7 +15,4 @@ const liOfColumnsInTr = async ( column ) => {
         
     return markup
 }
-
 module.exports  = liOfColumnsInTr
-const mark      = require ( '/var/task/modules/mark' )            
-mark ( `restful/getAllSchemas/liOfColumnsInTr.js LOADED` )

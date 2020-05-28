@@ -181,5 +181,3 @@ const composeResponse = async ( data ) => {
 }
 
 module.exports  = composeResponse
-const mark      = require ( '../mark' )            
-mark ( `composeResponse.js LOADED` )

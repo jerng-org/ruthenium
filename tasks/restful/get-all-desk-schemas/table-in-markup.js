@@ -1,5 +1,5 @@
 const trInTable
-    = require (`/var/task/tasks/restful/getAllDeskSchemas/trInTable.js`) 
+    = require (`/var/task/tasks/restful/get-all-desk-schemas/tr-in-table.js`) 
 
 const tableInMarkup = async ( deskSchemasScan ) => {
     
@@ -42,7 +42,4 @@ const tableInMarkup = async ( deskSchemasScan ) => {
 
     return markup
 }
-
 module.exports  = tableInMarkup
-const mark      = require ( '/var/task/modules/mark' )            
-mark ( `restful/getAllDeskSchemas/tableInMarkup.js LOADED` )

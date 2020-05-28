@@ -1,17 +1,14 @@
 'use strict'
 
-const mark      
-    = require ( '/var/task/modules/mark' )
-
-const DDBDC     
-    = require ( '/var/task/io/DDBDC.js' )
+const ddbdc     
+    = require ( '/var/task/io/ddbdc.js' )
 
 const markup 
-    = require ( '/var/task/tasks/restful/getAllDeskSchemas/markup.js' )
+    = require ( '/var/task/tasks/restful/get-all-desk-schemas/markup.js' )
 
 const getAllDeskSchemas = async ( data ) => {
     
-    data.RU.io.deskSchemasScan = await DDBDC.scan ( {
+    data.RU.io.deskSchemasScan = await ddbdc.scan ( {
         TableName: 'TEST-APP-DESK-SCHEMAS',
         ReturnConsumedCapacity : 'TOTAL'
     } ).promise()
@@ -26,8 +23,5 @@ const getAllDeskSchemas = async ( data ) => {
             data.RU.response.body = await markup ( data )
     }
 
-    mark ( `restful/getAllDeskSchemas/index.js EXECUTED` )
 }
-
 module.exports = getAllDeskSchemas
-mark ( `restful/getAllDeskSchemas/index.js LOADED` )
