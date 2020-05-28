@@ -39,7 +39,7 @@ const lambdaLoadMetadata
     = require (`/var/task/modules/middlewares/lambda-load-metadata.js`) 
 
 const lambdaNormalizeFormData                
-    = require (`/var/task/modules/middlewares/lambda-load-form-data.js`) 
+    = require (`/var/task/modules/middlewares/lambda-normalize-form-data.js`) 
 
 const lambdaNormalizeHeaders                 
     = require (`/var/task/modules/middlewares/lambda-normalize-headers.js`) 
