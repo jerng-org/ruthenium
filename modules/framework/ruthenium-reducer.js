@@ -13,7 +13,7 @@ const rutheniumReducer = async (    DATA_IN_PROMISE,
 
             // Validation: as middlewares may return nonsense
             if (        typeof intermediateData == 'object'
-                    &&  intermediateData.LAMBDA
+                    //&&  intermediateData.LAMBDA // (uncomment this when it has been generalised to HOST_LABEL)
                     &&  intermediateData.RU                    ) 
             {
                 return  intermediateData
@@ -54,7 +54,7 @@ ${
 }
         
     );
-    we expected Object.keys ( intermediateData ) to include 'LAMBDA' and 'RU';
+    we expected Object.keys ( intermediateData ) to include '(HOST_LABEL)' and 'RU';
     
     Here's DATA before it was operated on by the faulty middleware:
     
