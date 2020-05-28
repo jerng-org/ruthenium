@@ -56,7 +56,8 @@ const router
 // LAMBDA HANDLER
 exports.handler = async function () { 
 
-    console.log (
+    console.warn (
+        `DEBT_NOTE`,
         [   `THINGS TO DO :`,
             `https://www.npmjs.com/package/require-directory`,
             `utilities/RU module?`,
