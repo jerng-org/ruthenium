@@ -68,7 +68,7 @@ const lastGuard = async ( data ) => {
 
 
     
-    //*
+    /*
     const response = { ... data.RU.response }
 
     if ( typeof data.RU.response.body == 'string' ) {
@@ -79,9 +79,11 @@ const lastGuard = async ( data ) => {
     `<pre><code>${
         util.inspect( data, { depth: Infinity } )
     }</code></pre>` 
+    
+    data.RU.response = response
     //*/
     
-    return response 
+    return data.RU.response
     
     
     
