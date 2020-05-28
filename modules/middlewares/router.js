@@ -47,7 +47,7 @@ const router = async ( data ) => {
                         // Transaction: METHOD, &batch=[], transaction=1  
                     break
                 case ( 'file' ):
-                    data.RU.signals.taskname = 'sendBlob'
+                    data.RU.signals.taskname = 'send-blob'
                     break
                 case ( undefined ):
                     // see below
