@@ -1,5 +1,5 @@
 const trInTable
-    = require (`/var/task/tasks/restful/get-all-desk-schemas/tr-in-table.js`) 
+    = require (`/var/task/tasks/restful/desk-schemas-get/tr-in-table.js`) 
 
 const tableInMarkup = async ( deskSchemasScan ) => {
     
