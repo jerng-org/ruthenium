@@ -87,7 +87,7 @@ switch ( data.RU.request.http.method ) {
                     case ('forms'):
                         // (desks) and (forms) are special / meta
                         //data.RU.metadata['desk-data-types'] = ;
-                        data.RU.signals.markupName = 'forms/createDeskSchema'
+                        data.RU.signals.markupName = 'forms/create-desk-schema'
                         break
                     default:
                         // GET the Virtual ROW
