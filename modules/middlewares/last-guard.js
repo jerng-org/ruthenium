@@ -69,7 +69,7 @@ const lastGuard = async ( data ) => {
 
     
     //*
-    if ( data.RU.response.headers['content-type'] == 'text/html') {
+    if ( data.RU.response.headers['content-type'].toLowerCase().includes('html') ) {
         
         const response = { ... data.RU.response }
     
