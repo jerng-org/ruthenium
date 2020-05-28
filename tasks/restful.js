@@ -90,7 +90,9 @@ switch ( data.RU.request.http.method ) {
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('forms'):
                         // (desks) and (forms) are special / meta
-                        data.RU.response.body = await formsDeskSchemasPostMarkup()
+                        data.RU.signals.sendResponse = {
+                            body: await formsDeskSchemasPostMarkup()
+                        }
                         break
                     default:
                         // GET the Virtual ROW
