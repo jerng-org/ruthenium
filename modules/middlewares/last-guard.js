@@ -68,19 +68,23 @@ const lastGuard = async ( data ) => {
 
 
     
-    /*
-    const response = { ... data.RU.response }
-
-    if ( typeof data.RU.response.body == 'string' ) {
-        data.RU.response.body = data.RU.response.body.replace(/</g, '[')   
+    //*
+    if ( data.RU.response.headers['content-type'] == 'text/html') {
+        
+        const response = { ... data.RU.response }
+    
+        if ( typeof data.RU.response.body == 'string' ) {
+            data.RU.response.body = data.RU.response.body.replace(/</g, '[')   
+        }
+        
+        response.body +=
+        `<pre><code>${
+            util.inspect( data, { depth: Infinity } )
+        }</code></pre>` 
+        
+        data.RU.response = response
+    
     }
-    
-    response.body +=
-    `<pre><code>${
-        util.inspect( data, { depth: Infinity } )
-    }</code></pre>` 
-    
-    data.RU.response = response
     //*/
     
     return data.RU.response
