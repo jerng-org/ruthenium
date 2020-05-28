@@ -69,7 +69,7 @@ const lastGuard = async ( data ) => {
 
     
     //*
-   //if ( data.RU.response.headers['content-type'].toLowerCase().includes('html') ) {
+    if ( data.RU.response.headers['content-type'].toLowerCase().includes('html') ) {
         
         const response = { ... data.RU.response }
     
@@ -84,7 +84,7 @@ const lastGuard = async ( data ) => {
         
         data.RU.response = response
     
-    //}
+    }
     //*/
     
     return data.RU.response
