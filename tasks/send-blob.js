@@ -13,7 +13,7 @@ const blobMimeTypes = {
 
 const blobFileNames = fs.readdirSync ('/var/task/io/blobs')
 blobFileNames.forEach ( ( current, index, array ) => {
-    blobs[ current ] = fs.readFileSync ( '/var/task/io/blobs/' + current, 'utf' )
+    blobs[ current ] = fs.readFileSync ( '/var/task/io/blobs/' + current, 'utf8' )
 } /* , thisArg */ ) 
 
 
