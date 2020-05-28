@@ -9,7 +9,7 @@
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
-const restfulFormTunnel = async ( data ) => {
+const tunnelRestfulForms = async ( data ) => {
     
     if ( 'form-method' in data.RU.request.queryStringParameters ) {
         
@@ -23,7 +23,7 @@ const restfulFormTunnel = async ( data ) => {
                 data.RU.request.http.method = 'PATCH'
                 break            
             case ('DELETE'):
-                data.RU.request.http.method = 'DEL'
+                data.RU.request.http.method = 'DELETE'
                 break            
             default:
                 // de nada
@@ -34,4 +34,4 @@ const restfulFormTunnel = async ( data ) => {
     return data
 
 }
-module.exports = restfulFormTunnel
+module.exports = tunnelRestfulForms

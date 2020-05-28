@@ -81,22 +81,22 @@ const composeResponse = async ( data ) => {
 
         }
         else
-        if ( data.RU.response.statusCode || data.RU.response.body ) {
+        if ( data.RU.signals.sendResponse.statusCode || data.RU.signals.sendResponse.body ) {
             
             //  This branch allows the programmer to short-circuit "automatic 
             //  task-markup-matching" by specifying either the (statusCode) or
             //  (body) manually.
             
-            data.RU.response.statusCode = data.RU.response.statusCode
-                ? data.RU.response.statusCode
+            data.RU.response.statusCode = data.RU.signals.sendResponse.statusCode
+                ? data.RU.signals.sendResponse.statusCode
                 : 200
                 
-            data.RU.response.body = data.RU.response.body
-                ? data.RU.response.body
+            data.RU.response.body = data.RU.signals.sendResponse.body
+                ? data.RU.signals.sendResponse.body
                 : ''
                 
             data.RU.response.headers = data.RU.response.headers
-                ? data.RU.response.headers
+                ? data.RU.signals.sendResponse.headers
                 : { 'content-type': 'text/html' }
                 
         }
