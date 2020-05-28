@@ -1,7 +1,7 @@
 'use strict'
 
 const mark      = require ( '/var/task/modules/mark' )            
-const ddbc     = require ( '/var/task/io/ddbc.js' )
+const ddbc     = require ( '/var/task/io/ddbdc.js' )
 
 const lambdaLoadMetadata = async ( data ) => {
     
