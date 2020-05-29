@@ -1,6 +1,14 @@
 'use strict'
 
-// JSON.stringify( DATA, null, 4 ).replace(/\\n/g, '\n')
+/*
+
+{   const stack = (new Error).stack;  console.warn ( `⚠ DEBT_WARNING ⚠`, 
+    stack.substring( stack.indexOf( '(' ), stack.indexOf( ')' ) + 1 ) )
+}
+
+JSON.stringify( DATA, null, 4 ).replace(/\\n/g, '\n')
+
+*/
 
 // require() executes modules; use require.res() to resolve without execution.
 
