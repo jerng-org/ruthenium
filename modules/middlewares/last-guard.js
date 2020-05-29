@@ -71,17 +71,26 @@ const lastGuard = async ( data ) => {
     //*
     if ( data.RU.response.headers['content-type'].toLowerCase().includes('html') ) {
         
+        // MAKE (COPY OF ORIGINAL VALUE)
         const response = { ... data.RU.response }
-    
+        
+        // MODIFY (ORIGINAL ADDRESS) TO (NEW VALUE)
         if ( typeof data.RU.response.body == 'string' ) {
-            data.RU.response.body = data.RU.response.body.replace(/</g, '[')   
+            data.RU.response.body 
+                = data.RU.response.body.replace(/</g, '[')   
+        }
+        if ( typeof data.RU.signals.sendResponse.body == 'string' ) {
+            data.RU.signals.sendResponse.body 
+                = data.RU.signals.sendResponse.body.replace(/</g, '[')   
         }
         
+        // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
         response.body +=
         `<pre><code>${
             util.inspect( data, { depth: Infinity } )
         }</code></pre>` 
         
+        // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
         data.RU.response = response
     
     }
