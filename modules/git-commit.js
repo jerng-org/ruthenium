@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `documentation`
+const commitMessage = `moved /var/task/markup to /var/task/tasks/markup`
 
 const gitCommit = () => { try {
 
