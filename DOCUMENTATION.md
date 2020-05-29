@@ -7,7 +7,7 @@ away for a few months, unless you want to grab a coffee and just chat about
 software.
 
 This is not meant to be ECMAScript-specific framework. It just happens to be the first,
-and therefore the reference implementation, for the [ruthenium](./READM)
+and therefore the reference implementation, for the [ruthenium](./README.md) 
 web application kit.
 
 This software is not meant to be exemplary, rather it exists to portray the 
