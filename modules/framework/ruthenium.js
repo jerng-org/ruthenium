@@ -540,4 +540,57 @@ event handler scripts to such elements. For such handlers, whenever possible:
             
         })    
 
+-   Documentation for your widget should take the following form:
+
+            WIDGET                  : 
+            Coralling Attribute     :
+            Key Elements            :   Algebraic
+            User Story              :   Algebraic
+            Use Case                :   Instantiated
+            
+    FOR EXAMPLE:
+        
+        WIDGET : RU-INCREMENTAL 
+
+        Coralling Attribute:    data-ru-incrementable-group="INSTANTIATE"
+    
+        Key Elements:
+        
+            "A: a button that adds a copy of a template, D, to the DOM":
+            
+                                data-ru-incrementable-role="append-one"
+            
+            "B: an element into which ... element C will be appended as a child":
+            
+                                data-ru-incrementable-role="parent"
+            
+            "C: a cloned node from the (content)-prop of a (template)":
+            
+                                data-ru-incrementable-role="appended-child"
+                                
+            "D: the template from which C is cloned:"
+    
+                                template[data-ru-incrementable-group="INSTANTIATE"]
+    
+            "E: a button that removes the closest matching ancestor C":
+            
+                                data-ru-incrementable-role="remove-closest"
+    
+        User Story:
+        
+            When you click A once, a new instance of C appears inside B.
+            If you click A many times, there will be many Cs.
+            The template D for C should include an E, such that each C has an E.
+            If you click an E, its ancestor C is removed from the DOM.
+    
+        Use Case:
+        
+            A form for your favourite foods may take multiple entries. When you load
+            the form, it may have zero inputs displayed. But it would have a "add
+            input" button (A), and clicking A would insert input fields (C)s into
+            the DOM. Beside each input field there might be a "remove this" button
+            (E). Clicking E would remove its ancestor C from the DOM.
+            
+        
+
 */
