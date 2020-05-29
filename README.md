@@ -1,5 +1,7 @@
 # ruthenium
 
+[Technical Documentation](./DOCUMENTATION.md)
+
 ## Meta
 
 The following nouns are asserted to being equivalent for the purpose of this
@@ -12,10 +14,10 @@ README:
 
 ## Kit
 
+This kit addresses the complexities of developing *web applications*. 
+
 This is meant to be a *language-agnostic* and *runtime-agnostic* kit. This kit
 may be implemented in any / many languages and runtimes.
-
-This kit addresses the complexities of developing *web applications*. 
 
 ### Reference Kit 
 
