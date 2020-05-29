@@ -26,40 +26,29 @@ const createDeskSchema = async ( data ) => {
             <td>
                 <i  class="material-icons"
                     data-ru-incrementable-group="column-definition"
-                    data-ru-incrementable-role="append-one"
-                    onclick="/*
-                    
-// Prepare                    
-if ( !  (   this.columnDefinitionTemplate 
-        &&  this.relevantTable               ) )
-{
-    this.relevantTable = this.closest('table')
-    
-    this.columnDefinitionTemplate 
-        = document.querySelector ( '#column-definition' )
-}
-
-// Perform
-this.relevantTable.append ( 
-    columnDefinitionTemplate.content.cloneNode ( true ) ) 
-
-                    */">add_circle_outline</i>
+                    data-ru-incrementable-role="append-one""
+                    >
+                    add_circle_outline</i>
             
             </td>
             <td>
-                <label      for="column[name].all">
-                    Add a Column for this new Desk Schema</label>
+                <label  for="column[name].all"
+                        >
+                        Add a Column for this new Desk Schema</label>
             </td>
             <td>
-                <label for="column[type].all">
-                    Type of data in this Column ('string' and 'number' are efficient)
-                    </label>
+                <label  for="column[type].all"
+                        >
+                        Type of data in this Column ('string' and 'number' are efficient)
+                        </label>
             </td>
         </tr>
 
 <!---------------------------------------------------------------------------->        
         <template data-ru-incrementable-group="column-definition">
-        <tr data-ru-incrementable-group="column-definition">
+        <tr data-ru-incrementable-group="column-definition"
+            data-ru-incrementable-role="appended-child"
+            >
             <td>
                 <i  class="material-icons"
                     data-ru-incrementable-group="column-definition"

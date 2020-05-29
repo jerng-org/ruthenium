@@ -503,4 +503,27 @@ event handler scripts to such elements. For such handlers, whenever possible:
                                         "
 -   We expect this this advice will change when we get around to implementing a 
     document-wide or global-esque state manager
+
+* How to Write DOM Widgets in this Software Framework *
+
+-   Begin by designing a coralling attribute, of the following form:
+
+        [data-ru-WIDGETTYPE-group="GROUPNAME"]
+
+-   Then, break down the precise preferred UX behaviour of the widget, 
+    into discrete stages. (Each stage should have a clearly demarcated beginning
+    and a clearly demarcated end, and refer to specific elements.) Elements in
+    the same widget group may be refined in scope with an attribute, of the
+    following form:
+    
+        [data-ru-WIDGETTYPE-role="ROLENAME"]
+
+-   Then, using the most verbose variable names, write the logic for the entire
+    widget, STRONGLY prioritising CORRECTNESS of code, over PERFORMANCE.
+    Performance can be fixed later, but never will be fixed unless the prototype
+    is correct.
+    
+
+    Then for each stage
+
 */
