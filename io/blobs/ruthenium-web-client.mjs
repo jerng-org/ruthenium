@@ -58,13 +58,13 @@ window.addEventListener('load', (event) => {
                            +'[data-ru-incrementable-role="remove-closest"]'
                         ))
                     { 
-                        console.log(
+                        //console.log(
                         _target.closest(
                             '[data-ru-incrementable-group="column-definition"]'
                            +'[data-ru-incrementable-role="appended-child"]'
                         )
-                        //.remove()
-                        )
+                        .remove()
+                        
                     }
                 })
             
