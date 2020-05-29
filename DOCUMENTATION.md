@@ -31,7 +31,7 @@ author's preferences.
 | * [How to Write Inline ECMAScript Handlers in this implementation](#how-to-write-inline-ecmascript-handlers-in-this-implementation)
 | * [How to Write DOM Widgets in this implementation](#how-to-write-dom-widgets-in-this-implementation)
 |**Fala-la**
-|[How this project was Named](#how-this-project-was-named)
+| * [How this project was named](#how-this-project-was-named)
 |[]()
 
 
@@ -578,7 +578,9 @@ event handler scripts to such elements. For such handlers, whenever possible:
             (E). Clicking E would remove its ancestor C from the DOM.
 ```
 
-# How this project was Named
+# How this project was named
+
+Development just so-happened to begin on AWS Lambda.
 
 The letter after Lambda is Mu, which is nice and short, but it is also already
 taken in the universe of software development framework names. Nu is a little
