@@ -57,14 +57,14 @@ window.addEventListener('load', (event) => {
                             '[data-ru-incrementable-group="column-definition"]'
                            +'[data-ru-incrementable-role="remove-closest"]'
                         ))
-                    {
+                    { 
                         console.log(
                         _target.closest(
                             '[data-ru-incrementable-group="column-definition"]'
                            +'[data-ru-incrementable-role="appended-child"]'
                         )
                         //.remove()
-                        
+                        )
                     }
                 })
             
