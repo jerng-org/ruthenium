@@ -34,41 +34,6 @@ author's preferences.
 | * [How this project was named](#how-this-project-was-named)
 |[]()
 
-
-# How to Write Names in this implementation
-
-```
-VARNAMES,
-PROPNAMES   should avoid quotation marks:   so use camelCase
-
-FILENAMES   follow nodeJS convention    :   so use kebab-skewer-satay-case
-
-OTHERWISE   emphasise readability across encodings   
-
-                                        :   so use kebab-skewer-satay-case
-
-                                Examples:   HTML class names,
-                                            HTTP headers
-```
-
-# How to Write Middleware in this implementation
-
-Wherever the cost is minimal, avoid dependencies between any two middlewares.
-
-Dependencies between middlewares are possible; this means that the order of 
-execution of middlewares is non-trivial. Watch your orderings.
-
-# How to Refer to Data in this implementation
-
-Broadly, there are Types and Things. Whenever referring to a Type in English,
-use the plural form. This is in order to deliver the semantics that a Type has
-no meaning outside of the Things which are its individual instances. Types
-therefore are roughly, Platonic Forms.
-
-    Therefore,              "Schemas" refers to the class of things which share
-                            common traits, or schema-ness. A single schema is
-                            simply one such Thing.
-
 # Mapping Routes to Tasks in this implementation
 
 There exists a middleware (router.js) which maps (request parameters) to (tasks)
@@ -391,6 +356,40 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
     |
     +- blobs/   ... static assets / files go here;
 ```
+
+# How to Write Names in this implementation
+
+```
+VARNAMES,
+PROPNAMES   should avoid quotation marks:   so use camelCase
+
+FILENAMES   follow nodeJS convention    :   so use kebab-skewer-satay-case
+
+OTHERWISE   emphasise readability across encodings   
+
+                                        :   so use kebab-skewer-satay-case
+
+                                Examples:   HTML class names,
+                                            HTTP headers
+```
+
+# How to Write Middleware in this implementation
+
+Wherever the cost is minimal, avoid dependencies between any two middlewares.
+
+Dependencies between middlewares are possible; this means that the order of 
+execution of middlewares is non-trivial. Watch your orderings.
+
+# How to Refer to Data in this implementation
+
+Broadly, there are Types and Things. Whenever referring to a Type in English,
+use the plural form. This is in order to deliver the semantics that a Type has
+no meaning outside of the Things which are its individual instances. Types
+therefore are roughly, Platonic Forms.
+
+    Therefore,              "Schemas" refers to the class of things which share
+                            common traits, or schema-ness. A single schema is
+                            simply one such Thing.
 
 # How to Deploy Functions in this implementation
 
