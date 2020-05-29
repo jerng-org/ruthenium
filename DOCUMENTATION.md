@@ -441,7 +441,9 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
     )
     ```
     
--   Do NOT use:     `fulfill`   in place of     `resolve` 
+-   Do NOT use:     
+
+                    `fulfill`   in place of     `resolve` 
 
                         (   while `fulfill` is more historically correct, it is 
                             unfortunately contradicted by the ECMAScript 
