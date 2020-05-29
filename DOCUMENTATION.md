@@ -3,31 +3,32 @@ Technical Documentation
 # ⚠️ This Software is Not Stable
 
 It is strongly suggested that you browse the table of contents below, then go
-away for a few months, unless you just want to grab a coffee and chat about 
+away for a few months, unless you want to grab a coffee and just chat about 
 software.
 
 This is not meant to be ECMAScript-specific framework. It just happens to be the first,
-and therefore the reference implementation, for the [ruthenium](https://github.com/jerng-org/ruthenium)
+and therefore the reference implementation, for the [ruthenium](./READM)
 web application kit.
 
-[Technical Documentation](https://github.com/jerng-org/ruthenium/blob/master/DOCUMENTATION.md)
+This software is not meant to be exemplary, rather it exists to portray the 
+author's preferences.
 
 |Contents
 |:---
-|#### Platform-agnostic Patterns : Broad
+| **Platform-agnostic Patterns : Broad**
 |[Mapping Routes to Tasks in this implementation](#mapping-routes-to-tasks-in-this-implementation)
 |[Flow of Business in this implementation](#flow-of-business-in-this-implementation)
-|[How to group Files and Folders in this implementation](#how-to-group-files-and-folders-in-this-implementation)
-|#### Platform-agnostic Patterns : Narrow
+|[How to Group Files and Folders in this implementation](#how-to-group-files-and-folders-in-this-implementation)
+|**Platform-agnostic Patterns : Narrow**
 |[How to Write Names in this implementation](#how-to-write-names-in-this-implementation)
 |[How to Write Middleware in this implementation](#how-to-write-middleware-in-this-implementation)
 |[How to Refer to Data in this implementation](#how-to-refer-to-data-in-this-implementation)
-|#### Implementation-specific Patterns
+|**Implementation-specific Patterns**
 |[How to Deploy Functions in this implementation](#how-to-deploy-functions-in-this-implementation)
 |[How to Deploy Promises in this implementation](#how-to-deploy-promises-in-this-implementation)
 |[How to Write Inline ECMAScript Handlers in this implementation](#how-to-write-inline-ecmascript-handlers-in-this-implementation)
 |[How to Write DOM Widgets in this implementation](#how-to-write-dom-widgets-in-this-implementation)
-|#### Fala-la
+|**Fala-la**
 |[How this project was Named](#how-this-project-was-named)
 |[]()
 
@@ -197,7 +198,7 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
     █>█████>█████>█████>█████>█████>█████>█████>█████>█████>█████>█████>
 ```
 
-# How to group Files and Folders in this implementation
+# How to Group Files and Folders in this implementation
 
 ### FOLDERS ONLY:
 

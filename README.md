@@ -1,6 +1,6 @@
 # ruthenium
 
-[Technical Documentation](https://github.com/jerng-org/ruthenium/blob/master/DOCUMENTATION.md)
+[Technical Documentation](./DOCUMENTATION.md)
 
 ## Meta
 
