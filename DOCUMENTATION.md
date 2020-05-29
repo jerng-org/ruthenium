@@ -2,6 +2,8 @@ Technical Documentation
 
 # ⚠️ This Software is Not Stable
 
+Nor is it complete!
+
 It is strongly suggested that you browse the table of contents below, then go
 away for a few months, unless you want to grab a coffee and just chat about 
 software.
@@ -16,18 +18,18 @@ author's preferences.
 |Contents
 |:---
 | **Platform-agnostic Patterns : Broad**
-|[Mapping Routes to Tasks in this implementation](#mapping-routes-to-tasks-in-this-implementation)
-|[Flow of Business in this implementation](#flow-of-business-in-this-implementation)
-|[How to Group Files and Folders in this implementation](#how-to-group-files-and-folders-in-this-implementation)
+| * [Mapping Routes to Tasks in this implementation](#mapping-routes-to-tasks-in-this-implementation)
+| * [Flow of Business in this implementation](#flow-of-business-in-this-implementation)
+| * [How to Group Files and Folders in this implementation](#how-to-group-files-and-folders-in-this-implementation)
 |**Platform-agnostic Patterns : Narrow**
-|[How to Write Names in this implementation](#how-to-write-names-in-this-implementation)
-|[How to Write Middleware in this implementation](#how-to-write-middleware-in-this-implementation)
-|[How to Refer to Data in this implementation](#how-to-refer-to-data-in-this-implementation)
+| * [How to Write Names in this implementation](#how-to-write-names-in-this-implementation)
+| * [How to Write Middleware in this implementation](#how-to-write-middleware-in-this-implementation)
+| * [How to Refer to Data in this implementation](#how-to-refer-to-data-in-this-implementation)
 |**Implementation-specific Patterns**
-|[How to Deploy Functions in this implementation](#how-to-deploy-functions-in-this-implementation)
-|[How to Deploy Promises in this implementation](#how-to-deploy-promises-in-this-implementation)
-|[How to Write Inline ECMAScript Handlers in this implementation](#how-to-write-inline-ecmascript-handlers-in-this-implementation)
-|[How to Write DOM Widgets in this implementation](#how-to-write-dom-widgets-in-this-implementation)
+| * [How to Deploy Functions in this implementation](#how-to-deploy-functions-in-this-implementation)
+| * [How to Deploy Promises in this implementation](#how-to-deploy-promises-in-this-implementation)
+| * [How to Write Inline ECMAScript Handlers in this implementation](#how-to-write-inline-ecmascript-handlers-in-this-implementation)
+| * [How to Write DOM Widgets in this implementation](#how-to-write-dom-widgets-in-this-implementation)
 |**Fala-la**
 |[How this project was Named](#how-this-project-was-named)
 |[]()
