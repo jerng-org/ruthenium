@@ -380,6 +380,16 @@ Wherever the cost is minimal, avoid dependencies between any two middlewares.
 Dependencies between middlewares are possible; this means that the order of 
 execution of middlewares is non-trivial. Watch your orderings.
 
+Please note however, that this framework does not employ an 'onion'-style
+architecture. Our middlewares are called in sequence by (ruthenium-reducer.js),
+but (data) flows through each middleware only once, and middlewares do not 
+directly call other middlewares. So middlewares can't mess with each other
+directly - they can only modify the (data) object which passes through all
+middlewares once.
+
+[This](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) ... may be 
+a canonical name for this pattern
+
 # How to Refer to Data in this implementation
 
 Broadly, there are Types and Things. Whenever referring to a Type in English,
