@@ -20,11 +20,14 @@ const createDeskSchema = async ( data ) => {
                 id="schema[desk-schema-name].1"
                 placeholder="new desk schema name">       
     
-    <table>
+    <table  data-ru-incrementable-group="column-definition"
+            data-ru-incrementable-role="parent">
         <tr>
             <td>
                 <i  class="material-icons"
-                    onclick="
+                    data-ru-incrementable-group="column-definition"
+                    data-ru-incrementable-role="append-one"
+                    onclick="/*
                     
 // Prepare                    
 if ( !  (   this.columnDefinitionTemplate 
@@ -40,7 +43,7 @@ if ( !  (   this.columnDefinitionTemplate
 this.relevantTable.append ( 
     columnDefinitionTemplate.content.cloneNode ( true ) ) 
 
-                    ">add_circle_outline</i>
+                    */">add_circle_outline</i>
             
             </td>
             <td>
@@ -55,11 +58,14 @@ this.relevantTable.append (
         </tr>
 
 <!---------------------------------------------------------------------------->        
-        <template id="column-definition">
-        <tr>
+        <template data-ru-incrementable-group="column-definition">
+        <tr data-ru-incrementable-group="column-definition">
             <td>
                 <i  class="material-icons"
-                    onclick="/*RU.removeClosestTr(this)*/removeClosest('tr')"
+                    data-ru-incrementable-group="column-definition"
+                    data-ru-incrementable-role="remove-closest"
+                    onclick="/*RU.removeClosestTr(this)removeClosest('tr')*/"
+                    
                     >
                     remove_circle_outline</i>
             </td>
