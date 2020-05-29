@@ -523,7 +523,21 @@ event handler scripts to such elements. For such handlers, whenever possible:
     Performance can be fixed later, but never will be fixed unless the prototype
     is correct.
     
+    Then for each stage [unwritten]
 
-    Then for each stage
+    ...
+
+-   In any function body where the reserved variable name (this) is used
+    prominently, begin the function body with a comment on the explicit
+    referent of (this). For example:
+
+        element
+        .addEventListener( 'click', function(event){
+            
+            // (this) refers to this method's parent object, the (element)
+        
+            / * the rest of your code * /
+            
+        })    
 
 */

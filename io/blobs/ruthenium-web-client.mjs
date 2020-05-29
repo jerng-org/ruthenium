@@ -35,6 +35,8 @@ window.addEventListener('load', (event) => {
         element
         .addEventListener( 'click', function(event){
             
+            // (this) refers to this method's parent object, the (element)
+            
             // PREPARE OP#1
             if ( ! (        this.columnDefinitionTemplate 
                         &&  this.relevantTable               ) )
@@ -49,19 +51,20 @@ window.addEventListener('load', (event) => {
                 )
                 this.relevantTable.addEventListener('click',function(_event){
                     
-                    // PREPARE OP#2
+                    // PERFORM OP#2
                     const _target = _event.target
                     if (_target.matches(
                             '[data-ru-incrementable-group="column-definition"]'
                            +'[data-ru-incrementable-role="remove-closest"]'
                         ))
                     {
-                        // PERFORM OP#2
-                        this.closest(
+                        console.log(
+                        _target.closest(
                             '[data-ru-incrementable-group="column-definition"]'
                            +'[data-ru-incrementable-role="appended-child"]'
                         )
-                        .remove()
+                        //.remove()
+                        
                     }
                 })
             
