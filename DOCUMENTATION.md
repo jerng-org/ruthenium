@@ -219,8 +219,7 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
      |  |  +- (subfolders)              
      |  |
      |  +- restful/                     
-     |
-     +- markup/ 
+     |  +- markup/ 
      |
      +- io/
         |
@@ -259,11 +258,10 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
      |  |
      |  +- (a simple task).js           
      |  +- restful/                     
-     |  
-     +- markup/ 
-     |  |
-     |  +- (a simple task)-markup.js    
-     |  +- (any other markup name).js   
+     |  +- markup/ 
+     |     |
+     |     +- (a simple task)-markup.js    
+     |     +- (any other markup name).js   
      |  
      +- io/         
         |
@@ -340,7 +338,7 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
  |  |  |                                should be in the folder's (markup.js)
  |  |  |
  |  |  +- x-in-y.js                 ... see 
- |  |  |                                (~/markup/(any other markup name).js);
+ |  |  |                                (~/tasks/markup/(any other markup name).js);
  |  |  |
  |  |  +- (subfolders)              ... in general, a (task folder) should have
  |  |                                   no more than seven (7) files;
@@ -360,21 +358,21 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
  |  |                                   For Example:    if, given a (task) file
  |  |                                                   (~/tasks/bumble.js),
  |  |                                   then, (composeResponse.js) will look for
- |  |                                   (~/markups/bumble-markup.js).
+ |  |                                   (~/tasks/markups/bumble-markup.js).
  |  |
  |  +- restful/                     ... this (complex task folder) is for the 
- |                                      (tasks) which are supposed to be
- |                                      culturally RESTFUL (restfulness is an 
- |                                      option, not a requirement);
- |
- |                      NAMING RESTFUL TASK FILES AND FOLDERS :
- |
- |                      (TYPE_PLURAL)-(HTTP method) is the general pattern;
- |                      E.g. "desk-schemas-get" refers to a (task) which
- |                      should be mapped to a GET HTTP method, and it should
- |                      refer to some (data type) which is a desk schema;
- |   
- +- markup/ 
+ |  |                                   (tasks) which are supposed to be
+ |  |                                   culturally RESTFUL (restfulness is an 
+ |  |                                   option, not a requirement);
+ |  |
+ |  |                   NAMING RESTFUL TASK FILES AND FOLDERS :
+ |  |
+ |  |                   (TYPE_PLURAL)-(HTTP method) is the general pattern;
+ |  |                   E.g. "desk-schemas-get" refers to a (task) which
+ |  |                   should be mapped to a GET HTTP method, and it should
+ |  |                   refer to some (data type) which is a desk schema;
+ |  | 
+ |  +- markup/ 
  |  |
  |  +- (a simple task)-markup.js    ... please read ~/tasks/(a simple task).js;
  |  |  
