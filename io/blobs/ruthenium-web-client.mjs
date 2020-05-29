@@ -15,7 +15,7 @@ window.addEventListener('load', (event) => {
     
 });
 
-const removeClosest 
+window.removeClosest 
     = function (  selector ) {  this.closest( selector ).remove() }
 
 /*
