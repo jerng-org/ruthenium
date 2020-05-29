@@ -24,12 +24,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
 window.addEventListener('load', (event) => {
     
     Array.from ( document.querySelectorAll(
-        '[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="append-one"]'
+         '[data-ru-incrementable-group="column-definition"]'
+        +'[data-ru-incrementable-role="append-one"]'
     ) )
     .forEach ( element => {
         element
             .addEventListener( 'click', function(){
-                alert()
+///////////////////////////////////////////////////////////////////////////////
+console.log(this)
+/*
+// Prepare
+if ( !  (   this.columnDefinitionTemplate 
+        &&  this.relevantTable               ) )
+{
+    this.relevantTable = this.closest('table')
+    
+    this.columnDefinitionTemplate 
+        = document.querySelector ( '#column-definition' )
+}
+
+// Perform
+this.relevantTable.append ( 
+    columnDefinitionTemplate.content.cloneNode ( true ) ) 
+*/
+///////////////////////////////////////////////////////////////////////////////
             })
     })
     
