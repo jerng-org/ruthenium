@@ -22,37 +22,61 @@ document.addEventListener('DOMContentLoaded', (event) => {
 })
 
 window.addEventListener('load', (event) => {
-    
+
+///////////////////////////////////////////////////////////////////////////////    
+//  WIDGET : RU-INCREMENTAL 
+///////////////////////////////////////////////////////////////////////////////    
     Array.from ( document.querySelectorAll(
          '[data-ru-incrementable-group="column-definition"]'
         +'[data-ru-incrementable-role="append-one"]'
     ) )
     .forEach ( element => {
+        
         element
-            .addEventListener( 'click', function(event){
-///////////////////////////////////////////////////////////////////////////////
-
-// PREPARE
-if ( ! (        this.columnDefinitionTemplate 
-            &&  this.relevantTable               ) )
-{
-    this.relevantTable = document.querySelector(
-        '[data-ru-incrementable-group="column-definition"]'
-       +'[data-ru-incrementable-role="parent"]'
-    )
-    this.columnDefinitionTemplate = document.querySelector ( 
-        'template[data-ru-incrementable-group="column-definition"]'
-    )
-}
-
-// PERFORM
-this.relevantTable.append ( 
-    this.columnDefinitionTemplate.content.cloneNode ( true ) 
-) 
-///////////////////////////////////////////////////////////////////////////////
-            })
-    })
+        .addEventListener( 'click', function(event){
+            
+            // PREPARE OP#1
+            if ( ! (        this.columnDefinitionTemplate 
+                        &&  this.relevantTable               ) )
+            {
+                this.columnDefinitionTemplate = document.querySelector ( 
+                    'template[data-ru-incrementable-group="column-definition"]'
+                )
+                
+                this.relevantTable = document.querySelector(
+                    '[data-ru-incrementable-group="column-definition"]'
+                   +'[data-ru-incrementable-role="parent"]'
+                )
+                this.relevantTable.addEventListener('click',function(_event){
+                    
+                    // PREPARE OP#2
+                    const _target = _event.target
+                    if (_target.matches(
+                            '[data-ru-incrementable-group="column-definition"]'
+                           +'[data-ru-incrementable-role="remove-closest"]'
+                        ))
+                    {
+                        // PERFORM OP#2
+                        this.closest(
+                            '[data-ru-incrementable-group="column-definition"]'
+                           +'[data-ru-incrementable-role="appended-child"]'
+                        )
+                        .remove()
+                    }
+                })
+            
+                
+            }
+            
+            // PERFORM OP#1
+            this.relevantTable.append ( 
+                this.columnDefinitionTemplate.content.cloneNode ( true ) 
+            ) 
+        })
     
+        
+    })
+
 })
 
 
