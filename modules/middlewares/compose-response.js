@@ -15,7 +15,7 @@ const markupFileNames = fs.readdirSync ('/var/task/markup', {
 })
 markupFileNames.forEach ( ( current, index, array ) => {
     if (current.isFile()) {
-        markups[ current.name.slice (0, -3) ] = require ( '/var/task/markup/' + current.name )
+        markups[ current.name.slice (0, -3) ] = require ( '/var/task/tasks/markup/' + current.name )
     }        
 } // , thisArg  
 )
