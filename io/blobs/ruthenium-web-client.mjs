@@ -29,24 +29,26 @@ window.addEventListener('load', (event) => {
     ) )
     .forEach ( element => {
         element
-            .addEventListener( 'click', function(){
+            .addEventListener( 'click', function(event){
 ///////////////////////////////////////////////////////////////////////////////
-console.log(this)
-/*
-// Prepare
-if ( !  (   this.columnDefinitionTemplate 
-        &&  this.relevantTable               ) )
+
+// PREPARE
+if ( ! (        this.columnDefinitionTemplate 
+            &&  this.relevantTable               ) )
 {
-    this.relevantTable = this.closest('table')
-    
-    this.columnDefinitionTemplate 
-        = document.querySelector ( '#column-definition' )
+    this.relevantTable = this.querySelector(
+        '[data-ru-incrementable-group="column-definition"]'
+       +'[data-ru-incrementable-role="parent"]'
+    )
+    this.columnDefinitionTemplate = document.querySelector ( 
+        'template[data-ru-incrementable-group="column-definition"]'
+    )
 }
 
-// Perform
+// PERFORM
 this.relevantTable.append ( 
-    columnDefinitionTemplate.content.cloneNode ( true ) ) 
-*/
+    this.columnDefinitionTemplate.content.cloneNode ( true ) 
+) 
 ///////////////////////////////////////////////////////////////////////////////
             })
     })
