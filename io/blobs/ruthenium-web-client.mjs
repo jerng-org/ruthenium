@@ -23,11 +23,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 window.addEventListener('load', (event) => {
     
-    document.querySelectorAll(
+    Array.from ( document.querySelectorAll(
         '[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="append-one"]'
-    )
-    .addEventListener( 'click', function(){
-        alert()
+    ) )
+    .forEach ( element => {
+        element
+            .addEventListener( 'click', function(){
+                alert()
+            })
     })
     
 })
