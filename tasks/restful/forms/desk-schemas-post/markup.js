@@ -59,7 +59,7 @@ this.relevantTable.append (
         <tr>
             <td>
                 <i  class="material-icons"
-                    onclick=" /*this.closest('tr').remove()*/ removeClosestTr(this)"
+                    onclick="RUremoveClosestTr(this)"
                     >
                     remove_circle_outline</i>
             </td>
