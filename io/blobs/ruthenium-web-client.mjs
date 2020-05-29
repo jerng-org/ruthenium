@@ -1,3 +1,8 @@
 // https://jakearchibald.com/2017/es-modules-in-browsers/
 
-alert(`mjs reporting`)
+
+removeClosest = ( thisArg, selector ) => {
+    thisArg.closest( selector ).remove() 
+}
+
+removeClosestTr = ( thisArg ) => { removeClosest ( thisArg, 'tr' ) }
