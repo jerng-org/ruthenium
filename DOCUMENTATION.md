@@ -1,18 +1,33 @@
+Technical Documentation
+
 # ⚠️ This Software is Not Stable
 
+It is strongly suggested that you browse the table of contents below, then go
+away for a few months, unless you just want to grab a coffee and chat about 
+software.
+
+This is not meant to be ECMAScript-specific framework. It just happens to be the first,
+and therefore the reference implementation, for the [ruthenium](https://github.com/jerng-org/ruthenium)
+web application kit.
+
+[Technical Documentation](https://github.com/jerng-org/ruthenium/blob/master/DOCUMENTATION.md)
 
 |Contents
 |:---
+|#### Platform-agnostic Patterns : Broad
+|[Mapping Routes to Tasks in this implementation](#mapping-routes-to-tasks-in-this-implementation)
+|[Flow of Business in this implementation](#flow-of-business-in-this-implementation)
+|[How to group Files and Folders in this implementation](#how-to-group-files-and-folders-in-this-implementation)
+|#### Platform-agnostic Patterns : Narrow
 |[How to Write Names in this implementation](#how-to-write-names-in-this-implementation)
 |[How to Write Middleware in this implementation](#how-to-write-middleware-in-this-implementation)
+|[How to Refer to Data in this implementation](#how-to-refer-to-data-in-this-implementation)
+|#### Implementation-specific Patterns
 |[How to Deploy Functions in this implementation](#how-to-deploy-functions-in-this-implementation)
 |[How to Deploy Promises in this implementation](#how-to-deploy-promises-in-this-implementation)
-|[How to Refer to Data in this implementation](#how-to-refer-to-data-in-this-implementation)
-|[Mapping Routes to Tasks in this implementation](#mapping-routes-to-tasks-in-this-implementation)
-|[How to group Files and Folders in this implementation](#how-to-group-files-and-folders-in-this-implementation)
-|[Flow of Business in this implementation](#flow-of-business-in-this-implementation)
 |[How to Write Inline ECMAScript Handlers in this implementation](#how-to-write-inline-ecmascript-handlers-in-this-implementation)
 |[How to Write DOM Widgets in this implementation](#how-to-write-dom-widgets-in-this-implementation)
+|#### Fala-la
 |[How this project was Named](#how-this-project-was-named)
 |[]()
 
@@ -40,77 +55,6 @@ Wherever the cost is minimal, avoid dependencies between any two middlewares.
 Dependencies between middlewares are possible; this means that the order of 
 execution of middlewares is non-trivial. Watch your orderings.
 
-# How to Deploy Functions in this implementation
-
--   ALWAYS use arrow function expressions (AFEs), UNLESS there is a specific 
-    need to refer to a function as `this` from within its own body ... and to
-    a less significant degree, if you need the function's `arguments` array.
-    Heuristics: prefer terseness; explicitly state intentions.
-
--   ALWAYS use async functions, UNLESS there is a specific advantage to force 
-    synchronous responses. Heuristic: prefer decoupling.
-    
-    -   Because middleware does I/O, it needs to call `await` in order to avoid 
-        promise spaghetti, it can only call `await` if it is itself `async`.
-        Currently all middleware is queued, and reduced with an accumulating 
-        function. So, all middleware should be homogenised as `async`, to 
-        simplify the logic of the accumulating function. 
-        
-    -   However, views are nested, and with the use of accumulating functions, 
-        there evolves a need to use `await` on nearly other line. So in order
-        to ease this part of development, we can do more I/O in middleware
-        and avoid doing it in views, thereby allowing us to homogenise views
-        as synchronous (with perhaps, a few yet to be determined exceptions).
-    
--   Use generator functions ONLY when there is a specific need for such
-    functionality. (Note added for completeness. Did we miss any other type of 
-    function?)
-
-# How to Deploy Promises in this implementation
-
--   ALWAYS use the following taxonomy:
-
-    ```
-    (   Promise ( 
-            ( resolveFn, rejectFn ) => {}   // an `executor`
-            
-        ).then(
-            onResolved  ( value )   => {},  // a Promise is `settled`1
-            onRejected  ( reason )  => {}   // a Promise is `settled`2
-            
-        ).catch(                            // sugared  .then()
-            onRejected  ( reason )  => {}
-            
-        ).finally(
-            regardless  ()          => {}   //  No argument is ever passed.
-        )
-    )
-    ```
-    
--   Do NOT use:     `fulfill`   in place of     `resolve` 
-
-                        (   while `fulfill` is more historically correct, it is 
-                            unfortunately contradicted by the ECMAScript 
-                            specification choice of .resolve() as the relevant
-                            method with its own name; 
-                        )
-                        
-                    `resolved`  in place of     `settled`
-                    `result`    in place of     `value`
-                    `error`     in place of     `reason`
-
-    Heuristic: prefer standards (the etymology is complex; I have a slide).
-
--   ALWAYS enter both arguments of Executors, and .then(), EVEN IF one argument
-    will not be used. For minimal line noise, consider using `_`, `res`, `rej`, 
-    `onRes`, `onRej`, `value => {}`, `reason => {}`. Heuristic: terseness; 
-    explicitly deny options.
-
--   ALWAYS use `await`, and therefore `try { await } catch (e) { handler }`
-    UNLESS some of the above is more succinct OR you don't have a wrapping 
-    `async` function context. Heuristics: terseness; explicitly state 
-    intentions.
-
 # How to Refer to Data in this implementation
 
 Broadly, there are Types and Things. Whenever referring to a Type in English,
@@ -130,6 +74,128 @@ are being requested of the system by the user). A (default mapping) exists in
 (router.js), and a (custom mapping) is explicitly defined as (undefined). As
 long as the (custom mapping) variable is falsy, (router.js) will use the 
 (default mapping).
+
+# Flow of Business in this implementation
+
+```
+    ████████████████████████████████████████████████████████████████████
+    [ END USER CLIENT                                                  █
+    █                                █                                 █
+    █ sends a HTTP                   █                                 █
+    █ REQUEST;                       █               receives RESPONSE ]
+    ████████████████████████████████████████████████████████████████████
+    v                                                                  ^ 
+    v                                                                  ^ 
+    v                                                                  ^ 
+    v                                                                  ^
+    ████████████████████████████████████████████████████████████████████
+    [ HOST_ENVIRONMENT  receives HTTP REQUEST,                         █
+    █                   initializes the data object                    █
+    █                   (henceforth: DATA),                     █      █
+    █                   configures MIDDLEWARES,                 █      █
+    █                   then calls RUTHENIUM on                 █      █
+    DATA;                                                       █      █
+    █       █████████████████████████████████████████████████████      █
+    █       █               when the HOST_ENVIRONMENT receives the     █        
+    █       █                                       returned RESPONSE, █
+    █                      it then does as it will                     █
+    █                      and sends it back to the END USER CLIENT    ]
+    ████████████████████████████████████████████████████████████████████                                                                
+    v                                                                  ^
+    v                                                                  ^
+    v                                                                  ^
+    v                                                                  ^
+    ████████████████████████████████████████████████████████████████████
+    [ RUTHENIUM         appends to DATA,                               █
+    █                   then calls REDUCER on                          █
+    DATA ;          ███████                                            █
+    █               █   when it receives the returned RESPONSE,        █
+    █               █          it passes it to the HOST_ENVIRONMENT    ]
+    ████████████████████████████████████████████████████████████████████
+    v                                                                  ^
+    v                                                                  ^
+    v                                                                  ^
+    v                                                                  ^
+    ████████████████████████████████████████████████████████████████████
+    [ REDUCER           refers to DATA,                                ^
+    █████               iterates through MIDDLEWARES, passing          █
+        █                                                              █
+        DATA                                                           ^
+        v                                                              █
+        █                                                              ^
+        v                                                              █
+        █████████████████████████████████████████                      ^
+        █[ MIDDLEWARE #1 ingests DATA,          █                      █
+        █               operates on DATA,       █                      █
+        █               then returns            █                      ^
+        █                                       █                      █
+        █DATA ] [ REDUCER does some checks and  █                      █
+        █        iteratively passes on          █                      ^
+        █DATA ]                                 █                      █
+        █████████████████████████████████████████                      █
+        v                                                              ^
+        █                                                              ^
+        v                                                              █
+        █████████████████████████████████████████                      █
+        █[ MIDDLEWARE #2 ingests DATA,          █                      ^
+        █               operates on DATA,       █                      █
+        █               then returns            █                      █
+        █                                       █                      ^
+        █DATA ] [ REDUCER does some checks and  █                      █
+        █        iteratively passes on          █                      █
+        █DATA ]                                 █                      ^
+        █████████████████████████████████████████                      █
+        v                                                              █
+        █                                                              ^
+        v                                                              ^
+        █████████████████████████████████████████                      █
+        █[ MIDDLEWARE #N is the ROUTER          █                      ^
+        █                                       █                      █
+        █               which ingests DATA,     █                      ^
+        █               operates on DATA,       █                      █
+        █                                       █                      █
+        █>>>>>>█████████████████████████████████████████████████       ^
+        █      █  █                                            █       █
+        █      █  █The ROUTER passes DATA to a                 █       █
+        █      █  █TASK,   by REFERENCE,                       █       ^
+        █      █  █       so DATA does NOT need to be returned █       █
+        █      █  █                                            █       █
+        █      █  █>>█The TASK may further pass DATA to        █       ^
+        █      █     █sub-TASKS or                             █       █
+        █      █     █a MARKUP                                 █       ^
+        █      █     █                                         █       █
+        █      █     █>>>█The MARKUP may further pass DATA to  █       ^
+        █      █         █sub-MARKUPS                          █       █
+        █      █                                               █       █
+        █      █████████████████████████████████████████████████       ^
+        █                                       █                      █
+        █               then returns            █                      ^
+        █                                       █                      █
+        █DATA ] [ REDUCER does some checks and  █                      ^
+        █        iteratively passes on          █                      █
+        █DATA ]                                 █                      ^
+        █████████████████████████████████████████                      █
+        v                                                              ^
+        █                                                              ^
+        v                                                              █
+        █████████████████████████████████████████                      ^
+        █[ MIDDLEWARE #N+1 ingests DATA,        █                      █
+        █                 operates on DATA,     █                      ^
+        █                 then returns          █                      █
+        █                                       █                      ^
+        █DATA ] [ REDUCER does some checks and  █                      █
+        █        iteratively passes on          █                      ^
+        █DATA ]                                 █                      █
+        █████████████████████████████████████████                      ^
+        v                                                              █
+        █                                                              ^
+        v                                                              █
+        [ REDUCER   runs out of middlewares to run                     ^
+    █████           operations on DATA, then returns a                 █
+    REPONSE ]                                                          ^
+    █                                                                  █
+    █>█████>█████>█████>█████>█████>█████>█████>█████>█████>█████>█████>
+```
 
 # How to group Files and Folders in this implementation
 
@@ -325,127 +391,76 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
     +- blobs/   ... static assets / files go here;
 ```
 
-# Flow of Business in this implementation
+# How to Deploy Functions in this implementation
 
-```
-    ████████████████████████████████████████████████████████████████████
-    [ END USER CLIENT                                                  █
-    █                                █                                 █
-    █ sends a HTTP                   █                                 █
-    █ REQUEST;                       █               receives RESPONSE ]
-    ████████████████████████████████████████████████████████████████████
-    v                                                                  ^ 
-    v                                                                  ^ 
-    v                                                                  ^ 
-    v                                                                  ^
-    ████████████████████████████████████████████████████████████████████
-    [ HOST_ENVIRONMENT  receives HTTP REQUEST,                         █
-    █                   initializes the data object                    █
-    █                   (henceforth: DATA),                     █      █
-    █                   configures MIDDLEWARES,                 █      █
-    █                   then calls RUTHENIUM on                 █      █
-    DATA;                                                       █      █
-    █       █████████████████████████████████████████████████████      █
-    █       █               when the HOST_ENVIRONMENT receives the     █        
-    █       █                                       returned RESPONSE, █
-    █                      it then does as it will                     █
-    █                      and sends it back to the END USER CLIENT    ]
-    ████████████████████████████████████████████████████████████████████                                                                
-    v                                                                  ^
-    v                                                                  ^
-    v                                                                  ^
-    v                                                                  ^
-    ████████████████████████████████████████████████████████████████████
-    [ RUTHENIUM         appends to DATA,                               █
-    █                   then calls REDUCER on                          █
-    DATA ;          ███████                                            █
-    █               █   when it receives the returned RESPONSE,        █
-    █               █          it passes it to the HOST_ENVIRONMENT    ]
-    ████████████████████████████████████████████████████████████████████
-    v                                                                  ^
-    v                                                                  ^
-    v                                                                  ^
-    v                                                                  ^
-    ████████████████████████████████████████████████████████████████████
-    [ REDUCER           refers to DATA,                                ^
-    █████               iterates through MIDDLEWARES, passing          █
-        █                                                              █
-        DATA                                                           ^
-        v                                                              █
-        █                                                              ^
-        v                                                              █
-        █████████████████████████████████████████                      ^
-        █[ MIDDLEWARE #1 ingests DATA,          █                      █
-        █               operates on DATA,       █                      █
-        █               then returns            █                      ^
-        █                                       █                      █
-        █DATA ] [ REDUCER does some checks and  █                      █
-        █        iteratively passes on          █                      ^
-        █DATA ]                                 █                      █
-        █████████████████████████████████████████                      █
-        v                                                              ^
-        █                                                              ^
-        v                                                              █
-        █████████████████████████████████████████                      █
-        █[ MIDDLEWARE #2 ingests DATA,          █                      ^
-        █               operates on DATA,       █                      █
-        █               then returns            █                      █
-        █                                       █                      ^
-        █DATA ] [ REDUCER does some checks and  █                      █
-        █        iteratively passes on          █                      █
-        █DATA ]                                 █                      ^
-        █████████████████████████████████████████                      █
-        v                                                              █
-        █                                                              ^
-        v                                                              ^
-        █████████████████████████████████████████                      █
-        █[ MIDDLEWARE #N is the ROUTER          █                      ^
-        █                                       █                      █
-        █               which ingests DATA,     █                      ^
-        █               operates on DATA,       █                      █
-        █                                       █                      █
-        █>>>>>>█████████████████████████████████████████████████       ^
-        █      █  █                                            █       █
-        █      █  █The ROUTER passes DATA to a                 █       █
-        █      █  █TASK,   by REFERENCE,                       █       ^
-        █      █  █       so DATA does NOT need to be returned █       █
-        █      █  █                                            █       █
-        █      █  █>>█The TASK may further pass DATA to        █       ^
-        █      █     █sub-TASKS or                             █       █
-        █      █     █a MARKUP                                 █       ^
-        █      █     █                                         █       █
-        █      █     █>>>█The MARKUP may further pass DATA to  █       ^
-        █      █         █sub-MARKUPS                          █       █
-        █      █                                               █       █
-        █      █████████████████████████████████████████████████       ^
-        █                                       █                      █
-        █               then returns            █                      ^
-        █                                       █                      █
-        █DATA ] [ REDUCER does some checks and  █                      ^
-        █        iteratively passes on          █                      █
-        █DATA ]                                 █                      ^
-        █████████████████████████████████████████                      █
-        v                                                              ^
-        █                                                              ^
-        v                                                              █
-        █████████████████████████████████████████                      ^
-        █[ MIDDLEWARE #N+1 ingests DATA,        █                      █
-        █                 operates on DATA,     █                      ^
-        █                 then returns          █                      █
-        █                                       █                      ^
-        █DATA ] [ REDUCER does some checks and  █                      █
-        █        iteratively passes on          █                      ^
-        █DATA ]                                 █                      █
-        █████████████████████████████████████████                      ^
-        v                                                              █
-        █                                                              ^
-        v                                                              █
-        [ REDUCER   runs out of middlewares to run                     ^
-    █████           operations on DATA, then returns a                 █
-    REPONSE ]                                                          ^
-    █                                                                  █
-    █>█████>█████>█████>█████>█████>█████>█████>█████>█████>█████>█████>
-```
+-   ALWAYS use arrow function expressions (AFEs), UNLESS there is a specific 
+    need to refer to a function as `this` from within its own body ... and to
+    a less significant degree, if you need the function's `arguments` array.
+    Heuristics: prefer terseness; explicitly state intentions.
+
+-   ALWAYS use async functions, UNLESS there is a specific advantage to force 
+    synchronous responses. Heuristic: prefer decoupling.
+    
+    -   Because middleware does I/O, it needs to call `await` in order to avoid 
+        promise spaghetti, it can only call `await` if it is itself `async`.
+        Currently all middleware is queued, and reduced with an accumulating 
+        function. So, all middleware should be homogenised as `async`, to 
+        simplify the logic of the accumulating function. 
+        
+    -   However, views are nested, and with the use of accumulating functions, 
+        there evolves a need to use `await` on nearly other line. So in order
+        to ease this part of development, we can do more I/O in middleware
+        and avoid doing it in views, thereby allowing us to homogenise views
+        as synchronous (with perhaps, a few yet to be determined exceptions).
+    
+-   Use generator functions ONLY when there is a specific need for such
+    functionality. (Note added for completeness. Did we miss any other type of 
+    function?)
+
+# How to Deploy Promises in this implementation
+
+-   ALWAYS use the following taxonomy:
+
+    ```
+    (   Promise ( 
+            ( resolveFn, rejectFn ) => {}   // an `executor`
+            
+        ).then(
+            onResolved  ( value )   => {},  // a Promise is `settled`1
+            onRejected  ( reason )  => {}   // a Promise is `settled`2
+            
+        ).catch(                            // sugared  .then()
+            onRejected  ( reason )  => {}
+            
+        ).finally(
+            regardless  ()          => {}   //  No argument is ever passed.
+        )
+    )
+    ```
+    
+-   Do NOT use:     `fulfill`   in place of     `resolve` 
+
+                        (   while `fulfill` is more historically correct, it is 
+                            unfortunately contradicted by the ECMAScript 
+                            specification choice of .resolve() as the relevant
+                            method with its own name; 
+                        )
+                        
+                    `resolved`  in place of     `settled`
+                    `result`    in place of     `value`
+                    `error`     in place of     `reason`
+
+    Heuristic: prefer standards (the etymology is complex; I have a slide).
+
+-   ALWAYS enter both arguments of Executors, and .then(), EVEN IF one argument
+    will not be used. For minimal line noise, consider using `_`, `res`, `rej`, 
+    `onRes`, `onRej`, `value => {}`, `reason => {}`. Heuristic: terseness; 
+    explicitly deny options.
+
+-   ALWAYS use `await`, and therefore `try { await } catch (e) { handler }`
+    UNLESS some of the above is more succinct OR you don't have a wrapping 
+    `async` function context. Heuristics: terseness; explicitly state 
+    intentions.
 
 # How to Write Inline ECMAScript Handlers in this implementation
 
