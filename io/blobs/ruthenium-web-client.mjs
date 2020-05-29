@@ -36,7 +36,7 @@ window.addEventListener('load', (event) => {
 if ( ! (        this.columnDefinitionTemplate 
             &&  this.relevantTable               ) )
 {
-    this.relevantTable = this.querySelector(
+    this.relevantTable = document.querySelector(
         '[data-ru-incrementable-group="column-definition"]'
        +'[data-ru-incrementable-role="parent"]'
     )
