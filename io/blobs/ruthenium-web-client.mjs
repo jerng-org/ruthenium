@@ -2,8 +2,8 @@
 
 // https://jakearchibald.com/2017/es-modules-in-browsers/
 
-const removeClosest = ( thisArg, selector ) => {
+var removeClosest = ( thisArg, selector ) => {
     thisArg.closest( selector ).remove() 
 }
 
-const removeClosestTr = ( thisArg ) => { removeClosest ( thisArg, 'tr' ) }
+var removeClosestTr = ( thisArg ) => { removeClosest ( thisArg, 'tr' ) }
