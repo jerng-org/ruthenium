@@ -74,15 +74,13 @@ const createDeskSchema = async ( data ) => {
             </td>
             <td>
                 <input      type="text"  
-                            data-ru-incrementable-group="column-definition"
                             name="desk-schemas[column][name]"
                             placeholder="-- enter a name --"
                             required
                             >       
             </td>
             <td>
-                <select data-ru-incrementable-group="column-definition"
-                        name="desk-schemas[column][type]"
+                <select name="desk-schemas[column][type]"
                         required
                         >
                     <option disabled selected value> -- select an option -- </option>
