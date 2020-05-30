@@ -6,7 +6,7 @@ const lambdaNormalizeQueryStringParameters = async ( data ) => {
 
     if (data.RU.request.queryStringParameters) {
         
-        data.RU.parsedQuerystring = data.LAMBDA.event.rawQueryString 
+        data.RU.parsedQuerystring = querystring.unescape ( data.LAMBDA.event.rawQueryString )  
         
         for ( const prop in data.RU.request.queryStringParameters ) {
             data.RU.request.queryStringParameters[ prop ] 
