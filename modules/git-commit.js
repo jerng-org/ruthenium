@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `wrote on middlewares`
+const commitMessage = `bugfix in lastGuard.js`
 
 const gitCommit = () => { try {
 
