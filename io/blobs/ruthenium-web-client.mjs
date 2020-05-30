@@ -128,7 +128,7 @@ console.log (this.ruIncrementableAttributes)
             
             this.ruIncrementableCounter++
             
-            for ( const attr of this.incrementableAttributes ) {
+            for ( const attr of this.ruIncrementableAttributes ) {
                 this.ruClonedContent
                     .querySelector( `[${ attr.attribute }="${ attr.baseValue }"]` )
                     .setAttribute ( 
