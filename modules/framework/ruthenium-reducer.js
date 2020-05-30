@@ -23,18 +23,18 @@ const rutheniumReducer = async (    DATA_IN_PROMISE,
                     //&&  intermediateData.LAMBDA // (uncomment this when it has been generalised to HOST_LABEL)
                     &&  intermediateData.RU                    ) 
             {
+                // ordinary;
                 return  intermediateData
-                        // ordinary;
             }
             else 
             if (        INDEX + 1 == MIDDLEWARE_QUEUE.length )
             { 
-                
+                // don't complain about the last middleware in queue;
                 return  intermediateData 
-                        // don't complain about the last middleware in queue;
             }
-            else        // complain loudly
+            else        
             {           
+                // complain loudly
 ///////////////////////////////////////////////////////////////////////////////
 
 console.warn ( intermediateData )
