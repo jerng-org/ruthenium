@@ -14,20 +14,27 @@ const lambdaNormalizeHeadersFormData = async ( data ) => {
                     .from ( data.LAMBDA.event.body, 'base64' )
                     .toString ('utf8')
             :   data.LAMBDA.event.body
+
+        // NEW
+        data.RU.formStringPa
+            = querystring.parse ( data.RU.request.rawFormString )
+
             
+        /* OLD
         const parsedRawFormString
             = querystring.parse ( data.RU.request.rawFormString )
         
-        // WIP
-        data.RU.parsedRawFormString = parsedRawFormString
-        // END WIP
-        
         data.RU.request.formStringParameters = {}
+        
+        // WIP
+        //data.RU.parsedRawFormString = parsedRawFormString
+        // END WIP
         
         for ( const name in parsedRawFormString ) {
             data.RU.request.formStringParameters[ name ] 
                 = parsedRawFormString[ name ].split(',')
         }
+        */
 
     }
     
