@@ -62,7 +62,7 @@ const router = async ( data ) => {
             data.RU.signals.redirectRoute = 'initial&reader='
                 +   (   data.RU.request.queryStringParameters.reader
                         ? data.RU.request.queryStringParameters.reader[0]
-                        : 'human' 
+                        : 'human'
                     )
         }
     }
