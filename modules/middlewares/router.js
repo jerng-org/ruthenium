@@ -59,7 +59,7 @@ const router = async ( data ) => {
         //  or,     there was no matching (case) for the (route) argument
         if ( ! data.RU.signals.taskname ) {
             
-            throw data
+            throw JSON.parse( data,null, 4)
             
             data.RU.signals.redirectRoute = 'initial&reader='
                 +   (   data.RU.request.queryStringParameters.reader
