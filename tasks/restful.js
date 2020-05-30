@@ -106,6 +106,7 @@ switch ( data.RU.request.http.method ) {
             {
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('desk-schemas'):
+                        throw new Error 
                         // (desks) and (forms) are special / meta
                         await getAllDeskSchemas ( data ) 
                         break
