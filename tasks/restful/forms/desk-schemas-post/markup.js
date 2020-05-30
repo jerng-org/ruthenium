@@ -49,12 +49,14 @@ const createDeskSchema = async ( data ) => {
             <td>
                 <label  for="desk-schemas[column][name].all"
                         >
-                        Add a Column for this new Desk Schema</label>
+                        Add a Column for this new Desk Schema
+                        <h6>(you can do this later)</h6>
+                        </label>
             </td>
             <td>
                 <label  for="desk-schemas[column][type].all"
                         >
-                        Type of data in this Column
+                        Specify the type of data in this Column
                         <h6>('string' and 'number' are efficient)</h6>
                         </label>
             </td>
