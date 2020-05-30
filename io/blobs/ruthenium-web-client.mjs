@@ -125,7 +125,7 @@ window.addEventListener('load', (event) => {
             
             this.ruIncrementableCounter++
             
-            for ( const attr of this.incrementedAttributes ) {
+            for ( const attr of this.incrementableAttributes ) {
                 this.ruClonedContent
                     .querySelector( `[${ attr.attribute }="${ attr.baseValue }"]` )
                     .setAttribute ( 
