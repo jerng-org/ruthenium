@@ -84,6 +84,9 @@ window.addEventListener('load', (event) => {
             if ( ! (        this.ruClonedContent 
                         &&  this.ruIncrementableParent               ) )
             {
+                this.ruIncrementableData 
+                    = JSON.parse( this.dataset.ruIncrementableJson )
+
                 this.ruIncrementableCounter = 0
 
                 this.ruIncrementableTemplate = document.querySelector ( 
@@ -119,14 +122,18 @@ window.addEventListener('load', (event) => {
             this.ruClonedContent =  this.ruIncrementableTemplate
                                         .content
                                         .cloneNode ( true )
-            this.ruClonedContent
-                .querySelector(`[name="desk-schemas[column][name]"]`)
-                .name = `desk-schemas[column][name].${++this.ruIncrementableCounter}`
-                
-            this.ruClonedContent
-                .querySelector(`[name="desk-schemas[column][type]"]`)
-                .name = `desk-schemas[column][type].${this.ruIncrementableCounter}`
-                
+            
+            this.ruIncrementableCounter++
+            
+            for ( const attr of this.ruIncrementableData.incrementedAttributes ) {
+                this.ruClonedContent
+                    .querySelector( `[${ attr.attribute }="${ attr.baseValue }"]` )
+                    .setAttribute ( 
+                        attr.attribute, 
+                        `${ attr.baseValue }.${ this.ruIncrementableCounter }`
+                    )
+            }
+    
             this.ruIncrementableParent.append ( this.ruClonedContent ) 
         })
     
