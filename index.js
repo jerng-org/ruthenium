@@ -105,7 +105,7 @@ exports.handler = async function () {
         // System Integration with AWS Lambda
         lambdaCopyRequestParameters,         // Query string     values with same key stored as:     CSV string
         lambdaNormalizeHeaders,              // Cookie header    values with same key stored as:     Array of values
-        //lambdaNormalizeQueryStringParameters,// Query string     values with same key stored as:     Array of values
+        lambdaNormalizeQueryStringParameters,// Query string     values with same key stored as:     Array of values
         lambdaNormalizeFormData,             // Form string      values with same name stored as:    Array of values
         lambdaLoadMetadata,
         
