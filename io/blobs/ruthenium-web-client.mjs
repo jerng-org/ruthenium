@@ -67,7 +67,8 @@ window.addEventListener('load', (event) => {
         (E). Clicking E would remove its ancestor C from the DOM.
 
 */
-///////////////////////////////////////////////////////////////////////////////    
+///////////////////////////////////////////////////////////////////////////////  
+
     Array.from ( document.querySelectorAll(
          '[data-ru-incrementable-role="append-one"]'
     ) )
@@ -129,12 +130,12 @@ window.addEventListener('load', (event) => {
             
             this.ruIncrementableCounter++
             
-            for ( const attr of this.ruIncrementableAttributes ) {
+            for ( const _attr of this.ruIncrementableAttributes ) {
                 this.ruIncrementableClonedContent
-                    .querySelector( `[${ attr.attribute }="${ attr.baseValue }"]` )
+                    .querySelector( `[${ _attr.attribute }="${ _attr.baseValue }"]` )
                     .setAttribute ( 
-                        attr.attribute, 
-                        `${ attr.baseValue }.${ this.ruIncrementableCounter }`
+                        _attr.attribute, 
+                        `${ _attr.baseValue }.${ this.ruIncrementableCounter }`
                     )
             }
     
@@ -142,18 +143,7 @@ window.addEventListener('load', (event) => {
         })
     
         
-    })
+    }) //     WIDGET : RU-INCREMENTAL 
+
 
 })
-
-
-/*
-window.removeClosest 
-    = function (  selector ) {  this.closest( selector ).remove() }
-
-
-window.RU = {
-
-    removeClosestTr : thisArg => removeClosest ( thisArg, 'tr' )
-
-}*/
