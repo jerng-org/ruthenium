@@ -5,7 +5,7 @@
 OK - dump LAMBDA.event.queryStringParameters because it overhandles ","
 OK - manually parse queryString with (querystring)
 
-- check form POST behaviour, compared to above
+OK - check form POST behaviour, compared to above
 - check form GET behaviour, compared to above
 
 
@@ -20,7 +20,7 @@ const createDeskSchema = async ( data ) => {
     
     return `${ htmlIndex }
 
-<form method="post" action="/test-middleware?route=restful&type=desk-schemas">
+<form method="get" action="/test-middleware?route=restful&type=desk-schemas">
 <fieldset>
     
     <label      for="desk-schemas[name].1">
