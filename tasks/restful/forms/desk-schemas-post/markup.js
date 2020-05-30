@@ -31,7 +31,7 @@ const createDeskSchema = async ( data ) => {
     <input      type="text"  
                 name="desk-schemas[name]"
                 id="desk-schemas[name].1"
-                placeholder="new desk schema name"
+                placeholder="-- enter a name --"
                 required
                 >       
     
@@ -54,7 +54,8 @@ const createDeskSchema = async ( data ) => {
             <td>
                 <label  for="desk-schemas[column][type].all"
                         >
-                        Type of data in this Column ('string' and 'number' are efficient)
+                        Type of data in this Column
+                        <h6>('string' and 'number' are efficient)</h6>
                         </label>
             </td>
         </tr>
@@ -75,6 +76,7 @@ const createDeskSchema = async ( data ) => {
                 <input      type="text"  
                             name="desk-schemas[column][name]"
                             id="desk-schemas[column][name].1"
+                            placeholder="-- enter a name --"
                             required
                             >       
             </td>
