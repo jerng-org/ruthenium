@@ -31,7 +31,9 @@ const createDeskSchema = async ( data ) => {
     <input      type="text"  
                 name="desk-schemas[name]"
                 id="desk-schemas[name].1"
-                placeholder="new desk schema name">       
+                placeholder="new desk schema name"
+                required
+                >       
     
     <table  data-ru-incrementable-group="column-definition"
             data-ru-incrementable-role="parent">
@@ -66,8 +68,6 @@ const createDeskSchema = async ( data ) => {
                 <i  class="material-icons"
                     data-ru-incrementable-group="column-definition"
                     data-ru-incrementable-role="remove-closest"
-                    onclick="/*RU.removeClosestTr(this)removeClosest('tr')*/"
-                    
                     >
                     remove_circle_outline</i>
             </td>
