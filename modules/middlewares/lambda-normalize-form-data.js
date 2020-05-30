@@ -2,6 +2,9 @@ const querystring   = require ( 'querystring' )
 
 //  Section on reserved characters:
 //  -   https://tools.ietf.org/html/rfc3986#section-2.2
+//
+//  HTML5 has a special configuration for form-data sent via the GET method
+//  -   https://www.w3.org/TR/html52/sec-forms.html#form-submission-algorithm    
 
 const lambdaNormalizeHeadersFormData = async ( data ) => {
 
