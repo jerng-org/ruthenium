@@ -2,8 +2,8 @@
 
 /* Today's fixes will proceed as follows
 
-- dump LAMBDA.event.queryStringParameters because it overhandles ","
-- manually parse queryString with (querystring)
+OK - dump LAMBDA.event.queryStringParameters because it overhandles ","
+OK - manually parse queryString with (querystring)
 
 - check form POST behaviour, compared to above
 - check form GET behaviour, compared to above
