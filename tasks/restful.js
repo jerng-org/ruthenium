@@ -11,22 +11,25 @@ const formsDeskSchemasPostMarkup
 
 const restful = async ( data ) => {
     
+    //  ?batch=1
     if (        data.RU.request.queryStringParameters.batch
             &&  data.RU.request.queryStringParameters.batch[0] ) 
     {
-        // batch
-        
+
+        //  ?transaction=1
         if (        data.RU.request.queryStringParameters.transaction 
                 &&  data.RU.request.queryStringParameters.transaction[0] ) 
         {
             // transactional batch - DEV THIS LAST
         }
+        //  ?transaction=0
         else
         {
             
             // non-transactional batch - DEV THIS SECOND
         }
     }
+    //  ?batch=0
     else 
     {
         
