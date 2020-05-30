@@ -4,12 +4,12 @@ const querystring   = require ( 'querystring' )
 
 const lambdaNormalizeQueryStringParameters = async ( data ) => {
 
-    if (data.LAMBDA.event.raw) {
+    if (data.LAMBDA.event.rawQueryString) {
         
         data.RU.request.queryStringParameters = querystring.parse ( data.LAMBDA.event.rawQueryString )  
         
         for ( const prop in data.RU.request.queryStringParameters ) {
-            
+            throw data.RU.request.queryStringParameters[ prop ]
             if ( typeof data.RU.request.queryStringParameters[ prop ] == 'string' ) {
                 data.RU.request.queryStringParameters[ prop ] 
                     =   [ 
