@@ -102,6 +102,8 @@ window.addEventListener('load', (event) => {
                 )
                 this.ruIncrementableParent.addEventListener('click', function(_event){
                     
+                    console.log(`pre-op2`, this.ruIncrementableGroupSelector)
+                    
                     // PERFORM OP#2
                     const _target = _event.target
                     if (_target.matches(
@@ -109,7 +111,8 @@ window.addEventListener('load', (event) => {
                            +'[data-ru-incrementable-role="remove-closest"]'
                         ))
                     { 
-                        //console.log(
+                        console.log(`op2`, this.ruIncrementableGroupSelector)
+                        
                         _target.closest(
                             this.ruIncrementableGroupSelector
                            +'[data-ru-incrementable-role="appended-child"]'
