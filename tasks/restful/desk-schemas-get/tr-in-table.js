@@ -83,7 +83,7 @@ const trInTable = async ( item ) => {
                 >
     </fieldset>
 
-    <form method="post" action="/test-middleware?ruthenium=restful&type=schemas&thing=shoes&form-method=patch">
+    <form method="post" action="/test-middleware?route=restful&type=schemas&thing=shoes&form-method=patch">
     <fieldset   class="toggle-set-2" 
                 style="display:none;"
                 >
