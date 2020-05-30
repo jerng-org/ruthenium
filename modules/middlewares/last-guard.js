@@ -54,9 +54,10 @@ const lastGuard = async ( data ) => {
     {
     
         // OP 1
-        console.log (   data.RU.request.http 
+        console.log (   data.RU.request.http.method
+                        /*data.RU.request.http 
                         ?   data.RU.request.http.method
-                        :   '((data.RU.request.http) was falsy)', 
+                        :   '((data.RU.request.http) was falsy)'*/, 
                         data.RU.request.rawPath, 
                         data.RU.request.rawQueryString  ) 
     
