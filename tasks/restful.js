@@ -126,7 +126,6 @@ switch ( data.RU.request.http.method ) {
     case ( 'DELETE' ):
         break
     case ( 'POST' ):
-        throw new Error
         break
     case ( 'PATCH' ):
         if (data.RU.request.queryStringParameters.type
