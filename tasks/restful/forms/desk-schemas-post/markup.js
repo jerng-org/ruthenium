@@ -47,18 +47,16 @@ const createDeskSchema = async ( data ) => {
             
             </td>
             <td>
-                <label  for="desk-schemas[column][name].all"
-                        >
-                        Add a Column for this new Desk Schema
-                        <h6>&nbsp;</h6>
-                        </label>
+                <label>
+                    Add a Column for this new Desk Schema
+                    <h6>&nbsp;</h6>
+                    </label>
             </td>
             <td>
-                <label  for="desk-schemas[column][type].all"
-                        >
-                        Specify the type of data in this Column
-                        <h6>'string' and 'number' are efficient</h6>
-                        </label>
+                <label>
+                    Specify the type of data in this Column
+                    <h6>'string' and 'number' are efficient</h6>
+                    </label>
             </td>
         </tr>
 
@@ -76,14 +74,14 @@ const createDeskSchema = async ( data ) => {
             </td>
             <td>
                 <input      type="text"  
+                            data-ru-incrementable-group="column-definition"
                             name="desk-schemas[column][name]"
-                            id="desk-schemas[column][name].1"
                             placeholder="-- enter a name --"
                             required
                             >       
             </td>
             <td>
-                <select id="desk-schemas[column][type].1" 
+                <select data-ru-incrementable-group="column-definition"
                         name="desk-schemas[column][type]"
                         required
                         >

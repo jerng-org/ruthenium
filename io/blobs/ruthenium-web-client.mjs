@@ -80,18 +80,21 @@ window.addEventListener('load', (event) => {
             // (this) refers to this method's parent object, the (element)
             
             // PREPARE OP#1
-            if ( ! (        this.columnDefinitionTemplate 
-                        &&  this.relevantTable               ) )
+            if ( ! (        this.ruClonedContent 
+                        &&  this.ruIncrementableParent               ) )
             {
-                this.columnDefinitionTemplate = document.querySelector ( 
+                this.ruIncrementableCounter = 0
+
+                this.ruClonedContent = document.querySelector ( 
                     'template[data-ru-incrementable-group="column-definition"]'
                 )
+                .content.cloneNode ( true )
                 
-                this.relevantTable = document.querySelector(
+                this.ruIncrementableParent = document.querySelector(
                     '[data-ru-incrementable-group="column-definition"]'
                    +'[data-ru-incrementable-role="parent"]'
                 )
-                this.relevantTable.addEventListener('click', function(_event){
+                this.ruIncrementableParent.addEventListener('click', function(_event){
                     
                     // PERFORM OP#2
                     const _target = _event.target
@@ -113,9 +116,15 @@ window.addEventListener('load', (event) => {
             }
             
             // PERFORM OP#1
-            this.relevantTable.append ( 
-                this.columnDefinitionTemplate.content.cloneNode ( true ) 
-            ) 
+            this.ruClonedContent
+                .querySelector(`input[data-ru-incrementable-group="column-definition"]`)
+                .name = `desk-schemas[column][name].${++this.ruIncrementableCounter}`
+                
+            this.ruClonedContent
+                .querySelector(`select[data-ru-incrementable-group="column-definition"]`)
+                .name = `desk-schemas[column][type].${this.ruIncrementableCounter}`
+                
+            this.ruIncrementableParent.append ( this.ruClonedContent ) 
         })
     
         
