@@ -1,3 +1,4 @@
+'use strict'
 const querystring   = require ( 'querystring' )
 
 //  Section on reserved characters:

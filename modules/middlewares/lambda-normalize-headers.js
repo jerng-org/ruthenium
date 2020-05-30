@@ -1,3 +1,5 @@
+'use strict'
+
 const lambdaNormalizeHeaders = async ( data ) => {
 
     if (data.LAMBDA.event.headers) {
