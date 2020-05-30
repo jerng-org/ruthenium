@@ -99,13 +99,13 @@ window.addEventListener('load', (event) => {
                     // PERFORM OP#2
                     const _target = _event.target
                     if (_target.matches(
-                            `template[data-ru-incrementable-group="${ group }"]`
+                            `[data-ru-incrementable-group="${ group }"]`
                            +'[data-ru-incrementable-role="remove-closest"]'
                         ))
                     { 
                         //console.log(
                         _target.closest(
-                            `template[data-ru-incrementable-group="${ group }"]`
+                            `[data-ru-incrementable-group="${ group }"]`
                            +'[data-ru-incrementable-role="appended-child"]'
                         )
                         .remove()
