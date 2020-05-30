@@ -7,7 +7,7 @@ const querystring   = require ( 'querystring' )
 //  HTML5 has a special configuration for form-data sent via the GET method
 //  -   https://www.w3.org/TR/html52/sec-forms.html#form-submission-algorithm    
 
-const lambdaNormalizeHeadersFormData = async ( data ) => {
+const lambdaNormalizeFormData = async ( data ) => {
 
     if (    data.LAMBDA.event.headers
             &&  (   data.LAMBDA.event.headers['content-type'] 
@@ -26,26 +26,11 @@ const lambdaNormalizeHeadersFormData = async ( data ) => {
         data.RU.formStringParameters
             = querystring.parse ( data.RU.request.rawFormString )
 
-            
-        /* OLD
-        const parsedRawFormString
-            = querystring.parse ( data.RU.request.rawFormString )
-        
-        data.RU.request.formStringParameters = {}
-        
-        // WIP
-        //data.RU.parsedRawFormString = parsedRawFormString
-        // END WIP
-        
-        for ( const name in parsedRawFormString ) {
-            data.RU.request.formStringParameters[ name ] 
-                = parsedRawFormString[ name ].split(',')
-        }
-        */
 
+        console.warn (`GET method forms are not yet supported;`)
     }
     
     return data
 }
 
-module.exports  = lambdaNormalizeHeadersFormData
+module.exports  = lambdaNormalizeFormData
