@@ -54,7 +54,9 @@ const lastGuard = async ( data ) => {
     {
     
         // OP 1
-        console.log ( data.RU.request.rawPath, data.RU.request.rawQueryString  ) 
+        console.log (   data.RU.requesthttp.method, 
+                        data.RU.request.rawPath, 
+                        data.RU.request.rawQueryString  ) 
     
         // OP 2
         data.RU.response.body = hasBody 
