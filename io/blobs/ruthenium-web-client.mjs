@@ -81,23 +81,23 @@ window.addEventListener('load', (event) => {
             // (this) refers to this method's parent object, the (element)
             
             // PREPARE OP#1
-            if ( ! (        this.ruClonedContent 
+            if ( ! (        this.ruIncrementableClonedContent 
                         &&  this.ruIncrementableParent               ) )
             {
+                this.ruIncrementableCounter = 0
+
+                this.ruIncrementableGroupSelector 
+                    = `[data-ru-incrementable-group="${ group }"]`
+
                 this.ruIncrementableAttributes 
                     = JSON.parse( this.dataset.ruIncrementableAttributes )
 
-console.log (this.dataset.ruIncrementableAttributes)
-console.log (this.ruIncrementableAttributes)
-
-                this.ruIncrementableCounter = 0
-
                 this.ruIncrementableTemplate = document.querySelector ( 
-                    `template[data-ru-incrementable-group="${ group }"]`
+                    `template${ this.ruIncrementableGroupSelector }`
                 )
                 
                 this.ruIncrementableParent = document.querySelector(
-                    `[data-ru-incrementable-group="${ group }"]`
+                    this.ruIncrementableGroupSelector
                    +'[data-ru-incrementable-role="parent"]'
                 )
                 this.ruIncrementableParent.addEventListener('click', function(_event){
@@ -105,13 +105,13 @@ console.log (this.ruIncrementableAttributes)
                     // PERFORM OP#2
                     const _target = _event.target
                     if (_target.matches(
-                            `[data-ru-incrementable-group="${ group }"]`
+                            this.ruIncrementableGroupSelector
                            +'[data-ru-incrementable-role="remove-closest"]'
                         ))
                     { 
                         //console.log(
                         _target.closest(
-                            `[data-ru-incrementable-group="${ group }"]`
+                            this.ruIncrementableGroupSelector
                            +'[data-ru-incrementable-role="appended-child"]'
                         )
                         .remove()
@@ -122,14 +122,14 @@ console.log (this.ruIncrementableAttributes)
             }
             
             // PERFORM OP#1
-            this.ruClonedContent =  this.ruIncrementableTemplate
+            this.ruIncrementableClonedContent =  this.ruIncrementableTemplate
                                         .content
                                         .cloneNode ( true )
             
             this.ruIncrementableCounter++
             
             for ( const attr of this.ruIncrementableAttributes ) {
-                this.ruClonedContent
+                this.ruIncrementableClonedContent
                     .querySelector( `[${ attr.attribute }="${ attr.baseValue }"]` )
                     .setAttribute ( 
                         attr.attribute, 
@@ -137,7 +137,7 @@ console.log (this.ruIncrementableAttributes)
                     )
             }
     
-            this.ruIncrementableParent.append ( this.ruClonedContent ) 
+            this.ruIncrementableParent.append ( this.ruIncrementableClonedContent ) 
         })
     
         
