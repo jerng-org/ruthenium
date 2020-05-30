@@ -69,10 +69,11 @@ window.addEventListener('load', (event) => {
 */
 ///////////////////////////////////////////////////////////////////////////////    
     Array.from ( document.querySelectorAll(
-         '[data-ru-incrementable-group="column-definition"]'
-        +'[data-ru-incrementable-role="append-one"]'
+         '[data-ru-incrementable-role="append-one"]'
     ) )
     .forEach ( element => {
+        
+        const group = element.dataset.ruIncrementableGroup
         
         element
         .addEventListener( 'click', function(event){
@@ -86,11 +87,11 @@ window.addEventListener('load', (event) => {
                 this.ruIncrementableCounter = 0
 
                 this.ruIncrementableTemplate = document.querySelector ( 
-                    'template[data-ru-incrementable-group="column-definition"]'
+                    `template[data-ru-incrementable-group="${ group }"]`
                 )
                 
                 this.ruIncrementableParent = document.querySelector(
-                    '[data-ru-incrementable-group="column-definition"]'
+                    `[data-ru-incrementable-group="${ group }"]`
                    +'[data-ru-incrementable-role="parent"]'
                 )
                 this.ruIncrementableParent.addEventListener('click', function(_event){
@@ -98,13 +99,13 @@ window.addEventListener('load', (event) => {
                     // PERFORM OP#2
                     const _target = _event.target
                     if (_target.matches(
-                            '[data-ru-incrementable-group="column-definition"]'
+                            `template[data-ru-incrementable-group="${ group }"]`
                            +'[data-ru-incrementable-role="remove-closest"]'
                         ))
                     { 
                         //console.log(
                         _target.closest(
-                            '[data-ru-incrementable-group="column-definition"]'
+                            `template[data-ru-incrementable-group="${ group }"]`
                            +'[data-ru-incrementable-role="appended-child"]'
                         )
                         .remove()
