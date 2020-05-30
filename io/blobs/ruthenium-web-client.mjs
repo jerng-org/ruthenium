@@ -87,6 +87,9 @@ window.addEventListener('load', (event) => {
                 this.ruIncrementableAttributes 
                     = JSON.parse( this.dataset.ruIncrementableAttributes )
 
+console.log (this.dataset.ruIncrementableAttributes)
+console.log (this.ruIncrementableAttributes)
+
                 this.ruIncrementableCounter = 0
 
                 this.ruIncrementableTemplate = document.querySelector ( 
