@@ -37,7 +37,7 @@ const composeResponse = async ( data ) => {
 
 
         if ( data.RU.signals.redirectRoute ) { 
-            throw Error
+            
             data.RU.signals.redirectRoute 
                 = data.RU.request.http.path
                 + '?route='

@@ -75,7 +75,8 @@ exports.handler = async function () {
             `formHelpers`, 
             `urlHelpers`, 
             `htmlHelpers`, 
-            `markuplayouts?... `
+            `markuplayouts?... `,
+            'writes to (data.RU.signals) should be signed by the writer'
         ]
     )
 
