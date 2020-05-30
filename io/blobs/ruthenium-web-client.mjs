@@ -85,10 +85,9 @@ window.addEventListener('load', (event) => {
             {
                 this.ruIncrementableCounter = 0
 
-                this.ruClonedContent = document.querySelector ( 
+                this.ruIncrementableTemplate = document.querySelector ( 
                     'template[data-ru-incrementable-group="column-definition"]'
                 )
-                .content.cloneNode ( true )
                 
                 this.ruIncrementableParent = document.querySelector(
                     '[data-ru-incrementable-group="column-definition"]'
@@ -116,12 +115,15 @@ window.addEventListener('load', (event) => {
             }
             
             // PERFORM OP#1
+            this.ruClonedContent =  this.ruIncrementableTemplate
+                                        .content
+                                        .cloneNode ( true )
             this.ruClonedContent
-                .querySelector(`input[data-ru-incrementable-group="column-definition"]`)
+                .querySelector(`[name="desk-schemas[column][name]"]`)
                 .name = `desk-schemas[column][name].${++this.ruIncrementableCounter}`
                 
             this.ruClonedContent
-                .querySelector(`select[data-ru-incrementable-group="column-definition"]`)
+                .querySelector(`[name="desk-schemas[column][type]"]`)
                 .name = `desk-schemas[column][type].${this.ruIncrementableCounter}`
                 
             this.ruIncrementableParent.append ( this.ruClonedContent ) 
