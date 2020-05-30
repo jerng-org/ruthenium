@@ -1,5 +1,8 @@
 const querystring   = require ( 'querystring' )
 
+//  Section on reserved characters:
+//  -   https://tools.ietf.org/html/rfc3986#section-2.2
+
 const lambdaNormalizeHeadersFormData = async ( data ) => {
 
     if (    data.LAMBDA.event.headers

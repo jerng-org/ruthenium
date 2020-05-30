@@ -7,7 +7,7 @@ const createDeskSchema = async ( data ) => {
     
     return `${ htmlIndex }
 
-<form method="get" action="/test-middleware?route=restful&type=desk-schemas">
+<form method="post" action="/test-middleware?route=restful&type=desk-schemas">
 <fieldset>
     
     <label      for="desk-schemas[name].1">
