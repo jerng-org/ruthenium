@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `lambda-normalize-query-string-parameters.js FIXED`
+const commitMessage = `form data, querystring data, somewhat normalised; GET forms postponed`
 
 const gitCommit = () => { try {
 
