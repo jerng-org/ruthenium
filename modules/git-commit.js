@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `form data, querystring data, somewhat normalised; GET forms postponed`
+const commitMessage = `widget (incrementable) upgraded; not yet complete`
 
 const gitCommit = () => { try {
 
