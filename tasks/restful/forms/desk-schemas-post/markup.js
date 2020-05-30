@@ -1,5 +1,18 @@
 'use strict'
 
+/* Today's fixes will proceed as follows
+
+- dump LAMBDA.event.queryStringParameters because it overhandles ","
+- manually parse queryString with (querystring)
+
+- check form POST behaviour, compared to above
+- check form GET behaviour, compared to above
+
+
+test data: 11%2C22,33;44+55!66$77%2788(99)00"11
+
+*/
+
 const fs                    = require ( 'fs' )
 const htmlIndex             = fs.readFileSync ( 'io/blobs/index.html', { encoding: 'utf8' } )
 
