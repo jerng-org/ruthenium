@@ -65,7 +65,7 @@ const createDeskSchema = async ( data ) => {
             </td>
             <td>
                 <select id="column[type].1" 
-                        name="column[type]
+                        name="column[type]"
                         >
                     <option value="S">string</option>
                     <option value="N">number</option>
