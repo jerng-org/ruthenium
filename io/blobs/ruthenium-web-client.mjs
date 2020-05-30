@@ -84,8 +84,8 @@ window.addEventListener('load', (event) => {
             if ( ! (        this.ruClonedContent 
                         &&  this.ruIncrementableParent               ) )
             {
-                this.ruIncrementableData 
-                    = JSON.parse( this.dataset.ruIncrementableJson )
+                this.ruIncrementableAttributes 
+                    = JSON.parse( this.dataset.ruIncrementableAttributes )
 
                 this.ruIncrementableCounter = 0
 
@@ -125,7 +125,7 @@ window.addEventListener('load', (event) => {
             
             this.ruIncrementableCounter++
             
-            for ( const attr of this.ruIncrementableData.incrementedAttributes ) {
+            for ( const attr of this.incrementedAttributes ) {
                 this.ruClonedContent
                     .querySelector( `[${ attr.attribute }="${ attr.baseValue }"]` )
                     .setAttribute ( 
