@@ -117,7 +117,7 @@ exports.handler = async function () {
         lastGuard
     ]
     
-    return ruthenium ( hostInitializedData, middlewares ) 
+    return ruthenium ( hostInitializedData, middlewares )
     
 }
 mark (`index.js LOADED`, true)
