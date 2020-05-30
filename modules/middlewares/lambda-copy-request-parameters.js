@@ -1,5 +1,25 @@
 const lambdaCopyRequestParameters = async ( data ) => {
 
+    //  Section on reserved characters:
+    //  -   https://tools.ietf.org/html/rfc3986#section-2.2
+    //
+    //  !! WARNING !!
+    //  AWS LAMBDA (host) will interprete queryString values idiosyncretically:
+    //
+    //  -   "key=string1,string2,string3" 
+    //          will parse to 
+    //              { key : [ "string1", "string2", "string3"]
+    //
+    //  -   "key=string1%2Cstring2%2Cstring3" 
+    //          will ALSO parse to 
+    //              { key : [ "string1", "string2", "string3"]
+    //
+    //  -   BOTH OF THESE ARE APPLICATION-SPECIFIC INTEPRETATIONS, and while  
+    //      commas are reserved characters in the RFC, the RFC contains no
+    //      specific requirement for how commas should be interpreted; AWS
+    //      Lambda however, appears to follow the requirement that the encoded
+    //      and unencoded ', or %2C' both behave the same way.
+    
     // Maybe move this to firstGuard or something like that - its own .js
     if (! data.LAMBDA.event.requestContext ) {
         console.warn (`Are you in the Test Environment? This does not look like a HTTP request event.`)
