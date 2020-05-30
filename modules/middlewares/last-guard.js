@@ -70,7 +70,7 @@ const lastGuard = async ( data ) => {
 
 
     
-    /*
+    //*
     if (    data.RU.response.headers
         &&  data.RU.response.headers['content-type']
         &&  data.RU.response.headers['content-type']
