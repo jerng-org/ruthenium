@@ -42,18 +42,16 @@ const createDeskSchema = async ( data ) => {
                 <i  class="material-icons"
                     data-ru-incrementable-group="column-definition"
                     data-ru-incrementable-role="append-one""
-                    data-ru-incrementable-json='{
-                        "incrementedAttributes": [
-                            {   
-                                "attribute":    "name",
-                                "baseValue":    "desk-schemas[column][name]"
-                            },
-                            {   
-                                "attribute":    "name",
-                                "baseValue":    "desk-schemas[column][type]"
-                            }
-                        ]
-                    }'
+                    data-ru-incrementable-attributes='[
+                        {   
+                            "attribute":    "name",
+                            "baseValue":    "desk-schemas[column][name]"
+                        },
+                        {   
+                            "attribute":    "name",
+                            "baseValue":    "desk-schemas[column][type]"
+                        }
+                    ]'
                     >
                     add_circle_outline</i>
             
