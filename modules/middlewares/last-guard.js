@@ -85,7 +85,8 @@ const lastGuard = async ( data ) => {
             data.RU.response.body 
                 = data.RU.response.body.replace(/</g, '[')   
         }
-        if ( typeof data.RU.signals.sendResponse.body == 'string' ) {
+        if (    data.RU.signals.sendResponse
+                && typeof data.RU.signals.sendResponse.body == 'string' ) {
             data.RU.signals.sendResponse.body 
                 = data.RU.signals.sendResponse.body.replace(/</g, '[')   
         }
