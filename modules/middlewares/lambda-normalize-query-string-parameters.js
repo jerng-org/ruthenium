@@ -10,8 +10,7 @@ const lambdaNormalizeQueryStringParameters = async ( data ) => {
         
         for ( const prop in data.RU.request.queryStringParameters ) {
             
-            throw ( typeof data.RU.request.queryStringParameters[ prop ] )
-            
+
             if ( typeof data.RU.request.queryStringParameters[ prop ] == 'string' ) {
                 data.RU.request.queryStringParameters[ prop ] 
                     =   [ 
