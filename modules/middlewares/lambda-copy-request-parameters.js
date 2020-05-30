@@ -1,3 +1,5 @@
+'use strict'
+
 const lambdaCopyRequestParameters = async ( data ) => {
 
     //  Section on reserved characters:
