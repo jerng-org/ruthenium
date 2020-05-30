@@ -70,7 +70,10 @@ const lastGuard = async ( data ) => {
 
 
     
-    //*
+    //*     
+    console.warn (`This code is in a clumsy location; consider moving it to its own middleware;`)
+    
+    
     if (    data.RU.response.headers
         &&  data.RU.response.headers['content-type']
         &&  data.RU.response.headers['content-type']

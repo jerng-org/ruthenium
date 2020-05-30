@@ -76,7 +76,8 @@ exports.handler = async function () {
             `urlHelpers`, 
             `htmlHelpers`, 
             `markuplayouts?... `,
-            'writes to (data.RU.signals) should be signed by the writer'
+            'writes to (data.RU.signals) should be signed by the writer',
+            `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`
         ]
     )
 
