@@ -10,7 +10,7 @@ const createDeskSchema = async ( data ) => {
 <form method="post" action="/test-middleware?ruthenium=restful&type=desk-schemas">
 <fieldset>
     
-    <label      for="desk-schemas[desk-name].1">
+    <label      for="desk-schemas[name].1">
         
         Name for this new Desk Schema
         </label>
