@@ -7,7 +7,7 @@ const createDeskSchema = async ( data ) => {
     
     return `${ htmlIndex }
 
-<form method="post" action="/test-middleware?ruthenium=restful&type=schemas">
+<form method="post" action="/test-middleware?ruthenium=restful&type=desk-schemas">
 <fieldset>
     
     <label      for="schema[desk-name].1">
@@ -16,8 +16,8 @@ const createDeskSchema = async ( data ) => {
         </label>
     
     <input      type="text"  
-                name="schema[desk-schema-name]"
-                id="schema[desk-schema-name].1"
+                name="schema[desk-schemas-name]"
+                id="schema[desk-schemas-name].1"
                 placeholder="new desk schema name">       
     
     <table  data-ru-incrementable-group="column-definition"
