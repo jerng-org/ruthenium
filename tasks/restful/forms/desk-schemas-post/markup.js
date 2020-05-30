@@ -32,12 +32,12 @@ const createDeskSchema = async ( data ) => {
             
             </td>
             <td>
-                <label  for="desk-schemas[colum][name].all"
+                <label  for="desk-schemas[column][name].all"
                         >
                         Add a Column for this new Desk Schema</label>
             </td>
             <td>
-                <label  for="desk-schemas[colum][type].all"
+                <label  for="desk-schemas[column][type].all"
                         >
                         Type of data in this Column ('string' and 'number' are efficient)
                         </label>
@@ -60,12 +60,12 @@ const createDeskSchema = async ( data ) => {
             </td>
             <td>
                 <input      type="text"  
-                            name="desk-schemas[colum][name]"
-                            id="desk-schemas[colum][name].1">       
+                            name="desk-schemas[column][name]"
+                            id="desk-schemas[column][name].1">       
             </td>
             <td>
-                <select id="desk-schemas[colum][type].1" 
-                        name="desk-schemas[colum][type]"
+                <select id="desk-schemas[column][type].1" 
+                        name="desk-schemas[column][type]"
                         >
                     <option value="S">string</option>
                     <option value="N">number</option>
