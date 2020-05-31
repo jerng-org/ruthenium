@@ -2,7 +2,9 @@
 
 const reindexFormNames = async ( data ) => {
 
-    /*  Is regex even the best approach?
+    /*  https://stackoverflow.com/questions/62111549/whats-the-best-way-to-validate-and-lex-a-string-that-looks-like-a-nested-array
+    
+        Is regex even the best approach?
 
             Some simple valid-character assumptions:
             
@@ -15,6 +17,8 @@ const reindexFormNames = async ( data ) => {
             newlines are not 
             Context: JavaScript (no look-behind?)            
     
+        Sample Input:   shoes[country][source][arbitrarily-many-boxed-strings].69
+        
         Validation:     /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
         
         Demarcation:    /(?<head>^[^A-Z\[\]\n\r]+)|\[(?<segment>[^A-Z\[\]\n\r]+)\]|\.(?<tail>[0-9]+)$/g
