@@ -27,9 +27,13 @@ const reindexFormNames = async ( data ) => {
     */
     
     let temp = {}
+    const validationRegex = /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
+    const lexerRegex = /(?<head>^[^A-Z\[\]\n\r]+)|\[(?<segment>[^A-Z\[\]\n\r]+)\]|\.(?<tail>[0-9]+)$/g
     
     for ( const name in data.RU.request.formStringParameters ) {
-        temp[name] = name
+        temp[name] = { 
+            valid: validationRegex.text (name)
+        }
     }
 
     data.RU.request.formStringParameters = temp
