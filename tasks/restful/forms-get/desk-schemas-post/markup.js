@@ -45,11 +45,11 @@ const createDeskSchema = async ( data ) => {
                     data-ru-incrementable-attributes='[
                         {   
                             "attribute":    "name",
-                            "baseValue":    "desk-schemas[column][name]"
+                            "baseValue":    "desk-schemas[columns][name]"
                         },
                         {   
                             "attribute":    "name",
-                            "baseValue":    "desk-schemas[column][type]"
+                            "baseValue":    "desk-schemas[columns][type]"
                         }
                     ]'
                     >
@@ -84,13 +84,13 @@ const createDeskSchema = async ( data ) => {
             </td>
             <td>
                 <input      type="text"  
-                            name="desk-schemas[column][name]"
+                            name="desk-schemas[columns][name]"
                             placeholder="-- enter a name --"
                             required
                             >       
             </td>
             <td>
-                <select name="desk-schemas[column][type]"
+                <select name="desk-schemas[columns][type]"
                         required
                         >
                     <option disabled selected value> -- select an option -- </option>
