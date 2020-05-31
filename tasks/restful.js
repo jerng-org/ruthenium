@@ -144,9 +144,9 @@ switch ( data.RU.request.http.method ) {
     case ( 'DELETE' ):
         break
     case ( 'POST' ):
-        break
-    case ( 'PATCH' ):
         
+        throw data.RU.request.formStringParameters
+            
         switch (queryScope) {
             
             case ('vrow'):
@@ -177,6 +177,8 @@ switch ( data.RU.request.http.method ) {
                 throw queryScope
         }
 
+        break
+    case ( 'PATCH' ):
         break
     
     default:
