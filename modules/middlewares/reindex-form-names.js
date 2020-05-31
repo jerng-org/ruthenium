@@ -35,11 +35,10 @@ const reindexFormNames = async ( data ) => {
     const lexerRegex = /(?<head>^[^A-Z\[\]\n\r]+)|\[(?<segment>[^A-Z\[\]\n\r]+)\]|\.(?<tail>[0-9]+)$/g
     
     for ( const name in data.RU.request.formStringParameters ) {
-        temp[name] = { 
-            valid: validationRegex.test (name),
-            tokens: Array.from ( name.matchAll ( lexerRegex ), a => a.groups )
-            
-        }
+        temp[name] 
+            =   validationRegex.test (name)
+                ? Array.from ( name.matchAll ( lexerRegex ), a => a.groups )  
+                : new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
     }
 
     data.RU.request.formStringParameters = temp
