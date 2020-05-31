@@ -23,7 +23,7 @@ const reindexFormNames = async ( data ) => {
         
         Validation:     /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
         
-        Demarcation1    /(?<notTail>^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+)|(?<tail>[0-9]+)$/g
+        Demarcation1    /(?<tailless>^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+)|(?<tail>[0-9]+)$/g
         
                         This will separate the parts before and after the '.' 
                         delimiter.
@@ -43,7 +43,7 @@ const reindexFormNames = async ( data ) => {
     let temp = {}
     let temp2 = {}
     const validationRegex = /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
-    const lexerRegex = /(?<notTail>^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+)|(?<tail>[0-9]+)$/g
+    const lexerRegex = /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+|[0-9]+$/g
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
