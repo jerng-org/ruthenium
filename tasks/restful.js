@@ -144,7 +144,8 @@ switch ( data.RU.request.http.method ) {
     case ( 'DELETE' ):
         break
     case ( 'POST' ):
-        
+        // ^[^\[A-Z]+|\[[^\[A-Z]+\]|\.[0-9]+
+         
         let temp = {}
         
         for ( const name in data.RU.request.formStringParameters ) {
