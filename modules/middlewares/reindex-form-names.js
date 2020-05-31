@@ -41,7 +41,7 @@ const reindexFormNames = async ( data ) => {
                 ? Array
                     .from ( name.matchAll ( lexerRegex ), a => a.groups )
                     .map ( group => {
-                        return group[0]
+                        return group
                         
                     } )
                 : new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
