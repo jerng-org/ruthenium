@@ -160,6 +160,12 @@ switch ( data.RU.request.http.method ) {
             Validation:     /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
             
             Demarcation:    /(?<head>^[^A-Z\[\]\n\r]+)|\[(?<segment>[^A-Z\[\]\n\r]+)\]|\.(?<tail>[0-9]+)$/g
+            
+            Curiosity:      This has more explicit naming, but proves to be 
+                            closer in use to the (Validation) rather than the
+                            (Demarcation) example above:
+                            
+                            /(?<head>^[^A-Z\[\]\n\r]+)(?<x>\[(?<segment>[^A-Z\[\]\n\r]+)\])+?(?<y>\.(?<tail>[0-9]+)$)/g
         */
         let temp = {}
         
