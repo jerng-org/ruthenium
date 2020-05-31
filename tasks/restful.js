@@ -145,8 +145,8 @@ switch ( data.RU.request.http.method ) {
         break
     case ( 'POST' ):
         
+        const temp = 
         data.RU.request.formStringParameters
-        const temp = {}
         
         throw new Error ( JSON.stringify( temp, null, 4 ) )
             
