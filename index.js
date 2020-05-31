@@ -55,11 +55,14 @@ const lambdaNormalizeHeaders
 const lambdaNormalizeQueryStringParameters   
     = require (`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`) 
 
-const tunnelRestfulForms                
-    = require (`/var/task/modules/middlewares/tunnel-restful-forms.js`) 
+const reindexFormNames   
+    = require (`/var/task/modules/middlewares/reindexFormNames.js`) 
 
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
+
+const tunnelRestfulForms                
+    = require (`/var/task/modules/middlewares/tunnel-restful-forms.js`) 
 
 // LAMBDA HANDLER
 exports.handler = async function () { 
@@ -111,7 +114,8 @@ exports.handler = async function () {
         
         // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
         tunnelRestfulForms,
-        router,
+        reindexFormNames
+,        router,
         
         composeResponse,
         lastGuard
