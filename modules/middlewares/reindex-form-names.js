@@ -24,6 +24,7 @@ const reindexFormNames = async ( data ) => {
         Validation:     /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
         
         Demarcation1    /(?<tailless>^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+)|(?<tail>[0-9]+)$/g
+                        /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+|[0-9]+$/g
         
                         This will separate the parts before and after the '.' 
                         delimiter.
