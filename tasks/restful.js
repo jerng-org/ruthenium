@@ -145,8 +145,13 @@ switch ( data.RU.request.http.method ) {
         break
     case ( 'POST' ):
         
-        const temp = 
-        data.RU.request.formStringParameters
+        let temp = {}
+        
+        for ( const name in data.RU.request.formStringParameters ) {
+            temp[name] = 
+           ` https://stackoverflow.com/questions/20364329/how-to-get-the-unmatched-head-tail-of-a-string-before-after-all-the-regex-matche
+            `
+        }
         
         throw new Error ( JSON.stringify( temp, null, 4 ) )
             
