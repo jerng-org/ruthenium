@@ -144,38 +144,8 @@ switch ( data.RU.request.http.method ) {
     case ( 'DELETE' ):
         break
     case ( 'POST' ):
-        /*  Is regex even the best approach?
-
-                Some simple valid-character assumptions:
-                
-                the form xxx[xxx][xxx].yy must be adhered to
-                'x' can be any non-uppercase letter, and non-square-bracket
-                'y' must be Arabic numerals only
-                the number of [xxx] blocks is undetermined, but must be greater than 0
-                xxx segments cannot be zero-length, but may be any other length
-                yy segments cannot be zero-length, but may be any other length
-                newlines are not 
-                Context: JavaScript (no look-behind?)            
         
-            Validation:     /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
-            
-            Demarcation:    /(?<head>^[^A-Z\[\]\n\r]+)|\[(?<segment>[^A-Z\[\]\n\r]+)\]|\.(?<tail>[0-9]+)$/g
-            
-            Curiosity:      This has more explicit naming, but proves to be 
-                            closer in use to the (Validation) rather than the
-                            (Demarcation) example above:
-                            
-                            /(?<head>^[^A-Z\[\]\n\r]+)(?<x>\[(?<segment>[^A-Z\[\]\n\r]+)\])+?(?<y>\.(?<tail>[0-9]+)$)/g
-        */
-        let temp = {}
-        
-        for ( const name in data.RU.request.formStringParameters ) {
-            temp[name] = 
-           ` https://stackoverflow.com/questions/20364329/how-to-get-the-unmatched-head-tail-of-a-string-before-after-all-the-regex-matche
-            `
-        }
-        
-        throw new Error ( JSON.stringify( temp, null, 4 ) )
+        throw new Error ( JSON.stringify( data.RU.request.formStringParameters, null, 4 ) )
             
         switch (queryScope) {
             
