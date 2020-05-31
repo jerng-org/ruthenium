@@ -49,8 +49,8 @@ const reindexFormNames = async ( data ) => {
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
             temp[ name ] = Array.from ( name.matchAll ( lexerRegex ), a => { return {
-                tailless:   a[0][0],
-                tail:       a[1][0]
+                tailless:   a[0],
+                tail:       a[1]
             } } )
             //temp2 [ name ] = temp[name][0].head + 'segments' + temp[name][temp[name].length-1].tail
         } else {
