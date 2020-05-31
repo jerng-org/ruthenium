@@ -40,14 +40,14 @@ const reindexFormNames = async ( data ) => {
             =   validationRegex.test (name)
                 ? Array
                     .from ( name.matchAll ( lexerRegex ), a => a.groups )
-                    .map ( group => {
+                    /*.map ( group => {
                         const head = group[0]
                         const tail = group[group.length-1]
                         return {
                             head : head,
                             tail : tail
                         }
-                    } )
+                    } )*/
                 : new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
     }
 
