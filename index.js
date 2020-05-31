@@ -56,7 +56,7 @@ const lambdaNormalizeQueryStringParameters
     = require (`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`) 
 
 const reindexFormNames   
-    = require (`/var/task/modules/middlewares/reindexFormNames.js`) 
+    = require (`/var/task/modules/middlewares/reindex-form-names.js`) 
 
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
