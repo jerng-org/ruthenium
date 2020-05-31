@@ -41,10 +41,10 @@ const reindexFormNames = async ( data ) => {
                 ? Array
                     .from ( name.matchAll ( lexerRegex ), a => a.groups )
                     .map ( group => {
-                        return group
+                        return typeof group
                         
                     } )
-                : new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
+                : 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
     }
 
     data.RU.request.formStringParameters = temp
