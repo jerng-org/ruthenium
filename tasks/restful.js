@@ -78,18 +78,36 @@ PATCH	Partial 405 (Method not allowed),   200 (OK) or 204 (No Content).
 ******************************************************************************/
 
 try {       
+    
+const queryType     =   data.RU.request.queryStringParameters.type 
+                    &&  data.RU.request.queryStringParameters.type[0]     
+    
+const queryThing    =   data.RU.request.queryStringParameters.thing 
+                    &&  data.RU.request.queryStringParameters.thing[0]     
+
+const queryScope    =   queryType
+
+                        ?   ( queryThing
+                            ? 'vrow'        //  resource is a Virtual Row
+                            : 'vtable' )    //  resource is a Virtual Table
+                        
+                        :   new Error (     `Requested a (restful) task, 
+                                            but (type) was not specified.` )
+
+
+console.warn(`transpose the switches, make them inside out`)
+
 switch ( data.RU.request.http.method ) {
     case ( 'HEAD' ):
         break
     
     case ( 'GET' ):
         
-        if (data.RU.request.queryStringParameters.type 
-            &&  data.RU.request.queryStringParameters.type[0] ) 
-        { 
-            if (data.RU.request.queryStringParameters.thing
-                &&  data.RU.request.queryStringParameters.thing[0] ) 
-            {
+        switch (queryScope) {
+            
+            case ('vrow'):
+                
+                // Which individual Thing?
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('forms'):
                         // (desks) and (forms) are special / meta
@@ -100,10 +118,11 @@ switch ( data.RU.request.http.method ) {
                     default:
                         // GET the Virtual ROW
                 }
-
-            } 
-            else 
-            {
+                break
+            
+            case ('vtable'):
+                
+                // Which Type (set, group) of things?
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('desk-schemas'):
                         // (desks) and (forms) are special / meta
@@ -112,13 +131,12 @@ switch ( data.RU.request.http.method ) {
                     default:
                        // GET the Virtual TABLE   
                 }
-                
-            } 
-        } 
-        else {
-
-            //  ERROR : TYPE not specified
+                break
+            
+            default:
+                throw queryScope
         }
+        
         break
     
     case ( 'PUT' ):
@@ -126,32 +144,41 @@ switch ( data.RU.request.http.method ) {
     case ( 'DELETE' ):
         break
     case ( 'POST' ):
-        throw data.RU.formStringParameters
         break
     case ( 'PATCH' ):
-        if (data.RU.request.queryStringParameters.type
-            &&  data.RU.request.queryStringParameters.type[0] ) 
-        {
-            if (data.RU.request.queryStringParameters.thing
-                &&  data.RU.request.queryStringParameters.thing[0] ) 
-            {
-                // PATCH the Virtual ROW
-            } 
-            else {
-                
-                // convert to switch/case
-                if ( data.RU.request.queryStringParameters.type[0] == 'desk-schemas' ) {
-                   // await patchDeskSchema ( data ) // (desks) are meta ... i.e. special
-                } else {
-                    // PATCH the Virtual TABLE   
-                }
-            } 
-        } 
-        else {
+        
+        switch (queryScope) {
             
-            //  ERROR : TYPE not specified
+            case ('vrow'):
+                
+                // Which individual Thing?
+                switch (data.RU.request.queryStringParameters.type[0]) {
+                    case ('forms'):
+                        // (desks) and (forms) are special / meta
+                        break
+                    default:
+                        // GET the Virtual ROW
+                }
+                break
+            
+            case ('vtable'):
+                
+                // Which Type (set, group) of things?
+                switch (data.RU.request.queryStringParameters.type[0]) {
+                    case ('desk-schemas'):
+                        // (desks) and (forms) are special / meta
+                        break
+                    default:
+                       // GET the Virtual TABLE   
+                }
+                break
+            
+            default:
+                throw queryScope
         }
+
         break
+    
     default:
 } // switch ( data.RU.request.http.method )
 } catch (e) { throw e }
