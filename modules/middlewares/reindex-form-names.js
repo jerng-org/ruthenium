@@ -48,7 +48,7 @@ const reindexFormNames = async ( data ) => {
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
-            temp[ name ] = Array.from ( name.matchAll ( lexerRegex ), a => a )
+            temp[ name ] = Array.from ( name.matchAll ( lexerRegex ), a => a[0] )
             //temp2 [ name ] = temp[name][0].head + 'segments' + temp[name][temp[name].length-1].tail
         } else {
             temp[ name ] = 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
