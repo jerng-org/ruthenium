@@ -23,33 +23,64 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 window.addEventListener('load', (event) => {
 
+    console.warn (`IMPROVE DOCS: Widget RU-INCREMENTAL`)
+
 ///////////////////////////////////////////////////////////////////////////////    
 /*  
     WIDGET : RU-INCREMENTAL 
 
     Coralling Attribute:    data-ru-incrementable-group="INSTANTIATE"
-    
+                            - IMPORTANT: add this to each of A, B, C, D, E
     Key Elements:
     
-        "A: a button that adds a copy of a template, D, to the DOM":
+        "A: a button that adds a clone of a template, D, to the DOM":
         
-                            data-ru-incrementable-role="append-one"
-        
+            Must have:      data-ru-incrementable-role="append-one"
+                            
+                            data-ru-incrementable-attributes='[
+                                {
+                                    "attribute":    "ATTRIBUTENAME",
+                                    "baseValue":    "ATTRIBUTEVALUE"
+                                },
+                                etc.
+                            ]
+                            
+                            ^
+                            A list of objects. You can have as many as you want.
+                            ^
+                            When Cs are inserted into the DOM, C's attributes
+                            can be targeted, and their values appended with a 
+                            integer index which increases as more Cs are added.
+                            ^
+                            E.g.    "attribute":"name", "baseValue":"joe" 
+                                    
+                                    will become 
+                            
+                                    <element-c1 name="joe.1" />
+                                    <element-c2 name="joe.2" /> etc.
+                            ^        
+                            The index never decrements when Cs are removed from
+                            the DOM. This guarantees uniqueness of "attribute",
+                            so-long as your "baseValue" is unique per-document.
+                            ^
+                            A prototypical use-case for this pattern is to 
+                            create unique numbered names for form fields.
+                            
         "B: an element into which ... element C will be appended as a child":
         
-                            data-ru-incrementable-role="parent"
+            Must have:      data-ru-incrementable-role="parent"
         
         "C: a cloned node from the (content)-prop of a (template)":
         
-                            data-ru-incrementable-role="appended-child"
+            Must have:      data-ru-incrementable-role="appended-child"
                             
-        "D: the template from which C is cloned:"
+        "D: the (template) from which C is cloned; D is C's parent:"
 
-                            template[data-ru-incrementable-group="INSTANTIATE"]
-
+            Must be:        template
+                            
         "E: a button that removes the closest matching ancestor C":
         
-                            data-ru-incrementable-role="remove-closest"
+            Must have:      data-ru-incrementable-role="remove-closest"
 
     User Story:
     
@@ -65,6 +96,10 @@ window.addEventListener('load', (event) => {
         input" button (A), and clicking A would insert input fields (C)s into
         the DOM. Beside each input field there might be a "remove this" button
         (E). Clicking E would remove its ancestor C from the DOM.
+        
+    Reference Implementation:
+    
+        ~/tasks/restful/forms/desk-schemas-post.js
 
 */
 ///////////////////////////////////////////////////////////////////////////////  

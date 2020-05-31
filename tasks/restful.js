@@ -4,7 +4,7 @@ const getAllDeskSchemas
     = require ( '/var/task/tasks/restful/desk-schemas-get/index.js' )
 
 const formsDeskSchemasPostMarkup
-    = require ( `/var/task/tasks/restful/forms/desk-schemas-post/markup.js` )
+    = require ( `/var/task/tasks/restful/forms-get/desk-schemas-post/markup.js` )
 
 //const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
