@@ -23,7 +23,7 @@ const lambdaNormalizeFormData = async ( data ) => {
             :   data.LAMBDA.event.body
 
         // NEW
-        data.RU.requesformStringParameters
+        data.RU.request.formStringParameters
             = querystring.parse ( data.RU.request.rawFormString )
 
 
