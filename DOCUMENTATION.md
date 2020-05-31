@@ -86,12 +86,12 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
     v                                                                  ^
     ████████████████████████████████████████████████████████████████████
     [ REDUCER           refers to DATA,                                ^
-    █████               iterates through MIDDLEWARES, passing          █
-        █                                                              █
-        DATA                                                           ^
-        v                                                              █
-        █                                                              ^
-        v                                                              █
+    █                   iterates through MIDDLEWARES, passing          █
+    █                                                                  █
+    █████>>>DATA                                                       ^
+            v                                                          █
+            █                                                          ^
+            v                                                          █
         █████████████████████████████████████████                      ^
         █[ MIDDLEWARE #1 ingests DATA,          █                      █
         █               operates on DATA,       █                      █
@@ -101,9 +101,9 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
         █        iteratively passes on          █                      ^
         █DATA ]                                 █                      █
         █████████████████████████████████████████                      █
-        v                                                              ^
-        █                                                              ^
-        v                                                              █
+            v                                                          ^
+            █                                                          ^
+            v                                                          █
         █████████████████████████████████████████                      █
         █[ MIDDLEWARE #2 ingests DATA,          █                      ^
         █               operates on DATA,       █                      █
@@ -113,9 +113,9 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
         █        iteratively passes on          █                      █
         █DATA ]                                 █                      ^
         █████████████████████████████████████████                      █
-        v                                                              █
-        █                                                              ^
-        v                                                              ^
+            v                                                          █
+            █                                                          ^
+            v                                                          ^
         █████████████████████████████████████████                      █
         █[ MIDDLEWARE #N is the ROUTER          █                      ^
         █                                       █                      █
@@ -143,9 +143,9 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
         █        iteratively passes on          █                      █
         █DATA ]                                 █                      ^
         █████████████████████████████████████████                      █
-        v                                                              ^
-        █                                                              ^
-        v                                                              █
+            v                                                          ^
+            █                                                          ^
+            v                                                          █
         █████████████████████████████████████████                      ^
         █[ MIDDLEWARE #N+1 ingests DATA,        █                      █
         █                 operates on DATA,     █                      ^
@@ -155,12 +155,12 @@ long as the (custom mapping) variable is falsy, (router.js) will use the
         █        iteratively passes on          █                      ^
         █DATA ]                                 █                      █
         █████████████████████████████████████████                      ^
-        v                                                              █
-        █                                                              ^
-        v                                                              █
+            v                                                          █
+            █                                                          ^
+            v                                                          █
         [ REDUCER   runs out of middlewares to run                     ^
     █████           operations on DATA, then returns a                 █
-    REPONSE ]                                                          ^
+    RESPONSE ]                                                         ^
     █                                                                  █
     █>█████>█████>█████>█████>█████>█████>█████>█████>█████>█████>█████>
 ```
