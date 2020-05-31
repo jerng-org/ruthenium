@@ -33,7 +33,7 @@ const reindexFormNames = async ( data ) => {
     for ( const name in data.RU.request.formStringParameters ) {
         temp[name] = { 
             valid: validationRegex.test (name),
-            tokens: name.matchAll ( lexerRegex )
+            tokens: Array.from ( name.matchAll ( lexerRegex ) )
             
         }
     }
