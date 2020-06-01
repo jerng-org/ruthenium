@@ -54,7 +54,7 @@ const reindexFormNames = async ( data ) => {
     
             for ( const groupName in groups ) {
                 //if ( groups[ groupName ] ) {
-                    temp3.push ( groups[ groupName ] )
+                    temp3.push ( { [groupName]: groups[ groupName ] } )
                 //}
             }
             
