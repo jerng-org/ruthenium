@@ -84,13 +84,13 @@ const createDeskSchema = async ( data ) => {
             </td>
             <td>
                 <input      type="text"  
-                            name="desk-schemas[columns][name]"
+                            name="###"
                             placeholder="-- enter a name --"
                             required
                             >       
             </td>
             <td>
-                <select name="desk-schemas[columns][type]"
+                <select name="###"
                         required
                         >
                     <option disabled selected value> -- select an option -- </option>
