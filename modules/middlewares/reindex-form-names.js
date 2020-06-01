@@ -96,7 +96,7 @@ const reindexFormNames = async ( data ) => {
                 //const finalKey  = keyObjectList.length == 1
                 //const keyObject = keyObjectList.unshift()
 
-                storeObject =                 
+                storeObject = value                 
 
                 /*{
                     value: value,
