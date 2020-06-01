@@ -55,7 +55,7 @@ const reindexFormNames = async ( data ) => {
             //  all matches[n].groups are the same;
             //  so we only need matches[0], to get the groups;
             
-            temp1[ name ] = firstMatch
+            temp1[ name ] = firstMatch.groups
             /* almost there, working example
             
             const matches     = Array.from ( 
