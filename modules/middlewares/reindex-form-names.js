@@ -156,9 +156,9 @@ const reindexFormNames = async ( data ) => {
                 */
             }
             
-            temp1[ name ] = {}
+            //temp1[ name ] = {}
             
-            build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
+            //build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
             
         } else {
             temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
