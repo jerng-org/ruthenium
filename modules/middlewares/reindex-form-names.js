@@ -54,11 +54,11 @@ const reindexFormNames = async ( data ) => {
     
             for ( const groupName in groups ) {
                 //if ( groups[ groupName ] ) {
-                    temp3.push ( [groupName, groups[ groupName ] ] )
+                    temp3.push ( groups[ groupName ] )
                 //}
             }
             
-            temp1[ name ] = groups
+            temp1[ name ] = temp3
             /* almost there, working example
             
             const matches     = Array.from ( 
