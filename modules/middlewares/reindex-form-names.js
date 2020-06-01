@@ -96,7 +96,7 @@ const reindexFormNames = async ( data ) => {
                 //const finalKey  = keyObjectList.length == 1
                 //const keyObject = keyObjectList.unshift()
 
-                storeObject = '$$$'                 
+                storeObject['arb'] = '$$$'                 
 
                 /*{
                     value: value,
@@ -153,14 +153,13 @@ const reindexFormNames = async ( data ) => {
             }
             
             temp1[ name ] = {}
-            
+            /*
             const testFunction = storeObject => {
                 storeObject['arbitrary'] = data.RU.request.formStringParameters[ name ]
             }
-            
             testFunction( temp1[name] )
-            
-            //build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
+            */
+            build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
             
             //temp1 [ name ] = data.RU.request.formStringParameters[ name ]
             
