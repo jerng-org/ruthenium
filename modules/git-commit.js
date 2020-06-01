@@ -43,7 +43,7 @@ const gitCommit = () => { try {
         'git clone -n --depth 1 -b jerng-machines-writeable https://github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', stdio: 'inherit', cwd: '/tmp' })
 
-    mark ( `gitCommit.js Cloned into repository ...` )
+    mark ( `-` )
 ///////////////////////////////////////////////////////////////////////////////
 
     /*

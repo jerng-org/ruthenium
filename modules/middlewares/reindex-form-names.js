@@ -2,6 +2,30 @@
 
 const reindexFormNames = async ( data ) => {
 
+    /*
+        .matchAll(//g) returns anIterator, which you can pass as Array.from(anIterator) ... 
+        
+        ...  which in turn returns:
+        
+        [ //    Array: of matches
+        
+            [   //  Array: one per match
+            
+                ... [ all the capture groups],   
+                
+                        // become the numerically indexed elements;
+                
+                index,  // prop: index of the first result in the original string;
+                
+                input,  // prop: initial string;
+                
+                groups  // prop: Object
+                
+                            // { indices: values } ... named and unnamed capture groups 
+            ]
+        ]
+    */
+
     /*  Tool:           https://regexr.com/
     
         Related
@@ -64,9 +88,65 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
+            temp2[ name ] = temp3
             
+            const build = ( storeObject, keyObjectList, value ) => {
+                
+                // order is crucial
+                const finalKey  = keyObjectList.length == 1
+                const keyObject = keyObjectList.unshift()
+                
+                switch ( keyObject.keyType ) {
+                    
+                    case ( 'asIs' ) :       //  frequent
+                        
+                        if (    typeof storeObject == 'object'
+                             && ( ! storeObject instanceof Array ) ) 
+                        { 
+                            //  no problem
+                            storeObject[ keyObject.key ]
+                                =   finalKey
+                                    ?   value
+                                    :   build ( 
+                                            storeObject[ keyObject.key ], 
+                                            keyObjectList,
+                                            value
+                                        )
+                            
+                        } else {
+                            //  Perhaps we have to create a new item here.
+                            throw Error (`(reindex-form-names.js), regex group name (asIs), but (storeObject) isn't a POJO.`)
+                        }
+                        break
+                    
+                    case ( 'toArray' ) :    //  infrequent
+                    
+                        if ( storeObject instanceof Array ) 
+                        {  
+                            //  no problem
+                            const intKey = parseInt ( keyObject.key )
+                            storeObject[ intKey ]
+                                =   finalKey
+                                    ?   value
+                                    :   build ( 
+                                            storeObject[ keyObject.key ], 
+                                            keyObjectList,
+                                            value
+                                        )
+                                    
+                        } else {
+                            //  Perhaps we have to create a new item here.
+                            throw Error (`(reindex-form-names.js), regex group name (toArray), but (storeObject) isn't an Array.`)
+                        }
+                        break
+                        
+                } // no default
+                
+            }
             
-            temp1[ name ] = temp3
+            //temp3.forEach ( ( current, index, array ) => {
+            //} )
+            
             /* almost there, working example
             
             const matches     = Array.from ( 
@@ -85,30 +165,6 @@ const reindexFormNames = async ( data ) => {
             
             //  an Array of Groups: 
             //  each group being an Array of ( Arrays of the form [groupName: matchedValue] )
-            
-            /*
-                .matchAll(//g) returns anIterator, which you can pass as Array.from(anIterator) ... 
-                
-                ...  which in turn returns:
-                
-                [ //    Array: of matches
-                
-                    [   //  Array: one per match
-                    
-                        ... [ all the capture groups],   
-                        
-                                // become the numerically indexed elements;
-                        
-                        index,  // prop: index of the first result in the original string;
-                        
-                        input,  // prop: initial string;
-                        
-                        groups  // prop: Object
-                        
-                                    // { indices: values } ... named and unnamed capture groups 
-                    ]
-                ]
-            */
             
             
             
