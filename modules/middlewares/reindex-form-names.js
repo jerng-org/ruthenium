@@ -73,13 +73,15 @@ const reindexFormNames = async ( data ) => {
         
         if (validationRegex.test (name)) {
 
+            let temp3 = []
+            
             const groups = Array.from ( name.matchAll ( lexerRegex ), match => match.groups )
     
             for ( const group of groups ) {
                 for ( const name in group ) {
                     if ( group[ name ] ) {
                         
-                        temp2[ name ].push ( {
+                        temp3.push ( {
                             keyType:    name,
                             key:        group[ name ]
                         } ) 
@@ -87,6 +89,7 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
+            temp2[ name ] = temp3
             
             const build = ( storeObject, keyObjectList, value ) => {
                 
@@ -153,9 +156,9 @@ const reindexFormNames = async ( data ) => {
                 */
             }
             
-           // temp1[ name ] = {}
+            temp1[ name ] = {}
             
-            //build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
+            build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
             
         } else {
             temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
