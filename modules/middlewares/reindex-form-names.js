@@ -51,7 +51,7 @@ const reindexFormNames = async ( data ) => {
             const subNames     = Array.from ( 
                 name.matchAll ( lexerRegex ), 
                 a => {
-                    return a
+                    return Object.getOwnPropertyDescriptors (a)
                     //const subNameGroups = Object.entries ( a.groups ) 
                     //return subNameGroups
                     //for ( const group of subNameGroups ) {
