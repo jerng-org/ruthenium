@@ -154,7 +154,9 @@ const reindexFormNames = async ( data ) => {
             
             temp1[ name ] = {}
             
-            
+            const testFunction = storeObject => {
+                storeObject['arbitrary'] = 'value'
+            }
             
             //build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
             
