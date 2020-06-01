@@ -59,11 +59,7 @@ const reindexFormNames = async ( data ) => {
                     }
                 }
             }
-            
-            //temp3.reduce( ( accumulator, current, index, array ) => {
-                
-            //}, temp2 )
-            
+/*
             const build = ( store, keyStrings, data ) => {
 
                 const finalCall     = keyStrings.length == 1
@@ -74,51 +70,11 @@ const reindexFormNames = async ( data ) => {
 
                     store[ headKeyString ] = data 
                 }
-                
-                /*
-                if ( headKeyString )
-                {
-                    // keyStrings had at least one thing in it
-                    
-                    store[ headKeyString ]
-                        =   ( typeof store[ headKeyString ] != 'object' )
-                            ?   {}
-                            : store[ headKeyString ]
-                             
-                    // do nothing to (store), just burrow in one level deeper
-                    return build ( store[ headKeyString ], keyStrings, data )
-                    
-                } 
-                else 
-                {
-                    // keyStrings was []
-                    
-                    store = data
-                    
-                    //return headKeyString // something
-                }
-                */
-            }
-            
+*/
+
             temp1[ name ] = temp3
-            /* almost there, working example
             
-            const matches     = Array.from ( 
-                name.matchAll ( lexerRegex ), 
-                match => {
-                    for ( const groupName in match.groups ) {
-                        if ( match.groups[ groupName ] ) {
-                            temp3.push ( match.groups[ groupName ] )
-                        }
-                    }
-                    return temp3  
-                }
-            )
-            temp1[ name ] = matches[0] // All matches[n].groups are the same, so we only need the first.
-            */
-            
-            //  an Array of Groups: 
-            //  each group being an Array of ( Arrays of the form [groupName: matchedValue] )
+
             
             /*
                 .matchAll(//g) returns anIterator, which you can pass as Array.from(anIterator) ... 
