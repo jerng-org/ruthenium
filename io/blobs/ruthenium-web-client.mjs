@@ -40,7 +40,7 @@ window.addEventListener('load', (event) => {
                             data-ru-incrementable-attributes='[
                                 {
                                     "attribute":    "ATTRIBUTENAME",
-                                    "baseValue":    "ATTRIBUTEVALUE"
+                                    "baseValue":    "ATTRIBUTEVALUE"    // Must match in D
                                 },
                                 etc.
                             ]
@@ -48,16 +48,26 @@ window.addEventListener('load', (event) => {
                             ^
                             A list of objects. You can have as many as you want.
                             ^
+                            [attribute="baseValue"] must match an element in D.
+                            Cs are clones of D.content.
+                            ^
                             When Cs are inserted into the DOM, C's attributes
                             can be targeted, and their values appended with a 
                             integer index which increases as more Cs are added.
                             ^
+                            (baseValue) should contain the string '###' which
+                            will be replaced by the counter value.
+                            ^
                             E.g.    "attribute":"name", "baseValue":"joe" 
+                                    
+                                    where
+                                    
+                                    <element-d> name="joe-###-shmo" />
                                     
                                     will become 
                             
-                                    <element-c1 name="joe.1" />
-                                    <element-c2 name="joe.2" /> etc.
+                                    <element-c1 name="joe-1-shmo" />
+                                    <element-c2 name="joe-2-shmo" /> etc.
                             ^        
                             The index never decrements when Cs are removed from
                             the DOM. This guarantees uniqueness of "attribute",
@@ -170,7 +180,7 @@ window.addEventListener('load', (event) => {
                     .querySelector( `[${ _attr.attribute }="${ _attr.baseValue }"]` )
                     .setAttribute ( 
                         _attr.attribute, 
-                        `${ _attr.baseValue }.${ this.ruIncrementableCounter }`
+                        _attr.baseValue.replace ( '###', this.ruIncrementableCounter )
                     )
             }
     
