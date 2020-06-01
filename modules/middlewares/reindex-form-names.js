@@ -98,7 +98,7 @@ const reindexFormNames = async ( data ) => {
 
                 storeObject[ 'arb' ] = {
                     value: value,
-                    keyObjectList: keyObjectList
+                    keyObject: keyObject
                 }
                 
                 /*{
