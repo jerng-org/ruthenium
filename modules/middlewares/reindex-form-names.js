@@ -4,6 +4,7 @@ const reindexFormNames = async ( data ) => {
 
     /*  Tool:           https://regexr.com/
     
+        Related
         Public Query:   https://stackoverflow.com/questions/62111549/whats-the-best-way-to-validate-and-lex-a-string-that-looks-like-a-nested-array
     
                 Is regex even the best approach?
@@ -18,30 +19,25 @@ const reindexFormNames = async ( data ) => {
                     yy segments cannot be zero-length, but may be any other length
                     newlines are not 
                     Context: JavaScript (no look-behind?)            
+        
+        //////////////////////////////////////////////////////////////////////
             
-        Sample Input:   shoes[country][source][arbitrarily-many-boxed-strings].69
+        Sample Input:   ^shoes[country][source]###[arbitrarily-many-boxed-strings]$
                         
-                        Overall, this seems like a rather cumbersome design, and 
-                        it deserves a thorough review in the future. TODO
-        
-        Validation:     /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
-        
-        Demarcation1    /(?<tailless>^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+)|(?<tail>[0-9]+)$/g
-                        /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+|[0-9]+$/g
-        
-                        This will separate the parts before and after the '.' 
-                        delimiter.
-        
-        Demarcation2:   /(?<head>^[^A-Z\[\]\n\r]+)|\[(?<segment>[^A-Z\[\]\n\r]+)\]|\.(?<tail>[0-9]+)$/g
+                        ^HEAD[SEGMENT-1][SEGMENT-2]###[SEGMENT-3][SEGMENT-N]$
                         
-                        This can identify every subsegment but we don't seem
-                        to need it yet.
-        
-        Curiosity:      This has more explicit naming, but proves to be 
-                        closer in use to the (Validation) rather than the
-                        (Demarcation) example above:
+            Rules:      - HEAD & SEGMENT each have length > 0
+                        - HEAD & SEGMENT disallow 
+                            uppercase, line breaks, '[', ']'
+                        - SEGMENT disallows 
+                            ###
+                        - ###\d+### can occur only once
+                            implicitly, only outside [blocks]
                         
-                        /(?<head>^[^A-Z\[\]\n\r]+)(?<x>\[(?<segment>[^A-Z\[\]\n\r]+)\])+?(?<y>\.(?<tail>[0-9]+)$)/g
+        Validation:     /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
+        
+        Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|(?<toArray>###\d+###)/g
+        
     */
     /*
     let temp = {}
