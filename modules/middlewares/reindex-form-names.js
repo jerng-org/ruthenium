@@ -50,12 +50,12 @@ const reindexFormNames = async ( data ) => {
 
             let temp3 = []
             
-            const firstMatch = Array.from ( name.matchAll ( lexerRegex ) )[0]
+            const matches = Array.from ( name.matchAll ( lexerRegex ) )
             //  .matchaAll() returns matches;
             //  all matches[n].groups are the same;
             //  so we only need matches[0], to get the groups;
             
-            temp1[ name ] = firstMatch.groups
+            temp1[ name ] = matches
             /* almost there, working example
             
             const matches     = Array.from ( 
