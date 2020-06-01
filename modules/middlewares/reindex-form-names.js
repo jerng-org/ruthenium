@@ -50,7 +50,7 @@ const reindexFormNames = async ( data ) => {
 
             let temp3 = []
             
-            const matches     = Array.from ( 
+            const matchGroups     = Array.from ( 
                 name.matchAll ( lexerRegex )/*, 
                 match => {
                     for ( const groupName in match.groups ) {
@@ -60,8 +60,9 @@ const reindexFormNames = async ( data ) => {
                     }
                     return temp3  
                 }*/
-            )
-            
+            )[0]
+            // All matches[n].groups are the same, so we only need the first.
+
             
             //  an Array of Groups: 
             //  each group being an Array of ( Arrays of the form [groupName: matchedValue] )
@@ -94,7 +95,7 @@ const reindexFormNames = async ( data ) => {
             
             //temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
 
-            temp1[ name ] = matches[0] // All matches[n].groups are the same, so we only need the first.
+            temp1[ name ] = matchGroups // All matches[n].groups are the same, so we only need the first.
 
         } else {
             temp1[ name ] = 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
