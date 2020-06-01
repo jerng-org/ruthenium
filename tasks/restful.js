@@ -174,12 +174,12 @@ switch ( data.RU.request.http.method ) {
                 break
             
             default:
-                throw queryScope
+                throw queryScope 
         }
 
         break
     case ( 'PATCH' ):
-        throw data.RU.request.formStringParameters
+        throw new Error ( data.RU.request.formStringParameters )
         break
     
     default:
