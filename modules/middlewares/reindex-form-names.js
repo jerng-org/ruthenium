@@ -22,9 +22,9 @@ const reindexFormNames = async ( data ) => {
         
         //////////////////////////////////////////////////////////////////////
             
-        Sample Input:   ^shoes[country][source]###[arbitrarily-many-boxed-strings]$
+        Sample Input:   ^shoes[country][source]###567###[arbitrarily-many-boxed-strings]$
                         
-                        ^HEAD[SEGMENT-1][SEGMENT-2]###[SEGMENT-3][SEGMENT-N]$
+                        ^HEAD[SEGMENT-1][SEGMENT-2]toArray[SEGMENT-3][SEGMENT-N]$
                         
             Rules:      - HEAD & SEGMENT each have length > 0
                         - HEAD & SEGMENT disallow 
@@ -47,7 +47,32 @@ const reindexFormNames = async ( data ) => {
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
-            const lexed     = Array.from ( name.matchAll ( lexerRegex ), a => a )
+            const lexed     = Array.from ( name.matchAll ( lexerRegex ), a => a.groups )
+            
+            /*
+                .matchAll(//g) returns anIterator, which you can pass as Array.from(anIterator) ... 
+                
+                ...  which in turn returns:
+                
+                [ //    Array: of matches
+                
+                    [   //  Array: one per match
+                    
+                        ... [ all the capture groups],   
+                        
+                                // become the first elements;
+                        
+                        index,  // prop: index of the first result in the original string;
+                        
+                        input,  // prop: initial string;
+                        
+                        groups  // prop: Object
+                        
+                                    // { ... named and unnamed capture groups } 
+                    ]
+                ]
+            */
+            
             //const tailless  = lexed[0]
             //const tail      = lexed[1]
             
