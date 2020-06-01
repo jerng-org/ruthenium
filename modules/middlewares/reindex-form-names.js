@@ -93,10 +93,10 @@ const reindexFormNames = async ( data ) => {
             const build = ( storeObject, keyObjectList, value ) => {
                 
                 // order is crucial
-                //const finalKey  = keyObjectList.length == 1
-                //const keyObject = keyObjectList.unshift()
+                const finalKey  = keyObjectList.length == 1
+                const keyObject = keyObjectList.unshift()
 
-                storeObject['arb'] = '$$$'                 
+                storeObject[ keyObject.key ] = value                 
 
                 /*{
                     value: value,
