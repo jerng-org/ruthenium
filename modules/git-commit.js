@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `regex for new syntax, ready for testing`
+const commitMessage = `-`
 
 const gitCommit = () => { try {
 
