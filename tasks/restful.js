@@ -145,7 +145,7 @@ switch ( data.RU.request.http.method ) {
         break
     case ( 'POST' ):
         
-        //throw new Error ( JSON.stringify( data.RU.request.formStringParameters, null, 4 ) )
+        throw JSON.stringify( data.RU.request.formStringParameters, null, 4 ) 
             
         switch (queryScope) {
             
@@ -174,12 +174,11 @@ switch ( data.RU.request.http.method ) {
                 break
             
             default:
-                throw queryScope 
+                throw queryScope
         }
 
         break
     case ( 'PATCH' ):
-        throw new Error ( data.RU.request.formStringParameters )
         break
     
     default:
