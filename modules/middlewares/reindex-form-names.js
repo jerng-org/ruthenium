@@ -20,6 +20,9 @@ const reindexFormNames = async ( data ) => {
                     Context: JavaScript (no look-behind?)            
             
         Sample Input:   shoes[country][source][arbitrarily-many-boxed-strings].69
+                        
+                        Overall, this seems like a rather cumbersome design, and 
+                        it deserves a thorough review in the future. TODO
         
         Validation:     /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
         
@@ -48,13 +51,14 @@ const reindexFormNames = async ( data ) => {
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
-            const lexed = Array.from ( name.matchAll ( lexerRegex ), a => a[0] )
-            temp[ name ] = {
-                tailless:   lexed[0],
-                tail:       lexed[1]
+            const lexed     = Array.from ( name.matchAll ( lexerRegex ), a => a[0] )
+            const tailless  = lexed[0]
+            //const tail      = lexed[1]
+            
+            if ( temp2[ tailless ] ) {
+                temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
             }
             
-            //temp2 [ name ] = temp[name][0].head + 'segments' + temp[name][temp[name].length-1].tail
         } else {
             temp[ name ] = 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
         }
