@@ -55,11 +55,7 @@ const reindexFormNames = async ( data ) => {
             for ( const group of groups ) {
                 for ( const name in group ) {
                     if ( group[ name ] ) {
-                        if ( name == 'toArray' ) {
-                            temp3.push( '########### special' )   
-                        } else {
-                            temp3.push( group[ name ] + `### basic ` ) 
-                        }
+                        temp3.push ( group[ name ] ) 
                     }
                 }
             }
