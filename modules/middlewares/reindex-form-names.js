@@ -144,6 +144,9 @@ const reindexFormNames = async ( data ) => {
                 
             }
             
+            build ( temp1, temp3, data.RU.request.formStringParameters[ name ] )
+            
+            
             //temp3.forEach ( ( current, index, array ) => {
             //} )
             
