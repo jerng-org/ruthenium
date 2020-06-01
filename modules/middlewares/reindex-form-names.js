@@ -50,7 +50,7 @@ const reindexFormNames = async ( data ) => {
             
             const lexed     = Array.from ( 
                 name.matchAll ( lexerRegex ), 
-                a => [ typeof a.groups, a.groups ]  
+                a => [ typeof a.groups, Object.entries ( a.groups ) ]  
             )
                         /*
                 .matchAll(//g) returns anIterator, which you can pass as Array.from(anIterator) ... 
