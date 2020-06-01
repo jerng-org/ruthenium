@@ -55,7 +55,11 @@ const reindexFormNames = async ( data ) => {
             for ( const group of groups ) {
                 for ( const name in group ) {
                     if ( group[ name ] ) {
-                        temp3.push( group[ name ] ) 
+                        if ( name == 'toArray' ) {
+                            temp3.push( '###########special' )   
+                        } else {
+                            temp3.push( group[ name ] ) 
+                        }
                     }
                 }
             }
@@ -110,7 +114,7 @@ const reindexFormNames = async ( data ) => {
 
     
         } else {
-            temp1[ name ] = 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
+            temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
         }
     }
 
