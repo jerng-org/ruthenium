@@ -52,10 +52,10 @@ const reindexFormNames = async ( data ) => {
                 name.matchAll ( lexerRegex ), 
                 match => {
                     
-                    return JSON.stringify( match.groups )
-                    /*for ( const group of match.groups ) {
-                        
-                    }*/
+                    let temp3 = []
+                    for ( const group of match.groups ) {
+                        temp3.push ( Object.values(group) )
+                    }
                 }
             )
             //  an Array of Groups: 
