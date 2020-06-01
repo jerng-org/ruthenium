@@ -56,14 +56,20 @@ const reindexFormNames = async ( data ) => {
                 for ( const name in group ) {
                     if ( group[ name ] ) {
                         
-                        if ( name == 'toArray' ) {
-                            group[ name ] = parseInt ( group[ name ] )
+                        if ( name == 'toArray' )
+                        {
+                            temp3.push ( { 
+                                key:        parseInt ( group[ name ] ),
+                                keyType:    'number'
+                            } ) 
                         }
-                        temp3.push ( { 
-                            key:        group[ name ],
-                            keyType:    typeof group[ name ]
-                        } ) 
-                        
+                        else
+                        {
+                            temp3.push ( { 
+                                key:        group[ name ],
+                                keyType:    'string'
+                            } ) 
+                        }
                     }
                 }
             }
