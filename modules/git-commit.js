@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `~/modules/middlewares/reindex-form-names.js now works; but indicates that we should redesign the form input names a bit`
+const commitMessage = `-`
 
 const gitCommit = () => { try {
 
