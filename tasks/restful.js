@@ -179,6 +179,7 @@ switch ( data.RU.request.http.method ) {
 
         break
     case ( 'PATCH' ):
+        throw data.RU.request.formStringParameters
         break
     
     default:
