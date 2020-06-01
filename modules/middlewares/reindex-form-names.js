@@ -47,9 +47,12 @@ const reindexFormNames = async ( data ) => {
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
-            const lexed     = Array.from ( name.matchAll ( lexerRegex ), a => a.groups )
             
-            /*
+            const lexed     = Array.from ( 
+                name.matchAll ( lexerRegex ), 
+                a => Object.fromEntries ( a.groups ) 
+            )
+                        /*
                 .matchAll(//g) returns anIterator, which you can pass as Array.from(anIterator) ... 
                 
                 ...  which in turn returns:
@@ -60,7 +63,7 @@ const reindexFormNames = async ( data ) => {
                     
                         ... [ all the capture groups],   
                         
-                                // become the first elements;
+                                // become the numerically indexed elements;
                         
                         index,  // prop: index of the first result in the original string;
                         
@@ -73,10 +76,7 @@ const reindexFormNames = async ( data ) => {
                 ]
             */
             
-            //const tailless  = lexed[0]
-            //const tail      = lexed[1]
             
-            //temp2[ tailless ] = temp2[ tailless ] ? temp2[ tailless ] : []
             
             //temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
 
