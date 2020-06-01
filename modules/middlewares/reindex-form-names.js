@@ -75,7 +75,6 @@ const reindexFormNames = async ( data ) => {
 
             const groups = Array.from ( name.matchAll ( lexerRegex ), match => match.groups )
     
-            temp2[ name ] = []
             for ( const group of groups ) {
                 for ( const name in group ) {
                     if ( group[ name ] ) {
@@ -154,9 +153,9 @@ const reindexFormNames = async ( data ) => {
                 */
             }
             
-            temp1[ name ] = {}
+           // temp1[ name ] = {}
             
-            build ( temp1[ name ], temp2[ name ], data.RU.request.formStringParameters[ name ] )
+            //build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
             
         } else {
             temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
