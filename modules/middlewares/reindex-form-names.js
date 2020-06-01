@@ -36,14 +36,14 @@ const reindexFormNames = async ( data ) => {
                         
         Validation:     /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
         
-        Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/
+        Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|(?<toArray>###\d+###)/g
         
     */
     ///*
     let temp1 = {}
     let temp2 = {}
     const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
-    const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/
+    const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|(?<toArray>###\d+###)/g
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
@@ -59,22 +59,28 @@ const reindexFormNames = async ( data ) => {
                     }
                 }
             }
-/*
-            const build = ( store, keyStrings, data ) => {
-
-                const finalCall     = keyStrings.length == 1
-                
-                const headKeyString = keyStrings.unshift()
-
-                if ( finalCall ) {
-
-                    store[ headKeyString ] = data 
-                }
-*/
-
-            temp1[ name ] = temp3
             
-
+            
+            
+            temp1[ name ] = temp3
+            /* almost there, working example
+            
+            const matches     = Array.from ( 
+                name.matchAll ( lexerRegex ), 
+                match => {
+                    for ( const groupName in match.groups ) {
+                        if ( match.groups[ groupName ] ) {
+                            temp3.push ( match.groups[ groupName ] )
+                        }
+                    }
+                    return temp3  
+                }
+            )
+            temp1[ name ] = matches[0] // All matches[n].groups are the same, so we only need the first.
+            */
+            
+            //  an Array of Groups: 
+            //  each group being an Array of ( Arrays of the form [groupName: matchedValue] )
             
             /*
                 .matchAll(//g) returns anIterator, which you can pass as Array.from(anIterator) ... 
