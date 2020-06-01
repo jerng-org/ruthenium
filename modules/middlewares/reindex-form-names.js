@@ -51,27 +51,18 @@ const reindexFormNames = async ( data ) => {
             let temp3 = []
             
             const matches     = Array.from ( 
-                name.matchAll ( lexerRegex ), 
+                name.matchAll ( lexerRegex )/*, 
                 match => {
-                    
-                    /*
-                    const groupLabels = Object.keys ( match.groups )
-                    const groupValues = Object.values ( match.groups )
-                    const groupEntries= Object.entries ( match.groups )
-                    */
                     for ( const groupName in match.groups ) {
                         if ( match.groups[ groupName ] ) {
                             temp3.push ( match.groups[ groupName ] )
                         }
                     }
-                    return temp3  /*{
-                        labels : groupLabels,
-                        values: groupValues,
-                        entries: groupEntries,
-                        temp3: temp3
-                    }*/
-                }
+                    return temp3  
+                }*/
             )
+            
+            
             //  an Array of Groups: 
             //  each group being an Array of ( Arrays of the form [groupName: matchedValue] )
             
