@@ -36,14 +36,14 @@ const reindexFormNames = async ( data ) => {
                         
         Validation:     /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
         
-        Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|(?<toArray>###\d+###)/g
+        Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/
         
     */
     ///*
     let temp1 = {}
     let temp2 = {}
     const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
-    const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|(?<toArray>###\d+###)/g
+    const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
@@ -58,6 +58,46 @@ const reindexFormNames = async ( data ) => {
                         temp3.push ( group[ name ] ) 
                     }
                 }
+            }
+            
+            //temp3.reduce( ( accumulator, current, index, array ) => {
+                
+            //}, temp2 )
+            
+            const build = ( store, keyStrings, data ) => {
+
+                const finalCall     = keyStrings.length == 1
+                
+                const headKeyString = keyStrings.unshift()
+
+                if ( finalCall ) {
+
+                    store[ headKeyString ] = data 
+                }
+                
+                /*
+                if ( headKeyString )
+                {
+                    // keyStrings had at least one thing in it
+                    
+                    store[ headKeyString ]
+                        =   ( typeof store[ headKeyString ] != 'object' )
+                            ?   {}
+                            : store[ headKeyString ]
+                             
+                    // do nothing to (store), just burrow in one level deeper
+                    return build ( store[ headKeyString ], keyStrings, data )
+                    
+                } 
+                else 
+                {
+                    // keyStrings was []
+                    
+                    store = data
+                    
+                    //return headKeyString // something
+                }
+                */
             }
             
             temp1[ name ] = temp3
