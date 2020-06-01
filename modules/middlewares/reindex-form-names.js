@@ -52,7 +52,7 @@ const reindexFormNames = async ( data ) => {
                 name.matchAll ( lexerRegex ), 
                 match => {
                     
-                    return JSON.stringify( match )
+                    return JSON.stringify( match.groups )
                     /*for ( const group of match.groups ) {
                         
                     }*/
