@@ -55,10 +55,10 @@ const reindexFormNames = async ( data ) => {
             const tailless  = lexed[0]
             //const tail      = lexed[1]
             
-            if ( temp2[ tailless ] ) {
-                temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
-            }
+            temp2[ tailless ] = temp2[ tailless ] ? temp2[ tailless ] : []
             
+            temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
+
         } else {
             temp[ name ] = 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
         }
