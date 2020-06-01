@@ -66,8 +66,8 @@ window.addEventListener('load', (event) => {
                                     
                                     will become 
                             
-                                    <element-c1 name="joe-1-shmo" />
-                                    <element-c2 name="joe-2-shmo" /> etc.
+                                    <element-c1 name="joe-###1###-shmo" />
+                                    <element-c2 name="joe-###2###-shmo" /> etc.
                             ^        
                             The index never decrements when Cs are removed from
                             the DOM. This guarantees uniqueness of "attribute",
@@ -180,7 +180,7 @@ window.addEventListener('load', (event) => {
                     .querySelector( `[${ _attr.attribute }="${ _attr.baseValue }"]` )
                     .setAttribute ( 
                         _attr.attribute, 
-                        _attr.baseValue.replace ( '###', this.ruIncrementableCounter )
+                        _attr.baseValue.replace ( '###', '###' + this.ruIncrementableCounter + '###' )
                     )
             }
     
