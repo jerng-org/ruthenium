@@ -103,7 +103,7 @@ const reindexFormNames = async ( data ) => {
             
             //temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
 
-            temp1[ name ] = matches
+            temp1[ name ] = matches[0] // All matches[n].groups are the same, so we only need the first.
 
         } else {
             temp1[ name ] = 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
