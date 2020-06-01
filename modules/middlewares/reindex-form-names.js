@@ -96,6 +96,11 @@ const reindexFormNames = async ( data ) => {
                 const finalKey  = keyObjectList.length == 1
                 const keyObject = keyObjectList.unshift()
                 
+                return {
+                    value: value,
+                    keyObject: keyObject
+                }
+                /*
                 switch ( keyObject.keyType ) {
                     
                     case ( 'asIs' ) :       //  frequent
@@ -141,7 +146,7 @@ const reindexFormNames = async ( data ) => {
                         break
                         
                 } // no default
-                
+                */
             }
             
             build ( temp1, temp3, data.RU.request.formStringParameters[ name ] )
