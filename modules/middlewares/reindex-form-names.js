@@ -56,7 +56,7 @@ const reindexFormNames = async ( data ) => {
                     for ( const key in match.groups ) {
                         temp3.push ( match.groups[key] )
                     }*/
-                    return Object.keys ( match)
+                    return Object.keys ( match.groups )
                 }
             )
             //  an Array of Groups: 
