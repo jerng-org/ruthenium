@@ -39,29 +39,31 @@ const reindexFormNames = async ( data ) => {
         Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|(?<toArray>###\d+###)/g
         
     */
-    /*
-    let temp = {}
+    ///*
+    let temp1 = {}
     let temp2 = {}
-    const validationRegex = /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
-    const lexerRegex = /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+|[0-9]+$/g
+    const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
+    const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|(?<toArray>###\d+###)/g
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
-            const lexed     = Array.from ( name.matchAll ( lexerRegex ), a => a[0] )
-            const tailless  = lexed[0]
+            const lexed     = Array.from ( name.matchAll ( lexerRegex ), a => a )
+            //const tailless  = lexed[0]
             //const tail      = lexed[1]
             
-            temp2[ tailless ] = temp2[ tailless ] ? temp2[ tailless ] : []
+            //temp2[ tailless ] = temp2[ tailless ] ? temp2[ tailless ] : []
             
-            temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
+            //temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
+
+            temp1[ name ] = lexed
 
         } else {
-            temp[ name ] = 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
+            temp1[ name ] = 'VALIDATION_FAILED'//new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
         }
     }
 
-    data.RU.request.formStringParameters = [ temp, temp2]
-    */
+    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2 }
+    //*/
     return data
 }
 
