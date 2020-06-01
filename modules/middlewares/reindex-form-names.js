@@ -47,27 +47,29 @@ const reindexFormNames = async ( data ) => {
     
     for ( const name in data.RU.request.formStringParameters ) {
         if (validationRegex.test (name)) {
+
+            let temp3 = []
             
             const matches     = Array.from ( 
                 name.matchAll ( lexerRegex ), 
                 match => {
                     
-                    let temp3 = []
+                    /*
                     const groupLabels = Object.keys ( match.groups )
                     const groupValues = Object.values ( match.groups )
                     const groupEntries= Object.entries ( match.groups )
-                    
-                    for ( const key in match.groups ) {
-                        if ( match.groups[ key ] ) {
-                            temp3.push ( match.groups[ key ] )
+                    */
+                    for ( const groupName in match.groups ) {
+                        if ( match.groups[ groupName ] ) {
+                            temp3.push ( match.groups[ groupName ] )
                         }
                     }
-                    return {
+                    return temp3  /*{
                         labels : groupLabels,
                         values: groupValues,
                         entries: groupEntries,
                         temp3: temp3
-                    }
+                    }*/
                 }
             )
             //  an Array of Groups: 
