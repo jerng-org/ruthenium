@@ -70,17 +70,16 @@ const reindexFormNames = async ( data ) => {
     const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/g
     
     for ( const name in data.RU.request.formStringParameters ) {
+        
         if (validationRegex.test (name)) {
 
-            let temp3 = []
-            
             const groups = Array.from ( name.matchAll ( lexerRegex ), match => match.groups )
     
             for ( const group of groups ) {
                 for ( const name in group ) {
                     if ( group[ name ] ) {
                         
-                        temp3.push ( {
+                        temp2[ name ].push ( {
                             keyType:    name,
                             key:        group[ name ]
                         } ) 
@@ -88,7 +87,6 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
-            temp2[ name ] = temp3
             
             const build = ( storeObject, keyObjectList, value ) => {
                 
@@ -156,43 +154,9 @@ const reindexFormNames = async ( data ) => {
             }
             
             temp1[ name ] = {}
-            /*
-            const testFunction = storeObject => {
-                storeObject['arbitrary'] = data.RU.request.formStringParameters[ name ]
-            }
-            testFunction( temp1[name] )
-            */
-            build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
             
-            //temp1 [ name ] = data.RU.request.formStringParameters[ name ]
+            build ( temp1[ name ], temp2[ name ], data.RU.request.formStringParameters[ name ] )
             
-            //temp3.forEach ( ( current, index, array ) => {
-            //} )
-            
-            /* almost there, working example
-            
-            const matches     = Array.from ( 
-                name.matchAll ( lexerRegex ), 
-                match => {
-                    for ( const groupName in match.groups ) {
-                        if ( match.groups[ groupName ] ) {
-                            temp3.push ( match.groups[ groupName ] )
-                        }
-                    }
-                    return temp3  
-                }
-            )
-            temp1[ name ] = matches[0] // All matches[n].groups are the same, so we only need the first.
-            */
-            
-            //  an Array of Groups: 
-            //  each group being an Array of ( Arrays of the form [groupName: matchedValue] )
-            
-            
-            
-            //temp2[ tailless ].push( data.RU.request.formStringParameters[ name ] )
-
-    
         } else {
             temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
         }
