@@ -43,7 +43,7 @@ const reindexFormNames = async ( data ) => {
                         
                         /(?<head>^[^A-Z\[\]\n\r]+)(?<x>\[(?<segment>[^A-Z\[\]\n\r]+)\])+?(?<y>\.(?<tail>[0-9]+)$)/g
     */
-    
+    /*
     let temp = {}
     let temp2 = {}
     const validationRegex = /^[^A-Z\[\]\n\r]+(\[[^A-Z\[\]\n\r]+\])+\.[0-9]+$/
@@ -65,7 +65,7 @@ const reindexFormNames = async ( data ) => {
     }
 
     data.RU.request.formStringParameters = [ temp, temp2]
-    
+    */
     return data
 }
 
