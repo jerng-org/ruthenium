@@ -104,12 +104,57 @@ const reindexFormNames = async ( data ) => {
                 const finalKey  = keyObjectList.length == 1
                 const keyObject = keyObjectList.unshift()
 
-                storeObject[ 'arb' ] = {
-                    value: value,
-                    keyObject: keyObject
-                }
+                switch ( keyObject.keyType ) {
+                    
+                    case ( 'asIs' ) :       //  frequent
+
+                        //  Confirm that we have a POJO not an Array :
+                        
+                        if (    typeof storeObject == 'object'
+                             && ( ! storeObject instanceof Array ) ) 
+                        { 
+                            //  no problem
+                            storeObject[ keyObject.key ]
+                                =   finalKey
+                                    ?   value
+                                    :   build ( 
+                                            storeObject[ keyObject.key ], 
+                                            keyObjectList,
+                                            value
+                                        )
+                            
+                        } else {
+                            //  Perhaps we have to create a new item here.
+                            throw Error (`(reindex-form-names.js), regex group name (asIs), but (storeObject) isn't a POJO.`)
+                        }
+                        break
+                    
+                    case ( 'toArray' ) :    //  infrequent
+                    
+                        //  Confirm that we have an Arrray :
+                    
+                        if ( storeObject instanceof Array ) 
+                        {  
+                            //  no problem
+                            const intKey = parseInt ( keyObject.key )
+                            storeObject[ intKey ]
+                                =   finalKey
+                                    ?   value
+                                    :   build ( 
+                                            storeObject[ keyObject.key ], 
+                                            keyObjectList,
+                                            value
+                                        )
+                                    
+                        } else {
+                            //  Perhaps we have to create a new item here.
+                            throw Error (`(reindex-form-names.js), regex group name (toArray), but (storeObject) isn't an Array.`)
+                        }
+                        break
+                        
+                } // switch; no default
                 
-            }
+            } // const build
             
             build ( temp2[ name ], temp1[ name ], data.RU.request.formStringParameters[ name ] )
             
