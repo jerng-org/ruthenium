@@ -110,8 +110,8 @@ const reindexFormNames = async ( data ) => {
 
                         //  Confirm that we have a POJO not an Array :
                         
-                        if (    typeof storeObject == 'object'
-                             && ( ! storeObject instanceof Array ) ) 
+                        if (    typeof storeObject[ keyObject.key ] == 'object'
+                             && ( ! storeObject[ keyObject.key ] instanceof Array ) ) 
                         { 
                             //  no problem
                             /*storeObject[ keyObject.key ]
@@ -125,7 +125,9 @@ const reindexFormNames = async ( data ) => {
                             */
                         } else {
                             //  Perhaps we have to create a new item here.
-                            throw Error (`(reindex-form-names.js), regex group name (asIs), but (storeObject) isn't a POJO.`)
+                            throw Error (
+`(reindex-form-names.js), regex group name (asIs), but (storeObject) isn't a POJO.`
+                            )
                         }
                         break
                     
@@ -133,7 +135,7 @@ const reindexFormNames = async ( data ) => {
                     
                         //  Confirm that we have an Arrray :
                     
-                        if ( storeObject instanceof Array ) 
+                        if ( storeObject[ keyObject.key ] instanceof Array ) 
                         {  
                             /*//  no problem
                             const intKey = parseInt ( keyObject.key )
@@ -148,7 +150,9 @@ const reindexFormNames = async ( data ) => {
                             */        
                         } else {
                             //  Perhaps we have to create a new item here.
-                            throw Error (`(reindex-form-names.js), regex group name (toArray), but (storeObject) isn't an Array.`)
+                            throw Error (
+`(reindex-form-names.js), regex group name (toArray), but (storeObject) isn't an Array.`
+                            )
                         }
                         break
                         
