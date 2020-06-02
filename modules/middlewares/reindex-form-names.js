@@ -1,6 +1,7 @@
 'use strict'
             
-const toArrayIndex = 'toArrayIndex' // GC hint ?
+const asIs          = 'asIs'
+const toArrayIndex  = 'toArrayIndex'
 const initiateAccumulator 
     = nextKeyObject =>  ( nextKeyObject.keyType == toArrayIndex )
                         ? []
@@ -28,14 +29,51 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
     }
     else
     {
+        const nextKeyObject = keyObjectList[0]
+        
         // recurse
         if ( typeof objectReference[ keyObject.key ] != 'object' ) {
             
             // Not an Object, and therefore also not an Array
             
             objectReference[ keyObject.key ]
-                = initiateAccumulator ( keyObjectList[0] )
+                = initiateAccumulator ( nextKeyObject )
                     // must exist because, ! finalIteration
+        }
+        else 
+        if ( objectReference[ keyObject.key ] instanceof Array )
+        {
+            // Is an Object. Is an Array.
+            
+            if ( nextKeyObject.keyType == asIs ) 
+            {
+                //  Violent
+                throw Error (`(reindex-form-names.js) encountered conflicting [name]s;
+                
+                [name]  :   ${htmlNameAttribute}
+                key     :   ${nextKeyObject.keyType}
+                conflict:   This key is for a POJO; a previous [name] has already
+                            asserted that this address should be keyed as an Array.`) 
+                            
+                //  Docile reaction? Not for now.
+            }
+        }
+        else 
+        {
+            // Is an Object. But NOT an Array.
+            
+            if ( nextKeyObject.keyType == toArrayIndex ) 
+            {
+                //  Violent
+                throw Error (`(reindex-form-names.js) encountered conflicting [name]s;
+                
+                [name]  :   ${htmlNameAttribute}
+                key     :   ${nextKeyObject.keyType}
+                conflict:   This key is for an Array; a previous [name] has already
+                            asserted that this address should be keyed as a POJ.`) 
+                            
+                //  Docile reaction? Not for now.
+            }
         }
         
         build ( htmlNameAttribute, keyObjectList, objectReference[ keyObject.key ], htmlValue )
