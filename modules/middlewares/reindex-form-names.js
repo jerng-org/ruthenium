@@ -54,6 +54,7 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
                 key     :   ${nextKeyObject.key}
                 conflict:   This key is for a POJO; a previous [name] has already
                             asserted that this address should be keyed as an Array.
+                            Please check the HTML markup for all [name]s in this form.
                             `) 
                             
                 //  Docile reaction? Not for now.
@@ -72,6 +73,7 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
                 key     :   ${nextKeyObject.key}
                 conflict:   This key is for an Array; a previous [name] has already
                             asserted that this address should be keyed as a POJO.
+                            Please check the HTML markup for all [name]s in this form.
                             `) 
                             
                 //  Docile reaction? Not for now.
@@ -212,6 +214,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             [name="${name}"]
             
             Expected pattern: HEAD[ASIS-1][ASIS-2]###INTEGER###[ASIS-3][ASIS-N]
+            Please check the HTML markup for this [name] in the form.
             ` )
             
             // Docile
