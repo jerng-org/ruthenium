@@ -123,7 +123,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
 */
     
     let temp1 = {}
-    let temp2 = {}
+    let objectifiedFormData = {}
     const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
     const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArrayIndex>\d+)###/g
     
@@ -160,7 +160,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             
             build ( name, 
                     temp1 [ name ], 
-                    temp2 , 
+                    objectifiedFormData , 
                     data.RU.request.formStringParameters[name] 
             )
             
@@ -169,7 +169,8 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         }
     }
 
-    data.RU.request.formStringParameters = { temp2: temp2, temp1: temp1 }
+    data.RU.request.formStringParameters = {    objectifiedFormData: objectifiedFormData, 
+                                                temp1: temp1 }
 
     return data
 }
