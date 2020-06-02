@@ -51,7 +51,7 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
                 throw Error (`(reindex-form-names.js) encountered conflicting [name]s;
                 
                 [name]  :   ${htmlNameAttribute}
-                key     :   ${nextKeyObject.keyType}
+                key     :   ${nextKeyObject.key}
                 conflict:   This key is for a POJO; a previous [name] has already
                             asserted that this address should be keyed as an Array.
                             `) 
@@ -69,7 +69,7 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
                 throw Error (`(reindex-form-names.js) encountered conflicting [name]s;
                 
                 [name]  :   ${htmlNameAttribute}
-                key     :   ${nextKeyObject.keyType}
+                key     :   ${nextKeyObject.key}
                 conflict:   This key is for an Array; a previous [name] has already
                             asserted that this address should be keyed as a POJO.
                             `) 
