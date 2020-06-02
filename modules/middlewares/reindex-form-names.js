@@ -82,7 +82,7 @@ const reindexFormNames = async ( data ) => {
                 for ( const name in group ) {
                     if ( group[ name ] ) {
                         
-                        temp2[ name ].push ( {
+                        temp3.push ( {
                             keyType:    name,
                             key:        group[ name ]
                         } ) 
@@ -164,7 +164,7 @@ const reindexFormNames = async ( data ) => {
         }
     }
 
-    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2 }
+    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2, temp3: temp3 }
     //*/
     return data
 }
