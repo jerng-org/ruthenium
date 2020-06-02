@@ -122,11 +122,11 @@ const reindexFormNames = async ( data ) => {
                                     ? []
                                     : {}
             
-            const build = ( htmlNameAttribute, objectReference, htmlValue ) => {
+            const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) => {
                 
                 // order is crucial
-                const finalKey  = temp1[ htmlNameAttribute ].length == 1
-                const keyObject = temp1[ htmlNameAttribute ].shift()
+                const finalKey  = keyObjectList.length == 1
+                const keyObject = keyObjectList.shift()
 
 
 
@@ -141,12 +141,12 @@ const reindexFormNames = async ( data ) => {
                         objectReference[ keyObject.key ] = {}
                     }
                     
-                    build ( objectReference[ keyObject.key ], htmlValue  )
+                    build ( objectReference[ keyObject.key ], htmlValue )
                 }
                 
             } // const build
             
-            build ( name, temp2, data.RU.request.formStringParameters[ name ] )
+            build ( name, temp1[name], temp2, data.RU.request.formStringParameters[name] )
             
             
             
