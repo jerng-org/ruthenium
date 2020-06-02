@@ -123,6 +123,9 @@ const reindexFormNames = async ( data ) => {
                                             value
                                         )
                             */
+                            
+                            storeObject[keyObject.key]['arb'] = value
+                            
                         } else {
                             //  Perhaps we have to create a new item here.
                             throw Error (
@@ -148,6 +151,9 @@ const reindexFormNames = async ( data ) => {
                                             value
                                         )
                             */        
+                            
+                            storeObject[keyObject.key][2] = value
+                            
                         } else {
                             //  Perhaps we have to create a new item here.
                             throw Error (
