@@ -110,7 +110,16 @@ const createDeskSchema = async ( data ) => {
 
 </fieldset>
 </form>`
-    
+
+// Some test data, temporarily:
+
++
+
+`    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+        <input type="text" name="desk-schemas[columns]###1###[name]" value="--a value--">
+        <input type="submit" value="POST it">
+    </form>
+`
     
 }
 module.exports = createDeskSchema
