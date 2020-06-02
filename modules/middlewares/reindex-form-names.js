@@ -89,6 +89,8 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
+            temp2[ name ] = temp3
+            
             const build = ( storeObject, keyObjectList, value ) => {
                 
                 // order is crucial
