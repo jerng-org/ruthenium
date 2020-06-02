@@ -128,27 +128,28 @@ const reindexFormNames = async ( data ) => {
                 const finalKey  = keyObjectList.length == 1
                 const keyObject = keyObjectList.shift()
 
-
-
-
-                if ( finalKey ) {
+                if ( finalKey )
+                {
                     objectReference[ keyObject.key ] = htmlValue
                 }
-                else {
-                    
+                else
+                {
                     // recurse
                     if ( typeof objectReference[ keyObject.key ] != 'object' ) {
                         objectReference[ keyObject.key ] = {}
                     }
-                    
                     build ( htmlNameAttribute, keyObjectList, objectReference[ keyObject.key ], htmlValue )
                 }
                 
             } // const build
             
-            build ( name, temp1[name], temp2, data.RU.request.formStringParameters[name] )
+            temp2 = initiateAccumulator ( temp1 [ name ] )
             
-            
+            build ( name, 
+                    temp1 [ name ], 
+                    temp2, 
+                    data.RU.request.formStringParameters[name] 
+            )
             
         } else {
             temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
