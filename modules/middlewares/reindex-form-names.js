@@ -53,7 +53,8 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
                 [name]  :   ${htmlNameAttribute}
                 key     :   ${nextKeyObject.keyType}
                 conflict:   This key is for a POJO; a previous [name] has already
-                            asserted that this address should be keyed as an Array.`) 
+                            asserted that this address should be keyed as an Array.
+                            `) 
                             
                 //  Docile reaction? Not for now.
             }
@@ -70,7 +71,8 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
                 [name]  :   ${htmlNameAttribute}
                 key     :   ${nextKeyObject.keyType}
                 conflict:   This key is for an Array; a previous [name] has already
-                            asserted that this address should be keyed as a POJ.`) 
+                            asserted that this address should be keyed as a POJO.
+                            `) 
                             
                 //  Docile reaction? Not for now.
             }
