@@ -1,5 +1,4 @@
 'use strict'
-
             
 const toArrayIndex = 'toArrayIndex' // GC hint ?
 const initiateAccumulator 
@@ -13,15 +12,15 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
     const finalIteration    = keyObjectList.length == 1
     const keyObject         = keyObjectList.shift()
     
-    /*  The following code is not necessary, as the value of 
-        (keyObject.key) will be cast (?) based on the actual
-        inheritance of (objectReference), which may or may not be
-        Array.
-    
-    const key               = keyObject.keyType == toArrayIndex
-                                ? parseInt ( keyObject.key )
-                                : keyObject.key
-    */
+        /*  This block of code is not necessary, as the value of 
+            (keyObject.key) will be cast (?) based on the actual
+            inheritance of (objectReference), which may or may not be
+            Array.
+        
+        const key               = keyObject.keyType == toArrayIndex
+                                    ? parseInt ( keyObject.key )
+                                    : keyObject.key
+        */
     
     if ( finalIteration )
     {
@@ -36,8 +35,9 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
             
             objectReference[ keyObject.key ]
                 = initiateAccumulator ( keyObjectList[0] )
-                    // must exist because, ~finalIteration
+                    // must exist because, ! finalIteration
         }
+        
         build ( htmlNameAttribute, keyObjectList, objectReference[ keyObject.key ], htmlValue )
     }
     
@@ -46,6 +46,13 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
 const reindexFormNames = async ( data ) => {
 
 /*
+///////////////////////////////////////////////////////////////////////////////
+
+WARNING :   the code as implemented CAN produce SPARSE arrays;
+            consider using Array.prototpye.filter() to remove nulls;
+            
+///////////////////////////////////////////////////////////////////////////////
+
     .matchAll(//g) returns anIterator, which you can pass as Array.from(anIterator) ... 
     
     ...  which in turn returns:
@@ -112,6 +119,7 @@ const reindexFormNames = async ( data ) => {
     
 ///////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////
 */
     
     let temp1 = {}
@@ -121,7 +129,7 @@ const reindexFormNames = async ( data ) => {
     
     for ( const name in data.RU.request.formStringParameters ) {
         
-    // For each [name] :
+    // For each [name] HTML attribute :
         
         if (validationRegex.test (name)) {
 
@@ -135,8 +143,8 @@ const reindexFormNames = async ( data ) => {
                 
                 for ( const groupName in group ) {
                     
-    //  Each (group object) contains keys for all (groups), and removal of 
-    //      (null) values is necessary, to retain only the relevant (group) :
+    //  Each (group object) contains keys for all sibling (groups), and removal  
+    //  of (null) values is necessary, to retain only the relevant (group) :
                 
                     if ( group[ groupName ] ) {
                     
@@ -148,8 +156,7 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
-            
-            //temp2 [ name ] = initiateAccumulator ( temp1 [ name ] )
+            // FIRE !!
             
             build ( name, 
                     temp1 [ name ], 
