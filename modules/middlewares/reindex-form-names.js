@@ -104,7 +104,7 @@ const reindexFormNames = async ( data ) => {
                 const finalKey  = keyObjectList.length == 1
                 const keyObject = keyObjectList.unshift()
 
-                storeObject[keyObject.key]['arb'] = 'questionable'
+                storeObject[keyObject.key] = 'questionable'
 
 
                 switch ( keyObject.keyType ) {
