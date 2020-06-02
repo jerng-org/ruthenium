@@ -167,15 +167,17 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         } else {
             
             // Violent
-            throw Error ( `(reindex-form-names.js) did not understand
+            throw Error ( `(reindex-form-names.js) did not understand :
             
             [name="${name}"]
+            
+            Expected pattern: HEAD[ASIS-1][ASIS-2]###INTEGER###[ASIS-3][ASIS-N]
             ` )
             
             // Docile
             //temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
             //
-            // Spare more thought for docile error collection, perhaps under (data.RU.errors.) TODO
+            // Spare more thought for docile error collection, perhaps under (data.RU.errors.docile) TODO
             
         }
     }
