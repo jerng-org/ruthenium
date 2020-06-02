@@ -145,7 +145,7 @@ switch ( data.RU.request.http.method ) {
         break
     case ( 'POST' ):
         
-        //throw JSON.stringify( data.RU.request.formStringParameters, null, 4 ) 
+        data.RU.signals.markupName = 'Development paused here; consider first transposing the switches in this file (~/tasks/restful.js)'
             
         switch (queryScope) {
             
