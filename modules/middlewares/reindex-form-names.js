@@ -123,6 +123,8 @@ const reindexFormNames = async ( data ) => {
 */
                 }
                 else {
+
+                    storeObject[ keyObject.key ] = {}
                     
                     ///*
                     build (
