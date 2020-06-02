@@ -105,14 +105,50 @@ const reindexFormNames = async ( data ) => {
                 const keyObject = keyObjectList.shift()
 
                 if ( finalKey ) {
+                    
                     storeObject[ keyObject.key ] = value
+/*
+                    switch ( keyObject.keyType ) {
+                    
+                        case ( 'asIs' ) :       //  frequent
+                            
+                            storeObject[ keyObject.key ] = value
+                            
+                            break
+                        
+                        case ( 'toArray' ) :    //  infrequent
+                            break
+                            
+                    } // switch; no default
+*/
                 }
                 else {
+                    
+                    ///*
                     build (
                         storeObject[ keyObject.key ],
                         keyObjectList,
                         value
                     )
+                    //*/
+/*                    
+                    switch ( keyObject.keyType ) {
+                    
+                        case ( 'asIs' ) :       //  frequent
+                            
+                            build (
+                                storeObject[ keyObject.key ],
+                                keyObjectList,
+                                value
+                            )
+                            
+                            break
+                        
+                        case ( 'toArray' ) :    //  infrequent
+                            break
+                            
+                    } // switch; no default
+*/
                 }
 
 /*
