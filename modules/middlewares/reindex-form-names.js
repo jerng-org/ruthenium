@@ -65,7 +65,6 @@ const reindexFormNames = async ( data ) => {
     */
     ///*
     let temp1 = {}
-    let temp2 = {}
     const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
     const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/g
     
@@ -75,7 +74,7 @@ const reindexFormNames = async ( data ) => {
         
         if (validationRegex.test (name)) {
 
-            temp2[ name ] = []
+            temp1[ name ] = []
             
             const groups = Array.from ( name.matchAll ( lexerRegex ), match => match.groups )
     
@@ -90,7 +89,7 @@ const reindexFormNames = async ( data ) => {
                 
                     if ( group[ groupName ] ) {
                     
-                        temp2[ name ].push ( {
+                        temp1[ name ].push ( {
                             keyType:    groupName,
                             key:        group[ groupName ]
                         } ) 
@@ -172,7 +171,7 @@ const reindexFormNames = async ( data ) => {
         }
     }
 
-    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2 }
+    data.RU.request.formStringParameters = { temp1: temp1}
     //*/
     return data
 }
