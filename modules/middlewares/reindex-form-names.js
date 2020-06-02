@@ -172,7 +172,7 @@ const reindexFormNames = async ( data ) => {
         }
     }
 
-    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2, temp4: temp4 }
+    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2 }
     //*/
     return data
 }
