@@ -49,9 +49,13 @@ const reindexFormNames = async ( data ) => {
         
     Sample Input:   ^shoes[country][source]###567###[arbitrarily-many-boxed-strings]$
                     
-                    ^HEAD[SEGMENT-1][SEGMENT-2]toArray[SEGMENT-3][SEGMENT-N]$
+                    ^HEAD[SEGMENT-1][SEGMENT-2]ARRAYINDEX[SEGMENT-3][SEGMENT-N]$
                     
-        Rules:      - HEAD & SEGMENT each have length > 0
+        Rules:      - HEAD must exist
+                    - SEGMENT and ARRAYINDEX are optional
+                    - max SEGMENTS      : Infinity
+                    - max ARRAYINDEX    : 1
+                    - HEAD & SEGMENT each have length > 0
                     - HEAD & SEGMENT disallow 
                         uppercase, line breaks, '[', ']'
                     - SEGMENT disallows 
