@@ -86,7 +86,7 @@ const reindexFormNames = async ( data ) => {
                 for ( const groupName in group ) {
                     
     //  Each (group object) contains keys for all (groups), and removal of 
-    //      (null) values is necessary, to retain only the relevant (group).
+    //      (null) values is necessary, to retain only the relevant (group) :
                 
                     if ( group[ groupName ] ) {
                     
@@ -109,70 +109,16 @@ const reindexFormNames = async ( data ) => {
                     keyObject: keyObject
                 }
                 
-                /*{
-                    value: value,
-                    keyObject: keyObject
-                }*/
-                
-                /*
-                switch ( keyObject.keyType ) {
-                    
-                    case ( 'asIs' ) :       //  frequent
-                        
-                        if (    typeof storeObject == 'object'
-                             && ( ! storeObject instanceof Array ) ) 
-                        { 
-                            //  no problem
-                            storeObject[ keyObject.key ]
-                                =   finalKey
-                                    ?   value
-                                    :   build ( 
-                                            storeObject[ keyObject.key ], 
-                                            keyObjectList,
-                                            value
-                                        )
-                            
-                        } else {
-                            //  Perhaps we have to create a new item here.
-                            throw Error (`(reindex-form-names.js), regex group name (asIs), but (storeObject) isn't a POJO.`)
-                        }
-                        break
-                    
-                    case ( 'toArray' ) :    //  infrequent
-                    
-                        if ( storeObject instanceof Array ) 
-                        {  
-                            //  no problem
-                            const intKey = parseInt ( keyObject.key )
-                            storeObject[ intKey ]
-                                =   finalKey
-                                    ?   value
-                                    :   build ( 
-                                            storeObject[ keyObject.key ], 
-                                            keyObjectList,
-                                            value
-                                        )
-                                    
-                        } else {
-                            //  Perhaps we have to create a new item here.
-                            throw Error (`(reindex-form-names.js), regex group name (toArray), but (storeObject) isn't an Array.`)
-                        }
-                        break
-                        
-                } // no default
-                */
             }
             
-            //temp1[ name ] = {}
-            
-            //build ( temp1[ name ], temp3, data.RU.request.formStringParameters[ name ] )
+            build ( temp2[ name ], temp1[ name ], data.RU.request.formStringParameters[ name ] )
             
         } else {
             temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
         }
     }
 
-    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2}
+    data.RU.request.formStringParameters = { temp2: temp2, temp1: temp1 }
     //*/
     return data
 }
