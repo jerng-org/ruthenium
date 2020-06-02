@@ -98,11 +98,11 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
-            const build = ( storeObject, keyObjectList, value ) => {
+            const build = ( storeObject, value ) => {
                 
                 // order is crucial
-                const finalKey  = keyObjectList.length == 1
-                const keyObject = keyObjectList.shift()
+                const finalKey  = temp1[ name ].length == 1
+                const keyObject = temp1[ name ].shift()
 
                 if ( finalKey ) {
                     
@@ -113,17 +113,13 @@ const reindexFormNames = async ( data ) => {
 
                     storeObject[ keyObject.key ] = {}
 
-                    build (
-                        storeObject[ keyObject.key ],
-                        keyObjectList,
-                        value
-                    )
+                    build ( storeObject[ keyObject.key ], value )
                 }
             } // const build
             
             temp2[ name ] = {}
             
-            build ( temp2[ name ], temp1[ name ], data.RU.request.formStringParameters[ name ] )
+            build ( temp2[ name ], data.RU.request.formStringParameters[ name ] )
             
         } else {
             temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
