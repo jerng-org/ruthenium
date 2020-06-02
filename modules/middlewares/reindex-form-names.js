@@ -93,7 +93,7 @@ const reindexFormNames = async ( data ) => {
                 
                     if ( group[ name ] ) {
                         
-                        console.log ( `temp4`, temp4 )
+                        console.log ( `temp4:`, temp4, `name:`, name, `temp4[name]:`,  )
                         
                         temp4[ name ].push ( {
                             keyType:    name,
