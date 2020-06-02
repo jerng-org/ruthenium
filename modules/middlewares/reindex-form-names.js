@@ -49,7 +49,7 @@ const reindexFormNames = async ( data ) => {
         
     Sample Input:   ^shoes[country][source]###567###[arbitrarily-many-boxed-strings]$
                     
-                    ^HEAD[SEGMENT-1][SEGMENT-2]ARRAYINDEX[SEGMENT-3][SEGMENT-N]$
+                    ^HEAD[ASIS-1][ASIS-2]TOARRAYINDEX[ASIS-3][ASIS-N]$
                     
         Rules:      - HEAD must exist
                     - SEGMENT and ARRAYINDEX are optional
@@ -65,17 +65,17 @@ const reindexFormNames = async ( data ) => {
                     
     Validation:     /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
     
-    Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/g
+    Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArrayIndex>\d+)###/g
     
 ///////////////////////////////////////////////////////////////////////////////
 
     Test Markup:
     
 `    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
-        <input type="text" name="desk-schemas[columns]###1###[name]" value="head,segment,arrayindex,segment">
-        <input type="text" name="[columns]###1###[name]" value="segment,arrayindex,segment">
-        <input type="text" name="desk-schemas###1###[name][anothername]" value="head,arrayindex,segment,segment">
-        <input type="text" name="desk-schemas[columns][name]###123###" value="head,segment,segment,arrayindex">
+        <input type="text" name="desk-schemas[columns]###1###[name]" value="head,asis,toarrayindex,asis">
+        <input type="text" name="[columns]###1###[name]" value="asis,toarrayindex,asis">
+        <input type="text" name="desk-schemas###1###[name][anothername]" value="head,toarrayindex,asis,asis">
+        <input type="text" name="desk-schemas[columns][name]###123###" value="head,asis,asis,toarrayindex">
         <input type="submit" value="POST it">
     </form>
 `
@@ -85,7 +85,7 @@ const reindexFormNames = async ( data ) => {
     let temp1 = {}
     let temp2 = {}
     const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
-    const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/g
+    const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArrayIndex>\d+)###/g
     
     for ( const name in data.RU.request.formStringParameters ) {
         
@@ -116,33 +116,37 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
+            const toArrayIndex = 'toArrayIndex' // GC hint ?
+            const initiateAccumulator 
+                = keyObjectList =>  ( keyObjectList.keyType == toArrayIndex )
+                                    ? []
+                                    : {}
             
-            
-            const build = ( storeObject, value ) => {
+            const build = ( htmlNameAttribute, objectReference, htmlValue ) => {
                 
                 // order is crucial
-                const finalKey  = temp1[ name ].length == 1
-                const keyObject = temp1[ name ].shift()
+                const finalKey  = temp1[ htmlNameAttribute ].length == 1
+                const keyObject = temp1[ htmlNameAttribute ].shift()
 
 
 
 
                 if ( finalKey ) {
-                    storeObject[ keyObject.key ] = value
+                    objectReference[ keyObject.key ] = htmlValue
                 }
                 else {
                     
                     // recurse
-                    if ( typeof storeObject[ keyObject.key ] != 'object' ) {
-                        storeObject[ keyObject.key ] = {}
+                    if ( typeof objectReference[ keyObject.key ] != 'object' ) {
+                        objectReference[ keyObject.key ] = {}
                     }
                     
-                    build ( storeObject[ keyObject.key ], value )
+                    build ( objectReference[ keyObject.key ], htmlV )
                 }
                 
             } // const build
             
-            build ( temp2, data.RU.request.formStringParameters[ name ] )
+            build ( name, temp2, data.RU.request.formStringParameters[ name ] )
             
             
             
