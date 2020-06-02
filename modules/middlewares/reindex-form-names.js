@@ -74,6 +74,7 @@ const reindexFormNames = async ( data ) => {
         if (validationRegex.test (name)) {
 
             let temp3 = []
+            temp2[ name ] = 'string test'
             
             const groups = Array.from ( name.matchAll ( lexerRegex ), match => match.groups )
     
@@ -88,8 +89,6 @@ const reindexFormNames = async ( data ) => {
                     }
                 }
             }
-            
-            temp2[ name ] = 'string test'
             
             const build = ( storeObject, keyObjectList, value ) => {
                 
