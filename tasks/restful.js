@@ -145,7 +145,7 @@ switch ( data.RU.request.http.method ) {
         break
     case ( 'POST' ):
         
-        throw JSON.stringify( data.RU.request.formStringParameters, null, 4 ) 
+        //throw JSON.stringify( data.RU.request.formStringParameters, null, 4 ) 
             
         switch (queryScope) {
             
