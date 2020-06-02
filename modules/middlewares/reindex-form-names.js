@@ -141,7 +141,7 @@ const reindexFormNames = async ( data ) => {
                         objectReference[ keyObject.key ] = {}
                     }
                     
-                    build ( objectReference[ keyObject.key ], htmlV )
+                    build ( objectReference[ keyObject.key ], htmlValue  )
                 }
                 
             } // const build
