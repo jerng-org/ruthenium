@@ -143,11 +143,11 @@ const reindexFormNames = async ( data ) => {
                 
             } // const build
             
-            temp2 = initiateAccumulator ( temp1 [ name ] )
+            //temp2 [ name ] = initiateAccumulator ( temp1 [ name ] )
             
             build ( name, 
                     temp1 [ name ], 
-                    temp2, 
+                    temp2 , 
                     data.RU.request.formStringParameters[name] 
             )
             
