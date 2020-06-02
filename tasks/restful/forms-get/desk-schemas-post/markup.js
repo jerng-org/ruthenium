@@ -115,7 +115,18 @@ const createDeskSchema = async ( data ) => {
 
 +
 
-`    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+`
+    <h1>Test Markup ( legit values ) :</h1>
+
+     <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+        <input type="text" name="desk-schemas[columns]###1###[name]" value="--a name--">
+        <input type="text" name="desk-schemas[columns]###1###[type]" value="--a type--">
+        <input type="text" name="desk-schemas[columns]###2###[name]" value="--another name--">
+        <input type="text" name="desk-schemas[columns]###2###[type]" value="--another type--">
+        <input type="submit" value="POST it">
+    </form>
+    
+     <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
         <input type="text" name="desk-schemas[columns]###1###[name]" value="head,asis,toarrayindex,asis">
         <input type="text" name="[columns]###1###[name]" value="asis,toarrayindex,asis">
         <input type="text" name="desk-schemas###1###[name][anothername]" value="head,toarrayindex,asis,asis">
@@ -123,6 +134,7 @@ const createDeskSchema = async ( data ) => {
         <input type="submit" value="POST it">
     </form>
 `
+
     
 }
 module.exports = createDeskSchema
