@@ -163,16 +163,22 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
 
 ///////////////////////////////////////////////////////////////////////////////
 */
+    data.RU.request.formStringParametersBeforeReindex = {}
     
     let temp1 = {}
     let objectifiedFormData = {}
     const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
     const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArrayIndex>\d+)###/g
-    
+
     for ( const name in data.RU.request.formStringParameters ) {
         
     // For each [name] HTML attribute :
-        
+
+        //  Document your work for downstream reference; 
+        //  these are ASSUMED to be just strings;
+        data.RU.request.formStringParametersBeforeReindex[ name ]
+            = data.RU.request.formStringParameters[ name ]
+
         if (validationRegex.test (name)) {
 
             temp1[ name ] = []
@@ -225,9 +231,8 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         }
     }
 
-    data.RU.request.formStringParameters = {    objectifiedFormData: objectifiedFormData, 
-                                                temp1: temp1 }
-
+    data.RU.request.formStringParameters = objectifiedFormData
+    
     return data
 }
 
