@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `(reindex-form-names.js) somewhat sorted`
+const commitMessage = `Included test `
 
 const gitCommit = () => { try {
 
