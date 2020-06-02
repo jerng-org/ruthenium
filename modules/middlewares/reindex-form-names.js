@@ -105,19 +105,30 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
+            
             const toArrayIndex = 'toArrayIndex' // GC hint ?
             const initiateAccumulator 
-                = keyObjectList =>  ( keyObjectList.keyType == toArrayIndex )
+                = nextKeyObject =>  ( nextKeyObject.keyType == toArrayIndex )
                                     ? []
                                     : {}
             
             const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) => {
                 
                 // order is crucial
-                const finalKey  = keyObjectList.length == 1
-                const keyObject = keyObjectList.shift()
-
-                if ( finalKey )
+                const finalIteration    = keyObjectList.length == 1
+                const keyObject         = keyObjectList.shift()
+                
+                /*  The following code is not necessary, as the value of 
+                    (keyObject.key) will be cast (?) based on the actual
+                    inheritance of (objectReference), which may or may not be
+                    Array.
+                
+                const key               = keyObject.keyType == toArrayIndex
+                                            ? parseInt ( keyObject.key )
+                                            : keyObject.key
+                */
+                
+                if ( finalIteration )
                 {
                     objectReference[ keyObject.key ] = htmlValue
                 }
@@ -125,7 +136,12 @@ const reindexFormNames = async ( data ) => {
                 {
                     // recurse
                     if ( typeof objectReference[ keyObject.key ] != 'object' ) {
-                        objectReference[ keyObject.key ] = {}
+                        
+                        // Not an Object, and therefore also not an Array
+                        
+                        objectReference[ keyObject.key ]
+                            = initiateAccumulator ( keyObjectList[0] )
+                                // must exist because, ~finalIteration
                     }
                     build ( htmlNameAttribute, keyObjectList, objectReference[ keyObject.key ], htmlValue )
                 }
