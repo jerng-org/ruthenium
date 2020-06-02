@@ -66,7 +66,6 @@ const reindexFormNames = async ( data ) => {
     ///*
     let temp1 = {}
     let temp2 = {}
-    let temp4 = {}
     const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
     const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/g
     
@@ -76,9 +75,7 @@ const reindexFormNames = async ( data ) => {
         
         if (validationRegex.test (name)) {
 
-            temp4[ name ] = []
-            
-            let temp3 = []
+            temp2[ name ] = []
             
             const groups = Array.from ( name.matchAll ( lexerRegex ), match => match.groups )
     
@@ -92,21 +89,14 @@ const reindexFormNames = async ( data ) => {
     //      (null) values is necessary, to retain only the relevant (group).
                 
                     if ( group[ groupName ] ) {
-                        
-                        temp4[ name ].push ( {
-                            keyType:    groupName,
-                            key:        group[ groupName ]
-                        } )
-                        
-                        temp3.push ( {
+                    
+                        temp2[ name ].push ( {
                             keyType:    groupName,
                             key:        group[ groupName ]
                         } ) 
                     }
                 }
             }
-            
-            temp2[ name ] = temp3
             
             const build = ( storeObject, keyObjectList, value ) => {
                 
