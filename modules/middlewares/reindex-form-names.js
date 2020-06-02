@@ -104,7 +104,7 @@ const reindexFormNames = async ( data ) => {
                 const finalKey  = keyObjectList.length == 1
                 const keyObject = keyObjectList.unshift()
 
-                storeObject = keyObject
+                storeObject[ 'arb' ] = keyObject
 
 
                 switch ( keyObject.keyType ) {
@@ -169,6 +169,8 @@ const reindexFormNames = async ( data ) => {
                 
                 
             } // const build
+            
+            temp2[ name ] = {}
             
             build ( temp2[ name ], temp1[ name ], data.RU.request.formStringParameters[ name ] )
             
