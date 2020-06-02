@@ -98,122 +98,23 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
-            const build = ( storeObject, keyObjectList, value ) => {
+            const build = ( storeObject, value ) => {
                 
                 // order is crucial
-                const finalKey  = keyObjectList.length == 1
-                const keyObject = keyObjectList.shift()
+                const finalKey  = temp1[ name ].length == 1
+                const keyObject = temp1[ name ].shift()
 
                 if ( finalKey ) {
                     
                     storeObject[ keyObject.key ] = value
-/*
-                    switch ( keyObject.keyType ) {
-                    
-                        case ( 'asIs' ) :       //  frequent
-                            
-                            storeObject[ keyObject.key ] = value
-                            
-                            break
-                        
-                        case ( 'toArray' ) :    //  infrequent
-                            break
-                            
-                    } // switch; no default
-*/
+
                 }
                 else {
 
                     storeObject[ keyObject.key ] = {}
                     
-                    ///*
-                    build (
-                        storeObject[ keyObject.key ],
-                        keyObjectList,
-                        value
-                    )
-                    //*/
-/*                    
-                    switch ( keyObject.keyType ) {
-                    
-                        case ( 'asIs' ) :       //  frequent
-                            
-                            build (
-                                storeObject[ keyObject.key ],
-                                keyObjectList,
-                                value
-                            )
-                            
-                            break
-                        
-                        case ( 'toArray' ) :    //  infrequent
-                            break
-                            
-                    } // switch; no default
-*/
+                    build ( storeObject[ keyObject.key ], value )
                 }
-
-/*
-                switch ( keyObject.keyType ) {
-                    
-                    case ( 'asIs' ) :       //  frequent
-
-                        //  Confirm that we have a POJO not an Array :
-                        
-                        if (    typeof storeObject[ keyObject.key ] == 'object'
-                             && ( ! storeObject[ keyObject.key ] instanceof Array ) ) 
-                        { 
-                            //  no problem
-                            storeObject[ keyObject.key ]
-                                =   finalKey
-                                    ?   value
-                                    :   build ( 
-                                            storeObject[ keyObject.key ], 
-                                            keyObjectList,
-                                            value
-                                        )
-                            
-                            
-                            storeObject[keyObject.key]['arb'] = value
-                            
-                        } else {
-                            //  Perhaps we have to create a new item here.
-                            throw Error (
-`(reindex-form-names.js), regex group name (asIs), but (storeObject) isn't a POJO.`
-                            )
-                        }
-                        break
-                    
-                    case ( 'toArray' ) :    //  infrequent
-                    
-                        //  Confirm that we have an Arrray :
-                    
-                        if ( storeObject[ keyObject.key ] instanceof Array ) 
-                        {  
-                            //  no problem
-                            const intKey = parseInt ( keyObject.key )
-                            storeObject[ intKey ]
-                                =   finalKey
-                                    ?   value
-                                    :   build ( 
-                                            storeObject[ keyObject.key ], 
-                                            keyObjectList,
-                                            value
-                                        )
-                                   
-                            
-                            storeObject[keyObject.key][2] = value
-                            
-                        } else {
-                            //  Perhaps we have to create a new item here.
-                            throw Error (
-`(reindex-form-names.js), regex group name (toArray), but (storeObject) isn't an Array.`
-                            )
-                        }
-                        break
-                        
-                } // switch; no default
-*/                
                 
             } // const build
             
