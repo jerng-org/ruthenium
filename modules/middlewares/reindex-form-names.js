@@ -66,20 +66,37 @@ const reindexFormNames = async ( data ) => {
     ///*
     let temp1 = {}
     let temp2 = {}
+    let temp4 = {}
     const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
     const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArray>\d+)###/g
     
     for ( const name in data.RU.request.formStringParameters ) {
         
+    // For each [name] :
+        
         if (validationRegex.test (name)) {
 
+            temp4[ name ] = []
+            
             let temp3 = []
             
             const groups = Array.from ( name.matchAll ( lexerRegex ), match => match.groups )
     
             for ( const group of groups ) {
+                
+    // For each /(match group-1)(group-N)/ in the regex :
+                
                 for ( const name in group ) {
+                    
+    //  Each (group object) contains keys for all (groups), and removal of 
+    //      (null) values is necessary, to retain only the relevant (group).
+                
                     if ( group[ name ] ) {
+                        
+                        temp2[ name ].push ( {
+                            keyType:    name,
+                            key:        group[ name ]
+                        } )
                         
                         temp3.push ( {
                             keyType:    name,
@@ -165,7 +182,7 @@ const reindexFormNames = async ( data ) => {
         }
     }
 
-    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2 }
+    data.RU.request.formStringParameters = { temp1: temp1, temp2: temp2, temp4: temp4 }
     //*/
     return data
 }
