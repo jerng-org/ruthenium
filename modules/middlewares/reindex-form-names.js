@@ -165,7 +165,12 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             )
             
         } else {
-            temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
+            
+            // Violent
+            thro new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
+            
+            // Docile
+            //temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
         }
     }
 
