@@ -86,23 +86,21 @@ const reindexFormNames = async ( data ) => {
                 
     // For each /(match group-1)(group-N)/ in the regex :
                 
-                for ( const name in group ) {
+                for ( const groupName in group ) {
                     
     //  Each (group object) contains keys for all (groups), and removal of 
     //      (null) values is necessary, to retain only the relevant (group).
                 
-                    if ( group[ name ] ) {
-                        
-                        console.log ( `temp4:`, temp4, `name:`, name, `temp4[name]:`,  )
+                    if ( group[ groupName ] ) {
                         
                         temp4[ name ].push ( {
-                            keyType:    name,
-                            key:        group[ name ]
+                            keyType:    groupName,
+                            key:        group[ groupName ]
                         } )
                         
                         temp3.push ( {
-                            keyType:    name,
-                            key:        group[ name ]
+                            keyType:    groupName,
+                            key:        group[ groupName ]
                         } ) 
                     }
                 }
