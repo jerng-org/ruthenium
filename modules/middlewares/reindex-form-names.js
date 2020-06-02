@@ -98,11 +98,11 @@ const reindexFormNames = async ( data ) => {
                 }
             }
             
-            const build = ( storeObject, value ) => {
+            const build = ( storeObject, keyObjectList, value ) => {
                 
                 // order is crucial
-                const finalKey  = temp1[ name ].length == 1
-                const keyObject = temp1[ name ].shift()
+                const finalKey  = keyObjectList.length == 1
+                const keyObject = keyObjectList.shift()
 
                 if ( finalKey ) {
                     
@@ -112,10 +112,13 @@ const reindexFormNames = async ( data ) => {
                 else {
 
                     storeObject[ keyObject.key ] = {}
-                    
-                    build ( storeObject[ keyObject.key ], value )
+
+                    build (
+                        storeObject[ keyObject.key ],
+                        keyObjectList,
+                        value
+                    )
                 }
-                
             } // const build
             
             temp2[ name ] = {}
