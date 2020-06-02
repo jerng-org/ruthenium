@@ -104,6 +104,9 @@ const reindexFormNames = async ( data ) => {
                 const finalKey  = keyObjectList.length == 1
                 const keyObject = keyObjectList.unshift()
 
+                storeObject[ keyObject ] = value
+
+                /*
                 switch ( keyObject.keyType ) {
                     
                     case ( 'asIs' ) :       //  frequent
@@ -153,6 +156,7 @@ const reindexFormNames = async ( data ) => {
                         break
                         
                 } // switch; no default
+                */
                 
             } // const build
             
