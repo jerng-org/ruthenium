@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `debugged shadowed variable (name)`
+const commitMessage = `Stablised; prepare for next step;`
 
 const gitCommit = () => { try {
 
@@ -43,7 +43,7 @@ const gitCommit = () => { try {
         'git clone -n --depth 1 -b jerng-machines-writeable https://github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', stdio: 'inherit', cwd: '/tmp' })
 
-    mark ( `Progressed. Prepare for next step.` ) 
+    mark ( `gitCommit.js Repository cloned ... ` )
 ///////////////////////////////////////////////////////////////////////////////
 
     /*
