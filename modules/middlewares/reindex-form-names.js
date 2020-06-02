@@ -104,9 +104,6 @@ const reindexFormNames = async ( data ) => {
                 const finalKey  = keyObjectList.length == 1
                 const keyObject = keyObjectList.shift()
 
-                storeObject[ 'arb' ] = keyObject
-
-
                 switch ( keyObject.keyType ) {
                     
                     case ( 'asIs' ) :       //  frequent
@@ -117,7 +114,7 @@ const reindexFormNames = async ( data ) => {
                              && ( ! storeObject[ keyObject.key ] instanceof Array ) ) 
                         { 
                             //  no problem
-                            /*storeObject[ keyObject.key ]
+                            storeObject[ keyObject.key ]
                                 =   finalKey
                                     ?   value
                                     :   build ( 
@@ -125,7 +122,7 @@ const reindexFormNames = async ( data ) => {
                                             keyObjectList,
                                             value
                                         )
-                            */
+                            
                             
                             storeObject[keyObject.key]['arb'] = value
                             
@@ -143,7 +140,7 @@ const reindexFormNames = async ( data ) => {
                     
                         if ( storeObject[ keyObject.key ] instanceof Array ) 
                         {  
-                            /*//  no problem
+                            //  no problem
                             const intKey = parseInt ( keyObject.key )
                             storeObject[ intKey ]
                                 =   finalKey
@@ -153,7 +150,7 @@ const reindexFormNames = async ( data ) => {
                                             keyObjectList,
                                             value
                                         )
-                            */        
+                                    
                             
                             storeObject[keyObject.key][2] = value
                             
