@@ -165,10 +165,10 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
 */
     data.RU.request.formStringParametersBeforeReindex = {}
     
-    let temp1 = {}
+    let temp1               = {}
     let objectifiedFormData = {}
-    const validationRegex = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
-    const lexerRegex = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArrayIndex>\d+)###/g
+    const validationRegex   = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
+    const lexerRegex        = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArrayIndex>\d+)###/g
 
     for ( const name in data.RU.request.formStringParameters ) {
         
