@@ -76,6 +76,7 @@ const reindexFormNames = async ( data ) => {
 
             //let temp3 = []
             temp2[ name ] = []
+            temp3[ name ] = []
             
             const groups = Array.from ( name.matchAll ( lexerRegex ), match => match.groups )
     
