@@ -167,7 +167,9 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         } else {
             
             // Violent
-            throw Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
+            throw Error ( `(reindex-form-names.js) did not understand
+            [name="${name}"]
+            ` )
             
             // Docile
             //temp1[ name ] = new Error ( `(reindex-form-names.js) did not understand [name="${name}"]` )
