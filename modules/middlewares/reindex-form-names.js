@@ -104,20 +104,16 @@ const reindexFormNames = async ( data ) => {
                 const finalKey  = keyObjectList.length == 1
                 const keyObject = keyObjectList.shift()
 
-                storeObject[ keyObject.key ] = value
-/*
                 if ( finalKey ) {
                     storeObject[ keyObject.key ] = value
                 }
                 else {
-                    storeObject[ keyObject.key ] = build (
+                    build (
                         storeObject[ keyObject.key ],
                         keyObjectList,
                         value
                     )
                 }
-*/
-
 
 /*
                 switch ( keyObject.keyType ) {
