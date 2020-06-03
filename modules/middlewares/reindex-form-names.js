@@ -1,5 +1,15 @@
 'use strict'
             
+/*
+object  =>  Object.values ( object )    =>  array       // retains (null), discards (undefined)
+object  <=  { ... array }               <=  array       // retails (null), 
+
+
+FIRST, decide if (build) can be simplified
+SECOND, decide how sparse array condensation may happen (optional parameter?)
+
+*/            
+            
 const asIs          = 'asIs'
 const toArrayIndex  = 'toArrayIndex'
 const initiateAccumulator 
@@ -282,6 +292,17 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             
         }
     }
+/*
+    const treeMap = ( root, fun ) => {
+
+        if ( typeof root != 'object' ) {
+            fun ( root )    // leaf node
+        } else {
+            
+        }
+        
+    }
+*/
 
     data.RU.request.formStringParameters = objectifiedFormData
     
