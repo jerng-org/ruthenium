@@ -52,6 +52,12 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
             
             // Not an Object, and therefore also not an Array
             
+            if ( objectReference.isAnArray ) {                      // gets ( .isAnArray )
+            }
+            else {
+            }
+            
+            
             objectReference[ keyObject.key ]
                 = initiateAccumulator ( nextKeyObject )         // sets ( .isAnArray )
                     // must exist because, ! finalIteration
