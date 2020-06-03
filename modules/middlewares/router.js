@@ -31,27 +31,43 @@ const router = async ( data ) => {
     // Default here
     const defaultDetermineTaskName = () => {
         
-        if (data.RU.request.queryStringParameters.route) {
+        if ( data.RU.request.queryStringParameters.route ) {
             switch ( data.RU.request.queryStringParameters.route[0] )
             {
-                case ( 'initial' ):
-                    data.RU.signals.taskname = 'initial'
-                    break
-                case ( 'restful' ):                 
-                    data.RU.signals.taskname = 'restful'
-                        // Single Item: METHOD, &type=M, &thing=N, &value/s=V
-                        // Batch:       METHOD, &batch=[ 
-                        //                          [ { method: type: thing: etc. } ]
-                        //                      ]
-                        // Transaction: METHOD, &batch=[], transaction=1  
-                    break
-                case ( 'file' ):
-                    data.RU.signals.taskname = 'send-blob'
-                    break
-                case ( undefined ):
-                    // see below
-                default:
-                    // see below
+            
+            
+            
+                
+            case ( 'initial' ):
+            data.RU.signals.taskname = 'initial'
+            break
+            
+            
+            
+            
+            case ( 'restful' ):                 
+            data.RU.signals.taskname = 'restful'
+                // Single Item: METHOD, &type=M, &thing=N, &value/s=V
+                // Batch:       METHOD, &batch=[ 
+                //                          [ { method: type: thing: etc. } ]
+                //                      ]
+                // Transaction: METHOD, &batch=[], transaction=1  
+            break
+            
+            
+            
+            
+            case ( 'file' ):
+            data.RU.signals.taskname = 'send-blob'
+            break
+            
+            
+            
+            
+            case ( undefined ):
+                // see below
+            default:
+                // see below
             }
         }
         
