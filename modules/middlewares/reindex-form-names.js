@@ -163,7 +163,16 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
 
 `
     <h1>Test Markup ( legit values ) :</h1>
-     <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+    
+    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+        <input type="text" name="desk-schemas[columns]###1###[name]" value="head=desk-schemas">
+        <input type="text" name="desk-schemas[columns]###1###[type]" value="head=desk-schemas">
+        <input type="text" name="not-a-desk[columns]###2###[name]" value="head=not-a-desk">
+        <input type="text" name="something-else[columns]###2###[type]" value="head=something-else">
+        <input type="submit" value="POST it">
+    </form>
+
+    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
         <input type="text" name="desk-schemas[columns]###1###[name]" value="--a name--">
         <input type="text" name="desk-schemas[columns]###1###[type]" value="--a type--">
         <input type="text" name="desk-schemas[columns]###2###[name]" value="--another name--">
@@ -171,7 +180,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         <input type="submit" value="POST it">
     </form>
     
-     <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
         <input type="text" name="desk-schemas###1###[name]" value="head,toarrayindex,asis">
         <input type="text" name="desk-schemas###1###[type]" value="head,toarrayindex,asis">
         <input type="text" name="desk-schemas###2###[name][metadata]" value="head,toarrayindex,asis,asis">
@@ -179,11 +188,11 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         <input type="submit" value="POST it">
     </form>
     
-     <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
-        <input type="text" name="desk-schemas[columns]###1###[name]" value="head=desk-schemas">
-        <input type="text" name="desk-schemas[columns]###1###[type]" value="head=desk-schemas">
-        <input type="text" name="not-a-desk[columns]###2###[name]" value="head=not-a-desk">
-        <input type="text" name="something-else[columns]###2###[type]" value="head=something-else">
+    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+        <input type="text" name="desk-schemas###3###[name]" value="head,toarrayindex3,asis">
+        <input type="text" name="desk-schemas###5###[name]" value="head,toarrayindex5,asis">
+        <input type="text" name="desk-schemas###8###[name]" value="head,toarrayindex8,asis">
+        <input type="text" name="desk-schemas###13###[name]" value="head,toarrayindex13,asis">
         <input type="submit" value="POST it">
     </form>
     
