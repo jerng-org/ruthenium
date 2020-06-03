@@ -17,7 +17,12 @@ const initiateAccumulator
                         ? Object.defineProperty ( [], 'isAnArray', {  value: true } ) 
                         : {}
 
-const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) => {
+const buildDeepObject = (   htmlNameAttribute, 
+                            keyObjectList, 
+                            objectReference, 
+                            htmlValue               
+                        
+                        ) => {
     
     // order is crucial
     const finalIteration    = keyObjectList.length == 1
