@@ -34,13 +34,13 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
         */
     
     if ( finalIteration )
-    {
+    {/*
         if ( objectReference[ keyObject.key ].isAnArray ) { // gets ( .isAnArray )
             objectReference[ keyObject.key ].push ( htmlValue )
         }
-        else {
+        else {*/
             objectReference[ keyObject.key ] = htmlValue  
-        }
+     //   }
     }
     else
     {
@@ -53,7 +53,7 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
             // Not an Object, and therefore also not an Array
             
             objectReference[ keyObject.key ]
-                = initiateAccumulator ( nextKeyObject )
+                = initiateAccumulator ( nextKeyObject ) // sets ( .isAnArray )
                     // must exist because, ! finalIteration
         }
         else 
@@ -61,7 +61,7 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
         {
             // Is an Object. Is an Array.
             
-            if ( nextKeyObject.keyType == asIs ) // sets ( .isAnArray )
+            if ( nextKeyObject.keyType == asIs ) 
             {
                 //  Violent
                 throw Error (`(reindex-form-names.js) encountered conflicting [name]s;
