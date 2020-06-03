@@ -97,11 +97,94 @@ const queryScope    =   queryType
 
 console.warn(`transpose the switches, make them inside out`)
 
+// DIMENSION A
+// (desk-schemas) and (forms) are special / meta
+switch
+( data.RU.request.queryStringParameters.type[0] ) {
+
+case
+('forms'):
+                // DIMENSION B
+                switch
+                ( data.RU.request.http.method ) {
+                    
+                case
+                ( 'GET' ):
+                                // DIMENSION C
+                                switch
+                                ( queryScope ) {
+                                
+                                case
+                                ('vrow'): 
+                                    // Which individual Thing?
+                                data.RU.signals.sendResponse = {
+                                    body: await formsDeskSchemasPostMarkup()
+                                }
+                                break
+                                
+                                default:
+                                throw queryScope
+                                    // current pattern: always do this
+                                    
+                                } 
+                                // switch 
+                                // ( queryScope )
+                break
+                
+                default:
+                
+                }
+                // switch
+                // ( .method )
+break
+        
+case
+('desk-schemas'):
+    
+                // DIMENSION B
+                switch
+                ( data.RU.request.http.method ) {
+                    
+                case
+                ( 'GET' ):
+                    
+                                // DIMENSION C
+                                switch
+                                ( queryScope ) {
+                                
+                                case
+                                ('vtable'):
+                                    // Which Type (set, group) of things?
+                                await getAllDeskSchemas ( data ) 
+                                break
+                                
+                                default:
+                                throw queryScope
+                                    // current pattern: always do this
+                                }        
+                                // switch
+                                // ( queryScope )
+                break
+            
+                default:
+                }
+                // switch 
+                // ( .method )
+break
+        
+default:
+// GET the Virtual ROW
+
+}
+// switch
+// ( .type[0] )
+
+
 /* DIMENSION A
 
 switch (data.RU.request.queryStringParameters.type[0]) {
     case ('forms'):
-        // (desks) and (forms) are special / meta
+        // (desk-schemas) and (forms) are special / meta
         break
     default:
         // GET the Virtual ROW
@@ -157,7 +240,7 @@ switch ( data.RU.request.http.method ) {
                 // Which individual Thing?
                 switch (data.RU.request.queryStringParameters.type[0]) {
                     case ('forms'):
-                        // (desks) and (forms) are special / meta
+                        // (desk-schemas) and (forms) are special / meta
                         data.RU.signals.sendResponse = {
                             body: await formsDeskSchemasPostMarkup()
                         }
