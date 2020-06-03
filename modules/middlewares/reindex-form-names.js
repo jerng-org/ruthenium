@@ -35,12 +35,15 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
     
     if ( finalIteration )
     {
+        /*
         if ( objectReference.isAnArray ) {                      // gets ( .isAnArray )
             objectReference.push ( htmlValue + ' (isAnArray' ) 
         }
         else {
             objectReference[ keyObject.key ] = htmlValue + ' (! isAnArray)'
         }
+        */
+        objectReference[ keyObject.key ] = htmlValue 
     }
     else
     {
@@ -111,7 +114,11 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
             }
         }
         
-        buildDeepObject ( htmlNameAttribute, keyObjectList, objectReference[ keyObject.key ], htmlValue )
+        buildDeepObject (   htmlNameAttribute, 
+                            keyObjectList, 
+                            objectReference[ keyObject.key ], 
+                            htmlValue 
+                        )
     }
     
 } // const build
