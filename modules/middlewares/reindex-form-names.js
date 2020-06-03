@@ -56,7 +56,7 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
 
             if ( objectReference.isAnArray ) {                      // gets ( .isAnArray )
             
-                objectReference[ keyObject.key ].push (
+                objectReference.push (
                     initiateAccumulator ( nextKeyObject )           // sets ( .isAnArray )
                 )        // must exist because, ! finalIteration
             }
