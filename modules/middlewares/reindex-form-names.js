@@ -54,7 +54,7 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
         if ( typeof objectReference[ keyObject.key ] != 'object' ) {
             
             // Not an Object, and therefore also not an Array
-            
+/*            
             if ( objectReference.isAnArray ) {                      // gets ( .isAnArray )
             
                 objectReference.push(
@@ -68,11 +68,12 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
                     = initiateAccumulator ( nextKeyObject )         // sets ( .isAnArray )
                         // must exist because, ! finalIteration
             }
-/*            
+*/
+            
                 objectReference[ keyObject.key ]
                     = initiateAccumulator ( nextKeyObject )         // sets ( .isAnArray )
                         // must exist because, ! finalIteration
-*/
+
         }
         else 
         if ( objectReference[ keyObject.key ] instanceof Array )
