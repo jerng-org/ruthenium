@@ -97,6 +97,53 @@ const queryScope    =   queryType
 
 console.warn(`transpose the switches, make them inside out`)
 
+/* DIMENSION A
+
+switch (data.RU.request.queryStringParameters.type[0]) {
+    case ('forms'):
+        // (desks) and (forms) are special / meta
+        break
+    default:
+        // GET the Virtual ROW
+}
+*/
+
+/* DIMENSION B
+
+switch (queryScope) {
+    case ('vrow'):
+    
+        // Which individual Thing?
+        break
+    case ('vtable'):
+    
+        // Which Type (set, group) of things?
+        break
+    default:
+        throw queryScope
+}
+*/
+
+/* DIMENSION C
+
+switch ( data.RU.request.http.method ) {
+    case ( 'HEAD' ):
+        break
+    case ( 'GET' ):
+        break
+    case ( 'PUT' ):
+        break
+    case ( 'DELETE' ):
+        break
+    case ( 'POST' ):
+        break
+    case ( 'PATCH' ):
+        break
+    default:
+} // switch ( data.RU.request.http.method )
+*/
+
+/*
 switch ( data.RU.request.http.method ) {
     case ( 'HEAD' ):
         break
@@ -183,6 +230,8 @@ switch ( data.RU.request.http.method ) {
     
     default:
 } // switch ( data.RU.request.http.method )
+*/
+
 } catch (e) { throw e }
 
 
