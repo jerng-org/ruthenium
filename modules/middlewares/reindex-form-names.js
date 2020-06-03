@@ -4,10 +4,6 @@
 object  =>  Object.values ( object )    =>  array       // retains (null), discards (undefined)
 object  <=  { ... array }               <=  array       // retails (null), 
 
-
-FIRST, decide if (build) can be simplified
-SECOND, decide how sparse array condensation may happen (optional parameter?)
-
 */            
             
 const asIs          = 'asIs'
