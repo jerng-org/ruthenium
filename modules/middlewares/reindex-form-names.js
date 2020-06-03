@@ -36,10 +36,10 @@ const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htm
     if ( finalIteration )
     {
         if ( objectReference.isAnArray ) {                      // gets ( .isAnArray )
-            objectReference.push ( htmlValue + 'isAnArray' ) 
+            objectReference.push ( htmlValue + ' (isAnArray)' ) 
         }
         else {
-            objectReference[ keyObject.key ] = htmlValue + '! isAnArray'
+            objectReference[ keyObject.key ] = htmlValue + ' (! isAnArray)'
         }
     }
     else
