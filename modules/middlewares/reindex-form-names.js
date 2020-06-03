@@ -320,6 +320,8 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             }
         }
     }
+    
+    // I suppose this may become a configuration setting in the future;
     walkTreeCondenseArrays ( objectifiedFormData )
 
     data.RU.request.formStringParameters = objectifiedFormData
