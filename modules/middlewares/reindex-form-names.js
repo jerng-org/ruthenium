@@ -306,13 +306,13 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         }
     }
 
-    // Breadth-first
     const walkTreeCondenseArrays = node => {
 
         for ( const key in node ) {
             
             if ( typeof node[ key ] == 'object' ) {
-                
+
+                // Condense Child Arrays before Traversing into Child Arrays                
                 if ( node[ key ] instanceof Array ) {
                     node[ key ] = node[ key ].filter( e => e != null ) 
                 }
@@ -320,7 +320,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             }
         }
     }
-
+    walkTreeCondenseArrays ( objectifiedFormData )
 
     data.RU.request.formStringParameters = objectifiedFormData
     
