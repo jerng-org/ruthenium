@@ -11,7 +11,7 @@ Git repository      :   https://github.com/jerng-org/ruthenium.git
     This repository must BELONG to a (GitHub Organization)
 
 Git branch          :   jerng-machines-writeable
-x
+
     Set a (Branch Protection Rule) which restricts who can push to 
     (jerng-machines-writeable), enabling only the user (jerng-machines).
 
@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark' )            
 const childProcess  = require('child_process')
 
-const commitMessage = `Included test `
+const commitMessage = `-`
 
 const gitCommit = () => { try {
 
