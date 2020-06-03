@@ -17,7 +17,7 @@ const initiateAccumulator
                         ? Object.defineProperty ( [], 'isAnArray', {  value: true } ) 
                         : {}
 
-const buildDeepObject = (   htmlNameAttribute, 
+const buildDeepPath =   (   htmlNameAttribute, 
                             keyObjectList, 
                             objectReference, 
                             htmlValue               
@@ -98,7 +98,7 @@ const buildDeepObject = (   htmlNameAttribute,
             }
         }
         
-        buildDeepObject (   htmlNameAttribute, 
+        buildDeepPath   (   htmlNameAttribute, 
                             keyObjectList, 
                             objectReference[ keyObject.key ], 
                             htmlValue 
@@ -280,7 +280,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             
             // FIRE !!
             
-            buildDeepObject ( 
+            buildDeepPath ( 
                     name, 
                     temp1 [ name ], 
                     objectifiedFormData , 
@@ -305,17 +305,22 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             
         }
     }
-/*
-    const treeMap = ( root, fun ) => {
 
-        if ( typeof root != 'object' ) {
-            fun ( root )    // leaf node
-        } else {
+    // Breadth-first
+    const walkTreeCondenseArrays = node => {
+
+        for ( const key in node ) {
             
+            if ( typeof node[ key ] == 'object' ) {
+                
+                if ( node[ key ] instanceof Array ) {
+                    node[ key ] = node[ key ].filter( e => e != null ) 
+                }
+                walkTreeCondenseArrays ( node[ key ] )
+            }
         }
-        
     }
-*/
+
 
     data.RU.request.formStringParameters = objectifiedFormData
     
