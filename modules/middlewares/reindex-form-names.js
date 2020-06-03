@@ -14,10 +14,10 @@ const asIs          = 'asIs'
 const toArrayIndex  = 'toArrayIndex'
 const initiateAccumulator 
     = nextKeyObject =>  ( nextKeyObject.keyType == toArrayIndex )
-                        ? []
+                        ? Object.defineProperty ( [], 'isAnArray', {  value: true } ) 
                         : {}
 
-const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) => {
+const buildDeepObject = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) => {
     
     // order is crucial
     const finalIteration    = keyObjectList.length == 1
@@ -35,13 +35,19 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
     
     if ( finalIteration )
     {
-        objectReference[ keyObject.key ] = htmlValue
+        if ( objectReference[ keyObject.key ].isAnArray ) { // gets ( .isAnArray )
+            objectReference[ keyObject.key ].push ( htmlValue )
+        }
+        else {
+            objectReference[ keyObject.key ] = htmlValue  
+        }
     }
     else
     {
         const nextKeyObject = keyObjectList[0]
         
         // recurse
+        
         if ( typeof objectReference[ keyObject.key ] != 'object' ) {
             
             // Not an Object, and therefore also not an Array
@@ -55,7 +61,7 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
         {
             // Is an Object. Is an Array.
             
-            if ( nextKeyObject.keyType == asIs ) 
+            if ( nextKeyObject.keyType == asIs ) // sets ( .isAnArray )
             {
                 //  Violent
                 throw Error (`(reindex-form-names.js) encountered conflicting [name]s;
@@ -90,7 +96,7 @@ const build = ( htmlNameAttribute, keyObjectList, objectReference, htmlValue ) =
             }
         }
         
-        build ( htmlNameAttribute, keyObjectList, objectReference[ keyObject.key ], htmlValue )
+        buildDeepObject ( htmlNameAttribute, keyObjectList, objectReference[ keyObject.key ], htmlValue )
     }
     
 } // const build
@@ -268,7 +274,8 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
             
             // FIRE !!
             
-            build ( name, 
+            buildDeepObject ( 
+                    name, 
                     temp1 [ name ], 
                     objectifiedFormData , 
                     data.RU.request.formStringParameters[name] 
