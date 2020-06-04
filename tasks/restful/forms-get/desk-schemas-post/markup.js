@@ -25,8 +25,7 @@ const createDeskSchema = async ( data ) => {
 <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
 <fieldset>
     
-    <input type="hidden" name="desk-schemas[name]" value="${ uuid4() }">
-    
+  
     <label      for="desk-schemas[name].1">
         
         Name for this new Desk Schema
