@@ -36,13 +36,6 @@ const deskSchemasPost = async ( data ) => {
                 ) 
         ) {
           
-            console.warn (  `name?`, 'name'   in column,
-                            `type?`, 'type'   in column,
-                            `name rx?`, /[^A-Z\[\]\s]+/.test( column[ 'name' ] ), // reuse blacklist in (reindex-form-names.js)
-                            `type rx?`, /[^A-Z\[\]\s]+/.test( column[ 'type' ] )   
-            )
-    
-          
             throw Error (   `(~/tasks/restful/desk-schemas-post/) candidate 
                             insertion to (desk-schemas.columns) did not pass 
                             validation.` ) 
@@ -52,7 +45,7 @@ const deskSchemasPost = async ( data ) => {
     //  end PROTOTYPICAL data validation process.
 
     // Provide ID
-    candidate['data-schemas'].id = uuid4()
+    candidate['desk-schemas'].id = uuid4()
 
     // Call storage layer
     data.RU.io.put = await ddbdc.put ( {
