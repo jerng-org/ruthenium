@@ -47,6 +47,8 @@ const deskSchemasPost = async ( data ) => {
     // Provide ID
     candidate['desk-schemas'].id = uuid4()
 
+console.warn(candidate)
+
     // Call storage layer
     data.RU.io.put = await ddbdc.put ( {
         
