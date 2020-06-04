@@ -1,9 +1,9 @@
 'use strict'
 
-const getAllDeskSchemas 
+const deskSchemasGet 
     = require ( '/var/task/tasks/restful/desk-schemas-get/index.js' )
 
-const postDeskSchemas 
+const deskSchemasPost 
     = require ( '/var/task/tasks/restful/desk-schemas-post/index.js' )
 
 const formsDeskSchemasPostMarkup
@@ -158,7 +158,7 @@ case
                                 case
                                 ('virtual-table'):
                                     // Which Type (set, group) of things?
-                                await getAllDeskSchemas ( data ) 
+                                await deskSchemasGet ( data ) 
                                 break
                                 
                                 default:
@@ -179,7 +179,7 @@ case
                                 case
                                 ('virtual-table'):
                                     // Which Type (set, group) of things?
-                                await postDeskSchemas ( data ) 
+                                await deskSchemasPost ( data ) 
                                 break
                                 
                                 default:
