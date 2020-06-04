@@ -173,9 +173,9 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
                     - ###\d+### can occur only once
                         implicitly, only outside [blocks]
                     
-    Validation:     /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
+    Validation:     /^((?!###)[^A-Z\[\]\s])+(\[((?!###)[^A-Z\[\]\s])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\s])+\])*$/
     
-    Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArrayIndex>\d+)###/g
+    Demarcation:    /(?<head>^((?!###)[^A-Z\[\]\s])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\s]+)\]+?)|###(?<toArrayIndex>\d+)###/g
     
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -237,8 +237,8 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
     
     let temp1               = {}
     let objectifiedFormData = {}
-    const validationRegex   = /^((?!###)[^A-Z\[\]\n\r])+(\[((?!###)[^A-Z\[\]\n\r])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\n\r])+\])*$/
-    const lexerRegex        = /(?<head>^((?!###)[^A-Z\[\]\n\r])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\n\r]+)\]+?)|###(?<toArrayIndex>\d+)###/g
+    const validationRegex   = /^((?!###)[^A-Z\[\]\s])+(\[((?!###)[^A-Z\[\]\s])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\s])+\])*$/
+    const lexerRegex        = /(?<head>^((?!###)[^A-Z\[\]\s])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\s]+)\]+?)|###(?<toArrayIndex>\d+)###/g
 
     for ( const name in data.RU.request.formStringParameters ) {
         
@@ -249,7 +249,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         data.RU.request.formStringParametersBeforeReindex[ name ]
             = data.RU.request.formStringParameters[ name ]
 
-        if (validationRegex.test (name)) {
+        if ( validationRegex.test ( name ) ) {
 
             temp1[ name ] = []
 
