@@ -10,12 +10,12 @@ const mark
     = require ( '/var/task/modules/mark' )
 
 // THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
-const markupFileNames = fs.readdirSync ('/var/task/tasks/markup', {
+const markupFileNames = fs.readdirSync ('/var/task/tasks', {
     withFileTypes: true
 })
 markupFileNames.forEach ( ( current, index, array ) => {
     if (current.isFile()) {
-        markups[ current.name.slice (0, -3) ] = require ( '/var/task/tasks/markup/' + current.name )
+        markups[ current.name.slice (0, -3) ] = require ( '/var/task/tasks/' + current.name )
     }        
 } // , thisArg  
 )
