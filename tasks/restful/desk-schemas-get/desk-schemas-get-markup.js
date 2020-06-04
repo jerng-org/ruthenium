@@ -8,7 +8,7 @@ const htmlIndex
     = fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
 
 const tableInMarkup
-    = require (`/var/task/tasks/restful/desk-schemas-get/table-in-markup.js`) 
+    = require (`/var/task/tasks/restful/desk-schemas-get/markup-table-in-markup.js`) 
 
 const allDeskSchemasMarkup = async ( data ) => {
 
