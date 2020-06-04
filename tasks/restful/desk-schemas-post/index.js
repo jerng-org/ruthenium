@@ -32,7 +32,7 @@ const deskSchemasPost = async ( data ) => {
         if ( !  (      'name'   in column
                     && 'type'   in column
                     && /[^A-Z\[\]\s]+/.test( column[ 'name' ] ) // reuse blacklist in (reindex-form-names.js)
-                    && /[^A-Z\[\]\s]+/.test( column[ 'type' ] ) 
+                    && [ 'S', 'N', 'other' ].includes( column[ 'type' ] ) 
                 ) 
         ) {
           
