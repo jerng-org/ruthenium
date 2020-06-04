@@ -21,7 +21,6 @@ markupFileNames.forEach ( ( current, index, array ) => {
 )
 
 const additionalRequestInformation = async _data => `
-    The following may be informative:
     ${ JSON.stringify( {
         
         signals:
