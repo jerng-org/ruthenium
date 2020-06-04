@@ -143,7 +143,7 @@ const composeResponse = async ( data ) => {
                         
                         The following may be informative:
                         
-                        ${ additionalRequestInformation ( data )}`)
+                        ${ await additionalRequestInformation ( data )}`)
             }
         }
         else
@@ -171,7 +171,7 @@ const composeResponse = async ( data ) => {
 
                         The following may be informative:
                         
-                        ${ additionalRequestInformation ( data )}`)
+                        ${ await additionalRequestInformation ( data )}`)
             }
         }
         
