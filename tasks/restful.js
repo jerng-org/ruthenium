@@ -97,9 +97,6 @@ const queryScope    =   queryType
                         :   new Error (     `Requested a (restful) task, 
                                             but (type) was not specified.` )
 
-
-console.warn(`transpose the switches, make them inside out`)
-
 // DIMENSION A
 // (desk-schemas) and (forms) are special / meta
 switch
