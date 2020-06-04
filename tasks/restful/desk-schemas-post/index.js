@@ -5,7 +5,7 @@ const ddbdc
 
 const deskSchemasPost = async ( data ) => {
   
-  throw new Error ( data.RU.formStringParameters ) 
+  throw new Error ( data.RU.request.formStringParameters ) 
 /*
 
 (new)
