@@ -4,7 +4,7 @@ const ddbdc
     = require ( '/var/task/io/ddbdc.js' )
 
 const markup 
-    = require ( '/var/task/tasks/restful/desk-schemas-get/markup.js' )
+    = require ( '/var/task/tasks/restful/desk-schemas-get-markup.js' )
 
 const deskSchemasGet = async ( data ) => {
 
