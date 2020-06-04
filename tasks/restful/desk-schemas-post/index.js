@@ -47,6 +47,7 @@ const deskSchemasPost = async ( data ) => {
     // Provide ID
     candidate['desk-schemas'].id = uuid4()
 
+    // Configure DB client parameters
     const params = {
         
         TableName: 'TEST-APP-DESK-SCHEMAS',
@@ -61,8 +62,6 @@ const deskSchemasPost = async ( data ) => {
         ReturnConsumedCapacity : 'TOTAL'
       
     }
-    
-console.warn ( params )
 
     // Call storage layer
     data.RU.io.put = await ddbdc.put ( params ).promise()
