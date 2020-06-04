@@ -91,8 +91,8 @@ const queryThing    =   data.RU.request.queryStringParameters.thing
 const queryScope    =   queryType
 
                         ?   ( queryThing
-                            ? 'vrow'        //  resource is a Virtual Row
-                            : 'vtable' )    //  resource is a Virtual Table
+                            ? 'virtual-row'        //  resource is a Virtual Row
+                            : 'virtual-table' )    //  resource is a Virtual Table
                         
                         :   new Error (     `Requested a (restful) task, 
                                             but (type) was not specified.` )
@@ -118,7 +118,7 @@ case
                                 ( queryScope ) {
                                 
                                 case
-                                ('vrow'): 
+                                ('virtual-row'): 
                                     // Which individual Thing?
                                 data.RU.signals.sendResponse = {
                                     body: await formsDeskSchemasPostMarkup()
@@ -156,7 +156,7 @@ case
                                 ( queryScope ) {
                                 
                                 case
-                                ('vtable'):
+                                ('virtual-table'):
                                     // Which Type (set, group) of things?
                                 await getAllDeskSchemas ( data ) 
                                 break
@@ -177,7 +177,7 @@ case
                                 ( queryScope ) {
                                 
                                 case
-                                ('vrow'):
+                                ('virtual-table'):
                                     // Which Type (set, group) of things?
                                 await postDeskSchemas ( data ) 
                                 break
@@ -218,11 +218,11 @@ switch (data.RU.request.queryStringParameters.type[0]) {
 /* DIMENSION B
 
 switch (queryScope) {
-    case ('vrow'):
+    case ('virtual-row'):
     
         // Which individual Thing?
         break
-    case ('vtable'):
+    case ('virtual-table'):
     
         // Which Type (set, group) of things?
         break
