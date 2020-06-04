@@ -3,6 +3,9 @@
 const getAllDeskSchemas 
     = require ( '/var/task/tasks/restful/desk-schemas-get/index.js' )
 
+const postDeskSchemas 
+    = require ( '/var/task/tasks/restful/desk-schemas-post/index.js' )
+
 const formsDeskSchemasPostMarkup
     = require ( `/var/task/tasks/restful/forms-get/desk-schemas-post/markup.js` )
 
@@ -156,6 +159,27 @@ case
                                 ('vtable'):
                                     // Which Type (set, group) of things?
                                 await getAllDeskSchemas ( data ) 
+                                break
+                                
+                                default:
+                                throw queryScope
+                                    // current pattern: always do this
+                                }        
+                                // switch
+                                // ( queryScope )
+                break
+            
+                case
+                ( 'POST' ):
+                    
+                                // DIMENSION C
+                                switch
+                                ( queryScope ) {
+                                
+                                case
+                                ('vrow'):
+                                    // Which Type (set, group) of things?
+                                await postDeskSchemas ( data ) 
                                 break
                                 
                                 default:

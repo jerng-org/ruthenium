@@ -6,7 +6,7 @@ const ddbdc
 const markup 
     = require ( '/var/task/tasks/restful/desk-schemas-get/markup.js' )
 
-const getAllDeskSchemas = async ( data ) => {
+const deskSchemasGet = async ( data ) => {
     
     data.RU.io.deskSchemasScan = await ddbdc.scan ( {
         TableName: 'TEST-APP-DESK-SCHEMAS',
@@ -24,4 +24,4 @@ const getAllDeskSchemas = async ( data ) => {
     }
 
 }
-module.exports = getAllDeskSchemas
+module.exports = deskSchemasGet
