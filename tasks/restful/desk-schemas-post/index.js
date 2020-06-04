@@ -14,12 +14,20 @@ const deskSchemasPost = async ( data ) => {
 
     //  begin PROTOTYPICAL data validation process:
     
+    console.warn (
+                'desk-schemas'  in candidate ,
+                'name'       in candidate[ 'desk-schemas' ],
+                'columns'    in candidate[ 'desk-schemas' ],
+                candidate[ 'desk-schemas' ]['columns'] instanceof Array,
+                candidate[ 'desk-schemas' ]['columns'].length > 0  
+    )
+    
     //  VAL_OP#1
     if ( !  (   'desk-schemas'  in candidate 
                 && 'name'       in candidate[ 'desk-schemas' ]
                 && 'columns'    in candidate[ 'desk-schemas' ]
                 && candidate[ 'desk-schemas' ]['columns'] instanceof Array
-                && candidate[ 'desk-schemas' ]['columns'].length > 1
+                && candidate[ 'desk-schemas' ]['columns'].length > 0
             ) 
     ) {
         throw Error (   `(~/tasks/restful/desk-schemas-post/) candidate 
