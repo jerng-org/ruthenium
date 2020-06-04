@@ -20,13 +20,32 @@ markupFileNames.forEach ( ( current, index, array ) => {
 } // , thisArg  
 )
 
-/*
-const formMarkupFileNames = fs.readdirSync ('/var/task/markup/forms')
-formMarkupFileNames.forEach ( ( current, index, array ) => {
-    markups[ 'forms/' + current.slice (0, -3) ] = require ( '/var/task/markup/forms/' + current )
-} // , thisArg 
-) 
-*/
+const additionalRequestInformation = async _data => `
+    The following may be informative:
+    ${ JSON.stringify( {
+        
+        signals:
+            _data.RU.signals,
+        
+        http: 
+            _data.RU.request.http,
+        
+        queryStringParameters:
+            _data.RU.request.queryStringParameters,
+        
+        formStringParameters:
+            _data.RU.request.formStringParameters,
+        
+        headers:
+            _data.RU.request.headers,
+            
+        middlewares:
+            _data.RU.middlewares,
+            
+        io:
+            _data.RU.io
+            
+    } , null, 4 ) }`
 
 const composeResponse = async ( data ) => {
     
@@ -123,30 +142,8 @@ const composeResponse = async ( data ) => {
                         (data.RU.response.markup).
                         
                         The following may be informative:
-                        ${ JSON.stringify( {
-                            
-                            signals:
-                                data.RU.signals,
-                            
-                            http: 
-                                data.RU.request.http,
-                            
-                            queryStringParameters:
-                                data.RU.request.queryStringParameters,
-                            
-                            formStringParameters:
-                                data.RU.request.formStringParameters,
-                            
-                            headers:
-                                data.RU.request.headers,
-                                
-                            middlewares:
-                                data.RU.middlewares,
-                                
-                            io:
-                                data.RU.io
-                                
-                        } , null, 4 ) }`)
+                        
+                        ${ additionalRequestInformation ( data )}`)
             }
         }
         else
@@ -166,36 +163,15 @@ const composeResponse = async ( data ) => {
                 }
             }
             else {
-                throw   Error (`(middlewares/compose-response.js) could not find (${ data.RU.signals.inferredMarkupName }) 
+                throw   Error (`(middlewares/compose-response.js) could not find 
+                        (${ data.RU.signals.inferredMarkupName }) 
                         in the markups directory. That name was guessed because 
                         (${ data.RU.signals.taskname }) was specified at 
                         (data.RU.signals.taskname).
-                        
+
                         The following may be informative:
-                        ${ JSON.stringify( {
-                            
-                            signals:
-                                data.RU.signals,
-                            
-                            http: 
-                                data.RU.request.http,
-                            
-                            queryStringParameters:
-                                data.RU.request.queryStringParameters,
-                            
-                            formStringParameters:
-                                data.RU.request.formStringParameters,
-                            
-                            headers:
-                                data.RU.request.headers,
-                                
-                            middlewares:
-                                data.RU.middlewares,
-                                
-                            io:
-                                data.RU.io
-                                
-                        } , null, 4 ) }`)
+                        
+                        ${ additionalRequestInformation ( data )}`)
             }
         }
         
@@ -204,8 +180,8 @@ const composeResponse = async ( data ) => {
         
     }
     else {
-        throw   Error (`(middlewares/compose-response.js) found that (data.RU.response) is falsy. 
-                Not sure how to proceed.
+        throw   Error (`(middlewares/compose-response.js) found that 
+                (data.RU.response) is falsy. Not sure how to proceed.
                 This is usually not a problem as it should be initiated at 
                 (ruthenium.js).`)
     }

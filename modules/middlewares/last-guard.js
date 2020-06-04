@@ -96,7 +96,7 @@ const lastGuard = async ( data ) => {
         
         // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
         response.body +=
-        `(last-guard.js) 
+        `(last-guard.js) :
          <pre><code>${
             util.inspect( data, { depth: Infinity } )
         }</code></pre>` 
