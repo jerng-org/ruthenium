@@ -66,7 +66,10 @@ const deskSchemasPost = async ( data ) => {
     // Call storage layer
     data.RU.io.put = await ddbdc.put ( params ).promise()
 
-    console.warn (`ddbdc.put returned:`, data.RU.io.put ) 
+    console.warn (`ddbdc.put returned:`, data.RU.io.put )
+    
+    // View
+    data.RU.signals.redirectRoute = 'initial'
 
 /*
 
