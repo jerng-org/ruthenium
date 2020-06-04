@@ -51,7 +51,7 @@ const deskSchemasPost = async ( data ) => {
         
         TableName: 'TEST-APP-DESK-SCHEMAS',
         
-        Item: candidate['data-schemas'],            
+        Item: candidate['desk-schemas'],            
         
         ConditionExpression : 'attribute_not_exists(id)',
           //  This checks data already in the DB;
