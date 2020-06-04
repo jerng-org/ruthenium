@@ -7,24 +7,13 @@ const trInTable = async ( item ) => {
             <tr>
                 <td>
     <!----------------------------------------------------------------------------->
-    <!-- contentEditable
-                onclick="
-                this.contentEditable = true;
-                const text = this.firstChild,
-                    r = document.createRange(),
-                    s = window.getSelection();
-                r.setStart(text,0);
-                r.setEnd(text,text.length);
-                s.removeAllRanges();
-                s.addRange(r);
-    -->        
     
     <blockquote>
 
     <script>
         const toggler = ( element, classString, focusSelector ) => {
         
-        Array.prototype.forEach.call( 
+        Array.prototype.forEach.call ( 
             element.querySelectorAll( classString ), 
             e => {
                 const wasVisible = ['','initial'].includes(e.style.display);
