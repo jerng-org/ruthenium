@@ -47,10 +47,7 @@ const deskSchemasPost = async ( data ) => {
     // Provide ID
     candidate['desk-schemas'].id = uuid4()
 
-console.warn(candidate)
-
-    // Call storage layer
-    data.RU.io.put = await ddbdc.put ( {
+    const params = {
         
         TableName: 'TEST-APP-DESK-SCHEMAS',
         
@@ -63,7 +60,12 @@ console.warn(candidate)
           
         ReturnConsumedCapacity : 'TOTAL'
       
-    } ).promise()
+    }
+    
+console.warn ( params )
+
+    // Call storage layer
+    data.RU.io.put = await ddbdc.put ( params ).promise()
 
     console.warn (`ddbdc.put returned:`, data.RU.io.put ) 
 
