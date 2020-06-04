@@ -14,14 +14,6 @@ const deskSchemasPost = async ( data ) => {
 
     //  begin PROTOTYPICAL data validation process:
     
-    console.warn (
-                'desk-schemas'  in candidate ,
-                'name'       in candidate[ 'desk-schemas' ],
-                'columns'    in candidate[ 'desk-schemas' ],
-                candidate[ 'desk-schemas' ]['columns'] instanceof Array,
-                candidate[ 'desk-schemas' ]['columns'].length > 0  
-    )
-    
     //  VAL_OP#1
     if ( !  (   'desk-schemas'  in candidate 
                 && 'name'       in candidate[ 'desk-schemas' ]
@@ -43,6 +35,14 @@ const deskSchemasPost = async ( data ) => {
                     && /[^A-Z\[\]\s]+/.test( column[ 'type' ] ) 
                 ) 
         ) {
+          
+            console.warn (  `name?`, 'name'   in column,
+                            `type?`, 'type'   in column,
+                            `name rx?`, /[^A-Z\[\]\s]+/.test( column[ 'name' ] ), // reuse blacklist in (reindex-form-names.js)
+                            `type rx?`, /[^A-Z\[\]\s]+/.test( column[ 'type' ] )   
+            )
+    
+          
             throw Error (   `(~/tasks/restful/desk-schemas-post/) candidate 
                             insertion to (desk-schemas.columns) did not pass 
                             validation.` ) 
