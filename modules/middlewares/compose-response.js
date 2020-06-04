@@ -119,7 +119,7 @@ const composeResponse = async ( data ) => {
             }
             else {
                 throw   Error (`Could not find (${ data.RU.signals.markupName 
-                        }.js) in the markups directory. That name was specified at
+                        }) in the markups directory. That name was specified at
                         (data.RU.response.markup).
                         
                         The following may be informative:
@@ -169,33 +169,7 @@ const composeResponse = async ( data ) => {
                 throw   Error (`Could not find (${ data.RU.signals.inferredMarkupName }) 
                         in the markups directory. That name was guessed because 
                         (${ data.RU.signals.taskname }) was specified at 
-                        (data.RU.signals.taskname).
-                        
-                        The following may be informative:
-                        ${ JSON.stringify( {
-                            
-                            signals:
-                                data.RU.signals,
-                            
-                            http: 
-                                data.RU.request.http,
-                            
-                            queryStringParameters:
-                                data.RU.request.queryStringParameters,
-                            
-                            formStringParameters:
-                                data.RU.request.formStringParameters,
-                            
-                            headers:
-                                data.RU.request.headers,
-                                
-                            middlewares:
-                                data.RU.middlewares,
-                                
-                            io:
-                                data.RU.io
-                                
-                        } , null, 4 ) }`)
+                        (data.RU.signals.taskname).`)
             }
         }
         
