@@ -1,4 +1,4 @@
-'use strict'
+markupmarkup'use strict'
 
 const ddbdc     
     = require ( '/var/task/io/ddbdc.js' )
