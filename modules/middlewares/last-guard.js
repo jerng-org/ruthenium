@@ -71,7 +71,7 @@ const lastGuard = async ( data ) => {
 
     
     //*     
-    console.warn (`This code is in a clumsy location; consider moving it to its own middleware;`)
+    console.warn (`(last-guard.js) This code is in a clumsy location; consider moving it to its own middleware;`)
     
     
     if (    data.RU.response.headers
@@ -96,7 +96,8 @@ const lastGuard = async ( data ) => {
         
         // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
         response.body +=
-        `<pre><code>${
+        `(last-guard.js) 
+         <pre><code>${
             util.inspect( data, { depth: Infinity } )
         }</code></pre>` 
         

@@ -118,7 +118,7 @@ const composeResponse = async ( data ) => {
                 }
             }
             else {
-                throw   Error (`Could not find (${ data.RU.signals.markupName 
+                throw   Error (`(middlewares/compose-response.js) could not find (${ data.RU.signals.markupName 
                         }.js) in the markups directory. That name was specified at
                         (data.RU.response.markup).
                         
@@ -166,7 +166,7 @@ const composeResponse = async ( data ) => {
                 }
             }
             else {
-                throw   Error (`Could not find (${ data.RU.signals.inferredMarkupName }) 
+                throw   Error (`(middlewares/compose-response.js) could not find (${ data.RU.signals.inferredMarkupName }) 
                         in the markups directory. That name was guessed because 
                         (${ data.RU.signals.taskname }) was specified at 
                         (data.RU.signals.taskname).
@@ -204,7 +204,8 @@ const composeResponse = async ( data ) => {
         
     }
     else {
-        throw   Error (`(data.RU.response) is falsy. Not sure how to proceed.
+        throw   Error (`(middlewares/compose-response.js) found that (data.RU.response) is falsy. 
+                Not sure how to proceed.
                 This is usually not a problem as it should be initiated at 
                 (ruthenium.js).`)
     }
