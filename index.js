@@ -120,6 +120,10 @@ exports.handler = async function () {
         
         composeResponse,
         lastGuard
+        
+        // TODO: devise a mechanism where the reducer hides (data) from being
+        //          returned to (index.js) by default, UNLESS (lastGuard.js)
+        //          is installed.
     ]
     
     return ruthenium ( hostInitializedData, middlewares )
@@ -129,4 +133,4 @@ exports.handler = async function () {
 mark (`index.js LOADED`, true)
 
 
-} catch ( e ) { console.error ( `(/var/task/index.js) outer 'try' block.`, e, e.stack ) }
+} catch ( e ) { console.error ( `(/var/task/index.js) outer 'try' block.`, e ) }
