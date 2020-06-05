@@ -123,7 +123,7 @@ exports.handler = async function () {
         
         // TODO: devise a mechanism where the reducer hides (data) from being
         //          returned to (index.js) by default, UNLESS (lastGuard.js)
-        //          is installed.
+        //          is installed. #security
     ]
     
     return ruthenium ( hostInitializedData, middlewares )
