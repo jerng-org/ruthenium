@@ -47,7 +47,7 @@ const additionalRequestInformation = async _data => `
     } , null, 4 ) }`
 
 const composeResponse = async ( data ) => {
-    
+    /*
     if ( data.RU.response ) {
         
         
@@ -184,7 +184,7 @@ const composeResponse = async ( data ) => {
                 This is usually not a problem as it should be initiated at 
                 (ruthenium.js).`)
     }
-    
+    */
     return data
 }
 
