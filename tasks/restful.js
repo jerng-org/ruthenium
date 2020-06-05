@@ -2,14 +2,14 @@
 
 const deskSchemasGet 
     = require ( '/var/task/tasks/restful/desk-schemas-get/desk-schemas-get.js' )
-
+/*
 const deskSchemasPost 
     = require ( '/var/task/tasks/restful/desk-schemas-post.js' ) 
+*/
 
-/*
 const formsDeskSchemasPostMarkup
     = require ( `/var/task/tasks/restful/forms-get/markup-desk-schemas-post.js` ) 
-*/
+
 
 
 const restful = async ( data ) => {
