@@ -26,10 +26,10 @@ Environmental variable with password
 
 */
 
-const mark          = require ( '/var/task/modules/mark' )            
-const childProcess  = require('child_process')
+const mark          = require ( '/var/task/modules/mark.js' )
+const childProcess  = require ( 'child_process' )
 
-const commitMessage = `-`
+const commitMessage = `centralised modules (r-u-s.js`
 
 const gitCommit = () => { try {
 
@@ -98,4 +98,4 @@ const gitCommit = () => { try {
 } catch (e) { console.error ( `gitCommit.js`, e.stack ) } }
 
 module.exports = gitCommit
-mark (`gitCommit.js LOADED`, true)
+mark (`gitCommit.js LOADED`)

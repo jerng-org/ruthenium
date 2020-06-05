@@ -1,16 +1,10 @@
 'use strict'
  
-const fs 
-    = require ( 'fs' )
-
-const markups = {
-}
-
-const mark 
-    = require ( '/var/task/modules/mark' )
+const rus       = require ( '/var/task/modules/r-u-s.js' )
 
 // THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
-const markupFileNames = fs.readdirSync ('/var/task/tasks', {
+const markups   = {}
+const markupFileNames = rus.node.fs.readdirSync ('/var/task/tasks', {
     withFileTypes: true
 })
 markupFileNames.forEach ( ( current, index, array ) => {
@@ -192,4 +186,4 @@ const composeResponse = async ( data ) => {
 }
 
 module.exports  = composeResponse
-mark (`compose-response.js LOADED`, true)
+rus.mark (`compose-response.js LOADED`)

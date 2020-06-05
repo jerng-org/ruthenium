@@ -1,13 +1,13 @@
 'use strict'
 
-const mark      = require ( '/var/task/modules/mark' )            
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
 const thisIsMyName = async ( data ) => {
     
-    mark ( `_template-markup.js EXECUTED` )
+    rus.mark ( `_template-markup.js EXECUTED` )
 
     //  Return markup as string, and it will be assigned to
     //      (data.RU.response.body) by (composeResponse.js).
@@ -18,4 +18,4 @@ const thisIsMyName = async ( data ) => {
 }
 
 module.exports = thisIsMyName
-mark ( `_template-markup.js LOADED` )
+rus.mark ( `_template-markup.js LOADED` )

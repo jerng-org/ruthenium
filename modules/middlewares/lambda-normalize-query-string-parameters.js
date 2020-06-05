@@ -1,12 +1,12 @@
 'use strict'
 
-const querystring   = require ( 'querystring' )
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const lambdaNormalizeQueryStringParameters = async ( data ) => {
 
     if (data.LAMBDA.event.rawQueryString) {
         
-        data.RU.request.queryStringParameters = querystring.parse ( data.LAMBDA.event.rawQueryString )  
+        data.RU.request.queryStringParameters = rus.node.querystring.parse ( data.LAMBDA.event.rawQueryString )  
         
         for ( const prop in data.RU.request.queryStringParameters ) {
             

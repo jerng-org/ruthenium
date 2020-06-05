@@ -1,8 +1,6 @@
 'use strict'
 
-const util = require ('util')
-
-const mark = require ( '/var/task/modules/mark' )
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const lastGuard = async ( data ) => {
 
@@ -100,7 +98,7 @@ const lastGuard = async ( data ) => {
         response.body +=
         `(last-guard.js) :
          <pre><code>${
-            util.inspect( data, { depth: Infinity } )
+            rus.node.util.inspect( data, { depth: Infinity } )
         }</code></pre>` 
         
         // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
@@ -116,4 +114,4 @@ const lastGuard = async ( data ) => {
     
 }
 module.exports = lastGuard
-mark (`last-guard.js LOADED`, true)
+rus.mark (`last-guard.js LOADED`)

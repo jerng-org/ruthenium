@@ -1,7 +1,6 @@
 'use strict'
 
-// NODE
-const fs    = require ( 'fs' )
+const rus   = require ( '/var/task/modules/r-u-s.js' )
 const blobs = {}
 
 // SAFELIST - until we add something like https://www.npmjs.com/package/mime
@@ -10,12 +9,12 @@ const blobMimeTypes = {
     'milligram.min.css':`text/css`,
     'ruthenium-web-client.mjs':`text/javascript`,
 }
-{   const stack = (new Error).stack;  console.warn ( `⚠ DEBT_WARNING ⚠`, 
+{   const stack = (new Error).stack;  console.warn ( `⚠ DEBT_NOTE ⚠`, 
     stack.substring( stack.indexOf( '(' ), stack.indexOf( ')' ) + 1 ) )
 }
-const blobFileNames = fs.readdirSync ('/var/task/io/blobs')
+const blobFileNames = rus.node.fs.readdirSync ('/var/task/io/blobs')
 blobFileNames.forEach ( ( current, index, array ) => {
-    blobs[ current ] = fs.readFileSync ( '/var/task/io/blobs/' + current, 'utf8' )
+    blobs[ current ] = rus.node.fs.readFileSync ( '/var/task/io/blobs/' + current, 'utf8' )
 } /* , thisArg */ ) 
 
 

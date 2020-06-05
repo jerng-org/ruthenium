@@ -1,12 +1,10 @@
 'use strict'
 
-const mark     = require ( '/var/task/modules/mark' )
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
-
-const fs = require ( 'fs' )
+// 
 const tasks = {}
-
-const taskFileNames = fs.readdirSync ('/var/task/tasks')
+const taskFileNames = rus.node.fs.readdirSync ('/var/task/tasks')
 taskFileNames.forEach ( ( current, index, array ) => {
     if ( current.toLowerCase().slice ( -3 ) == '.js' ) {
         tasks[ current.slice (0, -3) ] = require ( '/var/task/tasks/' + current )
@@ -116,4 +114,4 @@ const router = async ( data ) => {
     return data
 }
 module.exports = router
-mark (`router.js LOADED`, true)
+rus.mark (`router.js LOADED`)
