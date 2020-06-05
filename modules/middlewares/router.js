@@ -1,5 +1,8 @@
 'use strict'
 
+const mark     = require ( '/var/task/modules/mark' )
+
+
 const fs = require ( 'fs' )
 const tasks = {}
 
@@ -113,3 +116,4 @@ const router = async ( data ) => {
     return data
 }
 module.exports = router
+mark (`router.js LOADED`, true)
