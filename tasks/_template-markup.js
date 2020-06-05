@@ -7,7 +7,7 @@ const mark      = require ( '/var/task/modules/mark' )
 
 const thisIsMyName = async ( data ) => {
     
-    mark ( `thisIsMyName.js EXECUTED` )
+    mark ( `_template-markup.js EXECUTED` )
 
     //  Return markup as string, and it will be assigned to
     //      (data.RU.response.body) by (composeResponse.js).
@@ -18,4 +18,4 @@ const thisIsMyName = async ( data ) => {
 }
 
 module.exports = thisIsMyName
-mark ( `this-is-my-name.js LOADED` )
+mark ( `_template-markup.js LOADED` )
