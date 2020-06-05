@@ -118,7 +118,7 @@ exports.handler = async function () {
         //router,
         
         //composeResponse,
-        //lastGuard
+        lastGuard
     ]
     
     return ruthenium ( hostInitializedData, middlewares )
