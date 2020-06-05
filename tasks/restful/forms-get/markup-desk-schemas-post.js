@@ -16,7 +16,7 @@ test data: 11%2C22,33;44+55!66$77%2788(99)00"11
 const fs                    = require ( 'fs' )
 const htmlIndex             = fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
 
-const uuid4                   = require ( '/var/task/modules/uuid4.js' )
+const uuid4                 = require ( '/var/task/modules/uuid4.js' )
 
 const createDeskSchema = async ( data ) => {
     
@@ -26,14 +26,14 @@ const createDeskSchema = async ( data ) => {
 <fieldset>
     
   
-    <label      for="desk-schemas[name].1">
+    <label      for="desk-schemas[name]">
         
         Name for this new Desk Schema
         </label>
     
     <input      type="text"  
                 name="desk-schemas[name]"
-                id="desk-schemas[name].1"
+                id="desk-schemas[name]"
                 placeholder="-- enter a name --"
                 required
                 >       

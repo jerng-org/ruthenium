@@ -1,5 +1,6 @@
 'use strict'
-
+try {
+    
 /*
 
 {   const stack = (new Error).stack;  console.warn ( `⚠ DEBT_WARNING ⚠`, 
@@ -124,4 +125,8 @@ exports.handler = async function () {
     return ruthenium ( hostInitializedData, middlewares )
     
 }
+// exports.handler()
 mark (`index.js LOADED`, true)
+
+
+} catch ( e ) { console.error ( `(/var/task/index.js) outer 'try' block.` ) }
