@@ -1,5 +1,7 @@
 'use strict'
 
+const mark          = require ( '/var/task/modules/mark' )            
+
 //  Uncertain theoretical proposition about dependency injection :
 //
 //      (ruthenium.js)                                  is the client;
@@ -54,3 +56,4 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     return await MIDDLEWARE_QUEUE.reduce ( reducer , initialData )
 }
 module.exports = ruthenium
+mark (`ruthenium.js LOADED`, true)

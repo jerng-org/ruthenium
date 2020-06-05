@@ -9,6 +9,9 @@
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
+const mark 
+    = require ( '/var/task/modules/mark' )
+
 const tunnelRestfulForms = async ( data ) => {
     
     if ( 'form-method' in data.RU.request.queryStringParameters ) {
@@ -35,3 +38,4 @@ const tunnelRestfulForms = async ( data ) => {
 
 }
 module.exports = tunnelRestfulForms
+mark (`tunnel-restful.js LOADED`, true)

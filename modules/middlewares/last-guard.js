@@ -2,6 +2,8 @@
 
 const util = require ('util')
 
+const mark = require ( '/var/task/modules/mark' )
+
 const lastGuard = async ( data ) => {
 
 
@@ -114,3 +116,4 @@ const lastGuard = async ( data ) => {
     
 }
 module.exports = lastGuard
+mark (`last-guard.js LOADED`, true)

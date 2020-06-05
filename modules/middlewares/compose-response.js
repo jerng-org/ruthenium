@@ -189,3 +189,4 @@ const composeResponse = async ( data ) => {
 }
 
 module.exports  = composeResponse
+mark (`compose-response.js LOADED`, true)

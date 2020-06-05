@@ -4,8 +4,12 @@
 object  =>  Object.values ( object )    =>  array       // retains (null), discards (undefined)
 object  <=  { ... array }               <=  array       // retails (null), 
 
-*/            
-            
+*/ 
+
+const mark 
+    = require ( '/var/task/modules/mark' )
+
+
 const asIs          = 'asIs'
 const toArrayIndex  = 'toArrayIndex'
 const initiateAccumulator 
@@ -326,3 +330,4 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
 }
 
 module.exports  = reindexFormNames
+mark (`reindex-form-names.js LOADED`, true)
