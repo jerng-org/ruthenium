@@ -6,8 +6,10 @@
 //  TEMPLATE : in-code technical debt warning
 //  console.warn ( `⚠ DEBT_NOTE ⚠`, )
 
-const mark = require ( '/var/task/modules/mark.js' )
+const mark  = require ( '/var/task/modules/mark.js' )
 mark (`r-u-s.js (ruthenium utilities) LOADING ...`)
+
+const url   = require ('url')
 
 //////////
 //      //
@@ -15,7 +17,7 @@ mark (`r-u-s.js (ruthenium utilities) LOADING ...`)
 //      //
 //////////
 
-
+console.warn ( `fixme: rus.rurl (determine how to build a URL`)
 const rutheniumUtilities= {
 
     aws: {
@@ -36,9 +38,13 @@ const rutheniumUtilities= {
         
         querystring: require ( 'querystring' ),
         
+        url: url,
+        
         util: require ( 'util' )    
     },
     
+    nurl: () => new ( url.URL )('/test-middleware','https://secureapi.sudo.coffee'),
+
     stringify: 
         data => JSON.stringify( data, null, 4 ).replace(/\\n/g, '\n'),
     
