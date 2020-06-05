@@ -129,4 +129,4 @@ exports.handler = async function () {
 mark (`index.js LOADED`, true)
 
 
-} catch ( e ) { console.error ( `(/var/task/index.js) outer 'try' block.` ) }
+} catch ( e ) { console.error ( `(/var/task/index.js) outer 'try' block.`, e, e.stack ) }
