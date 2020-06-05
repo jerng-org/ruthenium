@@ -1,10 +1,6 @@
 'use strict'
 
-const ddbdc     
-    = require ( '/var/task/io/ddbdc.js' )
-
-const uuid4     
-    = require ( '/var/task/modules/uuid4.js' )
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const deskSchemasPost = async ( data ) => {
   
@@ -64,7 +60,7 @@ const deskSchemasPost = async ( data ) => {
     }
 
     // Call storage layer
-    data.RU.io.put = await ddbdc.put ( params ).promise()
+    data.RU.io.put = await rus.ddbdc.put ( params ).promise()
 
     console.warn (`ddbdc.put returned:`, data.RU.io.put )
     

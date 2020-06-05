@@ -9,8 +9,7 @@
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
-const mark 
-    = require ( '/var/task/modules/mark' )
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const tunnelRestfulForms = async ( data ) => {
     
@@ -38,4 +37,4 @@ const tunnelRestfulForms = async ( data ) => {
 
 }
 module.exports = tunnelRestfulForms
-mark (`tunnel-restful.js LOADED`, true)
+rus.mark (`tunnel-restful.js LOADED`)

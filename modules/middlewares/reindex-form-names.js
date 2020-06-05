@@ -6,9 +6,7 @@ object  <=  { ... array }               <=  array       // retails (null),
 
 */ 
 
-const mark 
-    = require ( '/var/task/modules/mark' )
-
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const asIs          = 'asIs'
 const toArrayIndex  = 'toArrayIndex'
@@ -330,4 +328,4 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
 }
 
 module.exports  = reindexFormNames
-mark (`reindex-form-names.js LOADED`, true)
+rus.mark (`reindex-form-names.js LOADED`)

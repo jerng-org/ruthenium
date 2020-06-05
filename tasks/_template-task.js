@@ -3,7 +3,7 @@
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
-const mark      = require ( '/var/task/modules/mark' )            
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const thisIsMyName = async ( data ) => {
     
@@ -11,8 +11,8 @@ const thisIsMyName = async ( data ) => {
 
     // no need to return (data)
 
-    mark ( `_template-task.js EXECUTED` )
+    rus.mark ( `_template-task.js EXECUTED` )
 }
 
 module.exports = thisIsMyName
-mark ( `_template-task.js LOADED` )
+rus.mark ( `_template-task.js LOADED` )

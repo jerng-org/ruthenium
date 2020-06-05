@@ -4,9 +4,9 @@
 
 */
 
-const mark      = require ( '/var/task/modules/mark' )            
+const mark       = require ( '/var/task/modules/mark.js' )
 
-const crypto    = require("crypto")
+const crypto    = require ( 'crypto' )
 
 const uuid4     = () => {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
@@ -16,4 +16,4 @@ const uuid4     = () => {
 }
 
 module.exports  = uuid4
-mark (`uuid4.js LOADED`, true)
+mark (`uuid4.js LOADED`)

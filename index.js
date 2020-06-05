@@ -1,38 +1,46 @@
 'use strict'
 try {
+
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
     
-/*
+//  See pertinent (nodeJS-specific) documentation at /var/task/modules/r-u-s.js
 
-{   const stack = (new Error).stack;  console.warn ( `⚠ DEBT_WARNING ⚠`, 
-    stack.substring( stack.indexOf( '(' ), stack.indexOf( ')' ) + 1 ) )
-}
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
-JSON.stringify( DATA, null, 4 ).replace(/\\n/g, '\n')
+rus.mark( `index.js loaded mark.js`)
 
-*/
+    console.warn (
+        `DEBT_NOTE`,
+        [   `THINGS TO DO :`,
+            `https://www.npmjs.com/package/require-directory`,
+            `utilities/RU module?`,
+            `test-middleware?ruthenium=restful&type=schemas;`,
+            `sessions`, 
+            `cognito`, 
+            `formHelpers`, 
+            `urlHelpers`, 
+            `htmlHelpers`, 
+            `markuplayouts?... `,
+            'writes to (data.RU.signals) should be signed by the writer',
+            `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`
+        ]
+    )
 
-// require() executes modules; use require.res() to resolve without execution.
+// VERSION CONTROL HACK
+rus.gitCommit()
 
-const util      
-    = require ( 'util' )
-
-// PROJECT
-const mark 
-    = require ( '/var/task/modules/mark' )
-mark( `index.js loaded mark.js`)
-
-const gitCommit
-    = require ( '/var/task/modules/git-commit' )            
-
-gitCommit ()
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
 
 const ruthenium 
     = require ( '/var/task/modules/framework/ruthenium' )
-
-const wastems   = async ms => { 
-    const start = new Date().getTime() 
-    while (new Date().getTime() < start + ms);
-}
 
 // PROJECT - MIDDLEWARES, lexical order
 const composeResponse
@@ -65,27 +73,16 @@ const router
 const tunnelRestfulForms                
     = require (`/var/task/modules/middlewares/tunnel-restful-forms.js`) 
 
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+
 // LAMBDA HANDLER
 exports.handler = async function () { 
 
-    console.warn (
-        `DEBT_NOTE`,
-        [   `THINGS TO DO :`,
-            `https://www.npmjs.com/package/require-directory`,
-            `utilities/RU module?`,
-            `test-middleware?ruthenium=restful&type=schemas;`,
-            `sessions`, 
-            `cognito`, 
-            `formHelpers`, 
-            `urlHelpers`, 
-            `htmlHelpers`, 
-            `markuplayouts?... `,
-            'writes to (data.RU.signals) should be signed by the writer',
-            `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`
-        ]
-    )
-
-    mark( `index.js, first mark in handler`, true )
+    rus.mark( `index.js, first mark in handler`, true )
     
     const hostInitializedData = {
         LAMBDA: {
@@ -97,7 +94,7 @@ exports.handler = async function () {
             
             //  Things which may not be immediately obvious, which we should
             //  encourage developers to be aware of.
-            inspectGlobal:  () => util.inspect ( global, { 
+            inspectGlobal:  () => rus.node.util.inspect ( global, { 
                 depth:      Infinity, 
                 showHidden: true
             } )
@@ -121,7 +118,7 @@ exports.handler = async function () {
         composeResponse,
         lastGuard
         
-        // TODO: devise a mechanism where the reducer hides (data) from being
+        // TODO:    devise a mechanism where the reducer hides (data) from being
         //          returned to (index.js) by default, UNLESS (lastGuard.js)
         //          is installed. #security
     ]
@@ -130,7 +127,14 @@ exports.handler = async function () {
     
 }
 // exports.handler()
-mark (`index.js LOADED`, true)
+rus.mark (`index.js LOADED`)
+
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
 
 
-} catch ( e ) { console.error ( `(/var/task/index.js) outer 'try' block.`, e ) }
+} catch ( e ) { console.error ( `
+(/var/task/index.js) outer 'try' block.`, e ) }

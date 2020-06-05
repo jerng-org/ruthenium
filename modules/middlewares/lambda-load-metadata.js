@@ -1,16 +1,12 @@
 'use strict'
 
-const mark
-    = require ( '/var/task/modules/mark' )            
-
-const ddbdc
-    = require ( '/var/task/io/ddbdc.js' )
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const lambdaLoadMetadata = async ( data ) => {
     
     data.RU.metadata = ( 
         
-        await ddbdc.get ( {
+        await rus.aws.ddbdc.get ( {
             TableName:              'TEST-APP-STASH',
             Key:                    { key: 'metadata' },
             ReturnConsumedCapacity: 'TOTAL'
@@ -23,3 +19,4 @@ const lambdaLoadMetadata = async ( data ) => {
 
 }
 module.exports = lambdaLoadMetadata
+rus.mark (`(lamba-load-metadata.js) LOADED`)

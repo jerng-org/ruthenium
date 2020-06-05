@@ -1,7 +1,7 @@
 'use strict'
 
-const mark 
-    = require ( '/var/task/modules/mark' )
+const rus 
+    = require ( '/var/task/modules/r-u-s.js' )
 
 const rutheniumReducer = async (    DATA_IN_PROMISE, 
                                     CURRENT_MIDDLEWARE, 
@@ -11,12 +11,12 @@ const rutheniumReducer = async (    DATA_IN_PROMISE,
         const DATA                  = await DATA_IN_PROMISE
         
         try { 
-            const intermediateData  = await CURRENT_MIDDLEWARE ( DATA )
             
+            const intermediateData  = await CURRENT_MIDDLEWARE ( DATA )
             
             /* THROWN? This line does not run, if CURRENT_MIDDLEWARE erred */
             
-            mark ( `middleware executed: ${ CURRENT_MIDDLEWARE.name }` )
+            rus.mark ( `middleware executed: ${ CURRENT_MIDDLEWARE.name }` )
 
             // Validation: as middlewares may return nonsense
             if (        typeof intermediateData == 'object'
@@ -48,7 +48,7 @@ throw Error (   `ruthenium.js :
     
     ... returned an unconventional ( intermediateData ): (
 ${ 
-    JSON.stringify ( {
+    rus.stringify ( {
         intermediateData_TYPE:  thingType,
         TO_STRING:              (       thingType == 'object'
                                     &&  intermediateData.toString
@@ -65,7 +65,7 @@ ${
     
     Here's DATA before it was operated on by the faulty middleware:
     
-    ${ JSON.stringify ( DATA, null, 4 ) }
+    ${ rus.stringify ( DATA ) }
 `)
 
 /*  More sensitive, related, information:

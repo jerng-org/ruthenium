@@ -13,10 +13,10 @@ test data: 11%2C22,33;44+55!66$77%2788(99)00"11
 
 */
 
-const fs                    = require ( 'fs' )
-const htmlIndex             = fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const uuid4                 = require ( '/var/task/modules/uuid4.js' )
+const htmlIndex = rus.node.fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
+
 
 const createDeskSchema = async ( data ) => {
     

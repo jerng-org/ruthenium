@@ -1,5 +1,6 @@
 'use strict'
-const querystring   = require ( 'querystring' )
+
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 //  Section on reserved characters:
 //  -   https://tools.ietf.org/html/rfc3986#section-2.2
@@ -24,7 +25,7 @@ const lambdaNormalizeFormData = async ( data ) => {
 
         // NEW
         data.RU.request.formStringParameters
-            = querystring.parse ( data.RU.request.rawFormString )
+            = rus.noquerystring.parse ( data.RU.request.rawFormString )
 
 
         console.warn (`GET method forms are not yet supported;`)

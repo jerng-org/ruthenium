@@ -1,14 +1,13 @@
 'use strict'
 
-const ddbdc     
-    = require ( '/var/task/io/ddbdc.js' )
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const markup 
     = require ( '/var/task/tasks/restful/desk-schemas-get/desk-schemas-get-markup.js' )
 
 const deskSchemasGet = async ( data ) => {
 
-    data.RU.io.deskSchemasScan = await ddbdc.scan ( {
+    data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan ( {
         TableName: 'TEST-APP-DESK-SCHEMAS',
         ReturnConsumedCapacity : 'TOTAL'
     } ).promise()
