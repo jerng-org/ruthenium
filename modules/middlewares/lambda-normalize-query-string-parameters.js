@@ -1,5 +1,7 @@
 'use strict'
 
+console.warn (`fixme https://html.spec.whatwg.org/#set-of-comma-separated-tokens`)
+
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const lambdaNormalizeQueryStringParameters = async ( data ) => {
