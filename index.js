@@ -114,10 +114,10 @@ exports.handler = async function () {
         
         // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
         tunnelRestfulForms,
-        reindexFormNames
-,        router,
+        reindexFormNames,
+        router,
         
-        composeResponse,
+        //composeResponse,
         lastGuard
     ]
     
