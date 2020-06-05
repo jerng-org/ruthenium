@@ -32,14 +32,13 @@ const wastems   = async ms => {
     const start = new Date().getTime() 
     while (new Date().getTime() < start + ms);
 }
-
 // PROJECT - MIDDLEWARES, lexical order
 const composeResponse
     = require (`/var/task/modules/middlewares/compose-response.js`) 
-
+/*
 const lastGuard
     = require (`/var/task/modules/middlewares/last-guard.js`) 
-
+*/
 const lambdaCopyRequestParameters
     = require (`/var/task/modules/middlewares/lambda-copy-request-parameters.js`) 
 
@@ -54,16 +53,16 @@ const lambdaNormalizeHeaders
 
 const lambdaNormalizeQueryStringParameters   
     = require (`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`) 
-
+/*
 const reindexFormNames   
     = require (`/var/task/modules/middlewares/reindex-form-names.js`) 
-/*
+
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
-*/
+
 const tunnelRestfulForms                
     = require (`/var/task/modules/middlewares/tunnel-restful-forms.js`) 
-
+*/
 // LAMBDA HANDLER
 exports.handler = async function () { 
 
@@ -113,12 +112,12 @@ exports.handler = async function () {
         lambdaLoadMetadata,
         
         // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
-        tunnelRestfulForms,
-        reindexFormNames,
+        //tunnelRestfulForms,
+        //reindexFormNames,
         //router,
         
         composeResponse,
-        lastGuard
+        //lastGuard
     ]
     
     return ruthenium ( hostInitializedData, middlewares )
