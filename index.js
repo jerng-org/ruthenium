@@ -32,11 +32,11 @@ const wastems   = async ms => {
     const start = new Date().getTime() 
     while (new Date().getTime() < start + ms);
 }
-
+/*
 // PROJECT - MIDDLEWARES, lexical order
 const composeResponse
     = require (`/var/task/modules/middlewares/compose-response.js`) 
-
+*/
 const lastGuard
     = require (`/var/task/modules/middlewares/last-guard.js`) 
 
@@ -115,7 +115,7 @@ exports.handler = async function () {
         // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
         tunnelRestfulForms,
         reindexFormNames,
-        //router,
+        router,
         
         //composeResponse,
         lastGuard
