@@ -54,10 +54,10 @@ const lambdaNormalizeHeaders
 
 const lambdaNormalizeQueryStringParameters   
     = require (`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`) 
-
+/*
 const reindexFormNames   
     = require (`/var/task/modules/middlewares/reindex-form-names.js`) 
-
+*/
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
 /*
@@ -114,7 +114,7 @@ exports.handler = async function () {
         
         // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
         //tunnelRestfulForms,
-        reindexFormNames,
+        //reindexFormNames,
         router,
         
         //composeResponse,
