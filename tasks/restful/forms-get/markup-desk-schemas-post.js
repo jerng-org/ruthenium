@@ -22,11 +22,14 @@ const createDeskSchema = async ( data ) => {
     
     return `${ htmlIndex }
 
-<form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+<form   method="POST" 
+        action="/test-middleware?route=restful&type=desk-schemas"
+        >
 <fieldset>
     
   
-    <label      for="desk-schemas[name]">
+    <label  for="desk-schemas[name]"
+            >
         
         Name for this new Desk Schema
         </label>
@@ -39,7 +42,8 @@ const createDeskSchema = async ( data ) => {
                 >       
     
     <table  data-ru-incrementable-group="column-definition"
-            data-ru-incrementable-role="parent">
+            data-ru-incrementable-role="parent"
+            >
         <tr>
             <td>
                 <i  class="material-icons"
