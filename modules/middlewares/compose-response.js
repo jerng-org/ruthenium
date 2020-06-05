@@ -2,8 +2,8 @@
  
 const fs 
     = require ( 'fs' )
+
 const markups = {
-    //schemas : {},
 }
 
 const mark 
@@ -16,7 +16,7 @@ const markupFileNames = fs.readdirSync ('/var/task/tasks', {
 markupFileNames.forEach ( ( current, index, array ) => {
     if (current.isFile()) {
         
-        console.warn(`searching in:`, current.name.slice (0, -3), `for`, '/var/task/tasks/' + current.name )
+        // console.warn(`searching in:`, current.name.slice (0, -3), `for`, '/var/task/tasks/' + current.name )
         
         markups[ current.name.slice (0, -3) ] = require ( '/var/task/tasks/' + current.name )
     }        
