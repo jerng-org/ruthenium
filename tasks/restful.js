@@ -1,7 +1,8 @@
 'use strict'
-/*
+
 const deskSchemasGet 
     = require ( '/var/task/tasks/restful/desk-schemas-get/desk-schemas-get.js' )
+/*
 
 const deskSchemasPost 
     = require ( '/var/task/tasks/restful/desk-schemas-post.js' ) 
