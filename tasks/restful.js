@@ -6,10 +6,10 @@ const deskSchemasGet
 const deskSchemasPost 
     = require ( '/var/task/tasks/restful/desk-schemas-post.js' ) 
 
-
 const formsDeskSchemasPostMarkup
-    = require ( `/var/task/tasks/restful/forms-get/markup-desk-schemas-post.js` ) 
+    = require ( `/var/task/tasks/restful/forms-get/markup-desk-schemas-post.js` )
 
+//const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
 
 const restful = async ( data ) => {
@@ -118,7 +118,7 @@ case
                                 ('virtual-row'): 
                                     // Which individual Thing?
                                 data.RU.signals.sendResponse = {
-                                    //body: await formsDeskSchemasPostMarkup()
+                                    body: await formsDeskSchemasPostMarkup()
                                 }
                                 break
                                 
@@ -155,7 +155,7 @@ case
                                 case
                                 ('virtual-table'):
                                     // Which Type (set, group) of things?
-                                //await deskSchemasGet ( data ) 
+                                await deskSchemasGet ( data ) 
                                 break
                                 
                                 default:
@@ -176,7 +176,7 @@ case
                                 case
                                 ('virtual-table'):
                                     // Which Type (set, group) of things?
-                                //await deskSchemasPost ( data ) 
+                                await deskSchemasPost ( data ) 
                                 break
                                 
                                 default:
