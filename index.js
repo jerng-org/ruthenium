@@ -36,10 +36,10 @@ const wastems   = async ms => {
 // PROJECT - MIDDLEWARES, lexical order
 const composeResponse
     = require (`/var/task/modules/middlewares/compose-response.js`) 
-
+*/
 const lastGuard
     = require (`/var/task/modules/middlewares/last-guard.js`) 
-*/
+
 const lambdaCopyRequestParameters
     = require (`/var/task/modules/middlewares/lambda-copy-request-parameters.js`) 
 
@@ -118,7 +118,7 @@ exports.handler = async function () {
         //router,
         
         //composeResponse,
-        //lastGuard
+        lastGuard
     ]
     
     return ruthenium ( hostInitializedData, middlewares )
