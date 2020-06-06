@@ -43,7 +43,13 @@ const rutheniumUtilities= {
         util: require ( 'util' )    
     },
     
-    nurl: () => new ( url.URL )('/test-middleware','https://secureapi.sudo.coffee'),
+    url: () => {    //  add various options to customise all URL components
+                    //  with useful defaults
+        
+        const baseUrl = new ( url.URL ) (   '/test-middleware',
+                                            'https://secureapi.sudo.coffee'
+                                        )
+    },
 
     stringify: 
         data => JSON.stringify( data, null, 4 ).replace(/\\n/g, '\n'),

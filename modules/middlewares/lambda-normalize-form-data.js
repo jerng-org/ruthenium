@@ -1,12 +1,9 @@
 'use strict'
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+//  PLEASE CAREFULLY refer to notes 
+//  in (lambda-normalize-query-string-parameters.js)
 
-//  Section on reserved characters:
-//  -   https://tools.ietf.org/html/rfc3986#section-2.2
-//
-//  HTML5 has a special configuration for form-data sent via the GET method
-//  -   https://www.w3.org/TR/html52/sec-forms.html#form-submission-algorithm    
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const lambdaNormalizeFormData = async ( data ) => {
 
