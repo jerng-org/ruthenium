@@ -43,12 +43,36 @@ const rutheniumUtilities= {
         util: require ( 'util' )    
     },
     
-    url: () => {    //  add various options to customise all URL components
-                    //  with useful defaults
+    //  Add various options to customise all URL components;
+    //  with useful defaults;
+    
+    //  Structure of (pairArrays) : 
+    //  
+    //      [
+    //          [ name, value ],
+    //          [ name, value ]
+    //      ]
+    
+    //  Explitly DISALLOW usage of { name: value }
+    //
+    //      While this allows shorter code, it provides too many ways to
+    //      do the same thing.
+    //
+    //      Furthermore it fails to accommodate duplicate (name)s
+    
+    appUrl: pairArrays => {   
         
-        const baseUrl = new ( url.URL ) (   '/test-middleware',
+        const URLObject = new ( url.URL ) ( '/test-middleware',
                                             'https://secureapi.sudo.coffee'
-                                        )
+                                            )
+                                            
+        const URLSearchParamsObject = URLObject.searchParams
+        
+        for ( const [ name, value ] of pairArrays ) {
+            URLSearchParamsObject.append ( name, value )
+        }
+        
+        return URLObject
     },
 
     stringify: 
