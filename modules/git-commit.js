@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark.js' )
 const childProcess  = require ( 'child_process' )
 
-const commitMessage = `(rus.url) initiated, but incomplete`
+const commitMessage = `(rus.appUrl ( pairArrays ) complete )`
 
 const gitCommit = () => { try {
 
