@@ -23,7 +23,7 @@ const createDeskSchema = async ( data ) => {
     return `${ htmlIndex }
 
 <form   method="POST" 
-        action="${ rus.nurl() }/test-middleware?route=restful&type=desk-schemas"
+        action="${ rus.url() }/test-middleware?route=restful&type=desk-schemas"
         >
 <fieldset>
     
