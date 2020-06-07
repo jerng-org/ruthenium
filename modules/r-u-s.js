@@ -17,8 +17,7 @@ const url   = require ('url')
 //      //
 //////////
 
-console.warn ( `fixme: rus.rurl (determine how to build a URL`)
-const rutheniumUtilities= {
+const rus= {
 
     aws: {
         ddbdc: require ( '/var/task/io/ddbdc.js' ),
@@ -26,6 +25,113 @@ const rutheniumUtilities= {
     
     gitCommit: 
         require ( '/var/task/modules/git-commit' ),
+    
+    html : {
+        
+        //  Priorities for (rus.html.form) :
+        //
+        //  -   Throw errors if critical attributes, etc. are missing.
+        //  -   Reduce markup to be typed.
+        //  -   Do not be more specific than necessary.
+        //
+        //  Design decisions:
+        //
+        //  -   (fieldset) is used arbitrarily; so it is left out here;
+        //  -   (label) is often adjacent to its (id)-ed element, but this is
+        //      also not necessary, so it is also left out here;
+        //
+        //
+        
+        
+        form : conf => {
+            
+            if ( ! conf.action ) {
+                throw Error (`(rus.html.form) called, without (conf.action) `)
+            }
+            else
+            if ( ! conf.innerHTML ) {
+                throw Error (`(rus.html.form) called, without (conf.innerHTML) `)
+            }
+            
+            const defaults = {
+                method: 'POST'
+            }
+            
+            const markup 
+                = `<form    method=${ conf.method ? conf.method : defaults.method }
+                            action=${ conf.action }
+                            >
+                            ${ conf.innerHTML }
+                            </form>`
+            return markup
+        },
+        
+        input : conf => {
+            
+            if ( ( ! conf.name ) && ( ! conf.type == 'submit' ) ) {
+                throw Error (`(rus.html.input) called, without (conf.name) `)
+            }
+            else
+            if ( conf.labelInnerHTML && ( ! conf.id ) ) {
+                throw Error (`(rus.html.input) called, (conf.labelInnerHTML) without (conf.id)`)
+            }
+            
+            const defaults = {
+                type: 'text'
+            }
+            
+            const markup 
+                = ` ${  conf.label 
+                        ? `<label   for="${ conf.id }"
+                                    > 
+                                    ${ conf.label }
+                                    </label>` 
+                        : ``
+                    }
+                    <input  type="${ conf.type ? conf.type : defaults.type }"
+                            name="${ conf.name }"
+                            ${ conf.placeholder ? conf.placeholder : '' }
+                            ${ conf.id ? conf.id : '' }
+                            ${ conf.required ? 'required' : '' }
+                            ${ conf.value ? `value="${ conf.value }"` : '' }
+                            >`
+                            
+            return markup
+        },
+/*        
+        select : conf => {
+            
+            if ( ! conf.name ) {
+                throw Error (`(rus.html.input) called, without (conf.name) `)
+            }
+            else
+            if ( conf.labelInnerHTML && ( ! conf.id ) ) {
+                throw Error (`(rus.html.input) called, (conf.labelInnerHTML) without (conf.id)`)
+            }
+            
+            const defaults = {
+                type: 'text'
+            }
+            
+            const markup 
+                = ` ${  conf.label 
+                        ? `<label   for="${ conf.id }"
+                                    > 
+                                    ${ conf.label }
+                                    </label>` 
+                        : ``
+                    }
+                    <input  type="${ conf.type ? conf.type : defaults.type }"
+                            name="${ conf.name }"
+                            ${ conf.placeholder ? conf.placeholder : '' }
+                            ${ conf.id ? conf.id : '' }
+                            ${ conf.required ? 'required' : '' }
+                            >`
+                            
+            return markup
+        },
+*/        
+    },
     
     mark: 
         mark,
@@ -63,7 +169,7 @@ const rutheniumUtilities= {
     appUrl: pairArrays => {   
         
         const URLObject = new ( url.URL ) ( '/test-middleware',
-                                            'https://secureapi.sudo.coffee'
+                                            'https://secure.api.sudo.coffee'
                                             )
                                             
         const URLSearchParamsObject = URLObject.searchParams
@@ -95,5 +201,5 @@ const rutheniumUtilities= {
 //      //
 //////////
 
-module.exports  = rutheniumUtilities
+module.exports  = rus
 mark (`r-u-s.js (ruthenium utilities) LOADED`)

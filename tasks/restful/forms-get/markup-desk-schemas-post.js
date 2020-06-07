@@ -17,29 +17,16 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const htmlIndex = rus.node.fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
 
-
-const createDeskSchema = async ( data ) => {
-    
-    return `${ htmlIndex }
-
-<form   method="POST" 
-        action="${ rus.appUrl( [ [ 'route','restful' ], [ 'type','desk-schemas' ] ] ) }"
-        >
+const innerHTML = `
 <fieldset>
-    
 
-    <label  for="desk-schemas[name]"
-            >
-        
-        Name for this new Desk Schema
-        </label>
-    
-    <input      type="text"  
-                name="desk-schemas[name]"
-                id="desk-schemas[name]"
-                placeholder="-- enter a name --"
-                required
-                >       
+    ${ rus.html.input ( {
+        name:       `desk-schemas[name]`,
+        id:         `desk-schemas[name]`,
+        placeholder:`-- enter a Desk Schema name --`,
+        required:   true,
+        label:      `Name for this new Desk Schema`
+    } ) }
     
     <table  data-ru-incrementable-group="column-definition"
             data-ru-incrementable-role="parent"
@@ -90,11 +77,11 @@ const createDeskSchema = async ( data ) => {
                     remove_circle_outline</i>
             </td>
             <td>
-                <input      type="text"  
-                            name="desk-schemas[columns]###[name]"
-                            placeholder="-- enter a name --"
-                            required
-                            >       
+                ${ rus.html.input ( {
+                    name:       `desk-schemas[columns]###[name]`,
+                    placeholder:`-- enter a Column name --`,
+                    required:   true
+                } ) }
             </td>
             <td>
                 <select name="desk-schemas[columns]###[type]"
@@ -112,14 +99,25 @@ const createDeskSchema = async ( data ) => {
         
     </table>
     
-    <input      type="submit" 
-                value="POST it">
+    ${  rus.html.input ( {
+        value:  `POST it`,
+        type:   `submit`
+    } ) }
 
 </fieldset>
-</form>`
+`
 
-
-
+const createDeskSchema = async ( data ) => {
+    
+    return htmlIndex + rus.html.form ( {
+        
+        action: rus.appUrl( [ 
+            [ 'route','restful' ], 
+            [ 'type','desk-schemas' ] 
+        ] ),
+        
+        innerHTML: innerHTML
+    } )
     
 }
 module.exports = createDeskSchema
