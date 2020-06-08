@@ -11,7 +11,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const tunnelRestfulForms = async ( data ) => {
+const formsTunnelRestfulMethods = async ( data ) => {
     
     if ( 'form-method' in data.RU.request.queryStringParameters ) {
         
@@ -36,5 +36,5 @@ const tunnelRestfulForms = async ( data ) => {
     return data
 
 }
-module.exports = tunnelRestfulForms
-rus.mark (`tunnel-restful.js LOADED`)
+module.exports = formsTunnelRestfulMethods
+rus.mark (`forms-tunnel-restful-methods.js LOADED`)

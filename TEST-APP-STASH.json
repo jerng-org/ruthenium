@@ -1,0 +1,60 @@
+{
+  "key": "metadata",
+  "value": {
+    "forms-validate-data.js": {
+      "candidates": {
+        "desk-schemas": {
+          "kids": {
+            "columns": {
+              "kids": {
+                "name": {
+                  "self": {
+                    "rules": {
+                      "regex_test": "/[^A-Z\\[\\]\\s]+/",
+                      "required": true
+                    }
+                  }
+                },
+                "type": {
+                  "self": {
+                    "included_in": [
+                      "S",
+                      "N",
+                      "other"
+                    ],
+                    "rules": {
+                      "required": true
+                    }
+                  }
+                }
+              },
+              "self": {
+                "rules": {
+                  "required": true
+                }
+              }
+            },
+            "name": {
+              "self": {
+                "rules": {
+                  "instanceof": [
+                    "Array"
+                  ],
+                  "length_gt": 0,
+                  "required": true
+                }
+              }
+            }
+          },
+          "self": {
+            "notes": "",
+            "rules": {
+              "required": true
+            }
+          }
+        }
+      },
+      "notes": "It looks like the the general form of data stored here (data about some kind of nested map) could be: { parent_node_name: { self:{ rules: {}, notes: \"\" }, kids:{ kid1_node_name: {}, kid2_node_name: {} } } }"
+    }
+  }
+}

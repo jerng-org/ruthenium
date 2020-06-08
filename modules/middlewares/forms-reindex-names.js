@@ -105,7 +105,7 @@ const buildDeepPath =   (   htmlNameAttribute,
     
 } // const build
 
-const reindexFormNames = async ( data ) => {
+const formsReindexNames = async ( data ) => {
 
 /*
 ///////////////////////////////////////////////////////////////////////////////
@@ -327,5 +327,5 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
     return data
 }
 
-module.exports  = reindexFormNames
-rus.mark (`reindex-form-names.js LOADED`)
+module.exports  = formsReindexNames
+rus.mark (`forms-reindex-names.js LOADED`)

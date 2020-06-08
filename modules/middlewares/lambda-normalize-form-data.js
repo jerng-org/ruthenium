@@ -22,7 +22,7 @@ const lambdaNormalizeFormData = async ( data ) => {
 
         // NEW
         data.RU.request.formStringParameters
-            = rus.noquerystring.parse ( data.RU.request.rawFormString )
+            = rus.node.querystring.parse ( data.RU.request.rawFormString )
 
 
         console.warn (`GET method forms are not yet supported;`)

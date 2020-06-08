@@ -23,14 +23,15 @@ const rus= {
         ddbdc: require ( '/var/task/io/ddbdc.js' ),
     },
     
-    gitCommit: 
-        require ( '/var/task/modules/git-commit' ),
+    lambdaGitCommit: 
+        require ( '/var/task/modules/lambda-git-commit' ),
     
     html : {
         
         //  Priorities for (rus.html.form) :
         //
         //  -   Throw errors if critical attributes, etc. are missing.
+        //  -   Automatically close tags.
         //  -   Reduce markup to be typed.
         //  -   Do not be more specific than necessary.
         //
@@ -89,11 +90,11 @@ const rus= {
                         : ``
                     }
                     <input  type="${ conf.type ? conf.type : defaults.type }"
-                            name="${ conf.name }"
-                            ${ conf.placeholder ? conf.placeholder : '' }
-                            ${ conf.id ? conf.id : '' }
-                            ${ conf.required ? 'required' : '' }
-                            ${ conf.value ? `value="${ conf.value }"` : '' }
+                            ${ conf.name        ? `name="${conf.name}"`     : '' }"
+                            ${ conf.placeholder ? conf.placeholder          : '' }
+                            ${ conf.id          ? conf.id                   : '' }
+                            ${ conf.required    ? 'required'                : '' }
+                            ${ conf.value       ? `value="${ conf.value }"` : '' }
                             >`
                             
             return markup
@@ -130,6 +131,10 @@ const rus= {
                             
             return markup
         },
+
+        table : conf => {
+        }
+
 */        
     },
     
