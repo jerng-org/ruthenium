@@ -31,7 +31,7 @@ rus.mark( `index.js loaded mark.js`)
     )
 
 // VERSION CONTROL HACK
-rus.gitCommit()
+rus.lambdaGitCommit()
 
 //////////
 //      //
@@ -64,14 +64,17 @@ const lambdaNormalizeHeaders
 const lambdaNormalizeQueryStringParameters   
     = require (`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`) 
 
-const reindexFormNames   
-    = require (`/var/task/modules/middlewares/reindex-form-names.js`) 
+const formsReindexNames   
+    = require (`/var/task/modules/middlewares/forms-reindex-names.js`) 
 
+const formsTunnelRestfulMethods                
+    = require (`/var/task/modules/middlewares/forms-tunnel-restful-methods.js`) 
+
+const formsValidateData
+    =   require (`/var/task/modules/middlewares/forms-validate-date.js`)
+    
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
-
-const tunnelRestfulForms                
-    = require (`/var/task/modules/middlewares/tunnel-restful-forms.js`) 
 
 //////////
 //      //
@@ -111,8 +114,11 @@ exports.handler = async function () {
         lambdaLoadMetadata,
         
         // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
-        tunnelRestfulForms,
-        reindexFormNames,
+        
+        formsTunnelRestfulMethods,
+        formsReindexNames,
+        formsValidateData,
+        
         router,
         
         composeResponse,

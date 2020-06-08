@@ -41,7 +41,7 @@ const deskSchemasPost = async ( data ) => {
     //  end PROTOTYPICAL data validation process.
 
     // Provide ID
-    candidate['desk-schemas'].id = uuid4()
+    candidate['desk-schemas'].id = rus.uuid4()
 
     // Configure DB client parameters
     const params = {
