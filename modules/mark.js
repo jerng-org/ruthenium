@@ -79,7 +79,7 @@ let invocationStartCPUsum
     //
     //  Core functionality:
     
-const mark = ( taskLabel, firstInHandler ) => {
+const mark = async ( taskLabel, firstInHandler ) => {
 
     if ( newExecutionContext ) {
         if ( firstInHandler ) {

@@ -17,7 +17,7 @@ const url   = require ('url')
 //      //
 //////////
 
-const rus= {
+const rus   = {
 
     aws: {
         ddbdc: require ( '/var/task/io/ddbdc.js' ),
@@ -44,7 +44,7 @@ const rus= {
         //
         
         
-        form : conf => {
+        form : async conf => {
             
             if ( ! conf.action ) {
                 throw Error (`(rus.html.form) called, without (conf.action) `)
@@ -67,7 +67,7 @@ const rus= {
             return markup
         },
         
-        input : conf => {
+        input : async conf => {
             
             if ( ( ! conf.name ) && ( ! conf.type == 'submit' ) ) {
                 throw Error (`(rus.html.input) called, without (conf.name) `)
@@ -171,7 +171,7 @@ const rus= {
     //
     //      Furthermore it fails to accommodate duplicate (name)s
     
-    appUrl: pairArrays => {   
+    appUrl: async pairArrays => {   
         
         const URLObject = new ( url.URL ) ( '/test-middleware',
                                             'https://secure.api.sudo.coffee'
@@ -187,13 +187,13 @@ const rus= {
     },
 
     stringify: 
-        data => JSON.stringify( data, null, 4 ).replace(/\\n/g, '\n'),
+        async data => JSON.stringify( data, null, 4 ).replace(/\\n/g, '\n'),
     
     uuid4:     
         require ( '/var/task/modules/uuid4.js' ),
 
     wasteMilliseconds: 
-        ms => { 
+        async ms => { 
             const start = new Date().getTime() 
             while (new Date().getTime() < start + ms);
         },
