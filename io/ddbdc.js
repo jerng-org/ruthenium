@@ -1,6 +1,6 @@
 'use strict'
 
-const mark              = require ( '/var/task/modules/mark.js' )
+const mark = require ( '/var/task/modules/mark.js' )
 
 const aws               = require ( 'aws-sdk' ) 
 aws.config.apiVersions  = { dynamodb: '2012-08-10' }
@@ -8,7 +8,7 @@ aws.config.apiVersions  = { dynamodb: '2012-08-10' }
 const ddb               = new aws.DynamoDB ()
 const ddbdc             = new aws.DynamoDB.DocumentClient () 
 
-module.exports = ddbdc
+module.exports          = ddbdc
 mark(`(ddbdc.js) LOADED`)
 
 /*

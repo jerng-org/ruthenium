@@ -30,9 +30,12 @@ rus.mark( `index.js loaded mark.js`)
         ]
     )
 
-// VERSION CONTROL HACK
 rus.lambdaGitCommit()
-//( async () => await rus.lambdaGitCommit() )()
+    //  VERSION CONTROL HACK
+    //  a SYNCHRONOUS FUNCTION - why? Because the alternative is:
+    //
+    //      ( async () => await rus.lambdaGitCommit() )()
+    //
     //  I actually don't understand how this came to be legitimate syntax for
     //  performing (await) in the global scope. I was under the impression that
     //  even if the the (async arrow function expression body) waited for the 
