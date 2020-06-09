@@ -32,6 +32,14 @@ rus.mark( `index.js loaded mark.js`)
 
 // VERSION CONTROL HACK
 rus.lambdaGitCommit()
+//( async () => await rus.lambdaGitCommit() )()
+    //  I actually don't understand how this came to be legitimate syntax for
+    //  performing (await) in the global scope. I was under the impression that
+    //  even if the the (async arrow function expression body) waited for the 
+    //  (rus.lambdaGitCommit), the global scope would not wait for ( async )().
+    //
+    //  But all the stackoverflows say that the global scope will wait for it.
+
 
 //////////
 //      //
@@ -71,7 +79,7 @@ const formsTunnelRestfulMethods
     = require (`/var/task/modules/middlewares/forms-tunnel-restful-methods.js`) 
 
 const formsValidateData
-    =   require (`/var/task/modules/middlewares/forms-validate-date.js`)
+    =   require (`/var/task/modules/middlewares/forms-validate-data.js`)
     
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
