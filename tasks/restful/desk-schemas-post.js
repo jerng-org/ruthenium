@@ -2,6 +2,8 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
+const deskSchemasModel = require (`/var/task/io/models/desk-schemas.js`)
+
 const deskSchemasPost = async ( data ) => {
   
     //  throw new Error ( JSON.stringify( data.RU.request.formStringParameters, null, 4 ) ) 
@@ -10,6 +12,10 @@ const deskSchemasPost = async ( data ) => {
 
     //  begin PROTOTYPICAL data validation process:
     
+    await rus.validate ( data.RU.request.formStringParameters, 'desk-schemas' )
+    
+    throw Error (data)
+    /*
     //  VAL_OP#1
     if ( !  (   'desk-schemas'  in candidate 
                 && 'name'       in candidate[ 'desk-schemas' ]
@@ -31,13 +37,14 @@ const deskSchemasPost = async ( data ) => {
                     && [ 'S', 'N', 'other' ].includes( column[ 'type' ] ) 
                 ) 
         ) {
-          
             throw Error (   `(~/tasks/restful/desk-schemas-post/) candidate 
                             insertion to (desk-schemas.columns) did not pass 
                             validation.` ) 
         }
     }
-
+    */
+    
+    
     //  end PROTOTYPICAL data validation process.
 
     // Provide ID

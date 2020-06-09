@@ -9,6 +9,20 @@
 const mark  = require ( '/var/task/modules/mark.js' )
 mark (`r-u-s.js (ruthenium utilities) LOADING ...`)
 
+const fs = require ('fs')
+
+let models = {}
+const modelFileNames = fs.readdirSync ('/var/task/io/models')
+modelFileNames.forEach ( ( current, index, array ) => {
+    
+    if (        current[0] != '_'
+            &&  current.toLowerCase().slice ( -3 ) == '.js' )
+    {
+        models[ current.slice (0, -3) ] = require ( '/var/task/io/models/' + current )
+    }
+} /* , thisArg */ ) 
+//const topLevelModels = models.map( m => m.name )
+
 const url   = require ('url')
 
 //////////
@@ -18,6 +32,21 @@ const url   = require ('url')
 //////////
 
 const rus   = {
+
+    appUrl: async pairArrays => {   
+        
+        const URLObject = new ( url.URL ) ( '/test-middleware',
+                                            'https://secure.api.sudo.coffee'
+                                            )
+                                            
+        const URLSearchParamsObject = URLObject.searchParams
+        
+        for ( const [ name, value ] of pairArrays ) {
+            URLSearchParamsObject.append ( name, value )
+        }
+        
+        return URLObject
+    },
 
     aws: {
         ddbdc: require ( '/var/task/io/ddbdc.js' ),
@@ -171,27 +200,43 @@ const rus   = {
     //
     //      Furthermore it fails to accommodate duplicate (name)s
     
-    appUrl: async pairArrays => {   
-        
-        const URLObject = new ( url.URL ) ( '/test-middleware',
-                                            'https://secure.api.sudo.coffee'
-                                            )
-                                            
-        const URLSearchParamsObject = URLObject.searchParams
-        
-        for ( const [ name, value ] of pairArrays ) {
-            URLSearchParamsObject.append ( name, value )
-        }
-        
-        return URLObject
-    },
-
     stringify: 
         async data => JSON.stringify( data, null, 4 ).replace(/\\n/g, '\n'),
     
     uuid4:     
         require ( '/var/task/modules/uuid4.js' ),
+    
+    validate : 
+        async ( formStringParameters, modelNameString ) => {
 
+
+            /* DRAFT FN BODY BEGINS */
+
+            if ( ! ( modelNameString in models ) ) {
+                throw Error (   `(rus.validate) the requested modelNameString 
+                                (${modelNameString}) was not found in (models).
+                                `)
+            }
+            
+            if (    models[ modelNameString ].self.rules.required 
+                    &&  ! ( modelNameString in formStringParameters ) ) {
+                throw Error (   `(rus.validate) required an Item named 
+                                (${modelNameString}), but did not find it in
+                                (formStringParameters)`)        
+            }
+            
+            
+            for ( const sub in models [ modelNameString ].subs ) {
+                /* DRAFT FN RECURSION */
+            }
+
+            /* DRAFT FN BODY ENDS */
+
+            throw Error ( JSON.stringify ( models, null, 4 ) )
+            
+            
+        },
+        
     wasteMilliseconds: 
         async ms => { 
             const start = new Date().getTime() 
