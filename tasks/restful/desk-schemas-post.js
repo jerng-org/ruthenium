@@ -41,7 +41,7 @@ const deskSchemasPost = async ( data ) => {
     //  end PROTOTYPICAL data validation process.
 
     // Provide ID
-    candidate['desk-schemas'].id = rus.uuid4()
+    candidate['desk-schemas'].id = await rus.uuid4()
 
     // Configure DB client parameters
     const params = {
@@ -60,7 +60,7 @@ const deskSchemasPost = async ( data ) => {
     }
 
     // Call storage layer
-    data.RU.io.put = await rus.ddbdc.put ( params ).promise()
+    data.RU.io.put = await rus.aws.ddbdc.put ( params ).promise()
 
     console.warn (`ddbdc.put returned:`, data.RU.io.put )
     

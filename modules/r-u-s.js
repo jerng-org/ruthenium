@@ -23,9 +23,6 @@ const rus   = {
         ddbdc: require ( '/var/task/io/ddbdc.js' ),
     },
     
-    lambdaGitCommit: 
-        require ( '/var/task/modules/lambda-git-commit' ),
-    
     html : {
         
         //  Priorities for (rus.html.form) :
@@ -44,7 +41,7 @@ const rus   = {
         //
         
         
-        form : async conf => {
+        form :  async conf => {
             
             if ( ! conf.action ) {
                 throw Error (`(rus.html.form) called, without (conf.action) `)
@@ -137,6 +134,9 @@ const rus   = {
 
 */        
     },
+    
+    lambdaGitCommit: 
+        require ( '/var/task/modules/lambda-git-commit' ),
     
     mark: 
         mark,

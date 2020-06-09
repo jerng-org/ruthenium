@@ -17,10 +17,10 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const htmlIndex = rus.node.fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
 
-const innerHTML = `
+const innerHTML = async () => `
 <fieldset>
 
-    ${ rus.html.input ( {
+    ${ await rus.html.input ( {
         name:       `desk-schemas[name]`,
         id:         `desk-schemas[name]`,
         placeholder:`-- enter a Desk Schema name --`,
@@ -77,7 +77,7 @@ const innerHTML = `
                     remove_circle_outline</i>
             </td>
             <td>
-                ${ rus.html.input ( {
+                ${ await rus.html.input ( {
                     name:       `desk-schemas[columns]###[name]`,
                     placeholder:`-- enter a Column name --`,
                     required:   true
@@ -99,7 +99,7 @@ const innerHTML = `
         
     </table>
     
-    ${  rus.html.input ( {
+    ${  await rus.html.input ( {
         value:  `POST it`,
         type:   `submit`
     } ) }
@@ -109,14 +109,14 @@ const innerHTML = `
 
 const createDeskSchema = async ( data ) => {
     
-    return htmlIndex + rus.html.form ( {
+    return htmlIndex + await rus.html.form ( {
         
-        action: rus.appUrl( [ 
+        action: await rus.appUrl( [ 
             [ 'route','restful' ], 
             [ 'type','desk-schemas' ] 
         ] ),
         
-        innerHTML: innerHTML
+        innerHTML: await innerHTML()
     } )
     
 }
