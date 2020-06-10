@@ -12,9 +12,9 @@ const deskSchemasPost = async ( data ) => {
 
     //  begin PROTOTYPICAL data validation process:
     
-    await rus.validate ( data.RU.request.formStringParameters, 'desk-schemas' )
+    const validity = await rus.validate ( data.RU.request.formStringParameters, 'desk-schemas' )
     
-    throw Error (data)
+    throw Error ( [`(desk-schemas-post.js) validity :`, validity, `data:`, data] )
     /*
     //  VAL_OP#1
     if ( !  (   'desk-schemas'  in candidate 
