@@ -207,32 +207,163 @@ const rus   = {
         require ( '/var/task/modules/uuid4.js' ),
     
     validate : 
-        async ( formStringParameters, modelNameString ) => {
-
-
-            /* DRAFT FN BODY BEGINS */
-
-            if ( ! ( modelNameString in models ) ) {
-                throw Error (   `(rus.validate) the requested modelNameString 
-                                (${modelNameString}) was not found in (models).
-                                `)
-            }
+    
+        /*  First parameter:        ValidateMe object
+        
+                Example -   { 'desk-schemas': { 
+                                
+                                name:       'myName',
+                                columns:    [
+                                    
+                                    { name:     'iAmColumn1',
+                                      type:     'other'
+                                    }
+                                    
+                                    { name:     'iAmColumn2',
+                                      type:     'S'
+                                    }
+                                ]
+                            } }
+        
+           
+           
+            Second parameter:       String | Array
             
-            if (    models[ modelNameString ].self.rules.required 
-                    &&  ! ( modelNameString in formStringParameters ) ) {
-                throw Error (   `(rus.validate) required an Item named 
-                                (${modelNameString}), but did not find it in
-                                (formStringParameters)`)        
-            }
+                String  -   string_key of the Models object
+                
+                Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
+                
+                    Where is the Models object?
+                    
+                    Answer: framework should have loaded it already.
+        
             
             
-            for ( const sub in models [ modelNameString ].subs ) {
-                /* DRAFT FN RECURSION */
+            Implicit parameter:     Models object
+            
+                Example -   models =
+                
+            {    
+                'desk-schemas': {  
+                    self:   {
+                        notes:  '',
+                        rules:  {
+                            required: true
+                        }
+                    },
+                    subs:   {
+                        
+                        name: {
+                            self: {
+                                notes:  '',
+                                rules: {
+                                    required: true
+                                }
+                            }
+                        },
+                        // desk-schemas/name
+                        
+                        columns: {
+                            
+                            self: {
+                                notes:  '',
+                                rules: {
+                                    required: true,
+                                    instance_of: Array,
+                                    length_gt: 0
+                                }
+                            },
+                            subs: {
+                              
+                                name: {
+                                    self: {
+                                        notes:  '',
+                                        rules: {
+                                            regex_test: "/[^A-Z\\[\\]\\s]+/",
+                                        required: true
+                                        }
+                                    }
+                                },
+                                // desk-schemas/columns/name
+                              
+                                type: {
+                                    self: {
+                                        notes:  '',
+                                        rules: {
+                                            required: true,
+                                            included_in: [
+                                                "S",
+                                                "N",
+                                                "other"
+                                            ]
+                                        }
+                                    }
+                                }
+                                // desk-schemas/columns/type
+                            }
+                        } 
+                        // desk-schemas/columns
+                    }
+                }
+                // desk-schemas
+            }
+            // models
+        
+        */
+        async ( validateMe, modelKey ) => {
+
+            if
+            ( typeof modelKey == 'string')
+            {
+                if
+                ( modelKey in models )
+                {
+                    const currentModel = models[ modelKey ]
+                }
+                
+                else
+                {
+                    throw Error ( `(rus.validate) the requested modelKey 
+                                  (${modelKey}) was not found in (models).
+                                  `)
+                }
+                
+            }
+            else
+            if 
+            ( modelKey instanceof Array )
+            {
+                //  NOT YET IMPLEMENTED - TODO
             }
 
-            /* DRAFT FN BODY ENDS */
+            const tempValidate = ( _validateMe, _modelKey ) => {
+                
+            //  RULES BEGIN, self-evaluation
+                
+                if
+                ( currentModel.self.rules.required 
+                  && ! ( _modelKey in _validateMe ) 
+                )
+                {
+                    throw Error ( `(rus.validate) required an Item keyed with 
+                                  (${ _modelKey }), but did not find this key
+                                  in (_validateMe)
+                                  `)        
+                }
+                
+            //  RULES END, self-evaluation
+                
+            //  RECURSE INTO SUB-ITEM rules for evaluation : 
+                for ( const sub in models [ _modelKey ].subs ) {
+                    
+                }
+                
+            }
 
-            throw Error ( JSON.stringify ( models, null, 4 ) )
+            tempValidate ( validateMe, modelKey ) 
+
+
+            throw Error ( JSON.stringify ( [, models], null, 4 ) )
             
             
         },
