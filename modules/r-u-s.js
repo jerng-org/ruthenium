@@ -309,58 +309,133 @@ const rus   = {
             }
             // models
         
+        2020-06-11  Generally, I'm not pleased with development in this area of 
+                    the project. Elegance in abstration seems to come with some
+                    cognitive cost of twistyness.
+        
         */
         async ( validateMe, modelKey ) => {
 
-            if
-            ( typeof modelKey == 'string')
-            {
-                if
-                ( modelKey in models )
-                {
-                    const currentModel = models[ modelKey ]
-                }
+            /*  Iterate over models/submodels, and for each,
+                Iterate over validateMe/validateSub
+            */
+
+            const testRule =    (   __dataToValidate, 
+                                    __modelKey, 
+                                    __currentModel,
+                                    __ruleKey            ) => {
                 
-                else
-                {
-                    throw Error ( `(rus.validate) the requested modelKey 
-                                  (${modelKey}) was not found in (models).
-                                  `)
+                switch ( __ruleKey ) {
+                    
+                    case ( 'count_gt' ) :
+                    if ( __currentModel.rules[ __ruleKey ] === 0
+                         && ! ( __modelKey in __dataToValidate )
+                    ) 
+                    {
+                        throw Error ( `(rus.validate) required an Item keyed
+                                      with (${ __modelKey }), but did not
+                                      find this key in (_dataToValidate)
+                                      `)        
+                    }
+                    break
                 }
-                
-            }
-            else
-            if 
-            ( modelKey instanceof Array )
-            {
-                //  NOT YET IMPLEMENTED - TODO
+                // switch
             }
 
-            const tempValidate = ( _validateMe, _modelKey ) => {
+            const tempValidate =    (   _dataToValidate, 
+                                        _modelKey, 
+                                        _models         ) => {
                 
-            //  RULES BEGIN, self-evaluation
+///////////////////////////////////////////////////////////////////////////////
+// OPERATION 1 : determine (_currentModel);
                 
-                if
-                ( currentModel.self.rules.required 
-                  && ! ( _modelKey in _validateMe ) 
-                )
+                let _currentModel
+                
+                if ( typeof _modelKey == 'string' ) {
+                    
+                    if ( _modelKey in _models ) {
+                        
+                        _currentModel = _models[ _modelKey ]
+                    }
+                    else {  throw Error (   `(rus.validate) the requested 
+                                            modelKey (${_modelKey}) was not 
+                                            found in (models).
+                                            `)
+                    }
+                    
+                } else if ( _modelKey instanceof Array ) {
+                    
+                    throw Error ( `(rus.validate) (_modelKey instanceof Array)
+                                  NOT YET IMPLEMENTED - TODO` )
+                }
+    
+///////////////////////////////////////////////////////////////////////////////
+// OPERATION 2 : determine if (_currentModel) is a (leaf node) in the (document tree);
+//
+//                  if _cM is a leaf,
+//                      check all _currentModel rules against (a datum)
+//
+//                  if _cM is NOT a leaf,
+//                      check all _currentModel rules against (an array of data)
+
+                if ( _currentModel.self.leaf ) {   
+                    
+                    for ( const _ruleKey in _currentModel.rules ) {
+                    
+                        testRule    (   _dataToValidate,
+                                        _modelKey,
+                                        _currentModel,
+                                        _ruleKey            ) 
+                    }
+                    // _currentModel.rules
+                    
+                } else {   
+
+                    //  INNER LOOP:                    
+                    //  CYCLE THROUGH DATA for evaluation : 
+                    for ( const _datumToValidate of _dataToValidate[ _modelKey ] ) {
+                        
+                        for ( const _ruleKey in _currentModel.rules ) {
+                        
+                            testRule    (   _datumToValidate,
+                                            _modelKey,
+                                            _currentModel,
+                                            _ruleKey            ) 
+                        }
+                        // _currentModel.rules
+                    }
+                    // _dataToValidate[ _modelKey ]
+                }
+                // _currentModel.self.leaf
+                
+                /*
                 {
                     throw Error ( `(rus.validate) required an Item keyed with 
                                   (${ _modelKey }), but did not find this key
-                                  in (_validateMe)
+                                  in (_dataToValidate)
                                   `)        
-                }
+                }*/
                 
             //  RULES END, self-evaluation
-                
-            //  RECURSE INTO SUB-ITEM rules for evaluation : 
-                for ( const sub in models [ _modelKey ].subs ) {
+
+///////////////////////////////////////////////////////////////////////////////
+// OPERATION 3 : iterate through (subModels, subDataToValidate) pairs;
+            
+//  OUTER LOOP:
+            //  RECURSE INTO SUBMODELS rules for evaluation : 
+            /*
+                for ( const _subModelKey in _models [ _modelKey ].subModels ) {
                     
-                }
+                    const _subModel = _models[ _modelKey ].subs[ _subModelKey ]
+                    
+                    tempValidate ( _subModelKey )
+                } 
+            */
                 
             }
+            // tempValidate ()
 
-            tempValidate ( validateMe, modelKey ) 
+            tempValidate ( validateMe, modelKey, models ) 
 
 
             throw Error ( JSON.stringify ( [, models], null, 4 ) )
