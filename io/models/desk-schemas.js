@@ -4,9 +4,9 @@
 const deskSchemas = {
 
     self:   {
-        leaf:   true,
+        // leaf:   true,
         rules:  {
-            count_gt:   0
+            // count_gt:   0
         },
         notes:  ''
     },
@@ -26,7 +26,7 @@ const deskSchemas = {
         columns: {
             
             self: {
-                leaf:   true,
+                leaf:   false,
                 rules:  {
                     count_gt:   0
                     /*  These should be the implementation of the above:

@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark.js' )
 const childProcess  = require ( 'child_process' )
 
-const commitMessage = `save before erasing work in (rus.validate)`
+const commitMessage = `Intermediate save point - some rework is progressing.`
 
 const lambdaGitCommit =  () => { try {
 
