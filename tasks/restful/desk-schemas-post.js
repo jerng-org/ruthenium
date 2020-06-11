@@ -12,7 +12,25 @@ const deskSchemasPost = async ( data ) => {
 
     //  begin PROTOTYPICAL data validation process:
     
-    const validity = await rus.validate ( data.RU.request.formStringParameters, 'desk-schemas' )
+    const TEST_VALIDATE_ME = { 
+        
+        'desk-schemas': { 
+            name:       'myName',
+            columns:    [
+                {   name:     'iAmColumn1',
+                    type:     'other'
+                },
+                {   name:     'iAmColumn2',
+                    type:     'S'
+                }
+            ]
+        } 
+    }
+    
+    //const scopedModel = await rus.scopeModel  ( 'desk-schemas' )
+    const validity    = await rus.validate    ( TEST_VALIDATE_ME, //data.RU.request.formStringParameters, 
+                                                'desk-schemas'
+                                              )
     
     throw Error ( [`(desk-schemas-post.js) validity :`, validity, `data:`, data] )
     /*

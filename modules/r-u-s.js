@@ -199,7 +199,32 @@ const rus   = {
     //      do the same thing.
     //
     //      Furthermore it fails to accommodate duplicate (name)s
-    
+
+    scopeModel:
+        async _modelKey => {
+            
+            let _currentModel
+            
+            if ( typeof _modelKey == 'string' ) {
+                
+                if ( _modelKey in models ) {
+                    
+                    _currentModel = models[ _modelKey ]
+                }
+                else {  throw Error (   `(rus.scopeModel) the requested 
+                                        modelKey (${_modelKey}) was not 
+                                        found in (models).
+                                        `)
+                }
+                
+            } else if ( _modelKey instanceof Array ) {
+                
+                throw Error ( `(rus.scopeModel) (_modelKey instanceof Array)
+                              NOT YET IMPLEMENTED - TODO` )
+            }
+            return _currentModel
+        },
+        
     stringify: 
         async data => JSON.stringify( data, null, 4 ).replace(/\\n/g, '\n'),
     
@@ -239,100 +264,44 @@ const rus   = {
         
             
             
-            Implicit parameter:     Models object
+            Third parameter:        scopedModel object
             
-                Example -   models =
+                EXAMPLE -   
                 
-            {    
-                'desk-schemas': {  
-                    self:   {
-                        notes:  '',
-                        rules:  {
-                            required: true
-                        }
-                    },
-                    subs:   {
-                        
-                        name: {
-                            self: {
-                                notes:  '',
-                                rules: {
-                                    required: true
-                                }
-                            }
-                        },
-                        // desk-schemas/name
-                        
-                        columns: {
-                            
-                            self: {
-                                notes:  '',
-                                rules: {
-                                    required: true,
-                                    instance_of: Array,
-                                    length_gt: 0
-                                }
-                            },
+                    models =        // built in (r-u-s.js)
+                    { 
+                        'desk-schemas' : { 
+                            self: etc.
                             subs: {
-                              
-                                name: {
-                                    self: {
-                                        notes:  '',
-                                        rules: {
-                                            regex_test: "/[^A-Z\\[\\]\\s]+/",
-                                        required: true
-                                        }
-                                    }
-                                },
-                                // desk-schemas/columns/name
-                              
-                                type: {
-                                    self: {
-                                        notes:  '',
-                                        rules: {
-                                            required: true,
-                                            included_in: [
-                                                "S",
-                                                "N",
-                                                "other"
-                                            ]
-                                        }
-                                    }
-                                }
-                                // desk-schemas/columns/type
+                                name:   { self: etc. },
+                                columns:{ self: etc. }
                             }
                         } 
-                        // desk-schemas/columns
                     }
-                }
-                // desk-schemas
-            }
-            // models
-        
-        2020-06-11  Generally, I'm not pleased with development in this area of 
-                    the project. Elegance in abstration seems to come with some
-                    cognitive cost of twistyness.
-        
-        */
-        async ( validateMe, modelKey ) => {
-
-            const VALIDATE_ME = { 
                 
-                'desk-schemas': { 
-                    name:       'myName',
-                    columns:    [
-                        { name:     'iAmColumn1',
-                          type:     'other'
-                        },
-                        { name:     'iAmColumn2',
-                          type:     'S'
+                    scopedModel =   // returned by (rus.scopeModel)
+                    { 
+                        self: etc.
+                        subs: {
+                            name:   { self: etc. },
+                            columns:{ self: etc. }
                         }
-                    ]
-                } 
-            }
-        
-
-
+                         
+                    }
+        */
+        async ( dataToValidate, modelKey, scopedModel ) => {
+            
+            //  We don't want to be running (rus.scopeModel) on every recursing
+            //  call, so here we control calls to happen only if (scopedModel)
+            //  is not provided ... we then use (modelKey) to find 
+            //  (scopedModel); but for the initiating call you can 
+            //  (rus.validate ( object, string, null) )
+            scopedModel = ( ! scopedModel && modelKey )
+                ? await rus.scopeModel( modelKey )
+                : scopedModel
+                
+                
+/*
             const testRule =    (   __dataToValidate, 
                                     __modelKey, 
                                     __currentModel,
@@ -354,43 +323,22 @@ const rus   = {
                 }
                 // switch
             }
-
-            const tempValidate =    (   _dataToValidate, 
-                                        _modelKey, 
-                                        _models         ) => {
+*/
+            const tempValidate = async (    _dataToValidate, 
+                                            _modelKey, 
+                                            _scopedModel 
+                                                            ) => {
                 
 ///////////////////////////////////////////////////////////////////////////////
-// OPERATION 1 : determine (_currentModel);
-  
-  // We should probably move this out of the way
-                
-                let _currentModel
-                
-                if ( typeof _modelKey == 'string' ) {
-                    
-                    if ( _modelKey in _models ) {
-                        
-                        _currentModel = _models[ _modelKey ]
-                    }
-                    else {  throw Error (   `(rus.validate) the requested 
-                                            modelKey (${_modelKey}) was not 
-                                            found in (models).
-                                            `)
-                    }
-                    
-                } else if ( _modelKey instanceof Array ) {
-                    
-                    throw Error ( `(rus.validate) (_modelKey instanceof Array)
-                                  NOT YET IMPLEMENTED - TODO` )
-                }
+// OPERATION 1 :
+//
     
 ///////////////////////////////////////////////////////////////////////////////
 // OPERATION 2 : 
 //
-
-                const _currentDatum = _dataToValidate[ _modelKey ]
+                const _scopedDatum = _dataToValidate[ _modelKey ]
                 
-                    /*  
+                    /*  EXAMPLE:
                         { 
                             name:       'myName',
                             columns:    [
@@ -404,36 +352,98 @@ const rus   = {
                         }
                     */
 
-                for ( const _subModelKey in _currentModel.subs ) {
-                    // Iterates through 'name', 'columns' (models not data)
+                for ( const _subModelKey in _scopedModel.subs ) 
+                {
+                            // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
 
-                    if ( _currentModel.subs[ _subModelKey ].self.leaf ) {
-                    // a leaf
+                    const rulesToTest = _scopedModel.subs[ _subModelKey ].self.rules
+                            // EXAMPLE: desk-schemas.subs.name.self.rules 
+                            // EXAMPLE: desk-schemas.subs.columns.self.rules 
+                        
+
+                    if ( _scopedModel.subs[ _subModelKey ].self.leaf )
+                    {
+                    // a leaf (in a model)
+                            // EXAMPLE: desk-schemas.subs.name.self.leaf == true
+
+                        //  CONSIDERATION:                    
+                        //  We should put the 'datum is required' test out here,
+                        //  because it requires (_scopedModel.subs);
+                        //  the opportunity cost is that it gives us more than 
+                        //  one place where code checks rules.
+                        if (    rulesToTest.count_gt === 0
+                                && 
+                                (   ( ! ( _subModelKey in _scopedDatum ) ) 
+                                      || _scopedDatum[ _subModelKey ] == undefined
+                                      || _scopedDatum[ _subModelKey ] == null  
+                                    ) 
+                                )
+                        {
+                            throw Error ( `(rus.validate) required an Item keyed
+                                          with (${ _subModelKey }), but did not
+                                          find this key in ( _scopedDatum ), or
+                                          this key's value was (null or 
+                                          undefined);
+                                          `)        
+                        }
+                        else
+                        {
+                            const valueToTest = _scopedDatum[ _subModelKey ]
+                                    // EXAMPLE: _scopedDatum.name    = 'myName'
+                        }
+
+                    // CONTINUE
+                    //testOne ( ???? )
+                        
+                    }
+                    else {                        
+                    // not a leaf (in a model; probably an array of leaves)
+                            // EXAMPLE: desk-schemas.subs.columns.self.leaf == false
                     
-                        _currentDatum[ _subModelKey ]
-                            // 'myName'
-                        _currentModel.subs[ _subModelKey ].self.rules
-                            // desk-schemas.subs.name.self.rules 
                         
-                        //  We can evaluate self.rules;
-                        //  We would also want to pass _currentDatum so that 
-                        //      checks such as (key in _currentDatum) can be 
-                        //      accomplished.
-                        //
-                        //  So  ... sending in  _currentDatum
-                        //                      _currentModel.subs[ _subModelKey ]
-                        //      
-                        //      ... seems isomorphic with
-                        //              tempValidate ( _dataTovalidate, _modelKey, _models) 
+                        if (    rulesToTest.count_gt === 0
+                                && 
+                                (   ( ! ( _subModelKey in _scopedDatum ) ) 
+                                      || ! ( _scopedDatum[ _subModelKey ] instanceof Array )
+                                      || (  _scopedDatum[ _subModelKey ]
+                                                = _scopedDatum[ _subModelKey ].filter(
+                                                    e =>    ( e != null ) 
+                                                            && 
+                                                            ( e != undefined )
+                                            ),
+                                            _scopedDatum[ _subModelKey ].length == 0
+                                         )
+                                ) 
+                        )
+                        {
+                            throw Error ( `(rus.validate) required an Array of 
+                                          items keyed with (${ _subModelKey }), 
+                                          but did not
+                                          find this key in ( _scopedDatum ), or
+                                          the value was not an Array, or the Array 
+                                          contained no non-null, non-undefined
+                                          elements);
+                                          `)        
+                        }
+                        else
+                        {
+                                    // EXAMPLE: _scopedDatum.columns = '[ columns ]'
+                            for (const valueToTest of _scopedDatum[ _subModelKey ] ) 
+                            {
+                                
+                            }
+                            
+                            // CONTINUE
+                            //testOne ( ???? )
+                        }
+
+                        // CONTINUE
+                        //testOne ( _subModelKey, _scopedDatum, _scopedModel )
                         
-                    } else {                        
-                    // not a leaf
                     
-                        _currentDatum[ _subModelKey ]
-                            // '[ columns ]'
-                        _currentModel.subs[ _subModelKey ].self.rules
-                            // desk-schemas.subs.columns.self.rules 
-                        
+                    
+                    
+
                         //  We can first evaluate the self.rules, then
                         //  recurse into subs via tempValidate ();
                     }
@@ -446,9 +456,9 @@ const rus   = {
             }
             // tempValidate ()
 
-            tempValidate (  VALIDATE_ME,    //  temporary data, as above;
+            tempValidate (  dataToValidate, //  temporary data, as above;
                             modelKey,       //  'desk-schemas' from (rus.validate)
-                            models          //  (read from disk in this file)
+                            scopedModel     //  (read from disk in this file)
                          )
 
             throw Error ( JSON.stringify ( [, models], null, 4 ) )
