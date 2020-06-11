@@ -316,10 +316,23 @@ const rus   = {
         */
         async ( validateMe, modelKey ) => {
 
-            /*  Iterate over models/submodels, and for each,
-                Iterate over validateMe/validateSub
-            */
+            const VALIDATE_ME = { 
+                
+                'desk-schemas': { 
+                    name:       'myName',
+                    columns:    [
+                        { name:     'iAmColumn1',
+                          type:     'other'
+                        },
+                        { name:     'iAmColumn2',
+                          type:     'S'
+                        }
+                    ]
+                } 
+            }
+        
 
+/*
             const testRule =    (   __dataToValidate, 
                                     __modelKey, 
                                     __currentModel,
@@ -341,7 +354,7 @@ const rus   = {
                 }
                 // switch
             }
-
+*/
             const tempValidate =    (   _dataToValidate, 
                                         _modelKey, 
                                         _models         ) => {
@@ -370,73 +383,62 @@ const rus   = {
                 }
     
 ///////////////////////////////////////////////////////////////////////////////
-// OPERATION 2 : determine if (_currentModel) is a (leaf node) in the (document tree);
+// OPERATION 2 : 
 //
-//                  if _cM is a leaf,
-//                      check all _currentModel rules against (a datum)
-//
-//                  if _cM is NOT a leaf,
-//                      check all _currentModel rules against (an array of data)
 
-                if ( _currentModel.self.leaf ) {   
-                    
-                    for ( const _ruleKey in _currentModel.rules ) {
-                    
-                        testRule    (   _dataToValidate,
-                                        _modelKey,
-                                        _currentModel,
-                                        _ruleKey            ) 
-                    }
-                    // _currentModel.rules
-                    
-                } else {   
-
-                    //  INNER LOOP:                    
-                    //  CYCLE THROUGH DATA for evaluation : 
-                    for ( const _datumToValidate of _dataToValidate[ _modelKey ] ) {
-                        
-                        for ( const _ruleKey in _currentModel.rules ) {
-                        
-                            testRule    (   _datumToValidate,
-                                            _modelKey,
-                                            _currentModel,
-                                            _ruleKey            ) 
+                const _currentDatum = _dataToValidate[ _modelKey ]
+                
+                    /*  
+                        { 
+                            name:       'myName',
+                            columns:    [
+                                { name:     'iAmColumn1',
+                                  type:     'other'
+                                },
+                                { name:     'iAmColumn2',
+                                  type:     'S'
+                                }
+                            ]
                         }
-                        // _currentModel.rules
+                    */
+
+                for ( const _subModelKey in _currentModel.subs ) {
+                    // Iterates through 'name', 'columns' (models not data)
+
+                    if ( _currentModel.subs[ _subModelKey ].self.leaf ) {
+                    // a leaf
+                    
+                        _currentDatum[ _subModelKey ]
+                            // 'myName'
+                        _currentModel.subs[ _subModelKey ].self.rules
+                            // desk-schemas.subs.name.self.rules 
+                        
+                        //  We can evaluate self.rules;
+                        
+                    } else {                        
+                    // not a leaf
+                    
+                        _currentDatum[ _subModelKey ]
+                            // '[ columns ]'
+                        _currentModel.subs[ _subModelKey ].self.rules
+                            // desk-schemas.subs.columns.self.rules 
+                        
+                        //  We can first evaluate the self.rules, then
+                        //  recurse into subs via tempValidate () ;
                     }
-                    // _dataToValidate[ _modelKey ]
+
                 }
-                // _currentModel.self.leaf
-                
-                /*
-                {
-                    throw Error ( `(rus.validate) required an Item keyed with 
-                                  (${ _modelKey }), but did not find this key
-                                  in (_dataToValidate)
-                                  `)        
-                }*/
-                
-            //  RULES END, self-evaluation
 
 ///////////////////////////////////////////////////////////////////////////////
 // OPERATION 3 : iterate through (subModels, subDataToValidate) pairs;
-            
-//  OUTER LOOP:
-            //  RECURSE INTO SUBMODELS rules for evaluation : 
-            /*
-                for ( const _subModelKey in _models [ _modelKey ].subModels ) {
-                    
-                    const _subModel = _models[ _modelKey ].subs[ _subModelKey ]
-                    
-                    tempValidate ( _subModelKey )
-                } 
-            */
-                
+
             }
             // tempValidate ()
 
-            tempValidate ( validateMe, modelKey, models ) 
-
+            tempValidate (  VALIDATE_ME,    //  temporary data, as above;
+                            modelKey,       //  'desk-schemas' from (rus.validate)
+                            models          //  (read from disk in this file)
+                         )
 
             throw Error ( JSON.stringify ( [, models], null, 4 ) )
             
