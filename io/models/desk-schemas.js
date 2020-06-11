@@ -1,59 +1,67 @@
 'use strict'
 
+// Types and Sub-types
 const deskSchemas = {
 
     self:   {
-        notes:  '',
+        leaf:   true,
         rules:  {
-            required: true
-        }
+            count_gt:   0
+        },
+        notes:  ''
     },
     subs:   {
         
         name: {
-            self: {
-                notes:  '',
+            self:   {
+                leaf:   true,
                 rules: {
-                    required: true
+                    count_gt:   0
                 }
-            }
+            },
+            notes:  ''
         },
         // desk-schemas/name
         
         columns: {
             
             self: {
-                notes:  '',
-                rules: {
-                    required: true,
-                    instance_of: Array,
-                    length_gt: 0
-                }
+                leaf:   true,
+                rules:  {
+                    count_gt:   0
+                    /*  These should be the implementation of the above:
+                        instance_of: Array,
+                        length_gt: 0
+                    */
+                },
+                notes:  ''
             },
             subs: {
               
                 name: {
                     self: {
-                        notes:  '',
-                        rules: {
-                            regex_test: "/[^A-Z\\[\\]\\s]+/",
-                        required: true
-                        }
+                        leaf:   true,
+                        rules:  {
+                            count_gt:   0,
+                            regex_test: "/[^A-Z\\[\\]\\s]+/"
+                        },
+                        notes: ''
                     }
                 },
                 // desk-schemas/columns/name
               
                 type: {
                     self: {
-                        notes:  '',
-                        rules: {
-                            required: true,
+                        leaf:   true,
+                        rules:  {
+                            count_gt:       0,
                             included_in: [
                                 "S",
                                 "N",
                                 "other"
                             ]
-                        }
+                        },
+                        notes:  ''
                     }
                 }
                 // desk-schemas/columns/type
