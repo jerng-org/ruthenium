@@ -332,7 +332,7 @@ const rus   = {
             }
         
 
-/*
+
             const testRule =    (   __dataToValidate, 
                                     __modelKey, 
                                     __currentModel,
@@ -354,13 +354,15 @@ const rus   = {
                 }
                 // switch
             }
-*/
+
             const tempValidate =    (   _dataToValidate, 
                                         _modelKey, 
                                         _models         ) => {
                 
 ///////////////////////////////////////////////////////////////////////////////
 // OPERATION 1 : determine (_currentModel);
+  
+  // We should probably move this out of the way
                 
                 let _currentModel
                 
@@ -414,6 +416,15 @@ const rus   = {
                             // desk-schemas.subs.name.self.rules 
                         
                         //  We can evaluate self.rules;
+                        //  We would also want to pass _currentDatum so that 
+                        //      checks such as (key in _currentDatum) can be 
+                        //      accomplished.
+                        //
+                        //  So  ... sending in  _currentDatum
+                        //                      _currentModel.subs[ _subModelKey ]
+                        //      
+                        //      ... seems isomorphic with
+                        //              tempValidate ( _dataTovalidate, _modelKey, _models) 
                         
                     } else {                        
                     // not a leaf
@@ -424,7 +435,7 @@ const rus   = {
                             // desk-schemas.subs.columns.self.rules 
                         
                         //  We can first evaluate the self.rules, then
-                        //  recurse into subs via tempValidate () ;
+                        //  recurse into subs via tempValidate ();
                     }
 
                 }
