@@ -302,203 +302,120 @@ const rus   = {
                 
                 // Now, (scopedModel) should be !null under all circustances.
 
-
-///////////////////////////////////////////////////////////////////////////////
-// OPERATION 1 :
-//
-    
-///////////////////////////////////////////////////////////////////////////////
-// OPERATION 2 : 
-//
-                const _scopedDatum = dataToValidate[ modelKey ]
-                
-                    /*  EXAMPLE:
-                        { 
-                            name:       'myName',
-                            columns:    [
-                                { name:     'iAmColumn1',
-                                  type:     'other'
-                                },
-                                { name:     'iAmColumn2',
-                                  type:     'S'
-                                }
-                            ]
-                        }
-                    */
-
-                for ( const _subModelKey in scopedModel.subs ) 
-                {
-                            // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
-
-                    const _rulesToTest = scopedModel.subs[ _subModelKey ].self.rules
-                            // EXAMPLE: desk-schemas.subs.name.self.rules 
-                            // EXAMPLE: desk-schemas.subs.columns.self.rules 
-                        
-
-                    if ( scopedModel.subs[ _subModelKey ].self.leaf )
-                    {
-// a leaf (in a model)
-                            // EXAMPLE: desk-schemas.subs.name.self.leaf == true
-
-                        //  CONSIDERATION:                    
-                        //      We should put the 'datum is required' test out
-                        //  here, because it requires (_scopedModel.subs);
-                        //  the opportunity cost is that it gives us more than 
-                        //  one place where code checks rules.
-                        //      In fact, any rule in the 'count_' family should 
-                        //  placed here because it requires checking the array,
-                        //  not the contents of the array.
-                        //      This uncovers an aberration in our design ...
-                        //  arrays are special.
-                        //      The 'count_' family for the time being consists
-                        //  foreseeably of:
-                        //      - 'count_gt'    (greater    than    x)
-                        //      - 'count_lt'    (less       than    x)
-                        //      - 'count_eq'    (equal      to      x)
-                        //  ... where the value of any key is the x).
-                        if (    _rulesToTest.count_gt === 0
-                                && 
-                                (   ( ! ( _subModelKey in _scopedDatum ) ) 
-                                      || _scopedDatum[ _subModelKey ] == undefined
-                                      || _scopedDatum[ _subModelKey ] == null  
-                                    ) 
-                                )
-                        {
-                            throw Error ( `(rus.validate) required an Item keyed
-                                          with (${ _subModelKey }), but did not
-                                          find this key in ( _scopedDatum ), or
-                                          this key's value was (null or 
-                                          undefined);
-                                          `)        
-                        }
-                        
-                        //  UNIMPLEMENTED TODO
-                        //  else if ( ) { 'count_gt', 'count_lt', 'count_eq' }
-                        
-                        else
-                        {
-                            const valueToTest = _scopedDatum[ _subModelKey ]
-                                    // EXAMPLE: _scopedDatum.name    = 'myName'
-                        }
-                        
-                        rus.validateRule ( valueToTest, _rulesToTest )
-                        
-                        /* ALTERNATIVELY */
-                        /*
-                        
-                        
-                        */
-                        /* END_ALTERNATIVELY */
-
-                    }
-                    else
-                    {                        
-// not a leaf (in a model; probably an array of leaves)
-                            // EXAMPLE: desk-schemas.subs.columns.self.leaf == false
-                    
-                        
-                        if (    _rulesToTest.count_gt === 0
-                                && 
-                                (   ( ! ( _subModelKey in _scopedDatum ) ) 
-                                      || ! ( _scopedDatum[ _subModelKey ] instanceof Array )
-                                      || (  _scopedDatum[ _subModelKey ]
-                                                = _scopedDatum[ _subModelKey ].filter(
-                                                    e =>    ( e != null ) 
-                                                            && 
-                                                            ( e != undefined )
-                                            ),
-                                            _scopedDatum[ _subModelKey ].length == 0
-                                         )
-                                ) 
-                        )
-                        {
-                            throw Error ( `(rus.validate) required an Array of 
-                                          items keyed with (${ _subModelKey }), 
-                                          but did not
-                                          find this key in ( _scopedDatum ), or
-                                          the value was not an Array, or the Array 
-                                          contained no non-null, non-undefined
-                                          elements);
-                                          `)        
-                        }
-                        
-                        //  UNIMPLEMENTED TODO
-                        //  else if ( ) { 'count_gt', 'count_lt', 'count_eq' }
-                        
-                        else
-                        {
-                                    // EXAMPLE: _scopedDatum.columns = '[ columns ]'
-                            for (const valueToTest of _scopedDatum[ _subModelKey ] ) 
-                            {
-                                rus.validateRule ( valueToTest, _rulesToTest )
+            const _scopedDatum = dataToValidate[ modelKey ]
+            
+                /*  EXAMPLE:
+                    { 
+                        name:       'myName',
+                        columns:    [
+                            { name:     'iAmColumn1',
+                              type:     'other'
+                            },
+                            { name:     'iAmColumn2',
+                              type:     'S'
                             }
-                            
-    
-                        }
-    
-                        /* ALTERNATIVELY */
-                        /*
-                        
-                        
-                        */
-                        /* END_ALTERNATIVELY */
-
-                        
-                    
-                    
-                    
-
-                        //  We can first evaluate the self.rules, then
-                        //  recurse into subs via tempValidate ();
+                        ]
                     }
-                    // if (leaf)
-// end if (leaf)                    
+                */
 
-                }
+            for ( const _subModelKey in scopedModel.subs ) 
+            {
+                // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
+                rus.validateRules ( _scopedDatum, _subModelKey, scopedModel )
+            }
 
-///////////////////////////////////////////////////////////////////////////////
-// OPERATION 3 : iterate through (subModels, subDataToValidate) pairs;
-
-
-/*
-            rus.validate (  dataToValidate, //  (desk-schemas-post.js)      ;
-                            modelKey,       //  'desk-schemas'              ;
-                            scopedModel     //  <-  passing an object here 
-                                            //      avoids a second call to
-                                            //      (rus.scopeModel)
-                         )
-*/
             throw Error ( JSON.stringify ( [, models], null, 4 ) )
             
             
         },
         
-    validateRule:
-        async () => {
-            
-        }
-        /*
-        async ( __dataToValidate, 
-                __modelKey, 
-                __currentModel,
-                __ruleKey            ) => {
-            
-            switch ( __ruleKey ) {
+    validateRules:
+        async ( scopedDatum, subModelKey, scopedModel ) => {
+
+
+            const _rulesToTest = scopedModel.subs[ subModelKey ].self.rules
+                    // EXAMPLE: desk-schemas.subs.name.self.rules 
+                    // EXAMPLE: desk-schemas.subs.columns.self.rules 
                 
-                case ( 'count_gt' ) :
-                if ( __currentModel.rules[ __ruleKey ] === 0
-                     && ! ( __modelKey in __dataToValidate )
-                ) 
-                {
-                    throw Error ( `(rus.validate) required an Item keyed
-                                  with (${ __modelKey }), but did not
-                                  find this key in (_dataToValidate)
-                                  `)        
-                }
-                break
+            for ( const _ruleKey in _rulesToTest ) {
+                
+switch ( _ruleKey ) {
+
+
+case ( 'count_gt' ):
+/*  This is a really stupendous amount of code just to check if something exists
+ *  or not. I really have no faith in this design at the moment. But it should
+ *  work. -2020-06-12
+ */    
+if ( scopedModel.subs[ subModelKey ].self.leaf ) // this pattern should recur for 'count_xyz'
+{
+            if  (   _rulesToTest.count_gt === 0 
+                    && 
+                    (   ( ! ( subModelKey in scopedDatum ) ) 
+                          || scopedDatum[ subModelKey ] == undefined
+                          || scopedDatum[ subModelKey ] == null  
+                        ) 
+                ) // existential quantifier
+            {
+                throw Error ( `(rus.validateRules) required an Item keyed
+                              with (${ subModelKey }), but did not
+                              find this key in ( scopedDatum ), or
+                              this key's value was (null or 
+                              undefined);
+                              `)        
             }
-            // switch
-        }*/,
+
+            //  You might proceed as such:
+            //      const valueToTest = scopedDatum[ subModelKey ]
+                        // EXAMPLE: _scopedDatum.name    = 'myName'
+
+}
+else    // is not a leaf, ergo is an Array; this pattern should recur for 'count_xyz'
+{
+            if  (   _rulesToTest.count_gt === 0
+                    && 
+                    (   ( ! ( subModelKey in scopedDatum ) ) 
+                          || ! ( scopedDatum[ subModelKey ] instanceof Array )
+                          || (  scopedDatum[ subModelKey ]
+                                    = scopedDatum[ subModelKey ].filter(
+                                        e =>    ( e != null ) 
+                                                && 
+                                                ( e != undefined )
+                                ),
+                                scopedDatum[ subModelKey ].length == 0
+                             )
+                    ) 
+                ) // existential quantifier
+            {
+                throw Error ( `(rus.validateRules) required an Array of 
+                              items keyed with (${ subModelKey }), 
+                              but did not
+                              find this key in ( scopedDatum ), or
+                              the value was not an Array, or the Array 
+                              contained no non-null, non-undefined
+                              elements);
+                              `)        
+            }
+            
+            //  You might proceed as such:
+            //      for (const valueToTest of scopedDatum[ subModelKey ] ) 
+                        // EXAMPLE: _scopedDatum.columns = '[ columns ]'
+            
+}
+// if (leaf), else [end of block]
+
+break
+// count_gt
+
+
+}
+// switch _ruleKey
+
+            }
+            // _ruleKey in _rulesToTest
+            
+        },
+        // (rus.validateRules)
         
     wasteMilliseconds: 
         async ms => { 
