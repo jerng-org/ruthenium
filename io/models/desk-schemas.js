@@ -55,7 +55,7 @@ const deskSchemas = {
                         leaf:   true,
                         rules:  {
                             count_gt:       0,
-                            included_in: [
+                            included_in:    [
                                 "S",
                                 "N",
                                 "other"

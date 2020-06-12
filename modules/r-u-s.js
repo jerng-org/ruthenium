@@ -1,3 +1,4 @@
+
 'use strict'
 
 //  require()       executes modules; 
@@ -231,39 +232,34 @@ const rus   = {
     uuid4:     
         require ( '/var/task/modules/uuid4.js' ),
     
-    validate : 
-    
-        /*  First parameter:        ValidateMe object
+        /*  (rus.validate):
         
-                Example -   { 'desk-schemas': { 
-                                
-                                name:       'myName',
-                                columns:    [
-                                    
-                                    { name:     'iAmColumn1',
-                                      type:     'other'
-                                    }
-                                    
-                                    { name:     'iAmColumn2',
-                                      type:     'S'
-                                    }
-                                ]
-                            } }
+            First parameter:        dataToValidate = Object
         
+                EXAMPLE -   
+                
+                    { 'desk-schemas': { 
+                        name:       'myName',
+                        columns:    [
+                            { name:     'iAmColumn1',
+                              type:     'other'
+                            },
+                            { name:     'iAmColumn2',
+                              type:     'S'
+                            }
+                        ]
+                    } }
            
-           
-            Second parameter:       String | Array
+            Second parameter:       modelKey = String | Array
             
-                String  -   string_key of the Models object
+                String  -   string_key of the (models) object
                 
                 Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
                 
-                    Where is the Models object?
+                    Where is the (models) object?
                     
                     Answer: framework should have loaded it already.
         
-            
-            
             Third parameter:        scopedModel object
             
                 EXAMPLE -   
@@ -289,7 +285,11 @@ const rus   = {
                          
                     }
         */
-        async ( dataToValidate, modelKey, scopedModel ) => {
+        
+    validate : 
+        async (     dataToValidate, 
+                    modelKey, 
+                    scopedModel         ) => {
             
             //  We don't want to be running (rus.scopeModel) on every recursing
             //  call, so here we control calls to happen only if (scopedModel)
@@ -300,35 +300,9 @@ const rus   = {
                 ? await rus.scopeModel( modelKey )
                 : scopedModel
                 
-                
-/*
-            const testRule =    (   __dataToValidate, 
-                                    __modelKey, 
-                                    __currentModel,
-                                    __ruleKey            ) => {
-                
-                switch ( __ruleKey ) {
-                    
-                    case ( 'count_gt' ) :
-                    if ( __currentModel.rules[ __ruleKey ] === 0
-                         && ! ( __modelKey in __dataToValidate )
-                    ) 
-                    {
-                        throw Error ( `(rus.validate) required an Item keyed
-                                      with (${ __modelKey }), but did not
-                                      find this key in (_dataToValidate)
-                                      `)        
-                    }
-                    break
-                }
-                // switch
-            }
-*/
-            const tempValidate = async (    _dataToValidate, 
-                                            _modelKey, 
-                                            _scopedModel 
-                                                            ) => {
-                
+                // Now, (scopedModel) should be !null under all circustances.
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // OPERATION 1 :
 //
@@ -336,7 +310,7 @@ const rus   = {
 ///////////////////////////////////////////////////////////////////////////////
 // OPERATION 2 : 
 //
-                const _scopedDatum = _dataToValidate[ _modelKey ]
+                const _scopedDatum = dataToValidate[ modelKey ]
                 
                     /*  EXAMPLE:
                         { 
@@ -352,26 +326,37 @@ const rus   = {
                         }
                     */
 
-                for ( const _subModelKey in _scopedModel.subs ) 
+                for ( const _subModelKey in scopedModel.subs ) 
                 {
                             // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
 
-                    const rulesToTest = _scopedModel.subs[ _subModelKey ].self.rules
+                    const _rulesToTest = scopedModel.subs[ _subModelKey ].self.rules
                             // EXAMPLE: desk-schemas.subs.name.self.rules 
                             // EXAMPLE: desk-schemas.subs.columns.self.rules 
                         
 
-                    if ( _scopedModel.subs[ _subModelKey ].self.leaf )
+                    if ( scopedModel.subs[ _subModelKey ].self.leaf )
                     {
-                    // a leaf (in a model)
+// a leaf (in a model)
                             // EXAMPLE: desk-schemas.subs.name.self.leaf == true
 
                         //  CONSIDERATION:                    
-                        //  We should put the 'datum is required' test out here,
-                        //  because it requires (_scopedModel.subs);
+                        //      We should put the 'datum is required' test out
+                        //  here, because it requires (_scopedModel.subs);
                         //  the opportunity cost is that it gives us more than 
                         //  one place where code checks rules.
-                        if (    rulesToTest.count_gt === 0
+                        //      In fact, any rule in the 'count_' family should 
+                        //  placed here because it requires checking the array,
+                        //  not the contents of the array.
+                        //      This uncovers an aberration in our design ...
+                        //  arrays are special.
+                        //      The 'count_' family for the time being consists
+                        //  foreseeably of:
+                        //      - 'count_gt'    (greater    than    x)
+                        //      - 'count_lt'    (less       than    x)
+                        //      - 'count_eq'    (equal      to      x)
+                        //  ... where the value of any key is the x).
+                        if (    _rulesToTest.count_gt === 0
                                 && 
                                 (   ( ! ( _subModelKey in _scopedDatum ) ) 
                                       || _scopedDatum[ _subModelKey ] == undefined
@@ -386,22 +371,33 @@ const rus   = {
                                           undefined);
                                           `)        
                         }
+                        
+                        //  UNIMPLEMENTED TODO
+                        //  else if ( ) { 'count_gt', 'count_lt', 'count_eq' }
+                        
                         else
                         {
                             const valueToTest = _scopedDatum[ _subModelKey ]
                                     // EXAMPLE: _scopedDatum.name    = 'myName'
                         }
-
-                    // CONTINUE
-                    //testOne ( ???? )
                         
+                        rus.validateRule ( valueToTest, _rulesToTest )
+                        
+                        /* ALTERNATIVELY */
+                        /*
+                        
+                        
+                        */
+                        /* END_ALTERNATIVELY */
+
                     }
-                    else {                        
-                    // not a leaf (in a model; probably an array of leaves)
+                    else
+                    {                        
+// not a leaf (in a model; probably an array of leaves)
                             // EXAMPLE: desk-schemas.subs.columns.self.leaf == false
                     
                         
-                        if (    rulesToTest.count_gt === 0
+                        if (    _rulesToTest.count_gt === 0
                                 && 
                                 (   ( ! ( _subModelKey in _scopedDatum ) ) 
                                       || ! ( _scopedDatum[ _subModelKey ] instanceof Array )
@@ -425,20 +421,28 @@ const rus   = {
                                           elements);
                                           `)        
                         }
+                        
+                        //  UNIMPLEMENTED TODO
+                        //  else if ( ) { 'count_gt', 'count_lt', 'count_eq' }
+                        
                         else
                         {
                                     // EXAMPLE: _scopedDatum.columns = '[ columns ]'
                             for (const valueToTest of _scopedDatum[ _subModelKey ] ) 
                             {
-                                
+                                rus.validateRule ( valueToTest, _rulesToTest )
                             }
                             
-                            // CONTINUE
-                            //testOne ( ???? )
+    
                         }
+    
+                        /* ALTERNATIVELY */
+                        /*
+                        
+                        
+                        */
+                        /* END_ALTERNATIVELY */
 
-                        // CONTINUE
-                        //testOne ( _subModelKey, _scopedDatum, _scopedModel )
                         
                     
                     
@@ -447,24 +451,54 @@ const rus   = {
                         //  We can first evaluate the self.rules, then
                         //  recurse into subs via tempValidate ();
                     }
+                    // if (leaf)
+// end if (leaf)                    
 
                 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // OPERATION 3 : iterate through (subModels, subDataToValidate) pairs;
 
-            }
-            // tempValidate ()
 
-            tempValidate (  dataToValidate, //  temporary data, as above;
-                            modelKey,       //  'desk-schemas' from (rus.validate)
-                            scopedModel     //  (read from disk in this file)
+/*
+            rus.validate (  dataToValidate, //  (desk-schemas-post.js)      ;
+                            modelKey,       //  'desk-schemas'              ;
+                            scopedModel     //  <-  passing an object here 
+                                            //      avoids a second call to
+                                            //      (rus.scopeModel)
                          )
-
+*/
             throw Error ( JSON.stringify ( [, models], null, 4 ) )
             
             
         },
+        
+    validateRule:
+        async () => {
+            
+        }
+        /*
+        async ( __dataToValidate, 
+                __modelKey, 
+                __currentModel,
+                __ruleKey            ) => {
+            
+            switch ( __ruleKey ) {
+                
+                case ( 'count_gt' ) :
+                if ( __currentModel.rules[ __ruleKey ] === 0
+                     && ! ( __modelKey in __dataToValidate )
+                ) 
+                {
+                    throw Error ( `(rus.validate) required an Item keyed
+                                  with (${ __modelKey }), but did not
+                                  find this key in (_dataToValidate)
+                                  `)        
+                }
+                break
+            }
+            // switch
+        }*/,
         
     wasteMilliseconds: 
         async ms => { 
