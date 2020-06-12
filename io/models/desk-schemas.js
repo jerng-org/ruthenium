@@ -29,10 +29,6 @@ const deskSchemas = {
                 leaf:   false,
                 rules:  {
                     count_gt:   0
-                    /*  These should be the implementation of the above:
-                        instance_of: Array,
-                        length_gt: 0
-                    */
                 },
                 notes:  ''
             },
