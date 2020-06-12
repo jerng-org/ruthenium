@@ -232,64 +232,79 @@ const rus   = {
     uuid4:     
         require ( '/var/task/modules/uuid4.js' ),
     
-        /*  (rus.validate):
-        
-            First parameter:        dataToValidate = Object
-        
-                EXAMPLE -   
-                
-                    { 'desk-schemas': { 
-                        name:       'myName',
-                        columns:    [
-                            { name:     'iAmColumn1',
-                              type:     'other'
-                            },
-                            { name:     'iAmColumn2',
-                              type:     'S'
-                            }
-                        ]
-                    } }
-           
-            Second parameter:       modelKey = String | Array
             
-                String  -   string_key of the (models) object
-                
-                Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
-                
-                    Where is the (models) object?
-                    
-                    Answer: framework should have loaded it already.
-        
-            Third parameter:        scopedModel object
-            
-                EXAMPLE -   
-                
-                    models =        // built in (r-u-s.js)
-                    { 
-                        'desk-schemas' : { 
-                            self: etc.
-                            subs: {
-                                name:   { self: etc. },
-                                columns:{ self: etc. }
-                            }
-                        } 
-                    }
-                
-                    scopedModel =   // returned by (rus.scopeModel)
-                    { 
-                        self: etc.
-                        subs: {
-                            name:   { self: etc. },
-                            columns:{ self: etc. }
-                        }
-                         
-                    }
-        */
-        
     validate : 
+    
+        /*  In summary, (rus.validate) walks through a tree of document 
+         *  (models), and at each model looks for the corresponding 
+         *  (dataToValidate), then calls (rus.validateRules) upon that pair.
+         */
+    
         async (     dataToValidate, 
+        
+                    /*  EXAMPLE
+                    
+                            { 'desk-schemas': { 
+                                name:       'myName',
+                                columns:    [
+                                    { name:     'iAmColumn1',
+                                      type:     'other'
+                                    },
+                                    { name:     'iAmColumn2',
+                                      type:     'S'
+                                    }
+                                ]
+                            } }
+                    */
+        
                     modelKey, 
-                    scopedModel         ) => {
+                    
+                    /*  EXAMPLE 'desk-schemas'
+                    
+                    
+                        String  -   string_key of the (models) object
+                        
+                        Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
+                        
+                            Where is the (models) object?
+                            
+                            Answer: framework should have loaded it already.
+                    */
+                    
+                    scopedModel         
+                    
+                    /*  EXAMPLE
+                    
+                            models =        // built in (r-u-s.js)
+                            { 
+                                'desk-schemas' : { 
+                                    self: etc.
+                                    subs: {
+                                        name:   { self: etc. },
+                                        columns:{ self: etc. }
+                                    }
+                                } 
+                            }
+                        
+                            scopedModel =   // returned by (rus.scopeModel)
+                            { 
+                                self: etc.
+                                subs: {
+                                    name:   { self: etc. },
+                                    columns:{ 
+                                        self: etc. 
+                                        subs: {
+                                            name: { self, etc. },
+                                            type: { self, etc. }
+                                        }
+                                    }
+                                }
+                            }                    
+                    */
+                    
+
+                    
+                    ) => {
             
             //  We don't want to be running (rus.scopeModel) on every recursing
             //  call, so here we control calls to happen only if (scopedModel)
@@ -322,17 +337,111 @@ const rus   = {
             {
                 // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
                 rus.validateRules ( _scopedDatum, _subModelKey, scopedModel )
+            
+                /*  In this example, the leaf 'name' is fed to (rus.validateRules);
+                 *
+                 *  After that, the non-leaf 'columns' is fed to (rus.validateRules);
+                 *
+                 *  If (rus.validateRules) does not throw, then it returns nothing.
+                 *
+                 *  We would still need to feed 'columns.name' and 'columns.type'
+                 *  to (rus.validateRules). Therefore ...
+                 */
+                
+                /*  Currently this appears to be written WRONG.
+                 *  This is supposed to check (dataToValidate) against
+                 *  (scopedModel.self)
+                 *
+                 */
+                
+                
+                
+                
+                
+                                    //for ( const _scopedSubDatum of _scopedDatum[ _subModelKey ] ) {
+                                    //    
+                                    //    rus.validate (  dataToValidate[ modelKey ], 
+                                    //                        
+                                    //                        /* EXAMPLE:
+                                    //                        
+                                    //                        { 
+                                    //                            name:       'myName',
+                                    //                            columns:    [
+                                    //                                { name:     'iAmColumn1',
+                                    //                                  type:     'other'
+                                    //                                },
+                                    //                                { name:     'iAmColumn2',
+                                    //                                  type:     'S'
+                                    //                                }
+                                    //                            ]
+                                    //                        }
+                                    //                        
+                                    //                        */
+                                    //                        
+                                    //                    _subModelKey, 
+                                    //                        
+                                    //                        /* EXAMPLE:  'name', 'columns' */
+                                    //                        
+                                    //                    scopedModel.subs[ _subModelKey ]    
+                                    //                        
+                                    //                        /* EXAMPLE:
+                                    //                        
+                                    //                        name:   { self: etc. },
+                                    //                        
+                                    //                            OR
+                                    //                        
+                                    //                        columns:{ 
+                                    //                            self: etc. 
+                                    //                            subs: {
+                                    //                                name: { self, etc. },
+                                    //                                type: { self, etc. }
+                                    //                            }
+                                    //                        }
+                                    //                        
+                                    //                        */
+                                    //                        
+                                    //                 ) 
+                                    //}
+                
             }
 
             throw Error ( JSON.stringify ( [, models], null, 4 ) )
             
             
         },
-        
+    
+    
     validateRules:
         async ( scopedDatum, subModelKey, scopedModel ) => {
 
-
+            /*  (rus.validateRules) EXAMPLE:
+            
+                scopedDatum     =   { 
+                                        name:       'myName',
+                                        columns:    [
+                                            { name:     'iAmColumn1',
+                                              type:     'other'
+                                            },
+                                            { name:     'iAmColumn2',
+                                              type:     'S'
+                                            }
+                                        ]
+                                    }
+                
+                subModelKey     =   'name' or 'columns'
+                
+                scopedModel     =   { 
+                                        self: etc.
+                                        subs: {
+                                            name:   { self: etc. },
+                                            columns:{ self: etc. }
+                                        }
+                                    }
+                                    
+                                    // returned by (rus.scopeModel)
+            
+            */    
+            
             const _rulesToTest = scopedModel.subs[ subModelKey ].self.rules
                     // EXAMPLE: desk-schemas.subs.name.self.rules 
                     // EXAMPLE: desk-schemas.subs.columns.self.rules 
@@ -340,7 +449,9 @@ const rus   = {
             for ( const _ruleKey in _rulesToTest ) {
                 
 switch ( _ruleKey ) {
-
+/*  Try to throw an Error; if no Error is thrown, the function returns nothing
+ *  and the model is assumed to have validated the data.
+ */
 
 case ( 'count_gt' ):
 /*  This is a really stupendous amount of code just to check if something exists
@@ -398,7 +509,7 @@ else    // is not a leaf, ergo is an Array; this pattern should recur for 'count
             }
             
             //  You might proceed as such:
-            //      for (const valueToTest of scopedDatum[ subModelKey ] ) 
+            //      for ( const valueToTest of scopedDatum[ subModelKey ] ) 
                         // EXAMPLE: _scopedDatum.columns = '[ columns ]'
             
 }
