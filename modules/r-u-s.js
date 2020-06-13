@@ -231,6 +231,12 @@ const rus   = {
     
     uuid4:     
         require ( '/var/task/modules/uuid4.js' ),
+
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
     
     validate : 
     
@@ -322,18 +328,18 @@ const rus   = {
                 
                 // Now, (scopedModel) should be !null under all circustances.
 
-            const _scopedDatum = dataToValidate[ modelKey ]
+            const _scopedData = dataToValidate[ modelKey ]
                 
-                
+                /*
                 throw Error (await rus.stringify({
                     scopedModel: scopedModel,
-                    scopedDatum: _scopedDatum
+                    scopedDatum: _scopedData
                 }))
-                
+                */
 
                 /*  EXAMPLE:
                     
-                    _scopedDatum ==
+                    _scopedData ==
                     { 
                         name:       'myName',
                         columns:    [
@@ -346,7 +352,7 @@ const rus   = {
                         ]
                     }
                     
-                    ... such that   _scopedDatum is now isomorphic with 
+                    ... such that   _scopedData is now isomorphic with 
                                     _scopedModel ...
                                    
                     _scopedModel == 
@@ -370,20 +376,20 @@ const rus   = {
                 CASE 1.0
                 The following are to be checked against scopedModel:
             
-                    _scopedDatum == undefined       // ! ( modelKey key in dataToValidate)
-                    _scopedDatum == value           // individual datum
+                    _scopedData == undefined       // ! ( modelKey key in dataToValidate)
+                    _scopedData == value           // individual datum
                     
                     CASE 1.1
                     The following must have VALUES INDIVIDUALLY CHECKED against scopedModel:     
                         
-                        _scopedDatum == []              // empty Array object
-                        _scopedDatum == [ values ]      // non-empty Array object
+                        _scopedData == []              // empty Array object
+                        _scopedData == [ values ]      // non-empty Array object
             
                 CASE 2.0
                 The following are to be checked against _scopedModel.subs[ _subModelKey ]:
             
-                    _scopedDatum == {}              // empty POJO 
-                    _scopedDatum == { entries }     // non-empty POJO
+                    _scopedData == {}              // empty POJO 
+                    _scopedData == { entries }     // non-empty POJO
                     
                     Therefore to isolate these cases, we might want to use:
                     
@@ -397,8 +403,8 @@ const rus   = {
                                     
                 */
 
-            if (        ( ! ( _scopedDatum instanceof Object ) )
-                    ||  Array.isArray( _scopedDatum )                )  
+            if (        ( ! ( _scopedData instanceof Object ) )
+                    ||  Array.isArray( _scopedData )                )  
             {
                 //  CASES 1.0, 1.1
                 //  validate against scopedModel;
@@ -407,7 +413,9 @@ const rus   = {
                 
                 //  make an appropriate call to rus.validateRules()
 
-                rus.validateRules()
+                rus.validateRules ( _scopedData,
+                                    modelKey,
+                                    scopedModel        )
             }
             else
             {
@@ -418,24 +426,26 @@ const rus   = {
                 //  Iteratively validate subModels against the relevant data
                 for ( const _subModelKey in scopedModel.subs ) 
                 {
-                    // NOT YET IMPLEMENTED - 
-                    //  make a call an appropriate call to rus.validate()
+                    // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
+                    await rus.validate (    _scopedData,
+                                            _subModelKey,
+                                            scopedModel.subs[ _subModelKey ]
+                                       )
                 }
                 // _subModelKey
             }
 
                 
-                // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
-                // rus.validateRules ( _scopedDatum, _subModelKey, scopedModel )
+                // rus.validateRules ( _scopedData, _subModelKey, scopedModel )
             
             
                 /*  In this example, the leaf 'name' is fed to (rus.validateRules);
                  *      scopedModel  [ _subModelKey ] is compared to;
-                 *      _scopedDatum [ _subModelKey ] ... which has value 'myName';
+                 *      _scopedData [ _subModelKey ] ... which has value 'myName';
                  *
                  *  After that, the non-leaf 'columns' is fed to (rus.validateRules);
                  *      scopedModel  [ _subModelKey ] is compared to;
-                 *      _scopedDatum [ _subModelKey ]... which has value [ columns ];
+                 *      _scopedData [ _subModelKey ]... which has value [ columns ];
                  *          [ columns ] is checked as an array;
                  *          each ( column ) is checked as an object;
                  *
@@ -444,41 +454,58 @@ const rus   = {
                  *  We would still need to feed 'columns.name' and 'columns.type'
                  *  to (rus.validateRules). Therefore ...
                  */
-                
-                
-                
-           
-
-            throw Error ( JSON.stringify ( [, models], null, 4 ) )
-            
-            
+       
         },
-    
+
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
     
     validateRules:
-        async ( scopedDatum, subModelKey, scopedModel ) => {
+        async ( scopedDatum, modelKey, scopedModel ) => {
 
             /*  (rus.validateRules) EXAMPLE:
             
-                scopedDatum     =   { 
-                                        name:       'myName',
-                                        columns:    [
-                                            { name:     'iAmColumn1',
-                                              type:     'other'
-                                            },
-                                            { name:     'iAmColumn2',
-                                              type:     'S'
-                                            }
-                                        ]
-                                    }
-                
-                subModelKey     =   'name' or 'columns'
+                scopedDatum     =   'myName',
+                                    [
+                                        { name:     'iAmColumn1',
+                                          type:     'other'
+                                        },
+                                        { name:     'iAmColumn2',
+                                          type:     'S'
+                                        }
+                                    ]
+                                
+                                    
+                    With reference to documentation in (rus.validate):
+
+                    THESE ARE EXPECTED:
+
+                    scopedDatum == undefined       // ! ( modelKey key in dataToValidate)
+                    scopedDatum == value           // individual datum
+                    scopedDatum == []              // empty Array object
+                    scopedDatum == [ values ]      // non-empty Array object
+                    
+                    THESE ARE NOT EXPECTED:
+                    
+                    _scopedData == {}              // empty POJO 
+                    _scopedData == { entries }     // non-empty POJO
+
+                modelKey     =   'name' or 'columns'
                 
                 scopedModel     =   { 
                                         self: etc.
                                         subs: {
                                             name:   { self: etc. },
-                                            columns:{ self: etc. }
+                                            columns:{ 
+                                                self: etc. 
+                                                subs: {
+                                                    name:   { self: etc. },
+                                                    type:   { self: etc. }
+                                                }
+                                            }
                                         }
                                     }
                                     
@@ -486,7 +513,7 @@ const rus   = {
             
             */    
             
-            const _rulesToTest = scopedModel.subs[ subModelKey ].self.rules
+            const _rulesToTest = scopedModel.subs[ modelKey ].self.rules
                     // EXAMPLE: desk-schemas.subs.name.self.rules 
                     // EXAMPLE: desk-schemas.subs.columns.self.rules 
                 
@@ -542,18 +569,18 @@ case ( 'count_gt' ):
  *  or not. I really have no faith in this design at the moment. But it should
  *  work. -2020-06-12
  */    
-if ( scopedModel.subs[ subModelKey ].self.leaf ) // this pattern should recur for 'count_xyz'
+if ( scopedModel.subs[ modelKey ].self.leaf ) // this pattern should recur for 'count_xyz'
 {
             if  (   _rulesToTest.count_gt === 0 
                     && 
-                    (   ( ! ( subModelKey in scopedDatum ) ) 
-                          || scopedDatum[ subModelKey ] == undefined
-                          || scopedDatum[ subModelKey ] == null  
+                    (   ( ! ( modelKey in scopedDatum ) ) 
+                          || scopedDatum[ modelKey ] == undefined
+                          || scopedDatum[ modelKey ] == null  
                         ) 
                 ) // existential quantifier
             {
                 throw Error ( `(rus.validateRules) required an Item keyed
-                              with (${ subModelKey }), but did not
+                              with (${ modelKey }), but did not
                               find this key in ( scopedDatum ), or
                               this key's value was (null or 
                               undefined);
@@ -562,28 +589,28 @@ if ( scopedModel.subs[ subModelKey ].self.leaf ) // this pattern should recur fo
 
             //  You might proceed as such:
             //      const valueToTest = scopedDatum[ subModelKey ]
-                        // EXAMPLE: _scopedDatum.name    = 'myName'
+                        // EXAMPLE: _scopedData.name    = 'myName'
 
 }
 else    // is not a leaf, ergo is an Array; this pattern should recur for 'count_xyz'
 {
             if  (   _rulesToTest.count_gt === 0
                     && 
-                    (   ( ! ( subModelKey in scopedDatum ) ) 
-                          || ! ( scopedDatum[ subModelKey ] instanceof Array )
-                          || (  scopedDatum[ subModelKey ]
-                                    = scopedDatum[ subModelKey ].filter(
+                    (   ( ! ( modelKey in scopedDatum ) ) 
+                          || ! ( scopedDatum[ modelKey ] instanceof Array )
+                          || (  scopedDatum[ modelKey ]
+                                    = scopedDatum[ modelKey ].filter(
                                         e =>    ( e != null ) 
                                                 && 
                                                 ( e != undefined )
                                 ),
-                                scopedDatum[ subModelKey ].length == 0
+                                scopedDatum[ modelKey ].length == 0
                              )
                     ) 
                 ) // existential quantifier
             {
                 throw Error ( `(rus.validateRules) required an Array of 
-                              items keyed with (${ subModelKey }), 
+                              items keyed with (${ modelKey }), 
                               but did not
                               find this key in ( scopedDatum ), or
                               the value was not an Array, or the Array 
@@ -594,7 +621,7 @@ else    // is not a leaf, ergo is an Array; this pattern should recur for 'count
             
             //  You might proceed as such:
             //      for ( const valueToTest of scopedDatum[ subModelKey ] ) 
-                        // EXAMPLE: _scopedDatum.columns = '[ columns ]'
+                        // EXAMPLE: _scopedData.columns = '[ columns ]'
             
 }
 // if (leaf), else [end of block]
