@@ -232,14 +232,7 @@ const rus   = {
     uuid4:     
         require ( '/var/task/modules/uuid4.js' ),
     
-            
     validate : 
-    
-        /*  In summary, (rus.validate) walks through a tree of document 
-         *  (models), and at each model looks for the corresponding 
-         *  (dataToValidate), then calls (rus.validateRules) upon that pair.
-         */
-    
         async (     dataToValidate, 
         
                     /*  EXAMPLE
@@ -305,6 +298,91 @@ const rus   = {
 
                     
                     ) => {
+        
+    },
+    
+    validateRules : async () => {
+        
+    },
+    
+    parkedValidate : 
+    
+        /*  In summary, (rus.validate) walks through a tree of document 
+         *  (models), and at each model looks for the corresponding 
+         *  (dataToValidate), then calls (rus.validateRules) upon that pair.
+         */
+    
+        async (     dataToValidate, 
+        
+                    /*  REQUIRED;
+                        
+                        EXAMPLE
+                    
+                            { 'desk-schemas': { 
+                                name:       'myName',
+                                columns:    [
+                                    { name:     'iAmColumn1',
+                                      type:     'other'
+                                    },
+                                    { name:     'iAmColumn2',
+                                      type:     'S'
+                                    }
+                                ]
+                            } }
+                    */
+        
+                    modelKey, 
+                    
+                    /*  REQUIRED;
+                    
+                        EXAMPLE 'desk-schemas'
+                    
+                    
+                        String  -   string_key of the (models) object
+                        
+                        Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
+                        
+                            Where is the (models) object?
+                            
+                            Answer: framework should have loaded it already.
+                    */
+                    
+                    scopedModel         
+                    
+                    /*  OPTIONAL;
+                    
+                        EXAMPLE
+                    
+                            models =        // built in (r-u-s.js)
+                            { 
+                                'desk-schemas' : { 
+                                    self: etc.
+                                    subs: {
+                                        name:   { self: etc. },
+                                        columns:{ self: etc. }
+                                    }
+                                } 
+                            }
+                        
+                            scopedModel =   // returned by (rus.scopeModel)
+                            { 
+                                self: etc.
+                                subs: {
+                                    name:   { self: etc. },
+                                    columns:{ 
+                                        self: etc. 
+                                        subs: {
+                                            name: { self, etc. },
+                                            type: { self, etc. }
+                                        }
+                                    }
+                                }
+                            }                    
+                    */
+                    
+
+                    
+                    ) => {
             
             //  We don't want to be running (rus.scopeModel) on every recursing
             //  call, so here we control calls to happen only if (scopedModel)
@@ -320,6 +398,8 @@ const rus   = {
             const _scopedDatum = dataToValidate[ modelKey ]
             
                 /*  EXAMPLE:
+                    
+                    _scopedDatum ==
                     { 
                         name:       'myName',
                         columns:    [
@@ -331,22 +411,53 @@ const rus   = {
                             }
                         ]
                     }
+                    
+                    ... such that   _scopedDatum is now isomorphic with 
+                                    _scopedModel ...
+                                   
+                    _scopedModel == 
+                    { 
+                        self: etc.
+                        subs: {
+                            name:   { self: etc. },
+                            columns:{ 
+                                self: etc. 
+                                subs: {
+                                    name: { self, etc. },
+                                    type: { self, etc. }
+                                }
+                            }
+                        }
+                    }                    
+                    
+                    BELOW WE FORGOT ... to validate these, but we went a level lower
                 */
 
             for ( const _subModelKey in scopedModel.subs ) 
             {
                 // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
-                rus.validateRules ( _scopedDatum, _subModelKey, scopedModel )
+                rus.parkedValidateRules ( _scopedDatum, _subModelKey, scopedModel )
             
                 /*  In this example, the leaf 'name' is fed to (rus.validateRules);
+                 *      scopedModel  [ _subModelKey ] is compared to;
+                 *      _scopedDatum [ _subModelKey ] ... which has value 'myName';
                  *
                  *  After that, the non-leaf 'columns' is fed to (rus.validateRules);
+                 *      scopedModel  [ _subModelKey ] is compared to;
+                 *      _scopedDatum [ _subModelKey ]... which has value [ columns ];
+                 *          [ columns ] is checked as an array;
+                 *          each ( column ) is checked as an object;
                  *
                  *  If (rus.validateRules) does not throw, then it returns nothing.
                  *
                  *  We would still need to feed 'columns.name' and 'columns.type'
                  *  to (rus.validateRules). Therefore ...
                  */
+                
+                
+                
+                
+                
                 
                 /*  Currently this appears to be written WRONG.
                  *  This is supposed to check (dataToValidate) against
@@ -411,7 +522,7 @@ const rus   = {
         },
     
     
-    validateRules:
+    parkedValidateRules:
         async ( scopedDatum, subModelKey, scopedModel ) => {
 
             /*  (rus.validateRules) EXAMPLE:
@@ -453,6 +564,46 @@ switch ( _ruleKey ) {
  *  and the model is assumed to have validated the data.
  */
 
+/*
+ *  Three types of entity can be found at the address scopedDatum[ subModelKey ]
+ *
+ *      1.  a plain old JavaScript object
+ *      2.  an Array object
+ *      3.  anything else (primitive, or object)
+ *
+ *  Case 1. 
+ *  A POJO at this address could be subject to rules in scopedModel[]
+ *
+ *  A single model can validate 
+ *      -   an individual   leaf:false  datum, or
+ *      -   an array of     leaf:true   data
+ *
+ *  case ( a rule that checks an array of data):
+ *  if ( scopedModel.subs[ subModelKey ].self.leaf ) 
+ *  {
+ *     
+ *  }
+ *  else
+ *  {
+ *     
+ *  }
+ *  break
+ *
+ *  case ( a rule that checks a datum):
+ *  if ( scopedModel.subs[ subModelKey ].self.leaf ) 
+ *  {
+ *     
+ *  }
+ *  else
+ *  {
+ *     
+ *  }
+ *  break
+ *
+ *    
+ *  
+ */
+ 
 case ( 'count_gt' ):
 /*  This is a really stupendous amount of code just to check if something exists
  *  or not. I really have no faith in this design at the moment. But it should
