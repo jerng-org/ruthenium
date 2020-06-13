@@ -238,6 +238,17 @@ const rus   = {
 //      //
 //////////
     
+    newValidate :
+        async () => {
+            
+        },
+        
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+    
     validate : 
     
         /*  In summary, (rus.validate) walks through a tree of document 
@@ -330,12 +341,12 @@ const rus   = {
 
             const _scopedData = dataToValidate[ modelKey ]
                 
-                /*
+                
                 throw Error (await rus.stringify({
                     scopedModel: scopedModel,
                     scopedDatum: _scopedData
                 }))
-                */
+                
 
                 /*  EXAMPLE:
                     
@@ -438,22 +449,7 @@ const rus   = {
                 
                 // rus.validateRules ( _scopedData, _subModelKey, scopedModel )
             
-            
-                /*  In this example, the leaf 'name' is fed to (rus.validateRules);
-                 *      scopedModel  [ _subModelKey ] is compared to;
-                 *      _scopedData [ _subModelKey ] ... which has value 'myName';
-                 *
-                 *  After that, the non-leaf 'columns' is fed to (rus.validateRules);
-                 *      scopedModel  [ _subModelKey ] is compared to;
-                 *      _scopedData [ _subModelKey ]... which has value [ columns ];
-                 *          [ columns ] is checked as an array;
-                 *          each ( column ) is checked as an object;
-                 *
-                 *  If (rus.validateRules) does not throw, then it returns nothing.
-                 *
-                 *  We would still need to feed 'columns.name' and 'columns.type'
-                 *  to (rus.validateRules). Therefore ...
-                 */
+
        
         },
 
@@ -535,11 +531,11 @@ switch ( _ruleKey ) {
  *  A POJO at this address could be subject to rules in scopedModel[]
  *
  *  A single model can validate 
- *      -   an individual   leaf:false  datum, or
- *      -   an array of     leaf:true   data
+ *      -   an individual   many:false  datum, or
+ *      -   an array of     many:true   data
  *
  *  case ( a rule that checks an array of data):
- *  if ( scopedModel.subs[ subModelKey ].self.leaf ) 
+ *  if ( scopedModel.subs[ subModelKey ].self.many ) 
  *  {
  *     
  *  }
@@ -550,7 +546,7 @@ switch ( _ruleKey ) {
  *  break
  *
  *  case ( a rule that checks a datum):
- *  if ( scopedModel.subs[ subModelKey ].self.leaf ) 
+ *  if ( scopedModel.subs[ subModelKey ].self.many ) 
  *  {
  *     
  *  }
@@ -569,30 +565,7 @@ case ( 'count_gt' ):
  *  or not. I really have no faith in this design at the moment. But it should
  *  work. -2020-06-12
  */    
-if ( scopedModel.subs[ modelKey ].self.leaf ) // this pattern should recur for 'count_xyz'
-{
-            if  (   _rulesToTest.count_gt === 0 
-                    && 
-                    (   ( ! ( modelKey in scopedDatum ) ) 
-                          || scopedDatum[ modelKey ] == undefined
-                          || scopedDatum[ modelKey ] == null  
-                        ) 
-                ) // existential quantifier
-            {
-                throw Error ( `(rus.validateRules) required an Item keyed
-                              with (${ modelKey }), but did not
-                              find this key in ( scopedDatum ), or
-                              this key's value was (null or 
-                              undefined);
-                              `)        
-            }
-
-            //  You might proceed as such:
-            //      const valueToTest = scopedDatum[ subModelKey ]
-                        // EXAMPLE: _scopedData.name    = 'myName'
-
-}
-else    // is not a leaf, ergo is an Array; this pattern should recur for 'count_xyz'
+if ( scopedModel.subs[ modelKey ].self.many ) // this pattern should recur for 'count_xyz'
 {
             if  (   _rulesToTest.count_gt === 0
                     && 
@@ -622,9 +595,32 @@ else    // is not a leaf, ergo is an Array; this pattern should recur for 'count
             //  You might proceed as such:
             //      for ( const valueToTest of scopedDatum[ subModelKey ] ) 
                         // EXAMPLE: _scopedData.columns = '[ columns ]'
+
+}
+else    // not-'many', ergo is an Array; this pattern should recur for 'count_xyz'
+{
+            if  (   _rulesToTest.count_gt === 0 
+                    && 
+                    (   ( ! ( modelKey in scopedDatum ) ) 
+                          || scopedDatum[ modelKey ] == undefined
+                          || scopedDatum[ modelKey ] == null  
+                        ) 
+                ) // existential quantifier
+            {
+                throw Error ( `(rus.validateRules) required an Item keyed
+                              with (${ modelKey }), but did not
+                              find this key in ( scopedDatum ), or
+                              this key's value was (null or 
+                              undefined);
+                              `)        
+            }
+
+            //  You might proceed as such:
+            //      const valueToTest = scopedDatum[ subModelKey ]
+                        // EXAMPLE: _scopedData.name    = 'myName'
             
 }
-// if (leaf), else [end of block]
+// if (many), else [end of block]
 
 break
 // count_gt
