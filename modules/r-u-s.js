@@ -323,11 +323,14 @@ const rus   = {
                 // Now, (scopedModel) should be !null under all circustances.
 
             const _scopedDatum = dataToValidate[ modelKey ]
+                
+                /*
+                throw Error (await rus.stringify({
+                    scopedModel: scopedModel,
+                    scopedDatum: _scopedDatum
+                }))
+                */
 
-throw Error (await rus.stringify({
-    scopedModel: scopedModel,
-    scopedDatum: _scopedDatum
-}))             
                 /*  EXAMPLE:
                     
                     _scopedDatum ==
@@ -360,71 +363,70 @@ throw Error (await rus.stringify({
                             }
                         }
                     }                    
+                                    
+                Now let's consider some of the potential data that might be 
+                compared with the model.
+            
+                CASE 1.0
+                The following are to be checked against scopedModel:
+            
+                    _scopedDatum == undefined       // ! ( modelKey key in dataToValidate)
+                    _scopedDatum == value           // individual datum
                     
-BELOW WE FORGOT ... to validate these, but we went a level lower.
-
-    Now let's consider some of the potential data that might be 
-    compared with the model.
-
-    The following are to be checked against scopedModel:
-
-        _scopedDatum == undefined       // ! ( modelKey key in dataToValidate)
-        _scopedDatum == []              // empty Array object
-        
-        _scopedDatum == value           // individual datum
-        _scopedDatum == [ values ]      // non-empty Array object
-
-    The following are to be checked against _scopedModel.subs[ _subModelKey ]:
-
-        _scopedDatum == {}              // empty POJO 
-        _scopedDatum == { entries }     // non-empty POJO
-        
-        Therefore to isolate these cases, we might want to use:
-        
-            (       x instanceof Object 
-                &&  ! Array.isArray( x )    )
+                    CASE 1.1
+                    The following must have VALUES INDIVIDUALLY CHECKED against scopedModel:     
+                        
+                        _scopedDatum == []              // empty Array object
+                        _scopedDatum == [ values ]      // non-empty Array object
+            
+                CASE 2.0
+                The following are to be checked against _scopedModel.subs[ _subModelKey ]:
+            
+                    _scopedDatum == {}              // empty POJO 
+                    _scopedDatum == { entries }     // non-empty POJO
                     
+                    Therefore to isolate these cases, we might want to use:
+                    
+                        (       x instanceof Object 
+                            &&  ! Array.isArray( x )    )
+                            
+                        contrapositively (terminology?),
+                        
+                        (       ! ( x instanceof Object) 
+                            ||  Array.isArray ( x )         )
+                                    
                 */
 
-            if (        _scopedDatum instanceof Object
-                    &&  ! Array.isArray( _scopedDatum) )
+            if (        ( ! ( _scopedDatum instanceof Object ) )
+                    ||  Array.isArray( _scopedDatum )                )  
             {
-                // validate against scopedModel
+                //  CASES 1.0, 1.1
+                //  validate against scopedModel;
+                //  difference between 1.0 and 1.1. to be handled by 
+                //  (rus.validateRules)
+                
+                //  make an appropriate call to rus.validateRules()
+
+                rus.validateRules()
             }
             else
             {
-                // do not validate against scopedModel
+                //  CASE 2.0
+                //  do not validate against scopedModel;
+                //  validate subData against subModels only;
+                
+                //  Iteratively validate subModels against the relevant data
+                for ( const _subModelKey in scopedModel.subs ) 
+                {
+                    // NOT YET IMPLEMENTED - 
+                    //  make a call an appropriate call to rus.validate()
+                }
+                // _subModelKey
             }
 
-
-            // Iteratively validate subModels against the relevant data
-            for ( const _subModelKey in scopedModel.subs ) 
-            {
-                
-                
-                
-                
-                //  make a call an appropriate call to rus.validate()
-                
-                
-                
-                
-                
-                
-                
-                
                 
                 // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
                 // rus.validateRules ( _scopedDatum, _subModelKey, scopedModel )
-            
-            
-            
-            
-            
-            
-            
-            
-            
             
             
                 /*  In this example, the leaf 'name' is fed to (rus.validateRules);
@@ -445,67 +447,7 @@ BELOW WE FORGOT ... to validate these, but we went a level lower.
                 
                 
                 
-                
-                
-                
-                /*  Currently this appears to be written WRONG.
-                 *  This is supposed to check (dataToValidate) against
-                 *  (scopedModel.self)
-                 *
-                 */
-                
-                
-                
-                
-                
-                                    //for ( const _scopedSubDatum of _scopedDatum[ _subModelKey ] ) {
-                                    //    
-                                    //    rus.validate (  dataToValidate[ modelKey ], 
-                                    //                        
-                                    //                        /* EXAMPLE:
-                                    //                        
-                                    //                        { 
-                                    //                            name:       'myName',
-                                    //                            columns:    [
-                                    //                                { name:     'iAmColumn1',
-                                    //                                  type:     'other'
-                                    //                                },
-                                    //                                { name:     'iAmColumn2',
-                                    //                                  type:     'S'
-                                    //                                }
-                                    //                            ]
-                                    //                        }
-                                    //                        
-                                    //                        */
-                                    //                        
-                                    //                    _subModelKey, 
-                                    //                        
-                                    //                        /* EXAMPLE:  'name', 'columns' */
-                                    //                        
-                                    //                    scopedModel.subs[ _subModelKey ]    
-                                    //                        
-                                    //                        /* EXAMPLE:
-                                    //                        
-                                    //                        name:   { self: etc. },
-                                    //                        
-                                    //                            OR
-                                    //                        
-                                    //                        columns:{ 
-                                    //                            self: etc. 
-                                    //                            subs: {
-                                    //                                name: { self, etc. },
-                                    //                                type: { self, etc. }
-                                    //                            }
-                                    //                        }
-                                    //                        
-                                    //                        */
-                                    //                        
-                                    //                 ) 
-                                    //}
-                
-            }
-            // _subModelKey
-            
+           
 
             throw Error ( JSON.stringify ( [, models], null, 4 ) )
             
