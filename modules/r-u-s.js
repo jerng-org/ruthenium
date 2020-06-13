@@ -233,79 +233,6 @@ const rus   = {
         require ( '/var/task/modules/uuid4.js' ),
     
     validate : 
-        async (     dataToValidate, 
-        
-                    /*  EXAMPLE
-                    
-                            { 'desk-schemas': { 
-                                name:       'myName',
-                                columns:    [
-                                    { name:     'iAmColumn1',
-                                      type:     'other'
-                                    },
-                                    { name:     'iAmColumn2',
-                                      type:     'S'
-                                    }
-                                ]
-                            } }
-                    */
-        
-                    modelKey, 
-                    
-                    /*  EXAMPLE 'desk-schemas'
-                    
-                    
-                        String  -   string_key of the (models) object
-                        
-                        Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
-                        
-                            Where is the (models) object?
-                            
-                            Answer: framework should have loaded it already.
-                    */
-                    
-                    scopedModel         
-                    
-                    /*  EXAMPLE
-                    
-                            models =        // built in (r-u-s.js)
-                            { 
-                                'desk-schemas' : { 
-                                    self: etc.
-                                    subs: {
-                                        name:   { self: etc. },
-                                        columns:{ self: etc. }
-                                    }
-                                } 
-                            }
-                        
-                            scopedModel =   // returned by (rus.scopeModel)
-                            { 
-                                self: etc.
-                                subs: {
-                                    name:   { self: etc. },
-                                    columns:{ 
-                                        self: etc. 
-                                        subs: {
-                                            name: { self, etc. },
-                                            type: { self, etc. }
-                                        }
-                                    }
-                                }
-                            }                    
-                    */
-                    
-
-                    
-                    ) => {
-        
-    },
-    
-    validateRules : async () => {
-        
-    },
-    
-    parkedValidate : 
     
         /*  In summary, (rus.validate) walks through a tree of document 
          *  (models), and at each model looks for the corresponding 
@@ -396,7 +323,11 @@ const rus   = {
                 // Now, (scopedModel) should be !null under all circustances.
 
             const _scopedDatum = dataToValidate[ modelKey ]
-            
+
+throw Error (rus.stringify({
+    scopedModel: scopedModel,
+    scopedDatum: _scopedDatum
+}))             
                 /*  EXAMPLE:
                     
                     _scopedDatum ==
@@ -432,28 +363,69 @@ const rus   = {
                     
 BELOW WE FORGOT ... to validate these, but we went a level lower.
 
-Now let's consider some of the potential data that might be 
-compared with the model.
+    Now let's consider some of the potential data that might be 
+    compared with the model.
 
-    The following are to be checked against _scopedModel:
+    The following are to be checked against scopedModel:
 
-        _scopedDatum == undefined   // ! ( modelKey key in dataToValidate)
-        _scopedDatum == []          // empty Array object
+        _scopedDatum == undefined       // ! ( modelKey key in dataToValidate)
+        _scopedDatum == []              // empty Array object
         
-        _scopedDatum == value      // individual datum
-        _scopedDatum == [ values ]  // non-empty Array object
+        _scopedDatum == value           // individual datum
+        _scopedDatum == [ values ]      // non-empty Array object
 
-    The following are to be checked against _scopedModel.subs:
+    The following are to be checked against _scopedModel.subs[ _subModelKey ]:
 
-        _scopedDatum == {}          // empty POJO 
-        _scopedDatum == { entries } // non-empty POJO
+        _scopedDatum == {}              // empty POJO 
+        _scopedDatum == { entries }     // non-empty POJO
+        
+        Therefore to isolate these cases, we might want to use:
+        
+            (       x instanceof Object 
+                &&  ! Array.isArray( x )    )
                     
                 */
 
+            if (        _scopedDatum instanceof Object
+                    &&  ! Array.isArray( _scopedDatum) )
+            {
+                // validate against scopedModel
+            }
+            else
+            {
+                // do not validate against scopedModel
+            }
+
+
+            // Iteratively validate subModels against the relevant data
             for ( const _subModelKey in scopedModel.subs ) 
             {
+                
+                
+                
+                
+                //  make a call an appropriate call to rus.validate()
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
-                rus.parkedValidateRules ( _scopedDatum, _subModelKey, scopedModel )
+                // rus.validateRules ( _scopedDatum, _subModelKey, scopedModel )
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
                 /*  In this example, the leaf 'name' is fed to (rus.validateRules);
                  *      scopedModel  [ _subModelKey ] is compared to;
@@ -532,6 +504,8 @@ compared with the model.
                                     //}
                 
             }
+            // _subModelKey
+            
 
             throw Error ( JSON.stringify ( [, models], null, 4 ) )
             
@@ -539,7 +513,7 @@ compared with the model.
         },
     
     
-    parkedValidateRules:
+    validateRules:
         async ( scopedDatum, subModelKey, scopedModel ) => {
 
             /*  (rus.validateRules) EXAMPLE:
