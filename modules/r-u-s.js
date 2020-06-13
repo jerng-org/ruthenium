@@ -430,7 +430,24 @@ const rus   = {
                         }
                     }                    
                     
-                    BELOW WE FORGOT ... to validate these, but we went a level lower
+BELOW WE FORGOT ... to validate these, but we went a level lower.
+
+Now let's consider some of the potential data that might be 
+compared with the model.
+
+    The following are to be checked against _scopedModel:
+
+        _scopedDatum == undefined   // ! ( modelKey key in dataToValidate)
+        _scopedDatum == []          // empty Array object
+        
+        _scopedDatum == value      // individual datum
+        _scopedDatum == [ values ]  // non-empty Array object
+
+    The following are to be checked against _scopedModel.subs:
+
+        _scopedDatum == {}          // empty POJO 
+        _scopedDatum == { entries } // non-empty POJO
+                    
                 */
 
             for ( const _subModelKey in scopedModel.subs ) 
