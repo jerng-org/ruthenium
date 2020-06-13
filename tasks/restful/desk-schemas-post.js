@@ -6,8 +6,6 @@ const deskSchemasModel = require (`/var/task/io/models/desk-schemas.js`)
 
 const deskSchemasPost = async ( data ) => {
   
-    //  throw new Error ( JSON.stringify( data.RU.request.formStringParameters, null, 4 ) ) 
-
     const candidate = data.RU.request.formStringParameters
 
     //  begin PROTOTYPICAL data validation process:
@@ -33,36 +31,8 @@ const deskSchemasPost = async ( data ) => {
                                                 'desk-schemas'
                                               )
     
-    throw Error ( [`(desk-schemas-post.js) validity :`, validity, `data:`, data] )
-    /*
-    //  VAL_OP#1
-    if ( !  (   'desk-schemas'  in candidate 
-                && 'name'       in candidate[ 'desk-schemas' ]
-                && 'columns'    in candidate[ 'desk-schemas' ]
-                && candidate[ 'desk-schemas' ]['columns'] instanceof Array
-                && candidate[ 'desk-schemas' ]['columns'].length > 0
-            ) 
-    ) {
-        throw Error (   `(~/tasks/restful/desk-schemas-post/) candidate 
-                        insertion to (desk-schemas) did not pass validation.` ) 
-    }
+throw Error ( [`(desk-schemas-post.js) validity :`, validity, `data:`, data] )
 
-    //  VAL_OP#2
-    for ( const column of candidate[ 'desk-schemas' ]['columns'] ) {
-        
-        if ( !  (      'name'   in column
-                    && 'type'   in column
-                    && /[^A-Z\[\]\s]+/.test( column[ 'name' ] ) // reuse blacklist in (reindex-form-names.js)
-                    && [ 'S', 'N', 'other' ].includes( column[ 'type' ] ) 
-                ) 
-        ) {
-            throw Error (   `(~/tasks/restful/desk-schemas-post/) candidate 
-                            insertion to (desk-schemas.columns) did not pass 
-                            validation.` ) 
-        }
-    }
-    */
-    
     
     //  end PROTOTYPICAL data validation process.
 
