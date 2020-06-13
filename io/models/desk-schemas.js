@@ -4,7 +4,7 @@
 const deskSchemas = {
 
     self:   {
-        // leaf:   true,
+        leaf:   false,
         rules:  {
             // count_gt:   0
         },
