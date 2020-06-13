@@ -14,20 +14,18 @@ const deskSchemasPost = async ( data ) => {
     
     const TEST_VALIDATE_ME = { 
         
-        'desk-schemas': [
-            { 
-                id:         'some-id-string',
-                name:       'myName',
-                columns:    [
-                    {   name:     'iAmColumn1',
-                        type:     'other'
-                    },
-                    {   name:     'iAmColumn2',
-                        type:     'S'
-                    }
-                ]
-            } 
-        ]
+        'desk-schemas': { 
+            id:         'some-id-string',
+            name:       'myName',
+            columns:    [
+                {   name:     'iAmColumn1',
+                    type:     'other'
+                },
+                {   name:     'iAmColumn2',
+                    type:     'S'
+                }
+            ]
+        }
     }
     
     //const scopedModel = await rus.scopeModel  ( 'desk-schemas' )

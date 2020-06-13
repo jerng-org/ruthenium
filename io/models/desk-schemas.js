@@ -6,7 +6,7 @@ const deskSchemas = {
     self:   {
         many:   false,
         rules:  {
-            // count_gt:   0
+            count_gt:   0
         },
         notes:  ''
     },
