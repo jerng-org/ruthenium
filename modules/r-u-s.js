@@ -324,7 +324,7 @@ const rus   = {
 
             const _scopedDatum = dataToValidate[ modelKey ]
 
-throw Error (rus.stringify({
+throw Error (await rus.stringify({
     scopedModel: scopedModel,
     scopedDatum: _scopedDatum
 }))             
