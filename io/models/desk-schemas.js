@@ -4,7 +4,7 @@
 const deskSchemas = {
 
     self:   {
-        leaf:   false,
+        many:   false,
         rules:  {
             // count_gt:   0
         },
@@ -14,7 +14,7 @@ const deskSchemas = {
         
         name: {
             self:   {
-                leaf:   true,
+                many:   false,
                 rules: {
                     count_gt:   0
                 }
@@ -26,7 +26,7 @@ const deskSchemas = {
         columns: {
             
             self: {
-                leaf:   false,
+                many:   true,
                 rules:  {
                     count_gt:   0
                 },
@@ -36,7 +36,7 @@ const deskSchemas = {
               
                 name: {
                     self: {
-                        leaf:   true,
+                        many:   false,
                         rules:  {
                             count_gt:   0,
                             regex_test: "/[^A-Z\\[\\]\\s]+/"
@@ -48,7 +48,7 @@ const deskSchemas = {
               
                 type: {
                     self: {
-                        leaf:   true,
+                        many:   false,
                         rules:  {
                             count_gt:       0,
                             included_in:    [
