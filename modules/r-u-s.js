@@ -4,27 +4,10 @@
 //  require()       executes modules; 
 //  require.res()   resolves paths without execution;
 
-//  TEMPLATE : in-code technical debt warning
-//  console.warn ( `⚠ DEBT_NOTE ⚠`, )
-
 const mark  = require ( '/var/task/modules/mark.js' )
 mark (`r-u-s.js (ruthenium utilities) LOADING ...`)
 
-const fs = require ('fs')
-
-/*
-let models = {}
-const modelFileNames = fs.readdirSync ('/var/task/io/models')
-modelFileNames.forEach ( ( current, index, array ) => {
-    
-    if (        current[0] != '_'
-            &&  current.toLowerCase().slice ( -3 ) == '.js' )
-    {
-        models[ current.slice (0, -3) ] = require ( '/var/task/io/models/' + current )
-    }
-} / * , thisArg * / ) 
-*/
-
+const fs    = require ('fs')
 const url   = require ('url')
 
 //////////
@@ -33,7 +16,6 @@ const url   = require ('url')
 //      //
 //////////
 
-console.warn (`(rus.validate) errors throw violently; consider a docile bubbling`) 
 
 const rus   = {
 
