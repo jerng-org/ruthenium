@@ -1,10 +1,10 @@
 'use strict'
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rus               = require ( '/var/task/modules/r-u-s.js' )
 
-const deskSchemasModel = require (`/var/task/io/models/desk-schemas.js`)
+const deskSchemasModel  = require (`/var/task/io/models/desk-schemas.js`)
 
-const deskSchemasPost = async ( data ) => {
+const deskSchemasPost   = async ( data ) => {
   
     const candidate = data.RU.request.formStringParameters
 
@@ -17,7 +17,7 @@ const deskSchemasPost = async ( data ) => {
             name:       'myName',
             columns:    [
                 {   name:     'iAmColumn1',
-                    type:     'other'
+                    //type:     'other'
                 },
                 {   name:     'iAmColumn2',
                     type:     'S'

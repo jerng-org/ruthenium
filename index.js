@@ -21,11 +21,9 @@ rus.mark( `index.js loaded mark.js`)
             `test-middleware?ruthenium=restful&type=schemas;`,
             `sessions`, 
             `cognito`, 
-            `formHelpers`, 
-            `urlHelpers`, 
-            `htmlHelpers`, 
             `markuplayouts?... `,
             'writes to (data.RU.signals) should be signed by the writer',
+            `(rus.validate) errors throw violently; consider a docile bubbling`,
             `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`
         ]
     )
