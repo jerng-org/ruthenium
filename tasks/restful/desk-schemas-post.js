@@ -26,7 +26,6 @@ const deskSchemasPost   = async ( data ) => {
         }
     }
     
-    //const scopedModel = await rus.scopeModel  ( 'desk-schemas' )
     const validity    = await rus.validate    ( TEST_VALIDATE_ME, //data.RU.request.formStringParameters, 
                                                 'desk-schemas'
                                               )

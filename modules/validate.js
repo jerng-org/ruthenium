@@ -178,7 +178,8 @@ OPERATION 3
 const validate = async (    dataToValidate, 
                             modelKey, 
                             scopedModel = null,
-                            keyTrace    = modelKey      ) => 
+                            keyTrace    = modelKey,
+                            report      = {}            ) => 
 {
     
     scopedModel = ( ! scopedModel && modelKey )
@@ -188,20 +189,23 @@ const validate = async (    dataToValidate,
 
     const _scopedData = dataToValidate[ modelKey ]
         
-    /*
-            throw Error (await JSON.stringify({
-                scopedModel: scopedModel,
-                scopedDatum: _scopedData
-            }))
-    */
+                        /*
+                                throw Error (await JSON.stringify({
+                                    scopedModel: scopedModel,
+                                    scopedDatum: _scopedData
+                                }))
+                        
+                        console.warn ( `
+                            r-u-s.js:398 modelKey:`, modelKey, `
+                            keyTrace:`, keyTrace, `
+                            _scopedData:`,  JSON.stringify ( _scopedData, null, 4 ),`
+                            scopedModel:`,  JSON.stringify ( scopedModel, null, 4 ) )
+                        */
     
-    console.warn ( `
-        r-u-s.js:398 modelKey:`, modelKey, `
-        keyTrace:`, keyTrace, `
-        _scopedData:`,  JSON.stringify ( _scopedData, null, 4 ),`
-        scopedModel:`,  JSON.stringify ( scopedModel, null, 4 ) )
-    
-    await validateRules ( _scopedData, scopedModel )
+    report[ keyTrace ] = await validateRules (  _scopedData, 
+                                                scopedModel, 
+                                                keyTrace, 
+                                                report[ scopedModel ]   )
 
     //  If we reached here without throwing, it means (_scopedData)
     //  checks out. Now we traverse subModels, if the value is a
@@ -210,55 +214,49 @@ const validate = async (    dataToValidate,
     for ( const _scopedSubModelKey in scopedModel.subs ) {
         // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
 
-        console.warn ( `
-            r-u-s.js:411 next call to (validate) will use 
-                _scopedSubModelKey:`, _scopedSubModelKey, `
+                        /*
+                        console.warn ( `
+                            r-u-s.js:411 next call to (validate) will use 
+                                _scopedSubModelKey:`, _scopedSubModelKey, `
+                                
+                            keyTrace:`, keyTrace, `
+                            _scopedData:`,  JSON.stringify ( _scopedData, null, 4 ),`
+                            scopedModel:`,  JSON.stringify ( scopedModel, null, 4 ) )
                 
-            keyTrace:`, keyTrace, `
-            _scopedData:`,  JSON.stringify ( _scopedData, null, 4 ),`
-            scopedModel:`,  JSON.stringify ( scopedModel, null, 4 ) )
-
-
+                        */
+        
         if ( scopedModel.self.many )
         {
             for ( const _scopedDataSubItem of _scopedData )
             {
-                await validate (  _scopedDataSubItem, 
+                await validate  (   _scopedDataSubItem, 
                                     //  Whereby, if the key is missing it will 
                                     //  caught by the subsequent (call to
                                     //  validateRules) in the body of 
                                     //  (validate)
                 
-                                _scopedSubModelKey,
-                                scopedModel.subs[ _scopedSubModelKey ],
-                                keyTrace + '.[#].' + _scopedSubModelKey
-                             )
+                                    _scopedSubModelKey,
+                                    scopedModel.subs[ _scopedSubModelKey ],
+                                    keyTrace + '.[#].' + _scopedSubModelKey
+                                )
             }
         }
         else
         {
-            await validate (  _scopedData, 
+            await validate  (   _scopedData, 
                                 //  Whereby, if the key is missing it will 
                                 //  caught by the subsequent (call to
                                 //  validateRules) in the body of 
                                 //  (validate)
             
-                            _scopedSubModelKey,
-                            scopedModel.subs[ _scopedSubModelKey ],
-                            keyTrace + '.' + _scopedSubModelKey
-                         ) 
+                                _scopedSubModelKey,
+                                scopedModel.subs[ _scopedSubModelKey ],
+                                keyTrace + '.' + _scopedSubModelKey
+                            ) 
         }
-
-/*                
-        if ( scopedModel.subs[ _scopedSubModelKey ].self.many )
-        {
-            
-        }
-        else // not many; 
-        {
-        }
-*/                
+        // if scopedModel.self.many / else-block ends
     }
+    // _scopedSubModelKey
 }
 // (validate)
 
@@ -336,7 +334,10 @@ break    // (rule)
              
     */
     
-const validateRules = async ( scopedDatum, scopedModel ) => {
+const validateRules = async (   scopedDatum, 
+                                scopedModel, 
+                                keyTrace, 
+                                report          ) => {
 
     console.warn ( `
     r-u-s.js:519 scopedData:`, await JSON.stringify ( scopedDatum ) )
@@ -367,7 +368,7 @@ if ( scopedModel.self.many ) // this pattern should recur for 'count_xyz'
             )
         ) 
     {
-        throw Error ( `(validateRules) (model.self.many:true) 
+        throw Error ( `(validateRules) (${keyTrace}) (model.self.many:true) 
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
                       }) failed; scopedDatum.length was: (${
@@ -379,7 +380,7 @@ if ( scopedModel.self.many ) // this pattern should recur for 'count_xyz'
     if (        ! Array.isArray( scopedDatum )
             ||  scopedDatum.length <= _rulesToTest.count_gt )
     {
-        throw Error ( `(validateRules) (model.self.many:false)
+        throw Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt:${
                         scopedModel.self.rules.count_gt
                       }) failed; scopedDatum.length was: (${
@@ -395,7 +396,7 @@ else // not-'many', ergo is not an Array
             [ undefined, null, NaN ].includes ( scopedDatum )
         )   
     {
-        throw Error ( `(validateRules) (model.self.many:false)
+        throw Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
                       }) failed; scopedDatum was: (${
@@ -405,7 +406,7 @@ else // not-'many', ergo is not an Array
     
     // naive comparison
     if ( _rulesToTest.count_gt > 1 ) {
-        throw Error ( `(validateRules) (model.self.many:false)
+        throw Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt was greater than 1) so this
                       is a contradiction; your actual data may or may 
                       not be ok.` )
