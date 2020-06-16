@@ -200,6 +200,7 @@ const validate = async (    dataToValidate,
 //      //
 //////////
 
+    console.warn ( keyTrace, shortReport )
 
     report[ modelKey ].self = await validateRules (  _scopedData, 
                                                     scopedModel, 
@@ -223,13 +224,11 @@ const validate = async (    dataToValidate,
     for ( const _scopedSubModelKey in scopedModel.subs ) {
         // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
 
-        //console.warn (`validate.js:_scopedSubModelKey: ${_scopedSubModelKey}`)
         if ( scopedModel.self.many )
         {
             let _count = 0
             for ( const _scopedDataSubItem of _scopedData )
             {
-                //console.warn (`validate.js:_scopedDataSubItem: ${modelKey} / ${_count} / ${_scopedSubModelKey}`)
                 report[ modelKey ].subs[ _count ][ _scopedSubModelKey ]
                     = ( await validate (_scopedDataSubItem, 
                                         //  Whereby, if the key is missing it will 
@@ -266,7 +265,7 @@ const validate = async (    dataToValidate,
                                         keyTrace + '.' + _scopedSubModelKey,
                                         
                                         undefined,
-                                        
+                                        shortReport
                     
                     ) ) [ _scopedSubModelKey ]
         }
