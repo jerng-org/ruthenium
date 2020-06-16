@@ -205,7 +205,7 @@ const validate = async (    dataToValidate,
     report[ modelKey ].self = await validateRules (  _scopedData, 
                                                     scopedModel, 
                                                     keyTrace, 
-                                                    //report[ scopedModel ]   
+                                                    shortReport   
                                                     )
                                                     
     //  If we reached here without throwing, it means (_scopedData)
@@ -280,7 +280,7 @@ const validate = async (    dataToValidate,
     }
     // _scopedSubModelKey
     
-    shortReport.push ( [ keyTrace, 'something' ] )
+    //shortReport.push ( [ keyTrace, 'something' ] )
         // Perhaps this would be more idiomatic as as Map, but I am avoiding thought about it for now.
     
     Object.defineProperty ( report, 'shortReport', {
@@ -369,7 +369,7 @@ break    // (rule)
 const validateRules = async (   scopedDatum, 
                                 scopedModel, 
                                 keyTrace, 
-                                //report          
+                                shortReport          
                                                 ) => {
                                                     
     const _rulesToTest  = scopedModel.self.rules
@@ -388,6 +388,7 @@ const validateRules = async (   scopedDatum,
             result:     undefined, // 'ok' or new Error
         }
         
+        shortReport.push ( [ keyTrace, 'valid' ] )
         const setResult = _maybeError => {
             report.rules[ _ruleKey ].result =   ( _maybeError instanceof Error )
                                                 ? [ `error`, _maybeError ]
