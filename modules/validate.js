@@ -221,9 +221,10 @@ const validate = async (    dataToValidate,
 
         if ( scopedModel.self.many )
         {
-            let _count              = 0
+            let _count = 0
             for ( const _scopedDataSubItem of _scopedData )
             {
+                console.warn (`validate.js:227: ${modelKey} / ${_count} / ${_scopedSubModelKey}`,)
                 report[ modelKey ].subs[ _count ][ _scopedSubModelKey ]
                     = ( await validate (_scopedDataSubItem, 
                                         //  Whereby, if the key is missing it will 
@@ -348,9 +349,6 @@ const validateRules = async (   scopedDatum,
                                 scopedModel, 
                                 keyTrace, 
                                 report          ) => {
-
-    console.warn ( `
-    r-u-s.js:519 scopedData:`, await JSON.stringify ( scopedDatum ) )
 
 
     const _rulesToTest = scopedModel.self.rules
