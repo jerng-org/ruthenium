@@ -209,8 +209,9 @@ const validate = async (    dataToValidate,
     //  non-Array object.
     
     report[ modelKey ].subs 
-        =   (       'subs' in scopedModel 
-                &&  Object.keys ( scopedModel.subs ).length )
+        =   scopedModel.self.many 
+            //(       'subs' in scopedModel 
+            //    &&  Object.keys ( scopedModel.subs ).length )
             ? new Array ( _scopedData.length )
                     .fill( {}, 0, _scopedData.length) 
             : {}
