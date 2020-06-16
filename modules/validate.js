@@ -354,12 +354,26 @@ const validateRules = async (   scopedDatum,
                                                 ) => {
                                                     
     const _rulesToTest  = scopedModel.self.rules
-    let result          = {
-        //candidate:  scopedDatum, 
-        rules:      _rulesToTest
+    let report          = {
+        rules:      {},
+        
+        //candidate: scopedDatum, 
+            // we could add the candidate data here, but this does not seem 
+            // helpful yet; 
     }
     
     for ( const _ruleKey in _rulesToTest ) {
+        
+        report.rules[ _ruleKey ] = {
+            argument:   _rulesToTest[ _ruleKey ],
+            result:     undefined, // 'ok' or new Error
+        }
+        
+        const setResult = _maybeError => {
+            report.rules[ _ruleKey ].result =   ( _maybeError instanceof Error )
+                                                ? _maybeError
+                                                : 'valid'
+        }
         
 switch ( _ruleKey ) {
 
