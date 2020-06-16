@@ -200,7 +200,7 @@ const validate = async (    dataToValidate,
 //      //
 //////////
 
-    console.warn ( keyTrace, shortReport )
+    
 
     report[ modelKey ].self = await validateRules (  _scopedData, 
                                                     scopedModel, 
