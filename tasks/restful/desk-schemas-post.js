@@ -17,7 +17,7 @@ const deskSchemasPost   = async ( data ) => {
             name:       'myName',
             columns:    [
                 {   name:     'iAmColumn1',
-                    //type:     'other'
+                    type:     'other'
                 },
                 {   name:     'iAmColumn2',
                     type:     'S'
