@@ -200,8 +200,6 @@ const validate = async (    dataToValidate,
 //      //
 //////////
 
-    
-
     report[ modelKey ].self = await validateRules (  _scopedData, 
                                                     scopedModel, 
                                                     keyTrace, 
@@ -220,6 +218,12 @@ const validate = async (    dataToValidate,
                     .fill(0)
                     .map( _ => ({}) )  
             : {}
+            
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
 
     for ( const _scopedSubModelKey in scopedModel.subs ) {
         // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
@@ -270,13 +274,6 @@ const validate = async (    dataToValidate,
                     ) ) [ _scopedSubModelKey ]
         }
         // if scopedModel.self.many / else-block ends
-
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
-
     }
     // _scopedSubModelKey
     
@@ -381,23 +378,43 @@ const validateRules = async (   scopedDatum,
             // helpful yet; 
     }
     
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+    
     for ( const _ruleKey in _rulesToTest ) {
         
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+
         report.rules[ _ruleKey ] = {
             argument:   _rulesToTest[ _ruleKey ],
             result:     undefined, // 'ok' or new Error
         }
-        
         shortReport.push ( [ keyTrace ] )
+        
         const setResult = _maybeError => {
-            report.rules[ _ruleKey ].result =   ( _maybeError instanceof Error )
-                                                ? [ `error`, _maybeError ]
-                                                : 'valid'
-            shortReport[ shortReport.length - 1 ][1]  =   ( _maybeError instanceof Error )
-                                                ? [ `error`, _maybeError ]
-                                                : 'valid'
+            if ( _maybeError instanceof Error )
+            {
+                report.rules[ _ruleKey ].result = [ `error`, _maybeError ]
+            }
+            else
+            {
+                shortReport[ shortReport.length - 1 ][1] = 'valid'   
+            }
         }
         setResult() // default pass
+        
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
         
 switch ( _ruleKey ) {
 
