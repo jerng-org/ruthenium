@@ -218,12 +218,13 @@ const validate = async (    dataToValidate,
 
         if ( scopedModel.self.many )
         {
-            let _count = 0
-            report[ modelKey ].subs[ _scopedSubModelKey ] = []
+            report[ modelKey ].subs = new Array ( _scopedData.length )
+                                            .fill ( {}, 0, _scopedData.length) 
+            let _count              = 0
             for ( const _scopedDataSubItem of _scopedData )
             {
-                report[ modelKey ].subs[ _scopedSubModelKey ].push (
-                    ( await validate (  _scopedDataSubItem, 
+                report[ modelKey ].subs[ _count ][ _scopedSubModelKey ]
+                    = ( await validate (_scopedDataSubItem, 
                                         //  Whereby, if the key is missing it will 
                                         //  caught by the subsequent (call to
                                         //  validateRules) in the body of 
@@ -236,7 +237,6 @@ const validate = async (    dataToValidate,
                                             + _scopedSubModelKey
                     
                     )   ) [ _scopedSubModelKey ]
-                )
                 _count ++
             }
         }
