@@ -225,7 +225,7 @@ const validate = async (    dataToValidate,
             for ( const _scopedDataSubItem of _scopedData )
             {
                 report[ modelKey ].subs[ _count ][ _scopedSubModelKey ]
-                    += JSON.stringify( await validate (_scopedDataSubItem, 
+                    += ( await validate (_scopedDataSubItem, 
                                         //  Whereby, if the key is missing it will 
                                         //  caught by the subsequent (call to
                                         //  validateRules) in the body of 
