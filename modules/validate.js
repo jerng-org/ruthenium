@@ -371,9 +371,10 @@ const validateRules = async (   scopedDatum,
         
         const setResult = _maybeError => {
             report.rules[ _ruleKey ].result =   ( _maybeError instanceof Error )
-                                                ? _maybeError
+                                                ? [ `error`, _maybeError ]
                                                 : 'valid'
         }
+        setResult() // default pass
         
 switch ( _ruleKey ) {
 
@@ -381,7 +382,7 @@ case ( 'count_gt' ):
 /*  This is a really stupendous amount of code just to check if something exists
 *  or not. I really have no faith in this design at the moment. But it should
 *  work. -2020-06-12
-*/    
+*/
 if ( scopedModel.self.many ) // this pattern should recur for 'count_xyz'
 {
     // existential quantifier
