@@ -208,18 +208,18 @@ const validate = async (    dataToValidate,
     //  checks out. Now we traverse subModels, if the value is a
     //  non-Array object.
     
-    if (        'subs' in scopedModel 
-            &&  Object.keys ( scopedModel.subs ).length
-    
-    ) report[ modelKey ].subs = {} ;
+    report[ modelKey ].subs 
+        =   (       'subs' in scopedModel 
+                &&  Object.keys ( scopedModel.subs ).length )
+            ? new Array( _scopedData.length )
+                    .fill( {}, 0, _scopedData.length) 
+            : {}
 
     for ( const _scopedSubModelKey in scopedModel.subs ) {
         // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
 
         if ( scopedModel.self.many )
         {
-            report[ modelKey ].subs = new Array ( _scopedData.length )
-                                            .fill ( {}, 0, _scopedData.length) 
             let _count              = 0
             for ( const _scopedDataSubItem of _scopedData )
             {
