@@ -355,7 +355,7 @@ const validateRules = async (   scopedDatum,
                                                     
     const _rulesToTest  = scopedModel.self.rules
     let result          = {
-        candidate:  scopedDatum, 
+        //candidate:  scopedDatum, 
         rules:      _rulesToTest
     }
     
