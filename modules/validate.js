@@ -270,7 +270,7 @@ const validate = async (    dataToValidate,
     }
     // _scopedSubModelKey
     
-    return { shortReport: shortReport, report: report }
+    return report // { shortReport: shortReport, report: report }
 }
 // (validate)
 
