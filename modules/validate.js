@@ -212,20 +212,20 @@ const validate = async (    dataToValidate,
         =   scopedModel.self.many 
             //(       'subs' in scopedModel 
             //    &&  Object.keys ( scopedModel.subs ).length )
-            ? new Array ( _scopedData.length )
-                    .fill( {}, 0, _scopedData.length) 
+            ? new Array ( _scopedData.length +1)
+                    .fill( {}, 0, _scopedData.length+1) 
             : {}
 
     for ( const _scopedSubModelKey in scopedModel.subs ) {
         // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
 
-        console.warn (`validate.js:_scopedSubModelKey: ${_scopedSubModelKey}`)
+        //console.warn (`validate.js:_scopedSubModelKey: ${_scopedSubModelKey}`)
         if ( scopedModel.self.many )
         {
             let _count = 0
             for ( const _scopedDataSubItem of _scopedData )
             {
-                console.warn (`validate.js:_scopedDataSubItem: ${modelKey} / ${_count} / ${_scopedSubModelKey}`)
+                //console.warn (`validate.js:_scopedDataSubItem: ${modelKey} / ${_count} / ${_scopedSubModelKey}`)
                 report[ modelKey ].subs[ _count ][ _scopedSubModelKey ]
                     = ( await validate (_scopedDataSubItem, 
                                         //  Whereby, if the key is missing it will 
