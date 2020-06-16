@@ -270,7 +270,7 @@ const validate = async (    dataToValidate,
     }
     // _scopedSubModelKey
     
-    shortReport[ keyTrace ] = 'something'
+    shortReport.push ( [ keyTrace, 'something' ] )
     
     Object.defineProperty ( report, 'shortReport', {
         enumerable: false,
