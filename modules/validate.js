@@ -179,7 +179,8 @@ const validate = async (    dataToValidate,
                             modelKey, 
                             scopedModel = null,
                             keyTrace    = modelKey,
-                            report      = { [modelKey]: {} }
+                            report      = { [modelKey]: {} },
+                            shortReport = []
                             
                         ) => 
 {
@@ -269,7 +270,7 @@ const validate = async (    dataToValidate,
     }
     // _scopedSubModelKey
     
-    return report
+    return { shortReport: shortReport, report: report }
 }
 // (validate)
 
