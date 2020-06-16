@@ -471,7 +471,7 @@ break   // regex_text
     }
     // _ruleKey in _rulesToTest
     
-    return result
+    return report
 }
 // (validateRules)
 
