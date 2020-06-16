@@ -212,8 +212,8 @@ const validate = async (    dataToValidate,
         =   scopedModel.self.many 
             //(       'subs' in scopedModel 
             //    &&  Object.keys ( scopedModel.subs ).length )
-            ? new Array ( _scopedData.length +1)
-                    .fill( {}, 0, _scopedData.length+1) 
+            ? new Array ( _scopedData.length )
+                    .map( _ => {} )  
             : {}
 
     for ( const _scopedSubModelKey in scopedModel.subs ) {
