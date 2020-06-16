@@ -270,6 +270,11 @@ const validate = async (    dataToValidate,
     }
     // _scopedSubModelKey
     
+    Object.defineProperty ( report, 'shortReport', {
+        enumerable: false,
+        value:      shortReport
+    } )
+    
     return report // { shortReport: shortReport, report: report }
 }
 // (validate)
