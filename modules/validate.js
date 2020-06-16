@@ -453,7 +453,7 @@ break   // regex_text
     }
     // _ruleKey in _rulesToTest
     
-    return 'validateRules returned / ' + keyTrace
+    return 'validateRules returned / ' + keyTrace + '/' + scopedDatum
 }
 // (validateRules)
 
