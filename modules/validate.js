@@ -177,8 +177,10 @@ OPERATION 3
     
 const validate = async (    dataToValidate, 
                             modelKey, 
+                            
                             scopedModel = null,
                             keyTrace    = modelKey,
+                            
                             report      = { [modelKey]: {} },
                             shortReport = []
                             
@@ -236,10 +238,14 @@ const validate = async (    dataToValidate,
                                         //  (validate)
                 
                                         _scopedSubModelKey,
+                                        
                                         scopedModel.subs[ _scopedSubModelKey ],
                                         keyTrace 
                                             + '.[' + _count + '].' 
-                                            + _scopedSubModelKey
+                                            + _scopedSubModelKey,
+                                            
+                                        null,
+                                        shortReport
                     
                     )   ) [ _scopedSubModelKey ]
                 _count ++
@@ -271,6 +277,7 @@ const validate = async (    dataToValidate,
     // _scopedSubModelKey
     
     shortReport.push ( [ keyTrace, 'something' ] )
+        // Perhaps this would be more idiomatic as as Map, but I am avoiding thought about it for now.
     
     Object.defineProperty ( report, 'shortReport', {
         enumerable: false,
