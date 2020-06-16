@@ -213,12 +213,12 @@ const validate = async (    dataToValidate,
     
     ) report[ modelKey ].subs = {} ;
 
-    let _count = 0
     for ( const _scopedSubModelKey in scopedModel.subs ) {
         // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
 
         if ( scopedModel.self.many )
         {
+            let _count = 0
             report[ modelKey ].subs[ _scopedSubModelKey ] = []
             for ( const _scopedDataSubItem of _scopedData )
             {
@@ -237,6 +237,7 @@ const validate = async (    dataToValidate,
                     
                     )   ) [ _scopedSubModelKey ]
                 )
+                _count ++
             }
         }
         else    // ! scopedModel.self.many
@@ -261,7 +262,6 @@ const validate = async (    dataToValidate,
 //  !!  //  Make way.
 //      //
 //////////
-        _count ++
     }
     // _scopedSubModelKey
     
