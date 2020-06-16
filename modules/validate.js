@@ -179,7 +179,9 @@ const validate = async (    dataToValidate,
                             modelKey, 
                             scopedModel = null,
                             keyTrace    = modelKey,
-                            report      = {}            ) => 
+                            report      = { [modelKey]: {} }
+                            
+                        ) => 
 {
     
     scopedModel = ( ! scopedModel && modelKey )
@@ -188,75 +190,82 @@ const validate = async (    dataToValidate,
         // Now, (scopedModel) should be !null under all circustances.
 
     const _scopedData = dataToValidate[ modelKey ]
-        
-                        /*
-                                throw Error (await JSON.stringify({
-                                    scopedModel: scopedModel,
-                                    scopedDatum: _scopedData
-                                }))
-                        
-                        console.warn ( `
-                            r-u-s.js:398 modelKey:`, modelKey, `
-                            keyTrace:`, keyTrace, `
-                            _scopedData:`,  JSON.stringify ( _scopedData, null, 4 ),`
-                            scopedModel:`,  JSON.stringify ( scopedModel, null, 4 ) )
-                        */
-    
-    report[ keyTrace ] = await validateRules (  _scopedData, 
-                                                scopedModel, 
-                                                keyTrace, 
-                                                report[ scopedModel ]   )
 
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+
+
+    report[ modelKey ].self = await validateRules (  _scopedData, 
+                                                    scopedModel, 
+                                                    keyTrace, 
+                                                    //report[ scopedModel ]   
+                                                    )
+                                                    
     //  If we reached here without throwing, it means (_scopedData)
     //  checks out. Now we traverse subModels, if the value is a
     //  non-Array object.
     
+    if (        'subs' in scopedModel 
+            &&  Object.keys ( scopedModel.subs ).length
+    
+    ) report[ modelKey ].subs = {} ;
+
+    let _count = 0
     for ( const _scopedSubModelKey in scopedModel.subs ) {
         // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
 
-                        /*
-                        console.warn ( `
-                            r-u-s.js:411 next call to (validate) will use 
-                                _scopedSubModelKey:`, _scopedSubModelKey, `
-                                
-                            keyTrace:`, keyTrace, `
-                            _scopedData:`,  JSON.stringify ( _scopedData, null, 4 ),`
-                            scopedModel:`,  JSON.stringify ( scopedModel, null, 4 ) )
-                
-                        */
-        
         if ( scopedModel.self.many )
         {
+            report[ modelKey ].subs[ _scopedSubModelKey ] = []
             for ( const _scopedDataSubItem of _scopedData )
             {
-                await validate  (   _scopedDataSubItem, 
-                                    //  Whereby, if the key is missing it will 
-                                    //  caught by the subsequent (call to
-                                    //  validateRules) in the body of 
-                                    //  (validate)
+                report[ modelKey ].subs[ _scopedSubModelKey ].push (
+                    ( await validate (  _scopedDataSubItem, 
+                                        //  Whereby, if the key is missing it will 
+                                        //  caught by the subsequent (call to
+                                        //  validateRules) in the body of 
+                                        //  (validate)
                 
-                                    _scopedSubModelKey,
-                                    scopedModel.subs[ _scopedSubModelKey ],
-                                    keyTrace + '.[#].' + _scopedSubModelKey
-                                )
+                                        _scopedSubModelKey,
+                                        scopedModel.subs[ _scopedSubModelKey ],
+                                        keyTrace 
+                                            + '.[' + _count + '].' 
+                                            + _scopedSubModelKey
+                    
+                    )   ) [ _scopedSubModelKey ]
+                )
             }
         }
-        else
-        {
-            await validate  (   _scopedData, 
-                                //  Whereby, if the key is missing it will 
-                                //  caught by the subsequent (call to
-                                //  validateRules) in the body of 
-                                //  (validate)
+        else    // ! scopedModel.self.many
+        {   
+            report[ modelKey ].subs[ _scopedSubModelKey ]
+                =   ( await validate(   _scopedData, 
+                                        //  Whereby, if the key is missing it will 
+                                        //  caught by the subsequent (call to
+                                        //  validateRules) in the body of 
+                                        //  (validate)
             
-                                _scopedSubModelKey,
-                                scopedModel.subs[ _scopedSubModelKey ],
-                                keyTrace + '.' + _scopedSubModelKey
-                            ) 
+                                        _scopedSubModelKey,
+                                        scopedModel.subs[ _scopedSubModelKey ],
+                                        keyTrace + '.' + _scopedSubModelKey
+                    
+                    ) ) [ _scopedSubModelKey ]
         }
         // if scopedModel.self.many / else-block ends
+
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+        _count ++
     }
     // _scopedSubModelKey
+    
+    return report
 }
 // (validate)
 
@@ -443,6 +452,7 @@ break   // regex_text
     }
     // _ruleKey in _rulesToTest
     
+    return 'validateRules returned'
 }
 // (validateRules)
 

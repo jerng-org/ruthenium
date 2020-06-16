@@ -17,7 +17,7 @@ const deskSchemasPost   = async ( data ) => {
             name:       'myName',
             columns:    [
                 {   name:     'iAmColumn1',
-                    //type:     'other'
+                    type:     'other'
                 },
                 {   name:     'iAmColumn2',
                     type:     'S'
@@ -26,11 +26,11 @@ const deskSchemasPost   = async ( data ) => {
         }
     }
     
-    const validity    = await rus.validate    ( TEST_VALIDATE_ME, //data.RU.request.formStringParameters, 
+    const report    = await rus.validate    ( TEST_VALIDATE_ME, //data.RU.request.formStringParameters, 
                                                 'desk-schemas'
                                               )
     
-throw Error ( [`(desk-schemas-post.js) validity :`, validity, `data:`, data] )
+throw Error ( await rus.stringify ( report) )
 
     
     //  end PROTOTYPICAL data validation process.
