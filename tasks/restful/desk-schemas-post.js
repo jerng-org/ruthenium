@@ -30,7 +30,7 @@ const deskSchemasPost   = async ( data ) => {
                                                 'desk-schemas'
                                               )
     
-throw Error ( await rus.stringify ( report.shortReport ) )
+throw Error ( await rus.stringify ( report) )
 
     
     //  end PROTOTYPICAL data validation process.
