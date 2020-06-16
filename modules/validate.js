@@ -388,9 +388,12 @@ const validateRules = async (   scopedDatum,
             result:     undefined, // 'ok' or new Error
         }
         
-        shortReport.push ( [ keyTrace, 'valid' ] )
+        shortReport.push ( [ keyTrace ] )
         const setResult = _maybeError => {
             report.rules[ _ruleKey ].result =   ( _maybeError instanceof Error )
+                                                ? [ `error`, _maybeError ]
+                                                : 'valid'
+            shortReport[ shortReport.length - 1 ][1]  =   ( _maybeError instanceof Error )
                                                 ? [ `error`, _maybeError ]
                                                 : 'valid'
         }
