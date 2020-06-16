@@ -350,10 +350,14 @@ break    // (rule)
 const validateRules = async (   scopedDatum, 
                                 scopedModel, 
                                 keyTrace, 
-                                report          ) => {
-
-
-    const _rulesToTest = scopedModel.self.rules
+                                //report          
+                                                ) => {
+                                                    
+    const _rulesToTest  = scopedModel.self.rules
+    let result          = {
+        candidate:  scopedDatum, 
+        rules:      _rulesToTest
+    }
     
     for ( const _ruleKey in _rulesToTest ) {
         
@@ -453,7 +457,7 @@ break   // regex_text
     }
     // _ruleKey in _rulesToTest
     
-    return 'validateRules returned / ' + keyTrace + ' / ' + scopedDatum
+    return result
 }
 // (validateRules)
 
