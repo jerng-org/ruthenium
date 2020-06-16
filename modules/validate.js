@@ -244,7 +244,7 @@ const validate = async (    dataToValidate,
                                             + '.[' + _count + '].' 
                                             + _scopedSubModelKey,
                                             
-                                        null,
+                                        undefined,
                                         shortReport
                     
                     )   ) [ _scopedSubModelKey ]
