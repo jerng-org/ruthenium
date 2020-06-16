@@ -396,24 +396,24 @@ if ( scopedModel.self.many ) // this pattern should recur for 'count_xyz'
             )
         ) 
     {
-        throw Error ( `(validateRules) (${keyTrace}) (model.self.many:true) 
+        setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:true) 
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
                       }) failed; scopedDatum.length was: (${
                           scopedDatum.length
-                      })`)        
+                      })`) )        
     }
 
     // naive comparison
     if (        ! Array.isArray( scopedDatum )
             ||  scopedDatum.length <= _rulesToTest.count_gt )
     {
-        throw Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
+        setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt:${
                         scopedModel.self.rules.count_gt
                       }) failed; scopedDatum.length was: (${
                         scopedDatum.length
-                      })` )
+                      })` ) )
     }
 }
 else // not-'many', ergo is not an Array
@@ -424,20 +424,20 @@ else // not-'many', ergo is not an Array
             [ undefined, null, NaN ].includes ( scopedDatum )
         )   
     {
-        throw Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
+        setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
                       }) failed; scopedDatum was: (${
                           scopedDatum
-                      })`)        
+                      })`) )
     }
     
     // naive comparison
     if ( _rulesToTest.count_gt > 1 ) {
-        throw Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
+        setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt was greater than 1) so this
                       is a contradiction; your actual data may or may 
-                      not be ok.` )
+                      not be ok.` ) )
     }
 } // if (many), else [end of block]
 break // count_gt
