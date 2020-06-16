@@ -261,8 +261,12 @@ const validate = async (    dataToValidate,
                                         //  (validate)
             
                                         _scopedSubModelKey,
+                                        
                                         scopedModel.subs[ _scopedSubModelKey ],
-                                        keyTrace + '.' + _scopedSubModelKey
+                                        keyTrace + '.' + _scopedSubModelKey,
+                                        
+                                        undefined,
+                                        
                     
                     ) ) [ _scopedSubModelKey ]
         }
@@ -273,6 +277,7 @@ const validate = async (    dataToValidate,
 //  !!  //  Make way.
 //      //
 //////////
+
     }
     // _scopedSubModelKey
     
