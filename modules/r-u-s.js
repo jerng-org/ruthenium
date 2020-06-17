@@ -225,7 +225,8 @@ const rus   = {
     stringify: 
         async data =>   JSON.stringify( data, null, 4 )
                         //.replace(/\\n/g, '\n')
-                        .replace(/\\"/g, '"'),
+                        //.replace(/\\"/g, '"')
+                        ,
     
 //////////
 //      //
