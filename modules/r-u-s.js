@@ -223,10 +223,7 @@ const rus   = {
     //      Furthermore it fails to accommodate duplicate (name)s
 
     stringify: 
-        async data =>   JSON.stringify( data, null, 4 )
-                        //.replace(/\\n/g, '\n')
-                        .replace('\\"', '"')
-                        ,
+        async data => JSON.stringify( data, null, 4 ),//.replace(/\\n/g, '\n'),
     
 //////////
 //      //
