@@ -182,7 +182,8 @@ const validate = async (    dataToValidate,
                             keyTrace    = modelKey,
                             
                             report      = { [modelKey]: {} },
-                            shortReport = []
+                            shortReport = [],
+                            summary     = true
                             
                         ) => 
 {
@@ -283,6 +284,11 @@ const validate = async (    dataToValidate,
     Object.defineProperty ( report, 'shortReport', {
         enumerable: false,
         value:      shortReport
+    } )
+    
+    Object.defineProperty ( report, 'summary', {
+        enumerable: false,
+        value:      summary
     } )
     
     return report // { shortReport: shortReport, report: report }
