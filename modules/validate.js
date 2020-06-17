@@ -12,11 +12,16 @@ modelFileNames.forEach ( ( current, index, array ) => {
     if (        current[0] != '_'
             &&  current.toLowerCase().slice ( -3 ) == '.js' )
     {
-        models[ current.slice (0, -3) ] = require ( '/var/task/io/models/' + current )
+        models[ current.slice (0, -3) ]
+            = require ( '/var/task/io/models/' + current )
     }
 } /* , thisArg */ ) 
 
-
+/*  See validate(), PARAMETER 2 - modelKey
+ *
+ *  -   the Array treatment is not yet implemented TODO
+ */
+ 
 const scopeModel = async _modelKey => {
             
     let _currentModel
@@ -44,134 +49,134 @@ const scopeModel = async _modelKey => {
 /*  In summary, (validate) walks through a tree of document 
  *  (models), and at each model looks for the corresponding 
  *  (dataToValidate), then calls (validateRules) upon that pair.
-
-PARAMETER 1 - dataToValidate 
-        
-    REQUIRED;
-                        
-        EXAMPLE
-    
-            { 'desk-schemas': { 
-                name:       'myName',
-                columns:    [
-                    { name:     'iAmColumn1',
-                      type:     'other'
-                    },
-                    { name:     'iAmColumn2',
-                      type:     'S'
-                    }
-                ]
-            } }
-
-PARAMETER 2 - modelKey
-
-    REQUIRED;
-    
-        String  -   string_key of the (models) object
-
-            EXAMPLE 'desk-schemas'
-        
-        Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
-        
-            Where is the (models) object?
-            
-            Answer: framework should have loaded it already.
-                    
-PARAMETER 3 - scopedModel         
-                    
-    OPTIONAL;
-                    
-        EXAMPLE
-    
-            models =        // built in (r-u-s.js)
-            { 
-                'desk-schemas' : { 
-                    self: etc.
-                    subs: {
-                        name:   { self: etc. },
-                        columns:{ self: etc. }
-                    }
-                } 
-            }
-        
-            scopedModel =   // returned by (validate.js:scopeModel)
-            { 
-                self: etc.
-                subs: {
-                    name:   { self: etc. },
-                    columns:{ 
-                        self: etc. 
-                        subs: {
-                            name: { self, etc. },
-                            type: { self, etc. }
-                        }
-                    }
-                }
-            }    
-            
-OPERATION 1
-
-    If PARAMETER 3 is not filled by the user, infer it from PARAMETER 2.
-    
-        //  We don't want to be running (validate.js:scopeModel) on every recursing
-        //  call, so here we control calls to happen only if (scopedModel)
-        //  is not provided ... we then use (modelKey) to find 
-        //  (scopedModel); but for the initiating call you can 
-        //  (validate ( object, string, null) )
-
-OPERATION 2
-
-    Use PARAMETER 1 and PARAMETER 2 to determine (_scopedData);
-    (_scopedData) should be isomorphic with (scopedModel ... PARAMETER 3)
-
-    "PARAMETER 4"
-
-    EXAMPLE:
-        
-        _scopedData ==
-        { 
-            name:       'myName',
-            columns:    [
-                { name:     'iAmColumn1',
-                  type:     'other'
-                },
-                { name:     'iAmColumn2',
-                  type:     'S'
-                }
-            ]
-        }
-
-OPERATION 3
-
-    PARAMETERS 3,4 can now be compared; they are isomorphic.
-
-    DISCUSSION:
-                
-        CASE 1.0
-        The following are to be checked against scopedModel:
-    
-        _scopedData == undefined       // ! ( modelKey key in dataToValidate)
-        _scopedData == value           // individual datum
-        
-            CASE 1.1
-            The following are to be checked against _scopedModel.subs[ _subModelKey ]:
-        
-            _scopedData == {}              // empty POJO 
-            _scopedData == { entries }     // non-empty POJO
-            
-            (entries) here are (scopedSubData) which may be mapped to 
-            (subModels), but this is not done in (validateRule);
-            instead it is done in (validate) AFTER (validate)
-            has executed (validateRule) on the (scopedData)
-                
-        CASE 2.0
-        The following must have VALUES INDIVIDUALLY CHECKED against scopedModel:     
-            
-            _scopedData == []              // empty Array object
-            _scopedData == [ values ]      // non-empty Array object
-    
-
-
+ *  
+ *  PARAMETER 1 - dataToValidate 
+ *          
+ *      REQUIRED;
+ *                          
+ *          EXAMPLE
+ *      
+ *              { 'desk-schemas': { 
+ *                  name:       'myName',
+ *                  columns:    [
+ *                      { name:     'iAmColumn1',
+ *                        type:     'other'
+ *                      },
+ *                      { name:     'iAmColumn2',
+ *                        type:     'S'
+ *                      }
+ *                  ]
+ *              } }
+ *  
+ *  PARAMETER 2 - modelKey
+ *  
+ *      REQUIRED;
+ *      
+ *          String  -   string_key of the (models) object
+ *  
+ *              EXAMPLE 'desk-schemas'
+ *          
+ *          Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
+ *          
+ *              Where is the (models) object?
+ *              
+ *              Answer: framework should have loaded it already.
+ *                      
+ *  PARAMETER 3 - scopedModel         
+ *                      
+ *      OPTIONAL;
+ *                      
+ *          EXAMPLE
+ *      
+ *              models =        // built in (r-u-s.js)
+ *              { 
+ *                  'desk-schemas' : { 
+ *                      self: etc.
+ *                      subs: {
+ *                          name:   { self: etc. },
+ *                          columns:{ self: etc. }
+ *                      }
+ *                  } 
+ *              }
+ *          
+ *              scopedModel =   // returned by (validate.js:scopeModel)
+ *              { 
+ *                  self: etc.
+ *                  subs: {
+ *                      name:   { self: etc. },
+ *                      columns:{ 
+ *                          self: etc. 
+ *                          subs: {
+ *                              name: { self, etc. },
+ *                              type: { self, etc. }
+ *                          }
+ *                      }
+ *                  }
+ *              }    
+ *              
+ *  OPERATION 1
+ *  
+ *      If PARAMETER 3 is not filled by the user, infer it from PARAMETER 2.
+ *      
+ *      We don't want to be running (validate.js:scopeModel) on every recursing
+ *      call, so here we control calls to happen only if (scopedModel)
+ *      is not provided ... we then use (modelKey) to find 
+ *      (scopedModel); but for the initiating call you can 
+ *      (validate ( object, string, null) )
+ *  
+ *  OPERATION 2
+ *  
+ *      Use PARAMETER 1 and PARAMETER 2 to determine (_scopedData);
+ *      (_scopedData) should be isomorphic with (scopedModel ... PARAMETER 3)
+ *  
+ *      "PARAMETER 4"
+ *  
+ *      EXAMPLE:
+ *          
+ *          _scopedData ==
+ *          { 
+ *              name:       'myName',
+ *              columns:    [
+ *                  { name:     'iAmColumn1',
+ *                    type:     'other'
+ *                  },
+ *                  { name:     'iAmColumn2',
+ *                    type:     'S'
+ *                  }
+ *              ]
+ *          }
+ *  
+ *  OPERATION 3
+ *  
+ *      PARAMETERS 3,4 can now be compared; they are isomorphic.
+ *  
+ *      DISCUSSION:
+ *                  
+ *          CASE 1.0
+ *          The following are to be checked against scopedModel:
+ *      
+ *          _scopedData == undefined   // ! ( modelKey key in dataToValidate)
+ *          _scopedData == value       // individual datum
+ *          
+ *              CASE 1.1
+ *              The following are to be checked against 
+ *                  _scopedModel.subs[ _subModelKey ]: 
+ *
+ *              _scopedData == {}              // empty POJO 
+ *              _scopedData == { entries }     // non-empty POJO
+ *              
+ *              (entries) here are (scopedSubData) which may be mapped to 
+ *              (subModels), but this is not done in (validateRule);
+ *              instead it is done in (validate) AFTER (validate)
+ *              has executed (validateRule) on the (scopedData)
+ *                  
+ *          CASE 2.0
+ *          The following must have VALUES INDIVIDUALLY CHECKED against 
+ *              scopedModel:     
+ *              
+ *              _scopedData == []              // empty Array object
+ *              _scopedData == [ values ]      // non-empty Array object
+ *      
  */
     
     
@@ -182,18 +187,16 @@ const validate = async (    dataToValidate,
                             keyTrace    = modelKey,
                             
                             report      = { [modelKey]: {} },
-                            shortReport 
-                                =   Object.defineProperty ( [], 'summary', {
-                                        configurable:   true,
-                                        enumerable:     false,
-                                        value:          true,
-                                                        // defaults to a 'pass'
-                                        writable:       true
-                                    } )
+                            shortReport =   
+                                Object.defineProperty ( [], 'summary', {
+                                    configurable:   true,
+                                    enumerable:     false,
+                                    value:          true, // defaults to 'pass'
+                                    writable:       true
+                                } )
                             
                         ) => 
 {
-    
     scopedModel = ( ! scopedModel && modelKey )
         ? await scopeModel( modelKey )
         : scopedModel
@@ -300,75 +303,74 @@ const validate = async (    dataToValidate,
 /*  In summary, (validateRules) is called by (validate) which passes in
  *  a pair of isomorphic arguments.
  *
- 
-PARAMETER 1
-
-    scopedDatum     =   'myName'
-                
-    scopedDatum     =  
-    
-        { 
-            id:         'some-id-string',
-            name:       'myName',
-            columns:    [
-                {   name:     'iAmColumn1',
-                    type:     'other'
-                },
-                {   name:     'iAmColumn2',
-                    type:     'S'
-                }
-            ]
-        }
-                                    
-        With reference to documentation in (validate):
-
-            THESE ARE EXPECTED:
-    
-            scopedDatum == undefined       // ! ( modelKey key in dataToValidate)
-            scopedDatum == value           // individual datum
-            scopedDatum == []              // empty Array object
-            scopedDatum == [ values ]      // non-empty Array object
-            scopedData == {}              // empty POJO 
-            scopedData == { entries }     // non-empty POJO
-
-PARAMETER 2                    
-    
-    scopedModel     =   { 
-                            self: etc.
-                            subs: {
-                                name:   { self: etc. },
-                                columns:{ 
-                                    self: etc. 
-                                    subs: {
-                                        name:   { self: etc. },
-                                        type:   { self: etc. }
-                                    }
-                                }
-                            }
-                        }
-                    // returned by (validate.js:scopeModel) 
-
-OPERATION 1
-
-    A giant switch runs through all the rules in scopedModel.self.rules.
-    
-    When it finds a match it tries to throw an Error; if no Error is thrown, 
-    the function returns nothing and the model is assumed to have validated the
-    data.
-            
-case (rule):
-if ( scopedModel.self.many ) 
-{
-  
-}        // if (many); if-block ends
-else     // not-'many', ergo is not an Array
-{
-  
-}        // if (many); else-block ends
-break    // (rule)
-         
-             
-    */
+ *
+ *  PARAMETER 1
+ *  
+ *      scopedDatum     =   'myName'
+ *                  
+ *      scopedDatum     =  
+ *      
+ *          { 
+ *              id:         'some-id-string',
+ *              name:       'myName',
+ *              columns:    [
+ *                  {   name:     'iAmColumn1',
+ *                      type:     'other'
+ *                  },
+ *                  {   name:     'iAmColumn2',
+ *                      type:     'S'
+ *                  }
+ *              ]
+ *          }
+ *                                      
+ *          With reference to documentation in (validate):
+ *  
+ *              THESE ARE EXPECTED:
+ *      
+ *              scopedDatum == undefined       // ! ( modelKey key in dataToValidate)
+ *              scopedDatum == value           // individual datum
+ *              scopedDatum == []              // empty Array object
+ *              scopedDatum == [ values ]      // non-empty Array object
+ *              scopedData == {}              // empty POJO 
+ *              scopedData == { entries }     // non-empty POJO
+ *  
+ *  PARAMETER 2                    
+ *      
+ *      scopedModel     =   { 
+ *                              self: etc.
+ *                              subs: {
+ *                                  name:   { self: etc. },
+ *                                  columns:{ 
+ *                                      self: etc. 
+ *                                      subs: {
+ *                                          name:   { self: etc. },
+ *                                          type:   { self: etc. }
+ *                                      }
+ *                                  }
+ *                              }
+ *                          }
+ *                      // returned by (validate.js:scopeModel) 
+ *  
+ *  OPERATION 1
+ *  
+ *      A giant switch runs through all the rules in scopedModel.self.rules.
+ *      
+ *      When it finds a match it tries to throw an Error; if no Error is thrown, 
+ *      the function returns nothing and the model is assumed to have validated the
+ *      data.
+ *              
+ *  case (rule):
+ *  if ( scopedModel.self.many ) 
+ *  {
+ *    
+ *  }        // if (many); if-block ends
+ *  else     // not-'many', ergo is not an Array
+ *  {
+ *    
+ *  }        // if (many); else-block ends
+ *  break    // (rule)
+ *           
+ */
     
 const validateRules = async (   scopedDatum, 
                                 scopedModel, 
@@ -430,6 +432,12 @@ const validateRules = async (   scopedDatum,
         
 switch ( _ruleKey ) {
 
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+        
 case ( 'count_gt' ):
 /*  This is a really stupendous amount of code just to check if something exists
 *  or not. I really have no faith in this design at the moment. But it should
@@ -495,6 +503,12 @@ else // not-'many', ergo is not an Array
 } // if (many), else [end of block]
 break // count_gt
 
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+        
 case ('included_in'):
 if ( scopedModel.self.many ) 
 {
@@ -506,6 +520,12 @@ else    // not-'many', ergo is not an Array
 }       // if (many); else-block ends
 break   // regex_text
 
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+        
 case ('regex_text'):
 if ( scopedModel.self.many ) 
 {
