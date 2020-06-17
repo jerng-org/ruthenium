@@ -186,8 +186,9 @@ const validate = async (    dataToValidate,
                                 =   Object.defineProperty ( [], 'summary', {
                                         configurable:   true,
                                         enumerable:     false,
-                                        value:          true    
+                                        value:          true,
                                                         // defaults to a 'pass'
+                                        writable:       true
                                     } )
                             
                         ) => 
