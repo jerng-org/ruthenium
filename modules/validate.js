@@ -401,15 +401,13 @@ const validateRules = async (   scopedDatum,
         const setResult = _maybeError => {
             if ( _maybeError instanceof Error )
             {
-                const _fail                             = [ `error`, _maybeError ]
-                report.rules[ _ruleKey ].result         = _fail
-                shortReport[ shortReport.length -1 ][1] = _fail
+                report.rules[ _ruleKey ].result         = 
+                shortReport[ shortReport.length -1 ][1] = [ `error`, _maybeError ]
             }
             else
             {
-                const _pass                                 = 'valid'
-                report.rules[ _ruleKey ].result             = _pass
-                shortReport[ shortReport.length - 1 ][1]    = _pass   
+                report.rules[ _ruleKey ].result             = 
+                shortReport[ shortReport.length - 1 ][1]    = 'valid'
             }
         }
         setResult() // default pass
