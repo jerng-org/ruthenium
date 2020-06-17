@@ -30,7 +30,7 @@ const deskSchemasPost   = async ( data ) => {
                                                 'desk-schemas'
                                               )
     
-throw Error ( await rus.stringify ( {   summary:        report.summary,
+throw Error ( await rus.stringify ( {   summary:        report.shortReport.summary,
                                         shortReport:    report.shortReport,
                                         report:         report } ) 
             )
