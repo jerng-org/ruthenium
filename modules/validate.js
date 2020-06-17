@@ -177,6 +177,13 @@ const scopeModel = async _modelKey => {
  *              _scopedData == []              // empty Array object
  *              _scopedData == [ values ]      // non-empty Array object
  *      
+ *  RETURNS     
+ *      
+ *      report                      //  enumerable;     Object
+ *      report.shortReport          //  non-enumerable; Array
+ *      report.shortReport.summary  //  non-enumerable; Boolean
+ *      
+ *      
  */
     
     
@@ -295,7 +302,7 @@ const validate = async (    dataToValidate,
         value:      shortReport
     } )
     
-    return report // { shortReport: shortReport, report: report }
+    return report
 }
 // (validate)
 
