@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark.js' )
 const childProcess  = require ( 'child_process' )
 
-const commitMessage = `validate.js : debugged, added (shortReport.summary)`
+const commitMessage = `validat.js debugged, added (shortReport.summary)`
 
 const lambdaGitCommit =  () => { try {
 
