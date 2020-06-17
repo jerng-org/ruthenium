@@ -181,9 +181,12 @@ const validate = async (    dataToValidate,
                             scopedModel = null,
                             keyTrace    = modelKey,
                             
-                            report      = { [modelKey]: {} },
-                            shortReport = [],
-                            summary     = true
+                            report      =   Object.defineProperty ( { [modelKey]: {} }, 'summary', {
+                                                configurable:   true,
+                                                enumerable:     false,
+                                                value:          true    // defaults to a 'pass'
+                                            } ),
+                            shortReport = []
                             
                         ) => 
 {
@@ -284,11 +287,6 @@ const validate = async (    dataToValidate,
     Object.defineProperty ( report, 'shortReport', {
         enumerable: false,
         value:      shortReport
-    } )
-    
-    Object.defineProperty ( report, 'summary', {
-        enumerable: false,
-        value:      summary
     } )
     
     return report // { shortReport: shortReport, report: report }
