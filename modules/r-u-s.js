@@ -242,7 +242,30 @@ const rus   = {
 
     validate:
         require ( `/var/task/modules/validate.js` ),
-       
+    
+    /*  VALIDATE_FORM_DATA
+     *
+     *  Returns (data.RU.signals.formDataValid); so you can use this call in
+     *  a control structure like (if-else), but please don't go and assign its 
+     *  returned value to some other variable; in your code simply refer to 
+     *  (data.RU.signals.formDataValid); of course if you have not made this
+     *  call during the current request, ('formDataValid' in data.RU.signals) 
+     *  will be (false) and therefore (data.RU.signals.formDataValid) will be 
+     *  (undefined), hence falsy;
+     */
+     
+    validateFormData:
+        async (data, modelKey) =>
+        {
+            const _report   =   await rus.validate (    
+                                        data.RU.request.formStringParameters, 
+                                        modelKey 
+                                )
+            data.RU.signals.formDataValid   = _report.shortReport.summary
+            data.RU.signals.formReport      = _report
+            return data.RU.signals.formDataValid
+        },
+        
 //////////
 //      //
 //  !!  //  Make way.

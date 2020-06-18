@@ -209,7 +209,11 @@ const validate = async (    dataToValidate,
         : scopedModel
         // Now, (scopedModel) should be !null under all circustances.
 
-    const _scopedData = dataToValidate[ modelKey ]
+if ( ! dataToValidate ){
+    //throw Error ( keyTrace )    
+}
+    const _scopedData           = dataToValidate[ modelKey ]
+    const _scopedDataIsArray    = Array.isArray ( _scopedData ) 
 
 //////////
 //      //
@@ -222,19 +226,20 @@ const validate = async (    dataToValidate,
                                                     keyTrace, 
                                                     shortReport   
                                                     )
-                                                    
-    //  If we reached here without throwing, it means (_scopedData)
-    //  checks out. Now we traverse subModels, if the value is a
-    //  non-Array object.
-    
-    report[ modelKey ].subs 
-        =   scopedModel.self.many 
-            //(       'subs' in scopedModel 
-            //    &&  Object.keys ( scopedModel.subs ).length )
-            ? new Array ( _scopedData.length )
-                    .fill(0)
-                    .map( _ => ({}) )  
-            : {}
+    if ( shortReport.summary ) {
+
+        //  If we reached here without a 'fail', it means (_scopedData)
+        //  checks out. Now we traverse subModels, if the value is a
+        //  non-Array object.
+        
+        report[ modelKey ].subs 
+            =   scopedModel.self.many 
+                //(       'subs' in scopedModel 
+                //    &&  Object.keys ( scopedModel.subs ).length )
+                ? new Array ( _scopedDataIsArray ? _scopedData.length : 0 )
+                            .fill(0)
+                            .map( _ => ({}) )  
+                : {}
             
 //////////
 //      //
@@ -242,57 +247,60 @@ const validate = async (    dataToValidate,
 //      //
 //////////
 
-    for ( const _scopedSubModelKey in scopedModel.subs ) {
-        // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
-
-        if ( scopedModel.self.many )
-        {
-            let _count = 0
-            for ( const _scopedDataSubItem of _scopedData )
+        for ( const _scopedSubModelKey in scopedModel.subs ) {
+            // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
+    
+            if ( _scopedDataIsArray ) // double-check logic on this line; TODO; 
             {
-                report[ modelKey ].subs[ _count ][ _scopedSubModelKey ]
-                    = ( await validate (_scopedDataSubItem, 
-                                        //  Whereby, if the key is missing it will 
-                                        //  caught by the subsequent (call to
-                                        //  validateRules) in the body of 
-                                        //  (validate)
-                
-                                        _scopedSubModelKey,
-                                        
-                                        scopedModel.subs[ _scopedSubModelKey ],
-                                        keyTrace 
-                                            + '.[' + _count + '].' 
-                                            + _scopedSubModelKey,
+                let _count = 0
+                for ( const _scopedDataSubItem of _scopedData )
+                {
+                    report[ modelKey ].subs[ _count ][ _scopedSubModelKey ]
+                        = ( await validate (_scopedDataSubItem, 
+                                            //  Whereby, if the key is missing it will 
+                                            //  caught by the subsequent (call to
+                                            //  validateRules) in the body of 
+                                            //  (validate)
+                    
+                                            _scopedSubModelKey,
                                             
-                                        undefined,
-                                        shortReport
-                    
-                    )   ) [ _scopedSubModelKey ]
-                _count ++
+                                            scopedModel.subs[ _scopedSubModelKey ],
+                                            keyTrace 
+                                                + '.[' + _count + '].' 
+                                                + _scopedSubModelKey,
+                                                
+                                            undefined,
+                                            shortReport
+                        
+                        )   ) [ _scopedSubModelKey ]
+                    _count ++
+                }
             }
+            else    // ! scopedModel.self.many
+            {   
+                report[ modelKey ].subs[ _scopedSubModelKey ]
+                    =   ( await validate(   _scopedData, 
+                                            //  Whereby, if the key is missing it will 
+                                            //  caught by the subsequent (call to
+                                            //  validateRules) in the body of 
+                                            //  (validate)
+                
+                                            _scopedSubModelKey,
+                                            
+                                            scopedModel.subs[ _scopedSubModelKey ],
+                                            keyTrace + '.' + _scopedSubModelKey,
+                                            
+                                            undefined,
+                                            shortReport
+                        
+                        ) ) [ _scopedSubModelKey ]
+            }
+            // if scopedModel.self.many / else-block ends
         }
-        else    // ! scopedModel.self.many
-        {   
-            report[ modelKey ].subs[ _scopedSubModelKey ]
-                =   ( await validate(   _scopedData, 
-                                        //  Whereby, if the key is missing it will 
-                                        //  caught by the subsequent (call to
-                                        //  validateRules) in the body of 
-                                        //  (validate)
-            
-                                        _scopedSubModelKey,
-                                        
-                                        scopedModel.subs[ _scopedSubModelKey ],
-                                        keyTrace + '.' + _scopedSubModelKey,
-                                        
-                                        undefined,
-                                        shortReport
-                    
-                    ) ) [ _scopedSubModelKey ]
-        }
-        // if scopedModel.self.many / else-block ends
-    }
-    // _scopedSubModelKey
+        // for _scopedSubModelKey
+    }                                                
+    // if ( shortReport.summary )
+    
     
     //shortReport.push ( [ keyTrace, 'something' ] )
         // Perhaps this would be more idiomatic as as Map, but I am avoiding thought about it for now.
@@ -447,8 +455,11 @@ switch ( _ruleKey ) {
         
 case ( 'count_gt' ):
 /*  This is a really stupendous amount of code just to check if something exists
-*  or not. I really have no faith in this design at the moment. But it should
-*  work. -2020-06-12
+*   or not. I really have no faith in this design at the moment. But it should
+*   work. -2020-06-12
+*
+*   We should probably combine the "existential quantifier" and "naive 
+*   comparison" checks. -2020-06-19
 */
 if ( scopedModel.self.many ) // this pattern should recur for 'count_xyz'
 {
@@ -467,8 +478,8 @@ if ( scopedModel.self.many ) // this pattern should recur for 'count_xyz'
         setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:true) 
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
-                      }) failed; scopedDatum.length was: (${
-                          scopedDatum.length
+                      }) failed; scopedDatum was: (${
+                          scopedDatum
                       })`) )        
     }
 
@@ -479,9 +490,9 @@ if ( scopedModel.self.many ) // this pattern should recur for 'count_xyz'
         setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt:${
                         scopedModel.self.rules.count_gt
-                      }) failed; scopedDatum.length was: (${
-                        scopedDatum.length
-                      })` ) )
+                      }) failed; scopedDatum was: (${
+                        scopedDatum
+                      })` ) ) 
     }
 }
 else // not-'many', ergo is not an Array

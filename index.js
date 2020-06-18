@@ -11,11 +11,12 @@ try {
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-rus.mark( `index.js loaded mark.js`)
+rus.mark( `index.js loaded mark.js` )
 
     console.warn (
         `DEBT_NOTE`,
         [   `THINGS TO DO :`,
+            `$.stuff for aliasing`,
             `https://www.npmjs.com/package/require-directory`,
             `utilities/RU module?`,
             `test-middleware?ruthenium=restful&type=schemas;`,
@@ -23,7 +24,7 @@ rus.mark( `index.js loaded mark.js`)
             `cognito`, 
             `markuplayouts?... `,
             'writes to (data.RU.signals) should be signed by the writer',
-            `(rus.validate) errors throw violently; consider a docile bubbling`,
+            `GET method forms are not yet supported;`,
             `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`
         ]
     )

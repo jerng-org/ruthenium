@@ -6,36 +6,13 @@ const deskSchemasModel  = require (`/var/task/io/models/desk-schemas.js`)
 
 const deskSchemasPost   = async ( data ) => {
   
-    const candidate = data.RU.request.formStringParameters
+    const candidate     = data.RU.request.formStringParameters
 
-    //  begin PROTOTYPICAL data validation process:
-    
-    const TEST_VALIDATE_ME = { 
-        
-        'desk-schemas': { 
-            id:         'some-id-string',
-            name:       'myName',
-            columns:    [
-                {   name:     'iAmColumn1',
-                    type:     'other'
-                },
-                {   name:     'iAmColumn2',
-                    type:     'S'
-                }
-            ]
-        }
+    if ( ! await rus.validateFormData ( data, 'desk-schemas' ) ) {
+        data.RU.signals.redirectRoute = '&message=we received a form with invalid data'
+        return
     }
-    
-    const report    = await rus.validate    ( TEST_VALIDATE_ME, //data.RU.request.formStringParameters, 
-                                                'desk-schemas'
-                                              )
-    
-throw Error ( await rus.stringify ( {   summary:        report.shortReport.summary,
-                                        shortReport:    report.shortReport,
-                                        report:         report } ) 
-            )
 
-    
     //  end PROTOTYPICAL data validation process.
 
     // Provide ID
@@ -92,6 +69,9 @@ throw Error ( await rus.stringify ( {   summary:        report.shortReport.summa
 }
 
 */
+    // manipulate (data.RU), for example
+
+    // no need to return (data)
 
 }
 module.exports = deskSchemasPost
