@@ -71,16 +71,27 @@ const router = async ( data ) => {
                 // see below
             }
         }
+        // if 'route' was in (queryStringParameters)
+        
         
         //  Either, there was no (route) queryParameter, 
         //  or,     there was no matching (case) for the (route) argument
         if ( ! data.RU.signals.taskname ) {
             
-            data.RU.signals.redirectRoute = 'initial&reader='
+            data.RU.signals.redirectRoute = 'initial'
+                
+                +   `&reader=`
                 +   (   data.RU.request.queryStringParameters.reader
                         ? data.RU.request.queryStringParameters.reader[0]
                         : 'human'
                     )
+                    
+                +   (   data.RU.request.queryStringParameters.message
+                        ? `&message=(via router.js)${data.RU.request.queryStringParameters.message[0]}`
+                        : ''
+                    )
+                    
+                    
         }
     }
     
