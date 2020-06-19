@@ -6,13 +6,13 @@
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const thisIsMyName = async ( data ) => {
-    
-    // manipulate (data.RU), for example
 
-    // no need to return (data)
+    // YOUR CODE HERE
 
     rus.mark ( `_template-task.js EXECUTED` )
 }
+// manipulate (data.RU), for example
+// no need to return (data)
 
 module.exports = thisIsMyName
 rus.mark ( `_template-task.js LOADED` )
