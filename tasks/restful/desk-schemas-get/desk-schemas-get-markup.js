@@ -9,7 +9,7 @@ const htmlIndex
 const tableInMarkup
     = require (`/var/task/tasks/restful/desk-schemas-get/markup-table-in-markup.js`) 
 
-const allDeskSchemasMarkup = async ( data ) => {
+const deskSchemasMarkup = async ( data ) => {
 
     const markup 
     
@@ -22,4 +22,4 @@ const allDeskSchemasMarkup = async ( data ) => {
 
     return markup
 }
-module.exports  = allDeskSchemasMarkup
+module.exports  = deskSchemasMarkup
