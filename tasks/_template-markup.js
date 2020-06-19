@@ -7,15 +7,15 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const thisIsMyName = async ( data ) => {
     
+    // YOUR CODE HERE
+    
     rus.mark ( `_template-markup.js EXECUTED` )
-
-    //  Return markup as string, and it will be assigned to
-    //      (data.RU.response.body) by (composeResponse.js).
-    //
-    //  You may also manipulated (data) directly, but that would be semantically
-    //  incoherent / unpretty.
-
 }
+//  Return markup as string, and it will be assigned to
+//      (data.RU.response.body) by (composeResponse.js).
+//
+//  You may also manipulated (data) directly, but that would be semantically
+//  incoherent / unpretty.
 
 module.exports = thisIsMyName
 rus.mark ( `_template-markup.js LOADED` )

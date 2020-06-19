@@ -87,6 +87,9 @@ const formsValidateData
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
 
+const setDefaultLayout                            
+    = require (`/var/task/modules/middlewares/set-default-layout.js`) 
+
 //////////
 //      //
 //  !!  //  Make way.
@@ -131,6 +134,7 @@ exports.handler = async function () {
         formsValidateData,
         
         router,
+        setDefaultLayout,
         
         composeResponse,
         lastGuard
