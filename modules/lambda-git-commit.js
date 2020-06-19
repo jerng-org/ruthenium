@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark.js' )
 const childProcess  = require ( 'child_process' )
 
-const commitMessage = `a variety of message passing to the user, via the (message) query parameter has been implemented`
+const commitMessage = `markup layout files prepared - next: think about plumbing design`
 
 const lambdaGitCommit =  () => { try {
 

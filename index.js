@@ -16,13 +16,14 @@ rus.mark( `index.js loaded mark.js` )
     console.warn (
         `DEBT_NOTE`,
         [   `THINGS TO DO :`,
+        
+            `markuplayouts?... to integrate with the (message) parameter`,
+            `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
+            
             `$.stuff for aliasing`,
             `https://www.npmjs.com/package/require-directory`,
-            `utilities/RU module?`,
-            `test-middleware?ruthenium=restful&type=schemas;`,
             `sessions`, 
             `cognito`, 
-            `markuplayouts?... `,
             'writes to (data.RU.signals) should be signed by the writer',
             `GET method forms are not yet supported;`,
             `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`
