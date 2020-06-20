@@ -17,31 +17,27 @@ markupFileNames.forEach ( ( current, index, array ) => {
 } // , thisArg  
 )
 
-const additionalRequestInformation = async _data => `
-    ${ JSON.stringify( {
-        
-        signals:
-            _data.RU.signals,
-        
-        http: 
-            _data.RU.request.http,
-        
-        queryStringParameters:
-            _data.RU.request.queryStringParameters,
-        
-        formStringParameters:
-            _data.RU.request.formStringParameters,
-        
-        headers:
-            _data.RU.request.headers,
-            
-        middlewares:
-            _data.RU.middlewares,
-            
-        io:
-            _data.RU.io
-            
-    } , null, 4 ) }`
+/*  1.
+ *  DEFAULT :   OPTIMISATION : completely de-coupled (task, layout)
+ *  
+ *  Layouts and task+markup should be treated as separate siloes. In such a case,
+ *  tasks should avoid getting data from (data.RU.io.layoutXYZ). In this case 
+ *  layouts can then be processed AFTER other tasks, as this avoids unnecessary
+ *  processing if the task wants to respond with a non-markup (therefore non-
+ *  layout requiring) response. So layouts maybe would be processed in 
+ *  (compose-response.js) which runs after (router.js).
+ *
+ *  2.
+ *  OPTIONAL:   OPTIMISATION : tightly-coupled (task, layout)
+ *  
+ *  Layouts should get processed BEFORE other tasks, as layouts are more 
+ *  general in scope. This enables (data.RU.io.layoutXYZ) to be accessed
+ *  somewhat predictably (?!) by tasks which use this layout, thereby reducing
+ *  io. So layouts maybe would be processed in (router.js) before task
+ *
+ *  
+ *
+ */
 
 const composeResponse = async ( data ) => {
     
@@ -108,6 +104,8 @@ const composeResponse = async ( data ) => {
             data.RU.response.statusCode = data.RU.signals.sendResponse.statusCode
                 ? data.RU.signals.sendResponse.statusCode
                 : 200
+            
+            data.
                 
             data.RU.response.body = data.RU.signals.sendResponse.body
                 ? data.RU.signals.sendResponse.body
@@ -139,7 +137,7 @@ const composeResponse = async ( data ) => {
                         
                         The following may be informative:
                         
-                        ${ await additionalRequestInformation ( data )}`)
+                        ${ await rus.additionalRequestInformation ( data )}`)
             }
         }
         else
@@ -167,7 +165,7 @@ const composeResponse = async ( data ) => {
 
                         The following may be informative:
                         
-                        ${ await additionalRequestInformation ( data )}`)
+                        ${ await rus.additionalRequestInformation ( data )}`)
             }
         }
         

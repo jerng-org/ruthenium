@@ -4,7 +4,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const layout = async ( data ) => {
 
-
+// set data in ( data.RU.io.layout )
     
 
 }

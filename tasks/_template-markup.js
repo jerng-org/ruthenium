@@ -8,6 +8,8 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 const thisIsMyName = async ( data ) => {
     
     // YOUR CODE HERE
+
+    // get data from ( data.RU.io.thisIsMyName )
     
     rus.mark ( `_template-markup.js EXECUTED` )
 }
