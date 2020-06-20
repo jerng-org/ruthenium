@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark.js' )
 const childProcess  = require ( 'child_process' )
 
-const commitMessage = `notes for continuation in (set-default-layout.js)`
+const commitMessage = `Optimisation branches for layouts, noted in compose-response.js`
 
 const lambdaGitCommit =  () => { try {
 

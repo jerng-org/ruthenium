@@ -2,7 +2,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const setDefaultLayout = async ( data ) => {
+const layoutSetDefault = async ( data ) => {
 
     data.RU.signals.layout =    require (`/var/task/tasks/layout.js`)
                                 //  ^ this is a questionably designed line of code; HACK
@@ -16,5 +16,5 @@ const setDefaultLayout = async ( data ) => {
     return data
 }
 
-module.exports = setDefaultLayout
+module.exports = layoutSetDefault
 rus.mark (`set-default-layout.js LOADED`)

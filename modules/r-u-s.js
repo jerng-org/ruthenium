@@ -25,6 +25,32 @@ const rus   = {
 //      //
 //////////
 
+    additionalRequestInformation : async _data => `
+        ${ JSON.stringify( {
+            
+            signals:
+                _data.RU.signals,
+            
+            http: 
+                _data.RU.request.http,
+            
+            queryStringParameters:
+                _data.RU.request.queryStringParameters,
+            
+            formStringParameters:
+                _data.RU.request.formStringParameters,
+            
+            headers:
+                _data.RU.request.headers,
+                
+            middlewares:
+                _data.RU.middlewares,
+                
+            io:
+                _data.RU.io
+                
+        } , null, 4 ) }`,
+
     appUrl: async pairArrays => {   
         
         const URLObject = new ( url.URL ) ( '/test-middleware',
