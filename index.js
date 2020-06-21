@@ -17,7 +17,7 @@ rus.mark( `index.js loaded mark.js` )
         `DEBT_NOTE`,
         [   `THINGS TO DO :`,
         
-            `markuplayouts?... to integrate with the (message) parameter`,
+            `layouts logic should move to its own middleware (see layout-set-default.js)`,
             `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
             
             `$.stuff for aliasing`,

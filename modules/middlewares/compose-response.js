@@ -17,29 +17,56 @@ markupFileNames.forEach ( ( current, index, array ) => {
 } // , thisArg  
 )
 
-/*  Notes on LAYOUTs, LAYOUT MARKUPs, and their interaction with other tasks/markups 
- * 
- *  1.
- *  DEFAULT :   OPTIMISATION : completely de-coupled (task, layout)
- *  
- *  Layouts and task+markup should be treated as separate siloes. In such a case,
- *  tasks should avoid getting data from (data.RU.io.layoutXYZ). In this case 
- *  layouts can then be processed AFTER other tasks, as this avoids unnecessary
- *  processing if the task wants to respond with a non-markup (therefore non-
- *  layout requiring) response. So layouts maybe would be processed in 
- *  (compose-response.js) which runs after (router.js).
- *
- *  2. TODO
- *  OPTIONAL:   OPTIMISATION : tightly-coupled (task, layout)
- *  
- *  Layouts should get processed BEFORE other tasks, as layouts are more 
- *  general in scope. This enables (data.RU.io.layoutXYZ) to be accessed
- *  somewhat predictably (?!) by tasks which use this layout, thereby reducing
- *  io. So layouts maybe would be processed in (router.js) before task
- *
- *  End-goal would be to have at least these two options.
+
+/*  Refer to "0. Notes on LAYOUTs, LAYOUT MARKUPs, and their interaction with 
+ *  other tasks/markups" in (layout-set-default.js)
+ */
+
+/*  Example of Usage :  data.RU.response.body 
+ *                          = wrapStringWithLayout ( data.RU.response.body )
  *
  */
+ /*
+const wrapStringWithLayout = async ( _data, _string ) => {
+
+    if ( _data.RU.signals.layoutTaskName )
+    {
+        _data.RU.signals.inferredLayoutMarkupName
+            = _data.RU.signals.layoutTaskName + '-markup'
+            
+        if ( _data.RU.signals.inferredLayoutMarkupName in markups )
+        {
+            await markups[_data.RU.signals.inferredLayoutMarkupName](_data)
+        }
+        else
+        {
+            throw Error (   `(compose-response.js),(wrapStringWithLayout) could not 
+                            find (${ 
+                            _data.RU.signals.inferredLayoutMarkupName 
+                            }.js) in the markups directory. That name was specified at
+                            (data.RU.response.inferredLayoutMarkupName).
+                            
+                            The following may be informative:
+                            
+                            ${ await rus.additionalRequestInformation ( _data )}`)
+        }
+    }
+    else
+    {   
+        throw Error (   `(compose-response.js),(wrapStringWithLayout) was called; 
+                        (data.RU.signals.layoutTaskName) was falsy - this is
+                        normally set to a default value in (layout-set-default.js),
+                        but the value may have been unset/erased between there 
+                        and this line; if you wish for (wrapStringWithLayout)
+                        to return the given string as-is, then consider creating
+                        a layout which adds nothing to the given string, and 
+                        then explicitly set that layout's name in 
+                        (data.RU.signals.layoutTaskName). Otherwise, simply do
+                        not run this function;`)
+    }
+
+}
+*/
 
 const composeResponse = async ( data ) => {
     
@@ -111,10 +138,6 @@ const composeResponse = async ( data ) => {
                 ? data.RU.signals.sendResponse.body
                 : ''
             
-            // Refer to notes at top of file, on Layouts / Markups / Tasks
-            //data.RU.layoutTask ( data )
-            //data.RU.layoutMarkup = data.
-                
             data.RU.response.headers = data.RU.response.headers
                 ? data.RU.signals.sendResponse.headers
                 : { 'content-type': 'text/html' }
@@ -137,7 +160,7 @@ const composeResponse = async ( data ) => {
             else {
                 throw   Error (`(middlewares/compose-response.js) could not find (${ 
                         data.RU.signals.markupName 
-                        }.js) in the markups directory. That name was specified at
+                        }.js) in the (~/tasks) directory. That name was specified at
                         (data.RU.response.markupName).
                         
                         The following may be informative:
@@ -146,9 +169,9 @@ const composeResponse = async ( data ) => {
             }
         }
         else
-        if ( data.RU.signals.taskname ) {
+        if ( data.RU.signals.taskName ) {
             
-            data.RU.signals.inferredMarkupName = data.RU.signals.taskname + '-markup'
+            data.RU.signals.inferredMarkupName = data.RU.signals.taskName + '-markup'
             
             if ( data.RU.signals.inferredMarkupName in markups ) {
                 
@@ -165,8 +188,8 @@ const composeResponse = async ( data ) => {
                 throw   Error (`(middlewares/compose-response.js) could not find 
                         (${ data.RU.signals.inferredMarkupName }) 
                         in the markups directory. That name was guessed because 
-                        (${ data.RU.signals.taskname }) was specified at 
-                        (data.RU.signals.taskname).
+                        (${ data.RU.signals.taskName }) was specified at 
+                        (data.RU.signals.taskName).
 
                         The following may be informative:
                         
