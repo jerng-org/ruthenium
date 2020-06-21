@@ -87,9 +87,9 @@ const formsValidateData
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
 
-const layoutSetDefault                            
-    = require (`/var/task/modules/middlewares/layout-set-default.js`) 
-
+const applyLayout                            
+    = require (`/var/task/modules/middlewares/apply-layout.js`) 
+    
 //////////
 //      //
 //  !!  //  Make way.
@@ -134,9 +134,10 @@ exports.handler = async function () {
         formsValidateData,
         
         router,
-        layoutSetDefault,
         
         composeResponse,
+        applyLayout,
+
         lastGuard
         
         // TODO:    devise a mechanism where the reducer hides (data) from being

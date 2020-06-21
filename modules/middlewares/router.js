@@ -118,22 +118,6 @@ const router = async ( data ) => {
         // Important things happen here, preparing (data.RU.io) for task-markup.
         await tasks [ data.RU.signals.taskName ]( data )   
         
-        /*
-        if (        data.RU.signals.layoutTaskName
-                &&  ( data.RU.signals.layoutTaskName in tasks ) )
-        {
-            // Important things happen here, preparing (data.RU.io) for layout-task-markup.
-            await tasks [ data.RU.signals.taskName ]( data )   
-        
-        }
-        
-        else
-        {
-            throw Error ( `Could not find (${ data.RU.signals.layoutTaskName 
-                          }) in the tasks directory. Or (layoutTaskName) was
-                          falsy.` )
-        }
-        */
     }
     else
     {
