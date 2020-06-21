@@ -40,14 +40,14 @@ const router = async ( data ) => {
             
                 
             case ( 'initial' ):
-            data.RU.signals.taskname = 'initial'
+            data.RU.signals.taskName = 'initial'
             break
             
             
             
             
             case ( 'restful' ):                 
-            data.RU.signals.taskname = 'restful'
+            data.RU.signals.taskName = 'restful'
                 // Single Item: METHOD, &type=M, &thing=N, &value/s=V
                 // Batch:       METHOD, &batch=[ 
                 //                          [ { method: type: thing: etc. } ]
@@ -59,7 +59,7 @@ const router = async ( data ) => {
             
             
             case ( 'file' ):
-            data.RU.signals.taskname = 'send-blob'
+            data.RU.signals.taskName = 'send-blob'
             break
             
             
@@ -76,7 +76,7 @@ const router = async ( data ) => {
         
         //  Either, there was no (route) queryParameter, 
         //  or,     there was no matching (case) for the (route) argument
-        if ( ! data.RU.signals.taskname ) {
+        if ( ! data.RU.signals.taskName ) {
             
             data.RU.signals.redirectRoute = 'initial'
                 
@@ -90,8 +90,6 @@ const router = async ( data ) => {
                         ? `&message=(via router.js)${data.RU.request.queryStringParameters.message[0]}`
                         : ''
                     )
-                    
-                    
         }
     }
     
@@ -103,20 +101,43 @@ const router = async ( data ) => {
 ////////////////////////////////////////////////////////////////////////////////
 
     // redirects: short-circuit
-    if ( data.RU.signals.redirectRoute || data.RU.signals.redirectRoute ) {
+    if ( data.RU.signals.redirectRoute )
+    { 
         return data
-    }    
+    }  
 
     // no redirects: 
     // Run the task, if its module is found.
     //
     //      TODO: perhaps we want another reducer here for multiple tasks?
     //
-    if ( data.RU.signals.taskname in tasks  ) {
-        await tasks [ data.RU.signals.taskname ]( data )   
+    
+    else
+    if ( data.RU.signals.taskName in tasks  ) {
+        
+        // Important things happen here, preparing (data.RU.io) for task-markup.
+        await tasks [ data.RU.signals.taskName ]( data )   
+        
+        /*
+        if (        data.RU.signals.layoutTaskName
+                &&  ( data.RU.signals.layoutTaskName in tasks ) )
+        {
+            // Important things happen here, preparing (data.RU.io) for layout-task-markup.
+            await tasks [ data.RU.signals.taskName ]( data )   
+        
+        }
+        
+        else
+        {
+            throw Error ( `Could not find (${ data.RU.signals.layoutTaskName 
+                          }) in the tasks directory. Or (layoutTaskName) was
+                          falsy.` )
+        }
+        */
     }
-    else {
-        throw Error ( `Could not find (${ data.RU.signals.taskname 
+    else
+    {
+        throw Error ( `Could not find (${ data.RU.signals.taskName 
                         }) in the tasks directory.` )
     }
 
