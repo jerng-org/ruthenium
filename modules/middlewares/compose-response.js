@@ -2,21 +2,21 @@
  
 const rus       = require ( '/var/task/modules/r-u-s.js' )
 
-// THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
-const markups   = {}
-const markupFileNames = rus.node.fs.readdirSync ('/var/task/tasks', {
-    withFileTypes: true
-})
-markupFileNames.forEach ( ( current, index, array ) => {
-    if (current.isFile()) {
-        
-        // console.warn(`searching in:`, current.name.slice (0, -3), `for`, '/var/task/tasks/' + current.name )
-        
-        markups[ current.name.slice (0, -3) ] = require ( '/var/task/tasks/' + current.name )
-    }        
-} // , thisArg  
-)
-
+//  THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
+//  THIS SECTION IS REDUNDANT WITH (apply-layout.js)
+    const markups   = {}
+    const markupFileNames = rus.node.fs.readdirSync ('/var/task/tasks', {
+        withFileTypes: true
+    })
+    markupFileNames.forEach ( ( current, index, array ) => {
+        if (current.isFile()) {
+            
+            // console.warn(`searching in:`, current.name.slice (0, -3), `for`, '/var/task/tasks/' + current.name )
+            
+            markups[ current.name.slice (0, -3) ] = require ( '/var/task/tasks/' + current.name )
+        }        
+    } // , thisArg  
+    )
 
 const composeResponse = async ( data ) => {
     
@@ -94,10 +94,10 @@ const composeResponse = async ( data ) => {
                 
         }
         else
-        if ( data.RU.signals.markupName ) {
-        
-            if ( data.RU.signals.markupName in markups ) {
-                
+        if ( data.RU.signals.markupName ) 
+        {
+            if ( data.RU.signals.markupName in markups )
+            {
                 // clobber (refine this as above; WIP / TODO )
                 data.RU.response = {
                     statusCode: 200,
@@ -107,11 +107,12 @@ const composeResponse = async ( data ) => {
                     body: await markups [ data.RU.signals.markupName ]( data )
                 }
             }
-            else {
+            else
+            {
                 throw   Error (`(middlewares/compose-response.js) could not find (${ 
                         data.RU.signals.markupName 
                         }.js) in the (~/tasks) directory. That name was specified at
-                        (data.RU.response.markupName).
+                        (data.RU.signals.markupName).
                         
                         The following may be informative:
                         
@@ -123,8 +124,8 @@ const composeResponse = async ( data ) => {
             
             data.RU.signals.inferredMarkupName = data.RU.signals.taskName + '-markup'
             
-            if ( data.RU.signals.inferredMarkupName in markups ) {
-                
+            if ( data.RU.signals.inferredMarkupName in markups )
+            {
                 // clobber (refine this as above; WIP / TODO )
                 data.RU.response = {
                     statusCode: 200,
@@ -134,7 +135,8 @@ const composeResponse = async ( data ) => {
                     body: await markups [ data.RU.signals.inferredMarkupName ]( data )
                 }
             }
-            else {
+            else 
+            {
                 throw   Error (`(middlewares/compose-response.js) could not find 
                         (${ data.RU.signals.inferredMarkupName }) 
                         in the markups directory. That name was guessed because 
