@@ -2,9 +2,14 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
+/*  Of course, to nullify the effects of this middleware, or to have "no layout"
+ *  at any point in the pipeline, simply (delete data.RU.signals.layoutTask);
+ *
+ */
+
 const layoutSetDefault = async ( data ) => {
 
-    data.RU.signals.layout =    require (`/var/task/tasks/layout.js`)
+    data.RU.signals.layoutTask =    require (`/var/task/tasks/layout.js`)
                                 //  ^ this is a questionably designed line of code; HACK
 
     // We have NOT YET figured out WHEN to run (layout.js), which could be 
