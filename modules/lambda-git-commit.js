@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark.js' )
 const childProcess  = require ( 'child_process' )
 
-const commitMessage = `(apply-layout.js) is practically implemented, now`
+const commitMessage = `html.js module encap`
 
 const lambdaGitCommit =  () => { try {
 
@@ -98,4 +98,4 @@ const lambdaGitCommit =  () => { try {
 } catch (e) { console.error ( `gitCommit.js`, e.stack ) } }
 
 module.exports = lambdaGitCommit
-mark (`lambda-git-commit.js LOADED`)
+mark (`~/modules/lambda-git-commit.js LOADED`)

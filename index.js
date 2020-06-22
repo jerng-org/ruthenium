@@ -15,18 +15,22 @@ rus.mark( `index.js loaded mark.js` )
 
     console.warn (
         `DEBT_NOTE`,
-        [   `THINGS TO DO :`,
-        
-            `layouts logic should move to its own middleware (see layout-set-default.js)`,
+        [   
+            `CURRENT:`,
+            `Prettier Debug`,
+            `
+            BACKLOG:`,
+            `cookies`, 
+            `sessions`, 
             `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
-            
+            `cognito`, 
+            'writes to (data.RU.signals) should be signed by the writer; perhaps via a non-enumerable property',
+            `GET method forms are not yet supported;`,
+            `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`,
+            `
+            ICEBOX:`,
             `$.stuff for aliasing`,
             `https://www.npmjs.com/package/require-directory`,
-            `sessions`, 
-            `cognito`, 
-            'writes to (data.RU.signals) should be signed by the writer',
-            `GET method forms are not yet supported;`,
-            `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`
         ]
     )
 
