@@ -3,7 +3,7 @@
 //  1.  open browser devtools, <<console>>
 //  2.  select the correct script execution context, <<index.html>> 
 //          under <<gibberish.cloudfront.net>>
-//  3.  configure the <<tesetUrl>> variable in the script below
+//  3.  configure the <<testUrl>> variable in the script below
 //  4.  run this entire script in the context of (1,2)
 //
 //  Now every time you click "Save", the testUrl should pop open in a new tab.
