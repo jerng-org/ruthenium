@@ -4,6 +4,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const defaultLayoutTaskName = 'layout'
 
+//  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (compose-response.js)
     const markups   = {}
@@ -20,7 +21,7 @@ const defaultLayoutTaskName = 'layout'
     } // , thisArg  
     )
 
-//  THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
+//  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (router.js)
     const tasks = {}
     const taskFileNames = rus.node.fs.readdirSync ('/var/task/tasks')
