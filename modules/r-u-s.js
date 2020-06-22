@@ -139,8 +139,47 @@ const rus   = {
     //
     //      Furthermore it fails to accommodate duplicate (name)s
 
-    stringify: 
-        async data => JSON.stringify( data, null, 4 ),//.replace(/\\n/g, '\n'),
+    print: {
+        
+        dataDebug:
+            async rutheniumDataObject => {
+                
+                return `
+[ Object.keys ( data ) ] renders ${ 
+    JSON.stringify( Object.keys ( rutheniumDataObject ), null, 4 ) }                 
+
+[ Object.keys ( data.RU.request ) ] renders ${
+    JSON.stringify( Object.keys ( rutheniumDataObject.RU.request ), null, 4 ) }                 
+
+[ Object.keys ( data.RU.signals ) ] renders ${
+    JSON.stringify( Object.keys ( rutheniumDataObject.RU.signals ), null, 4 ) }                 
+
+[ Object.keys ( data.RU.io ) ] renders ${
+    JSON.stringify( Object.keys ( rutheniumDataObject.RU.io ), null, 4 ) }                 
+
+[ Object.keys ( data.RU.response ) ] renders ${
+    JSON.stringify( Object.keys ( rutheniumDataObject.RU.response ), null, 4 ) }                 
+
+[ data.RU ] renders ${
+    await rus.print.inspectInfinity ( rutheniumDataObject.RU ) }                 
+
+[ data.LAMBDA ] renders ${
+    await rus.print.inspectInfinity ( rutheniumDataObject.LAMBDA ) }                 
+`
+// end string
+            },
+        
+        inspectInfinity:
+            async object => rus.node.util.inspect( object, { depth: Infinity } ),
+        
+        stringify4:
+            async object => JSON.stringify( object, null, 4 ).replace(/\\n/g, '\n'),
+
+        xml300:
+            async xmlString => 
+                ( xmlString.slice(0,300) + '... [POSSIBLY TRUNCATED]' )
+                .replace(/</g, '[')
+    },
     
 //////////
 //      //
@@ -205,4 +244,4 @@ const rus   = {
 //////////
 
 module.exports  = rus
-mark (`r-u-s.js (ruthenium utilities) LOADED`)
+mark (`~/modules/r-u-s.js (ruthenium utilities) LOADED`)

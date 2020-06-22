@@ -19,14 +19,13 @@ const lastGuard = async ( data ) => {
                 'content-type' : 'text/html'
             },
             body:   `<h1>Status: 500 Internal Server Error</h1>
-                The last guard said:
-                <h3>An Error was Thrown</h3>
-                Here's what we know : <pre><code>${
-                JSON.stringify( data.RU.errors, null, 4 ).replace(/\\n/g, '\n')
-            }</code></pre>` 
+                    The last guard said:
+                    <h3>An Error was Thrown</h3>
+                    Here's what we know : <pre><code>${
+                    await rus.print.stringify4 ( data )
+                    }</code></pre>` 
         }
         console.error (`(last-guard.js) detected a middleware error; (data) logged:`, data)
-        //return data.RU.response
     }
     else
     
@@ -38,15 +37,14 @@ const lastGuard = async ( data ) => {
             headers: {
                 'content-type' : 'text/html'
             },
-            body: `<h1>Status: 500 Internal Server Error</h1>
-                The last guard said :
-                <h3>No "View" was Assigned</h3>
-                The (data) looks like this : <pre><code>${
-                JSON.stringify( data, null, 4 ).replace(/\\n/g, '\n')
-            }</code></pre>` 
+            body:   `<h1>Status: 500 Internal Server Error</h1>
+                    The last guard said :
+                    <h3>No "View" was Assigned</h3>
+                    The (data) looks like this : <pre><code>${
+                    await rus.print.stringify4 ( data )
+                    }</code></pre>` 
         }
         console.error (`(last-guard.js) detected neither (statusCode), nor (body) in the (response).`, data)
-        //return data.RU.response
     }
     else 
 
@@ -85,26 +83,22 @@ const lastGuard = async ( data ) => {
         const response = { ... data.RU.response }
         
         // MODIFY (ORIGINAL ADDRESS) TO (NEW VALUE)
-        if ( typeof data.RU.response.body == 'string' ) {
+        if ( typeof data.RU.response.body == 'string' )
+        {
             data.RU.response.body 
-                =   (   data.RU.response.body.slice(0,300) 
-                        + '... [POSSIBLY TRUNCATED]' 
-                    ).replace(/</g, '[')   
+                =   await rus.print.xml300 ( data.RU.response.body )   
         }
         if (    data.RU.signals.sendResponse
-                && typeof data.RU.signals.sendResponse.body == 'string' ) {
+                && typeof data.RU.signals.sendResponse.body == 'string' )
+        {
             data.RU.signals.sendResponse.body 
-                =   (   data.RU.signals.sendResponse.body.slice(0,300)
-                        + '... [POSSIBLY TRUNCATED]'
-                    ).replace(/</g, '[')   
+                =   await rus.print.xml300( data.RU.signals.sendResponse.body )
         }
         
         // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
         response.body +=
         `<hr>[ Debug of (data) by last-guard.js ] :
-         <pre><code>${
-            rus.node.util.inspect( data, { depth: Infinity } )
-        }</code></pre>` 
+         <pre><code>${ await rus.print.dataDebug ( data ) }</code></pre>` 
         
         // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
         data.RU.response = response
@@ -119,4 +113,4 @@ const lastGuard = async ( data ) => {
     
 }
 module.exports = lastGuard
-rus.mark (`last-guard.js LOADED`)
+rus.mark (`~/modules/middlewares/last-guard.js LOADED`)

@@ -21,8 +21,10 @@ const reducer   = require ( '/var/task/modules/framework/ruthenium-reducer.js' )
 const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     
     const frameworkData = {
+        
+        config:         {},
             
-        middlewares:    MIDDLEWARE_QUEUE.map ( m => m.name ),
+        middlewares:    MIDDLEWARE_QUEUE.map ( m => m.name ), // TODO move this into config, out of index.js?
         
         request:        {},
         
