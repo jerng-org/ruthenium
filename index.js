@@ -61,6 +61,9 @@ const ruthenium
 const composeResponse
     = require (`/var/task/modules/middlewares/compose-response.js`) 
 
+const config
+    = require (`/var/task/modules/middlewares/config.js`) 
+
 const lastGuard
     = require (`/var/task/modules/middlewares/last-guard.js`) 
 

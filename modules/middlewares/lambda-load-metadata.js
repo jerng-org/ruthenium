@@ -19,4 +19,3 @@ const lambdaLoadMetadata = async ( data ) => {
 
 }
 module.exports = lambdaLoadMetadata
-rus.mark (`(lamba-load-metadata.js) LOADED`)

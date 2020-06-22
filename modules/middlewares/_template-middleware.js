@@ -14,4 +14,4 @@ const thisIsMyName = async ( data ) => {
 }
 
 module.exports = thisIsMyName
-rus.mark (`this-is-my-name.js LOADED`)
+rus.mark (`~/modules/middlewares/this-is-my-name.js LOADED`)
