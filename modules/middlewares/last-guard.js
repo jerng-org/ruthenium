@@ -54,7 +54,8 @@ const lastGuard = async ( data ) => {
     {
     
         // OP 1
-        console.log (   data.RU.request.http.method, 
+        console.log (   `(last-guard.js:57)`,
+                        data.RU.request.http.method, 
                         data.RU.request.rawPath, 
                         data.RU.request.rawQueryString  ) 
     
@@ -71,7 +72,7 @@ const lastGuard = async ( data ) => {
 
     
     //*     
-    console.warn (`(last-guard.js) This code is in a clumsy location; consider moving it to its own middleware;`)
+    console.warn (`(last-guard.js:75) This code is in a clumsy location; consider moving it to its own middleware;`)
     
     
     if (    data.RU.response.headers
@@ -86,17 +87,21 @@ const lastGuard = async ( data ) => {
         // MODIFY (ORIGINAL ADDRESS) TO (NEW VALUE)
         if ( typeof data.RU.response.body == 'string' ) {
             data.RU.response.body 
-                = data.RU.response.body.replace(/</g, '[')   
+                =   (   data.RU.response.body.slice(0,300) 
+                        + '... [POSSIBLY TRUNCATED]' 
+                    ).replace(/</g, '[')   
         }
         if (    data.RU.signals.sendResponse
                 && typeof data.RU.signals.sendResponse.body == 'string' ) {
             data.RU.signals.sendResponse.body 
-                = data.RU.signals.sendResponse.body.replace(/</g, '[')   
+                =   (   data.RU.signals.sendResponse.body.slice(0,300)
+                        + '... [POSSIBLY TRUNCATED]'
+                    ).replace(/</g, '[')   
         }
         
         // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
         response.body +=
-        `(last-guard.js) :
+        `<hr>[ Debug of (data) by last-guard.js ] :
          <pre><code>${
             rus.node.util.inspect( data, { depth: Infinity } )
         }</code></pre>` 
