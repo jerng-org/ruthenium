@@ -147,7 +147,7 @@ const applyLayout = async ( data ) => {
                     //  (data.RU.response.body) should have been set in
                     //  (compose-response.js) by this point, so a layout-markup
                     //  CAN refer to it;
-                    data.RU.respose.body = 
+                    data.RU.response.body = 
                         await markups [ data.RU.signals.inferredLayoutMarkupName ]( data )
                 
                     return data // EXIT POINT 3

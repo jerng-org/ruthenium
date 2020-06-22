@@ -11,10 +11,14 @@ const thisIsMyName = async ( data ) => {
 
     // get data from ( data.RU.io.thisIsMyName )
     
+    //  IFF this is a LAYOUT MARKUP, and if this is run after the main task+markup
+    //  are rendered, then find that rendered markup in (data.RU.response.body),
+    //  wrap it with more mar, then return it.
+    
     rus.mark ( `_template-markup.js EXECUTED` )
 }
 //  Return markup as string, and it will be assigned to
-//      (data.RU.response.body) by (composeResponse.js).
+//      (data.RU.response.body) by (compose-response.js).
 //
 //  You may also manipulated (data) directly, but that would be semantically
 //  incoherent / unpretty.

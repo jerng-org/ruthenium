@@ -6,8 +6,7 @@ const layoutMarkup = async ( data ) => {
 
 // get data from ( data.RU.io.layout )
 
-    
-`<!DOCTYPE html>
+return `<!DOCTYPE html>
 <html>
     <head>
         
@@ -36,7 +35,7 @@ const layoutMarkup = async ( data ) => {
         <h3>Welcome to Prototyping</h3>
         <p>
         </p>
-
+        ${ data.RU.response.body }
 
     </body>
 </html>`
