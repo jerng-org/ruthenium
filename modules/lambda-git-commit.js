@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark.js' )
 const childProcess  = require ( 'child_process' )
 
-const commitMessage = `-`
+const commitMessage = `(POC- open test URL upon web console SAVE)`
 
 const lambdaGitCommit =  () => { try {
 
