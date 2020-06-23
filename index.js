@@ -17,7 +17,7 @@ rus.mark( `index.js loaded mark.js` )
         `DEBT_NOTE`,
         [   
             `CURRENT:`,
-            `Prettier Debug`,
+            `Configuration: figure out where to put it; have a middleware yank it in; but also have other files yank it in as needed`,
             `
             BACKLOG:`,
             `cookies`, 
