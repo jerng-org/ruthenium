@@ -90,9 +90,9 @@ ${
             console.error ( e )
             console.log ( DATA.RU.errors )
             DATA.RU.errors.push ( {
-                thrown:     e,
                 'typeof':   typeof e,
-                stack:      e.stack
+                thrown:     e,
+                // apparently redundant? stack:      e.stack
             } )
 
             return DATA
