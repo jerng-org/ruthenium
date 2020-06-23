@@ -26,7 +26,8 @@ rus.mark( `index.js loaded mark.js` )
             `cognito`, 
             'writes to (data.RU.signals) should be signed by the writer; perhaps via a non-enumerable property',
             `GET method forms are not yet supported;`,
-            `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.`,
+            `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.
+            (test errors: in middlewares, in tasks, in markups, in modules)`,
             `
             ICEBOX:`,
             `$.stuff for aliasing`,
@@ -60,9 +61,6 @@ const ruthenium
 // PROJECT - MIDDLEWARES, lexical order
 const composeResponse
     = require (`/var/task/modules/middlewares/compose-response.js`) 
-
-const config
-    = require (`/var/task/modules/middlewares/config.js`) 
 
 const lastGuard
     = require (`/var/task/modules/middlewares/last-guard.js`) 
@@ -126,6 +124,7 @@ exports.handler = async function () {
     }
     
     const middlewares = [  // MIDDLEWARES, execution order
+         
                                 
         // System Integration with AWS Lambda
         lambdaCopyRequestParameters,         // Query string     values with same key stored as:     CSV string

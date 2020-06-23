@@ -21,11 +21,17 @@ const lastGuard = async ( data ) => {
             body:   `<h1>Status: 500 Internal Server Error</h1>
                     The last guard said:
                     <h3>An Error was Thrown</h3>
+                    ... in middlewares.`/*
                     Here's what we know : <pre><code>${
                     await rus.print.stringify4 ( data )
-                    }</code></pre>` 
+                    }</code></pre>` */
         }
-        console.error (`(last-guard.js) detected a middleware error; (data) logged:`, data)
+        console.error   (   500,
+                            `"Error in middlewares." (data.RU.errors).length > 0`,
+                            data.RU.response.body,
+                            `(data) logged:`,
+                            data
+                        )
     }
     else
     
@@ -39,12 +45,17 @@ const lastGuard = async ( data ) => {
             },
             body:   `<h1>Status: 500 Internal Server Error</h1>
                     The last guard said :
-                    <h3>No "View" was Assigned</h3>
+                    <h3>No "View" was Assigned</h3>`/*
                     The (data) looks like this : <pre><code>${
                     await rus.print.stringify4 ( data )
-                    }</code></pre>` 
+                    }</code></pre>` */
         }
-        console.error (`(last-guard.js) detected neither (statusCode), nor (body) in the (response).`, data)
+        console.error   (   500,
+                            `"No view." Neither (data.RU.response.statusCode) nor (data.RU.response.body) were assigned`,
+                            data.RU.response.body,
+                            `(data) logged:`,
+                            data
+                        )
     }
     else 
 
@@ -52,18 +63,11 @@ const lastGuard = async ( data ) => {
     {
     
         // OP 1
-        console.log (   `(last-guard.js:57)`,
-                        data.RU.request.http.method, 
-                        data.RU.request.rawPath, 
-                        data.RU.request.rawQueryString  ) 
-    
-        // OP 2
-        data.RU.response.body = hasBody 
-            ? data.RU.response.body
-            : `(last-guard.js) finds that (data.RU.response.body) is falsy: (${
-                data.RU.response.body
-                })`
-        
+        console.warn   (   data.RU.response.statusCode,
+                            `"Falsy response body." However, (data.RU.response.statusCode) was found.`,
+                            `(data) logged:`,
+                            data
+                        )
     }
 
 

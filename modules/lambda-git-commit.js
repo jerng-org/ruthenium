@@ -29,7 +29,7 @@ Environmental variable with password
 const mark          = require ( '/var/task/modules/mark.js' )
 const childProcess  = require ( 'child_process' )
 
-const commitMessage = `(config.js) debug verbosity parameter`
+const commitMessage = `(config.js) is no longer a middleware; a number of items need to be configured which do not have access to (data) thus, no point putting configurations here;`
 
 const lambdaGitCommit =  () => { try {
 

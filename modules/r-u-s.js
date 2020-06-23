@@ -145,6 +145,11 @@ const rus   = {
             async rutheniumDataObject => {
                 
                 return `
+DEBUG HIGHLIGHTS:
+                
+[ data.RU.errors ] renders ${
+    await rus.print.inspectInfinity ( rutheniumDataObject.RU.errors ) }                 
+
 [ Object.keys ( data ) ] renders ${ 
     JSON.stringify( Object.keys ( rutheniumDataObject ), null, 4 ) }                 
 
@@ -159,6 +164,8 @@ const rus   = {
 
 [ Object.keys ( data.RU.response ) ] renders ${
     JSON.stringify( Object.keys ( rutheniumDataObject.RU.response ), null, 4 ) }                 
+
+DEBUG EVERYTHING:
 
 [ data.RU ] renders ${
     await rus.print.inspectInfinity ( rutheniumDataObject.RU ) }                 
