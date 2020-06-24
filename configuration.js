@@ -12,8 +12,21 @@ module.exports = {
      *
      *      4   :   3       + (raw database output) -> response.body
      *
+     *      5   :   undefined, as yet
+     *
      *
      */
     
-    verbosity:  2
+    verbosity:  2,
+    
+    /*  performance monitoring
+     *
+     *      0   :   none
+     *
+     *      1   :   some
+     *
+     *      2   :   undefined, as yet
+     */
+     
+    performance: 0
 }
