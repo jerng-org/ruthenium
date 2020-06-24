@@ -9,9 +9,14 @@ const blobMimeTypes = {
     'milligram.min.css':`text/css`,
     'ruthenium-web-client.mjs':`text/javascript`,
 }
-{   const stack = (new Error).stack;  console.warn ( `⚠ DEBT_NOTE ⚠`, 
-    stack.substring( stack.indexOf( '(' ), stack.indexOf( ')' ) + 1 ) )
+
+if ( rus.conf.verbosity > 0 )
+{   
+    const stack = (new Error).stack; 
+    console.warn ( `⚠ DEBT_NOTE ⚠`, 
+        stack.substring( stack.indexOf( '(' ), stack.indexOf( ')' ) + 1 ) )
 }
+
 const blobFileNames = rus.node.fs.readdirSync ('/var/task/io/blobs')
 blobFileNames.forEach ( ( current, index, array ) => {
     blobs[ current ] = rus.node.fs.readFileSync ( '/var/task/io/blobs/' + current, 'utf8' )

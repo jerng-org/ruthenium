@@ -13,7 +13,8 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 rus.mark( `index.js loaded mark.js` )
 
-    console.warn (
+    rus.conf.verbosity < 1 
+    || console.warn (
         `DEBT_NOTE`,
         [   
             `CURRENT:`,
@@ -88,7 +89,7 @@ const formsTunnelRestfulMethods
     = require (`/var/task/modules/middlewares/forms-tunnel-restful-methods.js`) 
 
 const formsValidateData
-    =   require (`/var/task/modules/middlewares/forms-validate-data.js`)
+    =  require (`/var/task/modules/middlewares/forms-validate-data.js`)
     
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
@@ -104,6 +105,14 @@ const applyLayout
 
 // LAMBDA HANDLER
 exports.handler = async function () { 
+
+    // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
+    console.log (   arguments[0].requestContext.http.method,
+                    arguments[0].requestContext.domainName,
+                    arguments[0].requestContext.http.path,
+                    '?',
+                    arguments[0].rawQueryString
+    )
 
     rus.mark( `index.js, first mark in handler`, true )
     
@@ -126,7 +135,6 @@ exports.handler = async function () {
     
     const middlewares = [  // MIDDLEWARES, execution order
          
-                                
         // System Integration with AWS Lambda
         lambdaCopyRequestParameters,         // Query string     values with same key stored as:     CSV string
         lambdaNormalizeHeaders,              // Cookie header    values with same key stored as:     Array of values

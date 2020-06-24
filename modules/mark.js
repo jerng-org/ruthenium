@@ -2,7 +2,7 @@
 
 const conf      = require (`/var/task/configuration.js`)
 
-if ( ! conf.performance ) console.log = _ => _
+const _log      = conf.performance ? console.log : _ => _
 
 // The following code is written for the `nodejs` (12.x) runtime on AWS Lambda.
 // FWIW: `nodejs.process` also has: .resourceUsage() and .httime.bigint()
@@ -93,12 +93,12 @@ const mark = async ( taskLabel, firstInHandler ) => {
                                     + preInvocationCPU.system
             preInvocationTime       = performance.now()
             
-            console.log (`⚠ perf.js : these figures are loose and fast; ⚠`)
-            console.log (`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB; ⚠`)
-            console.log (
+            _log (`⚠ perf.js : these figures are loose and fast; ⚠`)
+            _log (`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB; ⚠`)
+            _log (
                 String('').padEnd ( 26 + 8 * padLength, `-` )
             )
-            console.log (
+            _log (
                 
                 String(`prior: `    + Math.round(preInvocationTime) 
                                         + ` ms`)
@@ -114,7 +114,7 @@ const mark = async ( taskLabel, firstInHandler ) => {
                 String(`throttle ⚠️ ㇏㇏`)
                     .padStart ( 2 * padLength + 6, ` `)
             )
-            console.log (
+            _log (
                 String('').padEnd ( 26 + 8 * padLength, `-` )
             )
             
@@ -132,7 +132,7 @@ const mark = async ( taskLabel, firstInHandler ) => {
         const invocationStartCPU    = process.cpuUsage()
         invocationStartCPUsum       = invocationStartCPU.user 
                                     + invocationStartCPU.system
-        console.log (
+        _log (
             String(`WALL-🕓:(Δ,Σ)`)
                 .padStart ( 5 + 2 * padLength, ` ` ),
             String(`RAM:(Δ,Σ)`)
@@ -142,7 +142,7 @@ const mark = async ( taskLabel, firstInHandler ) => {
             String(`[CPU-🕓/WALL-🕓]:(Δ,Σ)`)
                 .padStart ( 8 + 2 * padLength, ` ` )
         )
-        console.log (
+        _log (
             String('').padEnd ( 26 + 8 * padLength, `-` )
         )
     }
@@ -163,7 +163,7 @@ const mark = async ( taskLabel, firstInHandler ) => {
 
     let tempMem
     
-    console.log ( 
+    _log ( 
             
         //
         //

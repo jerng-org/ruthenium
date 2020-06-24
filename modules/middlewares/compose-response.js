@@ -3,8 +3,6 @@
 const rus       = require ( '/var/task/modules/r-u-s.js' )
 
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
-//  THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
-//  THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (apply-layout.js)
     const markups   = {}
     const markupFileNames = rus.node.fs.readdirSync ('/var/task/tasks', {

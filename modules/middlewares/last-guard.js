@@ -3,10 +3,7 @@
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const lastGuard = async ( data ) => {
-
-
-
-
+    
     const hasStatusCode = data.RU.response.statusCode   ? true : false
     const hasBody       = data.RU.response.body         ? true : false
     
@@ -33,9 +30,9 @@ const lastGuard = async ( data ) => {
                             data
                         )
     }
-    else
     
     // strict minimum requirement of a status code OR body
+    else
     if ( ! ( hasStatusCode || hasBody ) ) { 
         data.RU.responseBeforeLastGuard = data.RU.response
         data.RU.response = {
@@ -57,34 +54,14 @@ const lastGuard = async ( data ) => {
                             data
                         )
     }
-    else 
-
-    // Either a (statusCode) or a (body) or both are in data.RU.response
+    
+    // Debug
+    if (    rus.conf.verbosity >= 3  
+            &&  data.RU.response.headers
+            &&  data.RU.response.headers['content-type']
+            &&  data.RU.response.headers['content-type'].toLowerCase()
+                                                        .includes('html') )
     {
-    
-        // OP 1
-        rus.conf.verbosity < 1
-        || console.warn (   data.RU.response.statusCode,
-                            `"Falsy response body." However, (data.RU.response.statusCode) was found.`,
-                            `(data) logged:`,
-                            data
-                        )
-    }
-
-
-
-    
-    //*     
-    rus.conf.verbosity < 1
-    || console.warn (`(last-guard.js:75) This code is in a clumsy location; consider moving it to its own middleware;`)
-    
-    
-    if (    data.RU.response.headers
-        &&  data.RU.response.headers['content-type']
-        &&  data.RU.response.headers['content-type']
-                .toLowerCase()
-                .includes('html') ) {
-        
         // MAKE (COPY OF ORIGINAL VALUE)
         const response = { ... data.RU.response }
         
@@ -102,23 +79,17 @@ const lastGuard = async ( data ) => {
         }
         
         // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
-        rus.conf.verbosity < 3
-        ||  (   response.body +=
-                `<hr>[ Debug of (data) by last-guard.js ] :
-                <pre><code>${ 
-                await rus.print.dataDebug ( data ) }</code></pre>`)
+        
+        response.body +=
+            `<hr>[ Debug of (data) by last-guard.js ] :
+            <pre><code>${ 
+            await rus.print.dataDebug ( data ) }</code></pre>`
                 
         // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
         data.RU.response = response
-    
     }
-    //*/
-    
+
     return data.RU.response
-    
-    
-    
-    
 }
 module.exports = lastGuard
 rus.mark (`~/modules/middlewares/last-guard.js LOADED`)
