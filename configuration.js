@@ -2,15 +2,15 @@ module.exports = {
     
     /*  verbosity
      *
-     *      0   -   ONLY console.error
+     *      0   :   ONLY    console.error -> logs
      *      
-     *      1   -   ONLY console.error, console.warn
+     *      1   :   0       + console.warn -> logs
      *
-     *      2   -   ONLY console.error, console.warn, console.info
+     *      2   :   1       + console.info -> logs
      *
-     *      3   -   (all console calls), some HTML output
+     *      3   :   2       + (data) -> response.body
      *
-     *      4   -   undefined so far
+     *      4   :   3       + (raw database output) -> response.body
      *
      *
      */
