@@ -15,13 +15,7 @@ const lastGuard = async ( data ) => {
             headers: {
                 'content-type' : 'text/html'
             },
-            body:   `<h1>Status: 500 Internal Server Error</h1>
-                    The last guard said:
-                    <h3>An Error was Thrown</h3>
-                    ... in middlewares.`/*
-                    Here's what we know : <pre><code>${
-                    await rus.print.stringify4 ( data )
-                    }</code></pre>` */
+            body:   rus.conf.labels.lastGuard500InMiddleware
         }
         console.error   (   500,
                             `"Error in middlewares." (data.RU.errors).length > 0`,
@@ -40,12 +34,7 @@ const lastGuard = async ( data ) => {
             headers: {
                 'content-type' : 'text/html'
             },
-            body:   `<h1>Status: 500 Internal Server Error</h1>
-                    The last guard said :
-                    <h3>No "View" was Assigned</h3>`/*
-                    The (data) looks like this : <pre><code>${
-                    await rus.print.stringify4 ( data )
-                    }</code></pre>` */
+            body:   rus.conf.labels.lastGuardMissingStatusCodeAndBody
         }
         console.error   (   500,
                             `"No view." Neither (data.RU.response.statusCode) nor (data.RU.response.body) were assigned`,

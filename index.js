@@ -29,8 +29,6 @@ rus.mark( `index.js loaded mark.js` )
                 - example:  writes to (data.RU.signals) should be signed by the writer; 
                             perhaps via a non-enumerable property`,
             `GET method forms are not yet supported;`,
-            `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.
-            (test errors: in middlewares, in tasks, in markups, in modules)`,
             `
             ICEBOX:`,
             `$.stuff for aliasing`,
