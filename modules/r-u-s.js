@@ -82,6 +82,8 @@ const rus   = {
 //      //
 //////////
 
+    conf: require (`/var/task/configuration.js`),
+
     html:
         require ( '/var/task/modules/html' ),
     
