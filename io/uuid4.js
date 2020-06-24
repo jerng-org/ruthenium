@@ -1,8 +1,9 @@
 'use strict'
 
-/*      https://stackoverflow.com/posts/2117523/revisions
-
-*/
+/*    https://stackoverflow.com/posts/2117523/revisions
+ *   
+ *    This function my block while it waits for entropy. (?)
+ */
 
 const mark      = require ( '/var/task/modules/mark.js' )
 
