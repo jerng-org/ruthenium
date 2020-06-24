@@ -96,7 +96,7 @@ const rus   = {
 //////////
 
     lambdaGitCommit: 
-        require ( '/var/task/modules/lambda-git-commit' ),
+        require ( '/var/task/io/lambda-git-commit' ),
     
 //////////
 //      //
@@ -199,7 +199,7 @@ DEBUG EVERYTHING:
 //////////
 
     uuid4:     
-        require ( '/var/task/modules/uuid4.js' ),
+        require ( '/var/task/io/uuid4.js' ),
 
 //////////
 //      //
@@ -208,7 +208,7 @@ DEBUG EVERYTHING:
 //////////
 
     validate:
-        require ( `/var/task/modules/validate.js` ),
+        require ( `/var/task/io/validate.js` ),
     
     /*  VALIDATE_FORM_DATA
      *

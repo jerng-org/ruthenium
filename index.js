@@ -18,12 +18,11 @@ rus.mark( `index.js loaded mark.js` )
         `DEBT_NOTE`,
         [   
             `CURRENT:`,
-            `Configuration: figure out where to put it; have a middleware yank it in; but also have other files yank it in as needed`,
+            `maybe a naming convention for files loaded before (r-u-s.js)`,
             `
             BACKLOG:`,
             `cookies`, 
             `sessions`, 
-            `maybe a naming convention for files loaded before (r-u-s.js)`,
             `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
             `cognito`, 
             'writes to (data.RU.signals) should be signed by the writer; perhaps via a non-enumerable property',
@@ -37,7 +36,7 @@ rus.mark( `index.js loaded mark.js` )
         ]
     )
 
-rus.lambdaGitCommit()
+if ( rus.conf.gitCommit ) rus.lambdaGitCommit ( rus.conf.gitCommitMessage )
     //  VERSION CONTROL HACK
     //  a SYNCHRONOUS FUNCTION - why? Because the alternative is:
     //
