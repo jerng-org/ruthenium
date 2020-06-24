@@ -22,6 +22,7 @@ rus.mark( `index.js loaded mark.js` )
             BACKLOG:`,
             `cookies`, 
             `sessions`, 
+            `maybe a naming convention for files loaded before (r-u-s.js)`,
             `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
             `cognito`, 
             'writes to (data.RU.signals) should be signed by the writer; perhaps via a non-enumerable property',

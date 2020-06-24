@@ -37,6 +37,7 @@
 //
 //
 
+
 let newExecutionContext = true
 let nthInvocation
 let preInvocationTime
@@ -285,5 +286,9 @@ const mark = async ( taskLabel, firstInHandler ) => {
     newExecutionContext = false
     
 }
-module.exports = mark
+
+// Depends on Configuration file.
+const conf      = require (`/var/task/configuration.js`)
+module.exports  = conf.performance ? mark : _ => _
+
 mark (`~/modules/mark.js LOADED`, true)
