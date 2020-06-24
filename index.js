@@ -18,14 +18,16 @@ rus.mark( `index.js loaded mark.js` )
         `DEBT_NOTE`,
         [   
             `CURRENT:`,
-            `maybe a naming convention for files loaded before (r-u-s.js)`,
             `
             BACKLOG:`,
             `cookies`, 
             `sessions`, 
-            `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
             `cognito`, 
-            'writes to (data.RU.signals) should be signed by the writer; perhaps via a non-enumerable property',
+            `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
+            `Whole class of problems:
+                - whether to use ES/JS proxies (language specific!) to automatically anotate data;
+                - example:  writes to (data.RU.signals) should be signed by the writer; 
+                            perhaps via a non-enumerable property`,
             `GET method forms are not yet supported;`,
             `note if (lastGuard.js) throws an error, nothing catches it and (data); gets borked to the client in its entirety; fix this problem.
             (test errors: in middlewares, in tasks, in markups, in modules)`,
