@@ -18,11 +18,11 @@ rus.mark( `index.js loaded mark.js` )
         `DEBT_NOTE`,
         [   
             `CURRENT:`,
+            `cookies - read and memorise entire MDN protocol`, 
+            `sessions - read and memorise entire MDN protocol`, 
             `
             
             BACKLOG:`,
-            `cookies`, 
-            `sessions`, 
             `cognito`, 
             `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
             `Whole class of problems:

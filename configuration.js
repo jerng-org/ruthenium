@@ -40,7 +40,7 @@ module.exports = {
      *
      */
      gitCommit: 1,
-     gitCommitMessage: 'improved console hack to auto-test URL on save',
+     gitCommitMessage: 'notes: prepare to revise cookies and s',
      
     labels:  {
         
@@ -54,7 +54,7 @@ module.exports = {
          */
         lastGuard500InMiddleware:
             `<h1>Status: 500 Internal Server Error</h1>
-                The last guard said:
+                The last guard said :
             <h3>An Error was Thrown</h3>
                 ... in middlewares.`,
         
