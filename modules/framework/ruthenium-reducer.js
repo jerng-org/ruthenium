@@ -11,9 +11,10 @@ const rutheniumReducer = async (    DATA_IN_PROMISE,
         const DATA                  = await DATA_IN_PROMISE
         
         try { 
-            
+
             const intermediateData  = await CURRENT_MIDDLEWARE ( DATA )
-            
+           
+
             /* THROWN? This line does not run, if CURRENT_MIDDLEWARE erred */
             
             rus.mark ( `middleware executed: ${ CURRENT_MIDDLEWARE.name }` )
@@ -30,6 +31,8 @@ const rutheniumReducer = async (    DATA_IN_PROMISE,
             if (        INDEX + 1 == MIDDLEWARE_QUEUE.length )
             { 
                 // don't complain about the last middleware in queue;
+                // TODO: need to analyse this design decision a bit more;
+                //  Do we really want to admit non-object responses?
                 return  intermediateData 
             }
             else        
@@ -83,19 +86,28 @@ ${
 ///////////////////////////////////////////////////////////////////////////////
             
             }
-            
+            // end ELSE
+
         } 
         catch (e) 
         {
-            console.error ( e )
-            console.log ( DATA.RU.errors )
             DATA.RU.errors.push ( {
                 'typeof':   typeof e,
                 thrown:     e,
-                // apparently redundant? stack:      e.stack
             } )
+            console.error ( rus.conf.labels.reducer500Body, DATA )
 
-            return DATA
+            if ( INDEX + 1 == MIDDLEWARE_QUEUE.length )
+            {
+                // last middleware is special
+                return  {   statusCode: 500,
+                            body:       rus.conf.labels.reducer500Body
+                        }
+            }
+            else 
+            {
+                return DATA
+            }
         }
     }
 module.exports = rutheniumReducer
