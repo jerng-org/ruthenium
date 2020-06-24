@@ -40,7 +40,7 @@ module.exports = {
      *
      */
      gitCommit: 1,
-     gitCommitMessage: 'Fixed how (ruthenium-reducer.js) handles errors thrown in (last-guard.js)',
+     gitCommitMessage: 'improved console hack to auto-test URL on save',
      
     labels:  {
         

@@ -27,46 +27,25 @@ const body = document.querySelector('body')
 const observer1 = new MutationObserver( ( _mutationRecords, _mutationObserver ) => {
 
         _mutationRecords.forEach ( mutation => {
-            switch ( mutation.type ) {
-            
-            case 'childList':
-            if (    mutation.addedNodes[0].classList.contains(`errorlabel`) ) 
+
+
+            if (    mutation.target.classList.contains(`infolabel`) 
+                    && mutation.type == 'attributes'
+                    && mutation.attributeName == 'style'
+                    //&& ( ! mutation.target.classList.contains(`anim`) )
+                    && mutation.oldValue.includes('-17px') 
+                    ) 
             {
+
+                console.log (mutation.type, mutation.target)
 ///////////////////////////////////////////////////////////////////////////////
 
-                console.log (`FIRST flashed message`)
-                
-                const observer2 = new MutationObserver ( (  __mutationRecords,
-                                                            __mutationObserver ) => 
-                {
-                    __mutationRecords.forEach ( __mutation => {
-                        
-                        switch ( __mutation.type ) {
-                        
-                        case 'attributes':
-                        console.log ( __mutation.oldValue )
-                        if (    __mutation.attributeName == 'style'
-                                && __mutation.oldValue.includes('-17px')
-                            ) {
-
-                            console.log ( `SUBSEQUENT flash message`)
-                            window.open ( testUrl )
-                        }
-                        break
-
-                        }
-                    } ) 
-                } ) 
-                
-                observer2.observe ( mutation.addedNodes[0], 
-                                    { attributes: true, attributeOldValue: true} )
+                console.log (`flashed message`)
+                window.open ( testUrl )
 
 ///////////////////////////////////////////////////////////////////////////////
             }
-            break
 
-            }
-            // switch
         } )
         // forEach mutation
     }
@@ -75,4 +54,6 @@ const observer1 = new MutationObserver( ( _mutationRecords, _mutationObserver ) 
 // new MutationObserver
 
 // Start observing the target node for configured mutations
-observer1.observe ( body, { childList: true } ) 
+observer1.observe ( body,   {   subtree: true, 
+                                attributes: true,
+                                attributeOldValue: true } ) 
