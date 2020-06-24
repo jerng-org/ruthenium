@@ -1,5 +1,9 @@
 'use strict'
 
+const conf      = require (`/var/task/configuration.js`)
+
+if ( conf.performance ) console.log = _ => _
+
 // The following code is written for the `nodejs` (12.x) runtime on AWS Lambda.
 // FWIW: `nodejs.process` also has: .resourceUsage() and .httime.bigint()
 
@@ -287,8 +291,6 @@ const mark = async ( taskLabel, firstInHandler ) => {
     
 }
 
-// Depends on Configuration file.
-const conf      = require (`/var/task/configuration.js`)
 module.exports  = conf.performance ? mark : _ => _
 
 mark (`~/modules/mark.js LOADED`, true)
