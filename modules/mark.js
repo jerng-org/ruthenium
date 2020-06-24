@@ -2,7 +2,7 @@
 
 const conf      = require (`/var/task/configuration.js`)
 
-if ( conf.performance ) console.log = _ => _
+if ( ! conf.performance ) console.log = _ => _
 
 // The following code is written for the `nodejs` (12.x) runtime on AWS Lambda.
 // FWIW: `nodejs.process` also has: .resourceUsage() and .httime.bigint()
