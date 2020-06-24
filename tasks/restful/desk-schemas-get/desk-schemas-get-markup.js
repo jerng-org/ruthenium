@@ -11,17 +11,13 @@ const tableInMarkup
 
 const deskSchemasMarkup = async ( data ) => {
 
-    const markup 
+    const markup = await tableInMarkup ( data.RU.io.deskSchemasScan )
     
-        =
-        
-        //htmlIndex
-        //+ 
-        
-        await tableInMarkup ( data.RU.io.deskSchemasScan )
-    
-        + ` <h6>all-desk-schemas/markup.js:</h6>
-            <pre><code>${ JSON.stringify( data.RU.io.deskSchemasScan, null, 4 ) }</code></pre>`
+        + ( rus.conf.verbosity < 4 
+            ? '' 
+            : ` <h6>all-desk-schemas/markup.js:</h6>
+              <pre><code>${ JSON.stringify( data.RU.io.deskSchemasScan, null, 4 )
+              }</code></pre>` )
 
     return markup
 }
