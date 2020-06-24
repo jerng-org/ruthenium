@@ -63,7 +63,8 @@ const lastGuard = async ( data ) => {
     {
     
         // OP 1
-        console.warn   (   data.RU.response.statusCode,
+        rus.conf.verbosity > 0
+        || console.warn (   data.RU.response.statusCode,
                             `"Falsy response body." However, (data.RU.response.statusCode) was found.`,
                             `(data) logged:`,
                             data
@@ -74,7 +75,8 @@ const lastGuard = async ( data ) => {
 
     
     //*     
-    console.warn (`(last-guard.js:75) This code is in a clumsy location; consider moving it to its own middleware;`)
+    rus.conf.verbosity > 0
+    || console.warn (`(last-guard.js:75) This code is in a clumsy location; consider moving it to its own middleware;`)
     
     
     if (    data.RU.response.headers
@@ -100,10 +102,12 @@ const lastGuard = async ( data ) => {
         }
         
         // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
-        response.body +=
-        `<hr>[ Debug of (data) by last-guard.js ] :
-         <pre><code>${ await rus.print.dataDebug ( data ) }</code></pre>` 
-        
+        rus.conf.verbosity > 2
+        ||  (   response.body +=
+                `<hr>[ Debug of (data) by last-guard.js ] :
+                <pre><code>${ 
+                await rus.print.dataDebug ( data ) }</code></pre>`)
+                
         // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
         data.RU.response = response
     
