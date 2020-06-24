@@ -40,5 +40,5 @@ module.exports = {
      *
      */
      gitCommit: 1,
-     gitCommitMessage: 'added (prop:gitCommit) to (configuration.js)'
+     gitCommitMessage: '-'
 }
