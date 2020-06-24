@@ -4,10 +4,7 @@
 //  require()       executes modules; 
 //  require.res()   resolves paths without execution;
 
-const conf  =   require (`/var/task/configuration.js`)
-const mark  =   conf.performance
-                ? require ( '/var/task/modules/mark.js' )
-                : _ => _
+const mark  =   require ( '/var/task/modules/mark.js' )
                 
 mark (`r-u-s.js (ruthenium utilities) LOADING ...`)
 
@@ -87,7 +84,7 @@ const rus   = {
 //////////
 
     conf: 
-        conf,
+        require (`/var/task/configuration.js`),
 
     html:
         require ( '/var/task/modules/html' ),
