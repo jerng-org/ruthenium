@@ -30,6 +30,7 @@ rus.mark( `index.js loaded mark.js` )
                 - example:  writes to (data.RU.signals) should be signed by the writer; 
                             perhaps via a non-enumerable property`,
             `GET method forms are not yet supported;`,
+            `DECOUPLE: (compose-response.js) should be broken up into multiple middlewares also`,
             `
             
             ICEBOX:`,
@@ -62,9 +63,21 @@ const ruthenium
     = require ( '/var/task/modules/framework/ruthenium' )
 
 // PROJECT - MIDDLEWARES, lexical order
+const applyLayout                            
+    = require (`/var/task/modules/middlewares/apply-layout.js`) 
+    
 const composeResponse
     = require (`/var/task/modules/middlewares/compose-response.js`) 
 
+const formsReindexNames   
+    = require (`/var/task/modules/middlewares/forms-reindex-names.js`) 
+
+const formsTunnelRestfulMethods                
+    = require (`/var/task/modules/middlewares/forms-tunnel-restful-methods.js`) 
+
+const formsValidateData
+    =  require (`/var/task/modules/middlewares/forms-validate-data.js`)
+    
 const lastGuard
     = require (`/var/task/modules/middlewares/last-guard.js`) 
 
@@ -83,21 +96,12 @@ const lambdaNormalizeHeaders
 const lambdaNormalizeQueryStringParameters   
     = require (`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`) 
 
-const formsReindexNames   
-    = require (`/var/task/modules/middlewares/forms-reindex-names.js`) 
-
-const formsTunnelRestfulMethods                
-    = require (`/var/task/modules/middlewares/forms-tunnel-restful-methods.js`) 
-
-const formsValidateData
-    =  require (`/var/task/modules/middlewares/forms-validate-data.js`)
-    
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
 
-const applyLayout                            
-    = require (`/var/task/modules/middlewares/apply-layout.js`) 
-    
+const setCookies
+    = require (`/var/task/modules/middlewares/set-cookies.js`) 
+
 //////////
 //      //
 //  !!  //  Make way.
@@ -153,6 +157,7 @@ exports.handler = async function () {
         
         composeResponse,
         applyLayout,
+        setCookies,
 
         lastGuard
         
