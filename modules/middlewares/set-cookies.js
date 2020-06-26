@@ -14,30 +14,109 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
 
 /*  Ruthenium framework conventions
  *
- *  -   values ... base64 encoded
+ *  -   always double-quote cookie value; extend for opt-out later TODO;
+ *  -   always base64 encode the quoted value; extend for opt-out later TODO;
  *  -   always use Max-Age, which has precedence; never use Expires; 
- *      (RFC 6265.4.1.2.2)
+ *      (RFC 6265.4.1.2.2); extend for opt-out later TODO;
+ *          - so for deletion, (Max-Age: 0) is most succint;
  *          - we may regret this later;
- *  -   always double-quote cookie value
+ *  -   always use (SameSite=Strict;); extend for opt-out later TODO;
+ *  -   always use (HttpOnly;); extend for opt-out later TODO;
+ *  -   always use (Secure;); extend for opt-out later TODO;
+ *  -   always use (__Host-) which includes the functionality of (__Secure-);
+ *      extend for opt-out later TODO;
+ *      -   if the above is not applicable, try the item below;
+ *      -   always use the app-level (Path=??;) for the specified application; 
+ *          be neither more specific, nor more general than that path; this is 
+ *          not useful if you can use (__Host-);
  *  
  *  
  *  Important general implementation notes:
  *  
  *  -   Do not combine multiple Set-Cookie header-field-values, with commas; 
  *      (RFC 6265.3.)
+ *
  *  -   Set-Cookie header for Deletion must match Path and Date attribute values
  *      of the corresponding Creation header; (RFC 6265.3.1.)
+ *
  *  -   Set-Cookie header with identical tuple {cookie-name, path-av, domain-av}
  *      will be interpreted as destructive update to the user agent (update/
  *      delete). (RFC 6265.4.1.2.)
- *  -   Cookies are returned by the user-agent to the origin-server, but NOT to
- *      its sub-domains; this is if the (domain-av) is not specified; if the 
- *      (domain-av) is specified, then the cookie is sent to the specified
- *      domain AND ITS SUB-DOMAINS. (RFC 6265.4.1.2.3.)
- *  -   Cookies are ignored by user-agents if the (domain-av) does not match
- *      the origin server's domain, or an ancestor of the origin server's domain
- *      (RFC 6265.5.1.2.3.)
- *  
+ *
+ *  //////////
+ *  //      //
+ *  //  !!  //  Make way.
+ *  //      //
+ *  //////////
+ *
+ *  -   (Set-Cookie)s with (domain-av) Cookies are ignored by user-agents if the 
+ *      (domain-av) does not match (The algorithm is stated; BEWARE)
+ *      (RFC 6265bis.4.1.2.3.)
+ *
+ *          ("origin server CAN SEND MALICIOUS COOKIES TO ancestor domains")
+ *
+ *          Example:        Origin Server at (X.Y.Z) CAN set a cookie
+ *                          with the attribute value (Domain=X.Y.Z or Y.Z) 
+ *                          but NOT (Domain=A.Y.Z or W.X.Y.Z);
+ *                          ("self and ancestors, but not descendent domains")
+ *                          
+ *  -   (Cookie)s without (domain-av) are returned by the user-agent to the 
+ *      origin-server's domain, BUT NOT to its sub-domains; 
+ *
+ *          ("origin server CAN SEND MALICIOUS COOKIES to cousins domains, by  
+ *          setting ancestor domain's (domain-av)")
+ *
+ *          Example:
+ *
+ *  -   (Cookie)s with (domain-av) are returned by the user-agent to the 
+ *      origin-server's domain, AND ITS SUB-DOMAINS. (RFC 6265.4.1.2.3.)
+ *
+ *  //////////
+ *  //      //
+ *  //  !!  //  Make way.
+ *  //      //
+ *  //////////
+ *
+ *  -   If the (path-av) is omitted, the user-agent will follow the path of the
+ *      current URL as the default value. The cookie will be sent to the origin
+ *      server only for URLs which have the same path, or a subpath of that 
+ *      path; this has little security value; (RFC 6265.4.1.2.4.)
+ *
+ *  -   If (secure-av) is specified, the user-agent will decide when a request
+ *      is secure enough to send the cookie (usually HTTPS/ HTTP over TLS) is 
+ *      deemed sufficient (RFC 6265.4.1.2.5.)
+ *
+ *  -   If (httponly-av) is specified, the user-agent will hide cookies except
+ *      when using HTTP to communicate. (RFC 6265.4.1.2.6.)
+ *
+ *  -   (samesite-av) algorithm:
+ *      (RFC 6265bis.5.2., RFC 6265bis.5.3.7.1.)
+ *
+ *  -   (case-sensitive cookie name-prefixes)
+ *      (RFC 6265bis.5.4.)
+ *
+ *          -   (__Secure-) For example, the following would be rejected:
+ *
+ *                  Set-Cookie: __Secure-SID=12345; Domain=site.example
+ *
+ *              Whereas the following "Set-Cookie" header would be accepted:
+ * 
+ *                  Set-Cookie: __Secure-SID=12345; Domain=site.example; Secure
+ *
+ *          -   (__Host-) "then the cookie will have been set with a "Secure"
+ *              attribute, a "Path" attribute with a value of "/", and no "Domain"
+ *              attribute.
+ *      
+ *         This combination yields a cookie that hews as closely as a cookie can
+ *         to treating the origin as a security boundary.  The lack of a
+ *         "Domain" attribute ensures that the cookie's "host-only-flag" is
+ *         true, locking the cookie to a particular host, rather than allowing
+ *         it to span subdomains.  Setting the "Path" to "/" means that the
+ *         cookie is effective for the entire host, and won't be overridden for
+ *         specific paths.  The "Secure" attribute ensures that the cookie is
+ *         unaltered by non-secure origins, and won't span protocols."
+ *
+ *
  */
 
 /*  COOKIE SPECIFICATION
@@ -174,26 +253,26 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
    with the value 31d4d96e407aad42.  The user agent then returns the
    session identifier in subsequent requests.
 
-   == Server -> User Agent ==
-
-   Set-Cookie: SID=31d4d96e407aad42
-
-   == User Agent -> Server ==
-
-   Cookie: SID=31d4d96e407aad42
+           == Server -> User Agent ==
+        
+           Set-Cookie: SID=31d4d96e407aad42
+        
+           == User Agent -> Server ==
+        
+           Cookie: SID=31d4d96e407aad42
 
    The server can alter the default scope of the cookie using the Path
    and Domain attributes.  For example, the server can instruct the user
    agent to return the cookie to every path and every subdomain of
    example.com.
 
-   == Server -> User Agent ==
-
-   Set-Cookie: SID=31d4d96e407aad42; Path=/; Domain=example.com
-
-   == User Agent -> Server ==
-
-   Cookie: SID=31d4d96e407aad42
+           == Server -> User Agent ==
+        
+           Set-Cookie: SID=31d4d96e407aad42; Path=/; Domain=example.com
+        
+           == User Agent -> Server ==
+        
+           Cookie: SID=31d4d96e407aad42
 
    As shown in the next example, the server can store multiple cookies
    at the user agent.  For example, the server can store a session
@@ -202,14 +281,14 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
    HttpOnly attributes to provide additional security protections for
    the more sensitive session identifier (see Section 4.1.2.)
 
-   == Server -> User Agent ==
-
-   Set-Cookie: SID=31d4d96e407aad42; Path=/; Secure; HttpOnly
-   Set-Cookie: lang=en-US; Path=/; Domain=example.com
-
-   == User Agent -> Server ==
-
-   Cookie: SID=31d4d96e407aad42; lang=en-US
+           == Server -> User Agent ==
+        
+           Set-Cookie: SID=31d4d96e407aad42; Path=/; Secure; HttpOnly
+           Set-Cookie: lang=en-US; Path=/; Domain=example.com
+        
+           == User Agent -> Server ==
+        
+           Cookie: SID=31d4d96e407aad42; lang=en-US
 
    Notice that the Cookie header above contains two cookies, one named
    SID and one named lang.  If the server wishes the user agent to
@@ -219,13 +298,13 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
    the expiration date if the user agent's cookie store exceeds its
    quota or if the user manually deletes the server's cookie.
 
-   == Server -> User Agent ==
-
-   Set-Cookie: lang=en-US; Expires=Wed, 09 Jun 2021 10:18:14 GMT
-
-   == User Agent -> Server ==
-
-   Cookie: SID=31d4d96e407aad42; lang=en-US
+           == Server -> User Agent ==
+        
+           Set-Cookie: lang=en-US; Expires=Wed, 09 Jun 2021 10:18:14 GMT
+        
+           == User Agent -> Server ==
+        
+           Cookie: SID=31d4d96e407aad42; lang=en-US
 
    Finally, to remove a cookie, the server returns a Set-Cookie header
    with an expiration date in the past.  The server will be successful
@@ -233,13 +312,13 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
    the Set-Cookie header match the values used when the cookie was
    created.
 
-   == Server -> User Agent ==
-
-   Set-Cookie: lang=; Expires=Sun, 06 Nov 1994 08:49:37 GMT
-
-   == User Agent -> Server ==
-
-   Cookie: SID=31d4d96e407aad42
+           == Server -> User Agent ==
+        
+           Set-Cookie: lang=; Expires=Sun, 06 Nov 1994 08:49:37 GMT
+        
+           == User Agent -> Server ==
+        
+           Cookie: SID=31d4d96e407aad42
  
  
  *
