@@ -23,8 +23,17 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
  *  Important general implementation notes:
  *  
  *  -   Do not combine multiple Set-Cookie header-field-values, with commas; 
+ *      (RFC 6265.3.)
  *  -   Set-Cookie header for Deletion must match Path and Date attribute values
- *      of the corresponding Creation header;
+ *      of the corresponding Creation header; (RFC 6265.3.1.)
+ *  -   Set-Cookie header with identical tuple {cookie-name, path-av, domain-av}
+ *      will be interpreted as destructive update to the user agent (update/
+ *      delete). (RFC 6265.4.1.2.)
+ *  -   Cookies are returned by the user-agent to the origin-server, but NOT to
+ *      its sub-domains.
+ *  
+ *  
+ *  
  *  
  *  
  *  
