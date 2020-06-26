@@ -17,16 +17,31 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
  *  -   values ... base64 encoded
  *  -   always use Max-Age, which has precedence; never use Expires;
  *      - we may regret this later;
- *
- *
+ *  -   always double-quote cookie value
+ *  
+ *  
+ *  Important general implementation notes:
+ *  
+ *  -   Do not combine multiple Set-Cookie header-field-values, with commas; 
+ *  -   Set-Cookie header for Deletion must match Path and Date attribute values
+ *      of the corresponding Creation header;
+ *  
+ *  
+ *  
  */
 
 /*  COOKIE SPECIFICATION
  *
  *  RFC 822 - https://tools.ietf.org/html/rfc822 - (1982)
+ *      [ <- RFC 1123 points at ]
  *      [ <- RFC 2616 points at ]
  *
  *      "STANDARD FOR THE FORMAT OF ARPA INTERNET TEXT MESSAGES"
+ *
+ *  RFC 1123 - (1989)
+ *      [ <- RFC 6265 points at ]
+ *
+ *      For the relevant date / time format. But this points back to RFC 822.
  *
  *  RFC 2616 - https://www.ietf.org/rfc/rfc2616.txt - (1999)
  *      [ <- RFC 6265 points at ]
@@ -220,7 +235,7 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
  *
  *      4.1.1.  Syntax
  *
-  set-cookie-header = "Set-Cookie:" SP set-cookie-string
+ set-cookie-header = "Set-Cookie:" SP set-cookie-string
  set-cookie-string = cookie-pair *( ";" SP cookie-av )
  cookie-pair       = cookie-name "=" cookie-value
  cookie-name       = token
