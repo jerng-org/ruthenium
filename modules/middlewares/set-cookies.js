@@ -15,8 +15,9 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
 /*  Ruthenium framework conventions
  *
  *  -   values ... base64 encoded
- *  -   always use Max-Age, which has precedence; never use Expires;
- *      - we may regret this later;
+ *  -   always use Max-Age, which has precedence; never use Expires; 
+ *      (RFC 6265.4.1.2.2)
+ *          - we may regret this later;
  *  -   always double-quote cookie value
  *  
  *  
@@ -30,12 +31,12 @@ rus.mark (`~/modules/middlewares/set-cookies.js LOADED`)
  *      will be interpreted as destructive update to the user agent (update/
  *      delete). (RFC 6265.4.1.2.)
  *  -   Cookies are returned by the user-agent to the origin-server, but NOT to
- *      its sub-domains.
- *  
- *  
- *  
- *  
- *  
+ *      its sub-domains; this is if the (domain-av) is not specified; if the 
+ *      (domain-av) is specified, then the cookie is sent to the specified
+ *      domain AND ITS SUB-DOMAINS. (RFC 6265.4.1.2.3.)
+ *  -   Cookies are ignored by user-agents if the (domain-av) does not match
+ *      the origin server's domain, or an ancestor of the origin server's domain
+ *      (RFC 6265.5.1.2.3.)
  *  
  */
 
