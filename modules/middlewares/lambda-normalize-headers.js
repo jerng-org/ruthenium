@@ -6,6 +6,8 @@ const lambdaNormalizeHeaders = async ( data ) => {
         data.RU.request.headers = data.LAMBDA.event.headers
         
         if ( data.LAMBDA.event.cookies ) {
+            
+            /*
             data.LAMBDA.event.cookies.forEach (
                 
                 nameValue => {
@@ -34,6 +36,8 @@ const lambdaNormalizeHeaders = async ( data ) => {
                     }
                 }
             )
+            */
+            data.RU.request.headers.cookies = data.LAMBDA.event.cookies
         }
     }
 
