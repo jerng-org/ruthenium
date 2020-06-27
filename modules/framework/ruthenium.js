@@ -26,17 +26,19 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
         
         request:        {},
         
-        signals:        {
-        
-            sendResponse : {}
-        },     
-                                //  inter-middleware communications; 
+        signals:        {       //  inter-middleware communications; 
                                 //
                                 //  for example,
                                 //  to say something about the field 
                                 //  (data.RU.response), instead of messing
                                 //  it up with (data.RU.response.mySignal),
                                 //  you may write (data.RU.signals.mySignal);
+        
+            sendResponse : {
+                
+                setCookies: []  //  data will be caught by (set-cookies.js)
+            }
+        },     
             
         io:             {},     //  data-sources and data-sinks may go here;
             

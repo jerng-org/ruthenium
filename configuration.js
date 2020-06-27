@@ -40,7 +40,7 @@ module.exports = {
      *
      */
      gitCommit: 1,
-     gitCommitMessage: 'housekeeping for (compose-response.js); (cookie-test.js) ready to proceed',
+     gitCommitMessage: '(cookie.js) created, annotated, and interfaced; ready for implementation',
      
     labels:  {
         
