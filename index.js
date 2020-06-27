@@ -157,9 +157,9 @@ exports.handler = async function () {
         
         router,
         
+        setCookies,
         composeResponse,
         applyLayout,
-        setCookies,
 
         lastGuard
         
