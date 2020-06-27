@@ -16,7 +16,7 @@ module.exports = {
      *
      *
      */
-    verbosity:  3,
+    verbosity:  0,
     
     
     /*  performance monitoring
@@ -28,7 +28,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 0,
+    performance: 1,
     
     
     /*  gitCommit
