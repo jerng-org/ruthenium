@@ -21,6 +21,7 @@ rus.mark( `index.js loaded mark.js` )
             `cookies - read and memorise entire MDN protocol`, 
             `sessions - read and memorise entire MDN protocol`, 
             `https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks`,
+            `https://developer.mozilla.org/en-US/docs/Glossary/HSTS`,
             `
             
             BACKLOG:`,
