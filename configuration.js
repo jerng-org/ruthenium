@@ -16,7 +16,7 @@ module.exports = {
      *
      *
      */
-    verbosity:  3,
+    verbosity:  0,
     
     
     /*  performance monitoring
