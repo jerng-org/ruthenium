@@ -33,7 +33,9 @@ const router = async ( data ) => {
     // Default here
     const defaultDetermineTaskName = () => {
         
-        if ( data.RU.request.queryStringParameters.route ) {
+        if (    data.RU.request.queryStringParameters.route
+                && data.RU.request.queryStringParameters.route[0] ) 
+        {
             switch ( data.RU.request.queryStringParameters.route[0] )
             {
             
@@ -67,39 +69,43 @@ const router = async ( data ) => {
             
             
             case ( undefined ):
-                // see below
+            
+            break
+            
+            
+            
+            
             default:
-                // see below
+            // request ?query parameter was set, but is not one of the above cases;
+            data.RU.signals.taskName = data.RU.request.queryStringParameters.route[0]
             }
         }
-        // if 'route' was in (queryStringParameters)
+        // if (queryStringParameters.route[0] was truthy)
         
-        
-        //  Either, there was no (route) queryParameter, 
-        //  or,     there was no matching (case) for the (route) argument
-        if ( ! data.RU.signals.taskName ) {
-            
+        //  EITHER  (queryStringParameters.route[0] was not defined)
+        //  OR      (... it was defined as a falsy value, then conferred to .signals.taskName )
+        if ( ! data.RU.signals.taskName )
+        {
+            // request ?query parameter was not set;
             data.RU.signals.redirectRoute = 'initial'
                 
                 +   `&reader=`
                 +   (   data.RU.request.queryStringParameters.reader
                         ? data.RU.request.queryStringParameters.reader[0]
-                        : 'human'
-                    )
-                    
+                        : 'human' )
                 +   (   data.RU.request.queryStringParameters.message
                         ? `&message=(via router.js)${data.RU.request.queryStringParameters.message[0]}`
-                        : ''
-                    )
-        }
+                        : '' )
+        } 
     }
     
+////////////////////////////////////////////////////////////////////////////////
+// EXECUTION BEGINS
+
     // Determine the task.
     customDetermineTaskName 
         ? customDetermineTaskName () 
         : defaultDetermineTaskName ()
-
-////////////////////////////////////////////////////////////////////////////////
 
     // redirects: short-circuit
     if ( data.RU.signals.redirectRoute )
@@ -126,6 +132,7 @@ const router = async ( data ) => {
                         }) in the tasks directory.` )
     }
 
+// EXECUTION ENDS
 ////////////////////////////////////////////////////////////////////////////////
     
     return data

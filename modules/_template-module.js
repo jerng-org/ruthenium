@@ -7,4 +7,4 @@ const thisIsMyName     = async () => {
 }
 
 module.exports  = thisIsMyName
-mark (`~/thisIsMyName.js LOADED`)
+mark (`~/modules/thisIsMyName.js LOADED`)

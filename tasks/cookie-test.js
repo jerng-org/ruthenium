@@ -1,0 +1,19 @@
+'use strict'
+
+//  Provide a debuggable function name, 
+//  in order to avoid debuggin (function).toString()
+
+const rus = require ( '/var/task/modules/r-u-s.js' )
+
+const cookieTest = async ( data ) => {
+
+    data.RU.signals.sendResponse
+        = { ... data.RU.signals.sendResponse, body: 'hi' } 
+
+    rus.mark ( `cookie-test.js EXECUTED` )
+}
+// manipulate (data.RU), for example
+// no need to return (data)
+
+module.exports = cookieTest
+rus.mark ( `~/tasks/cookie-test.js LOADED` )
