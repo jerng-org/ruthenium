@@ -7,7 +7,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const cookieTest = async ( data ) => {
 
-    const body = `<pre>${await rus.print.stringify4 ( data.RU.request.headers.cookies )} </pre>
+    const body = `<pre>${await rus.print.stringify4 ( data.RU.request.headers.cookies )} </pre>`
 
     data.RU.signals.sendResponse
         = { ... data.RU.signals.sendResponse, body: body } 
@@ -18,4 +18,4 @@ const cookieTest = async ( data ) => {
 // no need to return (data)
 
 module.exports = cookieTest
-rus.mark ( `~/tasks/cookie-test.js LOADED` )
+rus.mark ( `~/tasks/cookie-test.js LOADED` ) 
