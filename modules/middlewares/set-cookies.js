@@ -2,6 +2,10 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
+/*  This middleware looks in (data.RU.signals.cookies.sendResponse.cookies)
+ *
+ */
+
 const setCookies = async ( data ) => {
     
     // rutheniumReducer.js will mark() execution, you don't have to

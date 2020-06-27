@@ -26,26 +26,27 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
         
         request:        {},
         
-        signals:        {}, //  inter-middleware communications; 
-                            //
-                            //  for example,
-                            //  to say something about the field 
-                            //  (data.RU.response), instead of messing
-                            //  it up with (data.RU.response.mySignal),
-                            //  you may write (data.RU.signals.mySignal)
-        
-        io:             {}, //  data-sources and data-sinks may go here
-        
-        response:       {},
-        
-        errors:         []  //  stuff errors in here, then continue 
-                            //  to let the next middleware process (data),
-                            //  instead of short-circuiting the entire 
-                            //  queue when a middleware throws an error;
-                            //
-                            //  we WILL later need a mechanism which gives
-                            //  the developer an option to short-circuit,
-                            //  but this is not currently the default
+        signals:        {},     //  inter-middleware communications; 
+                                //
+                                //  for example,
+                                //  to say something about the field 
+                                //  (data.RU.response), instead of messing
+                                //  it up with (data.RU.response.mySignal),
+                                //  you may write (data.RU.signals.mySignal);
+            
+        io:             {},     //  data-sources and data-sinks may go here;
+            
+        response:       null,   //  prevent accidental assignment, prior to 
+                                //  (compose-response.js) fulfilling that duty;
+            
+        errors:         []      //  stuff errors in here, then continue 
+                                //  to let the next middleware process (data),
+                                //  instead of short-circuiting the entire 
+                                //  queue when a middleware throws an error;
+                                //
+                                //  we WILL later need a mechanism which gives
+                                //  the developer an option to short-circuit,
+                                //  but this is not currently the default;
     }
 
     HOST_INITIALIZED_DATA.RU = frameworkData
