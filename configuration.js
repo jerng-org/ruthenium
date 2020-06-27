@@ -40,7 +40,7 @@ module.exports = {
      *
      */
      gitCommit: 1,
-     gitCommitMessage: '-',
+     gitCommitMessage: 'Tidied up (compose-response.js)',
      
     labels:  {
         
