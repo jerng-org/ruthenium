@@ -83,6 +83,9 @@ const rus   = {
 //      //
 //////////
 
+    cookie:
+        require (`/var/task/modules/cookie.js`),
+
     conf: 
         require (`/var/task/configuration.js`),
 

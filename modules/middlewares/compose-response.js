@@ -18,6 +18,21 @@ const rus       = require ( '/var/task/modules/r-u-s.js' )
     } // , thisArg  
     )
 
+/*  1.  Throw, if (data.RU.response) is truthy.
+ *
+ *  2.  Branch, if (data.RU.signals.redirectRoute) is truthy.
+ *
+ *  3.  Branch, if (data.RU.signals.sendBlob) is truthy.
+ *
+ *  4.  Branch, if (data.RU.signals.sendResponse[ 'statusCode' OR 'body' ]) is truthy.
+ *
+ *  5.  Branch, if (data.RU.signals.markupName) is truthy.
+ *
+ *  6.  Branch, if (data.RU.signals.taskName) is truthy.
+ *
+ *  7.  Return.
+ *
+ */
 const composeResponse = async ( data ) => {
     
     if ( data.RU.response ) {
