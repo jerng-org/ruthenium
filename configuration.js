@@ -40,7 +40,7 @@ module.exports = {
      *
      */
      gitCommit: 1,
-     gitCommitMessage: 'prepared notes in (set-cookies.js)',
+     gitCommitMessage: '-',
      
     labels:  {
         
