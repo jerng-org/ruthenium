@@ -7,8 +7,10 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const cookieTest = async ( data ) => {
 
+    const body = rus.print.stringify4 ( data.RU.request.headers.cookies )
+
     data.RU.signals.sendResponse
-        = { ... data.RU.signals.sendResponse, body: 'hi' } 
+        = { ... data.RU.signals.sendResponse, body: body } 
 
     rus.mark ( `cookie-test.js EXECUTED` )
 }
