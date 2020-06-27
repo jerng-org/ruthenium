@@ -40,7 +40,7 @@ module.exports = {
      *
      */
      gitCommit: 1,
-     gitCommitMessage: '(cookie.js) created, annotated, and interfaced; ready for implementation',
+     gitCommitMessage: '-',
      
     labels:  {
         
