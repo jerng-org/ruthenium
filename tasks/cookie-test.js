@@ -1,15 +1,20 @@
 'use strict'
 
-//  Provide a debuggable function name, 
-//  in order to avoid debuggin (function).toString()
-
 const rus = require ( '/var/task/modules/r-u-s.js' )
+
+/*  This middleware looks in (data.RU.signals.sendResponse.setCookies)
+ *
+ *  Framework users may call (rus.cookie.<<various>>) to manipulate the above.
+ */
+
 
 const cookieTest = async ( data ) => {
 
+    // call rus.cookie.<<variable>> here
+    
     const body = `
     
-    <h1>cookie debug</h1>
+    <h1>cookie debugging</h1>
     <pre>${await rus.print.stringify4 ( data.RU.request.headers.cookies )} </pre>`
 
     data.RU.signals.sendResponse

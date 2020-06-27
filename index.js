@@ -6,6 +6,38 @@ try {
 //  !!  //  Make way.
 //      //
 //////////
+
+/* 
+
+!!! WARNING !!! -   ANYTHING OUTSIDE (exports.handler) 
+
+                        persists across all  function calls, possibly for the 
+                        lifetime of the function's container;
+                    
+                    DO NOT WRITE TO THESE OBJECTS, 
+                    
+                        FROM MIDDLEWARES, OR FROM ANYWHERE ELSE IN CODE CALLED
+                        BY (exports.handler), AS THIS MAY RESULT IN
+                        SECURITY BREACHES, OR SPACE LEAKS;
+
+                    DO NOT WRITE ANYTHING TO THESE OBJECTS,
+                    
+                        MOST IMPORTANTLY DO NOT WRITE (data) from MIDDLEWARES
+                        TO THESE OBJECTS;
+                        
+                    ... SOONER, we need to test how (require()) handles these,
+                        to determine exactly what data persists between
+                        function calls;
+                        
+                    ... LATER, we need to implement a checker to block this from
+                        happening at commit-time;
+*/
+
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
     
 //  See pertinent (nodeJS-specific) documentation at /var/task/modules/r-u-s.js
 
@@ -32,7 +64,9 @@ rus.mark( `index.js loaded mark.js` )
                 - example:  writes to (data.RU.signals) should be signed by the writer; 
                             perhaps via a non-enumerable property`,
             `GET method forms are not yet supported;`,
-            `DECOUPLE: (compose-response.js) should be broken up into multiple middlewares also`,
+            `DECOUPLE: (compose-response.js) should be broken up into multiple middlewares also`, 
+            `Compliance=Weak mode which decreases performance but increases accepted spelling varieties for things like field names`,
+            `Test how require() maintains modules in memory, between function calls;`,
             `
             
             ICEBOX:`,
