@@ -20,7 +20,7 @@ const rus       = require ( '/var/task/modules/r-u-s.js' )
 
 const composeResponse = async ( data ) => {
     
-    if ( ! data.RU.response ) {
+    if ( data.RU.response ) {
         throw Error (   `(compose-response.js) found that (data.RU.response) was
                         truthy; composition aborted; nothing should be assigned
                         to (data.RU.response) prior to (compose-response.js)`)
