@@ -24,7 +24,8 @@ const composeResponse = async ( data ) => {
         throw Error (   `(compose-response.js) found that (data.RU.response) was
                         truthy; composition aborted; nothing should be assigned
                         to (data.RU.response) prior to (compose-response.js)`)
-    }    
+    }
+    else { data.RU.response = {} } // Initialisation
         
     if ( data.RU.signals.redirectRoute ) { 
         
