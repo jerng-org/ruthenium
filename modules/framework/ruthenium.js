@@ -26,7 +26,11 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
         
         request:        {},
         
-        signals:        {},     //  inter-middleware communications; 
+        signals:        {
+        
+            sendResponse : {}
+        },     
+                                //  inter-middleware communications; 
                                 //
                                 //  for example,
                                 //  to say something about the field 
