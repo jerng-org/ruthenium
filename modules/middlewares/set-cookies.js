@@ -2,7 +2,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-/*  This middleware looks in (data.RU.signals.cookies.sendResponse.cookies)
+/*  This middleware looks in (data.RU.signals.sendResponse.cookies)
  *
  */
 
