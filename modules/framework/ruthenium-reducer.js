@@ -95,7 +95,7 @@ ${
                 'typeof':   typeof e,
                 thrown:     e,
             } )
-            console.error ( rus.conf.labels.reducer500Body, DATA )
+            console.error ( rus.conf.labels.reducer500Body, e, DATA )
 
             if ( INDEX + 1 == MIDDLEWARE_QUEUE.length )
             {
