@@ -33,13 +33,13 @@ const composeResponse = async ( data ) => {
             + '?route='
             + data.RU.signals.redirectRoute
         
-        data.RU.response.statusCode =   data.RU.response.statusCode
-                                        ? data.RU.response.statusCode
+        data.RU.response.statusCode =   data.RU.signals.sendResponse.statusCode
+                                        ? data.RU.signals.sendResponse.statusCode
                                         : 303 // See Other
         
         // ensure headers is an object            
-        data.RU.response.headers    =   data.RU.response.headers
-                                        ? data.RU.response.headers
+        data.RU.response.headers    =   data.RU.signals.sendResponse.headers
+                                        ? data.RU.signals.sendResponse.headers
                                         : {}
         data.RU.response.headers.location =  data.RU.signals.redirectRoute 
         
@@ -47,19 +47,20 @@ const composeResponse = async ( data ) => {
     else
     if ( data.RU.signals.sendBlob ) {
         
-        data.RU.response.statusCode =   data.RU.response.statusCode
-                                        ? data.RU.response.statusCode
+        data.RU.response.statusCode =   data.RU.signals.sendResponse.statusCode
+                                        ? data.RU.signals.sendResponse.statusCode
                                         : 200 // OK
 
         // ensure headers is an object            
-        data.RU.response.headers    =   data.RU.response.headers
-                                        ? data.RU.response.headers
+        data.RU.response.headers    =   data.RU.signals.sendResponse.headers
+                                        ? data.RU.signals.sendResponse.headers
                                         : {}
 
         // if sendBlob specified a MIME type, then over/write response            
         if ( data.RU.signals.sendBlob[ 'content-type' ] ) {
+            
             data.RU.response.headers[ 'content-type' ]
-            = data.RU.signals.sendBlob[ 'content-type' ]
+                = data.RU.signals.sendBlob[ 'content-type' ]
         } 
 
         // if response has a MIME type, sent 'nosniff' directive            
