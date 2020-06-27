@@ -19,12 +19,12 @@
 //  We can't simply do this because the element is added to the document
 //  only after the first (save) event.
 
-const testUrl = ''
+let testUrl = ''
 
-const body = document.querySelector('body')
+let body = document.querySelector('body')
 
 // Create an observer instance linked to the callback function
-const observer1 = new MutationObserver( ( _mutationRecords, _mutationObserver ) => {
+let observer1 = new MutationObserver( ( _mutationRecords, _mutationObserver ) => {
 
         _mutationRecords.forEach ( mutation => {
 
