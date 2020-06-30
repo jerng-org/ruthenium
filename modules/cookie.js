@@ -157,6 +157,7 @@ const setCookieSignal = ( DATA, id, value, attributes ) => {
     return { 
         
         ... defaultAttributes,
+        ... attributes,
         ... checkedId,          // must have (name), but may be missing Path or Domain
         value : value           // goes last to ensure it isn't overwritten
     }
