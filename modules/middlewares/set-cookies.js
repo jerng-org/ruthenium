@@ -17,18 +17,31 @@ const setCookies = async ( data ) => {
     = data.RU.signals.sendResponse.setCookies.map ( 
         ( signal, index, array ) => {
             
-            let cookie =    signal.name + '="'
-                            + Buffer
-                                .from( `${ signal.value }` )
-                                .toString('base64') + '"'
-                                
-                                    //  ensure that your (base64) implementation is
-                                    //  "URL and filename safe" (https://tools.ietf.org/html/rfc4648#section-5)
-                                    //  [RFC 4868.5];
-                                    //  Corresponds to (lambda-normalize-headers.js)'s decoding of the value
-                                    //
-                                    //  TODO: do we want to decode (name) as well?
-                            + ';'
+            let cookie 
+            = signal.name
+            + '="'
+            + Buffer.from( `${ signal.value }` ).toString('base64') 
+            + '"'
+            
+                //  ensure that your (base64) implementation is
+                //  "URL and filename safe" (https://tools.ietf.org/html/rfc4648#section-5)
+                //  [RFC 4868.5];
+                //  Corresponds to (lambda-normalize-headers.js)'s decoding of the value
+                //
+                //  TODO: do we want to decode (name) as well?
+                
+            + ';'
+            + ( signal.Secure   
+                ? ` Secure;`    : `` )
+            + ( signal.HttpOnly 
+                ? ` HttpOnly;`  : `` )
+            + ( signal.Expires  
+                ? ` Expires=${ signal.Expires.toUTCString() };` : `` )
+            + ( Number.isInteger( signal['Max-Age'] ) 
+                ? ` Max-Age=${ signal['Max-Age'] };`            : `` )
+            + ( signal.SameSite 
+                ? ` SameSite=${ signal.SameSite };`             : `` )
+
             return cookie
         }
         //, thisArg 
