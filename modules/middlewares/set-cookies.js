@@ -33,6 +33,8 @@ const setCookies = async ( data ) => {
             + ';'
             + ( signal.Secure   
                 ? ` Secure;`    : `` )
+            + ( signal.Secure   
+                ? ` Secure;`    : `` )
             + ( signal.HttpOnly 
                 ? ` HttpOnly;`  : `` )
             + ( signal.Expires  
@@ -41,6 +43,10 @@ const setCookies = async ( data ) => {
                 ? ` Max-Age=${ signal['Max-Age'] };`            : `` )
             + ( signal.SameSite 
                 ? ` SameSite=${ signal.SameSite };`             : `` )
+            + ( signal.Domain   
+                ? ` Domain=${ signal.Domain };`                 : `` )
+            + ( signal.Path   
+                ? ` Path=${ signal.Path };`                     : `` )
 
             return cookie
         }
