@@ -39,8 +39,8 @@ module.exports = {
      *
      *
      */
-     gitCommit: 1,
-     gitCommitMessage: '-',
+    gitCommit: 1,
+    gitCommitMessage: 'cookies.set and cookie.expire work, without attributes',
      
     labels:  {
         

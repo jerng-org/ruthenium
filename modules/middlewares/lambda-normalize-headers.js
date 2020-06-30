@@ -1,5 +1,7 @@
 'use strict'
 
+// AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
+
 const lambdaNormalizeHeaders = async ( data ) => {
 
     if (data.LAMBDA.event.headers) {
@@ -28,9 +30,16 @@ const lambdaNormalizeHeaders = async ( data ) => {
                             data.RU.request.headers.cookies[ name ] = []
                         }
                         
-                        data.RU.request.headers.cookies[ name ].push ( value )
-                        // Values with same key stored as: Array of values
-                        
+                        data.RU.request.headers.cookies[ name ]
+                            .push ( Buffer.from(value, 'base64').toString('utf8') )
+                        //  Values with same key stored as: Array of values;
+                        //  ensure that your (base64) implementation is
+                        //  "URL and filename safe" (https://tools.ietf.org/html/rfc4648#section-5)
+                        //  [RFC 4868.5];
+                        //  Corresponds to (set-cookies.js)'s encoding of the value
+                        //
+                        //  TODO: do we want to encode (name) as well?
+                        //  TODO: double check, do we want utf8 here, or US-ASCII?
                     }
                 }
             )

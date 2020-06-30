@@ -10,12 +10,14 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const cookieTest = async ( data ) => {
 
-    rus.cookie.set ( data, 'cookie_name', 'cookie_value' )
+    //rus.cookie.set ( data, 'cookie_name', 'cookie_value' )
+    rus.cookie.expire ( data, 'session' )
     
     const body = `
-    
-    <h1>cookie debugging</h1>
-    <pre>${await rus.print.stringify4 ( data.RU.request.headers.cookies )} </pre>`
+        <h1>cookie debugging</h1>
+        <pre>${
+        await rus.print.stringify4 ( data.RU.request.headers.cookies )
+        } </pre>`
 
     data.RU.signals.sendResponse
         = { ... data.RU.signals.sendResponse, body: body } 

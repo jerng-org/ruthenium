@@ -117,6 +117,8 @@ const formsValidateData
 const lastGuard
     = require (`/var/task/modules/middlewares/last-guard.js`) 
 
+// AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
+
 const lambdaCopyRequestParameters
     = require (`/var/task/modules/middlewares/lambda-copy-request-parameters.js`) 
 
@@ -191,8 +193,8 @@ exports.handler = async function () {
         
         router,
         
-        setCookies,
         composeResponse,
+        setCookies,
         applyLayout,
 
         lastGuard
