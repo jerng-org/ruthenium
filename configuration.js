@@ -40,7 +40,7 @@ module.exports = {
      *
      */
      gitCommit: 1,
-     gitCommitMessage: '(cooke.js) (cookie.set) drafted',
+     gitCommitMessage: 'drafted six set/expire methods in (cookie.js)',
      
     labels:  {
         

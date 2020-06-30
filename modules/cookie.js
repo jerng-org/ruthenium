@@ -23,23 +23,29 @@ const conf      = require ( `/var/task/configuration.js` )
 
 /*  SIGNATURES
  *
- *  rus.cookie.set      ( name,                  value, { attributes } )      
- *  rus.cookie.set      ( {name, Path, Domain},  value, { attributes } )    //  Use defaults if ID is incompletely defined
+ *      rus.cookie.set      ( name,                  value, { attributes } )      
+ *      rus.cookie.set      ( {name, Path, Domain},  value, { attributes } )    
+ *  
+ *      rus.cookie.expire   ( name )                           
+ *      rus.cookie.expire   ( {name, Path, Domain} )                            
+ *  
+ *      -   How to use cookies, attributes ; LINK
+ *      -   Use defaults if (idObject) is incompletely defined
+ *  
+ *      rus.cookie.__SecureSet    ( suffix,                 value, { attributes } )
+ *      rus.cookie.__SecureSet    ( {suffix, Path, Domain}, value, { attributes } ) 
  *
- *  rus.cookie.expire   ( name )                           
- *  rus.cookie.expire   ( {name, Path, Domain} )                            //  Use defaults if ID is incompletely defined
- *
- *      How to use cookies, attributes ; LINK
- *
- *  rus.cookie.__SecureSet    ( suffix, value, { attributes } )
- *  rus.cookie.__SecureExpire ( suffix )
- *
- *      How to use __Secure- prefixed cookies ; LINK
- *
- *  rus.cookie.__HostSet      ( suffix, value, { attributes } )
- *  rus.cookie.__HostExpire   ( suffix )
- *
- *      How to use __Host- prefixed cookies ; LINK
+ *      rus.cookie.__SecureExpire ( suffix )
+ *      rus.cookie.__SecureExpire ( {suffix, Path, Domain} )                        
+ *  
+ *      -   How to use __Secure- prefixed cookies ; LINK
+ *      -   Use defaults if (idObject) is incompletely defined
+ *  
+ *      rus.cookie.__HostSet      ( suffix, value, { attributes } )
+ *      rus.cookie.__HostExpire   ( suffix )
+ *  
+ *      -   How to use __Host- prefixed cookies ; LINK
+ *      -   ID properties (except suffix) are not customisable by definition
  *
  *  PARAMETERS
  *
@@ -57,23 +63,33 @@ const conf      = require ( `/var/task/configuration.js` )
  *                      -   const __SecureDefaultAttributes
  *                      -   const __HostDefaultAttributes
  *
+ *      attributes : {                                  //  default values:
+ *          Expires:        undefined,                      //  new Date( <<four signatures>>) // set-cookies.js is responsible for conversion to.toUTCString()
+ *          ['Max-Age']:    undefined,                      //  3600 <<seconds>>
+ *          Secure:         undefined,                      //  true
+ *          HttpOnly:       undefined,                      //  true
+ *          SameSite:       undefined,                      //  'Strict'
+ *      }
  *
+ *  USAGE
  *
- *
- *
- *
+ *      Each pair of (Xset) and (Xexpire) functions will mirror each other.
+ *      If (Xset) applies defaults when objectID keys are not provided by the 
+ *      user, then (Xexpires) will follow in the same pattern.
  *
  */
 
-const defaultIdAttributes = {
+const __HostDefaultIdAttributes = {
     Path :'/',
-    Domain: undefined,  //  << origin only, min. surface, max. security >>
+    Domain: false,  //  << origin only, min. surface, max. security; a subset of the __Host- prefix specification >>
 }
+
+const defaultIdAttributes = __HostDefaultIdAttributes   // This relationship is not necessarily the case in the future
 
 const defaultAttributes = {
     
     ... defaultIdAttributes,
-    Expires: undefined, //  << ['Max-Age'] has precedence >>
+    Expires: false,     //  << ['Max-Age'] has precedence >>
     ['Max-Age']: 3600,  //  << seconds; could be init in rus.conf TODO >>
     Secure: true,       //  << typically: client only sends cookie over TLS >>
     HttpOnly: true,     //  << client omits cookie from "non-HTTP" APIs >>
@@ -93,9 +109,26 @@ const __SecureDefaultAttributes = { ... defaultAttributes, Secure: true }
 
 const __HostDefaultAttributes = {   ... __SecureDefaultAttributes, 
                                     Path: '/', 
-                                    Domain: undefined }
+                                    Domain: false }
     // redundant safety, in case defaultAttributes is modified in the future
 
+
+const checkId = id => {
+
+    switch ( typeof id ) {
+        case ('string'):
+            id = { name: id } 
+            break
+        case ('object'):
+            checkIdObject ( id )    // throws if id.name is missing
+            break
+        default:
+            throw (`(cookie.js) (cookie.checkId) argument (id) was typeof neither (string) nor (object)`)
+    }
+    // therefore, id.name by now MUST exist
+
+    return id
+}
 
 /*  This function does NOT SET any missing EXPECTED arguments.
  */
@@ -113,6 +146,36 @@ const checkIdObject = idObject => {
     }
 }
 
+const setCookieSignal = ( DATA, id, value, attributes ) => {
+            
+    if ( ! value ) throw Error ( `(cookie.js) (cookie.set) second argument (value) is falsy` )
+    
+    const checkedId = checkId ( id )
+
+    // enforce defaults; give (checkedId) props precedence over (attribute)
+    return { 
+        
+        ... defaultAttributes,
+        ... checkedId,          // must have (name), but may be missing Path or Domain
+        value : value           // goes last to ensure it isn't overwritten
+    }
+}
+
+const expireCookieSignal = ( DATA, id ) => {
+    
+    const checkedId = checkId ( id )
+    
+    // enforce defaults; give (checkedId) props precedence over (attribute)
+    return {
+        
+        ... defaultIdAttributes,
+        ... checkedId,              // must have (name), but may be missing Path or Domain
+        Expires: new Date (0),      //  << ['Max-Age'] has precedence >> // set-cookies.js is responsible for conversion to.toUTCString()
+        ['Max-Age']: -1,            // RFC 6265.4.1.1. "non-zero digit" thus encourages a negative number
+    }
+
+}
+
 const cookie     = async () => { return {
 
     /*  Begin with user provided (attributes) argument;
@@ -126,28 +189,15 @@ const cookie     = async () => { return {
      *
      *  -   set (name) and (value) appropriately;
      *  
+     *  At this point, neither (set) nor (checkIdObject) will check/disallow
+     *  empty strings. Reconsider : TODO; this may result in some errors due
+     *  to entities between keyboard and chair, however these errors ought to
+     *  to be transparent to, and thus manageable by such entities;
      */
     set:            
         ( DATA, id, value, attributes ) => {
-            
-            if ( ! value ) throw Error ( `(cooke.js) (cookie.set) second argument (value) is falsy` )
-            
-            switch ( typeof id ) {
-                case ('string'):
-                    id = { name: id } 
-                    break
-                case ('object'):
-                    checkIdObject ( id )    // throws if id.name is missing
-                    break
-            }
-            // therefore, id.name by now MUST exist
-            
-            // enforce defaults; give (id) props precedence over (attribute)
-            const cookieSignal = { 
-                ... defaultAttributes,
-                ... id,         // must have (name), but may be missing Path or Domain
-                value : value   // goes last to ensure it isn't overwritten
-            }
+           
+            const cookieSignal = setCookieSignal ( DATA, id, value, attributes ) 
             
             DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
             
@@ -157,27 +207,56 @@ console.warn(`test cookie-value string='false' and check what happens`)
     
     __SecureSet:    
         ( DATA, suffix, value, attributes ) => {
-        
+            
+            const cookieSignal = setCookieSignal ( DATA, suffix, value, attributes ) 
+            
+            cookieSignal.name   = `__Secure-` + cookieSignal.name
+            cookieSignal.Secure = true
+            
+            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
         },
     
     __HostSet:      
         ( DATA, suffix, value, attributes ) => {
         
+            const cookieSignal = setCookieSignal ( DATA, suffix, value, attributes ) 
+            
+            cookieSignal.name   = `__Host-` + cookieSignal.name
+            cookieSignal.Secure = true
+            cookieSignal.Path   = __HostDefaultIdAttributes.Path
+            cookieSignal.Domain = __HostDefaultIdAttributes.Domain
+            
+            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
         },
     
     expire:         
         ( DATA, id ) => {
-        
+            
+            const cookieSignal = expireCookieSignal ( DATA, id ) 
+            
+            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
         },
     
     __SecureExpire: 
         ( DATA, suffix ) => {
         
+            const cookieSignal = expireCookieSignal ( DATA, suffix ) 
+            cookieSignal.name   = `__Secure-` + cookieSignal.name
+            
+            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
+            cookieSignal.Secure = true
         },
     
     __HostExpire:   
         ( DATA, suffix ) => {
         
+            const cookieSignal = expireCookieSignal ( DATA, suffix ) 
+            cookieSignal.name   = `__Host-` + cookieSignal.name
+            cookieSignal.Secure = true
+            cookieSignal.Path   = __HostDefaultIdAttributes.Path
+            cookieSignal.Domain = __HostDefaultIdAttributes.Domain
+            
+            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
         },
     
 } }
