@@ -10,7 +10,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const cookieTest = async ( data ) => {
 
-    //rus.cookie.set ( data, 'cookie_name', 'cookie_value' )
+    /rus.cookie.set ( data, 'cookie_name', 'cookie_value' )
     //rus.cookie.expire ( data, 'session' )
     
     const body = `
