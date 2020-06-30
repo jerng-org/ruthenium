@@ -11,7 +11,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 const cookieTest = async ( data ) => {
 
     rus.cookie.set ( data, 'cookie_name', 'cookie_value', {
-        Path:   false,
+        Path:   '/',
         Domain: false,
         Secure: false,
         HttpOnly:   false,
