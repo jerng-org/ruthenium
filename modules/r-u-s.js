@@ -187,10 +187,7 @@ DEBUG EVERYTHING:
             async object => rus.node.util.inspect( object, { depth: Infinity } ),
         
         stringify4:
-            async object => { 
-                const stringified = JSON.stringify( object, null, 4 )
-                return stringified ? stringified.replace(/\\n/g, '\n') : stringified
-            },
+            async object => ( '' + object.name + JSON.stringify( object, null, 4 ) ).replace(/\\n/g, '\n'),
 
         xml300:
             async xmlString => 
