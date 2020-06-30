@@ -101,7 +101,7 @@ const defaultAttributes = {
                                 //      read the (referer) request header, then note that URL,
                                 //      read the user's current (session) then note its state,
                                 //      display the noted URLs and session state in a clear
-                                //      !!! WARNING !!! to the user, beside a continuation link
+                                //      !!! WARNING !!! to the user, beside a continuation link * Note at the bottom
 }
 
 const __SecureDefaultAttributes = { ... defaultAttributes, Secure: true }
@@ -263,3 +263,72 @@ console.warn(`test cookie-value string='false' and check what happens`)
 
 module.exports  = cookie 
 mark (`~/modules/cookie.js LOADED`)
+
+/*
+I'm not sure if it's relevant to your use case: affiliate
+marketing links.
+
+I was referring rather to cookies used for authorisation.
+
+Preamble 1a.  [CASTLE.TLD serves a HTTP response, with a set-cookie header, to
+CLIENT, where the value of the cookie contains the authority to access
+ResourceR.]
+
+Test.  [UNKNOWN.TLD serves a HTTP response, containing a HTML link to
+CASTLE.TLD, to CLIENT.] When CLIENT follows this link, we shall call such events
+XSR-link; analogously, XSR-iframe, and XSR-POST will refer to events where
+UNKNOWN.TLD initiates the CLIENT to do any such cross-site request.
+
+-
+
+Test-Scenario 1.  [Cookie was set with attribute SameSite=Strict.] Result: all
+the XSRs will NOT send the cookie.
+
+Test-Scenario 2.  [Cookie was set with attribute SameSite=Lax.] Result: all the
+XSR-link WILL send the cookie, but XSR-iframe and XSR-POST will NOT send the
+cookie. UNKNOWN.TLD can now initiate requests to ResourceR on CASTLE.TLD - which
+seems a little dangerous.
+
+Test-Scenario 3.  [Cookie was set with attribute SameSite=None.] Result: all the
+XSRs WILL send the cookie. This is very dangerous, and no one is supposed to do
+this anymore.
+
+-
+
+How about if we modify Preamble 1a?
+
+Preamble 1b.  [CASTLE.TLD serves a HTTP response, with a set-cookie header, to
+CLIENT - this is the same authorisation header indicated in Preamble 1a, under
+Scenario 1. 
+
+A second set-cookie header is attached, similar to the one issued under Scenario
+2, but this cookie does not contain authority - instead it only contains a mark
+that basically says, "whomsoever bears me, is logged in - but I do not tell you
+whom". OK? So now we have cookies 1bStrict-Authoritative and 1bLax-Obfuscated]
+
+Now back to Test. 
+
+Test-Scenario 4 (a.k.a. Scenario 1.1.).  [1bStrict-Authoritative,
+1bLax-Obfuscated.] Result: all XSRs will NOT send 1bStrict-Authoritative ... but
+XSR-link WILL send 1bLax-Obfuscated. CASTLE.TLD can react to 1bLax-Obfuscated by
+serving a HTTP response to CLIENT: with a HTML page that says:
+
+"Hey, you seem familiar, but we're not sure who you are. You also asked for
+ResourceR, but we have to be sure that we know you. Here is a link to ResourceR
+... now if you click this you are generating a new HTTP request from CASTLE.TLD
+to CASTLE.TLD, so that new request WILL contain the cookie
+1bStrict-Authoritative, and thereby grant you access to ResourceR ... which is
+more access than we can grant the first request initiated by UNKNOWN.TLD."
+
+-
+
+So all I was saying is, Scenario 4 is slower than Scenario 2.
+
+Albert Jonathan sorry - took a while for me to unmuddle myself.
+
+Chee Leong Chow I think it's supposed to be like this. I'm almost sure some
+sites already do it like this. New to me. Then again, a more efficient
+implementation is CASTLE.TLD receives the request, then 300s the CLIENT to
+CASTLE.TLD, unless you really need the user to eyeball the asset request. Hmm
+
+*/
