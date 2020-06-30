@@ -324,9 +324,7 @@ more access than we can grant the first request initiated by UNKNOWN.TLD."
 
 So all I was saying is, Scenario 4 is slower than Scenario 2.
 
-Albert Jonathan sorry - took a while for me to unmuddle myself.
-
-Chee Leong Chow I think it's supposed to be like this. I'm almost sure some
+I think it's supposed to be like this. I'm almost sure some
 sites already do it like this. New to me. Then again, a more efficient
 implementation is CASTLE.TLD receives the request, then 300s the CLIENT to
 CASTLE.TLD, unless you really need the user to eyeball the asset request. Hmm
