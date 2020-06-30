@@ -21,7 +21,7 @@ const cookieTest = async ( data ) => {
         SameSite:   false
     } )
     //*/
-    rus.cookie.expire ( data, 'cookie_name' )
+    //rus.cookie.expire ( data, 'cookie_name' )
     
     const body = `
         <h1>cookie debugging</h1>
