@@ -1,5 +1,7 @@
 'use strict'
 
+// AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
+
 /*      AWS API Gateway's (event.queryStringParameters) treats comma literals as
         value-delimiters; this is allowed but not required in RFC 3986
         ( https://tools.ietf.org/html/rfc3986 ) therefore we should not assume 

@@ -7,9 +7,34 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
  */
 
 const setCookies = async ( data ) => {
-    
-    // rutheniumReducer.js will mark() execution, you don't have to
-    
+
+    //  Nothing to do if there are no cookie signals
+    if ( ! data.RU.signals.sendResponse.setCookies.length ) return data
+        
+
+    // [] is initialised in ruthenium.js
+    data.RU.response.cookies
+    = data.RU.signals.sendResponse.setCookies.map ( 
+        ( signal, index, array ) => {
+            
+            let cookie =    signal.name + '="'
+                            + Buffer
+                                .from( `${ signal.value }` )
+                                .toString('base64') + '"'
+                                
+                                    //  ensure that your (base64) implementation is
+                                    //  "URL and filename safe" (https://tools.ietf.org/html/rfc4648#section-5)
+                                    //  [RFC 4868.5];
+                                    //  Corresponds to (lambda-normalize-headers.js)'s decoding of the value
+                                    //
+                                    //  TODO: do we want to decode (name) as well?
+                            + ';'
+            return cookie
+        }
+        //, thisArg 
+    )
+
+
     return data
 }
 

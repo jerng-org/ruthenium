@@ -1,5 +1,7 @@
 'use strict'
 
+// AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
+
 const lambdaCopyRequestParameters = async ( data ) => {
 
     //  Section on reserved characters:

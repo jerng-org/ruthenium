@@ -123,7 +123,7 @@ const checkId = id => {
             checkIdObject ( id )    // throws if id.name is missing
             break
         default:
-            throw (`(cookie.js) (cookie.checkId) argument (id) was typeof neither (string) nor (object)`)
+            throw Error (`(cookie.js) (cookie.checkId) argument (id) (usually the 2nd argument of Xset or Xexpire) was typeof neither (string) nor (object)`)
     }
     // therefore, id.name by now MUST exist
 
@@ -133,6 +133,7 @@ const checkId = id => {
 /*  This function does NOT SET any missing EXPECTED arguments.
  */
 const checkIdObject = idObject => {
+    
     if ( ! ( 'name' in idObject ) ) {
         throw Error (   `(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'name' was not found;` )
     }
@@ -172,6 +173,7 @@ const expireCookieSignal = ( DATA, id ) => {
         ... checkedId,              // must have (name), but may be missing Path or Domain
         Expires: new Date (0),      //  << ['Max-Age'] has precedence >> // set-cookies.js is responsible for conversion to.toUTCString()
         ['Max-Age']: -1,            // RFC 6265.4.1.1. "non-zero digit" thus encourages a negative number
+        value: 'expired'
     }
 
 }
@@ -208,7 +210,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
     __SecureSet:    
         async ( DATA, suffix, value, attributes ) => {
             
-            const cookieSignal = setCookieSignal ( DATA, suffix, value, attributes ) 
+            const cookieSignal  = setCookieSignal ( DATA, suffix, value, attributes ) 
             
             cookieSignal.name   = `__Secure-` + cookieSignal.name
             cookieSignal.Secure = true
@@ -219,7 +221,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
     __HostSet:      
         async ( DATA, suffix, value, attributes ) => {
         
-            const cookieSignal = setCookieSignal ( DATA, suffix, value, attributes ) 
+            const cookieSignal  = setCookieSignal ( DATA, suffix, value, attributes ) 
             
             cookieSignal.name   = `__Host-` + cookieSignal.name
             cookieSignal.Secure = true
@@ -232,7 +234,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
     expire:         
         async ( DATA, id ) => {
             
-            const cookieSignal = expireCookieSignal ( DATA, id ) 
+            const cookieSignal  = expireCookieSignal ( DATA, id ) 
             
             DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
         },
@@ -240,7 +242,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
     __SecureExpire: 
         async ( DATA, suffix ) => {
         
-            const cookieSignal = expireCookieSignal ( DATA, suffix ) 
+            const cookieSignal  = expireCookieSignal ( DATA, suffix ) 
             cookieSignal.name   = `__Secure-` + cookieSignal.name
             
             DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
@@ -250,7 +252,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
     __HostExpire:   
         async ( DATA, suffix ) => {
         
-            const cookieSignal = expireCookieSignal ( DATA, suffix ) 
+            const cookieSignal  = expireCookieSignal ( DATA, suffix ) 
             cookieSignal.name   = `__Host-` + cookieSignal.name
             cookieSignal.Secure = true
             cookieSignal.Path   = __HostDefaultIdAttributes.Path

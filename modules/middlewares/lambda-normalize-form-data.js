@@ -1,5 +1,7 @@
 'use strict'
 
+// AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
+
 //  PLEASE CAREFULLY refer to notes 
 //  in (lambda-normalize-query-string-parameters.js)
 
