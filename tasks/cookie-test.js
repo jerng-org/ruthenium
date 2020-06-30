@@ -16,10 +16,11 @@ const cookieTest = async ( data ) => {
         //Domain: false,
         //Secure: false,
         //HttpOnly:   false,
-        Expires:    false,
-        ['Max-Age']:false,
+        //Expires:    false,
+        //['Max-Age']:false,
         //SameSite:   false
-        SameSite: 'Lax'
+        SameSite: 'Lax' // no problem
+        //SameSite: 'Strict' // bad
     } )
     //*/
     //rus.cookie.expire ( data, 'cookie_name' )
