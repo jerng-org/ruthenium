@@ -10,10 +10,10 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const cookieTest = async ( data ) => {
 
-    //*
+    /*
     rus.cookie.set ( data, 'cookie_name', 'cookie_value', {
-        Path:   '/',
-        Domain: false,
+        //Path:   false,
+        //Domain: false,
         Secure: false,
         HttpOnly:   false,
         Expires:    false,
@@ -21,7 +21,7 @@ const cookieTest = async ( data ) => {
         SameSite:   false
     } )
     //*/
-    //rus.cookie.expire ( data, 'cookie_name' )
+    rus.cookie.expire ( data, 'cookie_name' )
     
     const body = `
         <h1>cookie debugging</h1>
