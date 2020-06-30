@@ -33,8 +33,6 @@ const setCookies = async ( data ) => {
             + ';'
             + ( signal.Secure   
                 ? ` Secure;`    : `` )
-            + ( signal.Secure   
-                ? ` Secure;`    : `` )
             + ( signal.HttpOnly 
                 ? ` HttpOnly;`  : `` )
             + ( signal.Expires  
