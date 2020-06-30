@@ -176,7 +176,7 @@ const expireCookieSignal = ( DATA, id ) => {
 
 }
 
-const cookie     = async () => { return {
+const cookie = {
 
     /*  Begin with user provided (attributes) argument;
      *
@@ -195,7 +195,7 @@ const cookie     = async () => { return {
      *  to be transparent to, and thus manageable by such entities;
      */
     set:            
-        ( DATA, id, value, attributes ) => {
+        async ( DATA, id, value, attributes ) => {
            
             const cookieSignal = setCookieSignal ( DATA, id, value, attributes ) 
             
@@ -206,7 +206,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
         },
     
     __SecureSet:    
-        ( DATA, suffix, value, attributes ) => {
+        async ( DATA, suffix, value, attributes ) => {
             
             const cookieSignal = setCookieSignal ( DATA, suffix, value, attributes ) 
             
@@ -217,7 +217,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
         },
     
     __HostSet:      
-        ( DATA, suffix, value, attributes ) => {
+        async ( DATA, suffix, value, attributes ) => {
         
             const cookieSignal = setCookieSignal ( DATA, suffix, value, attributes ) 
             
@@ -230,7 +230,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
         },
     
     expire:         
-        ( DATA, id ) => {
+        async ( DATA, id ) => {
             
             const cookieSignal = expireCookieSignal ( DATA, id ) 
             
@@ -238,7 +238,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
         },
     
     __SecureExpire: 
-        ( DATA, suffix ) => {
+        async ( DATA, suffix ) => {
         
             const cookieSignal = expireCookieSignal ( DATA, suffix ) 
             cookieSignal.name   = `__Secure-` + cookieSignal.name
@@ -248,7 +248,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
         },
     
     __HostExpire:   
-        ( DATA, suffix ) => {
+        async ( DATA, suffix ) => {
         
             const cookieSignal = expireCookieSignal ( DATA, suffix ) 
             cookieSignal.name   = `__Host-` + cookieSignal.name
@@ -259,7 +259,7 @@ console.warn(`test cookie-value string='false' and check what happens`)
             DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
         },
     
-} }
+}
 
 module.exports  = cookie 
 mark (`~/modules/cookie.js LOADED`)
