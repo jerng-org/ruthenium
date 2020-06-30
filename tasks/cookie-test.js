@@ -19,8 +19,8 @@ const cookieTest = async ( data ) => {
         //Expires:    false,
         //['Max-Age']:false,
         //SameSite:   false
-        SameSite: 'Lax' // no problem
-        //SameSite: 'Strict' // bad
+        //SameSite: 'Lax' // no problem
+        SameSite: 'Strict' // bad
     } )
     //*/
     //rus.cookie.expire ( data, 'cookie_name' )
