@@ -188,7 +188,7 @@ DEBUG EVERYTHING:
         
         stringify4:
             async object => ( `(rus.print.stringify4( object ) returned):
-                ` + JSON.stringify( object, null, 4 ) ).replace(/\\n/g, '\n'),
+` + JSON.stringify( object, null, 4 ) ).replace(/\\n/g, '\n'),
 
         xml300:
             async xmlString => 
