@@ -65,7 +65,7 @@ const conf      = require ( `/var/task/configuration.js` )
  *
  *      attributes : {                                  //  default values:
  *          Expires:        undefined,                      //  new Date( <<four signatures>>) // set-cookies.js is responsible for conversion to.toUTCString()
- *          ['Max-Age']:    undefined,                      //  3600 <<seconds>>
+ *          ['Max-Age']:    undefined,                      //  3600 << seconds ; use INTEGERS (set-cookie.js) will check for integers >>
  *          Secure:         undefined,                      //  true
  *          HttpOnly:       undefined,                      //  true
  *          SameSite:       undefined,                      //  'Strict'
