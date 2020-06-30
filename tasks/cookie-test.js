@@ -15,7 +15,7 @@ const cookieTest = async ( data ) => {
         //Path:   false,
         //Domain: false,
         //Secure: false,
-        HttpOnly:   false,
+        //HttpOnly:   false,
         Expires:    false,
         ['Max-Age']:false,
         SameSite:   false
