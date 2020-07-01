@@ -40,7 +40,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(cookie-test.js) still stuck with SameSite=Strict - this turns out to be a fake bug; Chrome requires navigating away from a page and back, to be able to reset the cookie',
+    gitCommitMessage: '-',
      
     labels:  {
         
