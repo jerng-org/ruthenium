@@ -27,7 +27,7 @@ const cookieTest = async ( data ) => {
         SameSite: 'Strict' // bad
     } )
     //*/
-    rus.cookie.expire ( data, '__Secure-cookie_name' )
+    rus.cookie.__SecureExpire ( data, 'cookie_name' )
     
     const body = `
         <h1>cookie debugging</h1>
