@@ -18,20 +18,22 @@ const conf      = require ( `/var/task/configuration.js` )
  *                  rus.cookie.set   ( name, value )
  *                  rus.cookie.expire( name )
  *
- *  -   call (rus.cookie) .set( stringName, value) and .expire( stringName ) );
- *
- *      -   you can refine (stringName) to << explaination of (idObject) >>
+ *  -   you can refine (stringName) to << explaination of (idObject) >>
  *
  *  -   default attributes will be applied ( some are configurable in rus.conf )
  *
  *
  *
+ *  TODO
+ *  -   more linkage to (rus.conf)
+ *  -   multiple cookies with different SameSite values
+ *  -   sessions
  *
  *
  *
- */
-
-/*  This modules pushed into (data.RU.signals.sendResponse.setCookies) a 
+ *  WORKFLOW 
+ *
+ *  This modules pushed into (data.RU.signals.sendResponse.setCookies) a 
  *  signal of the form:
  *
  *      {   name:   STRING,
