@@ -40,7 +40,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(cookie.set) defaults all work, except SameSite=Strict is not well understood',
+    gitCommitMessage: '(cookie-test.js) still stuck with SameSite=Strict',
      
     labels:  {
         

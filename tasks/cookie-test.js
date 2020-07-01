@@ -12,13 +12,16 @@ const cookieTest = async ( data ) => {
 
     //*
     rus.cookie.set ( data, 'cookie_name', 'cookie_value', {
-        //Path:   false,
-        //Domain: false,
-        //Secure: false,
-        //HttpOnly:   false,
-        //Expires:    false,
-        //['Max-Age']:false,
-        //SameSite:   false
+        Path:   false,
+        //Path: '/test-middleware',
+        Domain: false,
+        //Domain: 'secure.api.sudo.coffee',
+        Secure: false,
+        HttpOnly:   false,
+        Expires:    false,
+        ['Max-Age']:false,
+        SameSite:   false,
+        //SameSite: 'None', // no problem
         //SameSite: 'Lax' // no problem
         SameSite: 'Strict' // bad
     } )
