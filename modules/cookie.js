@@ -186,10 +186,11 @@ const expireCookieSignal = ( DATA, id ) => {
     return {
         
         ... defaultIdAttributes,
-        ... checkedId,              // must have (name), but may be missing Path or Domain
-        Expires: new Date (0),      //  << ['Max-Age'] has precedence >> // set-cookies.js is responsible for conversion to.toUTCString()
-        ['Max-Age']: -1,            // RFC 6265.4.1.1. "non-zero digit" thus encourages a negative number
-        value: 'expired'
+        ... checkedId,                  // must have (name), but may be missing Path or Domain
+        Secure:         defaultAttributes.Secure,
+        Expires:        new Date (0),   // << ['Max-Age'] has precedence >> // set-cookies.js is responsible for conversion to.toUTCString()
+        ['Max-Age']:    -1,             // RFC 6265.4.1.1. "non-zero digit" thus encourages a negative number
+        value:          'expired'
     }
 
 }
