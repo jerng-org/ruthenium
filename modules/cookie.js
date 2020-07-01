@@ -332,4 +332,6 @@ sites already do it like this. New to me. Then again, a more efficient
 implementation is CASTLE.TLD receives the request, then 300s the CLIENT to
 CASTLE.TLD, unless you really need the user to eyeball the asset request. Hmm
 
+A version of this is mentionedin RFC 6265bis.8.8.2.
+
 */
