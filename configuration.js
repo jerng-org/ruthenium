@@ -40,7 +40,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(cookie.js) (set-cookie.js) mostly working - usage docs in ',
+    gitCommitMessage: 'Next: Hook up Cognito and Cookies and Sessions.',
      
     labels:  {
         
