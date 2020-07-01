@@ -3,6 +3,21 @@
 const mark      = require ( `/var/task/modules/mark.js` )
 const conf      = require ( `/var/task/configuration.js` )
 
+/*  QUICK START
+ *
+ *  -   call (rus.cookie) .set( stringName, value) and .expire( stringName ) );
+ *
+ *      -   you can refine (stringName) to << explaination of (idObject) >>
+ *
+ *  -   default attributes will be applied ( some are configurable in rus.conf )
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
 /*  This modules pushed into (data.RU.signals.sendResponse.setCookies) a 
  *  signal of the form:
  *
