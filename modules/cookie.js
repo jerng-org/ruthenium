@@ -260,9 +260,9 @@ console.warn(`test cookie-value string='false' and check what happens`)
         
             const cookieSignal  = expireCookieSignal ( DATA, suffix ) 
             cookieSignal.name   = `__Secure-` + cookieSignal.name
+            cookieSignal.Secure = true
             
             DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
-            cookieSignal.Secure = true
         },
     
     __HostExpire:   
