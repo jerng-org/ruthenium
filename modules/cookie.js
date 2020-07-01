@@ -164,7 +164,7 @@ const checkIdObject = idObject => {
 
 const setCookieSignal = ( DATA, id, value, attributes ) => {
             
-    if ( ! value ) throw Error ( `(cookie.js) (cookie.set) second argument (value) is falsy` )
+    if ( ! value ) throw Error ( `(cookie.js) (cookie.set) third argument (value) is falsy` )
     
     const checkedId = checkId ( id )
 
