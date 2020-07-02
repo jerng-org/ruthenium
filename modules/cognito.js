@@ -14,6 +14,8 @@ mark (`~/modules/cognito.js LOADED`)
 2020-07-03 Notes on Cognito integration go here, temporarily:  
 
 1. Setting up AWS Cognito: at a glance
+   
+    Cognito > has many User Pools > each User Pool has many Apps
         
    -Cognito
     |
@@ -23,56 +25,97 @@ mark (`~/modules/cognito.js LOADED`)
     |
     +-Identity Pools :  "for authorization to AWS resources"
       |
-      +-<< STRING0 >> : "a pool name"
+      +-<< STRING0 >> : "a user pool name" (one of many)
         +
         +-General Settings
-        |
-        +-App Integration
         | |
-        | +-App Client Settings
-        | | |
-        | | +-ID : << STRING6 >>
-        | | |
-        | | +-Enabled Identity Providers : << CHECKBOXES >>
-        | | |
-        | | +-URLs
-        | | | |
-        | | | +-Callback URL(s) : << STRING7 >> "comma separated"
-        | | | |
-        | | | +-Sign Out URL(s) : << STRING8 >> "comma separated"
-        | | |
-        | | +-OAuth2.0
-        | |   |
-        | |   +-Allowed OAuth Flows : << CHECKBOXES >>
-        | |   |
-        | |   +-Allowed OAuth Scopes : << CHECKBOXES >>
-        | |   |
-        | |   +-Hosted UI : << URL >> from << STRING1 >>
-        | |
-        | |
-        | +-Domain Name
-        |   |
-        |   +-Amazon Cognito Domain :   "https://<< STRING1 >>.auth.<< AWS_REGION >>.amazoncognito.com"
-        |   |
-        |   +-Your Own Domain : "Must have associated certificate in ACM (AWS Certificate Manager)"
-        |     |
-        |     +-Domain Status : "ACTIVE" ?
-        |     |
-        |     +-Domain Name : << STRING2 >>
-        |     |
-        |     +-ACM Certificate : << STRING3 >>
-        |     |
-        |     +-Alias Target : << STRING4 >> "must be added to << STRING2 >>'s DNS record";
-        |                      this seems to take the form of a << STRING5 >>.cloudfront.net
+        | +-<< MANY ITEMS UNDOCUMENTED >>
         |
         +-Federation
+        | |
+        | +-<< MANY ITEMS UNDOCUMENTED >>
+        |
+        +-App Integration
+          |
+          +-UI Customisation
+          |
+          +-Resource Servers
+          |
+          +-App Client Settings
+          | |
+          | +-<< STRING9 >> : "an app name" (each user pool has many apps)
+          |   |
+          |   +-ID : << STRING6 >>
+          |   |
+          |   +-Enabled Identity Providers : << CHECKBOXES >>
+          |   |
+          |   +-URLs
+          |   | |
+          |   | +-Callback URL(s) : << STRING7 >> "comma separated"
+          |   | |
+          |   | +-Sign Out URL(s) : << STRING8 >> "comma separated"
+          |   |
+          |   +-OAuth2.0
+          |     |
+          |     +-Allowed OAuth Flows : << CHECKBOXES >>
+          |     |
+          |     +-Allowed OAuth Scopes : << CHECKBOXES >>
+          |     |
+          |     +-Hosted UI : << STRING1 >>, and << STRING2 >>
+          |
+          |
+          +-Domain Name
+            |
+            +-Amazon Cognito Domain : << STRING1 >> "https://<< STRING1.1 >>.auth.<< AWS_REGION >>.amazoncognito.com"
+            |
+            +-Your Own Domain : "Must have associated certificate in ACM (AWS Certificate Manager)"
+              |
+              +-Domain Status : "ACTIVE" ?
+              |
+              +-Domain Name : << STRING2 >>
+              |
+              +-ACM Certificate : << STRING3 >>
+              |
+              +-Alias Target : << STRING4 >> "must be added to << STRING2 >>'s DNS record";
+                               this seems to take the form of a << STRING5 >>.cloudfront.net
+         
 
 2.  Establish first that <<test user's state>> is <<logged out>>.
 
-3.  GET https://<< STRING2 >>/login ?client_id=
-                                    &response_type=
-                                    &scope=
-                                    &redirect_uri=
+3.  View the Login form at << Hosted UI >> at << STRING1 >> or << STRING2 >>
+
+    GET https://<< STRING2 >>/login ?client_id=             << STRING6 >>
+                                    &response_type= code    << limited by Allowed OAuth Flows >>
+                                    &scope=                 << limited by Allowed OAuth Scopes >>
+                                    &redirect_uri=          << STRING7 >> (URL Encoded)
+
+    3a. Optionally launch to (3.) from a prepared link in a webpage at URL 
+        << STRING11 >>; this can be the same as << STRING7 >> for example;
+
+4.  Submit the Login form including fields  << username >>
+                                            << password >>
+                                            << _csrf >>>
+                                            << cognitoAsfData >> (???)
+                                            << signInSubmitButton >>
+
+    POST << to the URL in (3.) above >>>
+    
+    Server will respond with:
+    
+        302 which redirects to << STRING7 >>    &code=  << STRING10 >>
+
+5.  Back at << STRING7 >>, a script has been monitoring (document.readyState and 
+    the  DOMContentLoaded event), and upon the specified conditions, checks
+    (window.location.search) for the string "code", and IF it finds it:
+
+        THEN, the script sets (document.location) i.e. a GET request to the URI:
+        
+        << STRING12 >> "which represents the Application "
+        
+6.  Over at << STRING12 >>, the Application performs the following operations:
+
+
+
 
  *
  *  -   https://***REMOVED***/login?client_id=***REMOVED***&response_type=code&scope=aws.cognito.signin.user.admin+openid&redirect_uri=https%3A%2F%2Fdehwoetvsljgieghlskhgs.sudo.coffee%3Freferer%3DsignInCallback
