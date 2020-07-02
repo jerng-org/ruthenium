@@ -40,7 +40,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: '(some bugfixes)',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
