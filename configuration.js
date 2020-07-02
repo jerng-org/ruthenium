@@ -40,7 +40,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(back to documenting Cognito integration)',
+    gitCommitMessage: '-',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
