@@ -40,7 +40,13 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'Next: Hook up Cognito and Cookies and Sessions.',
+    gitCommitMessage: '-',
+    /*  USES:
+     *  Merge order     :   1
+     *  Name            :   git-lambda2
+     *  Layer version   :   6
+     *  Version ARN     :   arn:aws:lambda:us-east-1:553035198032:layer:git-lambda2:6
+     */
      
     labels:  {
         

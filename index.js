@@ -50,14 +50,14 @@ rus.mark( `index.js loaded mark.js` )
         `DEBT_NOTE`,
         [   
             `CURRENT:`,
-            `cookies - read and memorise entire MDN protocol`, 
-            `sessions - read and memorise entire MDN protocol`, 
-            `https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks`,
-            `https://developer.mozilla.org/en-US/docs/Glossary/HSTS`,
+            `cognito - integration; designing with a view to opt-out easily, later;`, 
+            `sessions - stand-alone, and with cognito-integration`,
+            `single-page-app framework; history API`,
             `
             
             BACKLOG:`,
-            `cognito`, 
+            `https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks`,
+            `https://developer.mozilla.org/en-US/docs/Glossary/HSTS`,
             `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
             `Whole class of problems:
                 - whether to use ES/JS proxies (language specific!) to automatically anotate data;
