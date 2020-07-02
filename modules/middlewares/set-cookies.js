@@ -9,7 +9,9 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 const setCookies = async ( data ) => {
 
     //  Nothing to do if there are no cookie signals
-    if ( ! data.RU.signals.sendResponse.setCookies.length ) return data
+    if  ( ! (   data.RU.signals.sendResponse.setCookies
+                && data.RU.signals.sendResponse.setCookies.length 
+        ) ) return data
         
 
     // [] is initialised in ruthenium.js
