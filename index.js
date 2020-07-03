@@ -50,27 +50,49 @@ rus.mark( `index.js loaded mark.js` )
         `DEBT_NOTE`,
         [   
             `CURRENT:`,
-            `cognito - integration; designing with a view to opt-out easily, later;`, 
+            
+            `cognito - integration; designing with a view to opt-out easily, 
+            later;`, 
+            
             `sessions - stand-alone, and with cognito-integration`,
+            
             `single-page-app framework; history API`,
             `
             
             BACKLOG:`,
+            
             `https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks`,
+            
             `https://developer.mozilla.org/en-US/docs/Glossary/HSTS`,
+            
             `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
+            
             `Whole class of problems:
-                - whether to use ES/JS proxies (language specific!) to automatically anotate data;
-                - example:  writes to (data.RU.signals) should be signed by the writer; 
-                            perhaps via a non-enumerable property`,
+                -   whether to use ES/JS proxies (language specific!) to 
+                    automatically anotate data;
+                -   example:  writes to (data.RU.signals) should be signed by 
+                    the writer; perhaps via a non-enumerable property`,
+            
             `GET method forms are not yet supported;`,
-            `DECOUPLE: (compose-response.js) should be broken up into multiple middlewares also`, 
-            `Compliance=Weak mode which decreases performance but increases accepted spelling varieties for things like field names`,
-            `Test how require() maintains modules in memory, between function calls;`,
+            
+            `DECOUPLE: (compose-response.js) should be broken up into multiple 
+            middlewares also`, 
+            
+            `Compliance=Weak mode which decreases performance but increases 
+            accepted spelling varieties for things like field names`,
+            
+            `Test how require() maintains modules in memory, between function 
+            calls;`,
+            
+            `Modify the architecture of (the entire framework) such that it 
+            behaves more like a library; then again, the trade off always is how 
+            much it behaves like a cage, while feeling like a prairie.`,
             `
             
             ICEBOX:`,
+            
             `$.stuff for aliasing`,
+            
             `https://www.npmjs.com/package/require-directory`,
         ]
     )
@@ -178,14 +200,18 @@ exports.handler = async function () {
     
     const middlewares = [  // MIDDLEWARES, execution order
          
-        // System Integration with AWS Lambda
+        //  System Integration with AWS Lambda
         lambdaCopyRequestParameters,         // Query string     values with same key stored as:     CSV string
         lambdaNormalizeHeaders,              // Cookie header    values with same key stored as:     Array of values
         lambdaNormalizeQueryStringParameters,// Query string     values with same key stored as:     Array of values
         lambdaNormalizeFormData,             // Form string      values with same name stored as:    Array of values
         lambdaLoadMetadata,
         
-        // Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
+        //  Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
+        
+        //  Nevertheless, everything below targets Lambda's (response) format,
+        //  so if we implement somewhere other than Lambda, we'll need a final
+        //  (somewhere-response-formatter) middleware after (last-guard.js)
         
         formsTunnelRestfulMethods,
         formsReindexNames,

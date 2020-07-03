@@ -40,7 +40,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: '(oidc-relying-party.js) preparation - prototype code pasted in, but not yet integrated;',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
