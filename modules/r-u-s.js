@@ -1,24 +1,14 @@
-
 'use strict'
 
 //  require()       executes modules; 
 //  require.res()   resolves paths without execution;
 
-const mark  =   require ( '/var/task/modules/mark.js' )
-                
-mark (`r-u-s.js (ruthenium utilities) LOADING ...`)
+const mark = require('/var/task/modules/mark.js')
 
-const fs    = require ('fs')
-const url   = require ('url')
+mark(`r-u-s.js (ruthenium utilities) LOADING ...`)
 
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
-
-
-const rus   = {
+const fs = require('fs')
+const url = require('url')
 
 //////////
 //      //
@@ -26,7 +16,16 @@ const rus   = {
 //      //
 //////////
 
-    additionalRequestInformation : async _data => `
+
+const rus = {
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
+    additionalRequestInformation: async _data => `
         ${ JSON.stringify( {
             
             signals:
@@ -52,93 +51,92 @@ const rus   = {
                 
         } , null, 4 ) }`,
 
-    appUrl: async pairArrays => {   
-        
-        const URLObject = new ( url.URL ) ( '/test-middleware',
-                                            'https://secure.api.sudo.coffee'
-                                            )
-                                            
+    appUrl: async pairArrays => {
+
+        const URLObject = new(url.URL)('/test-middleware',
+            'https://secure.api.sudo.coffee'
+        )
+
         const URLSearchParamsObject = URLObject.searchParams
-        
-        for ( const [ name, value ] of pairArrays ) {
-            URLSearchParamsObject.append ( name, value )
+
+        for (const [name, value] of pairArrays) {
+            URLSearchParamsObject.append(name, value)
         }
-        
+
         return URLObject
     },
 
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
 
     aws: {
-        ddbdc: require ( '/var/task/io/ddbdc.js' ),
+        ddbdc: require('/var/task/io/ddbdc.js'),
     },
-    
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
 
-    cookie:
-        require (`/var/task/modules/cookie.js`),
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
 
-    conf: 
-        require (`/var/task/configuration.js`),
+    cookie: require(`/var/task/modules/cookie.js`),
 
-    html:
-        require ( '/var/task/modules/html' ),
-    
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
+    conf: require(`/var/task/configuration.js`),
 
-    lambdaGitCommit: 
-        require ( '/var/task/io/lambda-git-commit' ),
-    
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
+    html: require('/var/task/modules/html'),
 
-    mark: 
-        mark,
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
 
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
+    jsonwebtoken: require('jsonwebtoken'), // LAMBDA LAYER
+
+    jwkToPem: require('jwk-to-pem'), // LAMBDA LAYER
+
+    lambdaGitCommit: require('/var/task/io/lambda-git-commit'), // LAMBDA LAYER
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
+    mark: mark,
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
 
     node: {
-        
+
         //childProcess : require('child_process'),
-        
-        fs: require ( 'fs' ),
-        
-        querystring: require ( 'querystring' ),
-        
+
+        fs: require('fs'),
+
+        querystring: require('querystring'),
+
         url: url,
-        
-        util: require ( 'util' )    
+
+        util: require('util')
     },
-    
+
     //  Add various options to customise all URL components;
     //  with useful defaults;
-    
+
     //  Structure of (pairArrays) : 
     //  
     //      [
     //          [ name, value ],
     //          [ name, value ]
     //      ]
-    
+
     //  Explitly DISALLOW usage of { name: value }
     //
     //      While this allows shorter code, it provides too many ways to
@@ -147,11 +145,10 @@ const rus   = {
     //      Furthermore it fails to accommodate duplicate (name)s
 
     print: {
-        
-        dataDebug:
-            async rutheniumDataObject => {
-                
-                return `
+
+        dataDebug: async rutheniumDataObject => {
+
+            return `
 DEBUG HIGHLIGHTS:
                 
 [ data.RU.errors ] renders ${
@@ -180,40 +177,35 @@ DEBUG EVERYTHING:
 [ data.LAMBDA ] renders ${
     await rus.print.inspectInfinity ( rutheniumDataObject.LAMBDA ) }                 
 `
-// end string
-            },
-        
-        inspectInfinity:
-            async object => rus.node.util.inspect( object, { depth: Infinity } ),
-        
-        stringify4:
-            async object => ( `(rus.print.stringify4( object ) returned):
-` + JSON.stringify( object, null, 4 ) ).replace(/\\n/g, '\n'),
+            // end string
+        },
 
-        xml300:
-            async xmlString => 
-                ( xmlString.slice(0,300) + '... [POSSIBLY TRUNCATED]' )
-                .replace(/</g, '[')
+        inspectInfinity: async object => rus.node.util.inspect(object, { depth: Infinity }),
+
+        stringify4: async object => (`(rus.print.stringify4( object ) returned):
+` + JSON.stringify(object, null, 4)).replace(/\\n/g, '\n'),
+
+        xml300: async xmlString =>
+            (xmlString.slice(0, 300) + '... [POSSIBLY TRUNCATED]')
+            .replace(/</g, '[')
     },
-    
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
 
-    uuid4:     
-        require ( '/var/task/io/uuid4.js' ),
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
 
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
+    uuid4: require('/var/task/io/uuid4.js'),
 
-    validate:
-        require ( `/var/task/io/validate.js` ),
-    
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
+    validate: require(`/var/task/io/validate.js`),
+
     /*  VALIDATE_FORM_DATA
      *
      *  Returns (data.RU.signals.formDataValid); so you can use this call in
@@ -224,32 +216,29 @@ DEBUG EVERYTHING:
      *  will be (false) and therefore (data.RU.signals.formDataValid) will be 
      *  (undefined), hence falsy;
      */
-     
-    validateFormData:
-        async (data, modelKey) =>
-        {
-            const _report   =   await rus.validate (    
-                                        data.RU.request.formStringParameters, 
-                                        modelKey 
-                                )
-            data.RU.signals.formDataValid   = _report.shortReport.summary
-            data.RU.signals.formReport      = _report
-            return data.RU.signals.formDataValid
-        },
-        
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
 
-        
-    wasteMilliseconds: 
-        async ms => { 
-            const start = new Date().getTime() 
-            while (new Date().getTime() < start + ms);
-        },
-    
+    validateFormData: async(data, modelKey) => {
+        const _report = await rus.validate(
+            data.RU.request.formStringParameters,
+            modelKey
+        )
+        data.RU.signals.formDataValid = _report.shortReport.summary
+        data.RU.signals.formReport = _report
+        return data.RU.signals.formDataValid
+    },
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
+
+    wasteMilliseconds: async ms => {
+        const start = new Date().getTime()
+        while (new Date().getTime() < start + ms);
+    },
+
 }
 
 //////////
@@ -258,5 +247,5 @@ DEBUG EVERYTHING:
 //      //
 //////////
 
-module.exports  = rus
-mark (`~/modules/r-u-s.js (ruthenium utilities) LOADED`)
+module.exports = rus
+mark(`~/modules/r-u-s.js (ruthenium utilities) LOADED`)
