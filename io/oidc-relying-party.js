@@ -67,12 +67,12 @@ const authorizationCodeFlowJwtValidation = async () => {
         grant_type: 'authorization_code',
         client_id: appId,
 
-              //
-             ////
-            //  //
-           //    //     Take note:
-          //  !!  //
-         //        //
+        ////////
+        //   ////
+        //  //  //
+        // //    //     Take note:
+        ////  !!  //
+        ///        //
         //////////////
         
         code: event.queryStringParameters ? event.queryStringParameters.code : null,
