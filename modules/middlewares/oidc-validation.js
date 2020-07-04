@@ -27,7 +27,7 @@ const oidcValidation = async(data) => {
         // THROWS EXCEPTION ON FAILURE
     }
     catch (e) {
-        console.error(`Middleware (oidc-validation.js) failed, (data):`, data)
+        console.error(`Middleware (oidc-validation.js) failed, (error):`, e, `(data)`, data)
 
         throw Error (`(oidc-validation.js) failed`)
     }
