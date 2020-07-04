@@ -1,35 +1,13 @@
 module.exports = {
     
-    /*  verbosity
+    /*  faultTolerance:
      *
-     *      0   :   ONLY    console.error -> logs
-     *      
-     *      1   :   0       + console.warn -> logs
+     *      0   :   always break on first error
      *
-     *      2   :   1       + console.info -> logs
-     *
-     *      3   :   2       + (data) -> response.body
-     *
-     *      4   :   3       + (raw database output) -> response.body
-     *
-     *      5   :   undefined, as yet
-     *
-     *
+     *      1   :   accumulate errors in (data.RU.errors), but continue reducing
+     *              the queue of middlewares, executing subsequent middlewares;
      */
-    verbosity:  3,
-    
-    
-    /*  performance monitoring
-     *
-     *      0   :   none
-     *
-     *      1   :   some
-     *
-     *      2   :   undefined, as yet
-     *
-     */
-    performance: 0,
-    
+    faultTolerance: 0,
     
     /*  gitCommit
      *
@@ -86,5 +64,35 @@ module.exports = {
         reducer500Body: 
             `Middleware reducer caught an error, in the final middleware.`
         
-    }
+    },
+    
+    /*  performance monitoring
+     *
+     *      0   :   none
+     *
+     *      1   :   some
+     *
+     *      2   :   undefined, as yet
+     *
+     */
+    performance: 0,
+    
+    /*  verbosity
+     *
+     *      0   :   ONLY    console.error -> logs
+     *      
+     *      1   :   0       + console.warn -> logs
+     *
+     *      2   :   1       + console.info -> logs
+     *
+     *      3   :   2       + (data) -> response.body
+     *
+     *      4   :   3       + (raw database output) -> response.body
+     *
+     *      5   :   undefined, as yet
+     *
+     *
+     */
+    verbosity:  3,
+    
 }
