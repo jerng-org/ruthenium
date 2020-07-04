@@ -36,7 +36,7 @@ module.exports = {
          *
          */
         finalMiddleware500Body: 
-            `Middleware reducer caught: an error in the final middleware.`,
+            `Middleware reducer caught: an error in the final middleware. Please examine logs.`,
         
         /*  lastGuard500InMiddleware
          *
@@ -50,7 +50,8 @@ module.exports = {
             `<h1>Status: 500 Internal Server Error</h1>
                 The last guard said :
             <h3>An Error was Thrown</h3>
-                ... in middlewares.`,
+                ... in middlewares.
+                Please examine logs.`,
         
         /*  lastGuardMissingStatusCodeAndBody
          *
@@ -62,7 +63,8 @@ module.exports = {
         lastGuardMissingStatusCodeAndBody:
             `<h1>Status: 500 Internal Server Error</h1>
                     The last guard said :
-            <h3>No "View" was Assigned</h3>`,
+            <h3>No "View" was Assigned</h3>
+                    Please examine logs.`,
         
         /*  middleware500Body
          *
@@ -72,7 +74,7 @@ module.exports = {
          *
          */
         middleware500Body: 
-            `Middleware reducer caught: an error in a middleware.`,
+            `Middleware reducer caught: an error in a middleware. Please examine logs.`,
         
         /*  reducer500Body
          *
@@ -82,7 +84,7 @@ module.exports = {
          *
          */
         reducer500Body: 
-            `Framework caught: an error in the reducer.`,
+            `Framework caught: an error in the reducer. Please examine logs.`,
         
     },
     

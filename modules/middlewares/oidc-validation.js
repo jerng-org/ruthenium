@@ -7,7 +7,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const thisIsMyName = async(data) => {
 
-    let validationFailure
+    let validationFailure // defaults to "no failure"
 
     if (validationFailure) {
         throw Error(`test error in oidc-validation.js`)
