@@ -36,7 +36,7 @@ module.exports = {
          *
          */
         finalMiddleware500Body: 
-            `Middleware reducer caught: an error in the final middleware. Please examine logs.`,
+            `Reducer caught: an error in the final middleware. Please examine logs.`,
         
         /*  lastGuard500InMiddleware
          *
@@ -74,7 +74,7 @@ module.exports = {
          *
          */
         middleware500Body: 
-            `Middleware reducer caught: an error in a middleware. Please examine logs.`,
+            `Reducer caught: an error in a middleware. Please examine logs.`,
         
         /*  reducer500Body
          *
