@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: 'Integration plumbed betweeen (middlewares/oidc-validation.js) and (modules/oidc-relying-party.js); ready to plumb the latter;',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
