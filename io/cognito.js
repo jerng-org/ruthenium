@@ -2,11 +2,7 @@
 
 const mark = require('/var/task/modules/mark.js')
 
-const cognito = {
-
-    authorizationCodeFlowJwtValidation : require (`/var/task/io/oidc-relying-party.js`)
-
-}
+const cognito =  require (`/var/task/io/oidc-relying-party.js`)
 
 module.exports = cognito
 mark(`~/io/cognito.js LOADED`)
