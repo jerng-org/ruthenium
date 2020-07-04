@@ -103,12 +103,17 @@ if ( rus.conf.gitCommit ) rus.lambdaGitCommit ( rus.conf.gitCommitMessage )
     //
     //      ( async () => await rus.lambdaGitCommit() )()
     //
-    //  I actually don't understand how this came to be legitimate syntax for
-    //  performing (await) in the global scope. I was under the impression that
-    //  even if the the (async arrow function expression body) waited for the 
-    //  (rus.lambdaGitCommit), the global scope would not wait for ( async )().
+    //  If we run this, the global execution context will wait for it to finish
+    //  running before shutting itself down.
     //
-    //  But all the stackoverflows say that the global scope will wait for it.
+    //  IIRC : the Lambda runtime DOES allow us to leave running async processes
+    //  paused, while the overall Lambda container is paused, in between 
+    //  billable periods; this is NOT THE DEFAULT; but it can be configured in
+    //  the Lambda response control structures; by default the runtime will
+    //  wait for all asynchronous processes to finish running in the global
+    //  scope, before it then ends, not simply pauses, the execution context.
+    //  This pattern seems prone to an accumulation of async proceseses running
+    //  in the background and taking up both computation and memory, however.
 
 
 //////////
