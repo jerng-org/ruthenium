@@ -3,6 +3,9 @@
 const mark = require('/var/task/modules/mark.js')
 
 const cognito =  require (`/var/task/io/oidc-relying-party.js`)
+//  At this time (cognito.js) services as a documentation layer, as it directly
+//  re-exports (oidc-relying-party.js), however, in the future this may not be
+//  so simple;
 
 module.exports = cognito
 mark(`~/io/cognito.js LOADED`)
