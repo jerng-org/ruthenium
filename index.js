@@ -156,6 +156,9 @@ const lambdaNormalizeHeaders
 const lambdaNormalizeQueryStringParameters   
     = require (`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`) 
 
+const oidcValidation                            
+    = require (`/var/task/modules/middlewares/oidc-validation.js`) 
+
 const router                            
     = require (`/var/task/modules/middlewares/router.js`) 
 
@@ -212,6 +215,8 @@ exports.handler = async function () {
         //  Nevertheless, everything below targets Lambda's (response) format,
         //  so if we implement somewhere other than Lambda, we'll need a final
         //  (somewhere-response-formatter) middleware after (last-guard.js)
+        
+        oidcValidation,
         
         formsTunnelRestfulMethods,
         formsReindexNames,
