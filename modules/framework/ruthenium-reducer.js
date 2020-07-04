@@ -87,7 +87,7 @@ ${
 
     }
     catch (e) {
-        
+
         //  1.
         //  Caches the error
         DATA.RU.errors.push({
@@ -97,22 +97,28 @@ ${
         console.error(rus.conf.labels.reducer500Body, "\n", e, "\n", DATA)
 
         //  2.
-        if (INDEX + 1 == MIDDLEWARE_QUEUE.length)
-        {
-            //  2.a.
-            //  the last middleware is special;
-            return {    statusCode: 500,
-                        body: rus.conf.labels.reducer500Body    }
+        if (rus.conf.faultTolerance) {
+            if (INDEX + 1 == MIDDLEWARE_QUEUE.length) {
+                //  2.a.
+                //  the last middleware is special;
+                return {
+                    statusCode: 500,
+                    body: rus.conf.labels.reducer500Body
+                }
+            }
+            else {
+                //  2.b.
+                //  returning DATA here continues to attempt to execute subsequent
+                //  middlewares; this is NOT preferable if we need a hard exit
+                //  from the pipeline; but this is preferable if we have a 
+                //  soft process that tolerates failure; so there should be a switch
+                //  here;
+                return DATA
+            }
         }
-        else
+        else // no fault tolerance
         {
-            //  2.b.
-            //  returning DATA here continues to attempt to execute subsequent
-            //  middlewares; this is NOT preferable if we need a hard exit
-            //  from the pipeline; but this is preferable if we have a 
-            //  soft process that tolerates failure; so there should be a switch
-            //  here
-            return DATA
+            throw Error (`(ruthenium-reducer.js) Error thrown in Middleware. System is configured for zero fault tolerance. Please search the logs.`)
         }
     }
 }
