@@ -94,7 +94,7 @@ ${
             'typeof': typeof e,
             thrown: e,
         })
-        console.error(rus.conf.labels.reducer500Body, "\n", e, "\n", DATA)
+        console.error(rus.conf.labels.middleware500Body, "\n", e, "\n", DATA)
 
         //  2.
         if (rus.conf.faultTolerance) {
@@ -103,7 +103,7 @@ ${
                 //  the last middleware is special;
                 return {
                     statusCode: 500,
-                    body: rus.conf.labels.reducer500Body
+                    body: rus.conf.labels.finalMiddleware500Body
                 }
             }
             else {

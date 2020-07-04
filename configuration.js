@@ -28,6 +28,16 @@ module.exports = {
      
     labels:  {
         
+        /*  finalMiddleware500Body
+         *
+         *      What to tell the human reader, if an error occurs in the final
+         *      middleware (typically, last-guard.js) such that it is caught by 
+         *      (ruthenium-reducer.js).
+         *
+         */
+        finalMiddleware500Body: 
+            `Middleware reducer caught: an error in the final middleware.`,
+        
         /*  lastGuard500InMiddleware
          *
          *      What to tell the human reader, if an error occurs in any but the
@@ -54,15 +64,25 @@ module.exports = {
                     The last guard said :
             <h3>No "View" was Assigned</h3>`,
         
-        /*  reducer500Body
+        /*  middleware500Body
          *
-         *      What to tell the human reader, if an error occurs in the final
-         *      middleware (last-guard.js) such that it is caught by 
+         *      What to tell the human reader, if an error occurs in 
+         *      any middleware (~/modules/middlewares/*) such that it is caught by 
          *      (ruthenium-reducer.js).
          *
          */
+        middleware500Body: 
+            `Middleware reducer caught: an error in a middleware.`,
+        
+        /*  reducer500Body
+         *
+         *      What to tell the human reader, if an error occurs in 
+         *      any (ruthenium-reducer.js) such that it is caught by 
+         *      (ruthenium.js).
+         *
+         */
         reducer500Body: 
-            `Middleware reducer caught an error, in the final middleware.`
+            `Framework caught: an error in the reducer.`,
         
     },
     

@@ -58,9 +58,20 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     HOST_INITIALIZED_DATA.RU = frameworkData
 
     const initialData = Promise.resolve ( HOST_INITIALIZED_DATA )
-                        // clunky but more explicit thatn async IIFE
-
-    const finalData = await MIDDLEWARE_QUEUE.reduce ( reducer , initialData )
+                        // clunky but more explicit than async IIFE
+    let finalData
+    
+    try
+    {
+        finalData = await MIDDLEWARE_QUEUE.reduce ( reducer , initialData )
+    } 
+    catch (e)
+    {
+        return  {
+                    statusCode: 500,
+                    body: rus.conf.labels.reducer500Body
+                }
+    }
 
     return finalData 
 }
