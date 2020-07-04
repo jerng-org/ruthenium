@@ -74,6 +74,7 @@ const rus = {
 
     aws: {
         ddbdc: require('/var/task/io/ddbdc.js'),
+        cognito: require(`/var/task/io/cognito.js`)
     },
 
     //////////

@@ -2,20 +2,36 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-//  Provide a debuggable function name, 
-//  in order to avoid debugging (function).toString()
+/*  Roughly, this middleware tries to ...
+ *
+ *  validate                (data.RU.queryStringParameters.code) ...
+ *  
+ *  ... by calling          (rus.aws.cognito)
+ *
+ *      ... which calls     (~/io/cognito.js)
+ *
+ *          ... which calls (~/io/oidc-relying-party.js);
+ *
+ *
+ *
+ */
 
-const thisIsMyName = async(data) => {
+const oidcValidation = async(data) => {
 
-    let validationFailure // defaults to "no failure"
+    /*  More complicated logic which enables views that do not require 
+     *  OIDC validation, may go here. TODO
+     */
 
-    if (validationFailure) {
-        throw Error(`test error in oidc-validation.js`)
+    try {
+        await rus.aws.cognito.authorizationCodeFlowJwtValidation()
+        // THROWS EXCEPTION ON FAILURE
     }
-    else {
-        return data
+    catch (e) {
+        console.error(`Middleware (oidc-validation.js) failed, (data):`, data)
+
+        throw Error (`(oidc-validation.js) failed`)
     }
 }
 
-module.exports = thisIsMyName
-rus.mark(`~/modules/middlewares/this-is-my-name.js LOADED`)
+module.exports = oidcValidation
+rus.mark(`~/modules/middlewares/oidcValidation.js LOADED`)

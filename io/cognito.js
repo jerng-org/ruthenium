@@ -1,13 +1,15 @@
 'use strict'
 
-const mark      = require ( '/var/task/modules/mark.js' )
+const mark = require('/var/task/modules/mark.js')
 
-const cognito     = async () => {
-  
+const cognito = {
+
+    authorizationCodeFlowJwtValidation : require (`/var/task/io/oidc-relying-party.js`)
+
 }
 
-module.exports  = cognito
-mark (`~/modules/cognito.js LOADED`)
+module.exports = cognito
+mark(`~/io/cognito.js LOADED`)
 
 /*  
 
