@@ -9,7 +9,7 @@ const thisIsMyName = async ( data ) => {
     
     // rutheniumReducer.js will mark() execution, you don't have to
     
-    throw Error (`test error in oidc-validation.js`)
+    //throw Error (`test error in oidc-validation.js`)
     
     return data
 }

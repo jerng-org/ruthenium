@@ -60,7 +60,9 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     const initialData = Promise.resolve ( HOST_INITIALIZED_DATA )
                         // clunky but more explicit thatn async IIFE
 
-    return await MIDDLEWARE_QUEUE.reduce ( reducer , initialData )
+    const finalData = await MIDDLEWARE_QUEUE.reduce ( reducer , initialData )
+
+    return finalData 
 }
 module.exports = ruthenium
 rus.mark (`ruthenium.js LOADED`)
