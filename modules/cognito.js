@@ -13,6 +13,14 @@ mark (`~/modules/cognito.js LOADED`)
 
 2020-07-03 Notes on Cognito integration go here, temporarily:  
 
+Things which appear to be missing from the Cognito user experience:
+
+    -   Entity Relationship Diagram for its entire OIDC Issuer implementation,
+        hosted UI, and platform specific ontologies;
+        
+    -   OIDC Relying Party client libraries customised to match its Issuer 
+        implementation;
+
 1. Setting up AWS Cognito: at a glance
    
     Cognito > has many User Pools > each User Pool has many Apps
@@ -26,15 +34,33 @@ mark (`~/modules/cognito.js LOADED`)
     +-Identity Pools :  "for authorization to AWS resources"
       |
       +-<< STRING0 >> : "a user pool name" (one of many)
-        +
+        |
+        |     //////////
+        |     //      //
+        |     //  !!  //  Make way.
+        |     //      //
+        |     //////////
+        | 
         +-General Settings
         | |
         | +-<< MANY ITEMS UNDOCUMENTED >>
         |
+        |     //////////
+        |     //      //
+        |     //  !!  //  Make way.
+        |     //      //
+        |     //////////
+        | 
         +-Federation
         | |
         | +-<< MANY ITEMS UNDOCUMENTED >>
         |
+        |     //////////
+        |     //      //
+        |     //  !!  //  Make way.
+        |     //      //
+        |     //////////
+        | 
         +-App Integration
           |
           +-UI Customisation
@@ -98,7 +124,7 @@ mark (`~/modules/cognito.js LOADED`)
                                             << cognitoAsfData >> (???)
                                             << signInSubmitButton >>
 
-    POST << to the URL in (3.) above >>>
+        via POST << to the URL in (3.) above >>>
     
     Server will respond with:
     
@@ -111,23 +137,12 @@ mark (`~/modules/cognito.js LOADED`)
         THEN, the script sets (document.location) i.e. a GET request to the URI:
         
         << STRING12 >> "which represents the Application "
+
+    GET https://<< STRING12 >>/login ?code= << STRING10 >>
         
-6.  Over at << STRING12 >>, the Application performs the following operations:
-
-
-
-
- *
- *  -   https://***REMOVED***/login?client_id=***REMOVED***&response_type=code&scope=aws.cognito.signin.user.admin+openid&redirect_uri=https%3A%2F%2Fdehwoetvsljgieghlskhgs.sudo.coffee%3Freferer%3DsignInCallback
- *
- *
- *
- *
- *
- *
- *
- *
- *
+6.  Over at << STRING12 >>, the Application performs the operations, enumerated
+    in (~/modules/oidc-relying-party.js)
+  
  *
  *
  *
