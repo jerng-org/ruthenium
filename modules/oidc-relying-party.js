@@ -2,7 +2,7 @@
 
 const mark = require ( '/var/task/modules/mark.js' )
 
-const authorizationCodeFlowValidation = async () => {
+const authorizationCodeFlowJWTValidation = async () => {
 
     //  1.1.  
     //  Node modules
@@ -374,7 +374,7 @@ const authorizationCodeFlowValidation = async () => {
 }
 
 const oidcRelyingParty = {
-    authorizationCodeFlowValidation : authorizationCodeFlowValidation
+    authorizationCodeFlowJWTValidation : authorizationCodeFlowJWTValidation
 }
 
 module.exports  = oidcRelyingParty
