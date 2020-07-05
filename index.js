@@ -233,7 +233,7 @@ try {
             `rutheniumResponse.slice(0,50) ... [truncated]` :
             ((typeof rutheniumResponse != 'object') ?
                 `(ruthenium.js) responded with typeof (neither a string nor an object); we might have a problem.` :
-                (`status code: ${ rutheniumResponse.statusCode }`)
+                (`status code: ${ rutheniumResponse }`)
             )
         )
 
