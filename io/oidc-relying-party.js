@@ -4,7 +4,7 @@ const mark = require('/var/task/modules/mark.js')
 
 const authorizationCodeFlowJwtValidation = async code => {
 
-    console.log(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (id_token)`)
+    console.log(`(io/oidc-relying-party.js) 0. : (code) : `, code )
 
     //  1.1.  
     //  Node modules
