@@ -226,7 +226,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                 let processedTokens = {}
                 for (const key in tokens) {
 
-                    console.log(`(io/oidc-relying-party.js) 7.1.3.: found a (key) in (tokens): `, key)
+                    console.log(`(io/oidc-relying-party.js) 7.1.3.: found a key in (tokens): (`, key, `) whose value : `, tokens[key])
 
                     processedTokens[key] = processToken(tokens[key])
                 }
