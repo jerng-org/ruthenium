@@ -163,7 +163,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  
     //  })
 
-console.log(`(oidc-relying-party.js) BEFORE ALLSETTLED`)
+console.error(`(oidc-relying-party.js) BEFORE ALLSETTLED`)
 
     //  7.
     //  Wait for (all) to be (Settled)
@@ -177,7 +177,7 @@ console.log(`(oidc-relying-party.js) BEFORE ALLSETTLED`)
         //  (then)
         .then(resolvedValue => {
 
-console.log(`(oidc-relying-party.js) ALLSETTLED.THEN`)
+console.error(`(oidc-relying-party.js) ALLSETTLED.THEN`)
 
                 //  EXIT_OPPORTUNITY_2
                 if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
@@ -241,7 +241,7 @@ console.log(`(oidc-relying-party.js) ALLSETTLED.THEN`)
                 for (const key in tokens) {
                     processedTokens[key] = processToken(tokens[key])
                 }
-console.log(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTokens)
+console.error(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTokens)
 
                 /*
                 const processedTokens = {
@@ -313,7 +313,7 @@ console.log(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTo
 
                 //  7.4.2.
                 //  Attempt validation;
-                console.log(`(io/oidc-relying-party.js) 7.4.2.: before conditionals`,
+                console.error(`(io/oidc-relying-party.js) 7.4.2.: before conditionals`,
                     `
 
 tokenValidationArguments.id_token:`,
@@ -328,7 +328,7 @@ tokenValidationArguments.access_token:`,
                 if (tokenValidationArguments.id_token &&
                     tokenValidationArguments.id_token.pem &&
                     tokenValidationArguments.id_token.alg) {
-                    console.log(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (id_token)`)
+                    console.error(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (id_token)`)
                     try {
                         tokenValidatedPayloads.id_token = jsonwebtoken.verify(
                             tokenValidationArguments.id_token.token,
@@ -343,7 +343,7 @@ tokenValidationArguments.access_token:`,
                 if (tokenValidationArguments.access_token &&
                     tokenValidationArguments.access_token.pem &&
                     tokenValidationArguments.access_token.alg) {
-                    console.log(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (access_token)`)
+                    console.error(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (access_token)`)
                     try {
                         tokenValidatedPayloads.access_token = jsonwebtoken.verify(
                             tokenValidationArguments.access_token.token,
@@ -356,7 +356,7 @@ tokenValidationArguments.access_token:`,
                     }
                 }
 
-                console.log(`(io/oidc-relying-party.js) 7.4.2.:`, tokenValidatedPayloads)
+                console.error(`(io/oidc-relying-party.js) 7.4.2.:`, tokenValidatedPayloads)
 
                 //  THE FOLLOWING SECTIONS ARE MORE USEFUL WHEN THIS SCRIPT IS BEING 
                 //  TESTED IN A STANDALONE CONTEXT; HERE IT IS WRAPPED IN A WEB 
@@ -438,7 +438,7 @@ tokenValidationArguments.access_token:`,
             }
         )
     // end section (7.x) 
-console.log(`(oidc-relying-party.js) AFTER ALLSETTLED`)
+console.error(`(oidc-relying-party.js) AFTER ALLSETTLED`)
 
     return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation DEFAULT'
 }
