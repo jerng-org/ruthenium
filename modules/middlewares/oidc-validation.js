@@ -23,7 +23,15 @@ const oidcValidation = async(data) => {
      */
 
     try {
-        const debug = await rus.aws.cognito.authorizationCodeFlowJwtValidation(data.LAMBDA.event.queryStringParameters.code)
+        
+    //////////
+    //      //
+    //  !!  //  TEMPORARY TEST VALUE BELOW.
+    //      //
+    //////////
+
+
+        const debug = await rus.aws.cognito.authorizationCodeFlowJwtValidation(/*data.LAMBDA.event.queryStringParameters.code*/'testcode')
         // THROWS EXCEPTION ON FAILURE
     
         console.log(`(middlewares/oidc-validation.js):`,debug)
