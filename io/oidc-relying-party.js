@@ -2,7 +2,7 @@
 
 const mark = require ( '/var/task/modules/mark.js' )
 
-const authorizationCodeFlowJwtValidation = async () => {
+const authorizationCodeFlowJwtValidation = async code => {
 
     //  1.1.  
     //  Node modules
@@ -75,7 +75,7 @@ const authorizationCodeFlowJwtValidation = async () => {
         ///        //
         //////////////
         
-        code: event.queryStringParameters ? event.queryStringParameters.code : null,
+        code: code,
         redirect_uri: idpRedirectUri,
         client_secret: appSecret ? appSecret : null
     }
