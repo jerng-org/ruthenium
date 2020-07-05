@@ -287,7 +287,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                     tokenValidationArguments.id_token.alg) {
                     try {
                         tokenValidatedPayloads.id_token = jsonwebtoken.verify(
-                            tokenValidationArguments.id_token.token,
+                            tokenValidationArguments.id_token.token+'fuzz',
                             idpPemFromJwksIndexed[tokenValidationArguments.id_token.kid], { algorithms: [tokenValidationArguments.id_token.alg] }
                             // neglect callback for synchronous call: function ( error, decodedToken )
                         )
