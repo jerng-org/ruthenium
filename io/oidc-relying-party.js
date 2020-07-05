@@ -168,7 +168,7 @@ console.log(`(oidc-relying-party.js) BEFORE PROMISE.ALL`)
     //  7.
     //  (.all) resolves only if (all its children) resolve; if any child rejects
     //  , then (.all) rejects also. 
-    Promise
+    await Promise
         .all([
             issuerExchangeResponsePromise, // 4.4.
             issuerJwksResponsePromise, // 5.2.
