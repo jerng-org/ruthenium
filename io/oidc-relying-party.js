@@ -177,30 +177,29 @@ const authorizationCodeFlowJwtValidation = async code => {
         .then(resolvedValue => {
 
                 //  EXIT_OPPORTUNITY_2
-
-console.error (`issuerExchangeResponseBody:`,issuerExchangeResponseBody)
-                switch (issuerExchangeResponseBody) {
-
-                    case ('invalid_grant'):
-                        throw Error(`(oidc-relying-party.js) 7. 
-                        (issuerExchangeResponseBody) was found to be 
-                    "invalid_grant"`)
-
-                    default:
-                        null
-                }
-                //  if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
-                //  7. : (issuerExchangeResponseBody) was falsy : we sent a HTTP request 
-                //  containing (code) to the OIDC issuer, its HTTP response body
-                //  was falsy;`)
+                if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
+                7. : (issuerExchangeResponseBody) was falsy : we sent a HTTP request 
+                containing (code) to the OIDC issuer, its HTTP response body
+                was falsy;`)
 
                 //  7.1.
                 //  See (4.)
                 //
                 //  7.1.1.
                 //  Extract unprocessed tokens from 4.3.
-                const tokens = JSON.parse(issuerExchangeResponseBody, null, 4)
+                const parsedIssuerExchangeResponseBody = JSON.parse(issuerExchangeResponseBody, null, 4)
 
+                if ( 'error' in parsedIssuerExchangeResponseBody )
+                {
+                    throw Error(`(oidc-relying-party.js) 7. 
+                    (parsedIssuerExchangeResponseBody.error) was found to be 
+                    "${ parsedIssuerExchangeResponseBody.error }"`)
+                }
+                else
+                {
+                    const tokens = JSON.parse(issuerExchangeResponseBody, null, 4)
+                }
+                
                 //  7.1.2.
                 //  Define operations to process (7.1.)
                 const processToken = token => {
