@@ -40,7 +40,7 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
             console.warn(intermediateData)
             const thingType = typeof intermediateData
 
-            throw Error(`ruthenium.js : 
+            throw Error(`(ruthenium-reducer.js): 
                 
     a middleware, (${ ( CURRENT_MIDDLEWARE.name
                         ?   CURRENT_MIDDLEWARE.name
