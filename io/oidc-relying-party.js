@@ -2,6 +2,8 @@
 
 const mark = require('/var/task/modules/mark.js')
 
+const rus = require ( '/var/task/modules/r-u-s.js' )
+
 const authorizationCodeFlowJwtValidation = async code => {
 
     //  EXIT_OPPORTUNITY_1
