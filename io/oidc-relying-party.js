@@ -163,6 +163,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  
     //  })
 
+console.log(`(oidc-relying-party.js) BEFORE ALLSETTLED`)
 
     //  7.
     //  Wait for (all) to be (Settled)
@@ -175,6 +176,8 @@ const authorizationCodeFlowJwtValidation = async code => {
 
         //  (then)
         .then(resolvedValue => {
+
+console.log(`(oidc-relying-party.js) ALLSETTLED.THEN`)
 
                 //  EXIT_OPPORTUNITY_2
                 if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
@@ -435,6 +438,7 @@ tokenValidationArguments.access_token:`,
             }
         )
     // end section (7.x) 
+console.log(`(oidc-relying-party.js) AFTER ALLSETTLED`)
 
     return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation DEFAULT'
 }
