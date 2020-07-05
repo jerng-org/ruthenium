@@ -226,7 +226,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                 let processedTokens = {}
                 for (const key in tokens) {
 
-                    console.log(`(io/oidc-relying-party.js) 7.1.3.: found a key in (tokens): (`, key, `) whose value : `, tokens[key])
+                    console.log(`(io/oidc-relying-party.js) 7.1.3.: found a key in (tokens): (`, key, `) whose value is: `, tokens[key])
 
                     processedTokens[key] = processToken(tokens[key])
                 }
@@ -413,6 +413,7 @@ tokenValidationArguments.access_token:`,
                 //  //  Sends a response to AWS Lambda
                 //  //  callback(null, response)
 
+                
             },
 
             rReason => {
@@ -423,7 +424,8 @@ tokenValidationArguments.access_token:`,
             }
         )
     // end section (7.x) 
-
+    
+    return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation'
 }
 
 const oidcRelyingParty = {
