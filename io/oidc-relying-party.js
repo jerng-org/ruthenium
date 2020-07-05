@@ -287,7 +287,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                     tokenValidationArguments.id_token.alg) {
                     try {
                         tokenValidatedPayloads.id_token = jsonwebtoken.verify(
-                            tokenValidationArguments.id_token.token+'fuzz',
+                            tokenValidationArguments.id_token.token,
                             idpPemFromJwksIndexed[tokenValidationArguments.id_token.kid], { algorithms: [tokenValidationArguments.id_token.alg] }
                             // neglect callback for synchronous call: function ( error, decodedToken )
                         )
@@ -310,6 +310,8 @@ const authorizationCodeFlowJwtValidation = async code => {
                         console.error(`Failed to Validate ACCESS_TOKEN`, e)
                     }
                 }
+
+                console.log(`(io/oidc-relying-party.js)`,tokenValidatedPayloads)
 
                 //  THE FOLLOWING SECTIONS ARE MORE USEFUL WHEN THIS SCRIPT IS BEING 
                 //  TESTED IN A STANDALONE CONTEXT; HERE IT IS WRAPPED IN A WEB 
