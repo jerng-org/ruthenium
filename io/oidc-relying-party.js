@@ -285,6 +285,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                 if (tokenValidationArguments.id_token &&
                     tokenValidationArguments.id_token.pem &&
                     tokenValidationArguments.id_token.alg) {
+console.log(`(io/oidc-relying-party.js): before try, to validate (id_token)`)
                     try {
                         tokenValidatedPayloads.id_token = jsonwebtoken.verify(
                             tokenValidationArguments.id_token.token,
@@ -299,6 +300,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                 if (tokenValidationArguments.access_token &&
                     tokenValidationArguments.access_token.pem &&
                     tokenValidationArguments.access_token.alg) {
+console.log(`(io/oidc-relying-party.js): before try, to validate (access_token)`)
                     try {
                         tokenValidatedPayloads.access_token = jsonwebtoken.verify(
                             tokenValidationArguments.access_token.token,
@@ -311,7 +313,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                     }
                 }
 
-                console.log(`(io/oidc-relying-party.js):`,tokenValidatedPayloads)
+console.log(`(io/oidc-relying-party.js):`,tokenValidatedPayloads)
 
                 //  THE FOLLOWING SECTIONS ARE MORE USEFUL WHEN THIS SCRIPT IS BEING 
                 //  TESTED IN A STANDALONE CONTEXT; HERE IT IS WRAPPED IN A WEB 
