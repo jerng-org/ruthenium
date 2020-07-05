@@ -188,30 +188,30 @@ const authorizationCodeFlowJwtValidation = async code => {
                 //  7.1.1.
                 //  Extract unprocessed tokens from 4.3.
                 const parsedIssuerExchangeResponseBody = JSON.parse(issuerExchangeResponseBody, null, 4)
-
-                if ( 'error' in parsedIssuerExchangeResponseBody )
-                {
-                    throw Error(`(oidc-relying-party.js) 7. 
-                    (parsedIssuerExchangeResponseBody.error) was found to be 
-                    "${ parsedIssuerExchangeResponseBody.error }"`)
+                if (!parsedIssuerExchangeResponseBody) {
+                    // EXIT_OPPORTUNITY_4
+                    throw Error(`(oidc-relying-party.js) 7.1.2.
+                    (parsedIssuerExchangeResponseBody) was found to be falsy;`)
                 }
                 else
-                {
-                    const tokens = JSON.parse(issuerExchangeResponseBody, null, 4)
+                if ('error' in parsedIssuerExchangeResponseBody) {
+                    // EXIT_OPPORTUNITY_3
+                    throw Error(`(oidc-relying-party.js) 7. 
+                    (parsedIssuerExchangeResponseBody.error) was found to be 
+                    "${ parsedIssuerExchangeResponseBody.error }";`)
+
+                    // Expected error values: https://tools.ietf.org/html/rfc6749#section-5.2
                 }
-                
+                // If checks pass, then default:
+                const tokens = parsedIssuerExchangeResponseBody
+
                 //  7.1.2.
                 //  Define operations to process (7.1.)
                 const processToken = token => {
 
-                    // EXIT_OPPORTUNITY_3
-                    if (!token) throw Error(`(oidc-relying-party.js) 7.1.2.
-                    (processToken) was called with the argument (token), (token)
-                    was falsy;`)
-
                     let splitJwt = token.split('.')
 
-                    // EXIT_OPPORTUNITY_4
+                    // EXIT_OPPORTUNITY_5
                     if (splitJwt.length != 3) { throw Error(`
                     (oidc-relying-party.js) 7.1.2. (processToken) tried to split
                     (token), expected to find three (3) sections, but did not 
@@ -236,11 +236,9 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 let processedTokens = {}
                 for (const key in tokens) {
-
-                    console.log(`(io/oidc-relying-party.js) 7.1.3.: found a key in (tokens): (`, key, `) whose value is: `, tokens[key])
-
                     processedTokens[key] = processToken(tokens[key])
                 }
+console.log(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTokens)
 
                 /*
                 const processedTokens = {
