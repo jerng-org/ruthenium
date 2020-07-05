@@ -48,7 +48,7 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
     
     ... returned an unconventional ( intermediateData ): (
 ${ 
-    rus.print.stringify ( {
+    rus.print.stringify4 ( {
         intermediateData_TYPE:  thingType,
         TO_STRING:              (       thingType == 'object'
                                     &&  intermediateData.toString
