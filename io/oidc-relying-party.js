@@ -178,16 +178,16 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 //  EXIT_OPPORTUNITY_2
 
-                switch (issuerExchangeResponseBody) {
+                //switch (issuerExchangeResponseBody) {
 
-                    case ('invalid_grant'):
+                    //case ('invalid_grant'):
                         throw Error(`(oidc-relying-party.js) 7. 
                         (issuerExchangeResponseBody) was found to be 
                         "invalid_grant"`)
 
-                    default:
-                        null
-                }
+                  //  default:
+                   //     null
+                //}
                 //  if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
                 //  7. : (issuerExchangeResponseBody) was falsy : we sent a HTTP request 
                 //  containing (code) to the OIDC issuer, its HTTP response body
