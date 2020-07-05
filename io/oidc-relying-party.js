@@ -32,16 +32,16 @@ const authorizationCodeFlowJwtValidation = async code => {
 
     //  2.2.
     //  OIDC Discovery : JSON Web Key : https://tools.ietf.org/html/draft-ietf-jose-json-web-key-41
-    const idpJwksUrl = `***REMOVED***`
+    const issuerJwksUri = `***REMOVED***`
 
     //  2.3.
     //  OIDC redirect_url
-    const idpRedirectUri = `https://dehwoetvsljgieghlskhgs.sudo.coffee?referer=signInCallback`
+    const issuerRedirectUri = `https://dehwoetvsljgieghlskhgs.sudo.coffee?referer=signInCallback`
 
     //  3.
     //  OIDC Relying Party (RP) / Client Application / sudo.coffee;
-    const appId = `***REMOVED***`
-    const appSecret = `***REMOVED***`
+    const relyingPartyId = `***REMOVED***`
+    const relyingPartySecret = `***REMOVED***`
 
     //  4.
     //  OAuth : Access Token, ID Token, Refresh Token
@@ -50,41 +50,41 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  4.1.
     //  Configuration for (4.);
     //  URI is obtained from (2.1.)
-    //  UPSTREAM_FROM > https.request() > idpExchangeReq;
-    const idpExchangeReqOptions = {
+    //  UPSTREAM_FROM > https.request() > issuerExchangeRequest;
+    const issuerExchangeRequestOptions = {
         protocol: 'https:',
         hostname: '***REMOVED***', // 2. OAuth : AUTHORISATION SERVER ; OIDC : Issuer;
         port: 443,
         path: '/oauth2/token',
         method: 'POST',
         headers: {
-            'Authorization': appSecret ? `Basic ` + (Buffer.from(appId + ':' + appSecret)).toString('base64') : null,
+            'Authorization': relyingPartySecret ? `Basic ` + (Buffer.from(relyingPartyId + ':' + relyingPartySecret)).toString('base64') : null,
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     }
 
     //  4.2.
     //  The request body for (4.)
-    //  UPSTREAM_FROM > https.request() > idpExchangeReq;
-    const idpExchangeReqBody = {
+    //  UPSTREAM_FROM > https.request() > issuerExchangeRequest;
+    const issuerExchangeRequestBody = {
         grant_type: 'authorization_code',
-        client_id: appId,
+        client_id: relyingPartyId,
         code: code,
-        redirect_uri: idpRedirectUri,
-        client_secret: appSecret ? appSecret : null
+        redirect_uri: issuerRedirectUri,
+        client_secret: relyingPartySecret ? relyingPartySecret : null
     }
     // TODO: extend with PKCE
 
     //  4.3.
     //  Variable which stores the response (result of) (4.);
-    let idpExchangeResBody
+    let issuerExchangeResponseBody
 
     //  4.4.
     //  Promise containing the result of (4.);
     //  REMEMBER: Promise executors are executed immediately;
-    let idpExchangePromise = new Promise((F, R) => {
+    let issuerExchangeResponsePromise = new Promise((F, R) => {
 
-        const idpExchangeReq = https.request(idpExchangeReqOptions, res => {
+        const issuerExchangeRequest = https.request(issuerExchangeRequestOptions, res => {
 
             let data = ''
 
@@ -93,14 +93,14 @@ const authorizationCodeFlowJwtValidation = async code => {
             })
 
             res.on('end', () => {
-                idpExchangeResBody = data
-                F('idpExchangePromise fulfilment value')
+                issuerExchangeResponseBody = data
+                F('issuerExchangeResponsePromise fulfilment value')
             })
 
         })
-        idpExchangeReq.on('error', e => console.error(`IDP Token Exchange Request Error`, e, R(e)))
-        idpExchangeReq.write(querystring.stringify(idpExchangeReqBody)) // documented under Node's (http.write)
-        idpExchangeReq.end()
+        issuerExchangeRequest.on('error', e => console.error(`IDP Token Exchange Request Error`, e, R(e)))
+        issuerExchangeRequest.write(querystring.stringify(issuerExchangeRequestBody)) // documented under Node's (http.write)
+        issuerExchangeRequest.end()
     })
 
     //  5.
@@ -115,9 +115,9 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  5.2
     //  Promise containing the result of (5.);
     //  REMEMBER: Promise executors are executed immediately;
-    let idpJwksPromise = new Promise((F, R) => {
+    let issuerJwksResponsePromise = new Promise((F, R) => {
 
-        https.get(idpJwksUrl, resp => {
+        https.get(issuerJwksUri, resp => {
 
             let data = ''
 
@@ -127,7 +127,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
             resp.on('end', () => {
                 idpJwksResBody = JSON.parse(data)
-                F('idpJwksPromise fulfilment value')
+                F('issuerJwksResponsePromise fulfilment value')
             })
 
         }).on("error", e => console.error(`IDP JWKS Request Error`, e, R(e)))
@@ -168,26 +168,37 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  Wait for (all) to be (Settled)
     Promise
         .allSettled([
-            idpExchangePromise, // 4.4.
-            idpJwksPromise, // 5.2.
+            issuerExchangeResponsePromise, // 4.4.
+            issuerJwksResponsePromise, // 5.2.
             // idpConfigPromise // 6.2.
         ])
 
         //  (then)
-        .then( resolvedValue => {
+        .then(resolvedValue => {
 
                 //  EXIT_OPPORTUNITY_2
-                if (!idpExchangeResBody) throw Error(`(oidc-relying-party.js) 
-                7. : (idpExchangeResBody) was falsy : we sent a HTTP request 
-                containing (code) to the OIDC issuer, its HTTP response body
-                was falsy;`)
+
+                switch (issuerExchangeResponseBody) {
+
+                    case ('invalid_grant'):
+                        throw Error(`(oidc-relying-party.js) 7. 
+                        (issuerExchangeResponseBody) was found to be 
+                        "invalid_grant"`)
+
+                    default:
+                        null
+                }
+                //  if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
+                //  7. : (issuerExchangeResponseBody) was falsy : we sent a HTTP request 
+                //  containing (code) to the OIDC issuer, its HTTP response body
+                //  was falsy;`)
 
                 //  7.1.
                 //  See (4.)
                 //
                 //  7.1.1.
                 //  Extract unprocessed tokens from 4.3.
-                const tokens = JSON.parse(idpExchangeResBody, null, 4)
+                const tokens = JSON.parse(issuerExchangeResponseBody, null, 4)
 
                 //  7.1.2.
                 //  Define operations to process (7.1.)
@@ -201,7 +212,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                     let splitJwt = token.split('.')
 
                     // EXIT_OPPORTUNITY_4
-                    if (splitJwt.length != 3) { console.error (splitJwt);throw Error(`
+                    if (splitJwt.length != 3) { throw Error(`
                     (oidc-relying-party.js) 7.1.2. (processToken) tried to split
                     (token), expected to find three (3) sections, but did not 
                     find (3) sections; the Sections found: ${splitJwt}`) }
@@ -414,7 +425,7 @@ tokenValidationArguments.access_token:`,
                 //  //  callback(null, response)
 
                 return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.allSettled RESOLVED'
-                
+
             },
 
             rejectedReason => {
@@ -426,7 +437,7 @@ tokenValidationArguments.access_token:`,
             }
         )
     // end section (7.x) 
-    
+
     return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation DEFAULT'
 }
 
