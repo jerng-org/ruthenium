@@ -14,6 +14,9 @@ mark(`~/io/cognito.js LOADED`)
 
 2020-07-03 Notes on Cognito integration go here, temporarily:  
 
+Items below describe the Authorisation Server / Issuer implementation; for the 
+Relying Party logic, refer to (oidc-relying-party.js).
+
 Things which appear to be missing from the Cognito user experience:
 
     -   Entity Relationship Diagram for its entire OIDC Issuer implementation,
