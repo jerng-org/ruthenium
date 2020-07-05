@@ -174,7 +174,7 @@ const authorizationCodeFlowJwtValidation = async code => {
         ])
 
         //  (then)
-        .then(fValue => {
+        .then( resolvedValue => {
 
                 //  EXIT_OPPORTUNITY_2
                 if (!idpExchangeResBody) throw Error(`(oidc-relying-party.js) 
@@ -413,19 +413,21 @@ tokenValidationArguments.access_token:`,
                 //  //  Sends a response to AWS Lambda
                 //  //  callback(null, response)
 
+                return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.allSettled RESOLVED'
                 
             },
 
-            rReason => {
+            rejectedReason => {
                 //callback(rReason)
                 console.error(`(~/io/oidc-relying-party.js) algorithm section 
                                 7.x; Promise.allSettled was rejected with 
-                                reason:`, rReason)
+                                reason:`, rejectedReason)
+                return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.allSettled REJECTED'
             }
         )
     // end section (7.x) 
     
-    return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation'
+    return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation DEFAULT'
 }
 
 const oidcRelyingParty = {
