@@ -2,6 +2,12 @@
 
 const mark = require('/var/task/modules/mark.js')
 
+/*  The Authorization Server a.k.a. Issuer (Cognito) chooses within its rights
+ *  granted by the OAuth 2.0 (RFC 6749.4.1.2.) to never accept the same (code)
+ *  twice;
+ */
+
+
 const cognito =  require (`/var/task/io/oidc-relying-party.js`)
 //  At this time (cognito.js) services as a documentation layer, as it directly
 //  re-exports (oidc-relying-party.js), however, in the future this may not be
