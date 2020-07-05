@@ -36,7 +36,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
     //  2.3.
     //  OIDC redirect_url
-    const issuerRedirectUri = `https://dehwoetvsljgieghlskhgs.sudo.coffee?referer=signInCallback`
+    const issuerRedirectUri = `https://secure.api.sudo.coffee/test-middleware?route=restful&type=desk-schemas&reader=human`
 
     //  3.
     //  OIDC Relying Party (RP) / Client Application / sudo.coffee;
