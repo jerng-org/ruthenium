@@ -163,12 +163,13 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  
     //  })
 
-console.error(`(oidc-relying-party.js) BEFORE ALLSETTLED`)
+console.log(`(oidc-relying-party.js) BEFORE PROMISE.ALL`)
 
     //  7.
-    //  Wait for (all) to be (Settled)
+    //  (.all) resolves only if (all its children) resolve; if any child rejects
+    //  , then (.all) rejects also. 
     Promise
-        .allSettled([
+        .all([
             issuerExchangeResponsePromise, // 4.4.
             issuerJwksResponsePromise, // 5.2.
             // idpConfigPromise // 6.2.
@@ -177,7 +178,7 @@ console.error(`(oidc-relying-party.js) BEFORE ALLSETTLED`)
         //  (then)
         .then(resolvedValue => {
 
-console.error(`(oidc-relying-party.js) ALLSETTLED.THEN`)
+console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`)
 
                 //  EXIT_OPPORTUNITY_2
                 if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
@@ -241,7 +242,7 @@ console.error(`(oidc-relying-party.js) ALLSETTLED.THEN`)
                 for (const key in tokens) {
                     processedTokens[key] = processToken(tokens[key])
                 }
-console.error(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTokens)
+console.log(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTokens)
 
                 /*
                 const processedTokens = {
@@ -313,7 +314,7 @@ console.error(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processed
 
                 //  7.4.2.
                 //  Attempt validation;
-                console.error(`(io/oidc-relying-party.js) 7.4.2.: before conditionals`,
+                console.log(`(io/oidc-relying-party.js) 7.4.2.: before conditionals`,
                     `
 
 tokenValidationArguments.id_token:`,
@@ -328,7 +329,7 @@ tokenValidationArguments.access_token:`,
                 if (tokenValidationArguments.id_token &&
                     tokenValidationArguments.id_token.pem &&
                     tokenValidationArguments.id_token.alg) {
-                    console.error(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (id_token)`)
+                    console.log(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (id_token)`)
                     try {
                         tokenValidatedPayloads.id_token = jsonwebtoken.verify(
                             tokenValidationArguments.id_token.token,
@@ -343,7 +344,7 @@ tokenValidationArguments.access_token:`,
                 if (tokenValidationArguments.access_token &&
                     tokenValidationArguments.access_token.pem &&
                     tokenValidationArguments.access_token.alg) {
-                    console.error(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (access_token)`)
+                    console.log(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (access_token)`)
                     try {
                         tokenValidatedPayloads.access_token = jsonwebtoken.verify(
                             tokenValidationArguments.access_token.token,
@@ -356,7 +357,7 @@ tokenValidationArguments.access_token:`,
                     }
                 }
 
-                console.error(`(io/oidc-relying-party.js) 7.4.2.:`, tokenValidatedPayloads)
+                console.log(`(io/oidc-relying-party.js) 7.4.2.:`, tokenValidatedPayloads)
 
                 //  THE FOLLOWING SECTIONS ARE MORE USEFUL WHEN THIS SCRIPT IS BEING 
                 //  TESTED IN A STANDALONE CONTEXT; HERE IT IS WRAPPED IN A WEB 
@@ -425,20 +426,20 @@ tokenValidationArguments.access_token:`,
                 //  //  Sends a response to AWS Lambda
                 //  //  callback(null, response)
 
-                return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.allSettled RESOLVED'
+                return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.all RESOLVED'
 
             },
 
             rejectedReason => {
                 //callback(rReason)
                 console.error(`(~/io/oidc-relying-party.js) algorithm section 
-                                7.x; Promise.allSettled was rejected with 
+                                7.x; Promise.all was rejected with 
                                 reason:`, rejectedReason)
-                return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.allSettled REJECTED'
+                return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.all REJECTED'
             }
         )
     // end section (7.x) 
-console.error(`(oidc-relying-party.js) AFTER ALLSETTLED`)
+console.log(`(oidc-relying-party.js) AFTER PROMISE.ALL`)
 
     return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation DEFAULT'
 }
