@@ -225,7 +225,7 @@ try {
             //          is installed. #security
         ]
 
-        const rutheniumResponse = ruthenium(hostInitializedData, middlewares)
+        const rutheniumResponse = await ruthenium(hostInitializedData, middlewares)
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
         console.log(`Lambda Handler EXIT Point:`,
@@ -233,7 +233,7 @@ try {
             `rutheniumResponse.slice(0,50) ... [truncated]` :
             ((typeof rutheniumResponse != 'object') ?
                 `(ruthenium.js) responded with typeof (neither a string nor an object); we might have a problem.` :
-                (`status code: ${ rutheniumResponse }`)
+                (`status code: ${ rutheniumResponse.statusCode }`)
             )
         )
 
