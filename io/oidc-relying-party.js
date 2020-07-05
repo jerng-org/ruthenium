@@ -4,6 +4,8 @@ const mark = require('/var/task/modules/mark.js')
 
 const authorizationCodeFlowJwtValidation = async code => {
 
+    console.log(`(io/oidc-relying-party.js) 7.4.2.: before try, to validate (id_token)`)
+
     //  1.1.  
     //  Node modules
     const https = require('https')
@@ -66,15 +68,6 @@ const authorizationCodeFlowJwtValidation = async code => {
     const idpExchangeReqBody = {
         grant_type: 'authorization_code',
         client_id: appId,
-
-        ////////
-        //   ////
-        //  //  //
-        // //    //     Take note:
-        ////  !!  //
-        ///        //
-        //////////////
-
         code: code,
         redirect_uri: idpRedirectUri,
         client_secret: appSecret ? appSecret : null
