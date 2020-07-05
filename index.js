@@ -48,6 +48,7 @@ try {
     rus.conf.verbosity < 1 ||
         console.warn(
             `DEBT_NOTE`, [
+                
                 `CURRENT:`,
 
                 `cognito - integration; designing with a view to opt-out easily, 
@@ -60,6 +61,8 @@ try {
             
             BACKLOG:`,
 
+                `history API, S3 hosting with session, for SPA`,
+                
                 `https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks`,
 
                 `https://developer.mozilla.org/en-US/docs/Glossary/HSTS`,
