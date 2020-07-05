@@ -54,9 +54,12 @@ try {
                 `cognito - integration; designing with a view to opt-out easily, 
             later;`,
 
+                `replace relyingPartySecrets after feature development`,
+                
                 `sessions - stand-alone, and with cognito-integration`,
 
                 `single-page-app framework; history API`,
+                
                 `
             
             BACKLOG:`,
