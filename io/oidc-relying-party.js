@@ -2,8 +2,6 @@
 
 const mark = require('/var/task/modules/mark.js')
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const authorizationCodeFlowJwtValidation = async code => {
 
     //  EXIT_OPPORTUNITY_1
@@ -206,7 +204,7 @@ console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding)
                     if (splitJwt.length != 3) { throw Error(`
                     (oidc-relying-party.js) 7.1.2. (processToken) tried to split
                     (token), expected to find three (3) sections, but did not 
-                    find (3) sections; the Sections found: ${ rus.print.stringify4(splitJwt) }`) }
+                    find (3) sections; the Sections found: ${ JSON.stringify(splitJwt,null,4) }`) }
 
                     let decodedSections = splitJwt.map(s => {
                         let decodedSection = Buffer.from(s, 'base64').toString('utf8')
