@@ -65,7 +65,7 @@ ${
     
     Here's DATA before it was operated on by the faulty middleware:
     
-    ${ rus.stringify ( DATA ) }
+    ${ rus.print.stringify4 ( DATA ) }
 `)
 
             /*  More sensitive, related, information:
