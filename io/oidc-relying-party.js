@@ -201,10 +201,10 @@ const authorizationCodeFlowJwtValidation = async code => {
                     let splitJwt = token.split('.')
 
                     // EXIT_OPPORTUNITY_4
-                    if (splitJwt.length != 3) throw Error(`
+                    if (splitJwt.length != 3) { console.error (splitJwt); throw Error(`
                     (oidc-relying-party.js) 7.1.2. (processToken) tried to split
                     (token), expected to find three (3) sections, but did not 
-                    find (3) sections; SECTIONS :`, splitJwt)
+                    find (3) sections`) }
 
                     let decodedSections = splitJwt.map(s => {
                         let decodedSection = Buffer.from(s, 'base64').toString('utf8')
