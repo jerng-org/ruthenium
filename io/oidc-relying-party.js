@@ -162,7 +162,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 const [issuerExchangeResponseBody, issuerJwksResponseBody] = resolvedValues
 
-                console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`)
+                console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`, `IERB:`, issuerExchangeResponseBody, `IJRB:`,issuerJwksResponseBody)
 
                 //  EXIT_OPPORTUNITY_2
                 if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
