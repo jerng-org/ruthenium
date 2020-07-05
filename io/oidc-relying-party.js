@@ -73,6 +73,7 @@ const authorizationCodeFlowJwtValidation = async code => {
         redirect_uri: issuerRedirectUri,
         client_secret: relyingPartySecret ? relyingPartySecret : null
     }
+console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding): `, issuerExchangeRequestBody)
     // TODO: extend with PKCE
 
     //  4.3.
