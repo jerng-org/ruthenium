@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: `(oidc-relying-party.js) doesn't (throw), but we need to fuzz test it a bit more`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
