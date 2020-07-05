@@ -311,7 +311,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                     }
                 }
 
-                console.log(`(io/oidc-relying-party.js)`,tokenValidatedPayloads)
+                console.log(`(io/oidc-relying-party.js):`,tokenValidatedPayloads)
 
                 //  THE FOLLOWING SECTIONS ARE MORE USEFUL WHEN THIS SCRIPT IS BEING 
                 //  TESTED IN A STANDALONE CONTEXT; HERE IT IS WRAPPED IN A WEB 
