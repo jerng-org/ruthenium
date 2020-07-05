@@ -4,7 +4,8 @@ const mark = require('/var/task/modules/mark.js')
 
 const authorizationCodeFlowJwtValidation = async code => {
 
-    console.log(`(io/oidc-relying-party.js) 0. : (code) : `, code )
+    //  EXIT_OPPORTUNITY_1
+    if (!code) throw Error(`(oidc-relying-party.js) 0. : (code) was falsy`)
 
     //  1.1.  
     //  Node modules
@@ -175,6 +176,12 @@ const authorizationCodeFlowJwtValidation = async code => {
         //  (then)
         .then(fValue => {
 
+                //  EXIT_OPPORTUNITY_2
+                if (!idpExchangeResBody) throw Error(`(oidc-relying-party.js) 
+                7. : (idpExchangeResBody) was falsy : we sent a HTTP request 
+                containing (code) to the OIDC issuer, its HTTP response body
+                was falsy;`)
+
                 //  7.1.
                 //  See (4.)
                 //
@@ -186,10 +193,18 @@ const authorizationCodeFlowJwtValidation = async code => {
                 //  Define operations to process (7.1.)
                 const processToken = token => {
 
-                    if (!token) return 'no token'
+                    // EXIT_OPPORTUNITY_3
+                    if (!token) throw Error(`(oidc-relying-party.js) 7.1.2.
+                    (processToken) was called with the argument (token), (token)
+                    was falsy;`)
 
                     let splitJwt = token.split('.')
-                    if (splitJwt.length != 3) return token
+
+                    // EXIT_OPPORTUNITY_4
+                    if (splitJwt.length != 3) throw Error(`
+                    (oidc-relying-party.js) 7.1.2. (processToken) tried to split
+                    (token), expected to find three (3) sections, but did not 
+                    find (3) sections;`)
 
                     let decodedSections = splitJwt.map(s => {
                         let decodedSection = Buffer.from(s, 'base64').toString('utf8')
@@ -207,11 +222,22 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 // 7.1.3.
                 // Apply (7.1.2.) to (7.1.1.)
+
+                let processedTokens = {}
+                for (const key in tokens) {
+
+                    console.log(`(io/oidc-relying-party.js) 7.1.3.: found a (key) in (tokens): `, key)
+
+                    processedTokens[key] = processToken(tokens[key])
+                }
+
+                /*
                 const processedTokens = {
                     id_token: processToken(tokens.id_token),
                     access_token: processToken(tokens.access_token),
                     refresh_token: processToken(tokens.refresh_token)
                 }
+                */
 
                 //  7.2.
                 //  See (5.)
