@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(-)',
+    gitCommitMessage: '(oidc-relying-party.js) auth-code-flow, tokens obtained, but not yet properly delimited (.);',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
