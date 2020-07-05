@@ -77,26 +77,17 @@ const authorizationCodeFlowJwtValidation = async code => {
 
     //  4.3.
     //  Variable which stores the response (result of) (4.);
-    let issuerExchangeResponseBody
+    //  See 7. : issuerExchangeResponseBody
 
     //  4.4.
     //  Promise containing the result of (4.);
     //  REMEMBER: Promise executors are executed immediately;
     let issuerExchangeResponsePromise = new Promise((F, R) => {
 
-        const issuerExchangeRequest = https.request(issuerExchangeRequestOptions, res => {
-
+        const issuerExchangeRequest = https.request(issuerExchangeRequestOptions, response => {
             let data = ''
-
-            res.on('data', chunk => {
-                data += chunk
-            })
-
-            res.on('end', () => {
-                issuerExchangeResponseBody = data
-                F('issuerExchangeResponsePromise fulfilment value')
-            })
-
+            response.on('data', chunk => { data += chunk })
+            response.on('end', () => { F(data) })
         })
         issuerExchangeRequest.on('error', e => console.error(`IDP Token Exchange Request Error`, e, R(e)))
         issuerExchangeRequest.write(querystring.stringify(issuerExchangeRequestBody)) // documented under Node's (http.write)
@@ -110,7 +101,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //
     //  5.1.
     //  Variable which store the response (result of) (5.);
-    let idpJwksResBody
+    //  See 7. : issuerJwksResponseBody
 
     //  5.2
     //  Promise containing the result of (5.);
@@ -118,18 +109,9 @@ const authorizationCodeFlowJwtValidation = async code => {
     let issuerJwksResponsePromise = new Promise((F, R) => {
 
         https.get(issuerJwksUri, resp => {
-
             let data = ''
-
-            resp.on('data', chunk => {
-                data += chunk;
-            });
-
-            resp.on('end', () => {
-                idpJwksResBody = JSON.parse(data)
-                F('issuerJwksResponsePromise fulfilment value')
-            })
-
+            resp.on('data', chunk => { data += chunk; })
+            resp.on('end', () => { F(JSON.parse(data)) })
         }).on("error", e => console.error(`IDP JWKS Request Error`, e, R(e)))
 
     })
@@ -163,7 +145,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  
     //  })
 
-console.log(`(oidc-relying-party.js) BEFORE PROMISE.ALL`)
+    console.log(`(oidc-relying-party.js) BEFORE PROMISE.ALL`)
 
     //  7.
     //  (.all) resolves only if (all its children) resolve; if any child rejects
@@ -176,9 +158,11 @@ console.log(`(oidc-relying-party.js) BEFORE PROMISE.ALL`)
         ])
 
         //  (then)
-        .then(resolvedValue => {
+        .then(resolvedValues => {
 
-console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`)
+                const [issuerExchangeResponseBody, issuerJwksResponseBody] = resolvedValues
+
+                console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`)
 
                 //  EXIT_OPPORTUNITY_2
                 if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
@@ -242,7 +226,7 @@ console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`)
                 for (const key in tokens) {
                     processedTokens[key] = processToken(tokens[key])
                 }
-console.log(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTokens)
+                console.log(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTokens)
 
                 /*
                 const processedTokens = {
@@ -270,7 +254,7 @@ console.log(`(io/oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTo
                 //  7.2.2.
                 //  OIDC : (JSON Web) Key Identifiers;
                 //  from (5.);
-                idpJwksResBody.keys.forEach(k => {
+                issuerJwksResponseBody.keys.forEach(k => {
 
                     //  7.2.2.1.
                     //  Corresponds to (7.2.1.1.);
@@ -439,7 +423,7 @@ tokenValidationArguments.access_token:`,
             }
         )
     // end section (7.x) 
-console.log(`(oidc-relying-party.js) AFTER PROMISE.ALL`)
+    console.log(`(oidc-relying-party.js) AFTER PROMISE.ALL`)
 
     return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation DEFAULT'
 }
