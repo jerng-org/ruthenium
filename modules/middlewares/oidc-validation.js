@@ -31,6 +31,7 @@ const oidcValidation = async(data) => {
 
         throw Error(`(oidc-validation.js) failed`)
     }
+    return data
 }
 
 module.exports = oidcValidation
