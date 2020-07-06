@@ -253,14 +253,6 @@ const authorizationCodeFlowJwtValidation = async code => {
                     let decodedSections = compactSerialization.split('.').map(s => {
                         return Buffer.from(s, 'base64').toString('utf8')
                     })
-                    /*
-                                        let parsedSections = {
-                                            header: JSON.parse(decodedSections[0]),
-                                            payload: JSON.parse(decodedSections[1]),
-                                            signature: decodedSections[2]
-                                        }
-                                        return parsedSections
-                    */
                     return decodedSections
                 }
 
@@ -269,10 +261,31 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 //  What is expected here (specific to AWS Cognito, for now, 2020-07-06)
 
-                const processedTokens = {
+                const intermediateTokens = {
                     id_token: processToken(parsedIssuerExchangeResponseBody.id_token),
                     access_token: processToken(parsedIssuerExchangeResponseBody.access_token),
                     refresh_token: processToken(parsedIssuerExchangeResponseBody.refresh_token)
+                }
+
+                const processedTokens = {
+                    id_token: {
+                        header: intermediateTokens.id_token[0],
+                        payload: intermediateTokens.id_token[1],
+                        signature: intermediateTokens.id_token[2]
+                    },
+                    access_token: {
+                        header: intermediateTokens.access_token[0],
+                        payload: intermediateTokens.access_token[1],
+                        signature: intermediateTokens.access_token[2]
+                    },
+                    refresh_token: {
+                        header: intermediateTokens.refresh_token[0],
+                        key: intermediateTokens.refresh_token[1],
+                        vector: intermediateTokens.refresh_token[2],
+                        cyphertext: intermediateTokens.refresh_token[3],
+                        tag: intermediateTokens.refresh_token[4]
+
+                    }
                 }
 
                 //*                
