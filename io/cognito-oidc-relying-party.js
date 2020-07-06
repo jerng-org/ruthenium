@@ -337,13 +337,13 @@ const authorizationCodeFlowJwtValidation = async code => {
                 //  then use (7.1.3.) to get corresponding (7.2.2.2.) and arranges that nicely also;
                 const tokenValidationArguments = {
                     id_token: {
-                        token: processedTokens.id_token,
+                        token_as_string: parsedIssuerExchangeResponseBody.id_token,
                         kid: processedTokens.id_token.header.kid,
                         alg: processedTokens.id_token.header.alg,
                         pem: issuerPemFromJwksIndexed[processedTokens.id_token.header.kid],
                     },
                     access_token: {
-                        token: processedTokens.access_token,
+                        token_as_string: parsedIssuerExchangeResponseBody.access_token,
                         kid: processedTokens.access_token.header.kid,
                         alg: processedTokens.access_token.header.alg,
                         pem: issuerPemFromJwksIndexed[processedTokens.access_token.header.kid],
@@ -379,8 +379,8 @@ tokenValidationArguments.access_token:`,
                     console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.: before try, to validate (id_token)`)
                     try {
                         tokenValidatedPayloads.id_token = jsonwebtoken.verify(
-                            tokenValidationArguments.id_token.token,
-                            issuerPemFromJwksIndexed[tokenValidationArguments.id_token.kid], { algorithms: [tokenValidationArguments.id_token.alg] }
+                            tokenValidationArguments.id_token.token_as_string,
+                            tokenValidationArguments.id_token.pem, { algorithms: [tokenValidationArguments.id_token.alg] }
                             // neglect callback for synchronous call: function ( error, decodedToken )
                         )
                     }
@@ -394,8 +394,8 @@ tokenValidationArguments.access_token:`,
                     console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.: before try, to validate (access_token)`)
                     try {
                         tokenValidatedPayloads.access_token = jsonwebtoken.verify(
-                            tokenValidationArguments.access_token.token,
-                            issuerPemFromJwksIndexed[tokenValidationArguments.access_token.kid], { algorithms: [tokenValidationArguments.access_token.alg] }
+                            tokenValidationArguments.access_token.token_as_string,
+                            tokenValidationArguments.access_token.pem, { algorithms: [tokenValidationArguments.access_token.alg] }
                             // neglect callback for synchronous call: function ( error, decodedToken )
                         )
                     }
