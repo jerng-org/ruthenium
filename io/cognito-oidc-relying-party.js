@@ -296,30 +296,9 @@ const authorizationCodeFlowJwtValidation = async code => {
                                     `,
                     processedTokens
                 )
-                throw Error('artificial stop')
+                //throw Error('artificial stop')
+                
                 //*/
-
-
-                /*
-                                    // EXIT_OPPORTUNITY_5
-                                    if (splitJwt.length != 3) { throw Error(`
-                                    (cognito-oidc-relying-party.js) 7.1.2. (processToken) tried to split
-                                    (token), expected to find three (3) sections, but did not 
-                                    find (3) sections; the Sections found: ${ JSON.stringify(splitJwt,null,4) }`) }
-                */
-                /*
-                let processedTokens = {}
-                for (const key in tokens) {
-                    processedTokens[key] = processToken(tokens[key])
-                }
-                console.log(`(io/cognito-oidc-relying-party.js) 7.1.3.: (processedTokens):`, processedTokens)
-
-                const processedTokens = {
-                    id_token: processToken(tokens.id_token),
-                    access_token: processToken(tokens.access_token),
-                    refresh_token: processToken(tokens.refresh_token)
-                }
-                */
 
                 //  7.2.
                 //  See (5.)
@@ -329,12 +308,12 @@ const authorizationCodeFlowJwtValidation = async code => {
                 //
                 //  7.2.1.1.
                 //  Indexed (5.) by (7.2.2.) to ease extraction at (7.3.)
-                let idpJwksIndexed = {}
+                let issuerJwksIndexed = {}
 
                 //  7.2.1.2.
                 //  OAuth 2.0 : Transport Layer Security (TLS) Certificate;
                 //  PEM or Privacy Enhanced Mail is a Base64 encoded DER certificate;
-                let idpPemFromJwksIndexed = {}
+                let issuerPemFromJwksIndexed = {}
 
                 //  7.2.2.
                 //  OIDC : (JSON Web) Key Identifiers;
@@ -345,12 +324,12 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                     //  7.2.2.1.
                     //  Corresponds to (7.2.1.1.);
-                    idpJwksIndexed[k.kid] = k
+                    issuerJwksIndexed[k.kid] = k
 
                     //  7.2.2.2.
                     //  Corresponds to (7.2.1.2.);
                     //  uses external depedency;
-                    idpPemFromJwksIndexed[k.kid] = jwkToPem(k)
+                    issuerPemFromJwksIndexed[k.kid] = jwkToPem(k)
                 })
 
                 //  7.3.
@@ -358,20 +337,16 @@ const authorizationCodeFlowJwtValidation = async code => {
                 //  then use (7.1.3.) to get corresponding (7.2.2.2.) and arranges that nicely also;
                 const tokenValidationArguments = {
                     id_token: {
-                        token: tokens.id_token,
-                        kid: processedTokens.id_token.header ? processedTokens.id_token.header.kid : null,
-                        alg: processedTokens.id_token.header ? processedTokens.id_token.header.alg : null,
-                        pem: processedTokens.id_token.header ? idpPemFromJwksIndexed[processedTokens.id_token.header.kid] : null,
-
-
+                        token: processedTokens.id_token,
+                        kid: processedTokens.id_token.header.kid,
+                        alg: processedTokens.id_token.header.alg,
+                        pem: issuerPemFromJwksIndexed[processedTokens.id_token.header.kid],
                     },
                     access_token: {
-                        token: tokens.access_token,
-                        kid: processedTokens.access_token.header ? processedTokens.access_token.header.kid : null,
-                        alg: processedTokens.access_token.header ? processedTokens.access_token.header.alg : null,
-                        pem: processedTokens.access_token.header ? idpPemFromJwksIndexed[processedTokens.access_token.header.kid] : null,
-
-
+                        token: processedTokens.access_token,
+                        kid: processedTokens.access_token.header.kid,
+                        alg: processedTokens.access_token.header.alg,
+                        pem: issuerPemFromJwksIndexed[processedTokens.access_token.header.kid],
                     }
                 }
 
@@ -404,7 +379,7 @@ tokenValidationArguments.access_token:`,
                     try {
                         tokenValidatedPayloads.id_token = jsonwebtoken.verify(
                             tokenValidationArguments.id_token.token,
-                            idpPemFromJwksIndexed[tokenValidationArguments.id_token.kid], { algorithms: [tokenValidationArguments.id_token.alg] }
+                            issuerPemFromJwksIndexed[tokenValidationArguments.id_token.kid], { algorithms: [tokenValidationArguments.id_token.alg] }
                             // neglect callback for synchronous call: function ( error, decodedToken )
                         )
                     }
@@ -419,7 +394,7 @@ tokenValidationArguments.access_token:`,
                     try {
                         tokenValidatedPayloads.access_token = jsonwebtoken.verify(
                             tokenValidationArguments.access_token.token,
-                            idpPemFromJwksIndexed[tokenValidationArguments.access_token.kid], { algorithms: [tokenValidationArguments.access_token.alg] }
+                            issuerPemFromJwksIndexed[tokenValidationArguments.access_token.kid], { algorithms: [tokenValidationArguments.access_token.alg] }
                             // neglect callback for synchronous call: function ( error, decodedToken )
                         )
                     }
@@ -428,74 +403,8 @@ tokenValidationArguments.access_token:`,
                     }
                 }
 
-                console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.:`, tokenValidatedPayloads)
+                console.log(`(io/cognito-oidc-relying-party.js) 7.4.2. (tokenValidatedPayloads) :`, tokenValidatedPayloads)
 
-                //  THE FOLLOWING SECTIONS ARE MORE USEFUL WHEN THIS SCRIPT IS BEING 
-                //  TESTED IN A STANDALONE CONTEXT; HERE IT IS WRAPPED IN A WEB 
-                //  APPLICATION, AND THUS HAS NO UTLITY;
-
-                //  7.5.
-                //  Consolidate data operated upon on this file;
-                //  const bigDump = JSON.stringify({
-                //  
-                //      authorizerEvent: event,
-                //      authorizerContext: context,
-                //  
-                //      idpJwksIndexed: idpJwksIndexed, // 7.2.2.1.
-                //      idpPemFromJwksIndexed: idpPemFromJwksIndexed, // 7.2.2.2.
-                //      //idpConfigResponse: idpConfigResBody, // 6.1.
-                //  
-                //      idpTokenExchangeResponse: {
-                //          tokens: tokens, // 7.1.1.
-                //          processedTokens: processedTokens // 7.1.3.
-                //      },
-                //  
-                //      tokenValidationArguments: tokenValidationArguments, // 7.3.
-                //  
-                //      tokenValidatedPayloads: tokenValidatedPayloads, // 7.4.2
-                //  
-                //      reminders: [
-                //          'Cognito Console settings may have changed.',
-                //          'Refer to Cognito Token Endpoint reference for troubleshooting step-through.'
-                //      ]
-                //  }, null, 4)
-
-                //  7.6.
-                //  Here, you would want to kill specific cookies left in the client;
-                //  You might always want to set << session and other cookies >> here;
-
-
-                //  UTILS
-                //
-                //  const normalCookieParams = '; HttpOnly; Secure; Domain=sudo.coffee; SameSite=Lax;'
-                //  const killCookieParams = '; Max-Age=-1;'
-                //  const response = processedTokens.id_token == 'no token'
-                //
-                //      // unauthorized
-                //      ?
-                //      {
-                //          statusCode: 401,
-                //          body: bigDump,
-                //      }
-                //
-                //      // authorized
-                //      :
-                //      {
-                //          statusCode: 302,
-                //          headers: {
-                //              'location': 'https://secure.api.sudo.coffee/after-session-is-set'
-                //          },
-                //          cookies: [
-                //              `accessToken=${killCookieParams}`,
-                //              `refreshToken=${killCookieParams}`,
-                //              //`session=${ sessionId };${ normalCookieParams }`,
-                //              //`antiCSRFToken=iNeedToBePersisted`
-                //          ]
-                //      }
-                //  
-                //  //  7.7.
-                //  //  Sends a response to AWS Lambda
-                //  //  callback(null, response)
 
                 return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.all RESOLVED'
 
