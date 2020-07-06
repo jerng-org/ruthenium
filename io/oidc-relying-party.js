@@ -164,7 +164,14 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 const [issuerExchangeResponseBody, issuerJwksResponseBody] = resolvedValues
 
-                console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`, `IERB:`, issuerExchangeResponseBody, `IJRB:`, issuerJwksResponseBody)
+                console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`,
+                    `IERB:`,
+                    `<<${typeof issuerExchangeResponseBody}>>`,
+                    issuerExchangeResponseBody,
+                    `IJRB:`,
+                    `<<${typeof issuerJwksResponseBody}>>`,
+                    issuerJwksResponseBody
+                )
 
                 //  EXIT_OPPORTUNITY_2
                 if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
@@ -178,7 +185,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                 //  7.1.1.
                 //  Extract unprocessed tokens from 4.3.
                 const parsedIssuerExchangeResponseBody = JSON.parse(issuerExchangeResponseBody)
-                
+
                 if (!parsedIssuerExchangeResponseBody) {
                     // EXIT_OPPORTUNITY_4
                     throw Error(`(oidc-relying-party.js) 7.1.2.
@@ -258,7 +265,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                 //  OIDC : (JSON Web) Key Identifiers;
                 //  from (5.);
                 const parsedIssuerJwksResponseBody = JSON.parse(issuerJwksResponseBody)
-                
+
                 parsedIssuerJwksResponseBody.keys.forEach(k => {
 
                     //  7.2.2.1.
