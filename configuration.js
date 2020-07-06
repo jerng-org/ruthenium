@@ -97,7 +97,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 0,
+    performance: 1,
     
     /*  verbosity
      *
@@ -115,6 +115,6 @@ module.exports = {
      *
      *
      */
-    verbosity:  2,
+    verbosity:  0,
     
 }
