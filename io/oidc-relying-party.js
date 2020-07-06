@@ -220,21 +220,21 @@ const authorizationCodeFlowJwtValidation = async code => {
                     `,
                     parsedIssuerExchangeResponseBody.id_token.split('.').map(s => {
                         let decodedSection = Buffer.from(s, 'base64').toString('utf8')
-                        return decodedSection
+                        return [typeof decodedSection, decodedSection ]
                     }),
                     `parsedIssuerExchangeResponseBody.access_token:
                     
                     `,
                     parsedIssuerExchangeResponseBody.access_token.split('.').map(s => {
                         let decodedSection = Buffer.from(s, 'base64').toString('utf8')
-                        return decodedSection
+                        return [typeof decodedSection, decodedSection ]
                     }),
                     `parsedIssuerExchangeResponseBody.refresh_token:
                     
                     `,
                     parsedIssuerExchangeResponseBody.refresh_token.split('.').map(s => {
                         let decodedSection = Buffer.from(s, 'base64').toString('utf8')
-                        return decodedSection
+                        return [typeof decodedSection, decodedSection ]
                     }),
                 )
                 
