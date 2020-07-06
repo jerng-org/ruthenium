@@ -75,8 +75,6 @@ const authorizationCodeFlowJwtValidation = async code => {
     })
     // TODO: extend with PKCE
 
-    console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding): `, issuerExchangeRequestBody)
-
     //  4.3.
     //  Variable which stores the response (result of) (4.);
     //  See 7. : issuerExchangeResponseBody
@@ -214,6 +212,30 @@ const authorizationCodeFlowJwtValidation = async code => {
                     
                     `,
                     parsedIssuerExchangeResponseBody.refresh_token.split('.'),
+                )
+                
+                console.log(`(oidc-relying-party.js)`,
+                    `parsedIssuerExchangeResponseBody.id_token:
+                    
+                    `,
+                    parsedIssuerExchangeResponseBody.id_token.split('.').map(s => {
+                        let decodedSection = Buffer.from(s, 'base64').toString('utf8')
+                        return decodedSection
+                    }),
+                    `parsedIssuerExchangeResponseBody.access_token:
+                    
+                    `,
+                    parsedIssuerExchangeResponseBody.access_token.split('.').map(s => {
+                        let decodedSection = Buffer.from(s, 'base64').toString('utf8')
+                        return decodedSection
+                    }),
+                    `parsedIssuerExchangeResponseBody.refresh_token:
+                    
+                    `,
+                    parsedIssuerExchangeResponseBody.refresh_token.split('.').map(s => {
+                        let decodedSection = Buffer.from(s, 'base64').toString('utf8')
+                        return decodedSection
+                    }),
                 )
                 
 throw Error ('artificial stop')
