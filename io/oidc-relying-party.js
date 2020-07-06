@@ -66,15 +66,16 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  4.2.
     //  The request body for (4.)
     //  UPSTREAM_FROM > https.request() > issuerExchangeRequest;
-    const issuerExchangeRequestBody = {
+    const issuerExchangeRequestBody = querystring.stringify({
         grant_type: 'authorization_code',
         client_id: relyingPartyId,
         code: code,
         redirect_uri: issuerRedirectUri,
         client_secret: relyingPartySecret ? relyingPartySecret : null
-    }
-console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding): `, issuerExchangeRequestBody)
+    })
     // TODO: extend with PKCE
+
+    console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding): `, issuerExchangeRequestBody)
 
     //  4.3.
     //  Variable which stores the response (result of) (4.);
@@ -91,7 +92,7 @@ console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding)
             response.on('end', () => { F(data) })
         })
         issuerExchangeRequest.on('error', e => console.error(`IDP Token Exchange Request Error`, e, R(e)))
-        issuerExchangeRequest.write(querystring.stringify(issuerExchangeRequestBody)) // documented under Node's (http.write)
+        issuerExchangeRequest.write(issuerExchangeRequestBody) // documented under Node's (http.write)
         issuerExchangeRequest.end()
     })
 
@@ -112,7 +113,7 @@ console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding)
         https.get(issuerJwksUri, resp => {
             let data = ''
             resp.on('data', chunk => { data += chunk; })
-            resp.on('end', () => { F(JSON.parse(data)) })
+            resp.on('end', () => { F(data) })
         }).on("error", e => console.error(`IDP JWKS Request Error`, e, R(e)))
 
     })
@@ -163,7 +164,7 @@ console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding)
 
                 const [issuerExchangeResponseBody, issuerJwksResponseBody] = resolvedValues
 
-                console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`, `IERB:`, issuerExchangeResponseBody, `IJRB:`,issuerJwksResponseBody)
+                console.log(`(oidc-relying-party.js) PROMISE.ALL.THEN`, `IERB:`, issuerExchangeResponseBody, `IJRB:`, issuerJwksResponseBody)
 
                 //  EXIT_OPPORTUNITY_2
                 if (!issuerExchangeResponseBody) throw Error(`(oidc-relying-party.js) 
@@ -176,7 +177,8 @@ console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding)
                 //
                 //  7.1.1.
                 //  Extract unprocessed tokens from 4.3.
-                const parsedIssuerExchangeResponseBody = JSON.parse(issuerExchangeResponseBody, null, 4)
+                const parsedIssuerExchangeResponseBody = JSON.parse(issuerExchangeResponseBody)
+                
                 if (!parsedIssuerExchangeResponseBody) {
                     // EXIT_OPPORTUNITY_4
                     throw Error(`(oidc-relying-party.js) 7.1.2.
@@ -255,7 +257,9 @@ console.log(`(oidc-relying-party.js) issuerExchangeRequestBody (before encoding)
                 //  7.2.2.
                 //  OIDC : (JSON Web) Key Identifiers;
                 //  from (5.);
-                issuerJwksResponseBody.keys.forEach(k => {
+                const parsedIssuerJwksResponseBody = JSON.parse(issuerJwksResponseBody)
+                
+                parsedIssuerJwksResponseBody.keys.forEach(k => {
 
                     //  7.2.2.1.
                     //  Corresponds to (7.2.1.1.);
