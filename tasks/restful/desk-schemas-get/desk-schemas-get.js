@@ -7,18 +7,6 @@ const markup
 
 const deskSchemasGet = async ( data ) => {
 
-
-        ////////
-        //   ////
-        //  //  //
-        // //    //     Take note:
-        ////  !!  //
-        ///        //
-        //////////////
-
-    // temporary:
-    data.RU.signals.noLayout = true
-
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan ( {
         TableName: 'TEST-APP-DESK-SCHEMAS',
         ReturnConsumedCapacity : 'TOTAL'

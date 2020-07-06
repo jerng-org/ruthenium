@@ -8,11 +8,23 @@ const logThisFile = false
 /*  The Authorization Server a.k.a. Issuer (Cognito) chooses within its rights
  *  granted by the OAuth 2.0 (RFC 6749.4.1.2.) to never accept the same (code)
  *  twice;
+ *
+ *  !!! WARNING !!! Not a clean implementation; needs a severe tidying;
+ *
+ *  OUTLINE     1. load (various) modules
+ *              2. identify OIDC Issuer 
+ *              3. identify ODIC Relying Party
+ *              4. execute request to Issuer, bearing (code), for tokens
+ *              5. execute request to Issuer, for JSON Web Key Sets
+ *              6. (inactive) (should merge with 2. above)
+ *              7. return validated tokens ( <= validation <= Promises 3,4 ) 
+ *
+ *
  */
 
 const authorizationCodeFlowJwtValidation = async code => {
 
-    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP BEGINS`)
+    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP & EXECUTE PROMISES`)
 
     //  EXIT_OPPORTUNITY_1
     if (!code) throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 0. : (code) was falsy`)
@@ -159,7 +171,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  (.all) resolves only if (all its children) resolve; if any child rejects
     //  , then (.all) rejects also. 
 
-    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP ENDS; Execution Follows`)
+    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP ENDS; PROMISE RESOLUTIONS PENDING`)
 
     return await Promise
         .all([
@@ -171,7 +183,7 @@ const authorizationCodeFlowJwtValidation = async code => {
         //  (then)
         .then(resolvedValues => {
 
-                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Responses RESOLVED - THEN BEGINS`)
+                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN BEGINS`)
 
                 const [issuerExchangeResponseBody, issuerJwksResponseBody] = resolvedValues
 
@@ -412,7 +424,7 @@ tokenValidationArguments.access_token:
                     console.log(`(io/cognito-oidc-relying-party.js) 7.4.2. (validatedTokenPayloads) :
 `, validatedTokenPayloads)
 
-                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Responses RESOLVED - THEN ENDS`)
+                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN ENDS`)
                 
                 return validatedTokenPayloads
 
