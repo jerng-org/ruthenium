@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: 'cognito OIDC authorization code flow established (not the cleanest code); next, to add sessions; guest routes;',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
@@ -97,7 +97,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 1,
+    performance: 0,
     
     /*  verbosity
      *
