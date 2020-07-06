@@ -37,16 +37,16 @@ const authorizationCodeFlowJwtValidation = async code => {
 
     //  2.2.
     //  OIDC Discovery : JSON Web Key : https://tools.ietf.org/html/draft-ietf-jose-json-web-key-41
-    const issuerJwksUri = `***REMOVED***`
+    const issuerJwksUri = process.env.COGNITO_JWKS_URI
 
     //  2.3.
     //  OIDC redirect_url
-    const issuerRedirectUri = `https://secure.api.sudo.coffee/test-middleware?route=restful&type=desk-schemas&reader=human`
+    const issuerRedirectUri = process.env.COGNITO_REDIRECT_URI
 
     //  3.
     //  OIDC Relying Party (RP) / Client Application / sudo.coffee;
-    const relyingPartyId = `***REMOVED***`
-    const relyingPartySecret = `***REMOVED***`
+    const relyingPartyId = process.env.COGNITO_RELYING_PARTY_ID
+    const relyingPartySecret = process.env.COGNITO_RELYING_PARTY_SECRET
 
     //  4.
     //  OAuth : Access Token, ID Token, Refresh Token
@@ -58,7 +58,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  UPSTREAM_FROM > https.request() > issuerExchangeRequest;
     const issuerExchangeRequestOptions = {
         protocol: 'https:',
-        hostname: '***REMOVED***', // 2. OAuth : AUTHORISATION SERVER ; OIDC : Issuer;
+        hostname: process.env.COGNITO_ISSUER_HOST, // 2. OAuth : AUTHORISATION SERVER ; OIDC : Issuer;
         port: 443,
         path: '/oauth2/token',
         method: 'POST',
