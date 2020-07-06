@@ -232,11 +232,11 @@ const authorizationCodeFlowJwtValidation = async code => {
                     // Expected error values: https://tools.ietf.org/html/rfc6749#section-5.2
                 }
                 else
-                if ('id_token' in parsedIssuerExchangeResponseBody &&
-                    'access_token' in parsedIssuerExchangeResponseBody &&
-                    'refresh_token' in parsedIssuerExchangeResponseBody &&
-                    'expires_in' in parsedIssuerExchangeResponseBody &&
-                    'token_type' in parsedIssuerExchangeResponseBody) {
+                if (!('id_token' in parsedIssuerExchangeResponseBody &&
+                        'access_token' in parsedIssuerExchangeResponseBody &&
+                        'refresh_token' in parsedIssuerExchangeResponseBody &&
+                        'expires_in' in parsedIssuerExchangeResponseBody &&
+                        'token_type' in parsedIssuerExchangeResponseBody)) {
                     // EXIT_OPPORTUNITY_5
                     throw Error(`(cognito-oidc-relying-party.js) 7. 
                     (parsedIssuerExchangeResponseBody) did not have all expected
@@ -263,7 +263,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                     */
                     return decodedSections
                 }
-                
+
                 // 7.1.3.
                 // Apply (7.1.2.) to (7.1.1.)
 
