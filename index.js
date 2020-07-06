@@ -54,7 +54,7 @@ try {
                 `cognito - integration; designing with a view to opt-out easily, 
             later;`,
 
-                `replace relyingPartySecrets after feature development`,
+                `replace relyingPartySecrets after feature development; http://rtyley.github.io/bfg-repo-cleaner/`,
                 
                 `sessions - stand-alone, and with cognito-integration`,
 
