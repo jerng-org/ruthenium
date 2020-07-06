@@ -18,14 +18,9 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const oidcValidation = async(data) => {
 
-    /*  More complicated logic which enables views that do not require 
-     *  OIDC validation, may go here. TODO
-     */
-
     try {
         const debug = await rus.aws.cognito.authorizationCodeFlowJwtValidation(data.LAMBDA.event.queryStringParameters.code)
         // THROWS EXCEPTION ON FAILURE
-        console.log(`(middlewares/oidc-validation.js):(authorizationCodeFlowJwtValidation) returned:`, debug)
     }
     catch (e) {
         console.error(`Middleware (oidc-validation.js) failed, (error):`, e, `(data):`, data)
