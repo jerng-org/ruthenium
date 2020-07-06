@@ -187,19 +187,30 @@ const authorizationCodeFlowJwtValidation = async code => {
                 const parsedIssuerExchangeResponseBody = JSON.parse(issuerExchangeResponseBody)
 
                 if (!parsedIssuerExchangeResponseBody) {
-                    // EXIT_OPPORTUNITY_4
+                    // EXIT_OPPORTUNITY_3
                     throw Error(`(oidc-relying-party.js) 7.1.2.
                     (parsedIssuerExchangeResponseBody) was found to be falsy;`)
                 }
                 else
                 if ('error' in parsedIssuerExchangeResponseBody) {
-                    // EXIT_OPPORTUNITY_3
+                    // EXIT_OPPORTUNITY_4
                     throw Error(`(oidc-relying-party.js) 7. 
                     (parsedIssuerExchangeResponseBody.error) was found to be 
                     "${ parsedIssuerExchangeResponseBody.error }";`)
 
                     // Expected error values: https://tools.ietf.org/html/rfc6749#section-5.2
                 }
+                
+                console.log(`(oidc-relying-party.js)`,
+                    `parsedIssuerExchangeResponseBody.id_token:`,
+                    parsedIssuerExchangeResponseBody.id_token,
+                    `parsedIssuerExchangeResponseBody.access_token:`,
+                    parsedIssuerExchangeResponseBody.access_token,
+                    `parsedIssuerExchangeResponseBody.refresh_token:`,
+                    parsedIssuerExchangeResponseBody.refresh_token,
+                )
+                
+                
                 // If checks pass, then default:
                 const tokens = parsedIssuerExchangeResponseBody
 
