@@ -269,17 +269,17 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 const processedTokens = {
                     id_token: {
-                        header: intermediateTokens.id_token[0],
-                        payload: intermediateTokens.id_token[1],
+                        header: JSON.parse(intermediateTokens.id_token[0]),
+                        payload: JSON.parse(intermediateTokens.id_token[1]),
                         signature: intermediateTokens.id_token[2]
                     },
                     access_token: {
-                        header: intermediateTokens.access_token[0],
-                        payload: intermediateTokens.access_token[1],
+                        header: JSON.parse(intermediateTokens.access_token[0]),
+                        payload: JSON.parse(intermediateTokens.access_token[1]),
                         signature: intermediateTokens.access_token[2]
                     },
                     refresh_token: {
-                        header: intermediateTokens.refresh_token[0],
+                        header: JSON.parse(intermediateTokens.refresh_token[0]),
                         key: intermediateTokens.refresh_token[1],
                         vector: intermediateTokens.refresh_token[2],
                         cyphertext: intermediateTokens.refresh_token[3],
@@ -349,17 +349,6 @@ const authorizationCodeFlowJwtValidation = async code => {
                         pem: issuerPemFromJwksIndexed[processedTokens.access_token.header.kid],
                     }
                 }
-
-                //  7.4.
-                //  OIDC : Cryptographically Validate JSON Web Token;
-                //  uses external dependency;
-                //
-                //  7.4.1.
-                //  Variable to hold results;
-                let tokenValidatedPayloads = {}
-
-                //  7.4.2.
-                //  Attempt validation;
                 console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.: before conditionals`,
                     `
 
@@ -372,6 +361,18 @@ tokenValidationArguments.access_token:`,
 
                 )
 
+
+                //  7.4.
+                //  OIDC : Cryptographically Validate JSON Web Token;
+                //  uses external dependency;
+                //
+                //  7.4.1.
+                //  Variable to hold results;
+                let tokenValidatedPayloads = {}
+
+                //  7.4.2.
+                //  Attempt validation;
+                
                 if (tokenValidationArguments.id_token &&
                     tokenValidationArguments.id_token.pem &&
                     tokenValidationArguments.id_token.alg) {
