@@ -202,15 +202,22 @@ const authorizationCodeFlowJwtValidation = async code => {
                 }
                 
                 console.log(`(oidc-relying-party.js)`,
-                    `parsedIssuerExchangeResponseBody.id_token:`,
-                    parsedIssuerExchangeResponseBody.id_token,
-                    `parsedIssuerExchangeResponseBody.access_token:`,
-                    parsedIssuerExchangeResponseBody.access_token,
-                    `parsedIssuerExchangeResponseBody.refresh_token:`,
-                    parsedIssuerExchangeResponseBody.refresh_token,
+                    `parsedIssuerExchangeResponseBody.id_token:
+                    
+                    `,
+                    parsedIssuerExchangeResponseBody.id_token.split('.'),
+                    `parsedIssuerExchangeResponseBody.access_token:
+                    
+                    `,
+                    parsedIssuerExchangeResponseBody.access_token.split('.'),
+                    `parsedIssuerExchangeResponseBody.refresh_token:
+                    
+                    `,
+                    parsedIssuerExchangeResponseBody.refresh_token.split('.'),
                 )
                 
-                
+throw Error ('artificial stop')
+
                 // If checks pass, then default:
                 const tokens = parsedIssuerExchangeResponseBody
 
