@@ -158,6 +158,8 @@ try {
 
     const router = require(`/var/task/modules/middlewares/router.js`)
 
+    const sessions = require(`/var/task/modules/middlewares/sessions.js`)
+
     const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
 
     //////////
@@ -213,13 +215,13 @@ try {
             //  (somewhere-response-formatter) middleware after (last-guard.js)
 
             oidcValidation,
+            sessions,
 
             formsTunnelRestfulMethods,
             formsReindexNames,
             formsValidateData,
 
             router,
-
             composeResponse,
             setCookies,
             applyLayout,
