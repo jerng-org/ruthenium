@@ -1,6 +1,7 @@
 'use strict'
 
 const mark = require('/var/task/modules/mark.js')
+const conf = require(`/var/task/configuration.js`)
 
 /*  The Authorization Server a.k.a. Issuer (Cognito) chooses within its rights
  *  granted by the OAuth 2.0 (RFC 6749.4.1.2.) to never accept the same (code)
@@ -150,12 +151,10 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  
     //  })
 
-    console.log(`(cognito-oidc-relying-party.js) BEFORE PROMISE.ALL`)
-
     //  7.
     //  (.all) resolves only if (all its children) resolve; if any child rejects
     //  , then (.all) rejects also. 
-    await Promise
+    return await Promise
         .all([
             issuerExchangeResponsePromise, // 4.4.
             issuerJwksResponsePromise, // 5.2.
@@ -167,14 +166,15 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 const [issuerExchangeResponseBody, issuerJwksResponseBody] = resolvedValues
 
-                console.log(`(cognito-oidc-relying-party.js) PROMISE.ALL.THEN`,
-                    `IERB:`,
-                    `<<${typeof issuerExchangeResponseBody}>>`,
-                    issuerExchangeResponseBody,
-                    `IJRB:`,
-                    `<<${typeof issuerJwksResponseBody}>>`,
-                    issuerJwksResponseBody
-                )
+                conf.verbosity > 1 &&
+                    console.log(`(cognito-oidc-relying-party.js) PROMISE.ALL.THEN :
+                        (issuerExchangeResponseBody):`,
+                        `<<${typeof issuerExchangeResponseBody}>>`,
+                        issuerExchangeResponseBody,
+                        `(issuerJwksResponseBody):`,
+                        `<<${typeof issuerJwksResponseBody}>>`,
+                        issuerJwksResponseBody
+                    )
 
                 //  EXIT_OPPORTUNITY_2
                 if (!issuerExchangeResponseBody) throw Error(`(cognito-oidc-relying-party.js) 
@@ -289,15 +289,13 @@ const authorizationCodeFlowJwtValidation = async code => {
                 }
 
                 //*                
-                console.log(`(cognito-oidc-relying-party.js)
+                conf.verbosity > 1 &&
+                    console.log(`(cognito-oidc-relying-party.js)
                     
-                    processedTokens:
-                                    
-                                    `,
-                    processedTokens
-                )
+processedTokens:
+`, processedTokens)
                 //throw Error('artificial stop')
-                
+
                 //*/
 
                 //  7.2.
@@ -349,18 +347,14 @@ const authorizationCodeFlowJwtValidation = async code => {
                         pem: issuerPemFromJwksIndexed[processedTokens.access_token.header.kid],
                     }
                 }
-                console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.: before conditionals`,
-                    `
+                conf.verbosity > 1 &&
+                    console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.: before conditionals :
 
-tokenValidationArguments.id_token:`,
-                    tokenValidationArguments.id_token,
-                    `
+tokenValidationArguments.id_token:
+`, tokenValidationArguments.id_token, `
 
-tokenValidationArguments.access_token:`,
-                    tokenValidationArguments.access_token
-
-                )
-
+tokenValidationArguments.access_token:
+`, tokenValidationArguments.access_token)
 
                 //  7.4.
                 //  OIDC : Cryptographically Validate JSON Web Token;
@@ -368,46 +362,40 @@ tokenValidationArguments.access_token:`,
                 //
                 //  7.4.1.
                 //  Variable to hold results;
-                let tokenValidatedPayloads = {}
+                let validatedTokenPayloads = {}
 
                 //  7.4.2.
                 //  Attempt validation;
-                
-                if (tokenValidationArguments.id_token &&
-                    tokenValidationArguments.id_token.pem &&
-                    tokenValidationArguments.id_token.alg) {
-                    console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.: before try, to validate (id_token)`)
-                    try {
-                        tokenValidatedPayloads.id_token = jsonwebtoken.verify(
-                            tokenValidationArguments.id_token.token_as_string,
-                            tokenValidationArguments.id_token.pem, { algorithms: [tokenValidationArguments.id_token.alg] }
-                            // neglect callback for synchronous call: function ( error, decodedToken )
-                        )
-                    }
-                    catch (e) {
-                        console.error(`Failed to Validate ID_TOKEN`, e)
-                    }
+
+
+                try {
+                    validatedTokenPayloads.id_token = jsonwebtoken.verify(
+                        tokenValidationArguments.id_token.token_as_string,
+                        tokenValidationArguments.id_token.pem, { algorithms: [tokenValidationArguments.id_token.alg] }
+                        // neglect callback for synchronous call: function ( error, decodedToken )
+                    )
                 }
-                if (tokenValidationArguments.access_token &&
-                    tokenValidationArguments.access_token.pem &&
-                    tokenValidationArguments.access_token.alg) {
-                    console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.: before try, to validate (access_token)`)
-                    try {
-                        tokenValidatedPayloads.access_token = jsonwebtoken.verify(
-                            tokenValidationArguments.access_token.token_as_string,
-                            tokenValidationArguments.access_token.pem, { algorithms: [tokenValidationArguments.access_token.alg] }
-                            // neglect callback for synchronous call: function ( error, decodedToken )
-                        )
-                    }
-                    catch (e) {
-                        console.error(`Failed to Validate ACCESS_TOKEN`, e)
-                    }
+                catch (e) {
+                    console.error(`Failed to Validate ID_TOKEN`, e)
                 }
 
-                console.log(`(io/cognito-oidc-relying-party.js) 7.4.2. (tokenValidatedPayloads) :`, tokenValidatedPayloads)
 
+                try {
+                    validatedTokenPayloads.access_token = jsonwebtoken.verify(
+                        tokenValidationArguments.access_token.token_as_string,
+                        tokenValidationArguments.access_token.pem, { algorithms: [tokenValidationArguments.access_token.alg] }
+                        // neglect callback for synchronous call: function ( error, decodedToken )
+                    )
+                }
+                catch (e) {
+                    console.error(`Failed to Validate ACCESS_TOKEN`, e)
+                }
 
-                return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.all RESOLVED'
+                conf.verbosity > 1 &&
+                    console.log(`(io/cognito-oidc-relying-party.js) 7.4.2. (validatedTokenPayloads) :
+`, validatedTokenPayloads)
+
+                return validatedTokenPayloads
 
             },
 
@@ -420,9 +408,6 @@ tokenValidationArguments.access_token:`,
             }
         )
     // end section (7.x) 
-    console.log(`(cognito-oidc-relying-party.js) AFTER PROMISE.ALL`)
-
-    return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation DEFAULT'
 }
 
 const cognitoOidcRelyingParty = {
