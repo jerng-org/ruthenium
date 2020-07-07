@@ -224,7 +224,7 @@ try {
             }
         }
 
-        const middlewares = [ // MIDDLEWARES, execution order
+        const middlewares = [ // MIDDLEWARES, in execution order
 
             // HTTP Request - Host System Integration (AWS Lambda) Protocols & Data Structures
             lambdaCopyRequestParameters, // Query string     values with same key stored as:     CSV string
