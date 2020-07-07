@@ -426,7 +426,7 @@ tokenValidationArguments.access_token:
 
                 mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN ENDS`)
                 
-                return validatedTokenPayloads
+                return { validated: validatedTokenPayloads }
 
             },
 
