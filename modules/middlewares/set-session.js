@@ -11,13 +11,10 @@ const setSession = async(data) => {
      *
      *  TODO this SHOULD look for a SCOPE in an unexpired access_token;
      */
-    data.RU.signals.TAG_SET_SESSION_0 = true
 
     if (data.RU.signals.oidc &&
         data.RU.signals.oidc.validated &&
         data.RU.signals.oidc.validated.access_token) {
-
-        data.RU.signals.TAG_SET_SESSION_1 = true
 
         /* 1.1.
          *  Attempt to INVALIDATE SESSION;
@@ -26,13 +23,9 @@ const setSession = async(data) => {
         if (data.RU.signals.oidc.validated.access_token.exp < (new Date).getTime() / 1000) {
             // (expiry time) in s since epoch < (current time in ms since epoch) / 1000
 
-            data.RU.signals.TAG_SET_SESSION_2 = true
-
             await rus.session.expire(data)
             return data
         }
-
-        data.RU.signals.TAG_SET_SESSION_3 = true
 
         /*  1.2.
          *  Attempt to create VALID SESSION;
@@ -47,15 +40,11 @@ const setSession = async(data) => {
             data.RU.signals.oidc.validated.access_token.jti
         )
         
-        data.RU.signals.TAG_check_jti = data.RU.signals.oidc.validated.access_token.jti
-        data.RU.signals.TAG_check_cookie = await rus.print.stringify4 ( data.RU.signals.sendResponse.setCookies)
-
     //////////
     //      //
     //  !!  //  Make way. WIP HERE
     //      //
     //////////
-
 
     }
 
@@ -74,12 +63,8 @@ const setSession = async(data) => {
             data.RU.request.headers.cookies[rus.conf.obfuscations.sessionCookieName]) {
             const candidateSessionId = data.RU.request.headers.cookies[rus.conf.obfuscations.sessionCookieName]
 
-            data.RU.signals.TAG_SET_SESSION_4 = true
-
             // TODO check and kill
         }
-
-    data.RU.signals.TAG_SET_SESSION_5 = true
 
     return data
 }

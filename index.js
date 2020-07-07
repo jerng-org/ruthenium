@@ -92,9 +92,13 @@ try {
                 `Modify the architecture of (the entire framework) such that it 
             behaves more like a library; then again, the trade off always is how 
             much it behaves like a cage, while feeling like a prairie.`,
-            
+
                 `sessions.js: look for a SCOPE in an unexpired access_token;`,
-                
+
+                `Examine the pattern which would allow throwing an exception in any
+                middleware, to be checked for safety, then sent to Lambda as the response 
+                via ( middleware -> reducer -> ruthenium -> Lambda handler);`,
+
                 `
             
             ICEBOX:`,
@@ -102,6 +106,18 @@ try {
                 `$.stuff for aliasing`,
 
                 `https://www.npmjs.com/package/require-directory`,
+
+                `Things that could be done in JavaScript, but which may not be 
+                simply portable to other languages:
+                
+                -   setting non-enumerable properties on (data) which allow 
+                    hidden safety checks, for example (did someone delete keyX),
+                    also non-writeable, non-configurable, etc.
+                    
+                -   one possible paradigm for managing this, is to replace all
+                    prop-assignment with array-pushes, so that data already set
+                    not overwritten
+                    `
             ]
         )
 
@@ -221,7 +237,7 @@ try {
 
             oidcValidation,
             setSession,
-            sessionGuard,
+            sessionGuard, // throws, frequently
 
             formsTunnelRestfulMethods,
             formsReindexNames,

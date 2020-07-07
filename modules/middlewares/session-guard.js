@@ -1,16 +1,23 @@
 'use strict'
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rus = require('/var/task/modules/r-u-s.js')
 
-//  Provide a debuggable function name, 
-//  in order to avoid debugging (function).toString()
+const sessionGuard = async(data) => {
 
-const sessionGuard = async ( data ) => {
-    
-    // rutheniumReducer.js will mark() execution, you don't have to
-    
+    /*  Complain if no session cookie is found.
+     */
+
+    rus.cookie.__HostExpire(data, rus.conf.obfuscations.sessionCookieName)
+
+    if (!(data.RU.request.headers.cookies &&
+            ('__Host-' + rus.conf.obfuscations.sessionCookieName in data.RU.request.headers.cookies))
+    ) 
+    {
+        data.RU.signals.skipToMiddlewareName = 'composeResponse'
+    }
+
     return data
 }
 
 module.exports = sessionGuard
-rus.mark (`~/modules/middlewares/sessionGuard.js LOADED`)
+rus.mark(`~/modules/middlewares/sessionGuard.js LOADED`)

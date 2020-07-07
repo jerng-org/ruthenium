@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'session.js - testing cookies WIP',
+    gitCommitMessage: '(data.RU.signals.skipToMiddlewareName)',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
