@@ -60,6 +60,9 @@ const setSession = async(data) => {
          *
          */
 
+console.warn (`(set-session.js) checkit against DATABASE not OIDC or other 
+authentication mechanism; whole sections needs upgrade and QA review;`)
+
         if (data.RU.request.headers.cookies &&
             data.RU.request.headers.cookies['__Host-'+rus.conf.obfuscations.sessionCookieName]) {
 
