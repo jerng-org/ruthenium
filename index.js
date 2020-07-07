@@ -48,24 +48,24 @@ try {
     rus.conf.verbosity < 1 ||
         console.warn(
             `DEBT_NOTE`, [
-                
+
                 `CURRENT:`,
 
                 `cognito - integration; designing with a view to opt-out easily, 
             later;`,
 
                 `replace relyingPartySecrets after feature development; http://rtyley.github.io/bfg-repo-cleaner/`,
-                
+
                 `sessions - stand-alone, and with cognito-integration`,
 
                 `single-page-app framework; history API`,
-                
+
                 `
             
             BACKLOG:`,
 
                 `history API, S3 hosting with session, for SPA`,
-                
+
                 `https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks`,
 
                 `https://developer.mozilla.org/en-US/docs/Glossary/HSTS`,
@@ -92,6 +92,9 @@ try {
                 `Modify the architecture of (the entire framework) such that it 
             behaves more like a library; then again, the trade off always is how 
             much it behaves like a cage, while feeling like a prairie.`,
+            
+                `sessions.js: look for a SCOPE in an unexpired access_token;`,
+                
                 `
             
             ICEBOX:`,
@@ -158,7 +161,9 @@ try {
 
     const router = require(`/var/task/modules/middlewares/router.js`)
 
-    const sessions = require(`/var/task/modules/middlewares/sessions.js`)
+    const sessionGuard = require(`/var/task/modules/middlewares/session-guard.js`)
+
+    const setSession = require(`/var/task/modules/middlewares/set-session.js`)
 
     const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
 
@@ -176,7 +181,7 @@ try {
             arguments[0].requestContext.http.method,
             arguments[0].requestContext.domainName,
             arguments[0].requestContext.http.path,
-            '?',
+            '?', // literal
             arguments[0].rawQueryString
         )
 
@@ -215,7 +220,8 @@ try {
             //  (somewhere-response-formatter) middleware after (last-guard.js)
 
             oidcValidation,
-            sessions,
+            setSession,
+            sessionGuard,
 
             formsTunnelRestfulMethods,
             formsReindexNames,

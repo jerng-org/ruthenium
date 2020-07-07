@@ -197,6 +197,14 @@ DEBUG EVERYTHING:
     //      //
     //////////
 
+    session: require(`/var/task/modules/session.js`),
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
     uuid4: require('/var/task/io/uuid4.js'),
 
     //////////

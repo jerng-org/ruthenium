@@ -15,7 +15,7 @@ const lastGuard = async ( data ) => {
             headers: {
                 'content-type' : 'text/html'
             },
-            body:   rus.conf.labels.lastGuard500InMiddleware
+            body:   rus.conf.labels.lastGuard500InMiddlewareBody
         }
         console.error   (   500,
                             `"Error in middlewares." (data.RU.errors).length > 0`,
