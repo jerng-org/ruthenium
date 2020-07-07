@@ -7,8 +7,21 @@ try {
     //      //
     //////////
 
-    /* 
+    //  See pertinent (nodeJS-specific) documentation at /var/task/modules/r-u-s.js
 
+    const rus = require('/var/task/modules/r-u-s.js')
+
+    rus.mark(`index.js loaded mark.js`)
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
+    rus.conf.verbosity > 0 &&
+        console.warn(`
+        
     !!! WARNING !!! -   ANYTHING OUTSIDE (exports.handler) 
 
                             persists across all  function calls, possibly for the 
@@ -31,32 +44,17 @@ try {
                             
                         ... LATER, we need to implement a checker to block this from
                             happening at commit-time;
-    */
-
-    //////////
-    //      //
-    //  !!  //  Make way.
-    //      //
-    //////////
-
-    //  See pertinent (nodeJS-specific) documentation at /var/task/modules/r-u-s.js
-
-    const rus = require('/var/task/modules/r-u-s.js')
-
-    rus.mark(`index.js loaded mark.js`)
-
-    rus.conf.verbosity < 1 ||
+    `),
         console.warn(
+
             `DEBT_NOTE`, [
 
                 `CURRENT:`,
 
+                `un protected routes`,
+
                 `cognito - integration; designing with a view to opt-out easily, 
             later;`,
-
-                `replace relyingPartySecrets after feature development; http://rtyley.github.io/bfg-repo-cleaner/`,
-
-                `sessions - stand-alone, and with cognito-integration`,
 
                 `single-page-app framework; history API`,
 
@@ -98,6 +96,10 @@ try {
                 `Examine the pattern which would allow throwing an exception in any
                 middleware, to be checked for safety, then sent to Lambda as the response 
                 via ( middleware -> reducer -> ruthenium -> Lambda handler);`,
+
+                `devise a mechanism where the reducer hides (data) from being
+                returned to (index.js) by default, UNLESS (lastGuard.js)
+                is installed. #security`,
 
                 `
             
@@ -177,6 +179,8 @@ try {
 
     const router = require(`/var/task/modules/middlewares/router.js`)
 
+    const sessionExemption = require(`/var/task/modules/middlewares/session-exemption.js`)
+
     const sessionGuard = require(`/var/task/modules/middlewares/session-guard.js`)
 
     const setSession = require(`/var/task/modules/middlewares/set-session.js`)
@@ -222,37 +226,46 @@ try {
 
         const middlewares = [ // MIDDLEWARES, execution order
 
-            //  System Integration with AWS Lambda
+            // HTTP Request - Host System Integration (AWS Lambda) Protocols & Data Structures
             lambdaCopyRequestParameters, // Query string     values with same key stored as:     CSV string
             lambdaNormalizeHeaders, // Cookie header    values with same key stored as:     Array of values
             lambdaNormalizeQueryStringParameters, // Query string     values with same key stored as:     Array of values
             lambdaNormalizeFormData, // Form string      values with same name stored as:    Array of values
-            lambdaLoadMetadata,
+            //lambdaLoadMetadata,
+
+            //////////
+            //      //
+            //  !!  //  Make way.
+            //      //
+            //////////
 
             //  Middlewares below SHOULD be independent on host system (e.g. Lambda) implementation details
-
             //  Nevertheless, everything below targets Lambda's (response) format,
             //  so if we implement somewhere other than Lambda, we'll need a final
             //  (somewhere-response-formatter) middleware after (last-guard.js)
 
+            //  HTTP Request - Session Protocols & Data Structures
+            sessionExemption,
             oidcValidation,
             setSession,
-            sessionGuard, // throws, frequently
+            sessionGuard,
 
+            //  HTML Request - Form Protocols & Data Structures
             formsTunnelRestfulMethods,
             formsReindexNames,
             formsValidateData,
 
-            router,
+            //  Business Logic
+            router, // each route points to a tree of tasks ("sub-routines")
+
+            // HTTP Response
             composeResponse,
             setCookies,
-            applyLayout,
+            applyLayout, // - can this switch places with (setCookies)?
+            lastGuard //  Final Checkpoint
 
-            lastGuard
-
-            // TODO:    devise a mechanism where the reducer hides (data) from being
-            //          returned to (index.js) by default, UNLESS (lastGuard.js)
-            //          is installed. #security
+            // HTTP Response - Host System Integration (AWS Lambda) Protocols & Data Structures
+            // (none at this time)
         ]
 
         const rutheniumResponse = await ruthenium(hostInitializedData, middlewares)

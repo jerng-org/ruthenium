@@ -8,7 +8,11 @@ rus.conf.verbosity > 0 &&
     examined a bit more, because it may be too JavaScript-specific; i.e.
     it may not be able to be implemented the same way in other languages;
     and here we are trying to design a language agnostic framework;
-    for the time being, do not over-user (Function.name);`)
+    for the time being, do not over-user (Function.name);
+    
+    Furthermore, upon reaching (last-guard.js), any value in
+    (skipToMiddlewareName) should be ignored, and last-guard should really
+    have the final control action;`)
 
 const rutheniumReducer = async(DATA_IN_PROMISE,
     CURRENT_MIDDLEWARE,
