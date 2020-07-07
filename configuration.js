@@ -115,7 +115,7 @@ module.exports = {
         strings: [
             'test1'
         ],
-        regularExpressions: [
+        regExps: [
             /^test.$/
         ]
     },
