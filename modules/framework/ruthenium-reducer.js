@@ -2,6 +2,14 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
+rus.conf.verbosity > 0 &&
+    console.warn(`ruthenium-reducer.js: We're using (Function.name) here,
+    and this needs to be 
+    examined a bit more, because it may be too JavaScript-specific; i.e.
+    it may not be able to be implemented the same way in other languages;
+    and here we are trying to design a language agnostic framework;
+    for the time being, do not over-user (Function.name);`)
+
 const rutheniumReducer = async(DATA_IN_PROMISE,
     CURRENT_MIDDLEWARE,
     INDEX,
@@ -11,8 +19,15 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
 
     try {
 
+        // check for unusual invocation;
+        if (DATA.RU.signals.skipToMiddlewareName &&
+            (DATA.RU.signals.skipToMiddlewareName != CURRENT_MIDDLEWARE.name)) {
+            // skip to next candidate in middleware queue;
+            return DATA
+        }
+        
+        // normal operation;
         const intermediateData = await CURRENT_MIDDLEWARE(DATA)
-
 
         /* THROWN? This line does not run, if CURRENT_MIDDLEWARE erred */
 
@@ -23,6 +38,7 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
             //&&  intermediateData.LAMBDA // (uncomment this when it has been generalised to HOST_LABEL)
             &&
             intermediateData.RU) {
+
             // ordinary;
             return intermediateData
         }
@@ -34,7 +50,7 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
             return intermediateData
         }
         else {
-            // complain loudly
+            // complain loudly: 
             ///////////////////////////////////////////////////////////////////////////////
 
             console.warn(intermediateData)
@@ -89,7 +105,7 @@ ${
     catch (e) {
 
         //  1.
-        //  Caches the error
+        //  Caches the exception
         DATA.RU.errors.push({
             'typeof': typeof e,
             thrown: e,
@@ -118,7 +134,7 @@ ${
         }
         else // no fault tolerance
         {
-            throw Error (`(ruthenium-reducer.js) Error thrown in Middleware. System is configured for zero fault tolerance. Please search the logs.`)
+            throw Error(`(ruthenium-reducer.js) E thrown in Middleware. System is configured for zero fault tolerance. Please search the logs.`)
         }
     }
 }

@@ -67,6 +67,7 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     } 
     catch (e)
     {
+        console.error (rus.conf.labels.reducer500Body, `This exception was thrown : `, e )
         return  {
                     statusCode: 500,
                     body: rus.conf.labels.reducer500Body

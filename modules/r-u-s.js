@@ -205,6 +205,16 @@ DEBUG EVERYTHING:
     //      //
     //////////
 
+    tag: async(DATA, string, optionalTruthyValue) => {
+        DATA.RU.signals[`TAG_` + string.toUpperCase()] = optionalTruthyValue ? optionalTruthyValue : true
+    },
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
     uuid4: require('/var/task/io/uuid4.js'),
 
     //////////
