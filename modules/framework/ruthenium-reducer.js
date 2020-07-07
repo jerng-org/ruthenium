@@ -19,21 +19,29 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
 
     try {
 
-        // check for unusual invocation;
-        if (DATA.RU.signals.skipToMiddlewareName &&
-            (DATA.RU.signals.skipToMiddlewareName != CURRENT_MIDDLEWARE.name)) {
-            // skip to next candidate in middleware queue;
-            return DATA
+        //  1.
+        //  check for unusual invocation;
+        if (DATA.RU.signals.skipToMiddlewareName) {
+            if (DATA.RU.signals.skipToMiddlewareName != CURRENT_MIDDLEWARE.name) {
+                //  1.1.
+                //  skip to next candidate in middleware queue;
+                return DATA
+            }
+            //  1.2.
+            //  stop skipping after executing the current middleware;
+            delete DATA.RU.signals.skipToMiddlewareName
         }
-        
-        // normal operation;
+
+        //  2.
+        //  normal operation;
         const intermediateData = await CURRENT_MIDDLEWARE(DATA)
 
         /* THROWN? This line does not run, if CURRENT_MIDDLEWARE erred */
 
         rus.mark(`middleware executed: ${ CURRENT_MIDDLEWARE.name }`)
 
-        // Validation: as middlewares may return nonsense
+        //  3.
+        //  Validation: as middlewares may return nonsense
         if (typeof intermediateData == 'object'
             //&&  intermediateData.LAMBDA // (uncomment this when it has been generalised to HOST_LABEL)
             &&
