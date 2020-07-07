@@ -12,10 +12,10 @@ const thisIsMyName = async ( data ) => {
     // set data in ( data.RU.io.thisIsMyName )
 
 
-    rus.mark ( `_template-task.js EXECUTED` )
+    rus.mark ( `~/tasks/_template-task.js EXECUTED` )
 }
 // manipulate (data.RU), for example
 // no need to return (data)
 
 module.exports = thisIsMyName
-rus.mark ( `_template-task.js LOADED` )
+rus.mark ( `~/tasks/_template-task.js LOADED` )

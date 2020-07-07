@@ -84,7 +84,7 @@ module.exports = {
     },
 
     obfuscations: {
-        sessionCookieName : 'SONCHUSJD'
+        sessionCookieName: 'SONCHUSJD'
     },
 
     /*  performance monitoring
@@ -97,6 +97,28 @@ module.exports = {
      *
      */
     performance: 1,
+
+    /*  session exempted routes
+     *
+     *  This class of object:
+     *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+     *
+     *  This method of operation:
+     *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test
+     *
+     *  -   
+     *
+     *
+     */
+
+    sessionExemptedRoutes: {
+        strings: [
+            'test1'
+        ],
+        regularExpressions: [
+            /^test.$/
+        ]
+    },
 
     /*  verbosity
      *
