@@ -23,6 +23,8 @@ const setSession = async(data) => {
         if (data.RU.signals.oidc.validated.access_token.exp < (new Date).getTime() / 1000) {
             // (expiry time) in s since epoch < (current time in ms since epoch) / 1000
 
+            //  set any session cookies;
+            //  set internal signals;
             await rus.session.expire(data)
             return data
         }
@@ -34,12 +36,11 @@ const setSession = async(data) => {
          * 
          * 
          */
-        await rus.cookie.__HostSet(
-            data,
-            rus.conf.obfuscations.sessionCookieName,
-            data.RU.signals.oidc.validated.access_token.jti
-        )
-        
+         
+        //  set any session cookies;
+        //  set internal signals;
+        await rus.session.setFromOidcAccessToken(data)
+
     //////////
     //      //
     //  !!  //  Make way. WIP HERE
@@ -48,7 +49,7 @@ const setSession = async(data) => {
 
     }
 
-    else // If none is found, then 
+    else // If no valid OIDC (access_token) is found, then 
 
         /*  2.
          *  HTTP Request > Header > Cookie > Session
@@ -60,10 +61,11 @@ const setSession = async(data) => {
          */
 
         if (data.RU.request.headers.cookies &&
-            data.RU.request.headers.cookies[rus.conf.obfuscations.sessionCookieName]) {
-            const candidateSessionId = data.RU.request.headers.cookies[rus.conf.obfuscations.sessionCookieName]
+            data.RU.request.headers.cookies['__Host-'+rus.conf.obfuscations.sessionCookieName]) {
 
-            // TODO check and kill
+            //  set any session cookies;
+            //  set internal signals;
+            await rus.session.setFromRequestCookie(data)
         }
 
     return data

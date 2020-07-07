@@ -4,15 +4,14 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const sessionGuard = async(data) => {
 
-    /*  Complain if no session cookie is found.
+    /*  
+     *  Complain if no session cookie is found in (request).
      */
 
-    rus.cookie.__HostExpire(data, rus.conf.obfuscations.sessionCookieName)
-
-    if (!(data.RU.request.headers.cookies &&
-            ('__Host-' + rus.conf.obfuscations.sessionCookieName in data.RU.request.headers.cookies))
-    ) 
+    if (!(data.RU.signals.session && data.RU.signals.session.id )    ) 
     {
+        data.RU.signals.sendResponse.statusCode = 401
+        data.RU.signals.sendResponse.body = `Session not found.`
         data.RU.signals.skipToMiddlewareName = 'composeResponse'
     }
 
@@ -21,3 +20,6 @@ const sessionGuard = async(data) => {
 
 module.exports = sessionGuard
 rus.mark(`~/modules/middlewares/sessionGuard.js LOADED`)
+
+
+//rus.cookie.__HostExpire(data, rus.conf.obfuscations.sessionCookieName)
