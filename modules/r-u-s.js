@@ -158,6 +158,9 @@ DEBUG HIGHLIGHTS:
 [ Object.keys ( data ) ] renders ${ 
     JSON.stringify( Object.keys ( rutheniumDataObject ), null, 4 ) }                 
 
+[ Object.keys ( data.RU ) ] renders ${ 
+    JSON.stringify( Object.keys ( rutheniumDataObject.RU ), null, 4 ) }                 
+
 [ Object.keys ( data.RU.request ) ] renders ${
     JSON.stringify( Object.keys ( rutheniumDataObject.RU.request ), null, 4 ) }                 
 
