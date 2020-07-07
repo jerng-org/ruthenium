@@ -23,6 +23,8 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     const frameworkData = {
         
         middlewares:    MIDDLEWARE_QUEUE.map ( m => m.name ), // TODO move this into config, out of index.js?
+
+        middlewareSkipsExclusive: [], //  { from: <<name>>, to: <<name>> }
         
         request:        {},
         
