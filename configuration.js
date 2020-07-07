@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: 'Housekeeping; (session-exemption.js) and (session-guard.js) and (configuration.js) interact properly now;',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
