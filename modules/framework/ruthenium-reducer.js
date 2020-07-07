@@ -27,11 +27,26 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
         //  check for unusual invocation;
         if (DATA.RU.signals.skipToMiddlewareName) {
             if (DATA.RU.signals.skipToMiddlewareName != CURRENT_MIDDLEWARE.name) {
+
+                //  1.0.
+                //  mark name of skippedFrom
+                DATA.RU.signals.skippingFromMiddleware = DATA.RU.signals.skippingFromMiddleware ?
+                    DATA.RU.signals.skippingFromMiddleware :
+                    MIDDLEWARE_QUEUE[INDEX - 1].name
+
                 //  1.1.
                 //  skip to next candidate in middleware queue;
                 return DATA
             }
             //  1.2.
+            //  log;
+            DATA.RU.middlewareSkipsExclusive.push({
+                from: DATA.RU.signals.skippingFromMiddleware,
+                to: CURRENT_MIDDLEWARE.name
+            })
+            delete DATA.RU.signals.skippingFromMiddleware
+
+            //  1.3.
             //  stop skipping after executing the current middleware;
             delete DATA.RU.signals.skipToMiddlewareName
         }
