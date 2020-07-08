@@ -52,7 +52,9 @@ try {
                 `CURRENT:`,
 
                 `cognito - integration; designing with a view to opt-out easily, 
-            later;`,
+            later;
+            
+                sign-out link; persistent session store, and related policy, next.`,
 
                 `single-page-app framework; history API`,
 
