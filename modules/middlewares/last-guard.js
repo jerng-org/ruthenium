@@ -45,7 +45,7 @@ const lastGuard = async(data) => {
     }
 
     // Debug
-    if (rus.conf.verbosity >= 3 &&
+    if (rus.conf.verbosity > 2 &&
         data.RU.response.headers &&
         data.RU.response.headers['content-type'] &&
         data.RU.response.headers['content-type'].toLowerCase()
@@ -68,6 +68,8 @@ const lastGuard = async(data) => {
             `<hr>[ Debug of (data) by last-guard.js ] :
             <pre><code>${ 
             await rus.print.dataDebug ( data ) }</code></pre>`
+
+        console.info(response.body)
 
         // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
         data.RU.response = response

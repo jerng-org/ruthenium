@@ -19,7 +19,7 @@ try {
     //      //
     //////////
 
-    rus.conf.verbosity > 4 &&
+    rus.conf.verbosity > 4 && (
         console.warn(`
         
     !!! WARNING !!! -   ANYTHING OUTSIDE (exports.handler) 
@@ -122,6 +122,7 @@ try {
                     `
             ]
         )
+    )
 
     if (rus.conf.gitCommit) rus.lambdaGitCommit(rus.conf.gitCommitMessage)
     //  VERSION CONTROL HACK
