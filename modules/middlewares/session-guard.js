@@ -6,7 +6,7 @@ const sessionGuard = async(data) => {
 
     /*  
      *  Complain if no session cookie is found in (request), and no exemption
-     *  was granted by (session-exemtion.js);
+     *  was granted by (session-exemption.js);
      */
 
     if (data.RU.signals.sessionExempted ||
