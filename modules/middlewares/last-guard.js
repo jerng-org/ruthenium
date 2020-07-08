@@ -51,7 +51,7 @@ const lastGuard = async(data) => {
         data.RU.response.headers['content-type'].toLowerCase()
         .includes('html')) {
         // MAKE (COPY OF ORIGINAL VALUE)
-        const response = { ...data.RU.response }
+        const response = { ... data.RU.response }
 
         // MODIFY (ORIGINAL ADDRESS) TO (NEW VALUE)
         if (typeof data.RU.response.body == 'string') {
@@ -73,7 +73,7 @@ const lastGuard = async(data) => {
         data.RU.response = response
     }
 
-    rus.conf.verbosity > 2 && console.log(rus.print.inspectInfinity(data))
+    rus.conf.verbosity > 2 && console.log(await rus.print.inspectInfinity(data))
 
     return data.RU.response
 }
