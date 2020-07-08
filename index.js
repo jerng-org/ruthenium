@@ -51,8 +51,6 @@ try {
 
                 `CURRENT:`,
 
-                `un protected routes`,
-
                 `cognito - integration; designing with a view to opt-out easily, 
             later;`,
 
@@ -61,6 +59,8 @@ try {
                 `
             
             BACKLOG:`,
+
+                `redirect loop detection`,
 
                 `history API, S3 hosting with session, for SPA`,
 
