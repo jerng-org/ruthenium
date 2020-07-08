@@ -73,7 +73,7 @@ const lastGuard = async(data) => {
         data.RU.response = response
     }
 
-    rus.conf.verbosity > 2 && console.log(rus.print.stringify4(data))
+    rus.conf.verbosity > 2 && console.log(rus.print.inspectInfinity(data))
 
     return data.RU.response
 }
