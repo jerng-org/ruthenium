@@ -22,9 +22,7 @@ const sessionExemption = async(data) => {
             )
 
         )) {
-            
-        
-        data.RU.signals.redirectRoute = 'status-404'
+        data.RU.signals.sessionExepted = true
         data.RU.signals.skipToMiddlewareName = 'sessionGuard'
     }
 
