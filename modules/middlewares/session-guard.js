@@ -17,7 +17,7 @@ const sessionGuard = async(data) => {
     
     //data.RU.signals.sendResponse.statusCode = 401
     //data.RU.signals.sendResponse.body = `Session not found.`
-    data.RU.signals.skipToMiddlewareName = 'composeResponse'
+    data.RU.signals.redirectRoute = 'status-404'
     data.RU.signals.skipToMiddlewareName = 'composeResponse'
     return data
 }
