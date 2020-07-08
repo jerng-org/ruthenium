@@ -113,7 +113,7 @@ module.exports = {
 
     sessionExemptedRoutes: {
         strings: [
-            '404'
+            'status-404'
         ],
         regExps: [
             
