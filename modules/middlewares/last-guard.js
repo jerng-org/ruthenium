@@ -69,11 +69,11 @@ const lastGuard = async(data) => {
             <pre><code>${ 
             await rus.print.dataDebug ( data ) }</code></pre>`
 
-        console.info(response.body)
-
         // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
         data.RU.response = response
     }
+
+    rus.conf.verbosity > 2 && console.log(data)
 
     return data.RU.response
 }
