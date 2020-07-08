@@ -132,7 +132,7 @@ module.exports = {
      *
      *      4   :   3       + (raw database output) -> response.body
      *
-     *      5   :   undefined, as yet
+     *      5   :   4       + (development meta-narrative) -> logs
      *
      *
      */
