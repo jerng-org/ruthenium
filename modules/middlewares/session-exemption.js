@@ -22,7 +22,7 @@ const sessionExemption = async(data) => {
             )
 
         )) {
-        data.RU.signals.sessionExepted = true
+        data.RU.signals.sessionExempted = true
         data.RU.signals.skipToMiddlewareName = 'sessionGuard'
     }
 
