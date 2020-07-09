@@ -32,7 +32,7 @@ return `<!DOCTYPE html>
     
     </head>
     <body>
-        <pre>${ await rus.print.stringify4 ( data.RU.request.cookies ) }</pre>
+        <pre>${ await rus.print.stringify4 ( data.RU.request.headers.cookies ) }</pre>
         <h3>Welcome to Prototyping</h3>
         <p>
         </p>
