@@ -272,6 +272,9 @@ try {
             //      depend on form data.
             //
             router, // each route points to a tree of tasks ("sub-routines")
+            //
+            //      Question :      Why do we not separate the router and the 
+            //      "dispatcher" (Rails terminology)? TODO : consider it.
 
             // HTTP Response
             composeResponse,
