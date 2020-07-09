@@ -116,7 +116,7 @@ module.exports = {
             'file'
         ],
         regExps: [
-            /^status-\d{3}$/
+            /^status-\d{3}$/    // status code pages
         ]
     },
 
