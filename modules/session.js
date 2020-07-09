@@ -3,11 +3,35 @@
 const mark = require('/var/task/modules/mark.js')
 const cookie = require('/var/task/modules/cookie.js')
 const conf = require(`/var/task/configuration.js`)
+const ddbdc = require('/var/task/io/ddbdc.js')
 
 /*  Given any DATA, exerts control over DATA.RU.signals.session;
  *
  */
 
+const setSessionIdInSignals = async(DATA, id) => {
+    DATA.RU.signals.session = { id: id }
+}
+
+const setSessionIdWithPersistence = async(id) => {
+    // Configure DB client parameters
+    const params = {
+        
+        TableName: 'WIP',
+        
+        Item: {},            
+        
+        ConditionExpression : 'attribute_not_exists(id)',
+          //  This checks data already in the DB;
+          //  it seems we do not use this for validating data that has yet to
+          //  be inserted into the DB.
+
+    }
+
+    // Call storage layer
+    const WIP = await ddbdc.put ( params ).promise()
+
+}
 const session = {
 
     setFromOidcAccessToken: async DATA => {
@@ -20,9 +44,9 @@ const session = {
         )
 
         //  set internal signals;
-        DATA.RU.signals.session = {
-            id: DATA.RU.signals.oidc.validated.access_token.jti
-        }
+        const _id = DATA.RU.signals.oidc.validated.access_token.jti
+        await setSessionIdInSignals(DATA, _id)
+        await setSessionIdWithPersistence(_id)
     },
 
     setFromRequestCookie: async DATA => {
@@ -37,12 +61,13 @@ const session = {
         //////////
 
         //  (no need to) set any session cookies; this is the source;
+        
         //  set internal signals;
-        DATA.RU.signals.session = {
-            id: DATA.RU.request.headers.cookies[
-                '__Host-' + conf.obfuscations.sessionCookieName
-            ][0]
-        }
+        const _id = DATA.RU.request.headers.cookies[
+            '__Host-' + conf.obfuscations.sessionCookieName
+        ][0]
+        await setSessionIdInSignals(DATA, _id)
+        await setSessionIdWithPersistence(_id)
     },
 
     expire: async DATA => {

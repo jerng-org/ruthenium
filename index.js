@@ -103,6 +103,12 @@ try {
                 returned to (index.js) by default, UNLESS (lastGuard.js)
                 is installed. #security`,
 
+                `Addressing the issue: (modulesA) which are (require)d by (rus)
+                cannot call (rus.moduleB): we can resolve this (a) dynamically
+                where (modulesA.method(_RUS, ... OTHER_ARGUMENTS) or (b) by
+                establishing a (pre-rus) of some sort; I haven't looked into
+                this`,
+
                 `
             
             ICEBOX:`,
