@@ -15,7 +15,7 @@ const sessionGuard = async(data) => {
         return data
     }
 
-    data.RU.signals.redirectRoute = 'status-404'
+    data.RU.signals.redirectRoute = 'status-401'
     data.RU.signals.skipToMiddlewareName = 'composeResponse'
     return data
 }
