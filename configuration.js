@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: 'WIP session.js : persistence',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
