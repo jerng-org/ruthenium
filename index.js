@@ -254,11 +254,23 @@ try {
             sessionGuard,
 
             //  HTML Request - Form Protocols & Data Structures
+            //
+            //      Discussion:     Why do we not put (formsXYZ) before 
+            //      (sessionExemption)? This seems to sit on the presumption
+            //      that (session state) will NEVER depend on form data.
+            //
             formsTunnelRestfulMethods,
             formsReindexNames,
             formsValidateData,
 
             //  Business Logic
+            //
+            //      Discussion :    Why do we put (router) after (formsXYZ) and
+            //      not before 
+            //      (sessionExemption)? This seems to be required IF we make
+            //      the assertion that (routes ... i.e. business logic) may
+            //      depend on form data.
+            //
             router, // each route points to a tree of tasks ("sub-routines")
 
             // HTTP Response
