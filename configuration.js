@@ -136,6 +136,6 @@ module.exports = {
      *
      *
      */
-    verbosity: 0,
+    verbosity: 3,
 
 }
