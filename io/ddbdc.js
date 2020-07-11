@@ -1,14 +1,32 @@
 'use strict'
 
-const mark = require ( '/var/task/modules/mark.js' )
+const mark = require('/var/task/modules/mark.js')
 
-const aws               = require ( 'aws-sdk' ) 
-aws.config.apiVersions  = { dynamodb: '2012-08-10' }
+const aws = require('aws-sdk')
+aws.config.apiVersions = { dynamodb: '2012-08-10' }
 
-const ddb               = new aws.DynamoDB ()
-const ddbdc             = new aws.DynamoDB.DocumentClient () 
+const ddb = new aws.DynamoDB()
+const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
+    get: function(target, prop, receiver) {
 
-module.exports          = ddbdc
+        if (typeof target[prop] == 'function') {
+            return new Proxy(target[prop], {
+                apply: function(_target, _thisArg, _argumentsList) {
+                    try {
+                        return _target.apply(_thisArg, _argumentsList)
+                    }
+                    catch (e) {
+                        throw Error(`(ddbdc.js) (${_target.name}) was called;`)
+                    }
+
+                }
+            })
+        }
+        return target['prop']
+    }
+})
+
+module.exports = ddbdc
 mark(`~/io/ddbdc.js LOADED`)
 
 /*
@@ -78,4 +96,4 @@ Try again:
         Generally inserts are fast, but consistent reflection will be laggy.
         This seems acceptable for the purpose of our prototyping meta-app.
             
-*/            
+*/
