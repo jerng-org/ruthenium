@@ -7,9 +7,9 @@ aws.config.apiVersions = { dynamodb: '2012-08-10' }
 
 const ddb = new aws.DynamoDB()
 
-const ddbdc = new aws.DynamoDB.DocumentClient()
+//const ddbdc = new aws.DynamoDB.DocumentClient()
 
-/* 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via proxy.
+//* 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via proxy.
 
 const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
     get: function(target, prop, receiver) {
@@ -41,7 +41,7 @@ const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
         return target['prop']
     }
 })
-*/
+//*/
 
 module.exports = ddbdc
 mark(`~/io/ddbdc.js LOADED`)
