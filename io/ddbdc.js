@@ -16,7 +16,7 @@ const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
                         return _target.apply(_thisArg, _argumentsList)
                     }
                     catch (e) {
-                        throw Error(`(ddbdc.js) (${_target.name}) was called;`)
+                        throw Error(`(ddbdc.js) (${_target.name}) threw an exception; ${ e }`)
                     }
 
                 }
