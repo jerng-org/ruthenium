@@ -2,7 +2,7 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-const setSession = async(data) => {
+const setOidcSession = async(data) => {
 
     /*  1.
      *  OIDC / Authentication mechanism has priority;
@@ -25,7 +25,7 @@ const setSession = async(data) => {
 
             //  set any session cookies;
             //  set internal signals;
-            await rus.session.expire(data)
+            await rus.oidcSession.expire(data)
             return data
         }
 
@@ -39,7 +39,7 @@ const setSession = async(data) => {
          
         //  set any session cookies;
         //  set internal signals;
-        await rus.session.setFromOidcAccessToken(data)
+        await rus.oidcSession.setFromOidcAccessToken(data)
 
     //////////
     //      //
@@ -68,12 +68,12 @@ authentication mechanism; whole sections needs upgrade and QA review;`)
 
             //  set any session cookies;
             //  set internal signals;
-            await rus.session.setFromRequestCookie(data)
+            await rus.oidcSession.setFromRequestCookie(data)
         }
 
     return data
 }
 
-module.exports = setSession
-rus.mark(`~/modules/middlewares/setSessions.js LOADED`)
+module.exports = setOidcSession
+rus.mark(`~/modules/middlewares/setOidcSessions.js LOADED`)
 

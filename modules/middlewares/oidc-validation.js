@@ -45,7 +45,7 @@ data.RU.signals.
         'cognito:roles': [
           'arn:aws:iam::***REMOVED***:role/***REMOVED***'
         ],
-        aud: '', // relyingparty a.k.a. appID
+        aud: '', // relyingparty a.k.a. (appID) (access_token.client_id)
         token_use: 'id',
         auth_time: 1594072214,
         exp: ,
@@ -63,7 +63,7 @@ data.RU.signals.
         iat: 1594072214,
         version: 2,
         jti: '1830597d-346c-42fc-b5af-cd827f192c44', // token ID
-        client_id: '***REMOVED***',
+        client_id: '', // appID a.k.a. (id_token.aud)
         username: '***REMOVED***'
       }
    }

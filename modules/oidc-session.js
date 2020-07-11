@@ -32,7 +32,7 @@ const setSessionIdWithPersistence = async(id) => {
     const WIP = await ddbdc.put ( params ).promise()
 
 }
-const session = {
+const oidcSession = {
 
     setFromOidcAccessToken: async DATA => {
 
@@ -80,5 +80,5 @@ const session = {
     },
 }
 
-module.exports = session
-mark(`~/modules/session.js LOADED`)
+module.exports = oidcSession
+mark(`~/modules/oidcSession.js LOADED`)
