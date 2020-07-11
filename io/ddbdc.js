@@ -26,10 +26,12 @@ class handledDocumentClient extends aws.DynamoDB.DocumentClient {
     }
 
     put() {
-        try { return super.put(...arguments) }
+        let intermediate
+        try { intermediate = super.put(...arguments) }
         catch (e) {
             throw Error(`(ddbdc.js) (put) was called, but threw an exception: ${ e }`)
         }
+        return intermediate
 
     }
 
