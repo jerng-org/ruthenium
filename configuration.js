@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(unstable) Naming: various (session) things are now (oidc-session) because they are overly specific.',
+    gitCommitMessage: '(unstable) proxying of (ddbdc) failed - programmer is not yet smart enough; postponed.',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
