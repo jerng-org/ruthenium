@@ -13,6 +13,12 @@ const setSessionIdInSignals = async(DATA, id) => {
     DATA.RU.signals.session = { id: id }
 }
 
+    //////////
+    //      //
+    //  !!  //  Make way. WIP HERE
+    //      //
+    //////////
+
 const setSessionIdWithPersistence = async(id) => {
     // Configure DB client parameters
     const params = {
