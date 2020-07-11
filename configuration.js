@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: '(giving up on trying to wrap (ddbdc.js) methods in a try/catch) - noting for later work;',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
