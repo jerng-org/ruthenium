@@ -18,7 +18,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: '(unstable) Naming: various (session) things are now (oidc-session) because they are overly specific.',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
