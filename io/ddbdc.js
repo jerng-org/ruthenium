@@ -13,8 +13,12 @@ const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
             return new Proxy(target[prop], {
                 apply: function(_target, _thisArg, _argumentsList) {
                     try {
-                        return target['prop'](..._argumentsList)
-                        // _target(..._argumentsList)
+
+                        console.log(`TARGET:`, _target)
+                        console.log(`THIS_ARG:`, _thisArg)
+                        console.log(`ARGUMENTS_LIST:`, _argumentsList)
+
+                        return _target(..._argumentsList)
                         // _target.apply(_thisArg, _argumentsList)
                     }
                     catch (e) {
