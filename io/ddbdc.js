@@ -12,7 +12,7 @@ const ddb = new aws.DynamoDB()
 //* 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via proxy.
 
 const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
-//    get: function(target, prop, receiver) {
+    get: function(target, prop, receiver) {
 
 //      if (typeof target[prop] == 'function') {
 //          return new Proxy(target[prop], {
@@ -42,8 +42,8 @@ const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
 //              }
 //          })
 //      }
-//        return target['prop']
-//    }
+        return target['prop']
+    }
 })
 //*/
 
