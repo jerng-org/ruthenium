@@ -200,7 +200,7 @@ DEBUG EVERYTHING:
     //      //
     //////////
 
-    session: require(`/var/task/modules/session.js`),
+    oidcSession: require(`/var/task/modules/oidc-session.js`), 
 
     //////////
     //      //

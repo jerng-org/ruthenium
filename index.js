@@ -44,6 +44,10 @@ try {
                             
                         ... LATER, we need to implement a checker to block this from
                             happening at commit-time;
+                            
+    !!! GUIDELINE !!!   -   If any code is (lambda)-specific, prefix that file
+                            immediately, and figure out how to write a runtime
+                            agnostic version later.
     `),
         console.warn(
 
@@ -62,6 +66,8 @@ try {
             
             BACKLOG:`,
 
+                `Improve docs on "what we are trying to do here"`,
+                
                 `redirect loop detection`,
 
                 `history API, S3 hosting with session, for SPA`,
@@ -192,7 +198,7 @@ try {
 
     const sessionGuard = require(`/var/task/modules/middlewares/session-guard.js`)
 
-    const setSession = require(`/var/task/modules/middlewares/set-session.js`)
+    const setOidcSession = require(`/var/task/modules/middlewares/set-oidc-session.js`)
 
     const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
 
@@ -256,7 +262,7 @@ try {
             //  HTTP Request - Session Protocols & Data Structures
             sessionExemption,
             oidcValidation,
-            setSession,
+            setOidcSession,
             sessionGuard,
 
             //  HTML Request - Form Protocols & Data Structures
