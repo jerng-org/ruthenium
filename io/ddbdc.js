@@ -9,43 +9,24 @@ const ddb = new aws.DynamoDB()
 
 //const ddbdc = new aws.DynamoDB.DocumentClient()
 
-//* 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via proxy.
+// 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via Proxy. Using a 
+//                  (get) handler for ddbdc's methods returned the error 'method 
+//                  name is not a property of undefined'
 
-const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
-    get: function(target, prop, receiver) {
+class handledDocumentClient extends aws.DynamoDB.DocumentClient {
 
-//      if (typeof target[prop] == 'function') {
-//          return new Proxy(target[prop], {
-//              apply: function(_target, _thisArg, _argumentsList) {
-//                  try {
-
-//                      console.log(`TARGET:`, _target)
-//                      console.log(`THIS_ARG:`, _thisArg)
-//                      console.log(`ARGUMENTS_LIST:`, _argumentsList)
-
-//                      return _target(..._argumentsList) // TypeError: Cannot read property 'put' of undefined
-//                      
-//                      // TypeError: Cannot read property 'put' of undefined
-
-
-//                      //////////
-//                      //      //
-//                      //  !!  //  Make way. WIP HERE
-//                      //      //
-//                      //////////
-
-//                  }
-//                  catch (e) {
-//                      throw Error(`(ddbdc.js) (${_target.name}) threw an exception; ${ e }`)
-//                  }
-
-//              }
-//          })
-//      }
-        return target['prop']
+    constructor() {
+        super()
     }
-})
-//*/
+
+    put(){
+        
+        return super.put(...arguments)
+    }
+
+}
+
+const ddbdc = new handledDocumentClient()
 
 module.exports = ddbdc
 mark(`~/io/ddbdc.js LOADED`)
