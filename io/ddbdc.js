@@ -12,16 +12,25 @@ const ddb = new aws.DynamoDB()
 // 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via Proxy. Using a 
 //                  (get) handler for ddbdc's methods returned the error 'method 
 //                  name is not a property of undefined'
+//
+//  TODO - get help, or figure it out;
+//
 
+//  All this does is make debugging easier; moreover it is rather platform
+//  specific; so it doesn't really matter if this
+//  is not implemented in other language patterns of the Ruthenium pattern.
 class handledDocumentClient extends aws.DynamoDB.DocumentClient {
 
     constructor() {
         super()
     }
 
-    put(){
-        
-        return super.put(...arguments)
+    put() {
+        try { return super.put(...arguments) }
+        catch (e) {
+            throw Error(`(ddbdc.js) (put) was called, but threw an exception: ${ e }`)
+        }
+
     }
 
 }
