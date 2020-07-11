@@ -16,19 +16,33 @@ const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
 
         if (typeof target[prop] == 'function') {
             return new Proxy(target[prop], {
-                apply: function(_target, _thisArg, _argumentsList) {
+                apply: async function(_target, _thisArg, _argumentsList) {
                     try {
 
                         console.log(`TARGET:`, _target)
                         console.log(`THIS_ARG:`, _thisArg)
                         console.log(`ARGUMENTS_LIST:`, _argumentsList)
 
-                        return _target(..._argumentsList) // TypeError: Cannot read property 'put' of undefined
-    //////////
-    //      //
-    //  !!  //  Make way. WIP HERE
-    //      //
-    //////////
+//                        let intermediateResult 
+//                        if (_target.constructor.name === 'AsyncFunction') {
+//                            
+//                            intermediateResult = await _target(..._argumentsList)
+//                        }
+//                        else {
+//                            intermediateResult = _target(..._argumentsList)
+//                        }
+//                        return intermediateResult
+
+                        return await _target(..._argumentsList) // TypeError: Cannot read property 'put' of undefined
+                        
+                        // TypeError: Cannot read property 'put' of undefined
+
+
+                        //////////
+                        //      //
+                        //  !!  //  Make way. WIP HERE
+                        //      //
+                        //////////
 
                     }
                     catch (e) {
