@@ -161,7 +161,7 @@ ${
         }
         else // no fault tolerance
         {
-            throw Error(`(ruthenium-reducer.js) E thrown in Middleware. System is configured for zero fault tolerance. Please search the logs.`)
+            throw Error(`(ruthenium-reducer.js) Exception thrown in Middleware. System is configured for zero fault tolerance. Please search the logs.`)
         }
     }
 }
