@@ -6,6 +6,11 @@ const aws = require('aws-sdk')
 aws.config.apiVersions = { dynamodb: '2012-08-10' }
 
 const ddb = new aws.DynamoDB()
+
+const ddbdc = new aws.DynamoDB.DocumentClient()
+
+/* 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via proxy.
+
 const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
     get: function(target, prop, receiver) {
 
@@ -18,8 +23,13 @@ const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
                         console.log(`THIS_ARG:`, _thisArg)
                         console.log(`ARGUMENTS_LIST:`, _argumentsList)
 
-                        return _target(..._argumentsList)
-                        // _target.apply(_thisArg, _argumentsList)
+                        return _target(..._argumentsList) // TypeError: Cannot read property 'put' of undefined
+    //////////
+    //      //
+    //  !!  //  Make way. WIP HERE
+    //      //
+    //////////
+
                     }
                     catch (e) {
                         throw Error(`(ddbdc.js) (${_target.name}) threw an exception; ${ e }`)
@@ -31,6 +41,7 @@ const ddbdc = new Proxy(new aws.DynamoDB.DocumentClient(), {
         return target['prop']
     }
 })
+*/
 
 module.exports = ddbdc
 mark(`~/io/ddbdc.js LOADED`)
