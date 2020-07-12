@@ -24,7 +24,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: '(oidc-session.js) (oidc-validation.js) notes updated, preparing to specify fields to save to session table',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
