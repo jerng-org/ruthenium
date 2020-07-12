@@ -82,53 +82,73 @@ const setSessionIdWithPersistence = async(validated) => {
 
     // Call storage layer
     const WIP = await ddbdc.put(params).promise()
+    console.warn(`(oidc-session.js) stuff this into (data.RU.io.dynamoDB`)
+}
+
+const setSessionFromOidcAccessToken = async DATA => {
+
+    //  set any session cookies;
+    await cookie.__HostSet(
+        DATA,
+        conf.obfuscations.sessionCookieName,
+        DATA.RU.signals.oidc.validated.access_token.jti
+    )
+
+    //  set internal signals;
+    const _id = DATA.RU.signals.oidc.validated.access_token.jti
+    await setSessionIdInSignals(DATA, _id)
+    await setSessionIdWithPersistence(DATA.RU.signals.oidc.validated)
+}
+
+const setSessionFromRequestCookie = async DATA => {
+
+    // TODO check and expire client session cookie, if DATABASE says sessions has expired
+    console.warn('session.js : expire session cookies')
+
+    const params = {
+        TableName: 'TEST-APP-SESSIONS',
+        Key: {
+            [conf.platform.dynamoDB.sessions
+                .tableName
+            ]: DATA.RU.request.headers.cookies['__Host-' +
+                conf.obfuscations.sessionCookieName]
+        }
+    }
+    DATA.RU.io.sessionsGet = await ddbdc.get().promise()
+
+
+
+
+
+
+
+
+
+    //  (no need to) set any session cookies; this is the source;
+
+    //  set internal signals;
+    const _id = DATA.RU.request.headers.cookies[
+        '__Host-' + conf.obfuscations.sessionCookieName
+    ][0]
+    await setSessionIdInSignals(DATA, _id)
+}
+
+const expireSession = async DATA => {
+
+    //  expire any session cookies;
+    await cookie.__HostExpire(DATA, conf.obfuscations.sessionCookieName)
+
+    //  expire internal signals;
+    delete DATA.RU.signals.session
 }
 
 const oidcSession = {
 
-    setFromOidcAccessToken: async DATA => {
+    setSessionFromOidcAccessToken: setSessionFromOidcAccessToken,
 
-        //  set any session cookies;
-        await cookie.__HostSet(
-            DATA,
-            conf.obfuscations.sessionCookieName,
-            DATA.RU.signals.oidc.validated.access_token.jti
-        )
+    setSessionFromRequestCookie: setSessionFromRequestCookie,
 
-        //  set internal signals;
-        const _id = DATA.RU.signals.oidc.validated.access_token.jti
-        await setSessionIdInSignals(DATA, _id)
-        await setSessionIdWithPersistence(DATA.RU.signals.oidc.validated)
-    },
-
-    setFromRequestCookie: async DATA => {
-
-        // TODO check and expire client session cookie, if DATABASE says sessions has expired
-        console.warn('session.js : expire session cookies')
-
-        //////////
-        //      //
-        //  !!  //  Make way.
-        //      //
-        //////////
-
-        //  (no need to) set any session cookies; this is the source;
-
-        //  set internal signals;
-        const _id = DATA.RU.request.headers.cookies[
-            '__Host-' + conf.obfuscations.sessionCookieName
-        ][0]
-        await setSessionIdInSignals(DATA, _id)
-    },
-
-    expire: async DATA => {
-
-        //  expire any session cookies;
-        await cookie.__HostExpire(DATA, conf.obfuscations.sessionCookieName)
-
-        //  expire internal signals;
-        delete DATA.RU.signals.session
-    },
+    expireSession: expireSession,
 }
 
 module.exports = oidcSession
