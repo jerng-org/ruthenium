@@ -51,7 +51,7 @@ const setOidcSession = async(data) => {
 
     else // If no valid OIDC (access_token) is found, then 
 
-console.log(`WIP1`)
+console.log(`WIP1`) 
 
         /*  2.
          *  HTTP Request > Header > Cookie > Session
