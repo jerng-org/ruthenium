@@ -128,7 +128,7 @@ const router = async(data) => {
     }
     else {
         console.error(`Could not find (${ data.RU.signals.taskName  }) in the tasks directory.`)
-        data.RU.signals.redirectRoute(`status-`)
+        data.RU.signals.redirectRoute = `status-404`
     }
 
     // EXECUTION ENDS
