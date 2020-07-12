@@ -137,7 +137,7 @@ ${
             'typeof': typeof e,
             thrown: e,
         })
-        console.error(rus.conf.labels.middleware500Body, "\n", e, "\n", DATA)
+        console.error(rus.conf.labels.middleware500Body, "\n", e, "\n", rus.print.inspectInfinity(DATA))
 
         //  2.
         if (rus.conf.faultTolerance) {
