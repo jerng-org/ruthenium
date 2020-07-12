@@ -1,8 +1,27 @@
 module.exports = {
 
-    database: {
-        tableNames: {
-            sessions: `TEST-APP-SESSIONS`
+    /*  platform:
+     *  
+     *      Items specific to our AWS environment:
+     *      -   DynamoDB
+     *      -   API Gateway
+     *      -   Lambda
+     *      -
+     */
+    platform: {
+        dynamoDB: {
+            /*  -   used by (oidc-session.js) TODO which c/should be renamed 
+             *      (lambda-oidc-session.js);
+             *  -   this data should be sufficient documentation for the
+             *      recreation of a fungible table for this application;
+             */
+            session: { 
+                tableName: `TEST-APP-SESSIONS`,
+                primaryKey: 'cognito:username',
+                sortKey: 'exp',
+                ttlKey: 'exp'   
+                
+            }
         }
     },
 

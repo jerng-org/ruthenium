@@ -20,46 +20,60 @@ const setSessionIdInSignals = async(DATA, id) => {
 //////////
 
 const setSessionIdWithPersistence = async(validated) => {
+
+    //  Consistency checks
+    //
+    //  id.iss
+    //  id.exp
+    //      //  Cognito makes this equal to:
+    //      //      access.exp
+    //  id.'cognito:groups'
+    //  id.'cognito:username' 
+    //      //  Cognito makes this equal to: 
+    //      //      id.sub, 
+    //      //      access.sub, 
+    //      //      access.username
+    //  id.'cognito:roles'
+    //  id.email_verified
+    //      
+    //  access.scope
+    //  access.jti
+    //  access.version
+    //      // not sure if this refers to OAuth2, or some AWS API versio            
+    //  access.client_id
+    //      // OIDC requires this to equal: id.aud
+    //
+    if (validated.id_token.sub != validated.id_token['cognito:username'] ||
+        validated.id_token.sub != validated.access_token.sub ||
+        validated.id_token.sub != validated.access_token.username ||
+        validated.id_token.aud != validated.access_token.client_id ||
+        validated.id_token.exp != validated.access_token.exp
+    ) {
+        console.error(`(oidc-session.js) (setSessionIdWithPersistence) (validated)`, validated)
+        throw Error(`input data did not pass consistency checks;`)
+    }
+
     // Configure DB client parameters
     const params = {
 
-        TableName: 'TEST-APP-SESSION',
+        TableName: conf.platform.dynamoDB.session.tableName,
 
         Item: {
-            jti: validated.access_token.jti, // JWT ID
-            access: validated.access_token.version, // TODO Figure out what this is
-            scope: validated.access_token.scope,
-            id_token: {
-                iss: validated.id_token.iss,
-                exp:validated.id_token.exp,
-                ['cognito:groups']:validated.id_token['cognito:groups'],
-                ['cognito:username']:validated.id_token['cognito:username'],
-                ['cognito:roles']:validated.id_token['cognito:roles'],
-                
-                }
-            /*
-id.iss
-id.exp
-id.'cognito:groups'
-id.'cognito:username' 
-    //  Cognito makes this equal to: 
-    //      id.sub, 
-    //      access.sub, 
-    //      access.username
-id.'cognito:roles'
-id.email
-id.email_verified
-id.aud 
-    // OIDC requires this to equal: access.client_id
-
-access.scope
-access.jti
-access.version
-    // not sure if this refers to OAuth2, or some AWS API versio            
-  */
+            ['cognito:username']: validated.id_token['cognito:username'],
+            ['cognito:groups']: validated.id_token['cognito:groups'],
+            ['cognito:roles']: validated.id_token['cognito:roles'],
+            iss: validated.id_token.iss,
+            exp: validated.id_token.exp,
+            email_verified: validated.id_token.email_verified,
+            access_token: {
+                jti: validated.access_token.jti, // JWT ID
+                version: validated.access_token.version, // TODO Figure out what this is
+                scope: validated.access_token.scope,
+                client_id: validated.access_token.client_id,
+            }
         },
 
-        ConditionExpression: 'attribute_not_exists(id)',
+        ConditionExpression: `attribute_not_exists(${conf.platform.dynamoDB.session.primaryKey})`,
         //  This checks data already in the DB;
         //  it seems we do not use this for validating data that has yet to
         //  be inserted into the DB.
@@ -68,8 +82,8 @@ access.version
 
     // Call storage layer
     const WIP = await ddbdc.put(params).promise()
-
 }
+
 const oidcSession = {
 
     setFromOidcAccessToken: async DATA => {
