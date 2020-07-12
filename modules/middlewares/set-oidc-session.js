@@ -25,7 +25,7 @@ const setOidcSession = async(data) => {
 
             //  set any session cookies;
             //  set internal signals;
-            await rus.oidcSession.expire(data)
+            await rus.oidcSession.expireSession(data)
             return data
         }
 
@@ -39,7 +39,7 @@ const setOidcSession = async(data) => {
          
         //  set any session cookies;
         //  set internal signals;
-        await rus.oidcSession.setFromOidcAccessToken(data)
+        await rus.oidcSession.setSessionFromOidcAccessToken(data)
 
     //////////
     //      //
@@ -60,15 +60,12 @@ const setOidcSession = async(data) => {
          *
          */
 
-console.warn (`(set-session.js) checkit against DATABASE not OIDC or other 
-authentication mechanism; whole sections needs upgrade and QA review;`)
-
         if (data.RU.request.headers.cookies &&
             data.RU.request.headers.cookies['__Host-'+rus.conf.obfuscations.sessionCookieName]) {
 
             //  set any session cookies;
             //  set internal signals;
-            await rus.oidcSession.setFromRequestCookie(data)
+            await rus.oidcSession.setSessionFromRequestCookie(data)
         }
 
     return data

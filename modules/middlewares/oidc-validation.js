@@ -17,11 +17,13 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const oidcValidation = async(data) => {
 
-    try {
-        data.RU.signals.oidc = await rus.aws.cognito.authorizationCodeFlowJwtValidation(data.LAMBDA.event.queryStringParameters.code)
-    }
-    catch (e) {
-        console.warn(`Middleware (oidc-validation.js) failed, (error):`, e)
+    if (data.LAMBDA.event.queryStringParameters.code) {
+        try {
+            data.RU.signals.oidc = await rus.aws.cognito.authorizationCodeFlowJwtValidation(data.LAMBDA.event.queryStringParameters.code)
+        }
+        catch (e) {
+            console.warn(`Middleware (oidc-validation.js) failed, (error):`, e)
+        }
     }
     return data
 }
