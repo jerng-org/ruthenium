@@ -59,9 +59,9 @@ const setSessionIdWithPersistence = async(validated) => {
         TableName: conf.platform.dynamoDB.sessions.tableName,
 
         Item: {
-            ['cognito-username']: validated.id_token['cognito:username'],
-            ['cognito-groups']: validated.id_token['cognito:groups'],
-            ['cognito-roles']: validated.id_token['cognito:roles'],
+            ['cognitoUsername']: validated.id_token['cognito:username'],
+            ['cognitoGroups']: validated.id_token['cognito:groups'],
+            ['cognitoRoles']: validated.id_token['cognito:roles'],
             iss: validated.id_token.iss,
             exp: validated.id_token.exp,
             email_verified: validated.id_token.email_verified,
