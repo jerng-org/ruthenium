@@ -56,12 +56,12 @@ const setSessionIdWithPersistence = async(validated) => {
     // Configure DB client parameters
     const params = {
 
-        TableName: conf.platform.dynamoDB.session.tableName,
+        TableName: conf.platform.dynamoDB.sessions.tableName,
 
         Item: {
-            ['cognito:username']: validated.id_token['cognito:username'],
-            ['cognito:groups']: validated.id_token['cognito:groups'],
-            ['cognito:roles']: validated.id_token['cognito:roles'],
+            ['cognito-username']: validated.id_token['cognito:username'],
+            ['cognito-groups']: validated.id_token['cognito:groups'],
+            ['cognito-roles']: validated.id_token['cognito:roles'],
             iss: validated.id_token.iss,
             exp: validated.id_token.exp,
             email_verified: validated.id_token.email_verified,
@@ -73,7 +73,7 @@ const setSessionIdWithPersistence = async(validated) => {
             }
         },
 
-        ConditionExpression: `attribute_not_exists(${conf.platform.dynamoDB.session.primaryKey})`,
+        ConditionExpression: `attribute_not_exists(${conf.platform.dynamoDB.sessions.primaryKey})`,
         //  This checks data already in the DB;
         //  it seems we do not use this for validating data that has yet to
         //  be inserted into the DB.
