@@ -111,7 +111,7 @@ const setSessionFromRequestCookie = async DATA => {
             [conf.platform.dynamoDB.sessions
                 .primaryKey
             ]: DATA.RU.request.headers.cookies['__Host-' +
-                conf.obfuscations.sessionCookieName]
+                conf.obfuscations.sessionCookieName][0]
         }
     }
     console.log(`params`,params)
