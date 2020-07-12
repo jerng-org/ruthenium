@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: 'STABLE: sessions integration works with COGNITO and DYNAMODB; TTL in DDB is not yet tested.',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
