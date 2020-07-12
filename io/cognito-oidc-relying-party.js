@@ -50,7 +50,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  We are skipping this because it does not change frequently; 
     //  Production may want to actually execute a query, then cache this value;
     //
-    //  const idpConfigUrl =    `***REMOVED***/.well-known/openid-configuration`
+    //  const idpConfigUrl =    `https://cognito-idp.us-east-1.amazonaws.com/us-east-1_6Sd0e95XW/.well-known/openid-configuration`
 
     //  2.2.
     //  OIDC Discovery : JSON Web Key : https://tools.ietf.org/html/draft-ietf-jose-json-web-key-41

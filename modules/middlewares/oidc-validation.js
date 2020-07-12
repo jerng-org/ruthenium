@@ -33,7 +33,8 @@ rus.mark(`~/modules/middlewares/oidcValidation.js LOADED`)
 
 WHAT ARE THESE ATTRIBUTES? : https://medium.com/@darutk/understanding-id-token-5f83f50fa02e
 
-data.RU.signals.
+data.RU.signals.oidc.validated  .id_token
+                                .access_token
 
 id.iss
 id.exp
