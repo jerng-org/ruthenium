@@ -493,7 +493,8 @@ Things which appear to be missing from the Cognito user experience:
         | |   |
         | |   +-Set Attribute Read & Write Permissions
         | |     |
-        | |     +-Nickname : for example, a "less" sensitive field (TODO pick an even less sensitive field)
+        | |     +-Email Verified : for example, a "less" sensitive field (TODO pick an even less sensitive field)
+        | |     +-Updated At
         | |     |
         | |     +-<< MANY ITEMS UNDOCUMENTED >>
         | |
