@@ -18,7 +18,8 @@ module.exports = {
             sessions: { 
                 tableName: `TEST-APP-SESSIONS`,
                 primaryKey: 'cognitoUsername',
-                sortKey: 'exp',
+                //sortKey: 'exp',   //  we cannot "getItem()" when the (exp) is unknown
+                                    //  so exp needs to be a 
                 ttlKey: 'exp'   
                 
             }
