@@ -73,10 +73,13 @@ const setSessionIdWithPersistence = async(validated) => {
             }
         },
 
-        ConditionExpression: `attribute_not_exists(${conf.platform.dynamoDB.sessions.primaryKey})`,
-        //  This checks data already in the DB;
-        //  it seems we do not use this for validating data that has yet to
-        //  be inserted into the DB.
+        //ConditionExpression: `attribute_not_exists(${conf.platform.dynamoDB.sessions.primaryKey})`,
+        //
+        //      Wihout this expression, we clobber any previous session in DynamoDB
+        //
+        //      This checks data already in the DB;
+        //      it seems we do not use this for validating data that has yet to
+        //      be inserted into the DB.
 
     }
 
