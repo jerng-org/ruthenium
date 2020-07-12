@@ -1,5 +1,11 @@
 module.exports = {
 
+    database: {
+        tableNames: {
+            sessions: `TEST-APP-SESSIONS`
+        }
+    },
+
     /*  faultTolerance:
      *
      *      0   :   always break on first error
@@ -18,7 +24,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(giving up on trying to wrap (ddbdc.js) methods in a try/catch) - noting for later work;',
+    gitCommitMessage: '-',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
@@ -116,7 +122,7 @@ module.exports = {
             'file'
         ],
         regExps: [
-            /^status-\d{3}$/    // status code pages
+            /^status-\d{3}$/ // status code pages
         ]
     },
 
