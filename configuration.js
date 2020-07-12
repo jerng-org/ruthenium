@@ -17,7 +17,7 @@ module.exports = {
              */
             sessions: { 
                 tableName: `TEST-APP-SESSIONS`,
-                primaryKey: 'cognito-username',
+                primaryKey: 'cognitoUsername',
                 sortKey: 'exp',
                 ttlKey: 'exp'   
                 
