@@ -487,6 +487,16 @@ Things which appear to be missing from the Cognito user experience:
         | 
         +-General Settings
         | |
+        | +-App Clients 
+        | | |
+        | | +-<< STRING9 >> : "an app name" (each user pool has many apps)
+        | |   |
+        | |   +-Set Attribute Read & Write Permissions
+        | |     |
+        | |     +-Nickname : for example, a "less" sensitive field (TODO pick an even less sensitive field)
+        | |     |
+        | |     +-<< MANY ITEMS UNDOCUMENTED >>
+        | |
         | +-<< MANY ITEMS UNDOCUMENTED >>
         |
         |     //////////
