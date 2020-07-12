@@ -117,27 +117,21 @@ const setSessionFromRequestCookie = async DATA => {
                 conf.obfuscations.sessionCookieName][0]
         }
     }
-    
-    console.log(`params`,params)
-    
+
     DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
 
-    console.log(`DATA.RU.io.sessionsGet`,DATA.RU.io.sessionsGet)
+    if (DATA.RU.io.sessionsGet.Item) {
+        //  (no need to) set any session cookies; this is the source;
 
-
-
-
-
-
-
-
-    //  (no need to) set any session cookies; this is the source;
-
-    //  set internal signals;
-    const _id = DATA.RU.request.headers.cookies[
-        '__Host-' + conf.obfuscations.sessionCookieName
-    ][0]
-    await setSessionIdInSignals(DATA, _id)
+        //  set internal signals;
+        const _id = DATA.RU.request.headers.cookies[
+            '__Host-' + conf.obfuscations.sessionCookieName
+        ][0]
+        await setSessionIdInSignals(DATA, _id)
+    }
+    else {
+        await expireSession(DATA)
+    }
 }
 
 const expireSession = async DATA => {
