@@ -31,40 +31,27 @@ rus.mark(`~/modules/middlewares/oidcValidation.js LOADED`)
 
 /* SAMPLE:
 
+WHAT ARE THESE ATTRIBUTES? : https://medium.com/@darutk/understanding-id-token-5f83f50fa02e
+
 data.RU.signals.
 
-   oidc: {
-      id_token: {
-        at_hash: 'MAz4_Zin9kVmNJX8f0HGGw', // hash of id_token
-        sub: '***REMOVED***', // subject
-        'cognito:groups': [ 'TEST-GROUP' ],
-        email_verified: true,
-        'cognito:preferred_role': 'arn:aws:iam::***REMOVED***:role/***REMOVED***',
-        iss: '***REMOVED***',
-        'cognito:username': '***REMOVED***',
-        'cognito:roles': [
-          'arn:aws:iam::***REMOVED***:role/***REMOVED***'
-        ],
-        aud: '', // relyingparty a.k.a. (appID) (access_token.client_id)
-        token_use: 'id',
-        auth_time: 1594072214,
-        exp: ,
-        iat: 1594072214,
-        email: '***REMOVED***'
-      },
-      access_token: {
-        sub: '***REMOVED***',// subject
-        'cognito:groups': [ 'TEST-GROUP' ],
-        token_use: 'access',
-        scope: 'aws.cognito.signin.user.admin openid',
-        auth_time: 1594072214,
-        iss: '***REMOVED***',
-        exp: 1594075814,
-        iat: 1594072214,
-        version: 2,
-        jti: '1830597d-346c-42fc-b5af-cd827f192c44', // token ID
-        client_id: '', // appID a.k.a. (id_token.aud)
-        username: '***REMOVED***'
-      }
-   }
+id.iss
+id.exp
+id.'cognito:groups'
+id.'cognito:username' 
+    //  Cognito makes this equal to: 
+    //      id.sub, 
+    //      access.sub, 
+    //      access.username
+id.'cognito:roles'
+id.email
+id.email_verified
+id.aud 
+    // OIDC requires this to equal: access.client_id
+
+access.scope
+access.jti
+access.version
+    // not sure if this refers to OAuth2, or some AWS API version
+
 */

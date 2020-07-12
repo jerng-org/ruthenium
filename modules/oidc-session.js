@@ -27,6 +27,7 @@ const setSessionIdWithPersistence = async(id) => {
         
         Item: {
             
+            
         },
         
         ConditionExpression : 'attribute_not_exists(id)',
