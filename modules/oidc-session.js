@@ -119,7 +119,6 @@ const oidcSession = {
             '__Host-' + conf.obfuscations.sessionCookieName
         ][0]
         await setSessionIdInSignals(DATA, _id)
-        await setSessionIdWithPersistence(_id)
     },
 
     expire: async DATA => {
