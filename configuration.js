@@ -15,9 +15,9 @@ module.exports = {
              *  -   this data should be sufficient documentation for the
              *      recreation of a fungible table for this application;
              */
-            session: { 
+            sessions: { 
                 tableName: `TEST-APP-SESSIONS`,
-                primaryKey: 'cognito:username',
+                primaryKey: 'cognito-username',
                 sortKey: 'exp',
                 ttlKey: 'exp'   
                 
