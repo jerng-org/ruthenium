@@ -114,6 +114,7 @@ const setSessionFromRequestCookie = async DATA => {
                 conf.obfuscations.sessionCookieName]
         }
     }
+    console.log(`params`,params)
     DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
 
 
