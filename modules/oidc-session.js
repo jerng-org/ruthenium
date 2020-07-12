@@ -23,9 +23,11 @@ const setSessionIdWithPersistence = async(id) => {
     // Configure DB client parameters
     const params = {
         
-        TableName: 'WIP',
+        TableName: 'TEST-APP-SESSION',
         
-        Item: {},            
+        Item: {
+            
+        },
         
         ConditionExpression : 'attribute_not_exists(id)',
           //  This checks data already in the DB;
