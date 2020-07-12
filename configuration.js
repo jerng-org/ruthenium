@@ -19,7 +19,7 @@ module.exports = {
                 tableName: `TEST-APP-SESSIONS`,
                 primaryKey: 'cognitoUsername',
                 //sortKey: 'exp',   //  we cannot "getItem()" when the (exp) is unknown
-                                    //  so exp needs to be a 
+                                    //  so exp needs to be a LSI
                 ttlKey: 'exp'   
                 
             }
@@ -44,7 +44,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'STABLE: sessions integration works with COGNITO and DYNAMODB; TTL in DDB is not yet tested.',
+    gitCommitMessage: '(set-oidc-session.js) now checks DynamoDB for present session, if none is found, expiresSession. NEXT: read on the minimum cost call to DynamoDB.',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2

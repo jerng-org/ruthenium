@@ -51,8 +51,6 @@ const setOidcSession = async(data) => {
 
     else // If no valid OIDC (access_token) is found, then 
 
-console.log(`WIP1`) 
-
         /*  2.
          *  HTTP Request > Header > Cookie > Session
          *
@@ -64,13 +62,11 @@ console.log(`WIP1`)
 
         if (data.RU.request.headers.cookies &&
             data.RU.request.headers.cookies['__Host-'+rus.conf.obfuscations.sessionCookieName]) {
-console.log(`WIP2`)
 
             //  set any session cookies;
             //  set internal signals;
             await rus.oidcSession.setSessionFromRequestCookie(data)
         }
-console.log(`WIP10`)
 
     return data
 }
