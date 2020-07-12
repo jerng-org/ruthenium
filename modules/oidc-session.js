@@ -109,7 +109,7 @@ const setSessionFromRequestCookie = async DATA => {
         TableName: 'TEST-APP-SESSIONS',
         Key: {
             [conf.platform.dynamoDB.sessions
-                .tableName
+                .primaryKey
             ]: DATA.RU.request.headers.cookies['__Host-' +
                 conf.obfuscations.sessionCookieName]
         }
