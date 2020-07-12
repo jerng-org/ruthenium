@@ -91,11 +91,11 @@ const setSessionFromOidcAccessToken = async DATA => {
     await cookie.__HostSet(
         DATA,
         conf.obfuscations.sessionCookieName,
-        DATA.RU.signals.oidc.validated.access_token.jti
+        DATA.RU.signals.oidc.validated.access_token.sub
     )
 
     //  set internal signals;
-    const _id = DATA.RU.signals.oidc.validated.access_token.jti
+    const _id = DATA.RU.signals.oidc.validated.access_token.sub
     await setSessionIdInSignals(DATA, _id)
     await setSessionIdWithPersistence(DATA.RU.signals.oidc.validated)
 }
