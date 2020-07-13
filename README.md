@@ -73,7 +73,7 @@ Addressing issues 1.3. - 1.5.:
         
     3.1.
     -   A platonic data structure which is flexible enough to be implemented
-        in various language runtimes (1.4.), easily; it must also be reasonbly 
+        in various language runtimes (1.4.), easily; it must also be reasonably 
         efficient to store in various storage runtimes (1.5.)
         
         3.1.1.
@@ -181,8 +181,8 @@ Current state of 3.1. / 3.2.
     -   Database abstraction has not yet been plumbed, but it should look
         something like this:
         
-        data.RU.io.VENDOR.request =     {}  TODO
-        data.RU.io.VENDOR.response =    {}  TODO
+        data.RU.io.VENDOR_PURPOSE.request =     {}  TODO
+        data.RU.io.VENDOR_PURPOSE.response =    {}  TODO
             (currently we just do data.RU.io.KEY)
         
     -   ORMs are bad. We're not aiming to build one - but we do need a common
