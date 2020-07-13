@@ -1,7 +1,7 @@
 # ruthenium
 
-[Technical Documentation](./DOCUMENTATION.md)
-[Motivations](./MOTIVATIONS.md)
+-   [Technical Documentation](./DOCUMENTATION.md)
+-   [Motivations](./MOTIVATIONS.md)
 
 ## roadmap
 
