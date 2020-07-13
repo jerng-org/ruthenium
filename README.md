@@ -2,6 +2,22 @@
 
 -   [Technical Documentation](./DOCUMENTATION.md)
 -   [Motivations](./MOTIVATIONS.md)
+    **Excerpt:**
+    ```
+    The following nouns are asserted to being equivalent for the purpose of this README:
+
+    -   software framework
+    -   software development kit
+    -   software design pattern
+    -   kit (for brevity)
+    
+    Kit
+
+    This kit addresses the complexities of developing web applications.
+
+    This is meant to be a language-agnostic and runtime-agnostic kit. This kit 
+    may be implemented in any / many languages and runtimes.
+    ```
 
 ## roadmap
 
