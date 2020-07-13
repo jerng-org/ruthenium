@@ -44,7 +44,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'Tidied documentation.',
+    gitCommitMessage: 'Fixed typos.',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
