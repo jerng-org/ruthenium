@@ -44,7 +44,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: 'ARCHITECTURAL NOTES: in (index.js)',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
