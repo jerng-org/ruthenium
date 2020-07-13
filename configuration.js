@@ -44,7 +44,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(set-oidc-session.js) now checks DynamoDB for present session, if none is found, expiresSession. NEXT: read on the minimum cost call to DynamoDB.',
+    gitCommitMessage: '-',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
