@@ -1,7 +1,9 @@
 # ruthenium
 
 -   [Technical Documentation](./DOCUMENTATION.md)
+
 -   [Motivations](./MOTIVATIONS.md)
+    
     **Excerpt:**
     ```
     The following nouns are asserted to being equivalent for the purpose of this README:
