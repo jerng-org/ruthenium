@@ -1,12 +1,12 @@
 'use strict'
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rus = require('/var/task/modules/r-u-s.js')
 
-const layoutMarkup = async ( data ) => {
+const layoutMarkup = async(data) => {
 
-// get data from ( data.RU.io.layout )
+    // get data from ( data.RU.io.layout )
 
-return `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html>
     <head>
         
@@ -32,6 +32,16 @@ return `<!DOCTYPE html>
     
     </head>
     <body>
+        ${  data.RU.signals.session.id 
+            ?   '' 
+            :   '<a href="https://' + 
+                process.env.COGNITO_ISSUER_HOST + 
+                '/login?client_id=' + 
+                process.env.COGNITO_RELYING_PARTY_ID +
+                '&response_type=code&scope=openid&redirect_uri=' +
+                encodeURIComponent ( process.env.COGNITO_REDIRECT_URI ) +
+                '">Log In</a>' 
+        }
         <pre>${ await rus.print.stringify4 ( data.RU.request.headers.cookies ) }</pre>
         <h3>Welcome to Prototyping</h3>
         <p>
@@ -40,8 +50,8 @@ return `<!DOCTYPE html>
 
     </body>
 </html>`
-    
-    
+
+
     // manipulate (data.RU), for example
 
     // no need to return (data)
