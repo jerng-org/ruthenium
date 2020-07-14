@@ -1,6 +1,33 @@
-# ruthenium
+Motivations
 
 [Technical Documentation](./DOCUMENTATION.md)
+
+# Brief
+
+I'm generally concerned by the problem of having a dependency stack that looks 
+like:
+
+1.  W3.org / Browser Vendors
+2.  [ missing layer ]
+3.  (pick your favourite) language runtime
+4.  (pick your favourite) framework for (3)
+
+... because this results in different interpretations and expressions of how to 
+address (1). This means that every time I use a new (3) or (4), I find they all 
+implement different interpretations of (1). 
+
+`IF THIS PROBLEM INTERESTS YOU, THEN MAYBE IT IS USEFUL TO CONTINUE READING`
+
+I'm looking for something at (2) which is more rigid than (1), whereby every 
+time we use a new (3) or (4), we can retarget to implement all the (3s) and (4s) 
+to fit the same rigid target of (2).
+
+Since I couldn't find (2) in the wild, I started working on it ... of course, 
+it's not going to be complete for a while. But it's under active development, 
+and will soon be used in production for internal apps at my day job. 
+
+Feel free to jump into a discussion on the repo ... in the comments, or just PM 
+me. :)
 
 ## Meta
 
