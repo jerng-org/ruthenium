@@ -32,7 +32,7 @@ const layoutMarkup = async(data) => {
     
     </head>
     <body>
-        ${  data.RU.signals.session.id 
+        ${  data.RU.signals.session 
             ?   '' 
             :   '<a href="https://' + 
                 process.env.COGNITO_ISSUER_HOST + 
