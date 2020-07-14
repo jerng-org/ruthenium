@@ -8,7 +8,7 @@ I'm generally concerned by the problem of having a dependency stack that looks
 like:
 
 1.  W3.org / Browser Vendors
-2.  [ missing layer ]
+2.  `[ missing layer ]`
 3.  (pick your favourite) language runtime
 4.  (pick your favourite) framework for (3)
 
@@ -16,7 +16,7 @@ like:
 address (1). This means that every time I use a new (3) or (4), I find they all 
 implement different interpretations of (1). 
 
-`IF THIS PROBLEM INTERESTS YOU, THEN MAYBE IT IS USEFUL TO CONTINUE READING`
+**IF THIS PROBLEM INTERESTS YOU, THEN MAYBE IT IS USEFUL TO CONTINUE READING**
 
 I'm looking for something at (2) which is more rigid than (1), whereby every 
 time we use a new (3) or (4), we can retarget to implement all the (3s) and (4s) 
