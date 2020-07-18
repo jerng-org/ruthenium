@@ -47,6 +47,10 @@ DRAFT 3
 
 Try again:
 
+    TEST-APP-DESK-SCHEMAS
+
+    (update this)
+
     TEST-APP-DESKS
     
     1ryPartKey  :   (desk-name)             ->  for (any) desk ...

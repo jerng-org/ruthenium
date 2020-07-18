@@ -214,4 +214,9 @@ Current state of 3.1. / 3.2.
         It is then left to the developer to decide if they would be lazy and 
         use an ORM or other library instead of a completely manual 
         implementation.
+
+Current state of 4.0.
+
+    Well, this ES/JS repository is the (incomplete / and still incorrect)
+    reference implementation for now.
 ```
