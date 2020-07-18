@@ -26,6 +26,8 @@ mark(`~/io/ddbdc.js LOADED`)
 
 /*
 
+Cheat sheet for reference: https://github.com/jerng/aws-studies/blob/master/dynamodb-notes.md
+
 In general:
 
     1ryKeys are unique on base tables, but not on secondary indices.
@@ -40,6 +42,8 @@ In general:
     You want to store data close together for monolithic speed-up, until 
     partition IO limits are hit, then you want to store data apart (sharding) 
     for parallelised speed-up.
+
+DRAFT 3
 
 Try again:
 
