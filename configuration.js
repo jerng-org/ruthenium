@@ -44,7 +44,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'login link',
+    gitCommitMessage: 'dynamodb notes updated',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
