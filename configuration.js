@@ -44,7 +44,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: 'draft4 - Ghetto RDB on DynamoDB schema',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
