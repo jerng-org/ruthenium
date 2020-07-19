@@ -24,6 +24,14 @@ const ddbdc = new aws.DynamoDB.DocumentClient()
 module.exports = ddbdc
 mark(`~/io/ddbdc.js LOADED`)
 
+/*  TODO
+
+    -   ~/tasks/restful/desk-cells-post.js
+    -   ~/tasks/restful/desk-cells-ge.js
+
+
+*/
+
 /*
 
 Cheat sheet for reference: https://github.com/jerng/aws-studies/blob/master/dynamodb-notes.md
