@@ -8,6 +8,7 @@ const formsDeskSchemasPostMarkup = require(`/var/task/tasks/restful/forms-get/ma
 
 //const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
+console.warn(`(restful.js) we should really break up/curry the giant switch-case into a linear pipeline`)
 
 const restful = async(data) => {
 
@@ -75,54 +76,54 @@ const restful = async(data) => {
 
         try {
 
-            const queryType = data.RU.request.queryStringParameters.type &&
+            const queryHasType = data.RU.request.queryStringParameters.type &&
                 data.RU.request.queryStringParameters.type[0]
 
-            const queryThing = data.RU.request.queryStringParameters.thing &&
+            const queryHasThing = data.RU.request.queryStringParameters.thing &&
                 data.RU.request.queryStringParameters.thing[0]
 
-            const queryScope = queryType
+            const queryScope = queryHasType ?
+                (queryHasThing ? 'one' : 'all') :
+                new Error(`Requested a (restful) task, but (type) was not specified.`)
 
-                ?
-                (queryThing ?
-                    'virtual-row' //  resource is a Virtual Row
-                    :
-                    'virtual-table') //  resource is a Virtual Table
-
-                :
-                new Error(`Requested a (restful) task, 
-                                            but (type) was not specified.`)
-
-            // DIMENSION A
-            // (desk-schemas) and (forms) are special / meta
+            //  DIMENSION A
+            //  (desk-schemas) and (forms) are special / meta
             switch (data.RU.request.queryStringParameters.type[0]) {
 
                 case ('forms'):
-                    // DIMENSION B
+
+                    //  DIMENSION B
+                    //  METHODS for (forms)
                     switch (data.RU.request.http.method) {
 
                         case ('GET'):
-                            // DIMENSION C
+
+                            //  DIMENSION C
+                            //  GET (forms) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('virtual-row'):
-                                    // Which individual Thing?
-                                    data.RU.signals.sendResponse.body =
-                                        await formsDeskSchemasPostMarkup()
+                                case ('one'):
 
+                                    //  DIMENSION D
+                                    //  GET (forms), which one? 
+                                    switch (data.RU.request.queryStringParameters.thing[0]) {
+                                        case (`create-desk-schema`):
+                                            data.RU.signals.sendResponse.body = await formsDeskSchemasPostMarkup()
+                                            break
+                                        default:
+                                            throw new Error(`(restful.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
+                                    }
                                     break
 
                                 default:
-                                    throw queryScope
-                                    // current pattern: always do this
-
+                                    throw new Error(`(restful.js) (?type=forms) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                             }
                             // switch 
                             // ( queryScope )
                             break
 
                         default:
-
+                            throw new Error(`(restful.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                     }
                     // switch
                     // ( .method )
@@ -130,22 +131,22 @@ const restful = async(data) => {
 
                 case ('desk-schemas'):
 
-                    // DIMENSION B
+                    //  DIMENSION B
+                    //  METHODS for (desk-schemas)
                     switch (data.RU.request.http.method) {
 
                         case ('GET'):
 
-                            // DIMENSION C
+                            //  DIMENSION C
+                            //  GET (desk-schemas) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('virtual-table'):
-                                    // Which Type (set, group) of things?
+                                case ('all'):
                                     await deskSchemasGet(data)
                                     break
 
                                 default:
-                                    throw queryScope
-                                    // current pattern: always do this
+                                    throw new Error(`(restful.js) (?type=desk-schemas) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                             }
                             // switch
                             // ( queryScope )
@@ -153,82 +154,34 @@ const restful = async(data) => {
 
                         case ('POST'):
 
-                            // DIMENSION C
+                            //  DIMENSION C
+                            //  POST (desk-schemas) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('virtual-table'):
-                                    // Which Type (set, group) of things?
+                                case ('all'):
                                     await deskSchemasPost(data)
                                     break
 
                                 default:
-                                    throw queryScope
-                                    // current pattern: always do this
+                                    throw new Error(`(restful.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
                             }
                             // switch
                             // ( queryScope )
                             break
 
                         default:
+                            throw new Error(`(restful.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                     }
                     // switch 
                     // ( .method )
                     break
 
                 default:
-                    // GET the Virtual ROW
-
+                    //  (NOT desk-schemas) and (NOT forms)
+                    throw new Error(`(restful.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
             }
             // switch
             // ( .type[0] )
-
-
-            /* DIMENSION A
-
-            switch (data.RU.request.queryStringParameters.type[0]) {
-                case ('forms'):
-                    // (desk-schemas) and (forms) are special / meta
-                    break
-                default:
-                    // GET the Virtual ROW
-            }
-            */
-
-            /* DIMENSION B
-
-            switch (queryScope) {
-                case ('virtual-row'):
-                
-                    // Which individual Thing?
-                    break
-                case ('virtual-table'):
-                
-                    // Which Type (set, group) of things?
-                    break
-                default:
-                    throw queryScope
-            }
-            */
-
-            /* DIMENSION C
-
-            switch ( data.RU.request.http.method ) {
-                case ( 'HEAD' ):
-                    break
-                case ( 'GET' ):
-                    break
-                case ( 'PUT' ):
-                    break
-                case ( 'DELETE' ):
-                    break
-                case ( 'POST' ):
-                    break
-                case ( 'PATCH' ):
-                    break
-                default:
-            } // switch ( data.RU.request.http.method )
-            */
-
 
 
         }
