@@ -123,7 +123,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 1,
+    performance: 0,
 
     /*  session exempted routes
      *
@@ -163,6 +163,6 @@ module.exports = {
      *
      *
      */
-    verbosity: 3,
+    verbosity: 0,
 
 }
