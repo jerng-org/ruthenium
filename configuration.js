@@ -44,7 +44,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'Using DynamoDB native datatype descriptors',
+    gitCommitMessage: 'Notes on rowID UUID encoding.',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
