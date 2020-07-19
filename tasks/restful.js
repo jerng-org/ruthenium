@@ -82,9 +82,15 @@ const restful = async(data) => {
             const queryHasThing = data.RU.request.queryStringParameters.thing &&
                 data.RU.request.queryStringParameters.thing[0]
 
-            const queryScope = queryHasType ?
-                (queryHasThing ? 'one' : 'all') :
-                new Error(`Requested a (restful) task, but (type) was not specified.`)
+            let queryScope
+            if (queryHasType) {
+                queryScope = (queryHasThing ? 'one' : 'all')
+            }
+            else {
+                console.error(`(restful.js) (?type=) was not provided.`)
+                data.RU.signals.sendResponse.redirectRoute = 'status-400'
+                return data
+            }
 
             //  DIMENSION A
             //  (desk-schemas) and (forms) are special / meta
