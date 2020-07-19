@@ -20,6 +20,7 @@ module.exports = {
                 primaryKey: 'cognitoUsername',
                 //sortKey: 'exp',   //  we cannot "getItem()" when the (exp) is unknown
                                     //  so exp needs to be a LSI
+                                    //  TODO rename this 'hashKey'
                 ttlKey: 'exp'   
                 
             }
@@ -44,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'Notes on rowID UUID encoding.',
+    gitCommitMessage: '-',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
