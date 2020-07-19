@@ -30,38 +30,43 @@ Cheat sheet for reference: https://github.com/jerng/aws-studies/blob/master/dyna
 
 Schema design - Ghetto Relational Database on DynamoDB : DRAFT 4
 
-    LEGEND  -   d       :   deskID      <<string:readable>>
-            -   c       :   columnID    <<string:readable>>
-            -   r       :   rowID       <<string:UUID>>
+    LEGEND  -   D       :   deskID      <<string:readable>>
+            -   C       :   columnID    <<string:readable>>
+            -   R       :   rowID       <<string:UUID>>
             
-            -   st      :   data        <<string>> 
-            -   nu      :   data        <<number>> 
-            -   bo      :   data        <<boolean>> 
-            -   bi      :   data        <<binary>>
+            -   S       :   data        <<string>> 
+            -   N       :   data        <<number>> 
+            -   BOOL    :   data        <<boolean>> 
+            -   B       :   data        <<binary>>
             
-            -   li      :   N/A         <<list>>
-            -   ma      :   N/A         <<map>>
-            -   se      :   N/A         <<set>>
-            -   nu      :   N/A         <<null>>
+            -   L       :   N/A         <<list>>
+            -   M       :   N/A         <<map>>
+            -   NULL    :   N/A         <<null>>
+
+            -   SS      :   N/A         <<set:string>>
+            -   NS      :   N/A         <<set:number>>
+            -   BS      :   N/A         <<set:binary>>
+
+        Using conventions established at : https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html
 
     Table : "cells"  
-            -   HASHKEY :   "d#c"
-            -   SORTKEY :   "r"
-            -   OTHER   :   "st", "nu", "bo", "bi"
+            -   HASHKEY :   "D#C"
+            -   SORTKEY :   "R"
+            -   OTHER   :   "S", "N", "B", "BOOL" 
     
     LSI : "string-cells"
-            -   SORTKEY :   "st"
-            -   OTHER   :   "r"
+            -   SORTKEY :   "S"
+            -   OTHER   :   "R"
     
     LSI : "number-cells"
-            -   SORTKEY :   "nu"
-            -   OTHER   :   "r"
+            -   SORTKEY :   "N"
+            -   OTHER   :   "R"
     
     LSI : "boolean-cells"
-            -   SORTKEY :   "bo"
-            -   OTHER   :   "r"
+            -   SORTKEY :   "BOOL"
+            -   OTHER   :   "R"
     
     LSI : "binary-cells"
-            -   SORTKEY :   "bi"
-            -   OTHER   :   "r"
+            -   SORTKEY :   "B"
+            -   OTHER   :   "R"
 */
