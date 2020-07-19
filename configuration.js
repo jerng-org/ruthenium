@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: '~/tasks/restful/desk-cells( -get and -post ).js initialised',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
