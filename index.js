@@ -55,10 +55,9 @@ try {
 
                 `CURRENT:`,
 
-                `cognito - integration; designing with a view to opt-out easily, 
-            later;
-            
-                sign-out link; persistent session store, and related policy, next.`,
+                `rewire (redirects to 4xx, 5xx) to immediate responses with (4xx, 5xx)`,
+
+                `cognito - sign-out link; persistent session store, and related policy, next.`,
 
                 `single-page-app framework; history API`,
 
