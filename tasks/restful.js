@@ -111,19 +111,19 @@ const restful = async(data) => {
                                             data.RU.signals.sendResponse.body = await formsDeskSchemasPostMarkup()
                                             break
                                         default:
-                                            throw new Error(`(restful.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
+                                            console.error(`(restful.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
                                     }
                                     break
 
                                 default:
-                                    throw new Error(`(restful.js) (?type=forms) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    console.error(`(restful.js) (?type=forms) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                             }
                             // switch 
                             // ( queryScope )
                             break
 
                         default:
-                            throw new Error(`(restful.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            console.error(`(restful.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                     }
                     // switch
                     // ( .method )
@@ -146,7 +146,7 @@ const restful = async(data) => {
                                     break
 
                                 default:
-                                    throw new Error(`(restful.js) (?type=desk-schemas) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    console.error(`(restful.js) (?type=desk-schemas) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                             }
                             // switch
                             // ( queryScope )
@@ -163,14 +163,14 @@ const restful = async(data) => {
                                     break
 
                                 default:
-                                    throw new Error(`(restful.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    console.error(`(restful.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
                             }
                             // switch
                             // ( queryScope )
                             break
 
                         default:
-                            throw new Error(`(restful.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            console.error(`(restful.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                     }
                     // switch 
                     // ( .method )
@@ -178,7 +178,7 @@ const restful = async(data) => {
 
                 default:
                     //  (NOT desk-schemas) and (NOT forms)
-                    throw new Error(`(restful.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
+                    console.error(`(restful.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
             }
             // switch
             // ( .type[0] )
