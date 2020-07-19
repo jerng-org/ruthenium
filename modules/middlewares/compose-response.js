@@ -18,6 +18,28 @@ markupFileNames.forEach((current, index, array) => {
     } // , thisArg  
 )
 
+
+const redirect = async(DATA) => {
+
+    DATA.RU.signals.redirectRoute = DATA.RU.request.http.path +
+        '?route=' +
+        DATA.RU.signals.redirectRoute
+
+    DATA.RU.response.statusCode = DATA.RU.signals.sendResponse &&
+        DATA.RU.signals.sendResponse.statusCode ?
+        DATA.RU.signals.sendResponse.statusCode :
+        303 // See Other
+
+    console.warn(`compose-response.js, branch:redirectRoute : this seems insufficiently forceful - here we should not yield to a pre-set non-300 status code;`)
+
+    // ensure headers is an object            
+    DATA.RU.response.headers = DATA.RU.signals.sendResponse &&
+        DATA.RU.signals.sendResponse.headers ?
+        DATA.RU.signals.sendResponse.headers : {}
+
+    DATA.RU.response.headers.location = DATA.RU.signals.redirectRoute
+}
+
 /*  1.  Throw, if (data.RU.response) is truthy.
  *
  *  2.  Branch, if (data.RU.signals.redirectRoute) is truthy.
@@ -36,35 +58,14 @@ markupFileNames.forEach((current, index, array) => {
 const composeResponse = async(data) => {
 
     if (data.RU.response) {
-        throw Error(`(compose-response.js) found that (data.RU.response) was
-                        truthy; composition aborted; nothing should be assigned
-                        to (data.RU.response) prior to (compose-response.js)`)
+        console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js)`)
+        data.RU.signals.sendResponse.redirectRoute = 'status-500'
     }
     else { data.RU.response = {} } // Initialisation
 
-    if (data.RU.signals.redirectRoute) {
-
-        data.RU.signals.redirectRoute = data.RU.request.http.path +
-            '?route=' +
-            data.RU.signals.redirectRoute
-
-        data.RU.response.statusCode = data.RU.signals.sendResponse &&
-            data.RU.signals.sendResponse.statusCode ?
-            data.RU.signals.sendResponse.statusCode :
-            303 // See Other
-
-        console.warn (`compose-response.js, branch:redirectRoute : this seems insufficiently forceful - here we should not yield to a pre-set non-300 status code;`)
-
-        // ensure headers is an object            
-        data.RU.response.headers = data.RU.signals.sendResponse &&
-            data.RU.signals.sendResponse.headers ?
-            data.RU.signals.sendResponse.headers :
-            {}
-
-        data.RU.response.headers.location = data.RU.signals.redirectRoute
-
-    }
+    if (data.RU.signals.redirectRoute) { redirect(data) }
     else
+
     if (data.RU.signals.sendBlob) {
 
         data.RU.response.statusCode = data.RU.signals.sendResponse &&
@@ -75,8 +76,7 @@ const composeResponse = async(data) => {
         // ensure headers is an object            
         data.RU.response.headers = data.RU.signals.sendResponse &&
             data.RU.signals.sendResponse.headers ?
-            data.RU.signals.sendResponse.headers :
-            {}
+            data.RU.signals.sendResponse.headers : {}
 
         // if sendBlob specified a MIME type, then over/write response            
         if (data.RU.signals.sendBlob['content-type']) {
@@ -110,8 +110,7 @@ const composeResponse = async(data) => {
             ''
 
         data.RU.response.headers = data.RU.signals.sendResponse.headers ?
-            data.RU.signals.sendResponse.headers :
-            { 'content-type': 'text/html' }
+            data.RU.signals.sendResponse.headers : { 'content-type': 'text/html' }
 
     }
     else
@@ -127,14 +126,14 @@ const composeResponse = async(data) => {
             }
         }
         else {
-            throw Error(`(middlewares/compose-response.js) could not find (${ 
-                    data.RU.signals.markupName 
-                    }.js) in the (~/tasks) directory. That name was specified at
-                    (data.RU.signals.markupName).
+            console.error(`(compose-response.js) could not find (${  data.RU.signals.markupName  }.js) in the (~/tasks) directory. That name was specified at (data.RU.signals.markupName).
                     
                     The following may be informative:
                     
                     ${ await rus.additionalRequestInformation ( data )}`)
+
+            data.RU.signals.sendResponse.redirectRoute = 'status-501'
+            redirect(data)
         }
     }
     else
@@ -153,18 +152,16 @@ const composeResponse = async(data) => {
             }
         }
         else {
-            throw Error(`(middlewares/compose-response.js) could not find 
-                    (${ data.RU.signals.inferredMarkupName }) 
-                    in the markups directory. That name was guessed because 
-                    (${ data.RU.signals.taskName }) was specified at 
-                    (data.RU.signals.taskName).
+            console.error(`(middlewares/compose-response.js) could not find  (${ data.RU.signals.inferredMarkupName })  in the markups directory. That name was guessed because  (${ data.RU.signals.taskName }) was specified at  (data.RU.signals.taskName).
 
                     The following may be informative:
                     
                     ${ await rus.additionalRequestInformation ( data )}`)
+
+            data.RU.signals.sendResponse.redirectRoute = 'status-501'
+            redirect(data)
         }
     }
-
     return data
 }
 
