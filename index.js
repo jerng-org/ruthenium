@@ -65,6 +65,9 @@ try {
             
             BACKLOG:`,
 
+                `(lastGuard.js) needs to be updated to disallow certain
+                responses that Lambda allows (like JSON).`,
+
                 `Currently, (router.js)'s (despatcher phase) calls a (task), and
                 that (task) may be manually programmed to call other (tasks); but 
                 there is no generic way for tasks to call tasks - should there
