@@ -60,13 +60,23 @@ const redirect = async(DATA) => {
 const composeResponse = async(data) => {
 
     if (data.RU.response) {
-        console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js)`)
+        console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js); (data.RU.response): ${ rus.print.stringify4(data.RU.response) }`)
+        delete data.RU.response
+        
         await status500(data)
         await composeResponse(data)
     }
     else { data.RU.response = {} } // Initialisation
 
-    if (data.RU.signals.redirectRoute) { redirect(data) }
+    //  no returns yet;
+    ////////////////////////////////////////////////////////////////////////////
+    //  henceforth, each branch below will return;
+
+    if (data.RU.signals.redirectRoute) {
+
+        redirect(data)
+        return data
+    }
     else
 
     if (data.RU.signals.sendBlob) {
@@ -94,8 +104,10 @@ const composeResponse = async(data) => {
 
         data.RU.response.body = data.RU.signals.sendBlob.body
 
+        return data
     }
     else
+
     if (data.RU.signals.sendResponse &&
         (data.RU.signals.sendResponse.statusCode ||
             data.RU.signals.sendResponse.body)) {
@@ -115,8 +127,10 @@ const composeResponse = async(data) => {
         data.RU.response.headers = data.RU.signals.sendResponse.headers ?
             data.RU.signals.sendResponse.headers : { 'content-type': 'text/html' }
 
+        return data
     }
     else
+
     if (data.RU.signals.markupName) {
         if (data.RU.signals.markupName in markups) {
             // clobber (refine this as above; WIP / TODO )
@@ -138,8 +152,10 @@ const composeResponse = async(data) => {
             await status501(data)
             await composeResponse(data)
         }
+        return data
     }
     else
+
     if (data.RU.signals.taskName) {
 
         data.RU.signals.inferredMarkupName = data.RU.signals.taskName + '-markup'
@@ -161,12 +177,11 @@ const composeResponse = async(data) => {
                     
                     ${ await rus.additionalRequestInformation ( data )}`)
 
-            data.RU.signals.sendResponse.redirectRoute = 'status-501'
             await status501(data)
             await composeResponse(data)
         }
+        return data
     }
-    return data
 }
 
 module.exports = composeResponse
