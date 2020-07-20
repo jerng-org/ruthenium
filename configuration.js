@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'improved error routing',
+    gitCommitMessage: '-',
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
