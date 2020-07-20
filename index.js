@@ -337,3 +337,25 @@ try {
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
+
+/*
+API Gateway - HTTP API - logging variables :
+https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-logging-variables.html
+
+const inner = ["$context.accountId", "$context.apiId", "$context.authorizer.claims.property",
+"$context.awsEndpointRequestId", "$context.dataProcessed",
+"$context.domainName", "$context.domainPrefix", "$context.error.message",
+"$context.error.messageString", "$context.error.responseType",
+"$context.extendedRequestId", "$context.httpMethod",
+"$context.identity.sourceIp", "$context.identity.userAgent", "$context.path",
+"$context.protocol", "$context.requestId", "$context.requestTime",
+"$context.requestTimeEpoch", "$context.routeKey", "$context.stage",
+"$context.integrationErrorMessage", "$context.integrationLatency",
+"$context.integrationStatus", "$context.responseLatency",
+"$context.responseLength", "$context.status"]
+
+.map(a=>(`"${a.slice(7)}":"${a}"`)).join(',')
+
+`{"context":{${inner}}}`
+
+*/
