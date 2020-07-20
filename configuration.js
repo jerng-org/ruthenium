@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '-',
+    gitCommitMessage: 'API Gateway logging notes.', 
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
