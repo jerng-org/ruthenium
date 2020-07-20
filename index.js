@@ -60,6 +60,8 @@ try {
                 `cognito - sign-out link; persistent session store, and related policy, next.`,
 
                 `single-page-app framework; history API`,
+                
+                `(status-xxx.js) implement a custom message passing mechanism.`,
 
                 `
             

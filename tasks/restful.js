@@ -7,11 +7,14 @@ const deskSchemasPost = require('/var/task/tasks/restful/desk-schemas-post.js')
 const formsDeskSchemasPostMarkup = require(`/var/task/tasks/restful/forms-get/markup-desk-schemas-post.js`)
 
 const status400 = require(`/var/task/tasks/status-400.js`)
+const status404 = require(`/var/task/tasks/status-404.js`)
 const status501 = require(`/var/task/tasks/status-501.js`)
 
 //const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
 console.warn(`(restful.js) we should really break up/curry the giant switch-case into a linear pipeline`)
+                            console.warn(`TODO: implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+
 
 const restful = async(data) => {
 
@@ -121,11 +124,13 @@ const restful = async(data) => {
                                             break
                                         default:
                                             console.error(`(restful.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
+                                            await status404(data)
                                     }
                                     break
 
                                 default:
                                     console.error(`(restful.js) (?type=forms) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    await status404(data)
                             }
                             // switch 
                             // ( queryScope )
@@ -133,6 +138,8 @@ const restful = async(data) => {
 
                         default:
                             console.error(`(restful.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            await status404(data)
+                            console.warn(`TODO: implement status405`) 
                     }
                     // switch
                     // ( .method )
@@ -156,6 +163,7 @@ const restful = async(data) => {
 
                                 default:
                                     console.error(`(restful.js) (?type=desk-schemas) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    await status404(data)
                             }
                             // switch
                             // ( queryScope )
@@ -173,6 +181,7 @@ const restful = async(data) => {
 
                                 default:
                                     console.error(`(restful.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    await status404(data)
                             }
                             // switch
                             // ( queryScope )
@@ -180,6 +189,8 @@ const restful = async(data) => {
 
                         default:
                             console.error(`(restful.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            await status404(data)
+                            console.warn(`TODO: implement status405`) 
                     }
                     // switch 
                     // ( .method )
@@ -188,7 +199,7 @@ const restful = async(data) => {
                 default:
                     //  (NOT desk-schemas) and (NOT forms)
                     console.error(`(restful.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
-                    
+                    await status404(data)
             }
             // switch
             // ( .type[0] )
