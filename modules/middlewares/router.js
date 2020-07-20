@@ -128,7 +128,7 @@ const router = async(data) => {
     }
     else {
         console.error(`(router.js) Could not find (${ data.RU.signals.taskName  }) in the tasks directory.`)
-        await tasks['status-404'](da)
+        await tasks['status-404'](data) 
     }
 
     // EXECUTION ENDS
