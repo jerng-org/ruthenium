@@ -60,7 +60,7 @@ const redirect = async(DATA) => {
 const composeResponse = async(data) => {
 
     if (data.RU.response) {
-        console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js); (data.RU.response): ${ rus.print.stringify4(data.RU.response) }`)
+        console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js); (data.RU.response): ${ await rus.print.stringify4(data.RU.response) }`)
         delete data.RU.response
         
         await status500(data)
