@@ -63,6 +63,8 @@ try {
                 
                 `(status-xxx.js) implement a custom message passing mechanism.`,
 
+                `memory link; redirect to attempted URI after login`,
+
                 `
             
             BACKLOG:`,
