@@ -7,6 +7,7 @@ const deskSchemasPost = require('/var/task/tasks/restful/desk-schemas-post.js')
 const formsDeskSchemasPostMarkup = require(`/var/task/tasks/restful/forms-get/markup-desk-schemas-post.js`)
 
 const status400 = require(`/var/task/tasks/status-400.js`)
+const status501 = require(`/var/task/tasks/status-501.js`)
 
 //const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
@@ -187,6 +188,7 @@ const restful = async(data) => {
                 default:
                     //  (NOT desk-schemas) and (NOT forms)
                     console.error(`(restful.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
+                    
             }
             // switch
             // ( .type[0] )

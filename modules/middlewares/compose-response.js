@@ -62,6 +62,7 @@ const composeResponse = async(data) => {
     if (data.RU.response) {
         console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js)`)
         await status500(data)
+        await composeResponse(data)
     }
     else { data.RU.response = {} } // Initialisation
 
@@ -135,6 +136,7 @@ const composeResponse = async(data) => {
                     ${ await rus.additionalRequestInformation ( data )}`)
 
             await status501(data)
+            await composeResponse(data)
         }
     }
     else
@@ -161,6 +163,7 @@ const composeResponse = async(data) => {
 
             data.RU.signals.sendResponse.redirectRoute = 'status-501'
             await status501(data)
+            await composeResponse(data)
         }
     }
     return data
