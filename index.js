@@ -65,8 +65,14 @@ try {
             
             BACKLOG:`,
 
-                `Improve docs on "what we are trying to do here"`,
+                `Currently, (router.js)'s (despatcher phase) calls a (task), and
+                that (task) may be manually programmed to call other (tasks); but 
+                there is no generic way for tasks to call tasks - should there
+                be one? Or is this something we leave to the programmer?
                 
+                    Example of mess: we are (require)ing (status-xxx) tasks in
+                    other (task)s and (middleware)s.`,
+
                 `redirect loop detection`,
 
                 `history API, S3 hosting with session, for SPA`,

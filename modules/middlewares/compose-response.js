@@ -18,6 +18,8 @@ markupFileNames.forEach((current, index, array) => {
     } // , thisArg  
 )
 
+const status500 = require(`/var/task/tasks/status-500.js`)
+const status501 = require(`/var/task/tasks/status-501.js`)
 
 const redirect = async(DATA) => {
 
@@ -59,7 +61,7 @@ const composeResponse = async(data) => {
 
     if (data.RU.response) {
         console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js)`)
-        data.RU.signals.sendResponse.redirectRoute = 'status-500'
+        await status500(data)
     }
     else { data.RU.response = {} } // Initialisation
 
@@ -132,8 +134,7 @@ const composeResponse = async(data) => {
                     
                     ${ await rus.additionalRequestInformation ( data )}`)
 
-            data.RU.signals.sendResponse.redirectRoute = 'status-501'
-            redirect(data)
+            await status501(data)
         }
     }
     else
@@ -159,7 +160,7 @@ const composeResponse = async(data) => {
                     ${ await rus.additionalRequestInformation ( data )}`)
 
             data.RU.signals.sendResponse.redirectRoute = 'status-501'
-            redirect(data)
+            await status501(data)
         }
     }
     return data

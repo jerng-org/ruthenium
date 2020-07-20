@@ -2,6 +2,8 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
+const status401 = require(`/var/task/tasks/status-401.js`)
+
 const sessionGuard = async(data) => {
 
     /*  
@@ -14,8 +16,7 @@ const sessionGuard = async(data) => {
 
         return data
     }
-
-    data.RU.signals.redirectRoute = 'status-401'
+    await status401(data)
     data.RU.signals.skipToMiddlewareName = 'composeResponse'
     return data
 }

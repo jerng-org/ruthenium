@@ -6,6 +6,8 @@ const deskSchemasPost = require('/var/task/tasks/restful/desk-schemas-post.js')
 
 const formsDeskSchemasPostMarkup = require(`/var/task/tasks/restful/forms-get/markup-desk-schemas-post.js`)
 
+const status400 = require(`/var/task/tasks/status-400.js`)
+
 //const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
 console.warn(`(restful.js) we should really break up/curry the giant switch-case into a linear pipeline`)
@@ -88,7 +90,7 @@ const restful = async(data) => {
             }
             else {
                 console.error(`(restful.js) (?type=) was not provided.`)
-                data.RU.signals.sendResponse.redirectRoute = 'status-400'
+                await status400 (data)
                 return data
             }
 
