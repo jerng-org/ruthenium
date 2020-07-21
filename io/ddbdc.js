@@ -21,7 +21,7 @@ const ddb = new aws.DynamoDB()
 
 const ddbdc = new aws.DynamoDB.DocumentClient()
 
-module.exports = ddbdc
+module.exports = ddbdc 
 mark(`~/io/ddbdc.js LOADED`)
 
 /*  TODO
