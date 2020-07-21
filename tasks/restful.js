@@ -9,6 +9,7 @@ const formsDeskSchemasPostMarkup = require(`/var/task/tasks/restful/forms-get/ma
 const rus = require('/var/task/modules/r-u-s.js')
 
 const status400 = require(`/var/task/tasks/status-400.js`)
+const status403 = require(`/var/task/tasks/status-403.js`)
 const status404 = require(`/var/task/tasks/status-404.js`)
 const status501 = require(`/var/task/tasks/status-501.js`)
 
@@ -106,7 +107,7 @@ const restful = async(data) => {
             }
 
             //  DIMENSION A
-            //  (desk-schemas) and (forms) are special / meta
+            //  (desk-schemas), (desk-cells) and (forms) are special / meta
             //  TODO: reconsider: is this really necessary?
             switch (data.RU.request.queryStringParameters.type[0]) {
 
@@ -204,8 +205,126 @@ const restful = async(data) => {
                     // switch 
                     // ( .method )
 
+                case ('desk-cells'):
+
+                    //  DIMENSION B
+                    //  METHODS for (desk-cells)
+                    switch (data.RU.request.http.method) {
+
+                        case ('GET'):
+
+                            //  DIMENSION C
+                            //  GET (desk-cells) ... all of them, or just one?
+                            switch (queryScope) {
+
+                                case ('all'):
+                                    console.error(`(restful.js) (?type=desk-cells) (GET) (?thing=) was not provided. You should specify the (desk) whose (cells) you wish to GET.`)
+                                    await status403(data)
+                                    return
+
+                                default:
+                                    
+                                    console.error(`(restful.js) (?type=desk-cells) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    await status404(data)
+                                    
+                                    
+                                    /*  Validation for (thing) should allow:
+                                    
+                                        LITERAL
+                                        -   GET one entire desk-column-row
+
+                                        ABSTRACTION
+                                        -   GET one entire desk
+                                        -   GET one entire desk-column
+                                        -   GET one entire desk-row
+            
+                                    */
+                                    
+                                    return
+                            }
+                            // switch
+                            // ( queryScope )
+
+                        case ('POST'):
+
+                            //  DIMENSION C
+                            //  POST (desk-cells) ... all of them, or just one?
+                            switch (queryScope) {
+
+                                default:
+                                    console.error(`(restful.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    await status404(data)
+                                    return
+                            }
+                            // switch
+                            // ( queryScope )
+
+                        default:
+                            console.error(`(restful.js) Request query parameter (?type=desk-cells), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            await status404(data)
+                            console.warn(`TODO: implement status405`)
+                            return
+                    }
+                    // switch 
+                    // ( .method )
+
+                case ('desks'):
+
+                    //  DIMENSION B
+                    //  METHODS for (desks)
+                    switch (data.RU.request.http.method) {
+
+                        case ('GET'):
+
+                            //  DIMENSION C
+                            //  GET (desks) ... all of them, or just one?
+                            switch (queryScope) {
+
+                                case ('all'):
+                                    console.error(`(restful.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
+                                    await status403(data)
+                                    return
+
+                                case ('one'):
+
+                                    //  DIMENSION D
+                                    //  GET (desks), which one? 
+                                    const deskName = data.RU.request.queryStringParameters.thing[0]
+                                        
+                                    /*
+                                    
+                                        ddbdc lookups here;
+                                        
+                                        
+                                        
+                                        if not found, fail:
+                                    
+                                    
+                                        console.error(`(restful.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
+                                        await status404(data)
+                                    */
+                                    return
+
+                                default:
+                                    console.error(`(restful.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    await status404(data)
+                                    return
+                            }
+                            // switch
+                            // ( queryScope )
+
+                       
+                        default:
+                            console.error(`(restful.js) Request query parameter (?type=desks), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            await status404(data)
+                            console.warn(`TODO: implement status405`)
+                            return
+                    }
+                    // switch 
+                    // ( .method )
+
                 default:
-                    //  (NOT desk-schemas) and (NOT forms)
+                    //  (NOT desk-schemas) (NOT desk-cells) (NOT desks) and (NOT forms)
 
                     console.error(`(restful.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
                     await status404(data)

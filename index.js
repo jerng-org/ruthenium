@@ -54,8 +54,16 @@ try {
             `DEBT_NOTE`, [
 
                 `CURRENT:`,
+
+                `make ?type=(singular) : desk-schemas -> type=desk-schema`,
                 
-                `(desk) CRUD ... (desk-cells- xx .js)`,
+                `(desk) CRUD ... (desk-cells- xx .js)
+                
+                CONSIDER renaming API endpoints (not storage structures):  
+                
+                    (desk-schemas)  ->  (desks)
+                    (desk-cells)
+                `,
 
                 `cognito - sign-out link; persistent session store, and related policy, next.`,
 
