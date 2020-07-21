@@ -38,7 +38,10 @@ Cheat sheet for reference: https://github.com/jerng/aws-studies/blob/master/dyna
 
 Schema design - 
 Ghetto Relational Database on DynamoDB : 
-DRAFT 4
+
+    Where a user application "boolean" datatypes, it should be implemented as a
+    "number:1|0", which is bulkier but more transparent than a "binary", and 
+    arguably less open-ended than a "string" (which has more code-points).
 
     LEGEND  -   H       :   #           <<string:the hash character>> 
             -   D       :   deskID      <<string:readable>>
@@ -60,27 +63,54 @@ DRAFT 4
 
         Using conventions established at : https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html
 
+DRAFT 4
+
     Table : "desk-cells"  
             -   HASHKEY :   "DHC"       <<string:"deskID#columnID">>
             -   SORTKEY :   "R"         <<string:"rowID">>
             -   OTHER   :   "S", "N", "B"
     
+            Facilitated reads:
+                -   SCAN    : gets all data for ALL DESKS
+                -   QUERY   : on "DHC", gets all data for ONE COLUMN
+                            : can be compounded to build ONE DESK 
+                -   GETITEM : gets all data for ONE ROW
+    
     LSI : "DHC-S-LSI"
             -   SORTKEY :   "S"
             -   OTHER   :   "R"
     
+            Facilitated reads:
+                -   QUERY   : on "DHC", gets RANGED data for ONE COLUMN
+                            : rowIDs can be returned
+
     LSI : "DHC-N-LSI"
             -   SORTKEY :   "N"
             -   OTHER   :   "R"
     
+            Facilitated reads:
+                -   QUERY   : on "DHC", gets RANGED data for ONE COLUMN
+                            : rowIDs can be returned
+
     LSI : "DHC-B-LSI"
             -   SORTKEY :   "B"
             -   OTHER   :   "R"
 
-    Where a user application "boolean" datatypes, it should be implemented as a
-    "number:1|0", which is bulkier but more transparent than a "binary", and 
-    arguably less open-ended than a "string" (which has more code-points).
+            Facilitated reads:
+                -   QUERY   : on "DHC", gets RANGED data for ONE COLUMN
+                            : rowIDs can be returned
 
+    STORAGE -   DHC :   1x
+                R   :   3x  -   times 36 string characters, HORRIBLE!
+                S   :   2x
+                N   :   2x
+                B   :   2x
+
+    CONSIDERATION   -   Yet flipping the TABLE's HASHKEY and SORTKEY don't seem
+                        to solve much; that would prevent us from having LSIs
+                        that can be queried with HASHKEY=DESK#COLUMN (we would
+                        have to create GSIs to put DHC back as the HASHKEY, and 
+                        we would then need one GSI per datatype for S/N/B)
 */
 
 
@@ -141,4 +171,88 @@ DRAFT 4
     Characters are hexadecimal, but strings are UTF-8.
     Therefore UUIDs could be de/encoded to binary for space savings, if CPU
     demands are not too high. TODO : CONSIDER ONLY
+    
+-   https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html
+
+    API REFERENCE
+    
+
+    GETITEM -   returns     -   one ITEMs
+            -   applies to  -   TABLE
+            -   requires    -   Key -   ENTIRE PRIMARY KEY
+            
+            -   RCUs charged    -   are based on total size of the ITEM returned;
+                                    ITEMs are limited to 400KB; 
+            -   ProjectionExpression-   specifies which ATTRIBUTES to return;
+                                        neither consumes RCUs, nor reduces RCUs 
+                                        consumed by KeyConditionExpression 
+                                        results from the current TABLE or INDEX;
+                                    -   CONSUMES ADDITIONAL RCUs if called on
+                                        an INDEX, and including NON-PROJECTED
+                                        ATTRIBUTES in the return value;
+            -   SELECT              -   returns a COUNT or specific ATTRIBUTES;
+            
+    QUERY   -   returns     -   multiple ITEMs
+            -   applies to  -   TABLE, GSI, LSI
+            -   requires    -   KeyConditionExpression  -   HASHKEY
+                https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html
+                
+            -   allows      -                           -   HASHKEY, SORTKEY
+            -   RCUs charged    -   are based on total size of ITEMs returned by
+                                    KeyConditionExpression; 1 MB MAXIMUM;
+            -   FilterExpression-   neither consumes RCUs, nor reduces RCUs 
+                                    consumed by KeyConditionExpression results;
+                                -   returns a subset of KeyConditionExpression
+                                    results to the application;
+            -   ProjectionExpression-   specifies which ATTRIBUTES to return;
+                                        neither consumes RCUs, nor reduces RCUs 
+                                        consumed by KeyConditionExpression 
+                                        results from the current TABLE or INDEX;
+                                    -   CONSUMES ADDITIONAL RCUs if called on
+                                        an INDEX, and including NON-PROJECTED
+                                        ATTRIBUTES in the return value;
+            -   SELECT              -   returns a COUNT or specific ATTRIBUTES;
+            
+    SCAN    -   returns     -   all ITEMs
+            -   applies to  -   TABLE, GSI, LSI
+            -   RCUs charged    -   are based on total size of ITEMs returned; 
+                                    1 MB MAXIMUM;
+            -   FilterExpression-   neither consumes RCUs, nor reduces RCUs 
+                                    consumed by KeyConditionExpression results;
+                                -   returns a subset of KeyConditionExpression
+                                    results to the application;
+            -   ProjectionExpression-   specifies which ATTRIBUTES to return;
+                                        neither consumes RCUs, nor reduces RCUs 
+                                        consumed by KeyConditionExpression 
+                                        results from the current TABLE or INDEX;
+                                    -   CONSUMES ADDITIONAL RCUs if called on
+                                        an INDEX, and including NON-PROJECTED
+                                        ATTRIBUTES in the return value;
+            -   Parallel Scans      -   useful for large TABLEs / INDICEs;
+                                    -   invoked by Segments / TotalSegments;
+            -   SELECT              -   returns a COUNT or specific ATTRIBUTES;
+    
+    ExclusiveStartKey           -   used in pagination;
+
+    ExpressionAttributeNames    -   defines substitution values in attribute
+                                    names which can be dereferenced with a
+                                    '#'-prefixed token in the attribute name;
+    
+    ExpressionAttributeValues   -   defines substitution values in attribute
+                                    values which can be dereferenced with a
+                                    ':'-prefixed token in the attribute name;
+    
+    ConditionExpression         -   for WRITE requests, rules can be
+                                    provided as a guard against undesired
+                                    destruction;
+    
+    READING NON-PROJECTED ATTRIBUTES FROM SECONDARY INDICES !!! WARNING !!!
+    
+    -   Projecting an attribute from a TABLE to SECONDARY INDEX makes a copy of
+        that attribute in the INDEX; when an ITEM in an INDEX is returned, all the
+        ITEM's projected attributes count towards the CONSUMED READ CAPACITY, 
+        regardless of whether those attributes are presented to the application;
+        
+    -   If any NON-PROJECTED ATTRIBUTES are returned at this time, the BASE TABLE
+        ITEM IS READ and its entire size is added to the CONSUMED READ CAPACITY;
 */

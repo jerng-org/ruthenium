@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(WIP) restful.js - notes added;`, 
+    gitCommitMessage: `(WIP) restful.js - improved notes on dd`, 
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
