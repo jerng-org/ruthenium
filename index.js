@@ -54,8 +54,8 @@ try {
             `DEBT_NOTE`, [
 
                 `CURRENT:`,
-
-                `rewire (redirects to 4xx, 5xx) to immediate responses with (4xx, 5xx)`,
+                
+                `(desk) CRUD ... (desk-cells- xx .js)`,
 
                 `cognito - sign-out link; persistent session store, and related policy, next.`,
 
@@ -82,8 +82,6 @@ try {
 
                 `redirect loop detection`,
 
-                `history API, S3 hosting with session, for SPA`,
-
                 `https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks`,
 
                 `https://developer.mozilla.org/en-US/docs/Glossary/HSTS`,
@@ -96,7 +94,7 @@ try {
                 -   example:  writes to (data.RU.signals) should be signed by 
                     the writer; perhaps via a non-enumerable property`,
 
-                `GET method forms are not yet supported;`,
+                `GET method forms are not yet supported by (form middlewares);`,
 
                 `DECOUPLE: (compose-response.js) should be broken up into multiple 
             middlewares also`,
