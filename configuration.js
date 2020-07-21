@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: 'API Gateway logging notes.', 
+    gitCommitMessage: `(WIP) restful.js - pausing to think about implementing Erlang-style pattern matching; probably a bad idea;`, 
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
