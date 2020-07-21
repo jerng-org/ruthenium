@@ -73,6 +73,8 @@ try {
 
                 `memory link; redirect to attempted URI after login`,
 
+                `risk manage: billing attacks, for DynamoDB / Lambda / APIGW layers`,
+
                 `
             
             BACKLOG:`,

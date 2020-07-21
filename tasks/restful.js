@@ -1,5 +1,7 @@
 'use strict'
 
+const deskGet = require('/var/task/tasks/restful/desk-get.js')
+
 const deskSchemasGet = require('/var/task/tasks/restful/desk-schemas-get/desk-schemas-get.js')
 
 const deskSchemasPost = require('/var/task/tasks/restful/desk-schemas-post.js')
@@ -223,11 +225,11 @@ const restful = async(data) => {
                                     return
 
                                 default:
-                                    
+
                                     console.error(`(restful.js) (?type=desk-cells) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
-                                    
-                                    
+
+
                                     /*  Validation for (thing) should allow:
                                     
                                         LITERAL
@@ -239,7 +241,7 @@ const restful = async(data) => {
                                         -   GET one entire desk-row
             
                                     */
-                                    
+
                                     return
                             }
                             // switch
@@ -251,10 +253,9 @@ const restful = async(data) => {
                             //  POST (desk-cells) ... all of them, or just one?
                             switch (queryScope) {
 
-                                default:
-                                    console.error(`(restful.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
-                                    await status404(data)
-                                    return
+                                default: console.error(`(restful.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                await status404(data)
+                                return
                             }
                             // switch
                             // ( queryScope )
@@ -289,8 +290,9 @@ const restful = async(data) => {
 
                                     //  DIMENSION D
                                     //  GET (desks), which one? 
-                                    const deskName = data.RU.request.queryStringParameters.thing[0]
-                                        
+                                    await getDesk (data)
+                                    
+
                                     /*
                                     
                                         ddbdc lookups here;
@@ -313,7 +315,7 @@ const restful = async(data) => {
                             // switch
                             // ( queryScope )
 
-                       
+
                         default:
                             console.error(`(restful.js) Request query parameter (?type=desks), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await status404(data)
