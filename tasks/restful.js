@@ -6,14 +6,21 @@ const deskSchemasPost = require('/var/task/tasks/restful/desk-schemas-post.js')
 
 const formsDeskSchemasPostMarkup = require(`/var/task/tasks/restful/forms-get/markup-desk-schemas-post.js`)
 
+const rus = require('/var/task/modules/r-u-s.js')
+
 const status400 = require(`/var/task/tasks/status-400.js`)
 const status404 = require(`/var/task/tasks/status-404.js`)
 const status501 = require(`/var/task/tasks/status-501.js`)
 
+rus.conf.verbosity > 0 &&
+    (console.warn(`(~/tasks/restful.js) all (types) are currently manually coded; RECONSIDER.`),
+        console.warn(`(~/tasks/restful.js) (dimensions) may require a bit of restructuring.`)
+    )
+
 //const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
 
 console.warn(`(restful.js) we should really break up/curry the giant switch-case into a linear pipeline`)
-                            console.warn(`TODO: implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+console.warn(`TODO: implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
 
 
 const restful = async(data) => {
@@ -94,12 +101,13 @@ const restful = async(data) => {
             }
             else {
                 console.error(`(restful.js) (?type=) was not provided.`)
-                await status400 (data)
+                await status400(data)
                 return data
             }
 
             //  DIMENSION A
             //  (desk-schemas) and (forms) are special / meta
+            //  TODO: reconsider: is this really necessary?
             switch (data.RU.request.queryStringParameters.type[0]) {
 
                 case ('forms'):
@@ -121,29 +129,29 @@ const restful = async(data) => {
                                     switch (data.RU.request.queryStringParameters.thing[0]) {
                                         case (`create-desk-schema`):
                                             data.RU.signals.sendResponse.body = await formsDeskSchemasPostMarkup()
-                                            break
+                                            return
                                         default:
                                             console.error(`(restful.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
                                             await status404(data)
+                                            return
                                     }
-                                    break
 
                                 default:
                                     console.error(`(restful.js) (?type=forms) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
+                                    return
                             }
                             // switch 
                             // ( queryScope )
-                            break
 
                         default:
                             console.error(`(restful.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await status404(data)
-                            console.warn(`TODO: implement status405`) 
+                            console.warn(`TODO: implement status405`)
+                            return
                     }
                     // switch
                     // ( .method )
-                    break
 
                 case ('desk-schemas'):
 
@@ -159,15 +167,15 @@ const restful = async(data) => {
 
                                 case ('all'):
                                     await deskSchemasGet(data)
-                                    break
+                                    return
 
                                 default:
                                     console.error(`(restful.js) (?type=desk-schemas) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
+                                    return
                             }
                             // switch
                             // ( queryScope )
-                            break
 
                         case ('POST'):
 
@@ -177,29 +185,31 @@ const restful = async(data) => {
 
                                 case ('all'):
                                     await deskSchemasPost(data)
-                                    break
+                                    return
 
                                 default:
                                     console.error(`(restful.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
+                                    return
                             }
                             // switch
                             // ( queryScope )
-                            break
 
                         default:
                             console.error(`(restful.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await status404(data)
-                            console.warn(`TODO: implement status405`) 
+                            console.warn(`TODO: implement status405`)
+                            return
                     }
                     // switch 
                     // ( .method )
-                    break
 
                 default:
                     //  (NOT desk-schemas) and (NOT forms)
+
                     console.error(`(restful.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
                     await status404(data)
+                    return
             }
             // switch
             // ( .type[0] )
@@ -212,6 +222,8 @@ const restful = async(data) => {
 
     } // non-transactional; single operation; not a batch - DEV THIS FIRST
 
+    // manipulate (data.RU), for example
+    // no need to return (data)
 }
 
 module.exports = restful
