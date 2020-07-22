@@ -115,7 +115,8 @@ const setSessionFromRequestCookie = async DATA => {
                 .primaryKey
             ]: DATA.RU.request.headers.cookies['__Host-' +
                 conf.obfuscations.sessionCookieName][0]
-        }
+        },
+        ReturnConsumedCapacity:'TOTAL'
     }
 
     DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
