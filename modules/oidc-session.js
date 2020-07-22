@@ -121,6 +121,8 @@ const setSessionFromRequestCookie = async DATA => {
 
     DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
 
+    mark(`~/modules/oidc-session.js : setSessionFromRequestCookie CHECKED DATABASE`)
+
     if (DATA.RU.io.sessionsGet.Item) {
         //  (no need to) set any session cookies; this is the source;
 
