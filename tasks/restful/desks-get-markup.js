@@ -23,11 +23,11 @@ const desksGetMarkup = async(data) => {
     data.RU.io.deskCellsQuery.Items.forEach((cell) => {
 
         if (!(cell.R in deskCells)) {
-            deskCells.R = {} 
+            deskCells[cell.R] = {}
         }
         const colName = cell.DHC.slice(cell.DHC.indexOf('#'))
         const colType = deskColumnTypes[colName]
-        deskCells.R[colName] = cell[colType]
+        deskCells[cell.R][colName] = cell[colType]
     })
 
     let markup = `
