@@ -35,7 +35,7 @@ const deskGet = async(data) => {
     data.RU.io.deskCellsQueries = []
     for (const colName of colNames) {
 
-        data.RU.io.deskCellsQuery.push(
+        data.RU.io.deskCellsQueries.push(
             await rus.aws.ddbdc.query({
                 TableName: 'TEST-APP-DESK-CELLS',
                 KeyConditionExpression: 'id = :deskID',
