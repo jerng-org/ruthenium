@@ -8,11 +8,14 @@ const deskGet = async(data) => {
 
     const deskID = data.RU.request.queryStringParameters.thing[0]
 
-    data.RU.io.deskSchemasGet = await rus.aws.ddbdc.get ( {
+    data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
         TableName: 'TEST-APP-DESK-SCHEMAS',
-        Key:{ id:deskID }
-    } ).promise()
-    
+        KeyConditionExpression: 'id = :deskID',
+        ExpressionAttributeValues: {
+            ':deskID': deskID
+        }
+    }).promise()
+
     // no need to return (data)
 }
 module.exports = deskGet
