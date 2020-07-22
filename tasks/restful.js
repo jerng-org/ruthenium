@@ -290,7 +290,7 @@ const restful = async(data) => {
 
                                     //  DIMENSION D
                                     //  GET (desks), which one? 
-                                    await getDesk (data)
+                                    await deskGet (data)
                                     
 
                                     /*
