@@ -39,26 +39,6 @@ const deskGet = async(data) => {
         ReturnConsumedCapacity: 'TOTAL'
     }).promise()
     
-/*
-    data.RU.io.deskColumnNames = data.RU.io.deskSchemasQuery.Items[0].columns
-        .map(col => col.name)
-
-    data.RU.io.deskCellsQueries = []
-    for (const colName of data.RU.io.deskColumnNames) {
-
-        data.RU.io.deskCellsQueries.push(
-            await rus.aws.ddbdc.query({
-                TableName: 'TEST-APP-DESK-CELLS',
-                KeyConditionExpression: 'DHC = :deskID',
-                ExpressionAttributeValues: { ':deskID': deskName + '#' + colName },
-                ReturnConsumedCapacity: 'TOTAL'
-            }).promise()
-        )
-
-    }
-    
-    data.RU.io.deskRows
-*/    
     rus.conf.verbosity > 0
     && console.warn(`FIXME: (desks-get.js) implement (for-of) with (Promise.allSettled)`)
 
