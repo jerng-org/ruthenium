@@ -6,27 +6,33 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const desksGetMarkup = async(data) => {
 
+    let th1s = ''
+    let th2s = ''
+    for ( const col of data.RU.io.deskSchemasQuery.Items[0].columns ){
+        th1s += `<th scope="col">${ col.name }</th>`
+        th2s += `<th scope="col">${ col.type }</th>`
+
+    }   
+
     let markup = `
-<h1>Desk id: <code>${ data.RU.io.deskSchemasQuery.Items[0].id }</code></h1>
-<h1>Desk name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code></h1>
+<h1><i>GET</i> a Desk </h1>
+<h2>id:     <code>${ data.RU.io.deskSchemasQuery.Items[0].id }</code></h1>
+<h2>name:   <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code></h1>
 <table>
+
     <thead>
-        <tr>
-        ${
-data.RU.io.deskSchemasQuery.Items[0].columns
-    .reduce(( acc, cur, index, array)=>{
-        
-        return acc + `<th scope="col">${ cur.name }</th>`
-        
-    }, '' /*initial accumulator value*/ )
-            
-        }        
-        </tr>
+        <tr>${ th1s }</tr>        
+        <tr>${ th2s }</tr>        
     </thead>
+    
     <tbody>
+    
     </tbody>
+    
     <tfoot>
+    
     </tfoot>
+    
 </table>`
 
 
