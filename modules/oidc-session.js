@@ -4,8 +4,8 @@ const mark = require('/var/task/modules/mark.js')
 const cookie = require('/var/task/modules/cookie.js')
 const conf = require(`/var/task/configuration.js`)
 const ddbdc = require('/var/task/io/ddbdc.js')
-const ddb = require(`aws-sdk/clients/dynamodb`)
-
+const aws = require(`aws-sdk`)
+const ddb = new aws.DynamoDB({apiVersion: '2012-08-10'})
 /*  Given any DATA, exerts control over DATA.RU.signals.session;
  *
  */
