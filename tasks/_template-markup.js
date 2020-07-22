@@ -20,7 +20,7 @@ const thisIsMyName = async ( data ) => {
 //  Return markup as string, and it will be assigned to
 //      (data.RU.response.body) by (compose-response.js).
 //
-//  You may also manipulated (data) directly, but that would be semantically
+//  You may also manipulate (data) directly, but that would be semantically
 //  incoherent / unpretty.
 
 module.exports = thisIsMyName

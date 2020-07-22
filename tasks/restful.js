@@ -1,6 +1,6 @@
 'use strict'
 
-const deskGet = require('/var/task/tasks/restful/desk-get.js')
+const desksGet = require('/var/task/tasks/restful/desks-get.js')
 
 const deskSchemasGet = require('/var/task/tasks/restful/desk-schemas-get/desk-schemas-get.js')
 
@@ -297,7 +297,7 @@ const restful = async(data) => {
 
                                     //  DIMENSION D
                                     //  GET (desks), which one? 
-                                    await deskGet(data)
+                                    await desksGet(data)
 
 
                                     /*
