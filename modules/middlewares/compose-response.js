@@ -62,11 +62,11 @@ const composeResponse = async(data) => {
     if (data.RU.response) {
         console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js); (data.RU.response): ${ await rus.print.stringify4(data.RU.response) }`)
         delete data.RU.response
-        
+
         await status500(data)
         await composeResponse(data)
     }
-    else { data.RU.response = {} } // Initialisation
+    // Initialisation of (data.RU.response) has moved to branches below
 
     //  no returns yet;
     ////////////////////////////////////////////////////////////////////////////
@@ -80,6 +80,8 @@ const composeResponse = async(data) => {
     else
 
     if (data.RU.signals.sendBlob) {
+
+        data.RU.response = {}
 
         data.RU.response.statusCode = data.RU.signals.sendResponse &&
             data.RU.signals.sendResponse.statusCode ?
@@ -112,6 +114,9 @@ const composeResponse = async(data) => {
         (data.RU.signals.sendResponse.statusCode ||
             data.RU.signals.sendResponse.body)) {
 
+        data.RU.response = {}
+
+
         //  This branch allows the programmer to short-circuit "automatic 
         //  task-markup-matching" by specifying either the (statusCode) or
         //  (body) manually.
@@ -133,6 +138,9 @@ const composeResponse = async(data) => {
 
     if (data.RU.signals.markupName) {
         if (data.RU.signals.markupName in markups) {
+
+            data.RU.response = {}
+
             // clobber (refine this as above; WIP / TODO )
             data.RU.response = {
                 statusCode: 200,
@@ -157,10 +165,12 @@ const composeResponse = async(data) => {
     else
 
     if (data.RU.signals.taskName) {
-
         data.RU.signals.inferredMarkupName = data.RU.signals.taskName + '-markup'
 
         if (data.RU.signals.inferredMarkupName in markups) {
+
+            data.RU.response = {}
+
             // clobber (refine this as above; WIP / TODO )
             data.RU.response = {
                 statusCode: 200,
@@ -172,12 +182,12 @@ const composeResponse = async(data) => {
         }
         else {
             console.error(`(middlewares/compose-response.js) could not find  (${ data.RU.signals.inferredMarkupName })  in the markups directory. That name was guessed because (${ data.RU.signals.taskName }) was specified at  (data.RU.signals.taskName).`
-                    /*
-                    + `The following may be informative:
+                /*
+                + `The following may be informative:
                     
-                    ${ await rus.additionalRequestInformation ( data )}`
-                    */
-                    )
+                ${ await rus.additionalRequestInformation ( data )}`
+                */
+            )
 
             await status501(data)
             await composeResponse(data)
