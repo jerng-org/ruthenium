@@ -143,6 +143,9 @@ try {
             
             ICEBOX:`,
 
+                `consider upgrading performance of DynamoDB Document Client
+                https://www.npmjs.com/package/aws-thin-dynamo`,
+
                 `$.stuff for aliasing`,
 
                 `https://www.npmjs.com/package/require-directory`,
