@@ -13,7 +13,8 @@ const deskGet = async(data) => {
         KeyConditionExpression: 'id = :deskID',
         ExpressionAttributeValues: {
             ':deskID': deskID
-        }
+        },
+        ReturnConsumedCapacity:'TOTAL'
     }).promise()
 
     // no need to return (data)
