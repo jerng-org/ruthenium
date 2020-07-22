@@ -34,9 +34,9 @@ const desksGetMarkup = async(data) => {
     for (const rowID in deskCells) {
         tbodyTrs += `
         <tr>
-        ${colNames.reduce((accumulator, colName)=>{
-            return `<td>${deskCells[rowID][colName]}</td>`
-        },'')}
+        ${ colNames.reduce((accumulator, colName)=>{
+            return accumulator + `<td>${deskCells[rowID][colName]}</td>`
+        },'') }
         </tr>`
     }
 
@@ -45,6 +45,7 @@ const desksGetMarkup = async(data) => {
 <h1>id:     <code>${ data.RU.io.deskSchemasQuery.Items[0].id }</code></h1>
 <h2>name:   <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code></h2>
         <pre>${ await rus.print.stringify4(deskCells)}</pre>
+        <pre>${ await rus.print.stringify4(colNames)}</pre>
 <table>
 
     <thead>
