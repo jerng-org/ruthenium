@@ -42,8 +42,8 @@ const layoutMarkup = async(data) => {
                 encodeURIComponent ( process.env.COGNITO_REDIRECT_URI ) +
                 '">Log In</a>' 
         }
-        ${ rus.conf.verbosity > 2 && ( 'cookies:<pre>' + await rus.print.stringify4 ( data.RU.request.headers.cookies ) + '</pre>' ) }
-        ${ rus.conf.verbosity > 3 && ( 'io:<pre>' + await rus.print.stringify4 ( data.RU.io ) + '</pre>' ) }
+        ${ rus.conf.verbosity > 2 && ( "<pre>cookies:\n" + await rus.print.stringify4 ( data.RU.request.headers.cookies ) + '</pre>' ) }
+        ${ rus.conf.verbosity > 3 && ( "<pre>io:\n" + await rus.print.stringify4 ( data.RU.io ) + '</pre>' ) }
         <h3>Welcome to Prototyping</h3>
         <p>
         </p>
