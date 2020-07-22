@@ -4,6 +4,8 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const setOidcSession = async(data) => {
 
+    rus.mark(`~/modules/middlewares/set-oidc-session.js : BEGIN`)
+
     /*  1.
      *  OIDC / Authentication mechanism has priority;
      *
@@ -26,6 +28,7 @@ const setOidcSession = async(data) => {
             //  set any session cookies;
             //  set internal signals;
             await rus.oidcSession.expireSession(data)
+
             return data
         }
 
@@ -36,17 +39,10 @@ const setOidcSession = async(data) => {
          * 
          * 
          */
-         
+
         //  set any session cookies;
         //  set internal signals;
         await rus.oidcSession.setSessionFromOidcAccessToken(data)
-
-    //////////
-    //      //
-    //  !!  //  Make way. WIP HERE
-    //      //
-    //////////
-
     }
 
     else // If no valid OIDC (access_token) is found, then 
@@ -61,16 +57,17 @@ const setOidcSession = async(data) => {
          */
 
         if (data.RU.request.headers.cookies &&
-            data.RU.request.headers.cookies['__Host-'+rus.conf.obfuscations.sessionCookieName]) {
+            data.RU.request.headers.cookies['__Host-' + rus.conf.obfuscations.sessionCookieName]) {
 
             //  set any session cookies;
             //  set internal signals;
             await rus.oidcSession.setSessionFromRequestCookie(data)
         }
 
+    rus.mark(`~/modules/middlewares/set-oidc-session.js : END`)
+
     return data
 }
 
 module.exports = setOidcSession
 rus.mark(`~/modules/middlewares/setOidcSessions.js LOADED`)
-
