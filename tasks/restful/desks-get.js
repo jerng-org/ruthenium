@@ -14,8 +14,6 @@ rus.conf.verbosity > 0 &&
 
 const deskGet = async(data) => {
 
-    rus.mark(`~/tasks/restful/desks-get.js : BEGIN`)
-
     const deskID = data.RU.request.queryStringParameters.thing[0]
 
     data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
@@ -25,8 +23,6 @@ const deskGet = async(data) => {
         Limit: 1,
         ReturnConsumedCapacity: 'TOTAL'
     }).promise()
-
-    rus.mark(`~/tasks/restful/desks-get.js : deskSchemasQuery`)
 
     if (!data.RU.io.deskSchemasQuery.Items.length) {
         await status404(data)
@@ -43,15 +39,11 @@ const deskGet = async(data) => {
         ReturnConsumedCapacity: 'TOTAL'
     }).promise()
     
-    rus.mark(`~/tasks/restful/desks-get.js : deskCellsQuery`)
-
     rus.conf.verbosity > 0
     && console.warn(`FIXME: (desks-get.js) implement (for-of) with (Promise.allSettled)`)
 
     data.RU.signals.sendResponse.body = await markup(data)
 
-    rus.mark(`~/tasks/restful/desks-get.js : END`)
-    
     // no need to return (data)
 }
 module.exports = deskGet

@@ -42,16 +42,14 @@ const layoutMarkup = async(data) => {
                 encodeURIComponent ( process.env.COGNITO_REDIRECT_URI ) +
                 '">Log In</a>' 
         }
-        <div class="container">
-            <h3>Welcome to Prototyping</h3>
-            <p>
-            </p>
-            ${ data.RU.response.body }
-            
-            ${ rus.conf.verbosity > 2 ? '<hr><h4>(rus.conf.verbosity > 2) :</h4>' : ''}
-            ${ rus.conf.verbosity > 2 ? ( "<pre>cookies:\n" + await rus.print.stringify4 ( data.RU.request.headers.cookies ) + '</pre>' ) : ''}
-            ${ rus.conf.verbosity > 3 ? ( "<pre>io:\n" + await rus.print.stringify4 ( data.RU.io ) + '</pre>' ) : ''}
-        </div>
+        <h3>Welcome to Prototyping</h3>
+        <p>
+        </p>
+        ${ data.RU.response.body }
+        
+        ${ rus.conf.verbosity > 2 ? '<hr><h4>(rus.conf.verbosity > 2) :</h4>' : ''}
+        ${ rus.conf.verbosity > 2 ? ( "<pre>cookies:\n" + await rus.print.stringify4 ( data.RU.request.headers.cookies ) + '</pre>' ) : ''}
+        ${ rus.conf.verbosity > 3 ? ( "<pre>io:\n" + await rus.print.stringify4 ( data.RU.io ) + '</pre>' ) : ''}
     </body>
 </html>`
 

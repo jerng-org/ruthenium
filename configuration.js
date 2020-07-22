@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(WIP) restful.js - (desks-get-markup.js) `,
+    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
@@ -123,7 +123,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 1, 
+    performance: 1,
 
     /*  session exempted routes
      *
@@ -155,16 +155,14 @@ module.exports = {
      *
      *      2   :   1       + console.info  -> logs
      *
-     *      3   :   2       + (data)                        -> response.body
+     *      3   :   2       + (data)                        -> logs + response.body
      *
      *      4   :   3       + (raw database output)         -> response.body
      *
      *      5   :   4       + (development meta-narrative)  -> logs
      *
-     *      6   :   5       + (data)                        -> logs
-     *
      *
      */
-    verbosity: 0,
+    verbosity: 4,
 
 }
