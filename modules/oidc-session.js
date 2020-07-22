@@ -11,13 +11,9 @@ const ddbdc = require('/var/task/io/ddbdc.js')
 
 const setSessionIdInSignals = async(DATA, id) => {
     DATA.RU.signals.session = { id: id }
+    
+    mark(`~/modules/oidc-session.js : setSessionIdInSignals EXECUTED`)
 }
-
-//////////
-//      //
-//  !!  //  Make way. WIP HERE
-//      //
-//////////
 
 const setSessionIdWithPersistence = async(validated) => {
 
@@ -86,6 +82,8 @@ const setSessionIdWithPersistence = async(validated) => {
     // Call storage layer
     const WIP = await ddbdc.put(params).promise()
     console.warn(`(oidc-session.js) stuff this into (data.RU.io.dynamoDB`)
+    
+    mark(`~/modules/oidc-session.js : setSessionIdWithPersistence EXECUTED`)
 }
 
 const setSessionFromOidcAccessToken = async DATA => {
@@ -101,6 +99,8 @@ const setSessionFromOidcAccessToken = async DATA => {
     const _id = DATA.RU.signals.oidc.validated.access_token.sub
     await setSessionIdInSignals(DATA, _id)
     await setSessionIdWithPersistence(DATA.RU.signals.oidc.validated)
+
+    mark(`~/modules/oidc-session.js : setSessionFromOidcAccessToken EXECUTED`)
 }
 
 const setSessionFromRequestCookie = async DATA => {
@@ -133,6 +133,8 @@ const setSessionFromRequestCookie = async DATA => {
     else {
         await expireSession(DATA)
     }
+    
+    mark(`~/modules/oidc-session.js : setSessionFromRequestCookie EXECUTED`)
 }
 
 const expireSession = async DATA => {
@@ -142,6 +144,8 @@ const expireSession = async DATA => {
 
     //  expire internal signals;
     delete DATA.RU.signals.session
+    
+    mark(`~/modules/oidc-session.js : expireSession EXECUTED`)
 }
 
 const oidcSession = {
