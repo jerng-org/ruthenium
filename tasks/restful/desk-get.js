@@ -10,10 +10,7 @@ const deskGet = async(data) => {
 
     data.RU.io.deskSchemasGet = await rus.aws.ddbdc.get ( {
         TableName: 'TEST-APP-DESK-SCHEMAS',
-        Key:{
-            DHC:'',
-            R:'',
-        }
+        Key:{ name:deskName }
     } ).promise()
     
     // no need to return (data)
