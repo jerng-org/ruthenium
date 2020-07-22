@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(WIP) restful.js - (sidetrack: fixed a bug in compose-response ... regarding premature initalisation of (data.RU.response) )`,
+    gitCommitMessage: `(WIP) restful.js - ()`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
