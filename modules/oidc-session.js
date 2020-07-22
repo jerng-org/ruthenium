@@ -4,6 +4,7 @@ const mark = require('/var/task/modules/mark.js')
 const cookie = require('/var/task/modules/cookie.js')
 const conf = require(`/var/task/configuration.js`)
 const ddbdc = require('/var/task/io/ddbdc.js')
+const ddb = require(`aws-sdk/clients/dynamodb`)
 
 /*  Given any DATA, exerts control over DATA.RU.signals.session;
  *
@@ -11,7 +12,7 @@ const ddbdc = require('/var/task/io/ddbdc.js')
 
 const setSessionIdInSignals = async(DATA, id) => {
     DATA.RU.signals.session = { id: id }
-    
+
     mark(`~/modules/oidc-session.js : setSessionIdInSignals EXECUTED`)
 }
 
@@ -82,7 +83,7 @@ const setSessionIdWithPersistence = async(validated) => {
     // Call storage layer
     const WIP = await ddbdc.put(params).promise()
     console.warn(`(oidc-session.js) stuff this into (data.RU.io.dynamoDB`)
-    
+
     mark(`~/modules/oidc-session.js : setSessionIdWithPersistence EXECUTED`)
 }
 
@@ -107,19 +108,32 @@ const setSessionFromRequestCookie = async DATA => {
 
     // TODO check and expire client session cookie, if DATABASE says sessions has expired
     console.warn('session.js : expire session cookies')
+    /*
+        const params = {
+            TableName: 'TEST-APP-SESSIONS',
+            Key: {
+                [conf.platform.dynamoDB.sessions
+                    .primaryKey
+                ]: DATA.RU.request.headers.cookies['__Host-' +
+                    conf.obfuscations.sessionCookieName][0]
+            },
+            ReturnConsumedCapacity:'TOTAL'
+        }
 
-    const params = {
+        DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
+    */
+    DATA.RU.io.sessionsGet = await ddb.getItem({
         TableName: 'TEST-APP-SESSIONS',
         Key: {
             [conf.platform.dynamoDB.sessions
                 .primaryKey
-            ]: DATA.RU.request.headers.cookies['__Host-' +
-                conf.obfuscations.sessionCookieName][0]
+            ]: {
+                S: DATA.RU.request.headers.cookies['__Host-' +
+                    conf.obfuscations.sessionCookieName][0]
+            }
         },
-        ReturnConsumedCapacity:'TOTAL'
-    }
-
-    DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
+        ReturnConsumedCapacity: 'TOTAL'
+    }).promise()
 
     mark(`~/modules/oidc-session.js : setSessionFromRequestCookie CHECKED DATABASE`)
 
@@ -135,7 +149,7 @@ const setSessionFromRequestCookie = async DATA => {
     else {
         await expireSession(DATA)
     }
-    
+
     mark(`~/modules/oidc-session.js : setSessionFromRequestCookie EXECUTED`)
 }
 
@@ -146,7 +160,7 @@ const expireSession = async DATA => {
 
     //  expire internal signals;
     delete DATA.RU.signals.session
-    
+
     mark(`~/modules/oidc-session.js : expireSession EXECUTED`)
 }
 
