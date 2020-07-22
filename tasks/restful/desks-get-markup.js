@@ -25,7 +25,7 @@ const desksGetMarkup = async(data) => {
         if (!(cell.R in deskCells)) {
             deskCells[cell.R] = {}
         }
-        const colName = cell.DHC.slice(cell.DHC.indexOf('#'))
+        const colName = cell.DHC.slice(cell.D.length + 1)
         const colType = deskColumnTypes[colName]
         deskCells[cell.R][colName] = cell[colType]
     })
@@ -42,7 +42,7 @@ const desksGetMarkup = async(data) => {
     </thead>
     
     <tbody>
-    ${ await rus.print.stringify4(deskCells)}
+        <pre>${ await rus.print.stringify4(deskCells)}</pre>
     </tbody>
     
     <tfoot>
