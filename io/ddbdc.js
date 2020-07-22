@@ -63,25 +63,33 @@ Ghetto Relational Database on DynamoDB :
 
         Using conventions established at : https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html
 
-DRAFT 4.1
+DRAFT 4.2
 
     Table : "desk-cells"  
             -   HASHKEY :   "DHC"       <<string:"deskID#columnID">>
+                        :   This is the TABLE HASHKEY because, it is REUSED
+                            as the HASHKEY for EVERY LSI where we do DHC filters;
             -   SORTKEY :   "R"         <<string:"rowID">>
-            -   OTHER   :   "S", "N", "B"
+            -   OTHER   :   "S", "N", "B", "C", D"
     
             Facilitated reads:
                 -   SCAN    : gets all data for ALL DESKS
                 -   QUERY   : on "DHC", gets all data for ONE COLUMN
-                            : can be compounded to build ONE DESK
                 -   GETITEM : gets all data for ONE CELL
     
     GSI : "R-GSI"  
             -   HASHKEY :   "R"         <<string:"rowID">>
-            -   OTHER   :   "S", "N", "B", "DHC"
+            -   OTHER   :   "S", "N", "B", "C"
     
             Facilitated reads:
                 -   QUERY   : on "R", gets all data for ONE ROW
+
+    GSI : "D-GSI"  
+            -   HASHKEY :   "D"         <<string:"deskID">>
+            -   OTHER   :   "S", "N", "B", "C", "R"
+    
+            Facilitated reads:
+                -   QUERY   : on "D", gets all data for ONE DESK
 
     LSI : "DHC-S-LSI"
             -   SORTKEY :   "S"

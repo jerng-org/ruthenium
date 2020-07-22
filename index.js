@@ -55,6 +55,8 @@ try {
 
                 `CURRENT:`,
 
+                `Refactor (DESK-SCHEMAS id to be name) or (DESK-CELLS HASHKEY to be deskID#colName`,
+
                 `There should be a (task stack) so that we can trace tasks?`,
 
                 `make ?type=(singular) : desk-schemas -> type=desk-schema`,
