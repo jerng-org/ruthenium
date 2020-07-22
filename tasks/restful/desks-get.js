@@ -31,11 +31,20 @@ const deskGet = async(data) => {
 
     const deskName = data.RU.io.deskSchemasQuery.Items[0].name
 
-    const colNames = data.RU.io.deskSchemasQuery.Items[0].columns
+    data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
+        TableName: 'TEST-APP-DESK-CELLS',
+        IndexName: 'D-GSI',
+        KeyConditionExpression: 'D = :deskName',
+        ExpressionAttributeValues: { ':deskName': deskName },
+        ReturnConsumedCapacity: 'TOTAL'
+    }).promise()
+    
+/*
+    data.RU.io.deskColumnNames = data.RU.io.deskSchemasQuery.Items[0].columns
         .map(col => col.name)
 
     data.RU.io.deskCellsQueries = []
-    for (const colName of colNames) {
+    for (const colName of data.RU.io.deskColumnNames) {
 
         data.RU.io.deskCellsQueries.push(
             await rus.aws.ddbdc.query({
@@ -47,6 +56,11 @@ const deskGet = async(data) => {
         )
 
     }
+    
+    data.RU.io.deskRows
+*/    
+    rus.conf.verbosity > 0
+    && console.warn(`FIXME: (desks-get.js) implement (for-of) with (Promise.allSettled)`)
 
     data.RU.signals.sendResponse.body = await markup(data)
 
