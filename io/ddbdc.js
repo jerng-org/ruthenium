@@ -82,7 +82,6 @@ DRAFT 4.1
     
             Facilitated reads:
                 -   QUERY   : on "R", gets all data for ONE ROW
-                
 
     LSI : "DHC-S-LSI"
             -   SORTKEY :   "S"

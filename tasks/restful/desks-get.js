@@ -6,8 +6,7 @@ const status404 = require(`/var/task/tasks/status-404.js`)
 rus.conf.verbosity > 0 &&
     console.warn(`(desk-get.js) FIXME: rendering an error page should not involve a require() here;`)
 
-const markup 
-    = require ( '/var/task/tasks/restful/desks-get-markup.js' )
+const markup = require('/var/task/tasks/restful/desks-get-markup.js')
 rus.conf.verbosity > 0 &&
     console.warn(`(desk-schemas-get.js) FIXME: rendering (-markup.js) should not involve a require() here;`)
 
@@ -21,7 +20,7 @@ const deskGet = async(data) => {
         TableName: 'TEST-APP-DESK-SCHEMAS',
         KeyConditionExpression: 'id = :deskID',
         ExpressionAttributeValues: { ':deskID': deskID },
-        Limit:1,
+        Limit: 1,
         ReturnConsumedCapacity: 'TOTAL'
     }).promise()
 
@@ -30,14 +29,24 @@ const deskGet = async(data) => {
         return
     }
 
-    data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
-        TableName: 'TEST-APP-DESK-SCHEMAS',
-        KeyConditionExpression: 'id = :deskID',
-        ExpressionAttributeValues: { ':deskID': deskID },
-        ReturnConsumedCapacity: 'TOTAL'
-    }).promise()
+    const colNames = data.RU.io.deskSchemasQuery.Items[0].columns
+        .map(col => col.name)
 
-    data.RU.signals.sendResponse.body = await markup (data)
+    data.RU.io.deskCellsQueries = []
+    for (const colName of colNames) {
+
+        data.RU.io.deskCellsQuery.push(
+            await rus.aws.ddbdc.query({
+                TableName: 'TEST-APP-DESK-CELLS',
+                KeyConditionExpression: 'id = :deskID',
+                ExpressionAttributeValues: { ':deskID': deskID + '#' + colName },
+                ReturnConsumedCapacity: 'TOTAL'
+            }).promise()
+        )
+
+    }
+
+    data.RU.signals.sendResponse.body = await markup(data)
 
     // no need to return (data)
 }
