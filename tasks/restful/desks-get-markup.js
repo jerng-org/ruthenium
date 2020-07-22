@@ -8,7 +8,7 @@ const desksGetMarkup = async(data) => {
 
     let markup = ''
 
-    for (const column of data.RU.io.deskSchemasQuery.Items[0].columns0) {
+    for (const column of data.RU.io.deskSchemasQuery.Items[0].columns) {
         markup += column.name
     }
 
