@@ -70,7 +70,7 @@ DRAFT 4.2
                         :   This is the TABLE HASHKEY because, it is REUSED
                             as the HASHKEY for EVERY LSI where we do DHC filters;
             -   SORTKEY :   "R"         <<string:"rowID">>
-            -   OTHER   :   "S", "N", "B", "C", D"
+            -   OTHER   :   "S", "N", "B", "D"
     
             Facilitated reads:
                 -   SCAN    : gets all data for ALL DESKS
@@ -79,21 +79,21 @@ DRAFT 4.2
     
     GSI : "R-GSI"  
             -   HASHKEY :   "R"         <<string:"rowID">>
-            -   OTHER   :   "S", "N", "B", "C"
+            -   OTHER   :   "S", "N", "B", ("DHC", "R")
     
             Facilitated reads:
                 -   QUERY   : on "R", gets all data for ONE ROW
 
     GSI : "D-GSI"  
             -   HASHKEY :   "D"         <<string:"deskID">>
-            -   OTHER   :   "S", "N", "B", "C", "R"
+            -   OTHER   :   "S", "N", "B", ("DHC", "R")
     
             Facilitated reads:
                 -   QUERY   : on "D", gets all data for ONE DESK
 
     LSI : "DHC-S-LSI"
             -   SORTKEY :   "S"
-            -   OTHER   :   "R"
+            -   OTHER   :   ("DHC", "R")
     
             Facilitated reads:
                 -   QUERY   : on "DHC", gets RANGED data for ONE COLUMN
@@ -101,7 +101,7 @@ DRAFT 4.2
 
     LSI : "DHC-N-LSI"
             -   SORTKEY :   "N"
-            -   OTHER   :   "R"
+            -   OTHER   :   ("DHC", "R")
     
             Facilitated reads:
                 -   QUERY   : on "DHC", gets RANGED data for ONE COLUMN
@@ -109,7 +109,7 @@ DRAFT 4.2
 
     LSI : "DHC-B-LSI"
             -   SORTKEY :   "B"
-            -   OTHER   :   "R"
+            -   OTHER   :   ("DHC", "R")
 
             Facilitated reads:
                 -   QUERY   : on "DHC", gets RANGED data for ONE COLUMN
