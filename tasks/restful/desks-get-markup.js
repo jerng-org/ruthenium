@@ -12,7 +12,6 @@ const desksGetMarkup = async(data) => {
     for ( const col of data.RU.io.deskSchemasQuery.Items[0].columns ){
         th1s += `<th scope="col">${ col.name }</th>`
         th2s += `<th scope="col">${ col.type }</th>`
-        colNames.push( col.name )
     }   
     //let rowCount = 1
     
