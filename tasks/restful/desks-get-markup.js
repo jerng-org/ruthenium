@@ -7,6 +7,8 @@ const rus = require('/var/task/modules/r-u-s.js')
 const desksGetMarkup = async(data) => {
 
     let markup = `
+<h1>Desk id: <code>${ data.RU.io.deskSchemasQuery.Items[0].id }</code></h1>
+<h1>Desk name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code></h1>
 <table>
     <thead>
         <tr>
