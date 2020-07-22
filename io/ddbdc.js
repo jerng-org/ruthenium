@@ -2,11 +2,6 @@
 
 const mark = require('/var/task/modules/mark.js')
 
-const aws = require('aws-sdk')
-aws.config.apiVersions = { dynamodb: '2012-08-10' }
-
-const ddb = new aws.DynamoDB()
-
 // 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via Proxy. Using a 
 //                  (get) handler for ddbdc's methods returned the error 'method 
 //                  name is not a property of undefined'
@@ -19,7 +14,16 @@ const ddb = new aws.DynamoDB()
 //  specific; so it doesn't really matter if this
 //  is not implemented in other language patterns of the Ruthenium pattern.
 
-const ddbdc = new aws.DynamoDB.DocumentClient()
+/*
+const aws = require('aws-sdk')
+aws.config.apiVersions = { dynamodb: '2012-08-10' }
+
+const ddb = new aws.DynamoDB()
+*/
+
+const ddb = require(`aws-sdk/clients/dynamodb`)
+
+const ddbdc = new ddb.DocumentClient()
 
 module.exports = ddbdc 
 mark(`~/io/ddbdc.js LOADED`)
