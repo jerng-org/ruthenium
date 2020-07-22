@@ -145,6 +145,8 @@ try {
 
                 `consider upgrading performance of DynamoDB Document Client
                 https://www.npmjs.com/package/aws-thin-dynamo`,
+                
+                `tuning https://github.com/alexcasalboni/aws-lambda-power-tuning?`
 
                 `$.stuff for aliasing`,
 
