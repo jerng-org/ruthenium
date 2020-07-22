@@ -14,7 +14,7 @@ const desksGetMarkup = async(data) => {
 data.RU.io.deskSchemasQuery.Items[0].columns
     .reduce(( acc, cur, index, array)=>{
         
-        return acc + `<td>${ cur.name }</td>`
+        return acc + `<th scope="col">${ cur.name }</th>`
         
     }, '' /*initial accumulator value*/ )
             
