@@ -171,11 +171,13 @@ const composeResponse = async(data) => {
             }
         }
         else {
-            console.error(`(middlewares/compose-response.js) could not find  (${ data.RU.signals.inferredMarkupName })  in the markups directory. That name was guessed because  (${ data.RU.signals.taskName }) was specified at  (data.RU.signals.taskName).
-
-                    The following may be informative:
+            console.error(`(middlewares/compose-response.js) could not find  (${ data.RU.signals.inferredMarkupName })  in the markups directory. That name was guessed because (${ data.RU.signals.taskName }) was specified at  (data.RU.signals.taskName).`
+                    /*
+                    + `The following may be informative:
                     
-                    ${ await rus.additionalRequestInformation ( data )}`)
+                    ${ await rus.additionalRequestInformation ( data )}`
+                    */
+                    )
 
             await status501(data)
             await composeResponse(data)
