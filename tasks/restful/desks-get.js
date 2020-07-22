@@ -30,6 +30,13 @@ const deskGet = async(data) => {
         return
     }
 
+    data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
+        TableName: 'TEST-APP-DESK-SCHEMAS',
+        KeyConditionExpression: 'id = :deskID',
+        ExpressionAttributeValues: { ':deskID': deskID },
+        ReturnConsumedCapacity: 'TOTAL'
+    }).promise()
+
     data.RU.signals.sendResponse.body = await markup (data)
 
     // no need to return (data)
