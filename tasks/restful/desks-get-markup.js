@@ -6,11 +6,27 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const desksGetMarkup = async(data) => {
 
-    let markup = ''
+    let markup = `
+<table>
+    <thead>
+        <tr>
+        ${
+data.RU.io.deskSchemasQuery.Items[0].columns
+    .reduce(( acc, cur, index, array)=>{
+        
+        return `<td>${ cur.name }</td>`
+        
+    }, '' /*initial accumulator value*/ )
+            
+        }        
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>`
 
-    for (const column of data.RU.io.deskSchemasQuery.Items[0].columns) {
-        markup += column.name
-    }
 
     rus.mark(`~/tasks/restful/desks-get-markup.js EXECUTED`)
 

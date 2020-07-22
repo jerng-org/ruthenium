@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(WIP) restful.js - (desks-get-markup.js)`,
+    gitCommitMessage: `(WIP) restful.js - ()`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
