@@ -29,6 +29,8 @@ const deskGet = async(data) => {
         return
     }
 
+    const deskName = data.RU.io.deskSchemasQuery.Items[0].name
+
     const colNames = data.RU.io.deskSchemasQuery.Items[0].columns
         .map(col => col.name)
 
@@ -39,7 +41,7 @@ const deskGet = async(data) => {
             await rus.aws.ddbdc.query({
                 TableName: 'TEST-APP-DESK-CELLS',
                 KeyConditionExpression: 'DHC = :deskID',
-                ExpressionAttributeValues: { ':deskID': deskID + '#' + colName },
+                ExpressionAttributeValues: { ':deskID': deskName + '#' + colName },
                 ReturnConsumedCapacity: 'TOTAL'
             }).promise()
         )
