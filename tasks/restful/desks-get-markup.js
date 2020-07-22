@@ -45,9 +45,9 @@ const desksGetMarkup = async(data) => {
     }
 
     let markup = `
-<h3><i><code>GET</code></i> a Desk </h3>
+<h2><i><code>GET</code></i> a Desk </h2>
 <h1>name:   <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code></h1>
-<h3>id:     <code>${ data.RU.io.deskSchemasQuery.Items[0].id }</code></h3>
+<h4>id:     <code>${ data.RU.io.deskSchemasQuery.Items[0].id }</code></h4>
         <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }</pre>
         <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre>
 <table>
