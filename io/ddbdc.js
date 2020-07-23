@@ -144,13 +144,4 @@ DRAFT 5
                 -   GETITEM : gets all data for ONE ROW
     
 
-R / rowID is currently a UUID
-
-    UUIDs are represented as 36-character strings.
-    32 are data, and 4 are for readability.
-    Characters are hexadecimal, but strings are UTF-8.
-    Therefore UUIDs could be de/encoded to binary for space savings, if CPU
-    demands are not too high. TODO : CONSIDER ONLY
-    
-
 */
