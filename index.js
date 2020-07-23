@@ -54,8 +54,24 @@ try {
             `DEBT_NOTE`, [
 
                 `CURRENT:`,
+                
+                `Rendering options, to be REQUESTED by the client:
+                (a) all server responses are HTML
+                    -   (a.1) a HTML response can INVITE the client to switch 
+                        to protocol (b)
+                (b) all server responses are JSON
+                    -   (b.1) a JSON response can INVITE the client to switch
+                        to protocol (a)
+                        
+                We need to investigate how the history API achives simultaneous:
+                    -   display of URI-x in the navigation bar
+                    -   no      request of URI-x from the client
+                    -   actual  request of URI-y from the client
+                `,
 
-                `Refactor (DESK-SCHEMAS id to be name) or (DESK-CELLS HASHKEY to be deskID#colName`,
+                `UUID4 to base64 !`,
+
+                `Refactor (DESK-SCHEMAS id to be name)`,
 
                 `There should be a (task stack) so that we can trace tasks?`,
 
