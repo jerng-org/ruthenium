@@ -329,19 +329,19 @@ try {
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
         console.log(`Lambda Handler EXIT Point:`,
-        
-            arguments[0].requestContext.http.method,
-            arguments[0].requestContext.domainName,
-            arguments[0].requestContext.http.path,
-            '?', // literal
-            arguments[0].rawQueryString,
-        
+
             (typeof rutheniumResponse == 'string') ?
             `rutheniumResponse.slice(0,50) ... [truncated]` :
             ((typeof rutheniumResponse != 'object') ?
                 `(ruthenium.js) responded with typeof (neither a string nor an object); we might have a problem.` :
                 (`status code: ${ rutheniumResponse.statusCode }`)
-            )
+            ),
+            
+            arguments[0].requestContext.http.method,
+            arguments[0].requestContext.domainName,
+            arguments[0].requestContext.http.path,
+            '?', // literal
+            arguments[0].rawQueryString
         )
 
         return rutheniumResponse
