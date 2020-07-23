@@ -123,7 +123,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 1,
+    performance: 0,
 
     /*  session exempted routes
      *
@@ -162,6 +162,8 @@ module.exports = {
      *      5   :   4       + (development meta-narrative)  -> logs
      *
      *      6   :   5       + (data)                        -> logs
+     *
+     *      7   :   undefined as yet
      */
     verbosity: 0,
 
