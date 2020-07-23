@@ -163,6 +163,6 @@ module.exports = {
      *
      *      6   :   5       + (data)                        -> logs
      */
-    verbosity: 4,
+    verbosity: 0,
 
 }
