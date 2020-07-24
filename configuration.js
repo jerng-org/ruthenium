@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
+    gitCommitMessage: `Notes updated for environmental variables.`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
