@@ -45,7 +45,8 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(spa-prototype.js WIP) NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
+    gitCommitMessage: `updated docs`,
+//    gitCommitMessage: `(spa-prototype.js WIP) NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
