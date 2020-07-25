@@ -14,7 +14,16 @@ const spaPrototype = async ( data ) => {
 
 
     data.RU.signals.sendResponse.statusCode = 200
-    data.RU.signals.sendResponse.body = 'Single-page App Prototype'
+    data.RU.signals.sendResponse.body =
+
+// string begins
+`
+<h1>Single-page App Prototype</h1>
+
+<script>
+</script>
+`
+// string ends
 
 
 
@@ -29,9 +38,28 @@ rus.mark ( `~/tasks/spa-prototype.js LOADED` )
 
 
 /*
-    Question    :   Is the CSRF token planted in the client's cookie on login?
 
-    Examples
+WHAT
+
+    So historically ... they went from
+    
+    -   SSR-only, to
+    -   SSR-with-AJAX updates, to
+    -   SPA-with-AJAX updates :star:, to
+    -   SPA-with-SSR-with-AJAX updates :skull:
+    
+    The result seems to be that SPAs :star:  aren't generally designed to be 
+    extensions of [pre-SPA-SSR] ... and then [SPA-SSR :skull:] is all about 
+    this SPA :star: that wasn't designed with pre-SPA-SSR in mind. I'm currently 
+    thinking about how the traditional pre-SPA-SSR could be incrementally 
+    transitioned to SSR-with-SPA-with-AJAX-updates :rotating_light: which may be
+    different from :skull: depending on what the study uncovers.
+
+Questions
+
+    -   Is the CSRF token planted in the client's cookie on login?
+
+Examples
     
     1.      User READs a table (all the shoes)
     
@@ -112,4 +140,5 @@ rus.mark ( `~/tasks/spa-prototype.js LOADED` )
             
     1.4.
     POST : we do not use POST because it lacks idempotency
+    
 */
