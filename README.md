@@ -1,7 +1,28 @@
 # ruthenium
 
 -   [Technical Documentation](./DOCUMENTATION.md)
--   [Motivations](./MOTIVATIONS.md)  
+-   
+## But why?
+
+I don't want to learn new web frameworks every time I switch languages. So 
+whenever I switch to a new programming language, I want to be working in a 
+web application framework that looks almost exactly the same as another 
+web application framework I've used before.
+
+The only want to solve this elegantly is to have a family of frameworks in 
+different languages which are all build to-specification against a common 
+design pattern, sharing standardised:
+
+- security choices
+- data flows
+- folder structures
+- rendering methods
+- variable names
+- function names and arities
+
+Another way to look at this is as a solution to a documentation problem. You can
+refer to [Motivations](./MOTIVATIONS.md):
+
     **Excerpt:**
     ```
     The following nouns are asserted to being equivalent for the purpose of this README:

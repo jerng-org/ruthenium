@@ -55,6 +55,10 @@ try {
 
                 `CURRENT:`,
                 
+                `Perhaps the best way to nested guards is with (x in object),
+                and perhaps we thus need a routing table, or a routing tree 
+                object.`,
+                
                 `Oidc does not fail on bad code (bug)`,
                 
                 `Rendering options, to be REQUESTED by the client:

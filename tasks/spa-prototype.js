@@ -55,6 +55,10 @@ rus.mark ( `~/tasks/spa-prototype.js LOADED` )
             
             -   // MORE STEPS PENDING 
             
+            !!! WARNING !!! as pointed out by JayJun (2020-07-25), pure HTML
+            forms cannot use PUT. Perhaps then since we are patching PATCH for
+            idempotence, we should just patch POST and be done with it.
+            
     1.2.    User wants to UPDATE a shoe
     
             Client requests a form
@@ -69,7 +73,7 @@ rus.mark ( `~/tasks/spa-prototype.js LOADED` )
     PATCH : Client requests via PATCH, including:
             -   CSRF token
             -   ONLY DELTAS to shoe data
-            -   the previously responded READ TIME
+            -   the previously responded READ TIME (this adds IDEMPOTENCE)
             -   "prior context" 
                 -   if the SPA does an "update in place" then the URI sent to the
                     server should be for (1.), with some guarantee that the 
