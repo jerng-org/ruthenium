@@ -3,12 +3,12 @@
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rus = require('/var/task/modules/r-u-s.js')
 
-const spaPrototype = async ( data ) => {
+const spaPrototype = async(data) => {
 
     // YOUR CODE HERE
-    
+
     // set data in ( data.RU.io.thisIsMyName )
 
 
@@ -16,25 +16,25 @@ const spaPrototype = async ( data ) => {
     data.RU.signals.sendResponse.statusCode = 200
     data.RU.signals.sendResponse.body =
 
-// string begins
-`
+        // string begins
+        `
 <h1>Single-page App Prototype</h1>
 
 <script>
 </script>
 `
-// string ends
+    // string ends
 
 
 
 
-    rus.mark ( `~/tasks/spa-prototype.js EXECUTED` )
+    rus.mark(`~/tasks/spa-prototype.js EXECUTED`)
 }
 // manipulate (data.RU), for example
 // no need to return (data)
 
 module.exports = spaPrototype
-rus.mark ( `~/tasks/spa-prototype.js LOADED` )
+rus.mark(`~/tasks/spa-prototype.js LOADED`)
 
 
 /*
@@ -249,5 +249,70 @@ The application ROUTER
         request as a URI query parameter, and to notate the resource tree in the
         URI path
 
+
+EXPERIMENTAL SYNTAX FOR RESOURCE TREES 2020-07-27-EOD
+
+    PREVIOUS    :   ?route=some-task-name-that-looks-like-a-hyphenated-slug
     
+                    ... is subsequently mapped to a code block, which may call
+                        other code blocks;
+    
+    PERHAPS     :   
+    
+        {
+            resourceName1: {
+                
+                composer:   'address-of-code-block-which-renders-(default/configured)-CONCEPT',
+                
+                    <<  should have a parameter, __concepts, whose arguments look like this: 
+                        {
+                            slotName1:  slotName1Concept,
+                            slotNameTo: slotNameToConcept,
+                            slotNameN:  slotNameNConcept
+                        }
+                    >>
+                    
+                slots :     [ a list of slot names ],
+                
+                    //  when none are provided, a default is used
+                
+                subs :      [ 
+                    
+                    a list of 
+                        -   named resources     << strings >>
+                        -   literal resources   << functions >>
+                ]
+
+                    //  when none are provided, a default is used
+                
+            }
+        }
+        
+        This, roughly, seems to allow rapid drafting of "crude routes" which 
+        obfuscate their sub-resources, while enabling incremental refinement of
+        routes into "fine routes" where every sub-resource is finally minutely
+        defined.
+        
+        It looks like it might eventually jive with whatever the fuck the 
+        Web Components specification was supposed to do, but that is yet to be
+        determined.
+        
+        The routing table then becomes a one-layer-deep map of canonical
+        names for resources, and the literal resources themselves.
+        
+        The router module then iteratively traverses the routing table in order
+        to dereference canonical names, and to determine the final tree of 
+        literal resources.
+        
+        Within this framework then, the "proper" way to do AJAX updates is to
+        first delineate the sub-resource with its own canonical name, and then
+        to configure clients to send requests to the server with BOTH the root
+        resource name, and an indication of which specific sub-resource needs
+        to be updated.
+        
+        The server then remains in control of the client, and is additionally
+        able to send a response to (a request for a sub-resource) which is 
+        powerful enough to reset the root resource, or any resource in between
+        the root and any leaf.
+
 */

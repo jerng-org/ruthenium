@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(spa-prototype.js WIP - added Draft 1 approach)`,
+    gitCommitMessage: `(spa-prototype.js WIP - EOD 27Jul)`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
      *  Merge order     :   1
