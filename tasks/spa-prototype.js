@@ -250,7 +250,7 @@ The application ROUTER
         URI path
 
 
-EXPERIMENTAL SYNTAX FOR RESOURCE TREES 2020-07-27-EOD
+EXPERIMENTAL SEMANTICS FOR RESOURCE TREES 2020-07-27-EOD
 
     PREVIOUS    :   ?route=some-task-name-that-looks-like-a-hyphenated-slug
     
