@@ -140,5 +140,114 @@ Examples
             
     1.4.
     POST : we do not use POST because it lacks idempotency
+
+
+Draft 1 2020-07-26-EOD
+
+ISSUE / DOMAIN OF CONCERN
+
+-   To-date, this project appears to demand for the deprecation of the term
+    "single page application" (SPA) where it is currently applied to
+    [applications served from a URI, yet dependent on on-going updates from
+    other URIs in order to achieve full functionality].
+
+ALTERNATIVE PROPOSAL
+
+-   The following terminology is introduced:
+
+    -   server-initiated-application-client (SIAC) referring to client-side code
+        which is
+
+        -    first sent as a response from a server to a client,
+
+        -    then deployed on the client, and
+
+        -    then remains dependent on the server for updates in order to become
+             and remain fully functional *
+
+    -   server-hosted-application-updates (SHAU) referring to requests and
+        responses from the SIAC to the server, which enable ongoing
+        functionality of the SHAU [* as a delivery mechanism to the end user,
+        for the entire application's function]
+
+    -   (placeholder for other terms)
+
+-   On the client side, any [user interface (UI) element] in any [presentation
+    context (view, medium)] of a SIAC must be mapped to a uniform resource
+    identifier (URI). Presentation contexts must be treated as discrete
+    resources thusly.
+        
+-   On the server side, the routing table should not merely map the URI to a
+    [code block], rather it should additionally map to all [resources] touched
+    by that code block.
+    
+-   Once this is accomplished, you can run a SHAU-protocol ... have it fail
+    :red_circle: on a specific URI request, and then nearly seamlessly downgrade
+    to a HTML-only-protocol, but still return to the user the relevant
+    [presentation context] which  they were previously in, when they interacted
+    with the failed URI request ... just this time, it is fully reloaded from
+    the server.
+
+URIs should thus include:
+        
+-   a resource TREE;
+    
+    -   the resource at the root of this tree must be a "medium";
+
+    -   all other resources in the tree may be either another medium, or a
+        "concept" (datum);
+        
+    -   each resource in the tree may be mapped on the server side to "default
+        sub-resources" (allowing shorter URIs); these defaults can be
+        overwritten by "explicit sub-resources" (requiring longer URIs); a
+        grammar for this must be defined;
+
+        -   when a sub-resource is a medium, we may refer to it as a
+            "sub-medium";
+
+        -   a resource which is a "concept" may not have a sub-resource which is
+            a medium (except for example, when the medium is stored as
+            serialised data/concept); so only media can have sub-media; we may
+            refer to these parents as super-media;
+
+        -   each "sub-medium" must be rendered within a designated "sub-medium
+            slot" in its super-medium; there should be defined, a "default
+            sub-medium slot" where sub-media will be rendered,in the absence of
+            an "explicit sub-medium slot" (URI lengths again, will vary
+            accordingly); again a grammar must be defined;
+
+    -   each medium in the tree should be mapped on the server side to a
+        "default concept" (minimally a null), again mapped to a "default concept
+        rendering function" (minimally a toString().print()); again, explicit
+        overrides shall allow the alternative usecases;
+
+-   the term "configured" is introduced here as an alternative to the term
+    "defaulted" as used above with regards to sub-resources in a tree
+
+-   URIs containing trees may become long and messy; this is partially mitigated
+    by the necessary "default concepts", and the optional "default media"; yet,
+    sub-trees of resources may be repetitively used in "configured" trees;
+
+    -   in order to further enable the shortening of URIs, we introduce a lookup
+        table with "subtree shortnames" as keys and "resource sub-tree names" as
+        values, saving space at the expense of computation-time;
+
+The application ROUTER
+
+-   then dereferences all subtree shortnames from a URI, and identifies the
+    requested resource tree in its most reified form;
+
+-   then maps the requested resource tree to code blocks (operations) which will
+    construct the requested resource accordingly;
+
+-   SHAU request URIs must include reference to the entire resource tree which
+    represents the end user's current "presentation context", whereas the
+    request might call for a CRUD operation only upon a specific sub-resource of
+    that presentation context;
+
+    -   In such a case, it would/could be correct to notate the sub-resource
+        request as a URI query parameter, and to notate the resource tree in the
+        URI path
+
     
 */
