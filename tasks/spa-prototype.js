@@ -315,4 +315,129 @@ EXPERIMENTAL SEMANTICS FOR RESOURCE TREES 2020-07-27-EOD
         powerful enough to reset the root resource, or any resource in between
         the root and any leaf.
 
+TEST: Example of parsing example data structure, using example semantics:
+
+    GIVEN a routing table :
+    
+    routingTable = {
+    
+        aGreatParty: {
+            composer: 'a-great-party-markup',
+            slots: [
+                'thePool',
+                'theMusic',
+                'thePeople',
+                'theFood'
+            ],
+            subs: [
+                'thePool',
+                'theMusic',
+                async _ => '(Jim, Jane, Jeddah, JiongSun, Jemimah)',
+                // async _ => '(food: cheese, dumplings, fruit)' // a missing sub-resource
+            ]
+        },
+        
+        thePool: {
+            composer: 'the-pool-markup',
+            slots: [
+                'theFloatyToys', // missing from 'the-pool-markup'
+                'theCandles',
+                // 'theSlide' // a missing resource-slot ...
+            ],
+            subs: [
+                async _ => '(floaty toys: a unicorn, a duckling, and a sea monster)',
+                async _ => '(candles: scented, coloured, and self-igniting)',
+                async _ => '(a slide: slippery as can be)'
+            ]
+        },
+        
+        theMusic: {
+            // composer: 'the-music-markup', // missing composer function ...
+            slots : [
+                'song1',
+                'song2'
+            ],
+            subs : [
+                async _ => '(song1: falala)',
+                async _ => '(song2: feefifofum)'
+            ]
+        }
+        
+    }
+    
+    ... first on application initialisation, the routingTable must be validated
+        against the following validation rules (as processed by validation.js):
+        
+        {
+            // CONTINUE WORK HERE
+        }
+    
+    ... and GIVEN an HTTP request for the resource "aGreatParty", we would 
+    expect an implementation of (some-router.js) to proceed as follows:
+    
+        1. dereference the resource:
+        (discover if the resource can be found in the routingTable, and if it 
+        can, then prepare its sub-resource Functions for execution)
+        
+            << is resourceName in routingTable ? >>
+        
+            FALSE: reject('requested resource not found')
+            
+            TRUE: go to (2.)
+        
+        2. dereference sub-resources:
+        << for subResource of routingTable.aGreatParty.subs >>
+            
+            2.1. << if typeof subResource is Function >>
+
+                TRUE : exit; the goal of 1. is achieved
+
+                FALSE : go to (2.2.)
+
+            2.2. << if typeof subResource is String >>
+
+                TRUE : go to (1. with regards to this string; it is treated as 
+                        a resourceName, and sought for as a key in routingTable )
+
+                FALSE : reject('subresource defined in routing table as neither
+                        a Function nor a String; unacceptable; please fix;')
+
+
+// NO EXECUTION UNTIL DISPATCHER KICKS IN
+
+        x. execute all sub-resource getters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 */
