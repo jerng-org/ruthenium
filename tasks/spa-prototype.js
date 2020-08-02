@@ -410,25 +410,44 @@ TEST: Example of parsing example data structure, using example semantics:
         x. execute all sub-resource getters
 
 
-// 2020-07-29 doodles
 
-    routingTable = {
+//  2020-08-03 Notes
+
+    Following up on a question raised on 2020-07-29: we need two routing tables.
+    
+        Routing Table 1 :   Terminates in resources of various MIME types.
         
-        aResourceName : {
+        Routing Table 2 :   Terminates in resources of a MIME type << text >>
+        
+            Reference : https://tools.ietf.org/html/rfc2046#section-4.1
+
+        For all practical purposes, we should prototype this first, and seek to 
+        generalise it to other MIME types later if the prototype is successful.
+        
+        It should also be noted that << text/html >> is able to carry data URIs.
+
+    Therefore:
+    
+    aRoutingTableMappingTextResourceNamesToTextResourceDescriptionObjects = {
+
+        //  Below is an example of one  << text resource name >>
+        //  and one                     << text resource object >>
+        
+        aResourceName 
+        : {
             
-            aStringReferenceToCodeThatExpressesTheResourceInAMedium : 'aReference',
+            aStringREFERENCEToCodeThatRendersTheResourceInTextualMedia 
+            : 'aRenderingOperationName',
             
-                //  UNCLEAR: does the item above constitute the body of a HTTP response, or an entire HTTP response?
-                //              It seems that HTTP should be considered a medium also, yet not at this layer; rather
-                //              HTTP is a layer that mediates this layer.
+                //  Trivial example: 'toString'
             
-            anArrayOfStringSlotNamesInTheCodeAboveWhereResourceBelowWillBePut : [ 'aSlotName' ],
+            anArrayOfStringREFERENCEsToSlotsInMediationCodeWhereResourcesWillBePut 
+            : [ 'aSlotName' ],
             
-            anArrayOfStringReferencesToCodeThatReturnsResources : [ 'aResourceName' ]
+            anArrayOfStringREFERENCEsToResources 
+            : [ 'anotherResourceName' ]
         }
     }
-
-
 
 
 
