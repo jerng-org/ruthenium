@@ -396,8 +396,10 @@ TEST: Example of parsing example data structure, using example semantics:
 
             2.2. << if typeof subResource is String >>
 
-                TRUE : go to (1. with regards to this string; it is treated as 
-                        a resourceName, and sought for as a key in routingTable )
+                TRUE :  go to (1. with regards to this string; it is treated as 
+                        a resourceName, and sought for as a key in routingTable 
+                        ); so this needs to return an (async function).
+                        
 
                 FALSE : reject('subresource defined in routing table as neither
                         a Function nor a String; unacceptable; please fix;')
@@ -406,6 +408,25 @@ TEST: Example of parsing example data structure, using example semantics:
 // NO EXECUTION UNTIL DISPATCHER KICKS IN
 
         x. execute all sub-resource getters
+
+
+// 2020-07-29 doodles
+
+    routingTable = {
+        
+        aResourceName : {
+            
+            aStringReferenceToCodeThatExpressesTheResourceInAMedium : 'aReference',
+            
+                //  UNCLEAR: does the item above constitute the body of a HTTP response, or an entire HTTP response?
+                //              It seems that HTTP should be considered a medium also, yet not at this layer; rather
+                //              HTTP is a layer that mediates this layer.
+            
+            anArrayOfStringSlotNamesInTheCodeAboveWhereResourceBelowWillBePut : [ 'aSlotName' ],
+            
+            anArrayOfStringReferencesToCodeThatReturnsResources : [ 'aResourceName' ]
+        }
+    }
 
 
 
