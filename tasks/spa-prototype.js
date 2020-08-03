@@ -409,15 +409,28 @@ TEST: Example of parsing example data structure, using example semantics:
 
         x. execute all sub-resource getters
 
+//  2020-08-04 Notes
 
-
-//  2020-08-03 Notes
-
-    Following up on a question raised on 2020-07-29: we need two routing tables.
+    Documentation on REST indicates that in the REST style, the canonical 
+    synonym for "medium" above is "representation". The model provided is,
     
-        Routing Table 1 :   Terminates in resources of various MIME types.
+    [resource] 
+    ->  [representation: in a specific MIME type; can be a "composite media type"] 
+        ->  [response: from server to a request]
+            ->  [client: which sent the request for the resource]
+    
+    , hence:
+    
+    Following up on [a question raised on 2020-07-29 about MIME types], and 
+    modified by [the observations on 2020-08-04 about the term REPRESENTATION] 
+    : we need two routing tables.
+    
+        (MIME types refer to TYPES OF REPRESENTATIONS, not TYPES OF RESOURCES.)
+    
+        Routing Table 1 :   Terminates in REPRESENTATIONS of various MIME types.
         
-        Routing Table 2 :   Terminates in resources of a MIME type << text >>
+        Routing Table 2 :   Terminates in REPRESENTATIONS of a MIME type of 
+                            << text >>
         
             Reference : https://tools.ietf.org/html/rfc2046#section-4.1
 
@@ -428,20 +441,20 @@ TEST: Example of parsing example data structure, using example semantics:
 
     Therefore:
     
-    aRoutingTableMappingTextResourceNamesToTextResourceDescriptionObjects = {
+    aRoutingTableMappingResourceNamesToTextualRepresentationDescriptionObjects = {
 
-        //  Below is an example of one  << text resource name >>
-        //  and one                     << text resource object >>
+        //  Below is an example of one  << RESOURCE name >>
+        //  and one                     << textual REPRESENTATION descriptor >>
         
         aResourceName 
         : {
             
-            aStringREFERENCEToCodeThatRendersTheResourceInTextualMedia 
-            : 'aRenderingOperationName',
+            aStringREFERENCEToCodeThatReturnsATextRepresentationOfTheResource 
+            : 'aRepresentationalOperationName',
             
                 //  Trivial example: 'toString'
             
-            anArrayOfStringREFERENCEsToSlotsInMediationCodeWhereResourcesWillBePut 
+            anArrayOfStringREFERENCEsToSlotsInMediationCodeWhereResourcesWillBePassedIn 
             : [ 'aSlotName' ],
             
             anArrayOfStringREFERENCEsToResources 
@@ -449,17 +462,71 @@ TEST: Example of parsing example data structure, using example semantics:
         }
     }
 
+    Recap:
+    
+        Client:
+        
+                << HTML FORM REQUEST : METHOD : only POST, or GET >>
+          +---- (1) Client has these limitations;
+          | 
+          |     << ARBITRARY HTTP REQUEST : METHOD : any official HTTP method >>
+          |     (2) We want our server to accept this;
+          |      |
+          |      |
+      (4) |      v
+          |      
+          |     (3) We can build around 2. to establish an [intermediate form];
+          |                                                                       
+          |      ^  |                                                       
+          |      |  |                                                       
+          +------+  |
+             +------+
+             |                                                               
+             |  (4) Limited clients can have their requests mapped to the    
+             |      [intermediate form];                                     
+             |                                                               
+             +---+
+                 |
+                 v
+                                                                            
+                (5) Based on the [intermediate form], the server then picks 
+                    a response strategy (such that one application may       
+                 |  by design allow responses in different strategies);
+                 |  
+                 |  (5a) simple HTTP - the only requirements are that
+                 |       responses are HTTP specification compliant;
+                 |       
+                 |  (5b) RESTful - in addition to HTTP protocol, responses
+                 |       must also follow the REST architectural style;
+                 |       
+                 |  (5c) Other examples: SOAP, CORBA, Teapot, etc.
+                 |
+                 v
 
+                (6) Based on the [intermediate form], the server then picks 
+                    a response MIME type; the treatment of certain individual 
+                 |  MIME types may be implemented by the same block of code,
+                 |  under different strategies selected at (5); other individual
+                 |  MIME types may have different implementations, under 
+                 v  different strategies;
+                     
+                (7) Based on (5,6), a ROUTER determines the code-path for the 
+                    response.
+                    
+                     |
+                     v
+                     
+                    (7?-text) If the MIME type was text, then a special feature
+                              follows:
+                              
+                              the requested resource is intepreted not as an
+                              atomic ('discrete') resource, but as a tree of
+                              resources;
 
-
-
-
-
-
-
-
-
-
+                              Refer to 2020-07-27-EOD; 
+                              
+                              // CONTINUE WORK THERE
+                
 
 
 

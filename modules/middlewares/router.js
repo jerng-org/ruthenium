@@ -36,16 +36,10 @@ const router = async(data) => {
         if (data.RU.request.queryStringParameters.route &&
             data.RU.request.queryStringParameters.route[0]) {
             switch (data.RU.request.queryStringParameters.route[0]) {
-
-
-
-
+                
                 case ('initial'):
                     data.RU.signals.taskName = 'initial'
                     break
-
-
-
 
                 case ('restful'):
                     data.RU.signals.taskName = 'restful'
@@ -56,22 +50,16 @@ const router = async(data) => {
                     // Transaction: METHOD, &batch=[], transaction=1  
                     break
 
-
-
+                case ('text'):
+                    data.RU.signals.taskName = 'send-text'
+                    break
 
                 case ('file'):
                     data.RU.signals.taskName = 'send-blob'
                     break
 
-
-
-
                 case (undefined):
-
                     break
-
-
-
 
                 default:
                     // request ?query parameter was set, but is not one of the above cases;
