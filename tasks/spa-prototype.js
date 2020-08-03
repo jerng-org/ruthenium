@@ -527,6 +527,13 @@ TEST: Example of parsing example data structure, using example semantics:
                               
                               // CONTINUE WORK THERE
                 
+                (8) Based on (7), a DISPATCHER executes the code-path, and any
+                    sub-routines determined by the routed code-path;
+                    
+                    //  where can the following be set?
+                    
+                        //  HTTP response HEADERS (particularly, STATUS CODE)
+                        //  HTTP response BODY
 
 
 
