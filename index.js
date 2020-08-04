@@ -319,6 +319,7 @@ try {
             oidcValidation,
             setOidcSession,
             sessionGuard,
+                // CONSIDER RENAMING / NORMALISING NAMES OF THESE : TODO
 
             //  HTML Request - Form Protocols & Data Structures
             //
@@ -326,9 +327,13 @@ try {
             //      (sessionExemption)? This seems to sit on the presumption
             //      that (session state) will NEVER depend on form data.
             //
-            formsTunnelRestfulMethods,
+            formsTunnelRestfulMethods, 
+                // CONSIDER removing "restful" from this name: TODO
+                
             formsReindexNames,
             formsValidateData,
+
+            
 
             //  Business Logic
             //
@@ -338,6 +343,41 @@ try {
             //      the assertion that (routes ... i.e. business logic) may
             //      depend on form data.
             //
+            
+            
+            
+            
+            
+            //  2020-08-05 follow-up on notes from spa-prototype.js (2020-08-04)
+            //
+            //  NEW ROUTING ARCHITECTURE PROPOSAL
+            //
+            // routeResponseStrategy,
+            // routeResponseMimeType,
+            // routeCodePath,
+            
+                // currently under << router >>
+                
+                // << routeCodePath >> will have to include all of what is
+                //  currently under     << composeResponse >>
+                //                      << setCookies >>
+                //                      << applyLayout >>
+            
+            // executeCodePath,
+                
+                // currently under << router >>
+                
+                // << executeCodePath >> should terminate in a decisive opinion 
+                //  on  << response headers, including status code>>, and
+                //      << response body >>
+                
+            //  << lastGuard >> follows as is currently the case, where missing
+            //                  opinons are caught and handled;   
+                
+                
+                
+                
+            
             router, // each route points to a tree of tasks ("sub-routines")
             //
             //      Question :      Why do we not separate the router and the 
