@@ -411,6 +411,9 @@ TEST: Example of parsing example data structure, using example semantics:
 
 //  2020-08-04 Notes
 
+    Reference:
+    https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
+
     Documentation on REST indicates that in the REST style, the canonical 
     synonym for "medium" above is "representation". The model provided is,
     
@@ -418,6 +421,51 @@ TEST: Example of parsing example data structure, using example semantics:
     ->  [representation: in a specific MIME type; can be a "composite media type"] 
         ->  [response: from server to a request]
             ->  [client: which sent the request for the resource]
+    
+        !!! NOTE !!!    In the MIME specification, the only two "composite
+                        media types" are "multipart" and "message"; however
+                        we can develop the concept of "text/prs.tree", 
+                        "text/prs.branch", "text/prs.leaf" etc.
+                        
+            RFC 2045    "
+   An initial set of seven top-level media types is defined in RFC 2046.
+   Five of these are discrete types whose content is essentially opaque
+   as far as MIME processing is concerned.  The remaining two are
+   composite types whose contents require additional handling by MIME
+   processors.
+
+   This set of top-level media types is intended to be substantially
+   complete.  It is expected that additions to the larger set of
+   supported types can generally be accomplished by the creation of new
+   subtypes of these initial types.  In the future, more top-level types
+   may be defined only by a standards-track extension to this standard.
+   If another top-level type is to be used for any reason, it must be
+   given a name starting with "X-" to indicate its non-standard status
+   and to avoid a potential conflict with a future official name."
+   
+        RFC 2048    "2.1.3.  Personal or Vanity Tree
+
+   Registrations for media types created experimentally or as part of
+   products that are not distributed commercially may be registered in
+   the personal or vanity tree.  The registrations are distinguished by
+   the leading facet "prs.".
+
+   The owner of "personal" registrations and associated specifications
+   is the person or entity making the registration, or one to whom
+   responsibility has been transferred as described below.
+
+   While public exposure and review of media types to be registered in
+   the personal tree is not required, using the ietf-types list for
+   review is strongly encouraged to improve the quality of those
+   specifications.  Registrations in the personl tree may be submitted
+   directly to the IANA."
+   
+                    Examples of which are provided:
+                    
+                        https://en.wikipedia.org/wiki/Media_type
+                    
+        This can be formalised to 2.1.2 : Vendor Tree, prefix "vnd.", later.
+    
     
     , hence:
     

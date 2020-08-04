@@ -55,6 +55,10 @@ try {
 
                 `CURRENT:`,
                 
+                `1. Abandon RESTful approaches, temporarily.
+                
+                2. Turn focus to`,
+                
                 `Perhaps the best way to nested guards is with (x in object),
                 and perhaps we thus need a routing table, or a routing tree 
                 object.`,
