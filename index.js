@@ -415,4 +415,12 @@ LAMBDA ENVIRONMENTAL VARIABLES :
     COGNITO_RELYING_PARTY_SECRET	(secret)
     GITHUB_JERNG_MACHINES_USER_PASSWORD	(secret)
 
+LAMBDA & SERVER-SIDE EVENTS
+
+    Doing this in Node.js is currently expensive, and Lambdas won't stay alive
+    for very long anyway. So it is best not to try this yet, until a reasonably
+    cost-efficient architecture is discovered. (AWS may add features later.)
+    
+    https://html.spec.whatwg.org/multipage/server-sent-events.html
+
 */
