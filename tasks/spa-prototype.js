@@ -417,15 +417,19 @@ TEST: Example of parsing example data structure, using example semantics:
     Documentation on REST indicates that in the REST style, the canonical 
     synonym for "medium" above is "representation". The model provided is,
     
+    1. A hierarchy of nouns in REST:
+    
     [resource] 
-    ->  [representation: in a specific MIME type; can be a "composite media type"] 
+    ->  [representation: in a specific MIME type; can be a 
+                            "composite media type" or a 
+                            "discrete media type"] 
         ->  [response: from server to a request]
             ->  [client: which sent the request for the resource]
     
-        !!! NOTE !!!    In the MIME specification, the only two "composite
+    2.  !!! NOTE !!!    In the MIME specification, the only two "composite
                         media types" are "multipart" and "message"; however
-                        we can develop the concept of "text/prs.tree", 
-                        "text/prs.branch", "text/prs.leaf" etc.
+                        we can develop the concept of "text/x.tree", 
+                        "text/x.branch", "text/x.leaf" etc.
                         
             RFC 2045    "
    An initial set of seven top-level media types is defined in RFC 2046.
@@ -443,22 +447,18 @@ TEST: Example of parsing example data structure, using example semantics:
    given a name starting with "X-" to indicate its non-standard status
    and to avoid a potential conflict with a future official name."
    
-        RFC 2048    "2.1.3.  Personal or Vanity Tree
+        RFC 2048    "2.1.4.  Special `x.' Tree
 
-   Registrations for media types created experimentally or as part of
-   products that are not distributed commercially may be registered in
-   the personal or vanity tree.  The registrations are distinguished by
-   the leading facet "prs.".
-
-   The owner of "personal" registrations and associated specifications
-   is the person or entity making the registration, or one to whom
-   responsibility has been transferred as described below.
-
-   While public exposure and review of media types to be registered in
-   the personal tree is not required, using the ietf-types list for
-   review is strongly encouraged to improve the quality of those
-   specifications.  Registrations in the personl tree may be submitted
-   directly to the IANA."
+   For convenience and symmetry with this registration scheme, media
+   type names with "x." as the first facet may be used for the same
+   purposes for which names starting in "x-" are normally used.  These
+   types are unregistered, experimental, and should be used only with
+   the active agreement of the parties exchanging them.
+   
+   However, with the simplified registration procedures described above
+   for vendor and personal trees, it should rarely, if ever, be
+   necessary to use unregistered experimental types, and as such use of
+   both "x-" and "x." forms is discouraged.."
    
                     Examples of which are provided:
                     
@@ -467,7 +467,7 @@ TEST: Example of parsing example data structure, using example semantics:
         This can be formalised to 2.1.2 : Vendor Tree, prefix "vnd.", later.
     
     
-    , hence:
+    3. hence:
     
     Following up on [a question raised on 2020-07-29 about MIME types], and 
     modified by [the observations on 2020-08-04 about the term REPRESENTATION] 
@@ -487,7 +487,7 @@ TEST: Example of parsing example data structure, using example semantics:
         
         It should also be noted that << text/html >> is able to carry data URIs.
 
-    Therefore:
+    4. Therefore:
     
     aRoutingTableMappingResourceNamesToTextualRepresentationDescriptionObjects = {
 
@@ -510,7 +510,7 @@ TEST: Example of parsing example data structure, using example semantics:
         }
     }
 
-    Recap:
+    5. Recap:
     
                 CLIENT:
         
