@@ -464,7 +464,7 @@ TEST: Example of parsing example data structure, using example semantics:
 
     Recap:
     
-        Client:
+                CLIENT:
         
                 << HTML FORM REQUEST : METHOD : only POST, or GET >>
           +---- (1) Client has these limitations;
@@ -474,7 +474,9 @@ TEST: Example of parsing example data structure, using example semantics:
           |      |
           |      |
       (4) |      v
-          |      
+          |     
+          |     SERVER (hereon):
+          |
           |     (3) We can build around 2. to establish an [intermediate form];
           |                                                                       
           |      ^  |                                                       
