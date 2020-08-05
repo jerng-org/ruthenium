@@ -353,7 +353,14 @@ try {
             //  NEW ROUTING ARCHITECTURE PROPOSAL
             //
             // routeResponseStrategy,
+            
+                // for example:     << simple HTTP >>
+                //                  << RESTful >>
+                //                  << CORBA >>
+                //                  << TEAPOT >> etc.
+            
             // routeResponseMimeType,
+            
             // routeCodePath,
             
                 // currently under << router >>
