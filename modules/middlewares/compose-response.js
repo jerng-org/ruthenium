@@ -76,7 +76,7 @@ console.error(`(compose-response.js:top:data.RU.signals)`,data.RU.signals)
 
     if (data.RU.signals.redirectRoute) {
 
-        redirect(data)
+        await redirect(data)
         return data
     }
     else
