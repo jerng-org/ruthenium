@@ -45,7 +45,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(apply-layout.js) was not updated to reflect changes in (compose-response.js)`,
+    gitCommitMessage: `bugfix: (compose-response.js): redirection failed due to missing 'await'`,
 //    gitCommitMessage: `(spa-prototype.js WIP - )`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
