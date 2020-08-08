@@ -45,7 +45,8 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(spa-prototype.js WIP - )`,
+    gitCommitMessage: `(apply-layout.js) was not updated to reflect changes in (compose-response.js)`,
+//    gitCommitMessage: `(spa-prototype.js WIP - )`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
      *  Merge order     :   1
