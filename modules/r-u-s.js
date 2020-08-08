@@ -53,8 +53,8 @@ const rus = {
 
     appUrl: async pairArrays => {
 
-        const URLObject = new(url.URL)('/test-middleware',
-            'https://secure.api.sudo.coffee'
+        const URLObject = new(url.URL)('/',
+            'https://ruthenium-v1.dev.sudo.coffee'
         )
 
         const URLSearchParamsObject = URLObject.searchParams
