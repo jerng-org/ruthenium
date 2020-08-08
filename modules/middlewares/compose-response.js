@@ -59,6 +59,8 @@ const redirect = async(DATA) => {
  */
 const composeResponse = async(data) => {
 
+console.error(`(compose-response.js:top:data.RU.signals)`,data.RU.signals)
+
     if (data.RU.response) {
         console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js); (data.RU.response): ${ await rus.print.stringify4(data.RU.response) }`)
         delete data.RU.response
@@ -81,7 +83,6 @@ const composeResponse = async(data) => {
 
     if (data.RU.signals.sendBlob) {
 
-        // TODO: integrate with properties below
         data.RU.response = {}
 
         data.RU.response.statusCode = data.RU.signals.sendResponse &&
@@ -115,7 +116,6 @@ const composeResponse = async(data) => {
         (data.RU.signals.sendResponse.statusCode ||
             data.RU.signals.sendResponse.body)) {
 
-        // TODO: integrate with properties below
         data.RU.response = {}
 
 
@@ -141,6 +141,9 @@ const composeResponse = async(data) => {
     if (data.RU.signals.markupName) {
         if (data.RU.signals.markupName in markups) {
 
+            data.RU.response = {}
+
+            // clobber (refine this as above; WIP / TODO )
             data.RU.response = {
                 statusCode: 200,
                 headers: {
@@ -168,6 +171,9 @@ const composeResponse = async(data) => {
 
         if (data.RU.signals.inferredMarkupName in markups) {
 
+            data.RU.response = {}
+
+            // clobber (refine this as above; WIP / TODO )
             data.RU.response = {
                 statusCode: 200,
                 headers: {
@@ -189,18 +195,6 @@ const composeResponse = async(data) => {
             await composeResponse(data)
         }
         return data
-    }
-    
-    else {
-
-        data.RU.response = {
-            statusCode: 200,
-            headers: {
-                'content-type': 'text/html'
-            },
-            body: 'Development: this response should not exist - it is a placeholder.'
-        }
-
     }
 }
 
