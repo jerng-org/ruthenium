@@ -78,15 +78,9 @@ const applyLayout = async ( data ) => {
     //  (data.RU.signals.noLayout) is an explicit abortion, similar in function
     //  with (compose-response.js)'s use of the explicit 
     //  (data.RU.signals.sendResponse);
-
-
-
-/*    2020-08-09 attempted removal
-
+    
     if ( data.RU.response )
     {
-*/    
-    
         if (        data.RU.signals.redirectRoute 
                 ||  data.RU.signals.sendBlob
                 ||  data.RU.signals.noLayout        )    
@@ -173,11 +167,6 @@ const applyLayout = async ( data ) => {
             }            
         }
         // else-block ends
-    
-        
-        
-/* 2020-08-09 attempted removal 
-
     }
     // if data.RU.response
     
@@ -190,10 +179,6 @@ const applyLayout = async ( data ) => {
                 before this middleware, anyway.`)
     }     
     // if data.RU.response, else-block ends
-    
-*/    
-    
-    
 }
 
 module.exports = applyLayout
