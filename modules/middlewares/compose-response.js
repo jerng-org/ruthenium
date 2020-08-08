@@ -23,22 +23,28 @@ const status501 = require(`/var/task/tasks/status-501.js`)
 
 const redirect = async(DATA) => {
 
+    // Step 1.1 : Documentation
     DATA.RU.signals.redirectRoute = DATA.RU.request.http.path +
         '?route=' +
         DATA.RU.signals.redirectRoute
 
-    DATA.RU.response.statusCode = DATA.RU.signals.sendResponse &&
-        DATA.RU.signals.sendResponse.statusCode ?
-        DATA.RU.signals.sendResponse.statusCode :
-        303 // See Other
+    // Step 2 : initialisation
+    DATA.RU.response = {
+
+        statusCode: DATA.RU.response.statusCode = DATA.RU.signals.sendResponse &&
+            DATA.RU.signals.sendResponse.statusCode ?
+            DATA.RU.signals.sendResponse.statusCode : 303 // See Other 300s
+            ,
+
+        // Ensure (headers) is an object
+        headers: DATA.RU.signals.sendResponse &&
+            DATA.RU.signals.sendResponse.headers ?
+            DATA.RU.signals.sendResponse.headers : {}
+    }
 
     console.warn(`compose-response.js, branch:redirectRoute : this seems insufficiently forceful - here we should not yield to a pre-set non-300 status code;`)
 
-    // ensure headers is an object            
-    DATA.RU.response.headers = DATA.RU.signals.sendResponse &&
-        DATA.RU.signals.sendResponse.headers ?
-        DATA.RU.signals.sendResponse.headers : {}
-
+    // Step 1.2 : Implementation
     DATA.RU.response.headers.location = DATA.RU.signals.redirectRoute
 }
 
@@ -59,7 +65,7 @@ const redirect = async(DATA) => {
  */
 const composeResponse = async(data) => {
 
-console.error(`(compose-response.js:top:data.RU.signals)`,data.RU.signals)
+    console.error(`(compose-response.js:top:data.RU.signals)`, data.RU.signals)
 
     if (data.RU.response) {
         console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js); (data.RU.response): ${ await rus.print.stringify4(data.RU.response) }`)
