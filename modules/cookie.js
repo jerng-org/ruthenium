@@ -385,9 +385,9 @@ A version of this is mentionedin RFC 6265bis.8.8.2.
  *      //rus.cookie.__SecureSet ( data, 'cookie_name', 'cookie_value' )
  *      //rus.cookie.set ( data, 'cookie_name', 'cookie_value', {
  *      //    Path:   false,
- *      //    //Path: '/test-middleware',
+ *      //    //Path: '/',
  *      //    Domain: false,
- *      //    //Domain: 'secure.api.sudo.coffee',
+ *      //    //Domain: 'ruthenium-v1.dev.sudo.coffee',
  *      //    Secure: false,
  *      //    HttpOnly:   false,
  *      //    Expires:    false,
