@@ -31,7 +31,7 @@ const redirect = async(DATA) => {
     // Step 2 : initialisation
     DATA.RU.response = {
 
-        statusCode: DATA.RU.response.statusCode = DATA.RU.signals.sendResponse &&
+        statusCode: DATA.RU.signals.sendResponse &&
             DATA.RU.signals.sendResponse.statusCode ?
             DATA.RU.signals.sendResponse.statusCode : 303 // See Other 300s
             ,
