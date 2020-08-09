@@ -387,7 +387,7 @@ A version of this is mentionedin RFC 6265bis.8.8.2.
  *      //    Path:   false,
  *      //    //Path: '/',
  *      //    Domain: false,
- *      //    //Domain: 'ruthenium-v1.dev.sudo.coffee',
+ *      //    //Domain: rus.conf.app.uri.authority.host,
  *      //    Secure: false,
  *      //    HttpOnly:   false,
  *      //    Expires:    false,
