@@ -1,30 +1,28 @@
 module.exports = {
 
-    /*  platform:
-     *  
-     *      Items specific to our AWS environment:
-     *      -   DynamoDB
-     *      -   API Gateway
-     *      -   Lambda
-     *      -
-     */
-    platform: {
-        dynamoDB: {
-            /*  -   used by (oidc-session.js) TODO which c/should be renamed 
-             *      (lambda-oidc-session.js);
-             *  -   this data should be sufficient documentation for the
-             *      recreation of a fungible table for this application;
-             */
-            sessions: { 
-                tableName: `TEST-APP-SESSIONS`,
-                primaryKey: 'cognitoUsername',
-                //sortKey: 'exp',   //  we cannot "getItem()" when the (exp) is unknown
-                                    //  so exp needs to be a LSI
-                                    //  TODO rename this 'hashKey'
-                ttlKey: 'exp'   
+    app: {
+        
+        uri: {
+            
+            scheme: 'https',
+            authority: {
                 
-            }
+                userinfo: null,
+                host: 'ruthenium-v1.dev.sudo.coffee',
+                port: null
+                
+            },
+            path: '',
+            
+            /*
+            
+            query: '',
+            segment: ''
+                // these URI components are not currently relevant here
+            
+            */
         }
+        
     },
 
     /*  faultTolerance:
@@ -45,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `migration in progress`,
+    gitCommitMessage: `migration in progress: app uri-host configured at (rus.conf.app.uri)`,
 //    gitCommitMessage: `(spa-prototype.js WIP - )`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
@@ -126,6 +124,33 @@ module.exports = {
      *
      */
     performance: 1,
+
+    /*  platform:
+     *  
+     *      Items specific to our AWS environment:
+     *      -   DynamoDB
+     *      -   API Gateway
+     *      -   Lambda
+     *      -
+     */
+    platform: {
+        dynamoDB: {
+            /*  -   used by (oidc-session.js) TODO which c/should be renamed 
+             *      (lambda-oidc-session.js);
+             *  -   this data should be sufficient documentation for the
+             *      recreation of a fungible table for this application;
+             */
+            sessions: { 
+                tableName: `TEST-APP-SESSIONS`,
+                primaryKey: 'cognitoUsername',
+                //sortKey: 'exp',   //  we cannot "getItem()" when the (exp) is unknown
+                                    //  so exp needs to be a LSI
+                                    //  TODO rename this 'hashKey'
+                ttlKey: 'exp'   
+                
+            }
+        }
+    },
 
     /*  session exempted routes
      *

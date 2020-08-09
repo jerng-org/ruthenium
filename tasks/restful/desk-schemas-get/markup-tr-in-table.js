@@ -1,3 +1,5 @@
+const rus = require ( '/var/task/modules/r-u-s.js' )
+
 const liOfColumnsInTr 
     = require (`/var/task/tasks/restful/desk-schemas-get/markup-li-of-columns-in-tr.js`) 
 
@@ -72,7 +74,16 @@ const trInTable = async ( item ) => {
                 >
     </fieldset>
 
-    <form method="post" action="/test-middleware?route=restful&type=schemas&thing=shoes&form-method=patch">
+    <form method="post" action="${ 
+
+await rus.appUrl ( [
+    [ 'route', 'restful' ],
+    [ 'type', 'schemas' ],
+    [ 'thing', 'shoes' ],
+    [ 'form-method', 'patch' ]
+] )
+
+    }">
     <fieldset   class="toggle-set-2" 
                 style="display:none;"
                 >

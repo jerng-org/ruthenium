@@ -12,7 +12,15 @@ const layoutMarkup = async(data) => {
         
         <link   rel="stylesheet" 
                 type="text/css" 
-                href="/test-middleware?route=file&file=milligram.min.css">
+                href="${
+
+await rus.appUrl ( [
+    [ 'route', 'file' ],
+    [ 'file', 'milligram.min.css' ]
+] )
+
+
+                }">
         
         <link   href="https://fonts.googleapis.com/icon?family=Material+Icons"
                 rel="stylesheet">
@@ -26,9 +34,23 @@ const layoutMarkup = async(data) => {
         </style>
         
         <script     nomodule 
-                    src="/test-middleware?route=file&file=ruthenium-web-client.mjs"></script>
+                    src="${
+                    
+await rus.appUrl ( [
+    [ 'route', 'file' ],
+    [ 'file', 'ruthenium-web-client.mjs' ]
+] )
+
+                    }"></script>
         <script     type="module" 
-                    src="/test-middleware?route=file&file=ruthenium-web-client.mjs"></script>
+                    src="${
+                    
+await rus.appUrl ( [
+    [ 'route', 'file' ],
+    [ 'file', 'ruthenium-web-client.mjs' ]
+] )
+
+                    }"></script>
     
     </head>
     <body>

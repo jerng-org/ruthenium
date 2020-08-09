@@ -4,6 +4,7 @@
 //  require.res()   resolves paths without execution;
 
 const mark = require('/var/task/modules/mark.js')
+const conf = require(`/var/task/configuration.js`)
 
 mark(`r-u-s.js (ruthenium utilities) LOADING ...`)
 
@@ -53,8 +54,9 @@ const rus = {
 
     appUrl: async pairArrays => {
 
-        const URLObject = new(url.URL)('/',
-            'https://ruthenium-v1.dev.sudo.coffee'
+        const URLObject = new(url.URL)(
+            conf.app.uri.path,
+            conf.app.uri.scheme + '://' + conf.app.uri.authority.host
         )
 
         const URLSearchParamsObject = URLObject.searchParams
@@ -85,7 +87,7 @@ const rus = {
 
     cookie: require(`/var/task/modules/cookie.js`),
 
-    conf: require(`/var/task/configuration.js`),
+    conf: conf,
 
     html: require('/var/task/modules/html'),
 
