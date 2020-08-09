@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `migration in progress: github branch moved to (environmental variable)`,
+    gitCommitMessage: `migration in progress: deployment package imported from (v1 cf86ae028a1c7f09fcb9584d313bae22623e5886) `,
 //    gitCommitMessage: `(spa-prototype.js WIP - )`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
