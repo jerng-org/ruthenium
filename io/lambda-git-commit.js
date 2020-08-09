@@ -39,7 +39,7 @@ const lambdaGitCommit =  commitMessage => { try {
         { encoding: 'utf8', stdio: 'inherit' })
 
     childProcess.execSync(
-        'git clone -n --depth 1 -b dev-v1.x.x-alpha-jerng-machines-writeable https://github.com/jerng-org/ruthenium.git', 
+        `git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git`, 
         { encoding: 'utf8', stdio: 'inherit', cwd: '/tmp' })
 
     mark ( `gitCommit.js Repository cloned ... ` )
