@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `migration in progress: app uri-host configured at (rus.conf.app.uri)`,
+    gitCommitMessage: `migration in progress: github branch moved to (environmental variable)`,
 //    gitCommitMessage: `(spa-prototype.js WIP - )`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
