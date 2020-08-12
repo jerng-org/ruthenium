@@ -40,7 +40,7 @@ const desksGetMarkup = async(data) => {
             (accumulator, colName)=>{
                 return accumulator + `<td>${deskCells[rowID][colName]}</td>`
             },
-            `<th scope="row" id="${rowID}">${ ++rowCount }</th>` /*initial accumulator value*/) 
+            `<th scope="row" id="${rowID}">${ ++rowCount } : ${rowID}</th>` /*initial accumulator value*/) 
         }
         </tr>`
     }
