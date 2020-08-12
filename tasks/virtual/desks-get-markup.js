@@ -56,6 +56,7 @@ const desksGetMarkup = async(data) => {
     <thead>
         <tr>${ th1s }</tr>        
         <tr>${ th2s }</tr>        
+        <tr>${ th3s }</tr>        
     </thead>
     
     <tbody>${ tbodyTrs }</tbody>
