@@ -128,7 +128,7 @@ try {
 
                 `https://developer.mozilla.org/en-US/docs/Glossary/HSTS`,
 
-                `development of validation.js features is ongoing via ~/tasks/restful/desk-schemas-post.js`,
+                `development of validation.js features is ongoing via ~/tasks/virtual/desk-schemas-post.js`,
 
                 `Whole class of problems:
                 -   whether to use ES/JS proxies (language specific!) to 

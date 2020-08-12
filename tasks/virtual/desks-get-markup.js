@@ -65,7 +65,7 @@ const desksGetMarkup = async(data) => {
 </table>`
 
 
-    rus.mark(`~/tasks/restful/desks-get-markup.js EXECUTED`)
+    rus.mark(`~/tasks/virtual/desks-get-markup.js EXECUTED`)
 
     return markup
 }
@@ -74,4 +74,4 @@ const desksGetMarkup = async(data) => {
 
 
 module.exports = desksGetMarkup
-rus.mark(`~/tasks/restful/desks-get-markup.js LOADED`)
+rus.mark(`~/tasks/virtual/desks-get-markup.js LOADED`)
