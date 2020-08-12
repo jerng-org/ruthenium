@@ -184,7 +184,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
 `
     <h1>Test Markup ( legit values ) :</h1>
     
-    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+    <form method="POST" action="/test-middleware?route=virtual&type=desk-schemas">
         <input type="text" name="desk-schemas[columns]###1###[name]" value="head=desk-schemas">
         <input type="text" name="desk-schemas[columns]###1###[type]" value="head=desk-schemas">
         <input type="text" name="not-a-desk[columns]###2###[name]" value="head=not-a-desk">
@@ -192,7 +192,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         <input type="submit" value="POST it">
     </form>
 
-    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+    <form method="POST" action="/test-middleware?route=virtual&type=desk-schemas">
         <input type="text" name="desk-schemas[columns]###1###[name]" value="--a name--">
         <input type="text" name="desk-schemas[columns]###1###[type]" value="--a type--">
         <input type="text" name="desk-schemas[columns]###2###[name]" value="--another name--">
@@ -200,7 +200,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         <input type="submit" value="POST it">
     </form>
     
-    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+    <form method="POST" action="/test-middleware?route=virtual&type=desk-schemas">
         <input type="text" name="desk-schemas###1###[name]" value="head,toarrayindex,asis">
         <input type="text" name="desk-schemas###1###[type]" value="head,toarrayindex,asis">
         <input type="text" name="desk-schemas###2###[name][metadata]" value="head,toarrayindex,asis,asis">
@@ -208,7 +208,7 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
         <input type="submit" value="POST it">
     </form>
     
-    <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+    <form method="POST" action="/test-middleware?route=virtual&type=desk-schemas">
         <input type="text" name="desk-schemas###3###[name]" value="head,toarrayindex3,asis">
         <input type="text" name="desk-schemas###5###[name]" value="head,toarrayindex5,asis">
         <input type="text" name="desk-schemas###8###[name]" value="head,toarrayindex8,asis">
@@ -217,13 +217,13 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
     </form>
     
     <h1>Test Markup ( bad values ) :</h1>
-     <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+     <form method="POST" action="/test-middleware?route=virtual&type=desk-schemas">
         <input type="text" name="[columns]###1###[name]" value="(no head),asis,toarrayindex,asis">
         <input type="text" name="desk-schemas###1###[name][anothername]" value="head,toarrayindex,asis,asis">
         <input type="text" name="desk-schemas[columns][name]###123###" value="head,asis,asis,toarrayindex">
         <input type="submit" value="POST it">
     </form>
-     <form method="POST" action="/test-middleware?route=restful&type=desk-schemas">
+     <form method="POST" action="/test-middleware?route=virtual&type=desk-schemas">
         <input type="text" name="desk-schemas###1###[name]" value="head,(toarrayindex !!),asis">
         <input type="text" name="desk-schemas[type]###1###" value="head,(asis !!),toarrayindex">
         <input type="text" name="desk-schemas###2###[name][metadata]" value="head,(toarrayindex !!),asis,asis">

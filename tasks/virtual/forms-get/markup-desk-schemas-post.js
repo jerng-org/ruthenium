@@ -112,7 +112,7 @@ const createDeskSchema = async ( data ) => {
     return /*htmlIndex +*/ await rus.html.form ( {
         
         action: await rus.appUrl( [ 
-            [ 'route','restful' ], 
+            [ 'route','virtual' ], 
             [ 'type','desk-schemas' ] 
         ] ),
         

@@ -77,7 +77,7 @@ const trInTable = async ( item ) => {
     <form method="post" action="${ 
 
 await rus.appUrl ( [
-    [ 'route', 'restful' ],
+    [ 'route', 'virtual' ],
     [ 'type', 'schemas' ],
     [ 'thing', 'shoes' ],
     [ 'form-method', 'patch' ]

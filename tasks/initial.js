@@ -2,7 +2,7 @@
 
 const initial = async ( data ) => {
 
-    data.RU.signals.redirectRoute = 'restful&type=desk-schemas&reader=human'
+    data.RU.signals.redirectRoute = 'virtual&type=desk-schemas&reader=human'
     
     if ( 'message' in data.RU.request.queryStringParameters ) {
         data.RU.signals.redirectRoute += `&message=(via initial.js)${data.RU.request.queryStringParameters.message}`
