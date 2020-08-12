@@ -1,12 +1,12 @@
 'use strict'
 
-const desksGet = require('/var/task/tasks/restful/desks-get.js')
+const desksGet = require('/var/task/tasks/virtual/desks-get.js')
 
-const deskSchemasGet = require('/var/task/tasks/restful/desk-schemas-get/desk-schemas-get.js')
+const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js')
 
-const deskSchemasPost = require('/var/task/tasks/restful/desk-schemas-post.js')
+const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
 
-const formsDeskSchemasPostMarkup = require(`/var/task/tasks/restful/forms-get/markup-desk-schemas-post.js`)
+const formsDeskSchemasPostMarkup = require(`/var/task/tasks/virtual/forms-get/markup-desk-schemas-post.js`)
 
 const rus = require('/var/task/modules/r-u-s.js')
 
@@ -22,18 +22,18 @@ const logError = (DATA, message) => {
 }
 
 rus.conf.verbosity > 0 &&
-    (console.warn(`(~/tasks/restful.js) all (types) are currently manually coded; RECONSIDER.`),
-        console.warn(`(~/tasks/restful.js) (dimensions) may require a bit of restructuring.`)
+    (console.warn(`(~/tasks/virtual.js) all (types) are currently manually coded; RECONSIDER.`),
+        console.warn(`(~/tasks/virtual.js) (dimensions) may require a bit of restructuring.`)
     )
 
-//const patchDeskSchema   = require ( '/var/task/tasks/restful/patchDeskSchema.js' )
+//const patchDeskSchema   = require ( '/var/task/tasks/virtual/patchDeskSchema.js' )
 
-console.warn(`(restful.js) the (logError) function defined here is a framework-level anomaly; integrate this perhaps to (rus);`)
-console.warn(`(restful.js) we should really break up/curry the giant switch-case into a linear pipeline`)
+console.warn(`(virtual.js) the (logError) function defined here is a framework-level anomaly; integrate this perhaps to (rus);`)
+console.warn(`(virtual.js) we should really break up/curry the giant switch-case into a linear pipeline`)
 console.warn(`TODO: implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
 
 
-const restful = async(data) => {
+const vi = async(data) => {
 
     //  ?batch=1
     if (data.RU.request.queryStringParameters.batch &&
@@ -53,49 +53,6 @@ const restful = async(data) => {
     //  ?batch=0
     else {
 
-        /******************************************************************************  
-        *       Literary Review : https://restfulapi.net/http-methods/
-        *******************************************************************************  
-        *       safe => 'read only', # => idempotent
-        *******************************************************************************  
-        HTTP    CRUD	ENTIRE COLLECTION           SPECIFIC ITEM  
-        METHOD          (E.G. /USERS)               (E.G. /USERS/123)
-        *******************************************************************************  
-
-        HEAD
-        #
-        safe
-
-        GET	    Read	200 (OK), list of users.    200 (OK), single user. 
-        #               Use pagination, sorting     404 (Not Found), if ID not found or 
-        safe            and filtering to navigate   invalid.
-                        big lists.	
-
-        PUT	    Update/ 405 (Method not allowed),   200 (OK) or 204 (No Content).  
-        #       Replace	unless you want to update   Use 404 (Not Found), 
-                        every resource in the       if ID not found or invalid.
-                        entire collection of 
-                        resource.	
-
-        DELETE	Delete	405 (Method not allowed),   200 (OK). 404 (Not Found), 
-        #               unless you want to delete   if ID not found or invalid.
-                        the whole collection 
-                        — use with caution.	
-                        
-        POST	Create	201 (Created), ‘Location’   Avoid using POST on single resource
-                        header with link to 
-                        /users/{id} containing 
-                        new ID.	
-
-        PATCH	Partial 405 (Method not allowed),   200 (OK) or 204 (No Content). 
-                Update/ unless you want to modify   Use 404 (Not Found), 
-                Modify	the collection itself.	    if ID not found or invalid.
-         
-        ******************************************************************************
-        *   IMPLEMENTED ?
-        ******************************************************************************
-        *   BROKEN UP TO SUBFOLDER FILES ?
-        ******************************************************************************/
 
         try {
 
@@ -110,7 +67,7 @@ const restful = async(data) => {
                 queryScope = (queryHasThing ? 'one' : 'all')
             }
             else {
-                logError(data, `(restful.js) (?type=) was not provided.`)
+                logError(data, `(virtual.js) (?type=) was not provided.`)
                 await status400(data)
                 return data
             }
@@ -141,13 +98,13 @@ const restful = async(data) => {
                                             data.RU.signals.sendResponse.body = await formsDeskSchemasPostMarkup()
                                             return
                                         default:
-                                            logError(data, `(restful.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
+                                            logError(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
                                             await status404(data)
                                             return
                                     }
 
                                 default:
-                                    logError(data, `(restful.js) (?type=forms) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    logError(data, `(virtual.js) (?type=forms) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
@@ -155,7 +112,7 @@ const restful = async(data) => {
                             // ( queryScope )
 
                         default:
-                            logError(data, `(restful.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            logError(data, `(virtual.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await status404(data)
                             console.warn(`TODO: implement status405`)
                             return
@@ -180,7 +137,7 @@ const restful = async(data) => {
                                     return
 
                                 default:
-                                    logError(data, `(restful.js) (?type=desk-schemas) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    logError(data, `(virtual.js) (?type=desk-schemas) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
@@ -198,7 +155,7 @@ const restful = async(data) => {
                                     return
 
                                 default:
-                                    logError(data, `(restful.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    logError(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
@@ -206,7 +163,7 @@ const restful = async(data) => {
                             // ( queryScope )
 
                         default:
-                            logError(data, `(restful.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            logError(data, `(virtual.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await status404(data)
                             console.warn(`TODO: implement status405`)
                             return
@@ -227,13 +184,13 @@ const restful = async(data) => {
                             switch (queryScope) {
 
                                 case ('all'):
-                                    logError(data, `(restful.js) (?type=desk-cells) (GET) (?thing=) was not provided. You should specify the (desk) whose (cells) you wish to GET.`)
+                                    logError(data, `(virtual.js) (?type=desk-cells) (GET) (?thing=) was not provided. You should specify the (desk) whose (cells) you wish to GET.`)
                                     await status403(data)
                                     return
 
                                 default:
 
-                                    logError(data, `(restful.js) (?type=desk-cells) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    logError(data, `(virtual.js) (?type=desk-cells) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
 
 
@@ -260,7 +217,7 @@ const restful = async(data) => {
                             //  POST (desk-cells) ... all of them, or just one?
                             switch (queryScope) {
 
-                                default: logError(data, `(restful.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                default: logError(data, `(virtual.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
                                 await status404(data)
                                 return
                             }
@@ -268,7 +225,7 @@ const restful = async(data) => {
                             // ( queryScope )
 
                         default:
-                            logError(data, `(restful.js) Request query parameter (?type=desk-cells), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            logError(data, `(virtual.js) Request query parameter (?type=desk-cells), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await status404(data)
                             console.warn(`TODO: implement status405`)
                             return
@@ -289,7 +246,7 @@ const restful = async(data) => {
                             switch (queryScope) {
 
                                 case ('all'):
-                                    logError(data, `(restful.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
+                                    logError(data, `(virtual.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
                                     await status403(data)
                                     return
 
@@ -309,13 +266,13 @@ const restful = async(data) => {
                                         if not found, fail:
                                     
                                     
-                                        console.error(`(restful.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
+                                        console.error(`(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
                                         await status404(data)
                                     */
                                     return
 
                                 default:
-                                    logError(data, `(restful.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    logError(data, `(virtual.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
@@ -324,7 +281,7 @@ const restful = async(data) => {
 
 
                         default:
-                            logError(data, `(restful.js) Request query parameter (?type=desks), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            logError(data, `(virtual.js) Request query parameter (?type=desks), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await status404(data)
                             console.warn(`TODO: implement status405`)
                             return
@@ -335,7 +292,7 @@ const restful = async(data) => {
                 default:
                     //  (NOT desk-schemas) (NOT desk-cells) (NOT desks) and (NOT forms)
 
-                    logError(data, `(restful.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
+                    logError(data, `(virtual.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
                     await status404(data)
                     return
             }
@@ -354,4 +311,4 @@ const restful = async(data) => {
     // no need to return (data)
 }
 
-module.exports = restful
+module.exports = virtual
