@@ -33,7 +33,7 @@ console.warn(`(virtual.js) we should really break up/curry the giant switch-case
 console.warn(`TODO: implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
 
 
-const vi = async(data) => {
+const virtual = async(data) => {
 
     //  ?batch=1
     if (data.RU.request.queryStringParameters.batch &&
