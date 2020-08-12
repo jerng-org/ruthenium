@@ -6,7 +6,7 @@ const status404 = require(`/var/task/tasks/status-404.js`)
 rus.conf.verbosity > 0 &&
     console.warn(`(desk-get.js) FIXME: rendering an error page should not involve a require() here;`)
 
-const markup = require('/var/task/tasks/restful/desks-get-markup.js')
+const markup = require('/var/task/tasks/virtual/desks-get-markup.js')
 rus.conf.verbosity > 0 &&
     console.warn(`(desk-schemas-get.js) FIXME: rendering (-markup.js) should not involve a require() here;`)
 

@@ -109,7 +109,7 @@ window.addEventListener('load', (event) => {
         
     Reference Implementation:
     
-        ~/tasks/restful/forms/desk-schemas-post.js
+        ~/tasks/virtual/forms/desk-schemas-post.js
 
 */
 ///////////////////////////////////////////////////////////////////////////////  

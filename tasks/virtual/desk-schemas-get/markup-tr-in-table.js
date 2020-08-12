@@ -1,7 +1,7 @@
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const liOfColumnsInTr 
-    = require (`/var/task/tasks/restful/desk-schemas-get/markup-li-of-columns-in-tr.js`) 
+    = require (`/var/task/tasks/virtual/desk-schemas-get/markup-li-of-columns-in-tr.js`) 
 
 const trInTable = async ( item ) => {
     

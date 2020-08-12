@@ -30,8 +30,8 @@ mark(`~/io/ddbdc.js LOADED`)
 
 /*  TODO
 
-    -   ~/tasks/restful/desk-cells-post.js
-    -   ~/tasks/restful/desk-cells-ge.js
+    -   ~/tasks/virtual/desk-cells-post.js
+    -   ~/tasks/virtual/desk-cells-ge.js
 
 
 */
