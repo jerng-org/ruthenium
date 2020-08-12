@@ -43,8 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `migration in progress: github branch moved to (environmental variable)`,
-//    gitCommitMessage: `(spa-prototype.js WIP - )`,
+    gitCommitMessage: `v1 dev: rename "restful" to "virtual"`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
      *  Merge order     :   1
