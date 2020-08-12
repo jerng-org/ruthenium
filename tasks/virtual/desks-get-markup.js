@@ -8,6 +8,7 @@ const desksGetMarkup = async(data) => {
 
     let th1s = '<th scope="row">Column Names :</th>'
     let th2s = '<th scope="row">Column Types :</th>'
+    let th3s = '<th scope="col">Row Count :</th>'
     let colNames = []
     for (const col of data.RU.io.deskSchemasQuery.Items[0].columns) {
         colNames.push(col.name)
@@ -39,7 +40,7 @@ const desksGetMarkup = async(data) => {
             (accumulator, colName)=>{
                 return accumulator + `<td>${deskCells[rowID][colName]}</td>`
             },
-            `<th scope="row">${ ++rowCount }</th>` /*initial accumulator value*/) 
+            `<th scope="row" id="${rowID}">${ ++rowCount }</th>` /*initial accumulator value*/) 
         }
         </tr>`
     }
