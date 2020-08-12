@@ -67,6 +67,7 @@ await rus.appUrl ( [
         
         <div class="container">
             <h3>Welcome to Prototyping</h3>
+            <hr>
             <p>
             </p>
             ${ data.RU.response.body }
