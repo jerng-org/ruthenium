@@ -75,7 +75,7 @@ const lastGuard = async(data) => {
 
     rus.conf.verbosity > 5 && console.log(await rus.print.inspectInfinity(data))
 
-    return data.RU.response
+    return data
 }
 module.exports = lastGuard
 rus.mark(`~/modules/middlewares/last-guard.js LOADED`)

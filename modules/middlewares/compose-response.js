@@ -54,13 +54,15 @@ const redirect = async(DATA) => {
  *
  *  3.  Branch, if (data.RU.signals.sendBlob) is truthy.
  *
- *  4.  Branch, if (data.RU.signals.sendResponse[ 'statusCode' OR 'body' ]) is truthy.
+ *  4.  Branch, if (data.RU.signals.sendJson) is truthy.
  *
- *  5.  Branch, if (data.RU.signals.markupName) is truthy.
+ *  5.  Branch, if (data.RU.signals.sendResponse[ 'statusCode' OR 'body' ]) is truthy.
  *
- *  6.  Branch, if (data.RU.signals.taskName) is truthy.
+ *  6.  Branch, if (data.RU.signals.markupName) is truthy.
  *
- *  7.  Return.
+ *  7.  Branch, if (data.RU.signals.taskName) is truthy.
+ *
+ *  8.  Return.
  *
  */
 const composeResponse = async(data) => {
@@ -117,7 +119,16 @@ const composeResponse = async(data) => {
         return data
     }
     else
-
+    
+    if (data.RU.signals.sendJson)
+    {
+        console.warn('(compose-response.js) data.RU.signals.sendJson : implementation specific to Lambda payload format 2.0')
+        
+        data.response = data.RU.signals.sendJson
+        return data
+    }
+    else
+    
     if (data.RU.signals.sendResponse &&
         (data.RU.signals.sendResponse.statusCode ||
             data.RU.signals.sendResponse.body)) {

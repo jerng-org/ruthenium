@@ -247,6 +247,8 @@ try {
 
     const oidcValidation = require(`/var/task/modules/middlewares/oidc-validation.js`)
 
+    const returnResponse = require(`/var/task/modules/middlewares/returnResponse.js`)
+
     const router = require(`/var/task/modules/middlewares/router.js`)
 
     const sessionExemption = require(`/var/task/modules/middlewares/session-exemption.js`)
@@ -394,8 +396,9 @@ try {
             composeResponse,
             setCookies,
             applyLayout, // - can this switch places with (setCookies)?
-            lastGuard //  Final Checkpoint
-
+            lastGuard, //  Final Checkpoint
+            returnResponse
+            
             // HTTP Response - Host System Integration (AWS Lambda) Protocols & Data Structures
             // (none at this time)
         ]
