@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `WIP - NEXT: grep code - simplify (desk-schemas) table by remove (id) - (name) becomes partition key`,
+    gitCommitMessage: `TEST-APP-DESK-SCHEMAS now replaced by RUTHENIUM-V1-DESK-SCHEMAS`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
      *  Merge order     :   1
