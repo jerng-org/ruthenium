@@ -21,6 +21,7 @@ const deskSchemasGet = async(data) => {
                 (currentValue, index, array) => {
                     
                     // TEMPORARY: for migration of data 2020-08-15 only
+                    console.error ( currentValue)
                     delete currentValue.id
                 } /*, thisArg*/
             )
