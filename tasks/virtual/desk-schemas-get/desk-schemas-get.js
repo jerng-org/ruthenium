@@ -24,7 +24,7 @@ const deskSchemasGet = async(data) => {
                     delete currentValue.id
                 } /*, thisArg*/
             )
-            data.RU.signals.sendJson = data.RU.signals.senJson.Items
+            data.RU.signals.sendJson = data.RU.signals.sendJson.Items
             break
         case ('human'):
         default:
