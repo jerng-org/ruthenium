@@ -17,12 +17,11 @@ const deskSchemasGet = async(data) => {
 
         case ('machine'):
             data.RU.signals.sendJson = data.RU.io.deskSchemasScan
-            data.RU.signals.sendJson = data.RU.signals.sendJson.Items.forEach(
+            data.RU.signals.sendJson.Items.forEach(
                 (currentValue, index, array) => {
                     
                     // TEMPORARY: for migration of data 2020-08-15 only
                     delete currentValue.id
-                    console.error ( currentValue)
                 } /*, thisArg*/
             )
             break
