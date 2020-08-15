@@ -67,8 +67,8 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
         //  Validation: as middlewares may return nonsense
         if (typeof intermediateData == 'object'
             //&&  intermediateData.LAMBDA // (uncomment this when it has been generalised to HOST_LABEL)
-            &&
-            intermediateData.RU) {
+            && intermediateData != null
+            && intermediateData.RU) {
 
             // ordinary;
             return intermediateData

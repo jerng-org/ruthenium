@@ -124,7 +124,7 @@ const composeResponse = async(data) => {
     {
         console.warn('(compose-response.js) data.RU.signals.sendJson : implementation specific to Lambda payload format 2.0')
         
-        data.response = data.RU.signals.sendJson
+        data.RU.response = data.RU.signals.sendJson
         data.RU.signals.skipToMiddlewareName = 'returnResponse'
         return data
     }
