@@ -18,6 +18,7 @@ const deskSchemasGet = async ( data ) => {
         
         case ( 'machine' ) :
             data.RU.signals.sendResponse.body = data.RU.io.deskSchemasScan 
+            data.RU.signals.skipToMiddlewareName = 'composeResponse'
             break
         case ( 'human' ) :
         default:
