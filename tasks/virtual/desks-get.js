@@ -17,7 +17,7 @@ const deskGet = async(data) => {
     const deskID = data.RU.request.queryStringParameters.thing[0]
 
     data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
-        TableName: 'TEST-APP-DESK-SCHEMAS',
+        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
         KeyConditionExpression: 'id = :deskID',
         ExpressionAttributeValues: { ':deskID': deskID },
         Limit: 1,
