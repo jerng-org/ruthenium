@@ -9,7 +9,7 @@ rus.conf.verbosity > 0 &&
 const deskSchemasGet = async(data) => {
 
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
-        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+        TableName: 'TEST-APP-DESK-SCHEMAS',
         ReturnConsumedCapacity: 'TOTAL'
     }).promise()
 
