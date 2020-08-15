@@ -18,8 +18,9 @@ const deskGet = async(data) => {
 
     data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-        KeyConditionExpression: 'name = :deskName',
+        KeyConditionExpression: '#name = :deskName',
         ExpressionAttributeValues: { ':deskName': deskName },
+        ExpressionAttributeNames: { '#name': 'name' },
         Limit: 1,
         ReturnConsumedCapacity: 'TOTAL'
     }).promise()
