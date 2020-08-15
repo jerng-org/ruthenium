@@ -14,12 +14,12 @@ rus.conf.verbosity > 0 &&
 
 const deskGet = async(data) => {
 
-    const deskID = data.RU.request.queryStringParameters.thing[0]
+    const deskName = data.RU.request.queryStringParameters.thing[0]
 
     data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-        KeyConditionExpression: 'id = :deskID',
-        ExpressionAttributeValues: { ':deskID': deskID },
+        KeyConditionExpression: 'name = :deskName',
+        ExpressionAttributeValues: { ':deskName': deskName },
         Limit: 1,
         ReturnConsumedCapacity: 'TOTAL'
     }).promise()
@@ -28,8 +28,6 @@ const deskGet = async(data) => {
         await status404(data)
         return
     }
-
-    const deskName = data.RU.io.deskSchemasQuery.Items[0].name
 
     data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
         TableName: 'TEST-APP-DESK-CELLS',
