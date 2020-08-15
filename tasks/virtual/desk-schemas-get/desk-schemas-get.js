@@ -16,15 +16,7 @@ const deskSchemasGet = async(data) => {
     switch (data.RU.request.queryStringParameters.reader[0]) {
 
         case ('machine'):
-            data.RU.signals.sendJson = data.RU.io.deskSchemasScan
-            data.RU.signals.sendJson.Items.forEach(
-                (currentValue, index, array) => {
-                    
-                    // TEMPORARY: for migration of data 2020-08-15 only
-                    delete currentValue.id
-                } /*, thisArg*/
-            )
-            data.RU.signals.sendJson = data.RU.signals.sendJson.Items
+            data.RU.signals.sendJson = data.RU.io.deskSchemasScan.Items
             break
         case ('human'):
         default:
