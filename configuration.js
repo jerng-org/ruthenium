@@ -43,8 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: '(compose-response.js) data.RU.signals.sendJson behaviour defined',
-//    gitCommitMessage: `v1 dev: review (virtual) - NEXT: simplify (desk-schemas) table by remove (id) - (name) becomes partition key`,
+    gitCommitMessage: `v1 dev: review (virtual) - NEXT: simplify (desk-schemas) table by remove (id) - (name) becomes partition key`,
 //    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
     /*  USES:
      *  Merge order     :   1
