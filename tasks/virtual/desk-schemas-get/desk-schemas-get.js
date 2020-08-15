@@ -19,7 +19,7 @@ const deskSchemasGet = async ( data ) => {
         case ( 'machine' ) :
             // TODO
             console.error(`desk-schemas-get.js : case machine`)
-            data.RU.signals.sendResponse.body = data.RU.io.deskSchemasScan
+            data.RU.signals.sendResponse.body = data.RU.io.deskSchemasScan 
             break
         case ( 'human' ) :
         default:
