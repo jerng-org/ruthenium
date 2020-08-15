@@ -30,5 +30,7 @@ const deskSchemasGet = async(data) => {
             data.RU.signals.sendResponse.body = await markup(data)
     }
 
+    rus.mark ( `~/tasks/virtual/desk-schemas-get/desk-schemas-get.js EXECUTED` )
+
 }
 module.exports = deskSchemasGet
