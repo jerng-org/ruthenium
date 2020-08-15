@@ -34,6 +34,8 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
                     DATA.RU.signals.skippingFromMiddleware :
                     MIDDLEWARE_QUEUE[INDEX - 1].name
 
+                rus.mark(`middleware SKIPPED: ${ CURRENT_MIDDLEWARE.name }`)
+
                 //  1.1.
                 //  skip to next candidate in middleware queue;
                 return DATA
