@@ -247,7 +247,7 @@ try {
 
     const oidcValidation = require(`/var/task/modules/middlewares/oidc-validation.js`)
 
-    const returnResponse = require(`/var/task/modules/middlewares/returnResponse.js`)
+    const returnResponse = require(`/var/task/modules/middlewares/return-response.js`)
 
     const router = require(`/var/task/modules/middlewares/router.js`)
 
