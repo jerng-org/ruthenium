@@ -14,19 +14,13 @@ const deskSchemasGet = async ( data ) => {
         ReturnConsumedCapacity : 'TOTAL'
     } ).promise()
 
-    console.error(`desk-schemas-get.js : before switch`)
-
-    switch ( data.RU.request.queryStringParameters.reader ) {
+    switch ( data.RU.request.queryStringParameters.reader[0] ) {
         
         case ( 'machine' ) :
-            // TODO
-            console.error(`desk-schemas-get.js : case machine`)
             data.RU.signals.sendResponse.body = data.RU.io.deskSchemasScan 
             break
         case ( 'human' ) :
-            console.error(`desk-schemas-get.js : case human`)
         default:
-            console.error(`desk-schemas-get.js : case default`)
             data.RU.signals.sendResponse.body = await markup ( data )
     }
 
