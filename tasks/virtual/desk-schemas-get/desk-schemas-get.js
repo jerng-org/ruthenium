@@ -18,6 +18,7 @@ const deskSchemasGet = async ( data ) => {
         
         case ( 'machine' ) :
             // TODO
+            data.RU.signals.sendResponse.body = await data.RU.io.deskSchemasScan
             break
         case ( 'human' ) :
         default:
