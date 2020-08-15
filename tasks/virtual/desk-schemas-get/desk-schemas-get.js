@@ -18,7 +18,7 @@ const deskSchemasGet = async ( data ) => {
         
         case ( 'machine' ) :
             data.RU.signals.sendResponse.body = data.RU.io.deskSchemasScan 
-            //data.RU.signals.skipToMiddlewareName = 'lastGuard'
+            data.RU.signals.noLayout = true
             break
         case ( 'human' ) :
         default:
