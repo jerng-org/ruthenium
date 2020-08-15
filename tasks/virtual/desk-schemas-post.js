@@ -21,7 +21,7 @@ const deskSchemasPost   = async ( data ) => {
     // Configure DB client parameters
     const params = {
         
-        TableName: 'TEST-APP-DESK-SCHEMAS',
+        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
         
         Item: candidate['desk-schemas'],            
         
@@ -46,9 +46,8 @@ const deskSchemasPost   = async ( data ) => {
 /*
 
 (new)
-    TEST-APP-DESK-SCHEMAS
-        1ryPartKey : id
-        1rySortKey : desk-name
+    RUTHENIUM-V1-DESK-SCHEMAS
+        1ryPartKey : desk-name
         
         
 {
