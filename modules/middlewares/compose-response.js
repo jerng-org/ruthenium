@@ -65,7 +65,7 @@ const redirect = async(DATA) => {
  */
 const composeResponse = async(data) => {
 
-    console.error(`(compose-response.js:top:data.RU.signals)`, data.RU.signals)
+    //console.error(`(compose-response.js:top:data.RU.signals)`, data.RU.signals)
 
     if (data.RU.response) {
         console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js); (data.RU.response): ${ await rus.print.stringify4(data.RU.response) }`)
