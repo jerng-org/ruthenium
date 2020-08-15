@@ -17,8 +17,7 @@ const deskSchemasGet = async ( data ) => {
     switch ( data.RU.request.queryStringParameters.reader[0] ) {
         
         case ( 'machine' ) :
-            data.RU.signals.sendResponse.body = data.RU.io.deskSchemasScan 
-            data.RU.signals.noLayout = true
+            data.RU.signals.sendJson = data.RU.io.deskSchemasScan 
             break
         case ( 'human' ) :
         default:
