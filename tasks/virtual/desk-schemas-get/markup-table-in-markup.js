@@ -14,7 +14,44 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                         <div style="color:#f00; font-weight:700;">
                             <p>Current priority:</p>
                             <ul>
-                                <li>does routing look okay?</li>
+                                <li>
+                                    <p>does routing look okay?</p>
+                                    <p>
+                                        <pre>
+                                            We're currently working with something that looks like:
+                                            - ? route=virtual
+                                            - & type=(desk-schemas, or desks)
+                                            - & thing=(UNDEFINED-for-desk-schemas, or DESK-NAME-for-desks)
+                                            - & reader=(human, or machine)
+                                            
+                                            "route=virtual"
+                                            
+                                                -   this seems to indicate an abstract entity; 
+                                                    but that means it is redundant with the 
+                                                    definition of RESOURCES in REST, which are 
+                                                    always abstract, and never reified;
+                                                    
+                                                -   consider: "table=virtual" for a more 
+                                                    literal interpretation; or "storage=desk"
+                                                    which does not specify the implementation
+                                                    of desks, but which does refer to the 
+                                                    abstract concept of desk storage;
+                                            
+                                                -   perhaps then, 
+                                                
+                                                    "storage=desk"  -> (any desk name)
+                                                    "storage=table" -> "desk-schemas"
+                                                    
+                                                    or,
+                                                    
+                                                    "table=virtual" -> (any desk name)
+                                                    "table=actual"  -> "desk-schemas"
+                                                    
+                                                    but does this discuss too much about
+                                                    the implementation with the client?
+                                        </pre>
+                                    </p>
+                                </li>
                                 <li>does CRUD for desk-schemas work?</li>
                                 <li>does CRUD for desks work?</li>
                                 <li>what's missing?</li>
