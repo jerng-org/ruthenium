@@ -43,8 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `TEST-APP-DESK-SCHEMAS now replaced by RUTHENIUM-V1-DESK-SCHEMAS`,
-//    gitCommitMessage: `NEXT:(desks-get-markup.js) in-line edit / creation / deletion`,
+    gitCommitMessage: `(initial) : current priorities in red`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2

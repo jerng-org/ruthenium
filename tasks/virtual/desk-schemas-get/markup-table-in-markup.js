@@ -10,19 +10,19 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                 <th colspan="2">
                     <h6>
                         System is currently aware of ${ deskSchemasScan.Count } Desk Schemas
-                        <div style="color:#f00;">
+                        <h6 style="color:#f00;">
                             Current priority:
                             <ul>
-                                <li>does routing look okay?</li>
+                                <li>does routing look okay / feel comfy?</li>
                                 <li>does CRUD for desk-schemas work?</li>
                                 <li>does CRUD for desks work?</li>
-                                <li>what's missing</li>
+                                <li>what's missing?</li>
                                 <li></li>
                                 <li></li>
                                 <li></li>
                                 <li></li>
                             </ul>
-                        </div>
+                        </h6>
                         <a class="button float-right" href="#">Create Desk</a>
                     </h6>
     
