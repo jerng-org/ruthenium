@@ -11,7 +11,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                     <h6>
                         System is currently aware of ${ deskSchemasScan.Count } Desk Schemas
                         <div style="color:#f00; font-weight:700;">
-                            Current priority:
+                            <p>Current priority:</p>
                             <ul>
                                 <li>does routing look okay?</li>
                                 <li>does CRUD for desk-schemas work?</li>
