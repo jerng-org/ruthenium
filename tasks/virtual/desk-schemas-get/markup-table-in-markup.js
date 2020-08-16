@@ -19,48 +19,21 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                                     <p>
                                         <pre>
                                             We're currently working with something that looks like:
+                                            
                                             - ? route=virtual
                                             - & type=(desk-schemas, or desks)
                                             - & thing=(UNDEFINED-for-desk-schemas, or DESK-NAME-for-desks)
                                             - & reader=(human, or machine)
                                             
-                                            Discussion 1: "route=virtual"
+                                            Migrate to:
                                             
-                                                -   this seems to indicate an abstract entity; 
-                                                    but that means it is redundant with the 
-                                                    definition of RESOURCES in REST, which are 
-                                                    always abstract, and never reified;
-                                                    
-                                                -   consider: "table=virtual" for a more 
-                                                    literal interpretation; or "storage=desk"
-                                                    which does not specify the implementation
-                                                    of desks, but which does refer to the 
-                                                    abstract concept of desk storage;
-                                            
-                                                -   perhaps then, 
+                                                -   "storage=virtual & type=Deskname     & thing=Rowid"
                                                 
-                                                    "storage=desk"  -> (any desk name)
-                                                    "storage=table" -> "desk-schemas"
-                                                    
-                                                    or,
-                                                    
-                                                    "table=virtual" -> (any desk name)
-                                                    "table=actual"  -> "desk-schemas"
-                                                    "table=actual"  -> "desk-cells"
-                                                    
-                                                    (where a desk is a virtual table)
-                                                    
-                                                    or,
-                                                    
-                                                    "storage=actual"  -> "desk-schemas"
-                                                    "storage=actual"  -> "desk-cells"
-                                                    "storage=virtual" -> (any desk name)
+                                                -   "storage=actual  & type=desk-schemas & thing=Deskname"
+                                                
+                                                -   "storage=actual  & type=desk-cells   & thing=Deskname#Columnname,Rowid"
 
-                                            Discussion 1.1: "storage=, type=,"
-                                            
-                                                -   "storage=actual  & type=desk-schemas & thing=deskName"
-                                                -   "storage=actual  & type=desk-cell    & thing=deskName-columnName-rowId"
-                                                -   "storage=virtual & type=deskName     & thing=rowId
+                                            (we've stopped caring if "type" and "Columnname" are singular or plural)        
 
                                         </pre>
                                     </p>

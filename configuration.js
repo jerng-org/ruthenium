@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(initial) : Discussion 1.1. new taxonomy? cleared?`,
+    gitCommitMessage: `(initial) : Migration path defined`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
