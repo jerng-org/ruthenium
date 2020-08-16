@@ -8,8 +8,9 @@ const tableInMarkup = async ( deskSchemasScan ) => {
         <thead>
             <tr>
                 <th colspan="2">
+                
+                    <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p>
                     <h6>
-                        <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p>
                         <div style="color:#f00; font-weight:700;">
                             <p>Current priority:</p>
                             <ul>
@@ -23,8 +24,8 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                                 <li></li>
                             </ul>
                         </div>
-                        <a class="button float-right" href="#">Create Desk</a>
                     </h6>
+                    <a class="button float-right" href="#">Create Desk</a>
     
                 </th>
             </tr>
