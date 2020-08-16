@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(initial) : Migration path defined`,
+    gitCommitMessage: `(initial) : relationship defined between 'desk-schemas', 'desks', and 'desk-schema traits'` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2

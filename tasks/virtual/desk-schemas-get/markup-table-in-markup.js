@@ -27,14 +27,16 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                                             
                                             Migrate to:
                                             
-                                                -   "storage=virtual & type=Deskname     & thing=Rowid"
-                                                
-                                                -   "storage=actual  & type=desk-schemas & thing=Deskname"
-                                                
-                                                -   "storage=actual  & type=desk-cells   & thing=Deskname#Columnname,Rowid"
+                                            -   "storage=virtual & type=Deskname     & thing=Rowid"
+                                            -   "storage=actual  & type=desk-schemas & thing=Deskname"
+                                            -   "storage=actual  & type=desk-cells   & thing=Deskname#Columnname,Rowid"
 
                                             (we've stopped caring if "type" and "Columnname" are singular or plural)        
-
+                                            
+                                            User-story:     
+                                            
+                                            1.  Define traits for desks, in desk-schemas 
+                                            2.  All desks which share a desk-schema trait all work the same way
                                         </pre>
                                     </p>
                                 </li>
