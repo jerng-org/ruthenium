@@ -24,7 +24,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                                             - & thing=(UNDEFINED-for-desk-schemas, or DESK-NAME-for-desks)
                                             - & reader=(human, or machine)
                                             
-                                            "route=virtual"
+                                            Discussion 1: "route=virtual"
                                             
                                                 -   this seems to indicate an abstract entity; 
                                                     but that means it is redundant with the 
@@ -46,9 +46,22 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                                                     
                                                     "table=virtual" -> (any desk name)
                                                     "table=actual"  -> "desk-schemas"
+                                                    "table=actual"  -> "desk-cells"
                                                     
-                                                    but does this discuss too much about
-                                                    the implementation with the client?
+                                                    (where a desk is a virtual table)
+                                                    
+                                                    or,
+                                                    
+                                                    "storage=actual"  -> "desk-schemas"
+                                                    "storage=actual"  -> "desk-cells"
+                                                    "storage=virtual" -> (any desk name)
+
+                                            Discussion 1.1: "storage=, type=,"
+                                            
+                                                -   "storage=actual  & type=desk-schemas & thing=deskName"
+                                                -   "storage=actual  & type=desk-cell    & thing=deskName-columnName-rowId"
+                                                -   "storage=virtual & type=deskName     & thing=rowId
+
                                         </pre>
                                     </p>
                                 </li>
