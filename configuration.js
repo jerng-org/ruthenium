@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(initial) : current priorities in red`,
+    gitCommitMessage: `(initial) : Discussion 1.1. new taxonomy? cleared?`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
