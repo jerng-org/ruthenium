@@ -10,7 +10,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                 <th colspan="2">
                     <h6>
                         System is currently aware of ${ deskSchemasScan.Count } Desk Schemas
-                        <div style="color:#f00;"font-weigh: 700>
+                        <div style="color:#f00; font-weight:700;">
                             Current priority:
                             <ul>
                                 <li>does routing look okay?</li>
