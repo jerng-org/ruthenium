@@ -16,6 +16,8 @@ const deskGet = async(data) => {
 
     const deskName = data.RU.request.queryStringParameters.thing[0]
 
+    console.warn(`(desks-get.js) queries not yet optimised?`)
+
     data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
         KeyConditionExpression: '#name = :deskName',
