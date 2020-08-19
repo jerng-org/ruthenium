@@ -14,15 +14,9 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                         <div style="color:#f00; font-weight:700;">
                             <p>Current priority:</p>
                             <ul>
-                                <li>
-                                    <li>does routing look okay?</li>
-                                    <p>
-                                        <pre>
-                                        </pre>
-                                    </p>
-                                </li>
-                                <li>does CRUD for desk-schemas work?</li>
-                                <li>does CRUD for desks work?</li>
+                                <li>does routing look okay? - Good enough.</li>
+                                <li>does CRUD for desk-schemas work? - WIP</li>
+                                <li>does CRUD for desks work? - next WIP</li>
                                 <li>what's missing?</li>
                                 <li></li>
                                 <li></li>
