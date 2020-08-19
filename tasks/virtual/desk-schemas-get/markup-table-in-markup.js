@@ -54,7 +54,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                 <td colspan="2">
                     <a class="button float-right" href="${  
                         
-                        await rus.appURL ([
+                        await rus.appUrl ([
                             [ 'route', 'virtual' ],
                             [ 'type', 'forms' ],
                             [ 'thing', 'create-desk-schema' ],
