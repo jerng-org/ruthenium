@@ -7,10 +7,10 @@ const liOfColumnsInTr = async ( column ) => {
                     class="button-outline " 
                     onclick="return false;"> 
                 <span class="toggle-set-1">
-                    <i class="material-icons">lock</i>rename</span>
+                    <i class="material-icons">lock (stub) </i>rename</span>
             </button>
             <button class="button-outline" onclick="return false;">
-                <i class="material-icons">lock</i>destroy</button> 
+                <i class="material-icons">lock</i>destroy (stub) </button> 
         </li>`
         
     return markup
