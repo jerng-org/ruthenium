@@ -171,6 +171,29 @@ try {
             
             ICEBOX:`,
 
+                `We're currently working with something that looks like:
+                
+                    - ? route=virtual
+                    - & type=(desk-schemas, or desks)
+                    - & thing=(UNDEFINED-for-desk-schemas, or DESK-NAME-for-desks)
+                    - & reader=(human, or machine)
+                
+                We could migrate to:
+                
+                    -   "storage=virtual & type=Deskname     & thing=Rowid"
+                    -   "storage=actual  & type=desk-schemas & thing=Deskname"
+                    -   "storage=actual  & type=desk-cells   & thing=Deskname#Columnname,Rowid"
+
+                    (we've stopped caring if "type" and "Columnname" are singular or plural)        
+                    
+                    User-story:     
+                    
+                    1.  Define traits for desks, in desk-schemas 
+                    2.  All desks which share a desk-schema trait all work the same way
+                    
+                        But we really shouldn't bother until v2.
+                `,
+
                 `consider upgrading performance of DynamoDB Document Client
                 https://www.npmjs.com/package/aws-thin-dynamo`,
 
