@@ -35,7 +35,7 @@ const trInTable = async ( item ) => {
         <label for="unlock-desk-rename-NAME">
             <h1> ${ item['name'] } </h1>
             <button title="click to rename this desk" class="button-outline" onclick="return false;"> 
-                <span>rename <i class="material-icons">lock</i></span>
+                <span>rename (WIP) <i class="material-icons">lock</i></span>
                 <span class="toggle-set-1" style="display:none;">
                     code: 234806</span>
             </button>
@@ -114,7 +114,7 @@ await rus.appUrl ( [
                     }
                     </ul>
                     </h2>
-                    <a class="button float-right" href="#">Create Column</a>
+                    <a class="button float-right" href="#">Create Column (stub) </a>
                 </td>
             </tr>`
         
