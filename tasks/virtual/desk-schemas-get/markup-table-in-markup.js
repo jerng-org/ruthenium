@@ -15,7 +15,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                             <p>Current priority:</p>
                             <ul>
                                 <li>
-                                    <p>does routing look okay?</p>
+                                    <li>does routing look okay?</li>
                                     <p>
                                         <pre>
                                         </pre>
