@@ -1,6 +1,10 @@
 const trInTable
     = require (`/var/task/tasks/virtual/desk-schemas-get/markup-tr-in-table.js`) 
 
+
+const rus = require ( '/var/task/modules/r-u-s.js' )
+
+
 const tableInMarkup = async ( deskSchemasScan ) => {
     
     const markup = `
@@ -48,7 +52,17 @@ const tableInMarkup = async ( deskSchemasScan ) => {
         <tfoot>
             <tr>
                 <td colspan="2">
-                    <a class="button float-right" href="?route=virtual&type=forms&thing=create-desk-schema&reader=human">Create Desk</a>
+                    <a class="button float-right" href="${  
+                        
+                        await rus.appURL ([
+                            [ 'route', 'virtual' ],
+                            [ 'type', 'forms' ],
+                            [ 'thing', 'create-desk-schema' ],
+                            [ 'reader', 'human']
+                        ])
+                        
+                    }">Create Desk</a>
+                    
                 </td>
             </tr>
         </tfoot>
