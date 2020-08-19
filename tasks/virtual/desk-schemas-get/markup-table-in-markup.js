@@ -29,7 +29,16 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                             </ul>
                         </div>
                     </h6>
-                    <a class="button float-right" href="#">Create Desk</a>
+                    <a class="button float-right" href="${  
+                        
+                        await rus.appUrl ([
+                            [ 'route', 'virtual' ],
+                            [ 'type', 'forms' ],
+                            [ 'thing', 'create-desk-schema' ],
+                            [ 'reader', 'human']
+                        ])
+                        
+                    }">Create Desk</a>
     
                 </th>
             </tr>
@@ -52,16 +61,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
         <tfoot>
             <tr>
                 <td colspan="2">
-                    <a class="button float-right" href="${  
-                        
-                        await rus.appUrl ([
-                            [ 'route', 'virtual' ],
-                            [ 'type', 'forms' ],
-                            [ 'thing', 'create-desk-schema' ],
-                            [ 'reader', 'human']
-                        ])
-                        
-                    }">Create Desk</a>
+                    <a class="button float-right" href="#"> stub </a>
                     
                 </td>
             </tr>
