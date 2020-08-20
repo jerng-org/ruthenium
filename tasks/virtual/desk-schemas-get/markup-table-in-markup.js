@@ -63,8 +63,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
         <tfoot>
             <tr>
                 <td colspan="3">
-                    <a class="button float-right" href="#"> stub </a>
-                    
+                    Unallocated space.
                 </td>
             </tr>
         </tfoot>
