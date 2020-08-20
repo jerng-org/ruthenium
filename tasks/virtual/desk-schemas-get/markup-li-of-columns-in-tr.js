@@ -1,7 +1,7 @@
 const liOfColumnsInTr = async ( column ) => {
     
     let markup = `
-        <li>
+        <li class="ru-card">
             ${ column.name }<br>
             <button title="click to rename this column" 
                     class="button-outline " 
