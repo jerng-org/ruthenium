@@ -10,8 +10,6 @@ const trInTable = async ( item ) => {
                 <td>
     <!----------------------------------------------------------------------------->
     
-    <blockquote>
-
     <script>
         const toggler = ( element, classString, focusSelector ) => {
         
@@ -93,7 +91,6 @@ await rus.appUrl ( [
     </fieldset>
     </form>
     
-    </blockquote>
     <!--
     <a class="button" href="https://a.scriptless.webpage" title="rename this desk" onclick="return false;">Rename</a> 
     -->

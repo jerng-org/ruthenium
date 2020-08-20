@@ -31,6 +31,12 @@ await rus.appUrl ( [
             .material-icons {
                 vertical-align: middle;
             }
+            
+            li {
+                border-radius: 0.3em;
+                padding: 0.3em;
+                border: 1px solid #ccc;
+            }
         </style>
         
         <script     nomodule 
