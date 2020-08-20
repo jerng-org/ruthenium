@@ -46,7 +46,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
             <tr>
                 <th>Desk's Name</th>
                 <th>Desk's Column Names</th>
-                <th>Desk's Operations></th>
+                <th>Desk's Operations </th>
             </tr>
             
         </thead>
