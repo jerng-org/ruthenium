@@ -6,8 +6,8 @@ const liOfColumnsInTr
 const trInTable = async ( item ) => {
     
     let markup = `
-            <tr>
-                <td>
+            <div>
+                <div>
     <!----------------------------------------------------------------------------->
     
     <script>
@@ -112,8 +112,8 @@ await rus.appUrl ( [
                     </ul>
                     </h2>
                     <a class="button float-right" href="#">Create Column (stub) </a>
-                </td>
-            </tr>`
+                </div>
+            </div>`
         
     return markup
 }
