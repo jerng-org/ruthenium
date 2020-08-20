@@ -1,12 +1,11 @@
-const trInTable
-    = require (`/var/task/tasks/virtual/desk-schemas-get/markup-tr-in-table.js`) 
+const trInTable = require(`/var/task/tasks/virtual/desk-schemas-get/markup-tr-in-table.js`)
 
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rus = require('/var/task/modules/r-u-s.js')
 
 
-const tableInMarkup = async ( deskSchemasScan ) => {
-    
+const tableInMarkup = async(deskSchemasScan) => {
+
     const markup = `
     <table>
         <thead>
@@ -17,7 +16,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                     <p>
                         <div class="ru-card">                        
                             <p>(change from table to card layout later)</p> 
-                            <div style="color:#f00;">
+                            <div style="color:#f00; background-color:">
                                 <p>Current priority:</p>
                                 <ul>
                                     <li>does routing look okay? - Good enough.</li>
@@ -79,4 +78,4 @@ const tableInMarkup = async ( deskSchemasScan ) => {
 
     return markup
 }
-module.exports  = tableInMarkup
+module.exports = tableInMarkup
