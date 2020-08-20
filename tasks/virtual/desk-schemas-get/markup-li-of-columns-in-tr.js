@@ -1,7 +1,7 @@
 const liOfColumnsInTr = async ( column ) => {
     
     let markup = `
-        <li class="ru-card">
+        <li >
             ${ column.name }
             
             <!--
