@@ -11,7 +11,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
     <table>
         <thead>
             <tr>
-                <th colspan="2">
+                <th colspan="3">
                 
                     <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
                     <p>(change from table to card layout later</p> 
@@ -44,8 +44,9 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                 </th>
             </tr>
             <tr>
-                <th><h3>Desk Name</h3></th>
-                <th><h3>Column Names</h3></th>
+                <th><h3>Desk's Name</h3></th>
+                <th><h3>Desk's Column Names</h3></th>
+                <th><h3>Desk's Operations</h3></th>
             </tr>
         </thead>
         <tbody style="vertical-align:top;">

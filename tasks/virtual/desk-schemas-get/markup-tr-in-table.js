@@ -104,6 +104,7 @@ const trInTable = async ( item ) => {
     
     <!----------------------------------------------------------------------------->
                 </td>
+                
                 <td>
                 
                     <!--
@@ -124,6 +125,12 @@ const trInTable = async ( item ) => {
                     </ul>
                     </h2>
                 </td>
+                
+                <td>
+                    <a class="button" href="#">Edit</a>
+                    <a class="button" href="#">Delete</a>
+                </td>
+                
             </tr>`
         
     return markup
