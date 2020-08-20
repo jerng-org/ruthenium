@@ -111,7 +111,7 @@ const trInTable = async ( item ) => {
                         <a class="button float-right" href="#">Create Column (stub) </a>
                     -->
                     
-                    <h2>
+                    
                     <ul class="float-left">
                     ${  
                         await item['columns'].reduce (  
@@ -123,7 +123,7 @@ const trInTable = async ( item ) => {
                         )
                     }
                     </ul>
-                    </h2>
+                    
                 </td>
                 
                 <td>
