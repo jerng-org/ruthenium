@@ -12,7 +12,7 @@ const tableInMarkup = async ( deskSchemasScan ) => {
         <thead>
             
             <tr>
-                <th colspan="3">
+                <th colspan="3" class="ru->
                 
                     <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
                     <p>(change from table to card layout later</p> 
