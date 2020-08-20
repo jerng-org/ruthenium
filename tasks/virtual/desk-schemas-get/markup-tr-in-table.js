@@ -100,12 +100,16 @@ const trInTable = async ( item ) => {
         <a class="button" href="https://a.scriptless.webpage" title="rename this desk" onclick="return false;">Rename</a> 
     -->
     
-    </h2>
+    </h1>
     
     <!----------------------------------------------------------------------------->
                 </td>
                 <td>
-                    <a class="button float-right" href="#">Create Column (stub) </a>
+                
+                    <!--
+                        <a class="button float-right" href="#">Create Column (stub) </a>
+                    -->
+                    
                     <h2>
                     <ul class="float-left">
                     ${  
