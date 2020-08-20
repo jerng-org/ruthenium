@@ -10,26 +10,25 @@ const tableInMarkup = async ( deskSchemasScan ) => {
     const markup = `
     <table>
         <thead>
+            
             <tr>
                 <th colspan="3">
                 
                     <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
                     <p>(change from table to card layout later</p> 
-                    <h6>
-                        <div style="color:#f00; font-weight:700;">
-                            <p>Current priority:</p>
-                            <ul>
-                                <li>does routing look okay? - Good enough.</li>
-                                <li>does CRUD for desk-schemas work? - WIP</li>
-                                <li>does CRUD for desks work? - next WIP</li>
-                                <li>what's missing?</li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                        </div>
-                    </h6>
+                    <div style="color:#f00;">
+                        <p>Current priority:</p>
+                        <ul>
+                            <li>does routing look okay? - Good enough.</li>
+                            <li>does CRUD for desk-schemas work? - WIP</li>
+                            <li>does CRUD for desks work? - next WIP</li>
+                            <li>what's missing?</li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
                     <a class="button float-right" href="${  
                         
                         await rus.appUrl ([
@@ -43,11 +42,13 @@ const tableInMarkup = async ( deskSchemasScan ) => {
     
                 </th>
             </tr>
+            
             <tr>
-                <th><h3>Desk's Name</h3></th>
-                <th><h3>Desk's Column Names</h3></th>
-                <th><h3>Desk's Operations</h3></th>
+                <th>Desk's Name</th>
+                <th>Desk's Column Names</th>
+                <th>Desk's Operations></th>
             </tr>
+            
         </thead>
         <tbody style="vertical-align:top;">
             ${  
