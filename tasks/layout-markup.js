@@ -32,7 +32,7 @@ await rus.appUrl ( [
                 vertical-align: middle;
             }
             
-            li { 
+            .ru-card { 
                 border-radius: 0.3em;
                 padding: 0.3em;
                 border: 1px solid #ccc;
