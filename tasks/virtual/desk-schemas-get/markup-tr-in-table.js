@@ -127,8 +127,8 @@ const trInTable = async ( item ) => {
                 </td>
                 
                 <td>
-                    <a class="button" href="#">Edit</a>
-                    <a class="button" href="#">Delete</a>
+                    <a class="button" href="#">Edit (stub)</a>
+                    <a class="button" href="#">Delete (stub)</a>
                 </td>
                 
             </tr>`
