@@ -10,7 +10,7 @@ const trInTable = async ( item ) => {
                 <td>
     <!----------------------------------------------------------------------------->
     
-    <h1 class="ru-card">
+    <h3 class="ru-card">
     
         ${ item['name'] }
         
@@ -100,7 +100,7 @@ const trInTable = async ( item ) => {
         <a class="button" href="https://a.scriptless.webpage" title="rename this desk" onclick="return false;">Rename</a> 
     -->
     
-    </h1>
+    </h3>
     
     <!----------------------------------------------------------------------------->
                 </td>
