@@ -14,10 +14,8 @@ const tableInMarkup = async ( deskSchemasScan ) => {
             <tr>
                 <th colspan="3">
                 
-                    <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
-                    <p>(change from table to card layout later)</p> 
-                    
                     <blockquote>
+                        <p>(change from table to card layout later)</p> 
                         <div class="ru-card">
                     
                             <div style="color:#f00;">
@@ -36,6 +34,8 @@ const tableInMarkup = async ( deskSchemasScan ) => {
                         </div>
                     </blockquote>
 
+                    <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
+                    
                     <a class="button float-right" href="${  
                         
                         await rus.appUrl ([
