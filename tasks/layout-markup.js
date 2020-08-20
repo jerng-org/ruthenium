@@ -72,7 +72,7 @@ await rus.appUrl ( [
         }
         
         <div class="container">
-            <h3>Welcome to Prototyping</h3>
+            <h1>Welcome to Prototyping</h1>
             <hr>
             <p>
             </p>
