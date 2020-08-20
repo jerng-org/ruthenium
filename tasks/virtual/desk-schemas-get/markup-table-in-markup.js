@@ -14,9 +14,9 @@ const tableInMarkup = async(deskSchemasScan) => {
                 <th colspan="3">
                 
                     <p>
-                        <div class="ru-card">                        
+                        <div class="ru-card" style="background-color:#eee;">                        
                             <p>(change from table to card layout later)</p> 
-                            <div style="color:#f00; background-color:">
+                            <div style="color:#f00;">
                                 <p>Current priority:</p>
                                 <ul>
                                     <li>does routing look okay? - Good enough.</li>
