@@ -33,8 +33,8 @@ await rus.appUrl ( [
             }
             
             .ru-card { 
-                border-radius: 0.3em;
-                padding: 0.3em;
+                border-radius: 0.5em;
+                padding: 1em;
                 border: 1px solid #ccc;
             }
         </style>
