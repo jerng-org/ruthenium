@@ -102,6 +102,7 @@ await rus.appUrl ( [
     <!----------------------------------------------------------------------------->
                 </td>
                 <td>
+                    <a class="button float-right" href="#">Create Column (stub) </a>
                     <h2>
                     <ul class="float-left">
                     ${  
@@ -115,7 +116,6 @@ await rus.appUrl ( [
                     }
                     </ul>
                     </h2>
-                    <a class="button float-right" href="#">Create Column (stub) </a>
                 </td>
             </tr>`
         
