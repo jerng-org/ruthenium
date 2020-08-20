@@ -32,7 +32,7 @@ await rus.appUrl ( [
                 vertical-align: middle;
             }
             
-            li {
+            li, tbody > t {
                 border-radius: 0.3em;
                 padding: 0.3em;
                 border: 1px solid #ccc;
