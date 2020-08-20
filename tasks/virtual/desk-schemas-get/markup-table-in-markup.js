@@ -13,35 +13,40 @@ const tableInMarkup = async ( deskSchemasScan ) => {
             
             <tr>
                 <th colspan="3">
-                    <div class="ru-card">
+                
+                    <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
+                    <p>(change from table to card layout later)</p> 
                     
-                        <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
-                        <p>(change from table to card layout later</p> 
-                        <div style="color:#f00;">
-                            <p>Current priority:</p>
-                            <ul>
-                                <li>does routing look okay? - Good enough.</li>
-                                <li>does CRUD for desk-schemas work? - WIP</li>
-                                <li>does CRUD for desks work? - next WIP</li>
-                                <li>what's missing?</li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
+                    <blockquote>
+                        <div class="ru-card">
+                    
+                            <div style="color:#f00;">
+                                <p>Current priority:</p>
+                                <ul>
+                                    <li>does routing look okay? - Good enough.</li>
+                                    <li>does CRUD for desk-schemas work? - WIP</li>
+                                    <li>does CRUD for desks work? - next WIP</li>
+                                    <li>what's missing?</li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <a class="button float-right" href="${  
+                                
+                                await rus.appUrl ([
+                                    [ 'route', 'virtual' ],
+                                    [ 'type', 'forms' ],
+                                    [ 'thing', 'create-desk-schema' ],
+                                    [ 'reader', 'human']
+                                ])
+                                
+                            }">Create Desk (ok) </a>
+                        
                         </div>
-                        <a class="button float-right" href="${  
-                            
-                            await rus.appUrl ([
-                                [ 'route', 'virtual' ],
-                                [ 'type', 'forms' ],
-                                [ 'thing', 'create-desk-schema' ],
-                                [ 'reader', 'human']
-                            ])
-                            
-                        }">Create Desk (ok) </a>
+                    </blockquote>
                     
-                    </div>
                 </th>
             </tr>
             
