@@ -14,23 +14,26 @@ const tableInMarkup = async ( deskSchemasScan ) => {
             <tr>
                 <th colspan="3">
                 
-                    <p class="ru-card">                        
-                        <p>(change from table to card layout later)</p> 
-                        <div style="color:#f00;">
-                            <p>Current priority:</p>
-                            <ul>
-                                <li>does routing look okay? - Good enough.</li>
-                                <li>does CRUD for desk-schemas work? - WIP</li>
-                                <li>does CRUD for desks work? - next WIP</li>
-                                <li>what's missing?</li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
+                    <p>
+                        <div class="ru-card">                        
+                            <p>(change from table to card layout later)</p> 
+                            <div style="color:#f00;">
+                                <p>Current priority:</p>
+                                <ul>
+                                    <li>does routing look okay? - Good enough.</li>
+                                    <li>does CRUD for desk-schemas work? - WIP</li>
+                                    <li>does CRUD for desks work? - next WIP</li>
+                                    <li>what's missing?</li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
                         </div>
                     </p>
-
+                    
+                    
                     <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
                     
                     <a class="button float-right" href="${  
