@@ -34,7 +34,7 @@ await rus.appUrl ( [
             }
             
             .button code {
-                background-color: none;
+                background-color: inherit;
             }
             
             /* Application Original Content  */
