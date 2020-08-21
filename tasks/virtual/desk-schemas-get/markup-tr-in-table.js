@@ -160,7 +160,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }">Delete (WIP)</a>
+                    }"><i class="material-icons">delete</i></a>
                 </td>
                 
             </tr>`
