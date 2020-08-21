@@ -6,7 +6,7 @@ const updateDeskSchema = async ( data ) => {
     
     return `
     
-        <h2>Desk Schema : <code>update one</code> </h2>
+        <h2>Desk Schema : <code>delete one</code> </h2>
     
         ${  await rus.html.form ( {
                 action: await rus.appUrl( [ 
