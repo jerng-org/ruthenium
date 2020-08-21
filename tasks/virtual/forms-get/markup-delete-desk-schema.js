@@ -2,7 +2,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const updateDeskSchema = async ( data ) => {
+const deleteDeskSchema = async ( data ) => {
     
     return `
     
@@ -19,4 +19,4 @@ const updateDeskSchema = async ( data ) => {
     `
     
 }
-module.exports = updateDeskSchema
+module.exports = deleteDeskSchema

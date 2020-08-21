@@ -7,7 +7,9 @@ const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-sc
 const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
 
 const formsMarkupCreateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)
+const formsMarkupReadDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)
 const formsMarkupUpdateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)
+const formsMarkupDeleteDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-delete-desk-schema.js`)
 
 const rus = require('/var/task/modules/r-u-s.js')
 
@@ -105,8 +107,7 @@ const virtual = async(data) => {
                                             data.RU.signals.sendResponse.body = await formsMarkupCreateDeskSchema()
                                             return
 
-                                        case (`update-desk-schema`):
-
+                                        default:
                                             if (!data.RU.request.queryStringParameters['desk-schema-name'] ||
                                                 !data.RU.request.queryStringParameters['desk-schema-name'][0]) {
                                                 rus.log.error(data, `(virtual.js) (?type=forms) (GET) (?thing=update-desk-schema) (?desk-schema-name ... was unspecified.)`)
@@ -117,13 +118,21 @@ const virtual = async(data) => {
                                                 return
                                             }
 
-                                            data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
-                                            return
-
-                                        default:
-                                            rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
-                                            await status404(data)
-                                            return
+                                            switch (data.RU.request.queryStringParameters.thing[0]) {
+                                                case (`read-desk-schema`):
+                                                    data.RU.signals.sendResponse.body = await formsMarkupReadDeskSchema(data)
+                                                    return
+                                                case (`update-desk-schema`):
+                                                    data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
+                                                    return
+                                                case (`delete-desk-schema`):
+                                                    data.RU.signals.sendResponse.body = await formsMarkupDeleteDeskSchema(data)
+                                                    return
+                                                default:
+                                                    rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
+                                                    await status404(data)
+                                                    return
+                                            }
                                     }
 
                                 default:

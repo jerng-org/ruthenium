@@ -131,12 +131,24 @@ const trInTable = async(item) => {
                         await rus.appUrl ([
                             [ 'route', 'virtual' ],
                             [ 'type', 'forms' ],
+                            [ 'thing', 'read-desk-schema' ],
+                            [ 'desk-schema-name', item['name'] ], 
+                            [ 'reader', 'human']
+                        ])
+
+                    }">Read (WIP)</a>
+                    
+                    <a class="button" href="${
+                    
+                        await rus.appUrl ([
+                            [ 'route', 'virtual' ],
+                            [ 'type', 'forms' ],
                             [ 'thing', 'update-desk-schema' ],
                             [ 'desk-schema-name', item['name'] ], 
                             [ 'reader', 'human']
                         ])
 
-                    }">Edit (WIP)</a>
+                    }">Update (WIP)</a>
                     
                     <a class="button" href="${
                     

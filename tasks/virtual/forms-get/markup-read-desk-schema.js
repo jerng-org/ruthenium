@@ -2,11 +2,11 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const updateDeskSchema = async ( data ) => {
+const readDeskSchema = async ( data ) => {
     
     return `
     
-        <h2>Desk Schema : <code>update one</code> </h2>
+        <h2>Desk Schema : <code>read one</code> </h2>
     
         ${  await rus.html.form ( {
                 action: await rus.appUrl( [ 
@@ -19,4 +19,4 @@ const updateDeskSchema = async ( data ) => {
     `
     
 }
-module.exports = updateDeskSchema
+module.exports = readDeskSchema
