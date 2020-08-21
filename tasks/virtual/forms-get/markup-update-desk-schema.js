@@ -2,7 +2,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHTML = async () => ``
+const innerHTML = async () => `placeholder text`
 
 const updateDeskSchema = async ( data ) => {
     
