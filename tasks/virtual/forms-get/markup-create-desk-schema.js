@@ -59,8 +59,8 @@ const innerHTML = async () => `
             </td>
             <td>
                 <label>
-                    Specify column  :
-                    <h6>'string' and 'number' are efficient</h6>
+                    Specify column type :
+                    <h6>'string' and 'number' are efficient</h6> 
                     </label>
             </td>
         </tr>
