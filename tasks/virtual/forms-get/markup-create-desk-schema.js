@@ -55,7 +55,7 @@ const innerHTML = async () => `
             data-ru-incrementable-role="appended-child"
             >
             <td>
-                <i  class="material-icons"
+                <i  class="material-icons"stub
                     data-ru-incrementable-group="column-definition"
                     data-ru-incrementable-role="remove-closest"
                     >
