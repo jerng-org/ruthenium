@@ -15,10 +15,7 @@ test data: 11%2C22,33;44+55!66$77%2788(99)00"11
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-//const htmlIndex = rus.node.fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
-
 const innerHTML = async () => `
-<h2>Desk Schema : <code>creation</code> </h2>
 <fieldset>
 
     ${ await rus.html.input ( {
@@ -110,15 +107,19 @@ const innerHTML = async () => `
 
 const createDeskSchema = async ( data ) => {
     
-    return /*htmlIndex +*/ await rus.html.form ( {
-        
-        action: await rus.appUrl( [ 
-            [ 'route','virtual' ], 
-            [ 'type','desk-schemas' ] 
-        ] ),
-        
-        innerHTML: await innerHTML()
-    } )
+    return `
+    
+        <h2>Desk Schema : <code>creation</code> </h2>
+    
+        ${  await rus.html.form ( {
+                action: await rus.appUrl( [ 
+                    [ 'route','virtual' ], 
+                    [ 'type','desk-schemas' ] 
+                ] ),
+                innerHTML: await innerHTML()
+            } ) 
+        }
+    `
     
 }
 module.exports = createDeskSchema
