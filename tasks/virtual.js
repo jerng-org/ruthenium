@@ -6,7 +6,8 @@ const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-sc
 
 const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
 
-const formsDeskSchemasPostMarkup = require(`/var/task/tasks/virtual/forms-get/markup-desk-schemas-post.js`)
+const formsMarkupCreateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)
+const formsMarkupUpdateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)
 
 const rus = require('/var/task/modules/r-u-s.js')
 
@@ -95,6 +96,9 @@ const virtual = async(data) => {
                                     //  GET (forms), which one? 
                                     switch (data.RU.request.queryStringParameters.thing[0]) {
                                         case (`create-desk-schema`):
+                                            data.RU.signals.sendResponse.body = await formsMarkupCreateDeskSchema()
+                                            return
+                                        case (`update-desk-schema`):
                                             data.RU.signals.sendResponse.body = await formsDeskSchemasPostMarkup()
                                             return
                                         default:

@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(initial) : UI adjusted for minimal functionality` ,
+    gitCommitMessage: `(initial) : -` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2

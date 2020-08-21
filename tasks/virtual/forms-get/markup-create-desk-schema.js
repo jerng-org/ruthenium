@@ -18,6 +18,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 //const htmlIndex = rus.node.fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
 
 const innerHTML = async () => `
+<h2>Desk Schema : <code>CREATE</code> </h2>
 <fieldset>
 
     ${ await rus.html.input ( {
