@@ -26,7 +26,7 @@ const innerHTML = async () => `
         id:         `desk-schemas[name]`,
         placeholder:`-- enter a Desk Schema name --`,
         required:   true,
-        label:      `Name for this new Desk Schema :
+        label:      `Name for this new Desk Schema :`
     } ) }
     
     <table  data-ru-incrementable-group="column-definition"
@@ -59,7 +59,7 @@ const innerHTML = async () => `
             </td>
             <td>
                 <label>
-                    Specify the type of data in this Column 
+                    Specify the type of data in this Column :
                     <h6>'string' and 'number' are efficient</h6>
                     </label>
             </td>
