@@ -136,7 +136,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }">Read (WIP)</a>
+                    }">Read (OK)</a>
                     
                     <a class="button" href="${
                     

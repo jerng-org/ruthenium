@@ -118,16 +118,26 @@ const virtual = async(data) => {
                                                 return
                                             }
 
+                                            rus.conf.verbosity > 0 &&
+                                                console.warn(`(virtual.js) manipulation of (desk-schemas) is not RESTful; some RESTful adjustments are suggested.`)
+
                                             switch (data.RU.request.queryStringParameters.thing[0]) {
+
+                                                //  This is not RESTful; the following may be RESTful: ?type=desk-schema, method: GET
                                                 case (`read-desk-schema`):
                                                     data.RU.signals.sendResponse.body = await formsMarkupReadDeskSchema(data)
                                                     return
+
+                                                    //  This is RESTful;
                                                 case (`update-desk-schema`):
                                                     data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
                                                     return
+
+                                                    //  This is not RESTful; the following may be RESTful: ?type=desk-schema, method: DELETE
                                                 case (`delete-desk-schema`):
                                                     data.RU.signals.sendResponse.body = await formsMarkupDeleteDeskSchema(data)
                                                     return
+
                                                 default:
                                                     rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
                                                     await status404(data)
