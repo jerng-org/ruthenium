@@ -81,6 +81,16 @@ await rus.appUrl ( [
         
         <div class="container">
             <h1>Welcome to Prototyping</h1>
+            
+            <a class="button" href="${
+            
+                await rus.appUrl ([
+                    [ 'route', 'initial' ], 
+                    [ 'reader', 'human']
+                ])
+    
+            }"><i class="material-icons">home</i></a>
+
             <hr>
             <p>
             </p>
