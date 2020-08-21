@@ -26,7 +26,7 @@ const innerHTML = async () => `
         id:         `desk-schemas[name]`,
         placeholder:`-- enter a Desk Schema name --`,
         required:   true,
-        label:      `Name for this new Desk Schema :`
+        label:      `Name the schema :`
     } ) }
     
     <table  data-ru-incrementable-group="column-definition"
@@ -53,13 +53,13 @@ const innerHTML = async () => `
             </td>
             <td>
                 <label>
-                    Add a Column for this new Desk Schema :
+                    Add columns to the schema :
                     <h6>&nbsp;</h6>
                     </label>
             </td>
             <td>
                 <label>
-                    Specify the type of data in this Column :
+                    Specify column  :
                     <h6>'string' and 'number' are efficient</h6>
                     </label>
             </td>
