@@ -44,7 +44,7 @@ const tableInMarkup = async(deskSchemasScan) => {
                             [ 'reader', 'human']
                         ])
                         
-                    }">Desk <code>create</code></a>
+                    }">Desk : <code>create</code></a>
                         
                 </th>
             </tr>
