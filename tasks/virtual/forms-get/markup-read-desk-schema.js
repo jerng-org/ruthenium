@@ -10,15 +10,6 @@ const readDeskSchema = async ( data ) => {
         
         <pre><code>${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet.Item ) }</code></pre>
         
-        <a class="button" href="${
-        
-            await rus.appUrl ([
-                [ 'route', 'initial' ], 
-                [ 'reader', 'human']
-            ])
-
-        }"><i class="material-icons">home</i></a>
-
         `
     
 }
