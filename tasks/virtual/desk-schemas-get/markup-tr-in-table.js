@@ -1,10 +1,9 @@
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rus = require('/var/task/modules/r-u-s.js')
 
-const liOfColumnsInTr 
-    = require (`/var/task/tasks/virtual/desk-schemas-get/markup-li-of-columns-in-tr.js`) 
+const liOfColumnsInTr = require(`/var/task/tasks/virtual/desk-schemas-get/markup-li-of-columns-in-tr.js`)
 
-const trInTable = async ( item ) => {
-    
+const trInTable = async(item) => {
+
     let markup = `
             <tr>
                 <td>
@@ -144,6 +143,7 @@ const trInTable = async ( item ) => {
                             [ 'route', 'virtual' ],
                             [ 'type', 'forms' ],
                             [ 'thing', 'update-desk-schema' ],
+                            [ 'desk-schema-name', item['name'] ], 
                             [ 'reader', 'human']
                         ])
 
@@ -151,8 +151,8 @@ const trInTable = async ( item ) => {
                 </td>
                 
             </tr>`
-        
+
     return markup
 }
 
-module.exports  = trInTable
+module.exports = trInTable
