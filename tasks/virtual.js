@@ -115,50 +115,11 @@ const virtual = async(data) => {
                                             
                                             if (! data.RU.io.deskSchemasGet.Item) {
                                                 await status404(data)
-                                                
+                                                return
                                             }
                                             
-                                            /*
-                                                                                        if ( data.RU.request.queryStringParameters['desk-schema-name'][0] not found, then 404 ) {
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                        }
-
-                                            const setSessionFromRequestCookie = async DATA => {
-
-                                                // TODO check and expire client session cookie, if DATABASE says sessions has expired
-                                                console.warn('session.js : expire session cookies')
-
-                                                const params = {
-                                                    TableName: 'TEST-APP-SESSIONS',
-                                                    Key: {
-                                                        [conf.platform.dynamoDB.sessions
-                                                            .primaryKey
-                                                        ]: DATA.RU.request.headers.cookies['__Host-' +
-                                                            conf.obfuscations.sessionCookieName][0]
-                                                    },
-                                                    ReturnConsumedCapacity:'TOTAL'
-                                                }
-
-                                                DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
-
-                                                if (DATA.RU.io.sessionsGet.Item) {
-                                                    //  (no need to) set any session cookies; this is the source;
-
-                                                    //  set internal signals;
-                                                    const _id = DATA.RU.request.headers.cookies[
-                                                        '__Host-' + conf.obfuscations.sessionCookieName
-                                                    ][0]
-                                                    await setSessionIdInSignals(DATA, _id)
-                                                }
-                                                else {
-                                                    await expireSession(DATA)
-                                                }
-                                            }
-
-                                            */
+                                            console.error('virtual.js:121: data.RU.io.deskSchemasGet.Item was truthy')
+                                            
                                             data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
                                             return
 
