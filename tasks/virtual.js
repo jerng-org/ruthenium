@@ -99,7 +99,7 @@ const virtual = async(data) => {
                                             data.RU.signals.sendResponse.body = await formsMarkupCreateDeskSchema()
                                             return
                                         case (`update-desk-schema`):
-                                            data.RU.signals.sendResponse.body = await formsDeskSchemasPostMarkup()
+                                            data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema()
                                             return
                                         default:
                                             logError(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
