@@ -127,8 +127,27 @@ const trInTable = async ( item ) => {
                 </td>
                 
                 <td>
-                    <a class="button" href="#">Edit (stub)</a>
-                    <a class="button" href="#">Delete (stub)</a>
+                    <a class="button" href="${
+                    
+                        await rus.appUrl ([
+                            [ 'route', 'virtual' ],
+                            [ 'type', 'forms' ],
+                            [ 'thing', 'update-desk-schema' ],
+                            [ 'reader', 'human']
+                        ])
+
+                    }">Edit (stub)</a>
+                    
+                    <a class="button" href="${
+                    
+                        await rus.appUrl ([
+                            [ 'route', 'virtual' ],
+                            [ 'type', 'forms' ],
+                            [ 'thing', 'update-desk-schema' ],
+                            [ 'reader', 'human']
+                        ])
+
+                    }">Delete (stub)</a>
                 </td>
                 
             </tr>`
