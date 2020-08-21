@@ -111,14 +111,10 @@ const virtual = async(data) => {
                                             
                                             data.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
                                             
-                                            console.error('virtual.js:114:',data.RU.io.deskSchemasGet.Item)
-                                            
                                             if (! data.RU.io.deskSchemasGet.Item) {
                                                 await status404(data)
                                                 return
                                             }
-                                            
-                                            console.error('virtual.js:121: data.RU.io.deskSchemasGet.Item was truthy')
                                             
                                             data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
                                             return
