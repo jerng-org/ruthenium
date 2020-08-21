@@ -50,9 +50,9 @@ const tableInMarkup = async(deskSchemasScan) => {
             </tr>
             
             <tr>
-                <th>Desk's Name</th>
-                <th>Desk's Column Names</th>
-                <th>Desk's Operations </th>
+                <th>Schema: Desk's Name</th>
+                <th>Schema: Desk's Column Names</th>
+                <th>Operations on each Desk Schema</th>
             </tr>
             
         </thead>
