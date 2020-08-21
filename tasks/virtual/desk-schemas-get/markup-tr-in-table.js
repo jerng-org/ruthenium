@@ -150,7 +150,44 @@ const trInTable = async(item) => {
 
                     }"><i class="material-icons">edit</i> <i class="material-icons">construction</i></a>
                     
-                    <a class="button" href="${
+                    
+                    <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )">
+                        <label for="unlock-desk-schemas-delete-${ item['name'] }">
+                            <h1> ${ item['name'] } </h1>
+                            <button title="click to rename this desk" class="button-outline" onclick="return false;"> 
+                                <span>
+                                    <i class="material-icons">lock</i>
+                                    <i class="material-icons">delete</i>
+                                </span>
+                                <span class="toggle-set-1" style="display:none;">
+                                    code: 234806</span>
+                            </button>
+                        </label>
+                        <input  type="text" 
+                                id="unlock-desk-schemas-delete-${ item['name'] }" 
+                                placeholder="type the code, to delete the desk schema named: '${ item['name'] }'" 
+                                class="toggle-set-1"
+                                style="display:none;"
+                                onclick="(e=>e.stopImmediatePropagation())(event)"
+                                oninput="if (this.value==234806) { 
+                                
+                                    this.value = ''
+                                    toggler ( this.parentNode, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )
+                                    
+                                    const confirmed = window.confirm('WARNING : You are about to delete the desk schema named '${ item['name'] }' - select CANCEL to reconsider.')
+                                    if ( confirmed ) 
+                                    {
+                                        toggler ( this.closest('td'), '.toggle-set-2', 'input[name=desk-rename-shoes]' )
+                                    } else {
+                                        alert ('dev: cleanup required ')
+                                    }
+                                }"
+                                >
+                    </fieldset>
+                    
+                    <a  class="button toggle-set-2" 
+                        style="display:none;"
+                        href="${
                     
                         await rus.appUrl ([
                             [ 'route', 'virtual' ],
@@ -161,6 +198,8 @@ const trInTable = async(item) => {
                         ])
 
                     }"><i class="material-icons">delete_forever</i></a>
+
+                    
                 </td>
                 
             </tr>`

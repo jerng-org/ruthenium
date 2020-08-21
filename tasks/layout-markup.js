@@ -27,7 +27,7 @@ await rus.appUrl ( [
         
         <style>
             
-            /* Application overrides */
+            /* Application Milligram-Overrides */
         
             .material-icons {
                 vertical-align: middle;
@@ -50,21 +50,45 @@ await rus.appUrl ( [
         <script     nomodule 
                     src="${
                     
-await rus.appUrl ( [
-    [ 'route', 'file' ],
-    [ 'file', 'ruthenium-web-client.mjs' ]
-] )
-
+            await rus.appUrl ( [
+                [ 'route', 'file' ],
+                [ 'file', 'ruthenium-web-client.mjs' ]
+            ] )
+            
                     }"></script>
+                    
         <script     type="module" 
                     src="${
-                    
-await rus.appUrl ( [
-    [ 'route', 'file' ],
-    [ 'file', 'ruthenium-web-client.mjs' ]
-] )
+                                
+            await rus.appUrl ( [
+                [ 'route', 'file' ],
+                [ 'file', 'ruthenium-web-client.mjs' ]
+            ] )
 
                     }"></script>
+                    
+        <script>
+       
+            /* Application Original Content (move to io/blobs/ later) */
+         
+            const toggler = ( element, classString, focusSelector ) => {
+            
+            Array.prototype.forEach.call ( 
+                element.querySelectorAll( classString ), 
+                e => {
+                    const wasVisible = ['','initial'].includes(e.style.display);
+                    e.style.display = wasVisible ? 'none' : 'initial';
+                    if ( (! wasVisible) ) { 
+                        const input = element.querySelector ( focusSelector )
+                        input.focus()
+                        input.select()
+                    }
+                } 
+            )
+            
+            }
+        </script>
+ 
     
     </head>
     <body>
