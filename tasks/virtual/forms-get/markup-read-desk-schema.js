@@ -8,30 +8,8 @@ const readDeskSchema = async ( data ) => {
     
         <h2>Desk Schema : <code>read one</code> </h2>
         
-        <h3><code>pre</code></h3>
-        <pre>
-            ${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet ) }
-        </pre>    
-        
-        <h3><code>code</code></h3>
-        <code>
-            ${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet ) }
-        </code>    
-
-        <h3><code>pre > code</code></h3>
-        <pre>
-        <code>
-            ${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet ) }
-        </code>
-        </pre>    
-        
-        <h3><code>code > pre</code></h3>
-        <code>
-        <pre>
-            ${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet ) }
-        </pre>    
-        </code>
-    `
+        <pre><code>${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet.Item ) }</code></pre>    
+        `
     
 }
 module.exports = readDeskSchema
