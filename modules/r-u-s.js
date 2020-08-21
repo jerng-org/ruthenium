@@ -109,6 +109,15 @@ const rus = {
     //      //
     //////////
 
+    log: {
+
+        error: (DATA, message) => {
+            const err = new Error(message)
+            DATA.RU.errors.push(err)
+            console.error(err.stack)
+        }
+    },
+
     mark: mark,
 
     //////////
@@ -202,7 +211,7 @@ DEBUG EVERYTHING:
     //      //
     //////////
 
-    oidcSession: require(`/var/task/modules/oidc-session.js`), 
+    oidcSession: require(`/var/task/modules/oidc-session.js`),
 
     //////////
     //      //

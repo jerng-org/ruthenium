@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(initial) : desk schema creation form adjusted` ,
+    gitCommitMessage: `(initial) : desk schema update link adjusted` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
