@@ -1,18 +1,5 @@
 'use strict'
 
-/* Today's fixes will proceed as follows
-
-OK - dump LAMBDA.event.queryStringParameters because it overhandles ","
-OK - manually parse queryString with (querystring)
-
-OK - check form POST behaviour, compared to above
-- check form GET behaviour, compared to above
-
-
-test data: 11%2C22,33;44+55!66$77%2788(99)00"11
-
-*/
-
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const innerHTML = async () => `
@@ -120,6 +107,5 @@ const createDeskSchema = async ( data ) => {
             } ) 
         }
     `
-    
 }
 module.exports = createDeskSchema
