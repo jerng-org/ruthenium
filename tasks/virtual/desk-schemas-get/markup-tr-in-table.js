@@ -136,7 +136,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }">Edit (stub)</a>
+                    }">Edit (WIP)</a>
                     
                     <a class="button" href="${
                     
@@ -148,7 +148,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }">Delete (stub)</a>
+                    }">Delete (WIP)</a>
                 </td>
                 
             </tr>`
