@@ -8,20 +8,29 @@ const readDeskSchema = async ( data ) => {
     
         <h2>Desk Schema : <code>read one</code> </h2>
         
-        <h3><code><pre></code></h3>
+        <h3><code>pre</code></h3>
         <pre>
             ${ 'placeholder' }
         </pre>    
         
-        <h3><code><code></code></h3>
-        <pre>
+        <h3><code>code</code></h3>
+        <code>
             ${ 'placeholder' }
-        </pre>    
+        </code>    
 
-        <h3><code><pre> > <code></code></h3>
+        <h3><code>pre > code</code></h3>
+        <pre>
+        <code>
+            ${ 'placeholder' }
+        </code>
+        </pre>    
+        
+        <h3><code>code > pre</code></h3>
+        <code>
         <pre>
             ${ 'placeholder' }
         </pre>    
+        </code>
     `
     
 }
