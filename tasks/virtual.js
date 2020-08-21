@@ -111,6 +111,8 @@ const virtual = async(data) => {
                                             
                                             data.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
                                             
+                                            console.error('virtual.js:114:',data.RU.io.deskSchemasGet.Item)
+                                            
                                             if (! data.RU.io.deskSchemasGet.Item) {
                                                 await status404(data)
                                             }
