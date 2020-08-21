@@ -119,7 +119,7 @@ const virtual = async(data) => {
                                             }
 
                                             rus.conf.verbosity > 0 &&
-                                                console.warn(`(virtual.js) manipulation of (desk-schemas) is not RESTful; some RESTful adjustments are suggested.`)
+                                                console.warn(`(virtual.js) manipulation of (desk-schemas) is not RESTful (current arrangement is just to colocate code by filename); some RESTful adjustments are suggested.`)
 
                                             switch (data.RU.request.queryStringParameters.thing[0]) {
 
