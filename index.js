@@ -171,6 +171,23 @@ try {
             
             ICEBOX:`,
 
+                `RULE:
+                
+                    1.  A web server's hypertext graph should be defined in
+                        minimalistic form as-if for a machine reader, first.
+                    
+                        HATEOAS :   
+                        
+                            1.  Each resource should be identified by a URI.
+                            
+                                (URIs may be names or locations of resources.)
+                            
+                            2.  HTTP responses for machine readers should 
+                                include a list of 
+                    
+                    2.  
+                    `,
+
                 `We're currently working with something that looks like:
                 
                     - ? route=virtual
