@@ -153,7 +153,6 @@ const trInTable = async(item) => {
                     
                     <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )">
                         <label for="unlock-desk-schemas-delete-${ item['name'] }">
-                            <h1> ${ item['name'] } </h1>
                             <button title="click to rename this desk" class="button-outline" onclick="return false;"> 
                                 <span>
                                     <i class="material-icons">lock</i>
