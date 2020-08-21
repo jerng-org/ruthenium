@@ -136,7 +136,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }">Read</a>
+                    }"><i class="material-icons">preview</i></a>
                     
                     <a class="button" href="${
                     
@@ -148,7 +148,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }">Update (WIP)</a>
+                    }"><i class="material-icons">edit</i> <i class="material-icons">construction</i></a>
                     
                     <a class="button" href="${
                     
@@ -160,7 +160,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }"><i class="material-icons">delete</i></a>
+                    }"><i class="material-icons">delete_forever</i></a>
                 </td>
                 
             </tr>`
