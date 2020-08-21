@@ -132,6 +132,7 @@ const trInTable = async(item) => {
                             [ 'route', 'virtual' ],
                             [ 'type', 'forms' ],
                             [ 'thing', 'update-desk-schema' ],
+                            [ 'desk-schema-name', item['name'] ], 
                             [ 'reader', 'human']
                         ])
 
@@ -142,7 +143,7 @@ const trInTable = async(item) => {
                         await rus.appUrl ([
                             [ 'route', 'virtual' ],
                             [ 'type', 'forms' ],
-                            [ 'thing', 'update-desk-schema' ],
+                            [ 'thing', 'delete-desk-schema' ],
                             [ 'desk-schema-name', item['name'] ], 
                             [ 'reader', 'human']
                         ])
