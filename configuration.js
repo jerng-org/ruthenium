@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(virtual.js) : prepared to check database for ?desk-schema-name` ,
+    gitCommitMessage: `(virtual.js) : defined (deskSchemasGetSuccess)` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2

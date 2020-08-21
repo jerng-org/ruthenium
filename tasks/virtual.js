@@ -27,6 +27,17 @@ console.warn(`(virtual.js) the (rus.log.error) function defined here is a framew
 console.warn(`(virtual.js) we should really break up/curry the giant switch-case into a linear pipeline`)
 console.warn(`TODO: implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
 
+const deskSchemasGetSuccess = async(DATA, deskSchemaName) => {
+    const params = {
+        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+        Key: {
+            name: deskSchemaName
+        },
+        ReturnConsumedCapacity: 'TOTAL'
+    }
+    DATA.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
+    return ('Item' in DATA.RU.io.deskSchemasGet)
+}
 
 const virtual = async(data) => {
 
@@ -101,21 +112,11 @@ const virtual = async(data) => {
                                                 rus.log.error(data, `(virtual.js) (?type=forms) (GET) (?thing=update-desk-schema) (?desk-schema-name ... was unspecified.)`)
                                             }
 
-                                            const params = {
-                                                TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-                                                Key: {
-                                                    name: data.RU.request.queryStringParameters['desk-schema-name'][0]
-                                                },
-                                                ReturnConsumedCapacity: 'TOTAL'
-                                            }
-                                            
-                                            data.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
-                                            
-                                            if (! data.RU.io.deskSchemasGet.Item) {
+                                            if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
                                                 await status404(data)
                                                 return
                                             }
-                                            
+
                                             data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
                                             return
 
