@@ -57,7 +57,7 @@ try {
                 
                 `1. Abandon RESTful approaches, temporarily.
                 
-                2. Turn focus to`,
+                2. Turn focus to making virtual tables work (desks).`,
                 
                 `Perhaps the best way to nested guards is with (x in object),
                 and perhaps we thus need a routing table, or a routing tree 
@@ -108,6 +108,9 @@ try {
                 `
             
             BACKLOG:`,
+
+                `linking to route=initial involves one layer of indirection, as the
+                server redirects the client; REARCHITECTURE this.`,
 
                 `(lastGuard.js) needs to be updated to disallow certain
                 responses that Lambda allows (like JSON).`,
