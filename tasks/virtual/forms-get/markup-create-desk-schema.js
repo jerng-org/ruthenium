@@ -24,7 +24,7 @@ const innerHTML = async () => `
     ${ await rus.html.input ( {
         name:       `desk-schemas[name]`,
         id:         `desk-schemas[name]`,
-        placeholder:`-- enter a Desk Schema name --`,
+        placeholder:`-- enter a schema name --`,
         required:   true,
         label:      `Name the schema :`
     } ) }
@@ -80,7 +80,7 @@ const innerHTML = async () => `
             <td>
                 ${ await rus.html.input ( {
                     name:       `desk-schemas[columns]###[name]`,
-                    placeholder:`-- enter a Column name --`,
+                    placeholder:`-- enter a column name --`,
                     required:   true
                 } ) }
             </td>
