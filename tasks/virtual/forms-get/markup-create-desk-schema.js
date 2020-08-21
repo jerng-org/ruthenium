@@ -18,7 +18,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 //const htmlIndex = rus.node.fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
 
 const innerHTML = async () => `
-<h2>Desk Schema : <code>CREATE</code> </h2>
+<h2>Desk Schema : <code>creation</code> </h2>
 <fieldset>
 
     ${ await rus.html.input ( {
@@ -26,7 +26,7 @@ const innerHTML = async () => `
         id:         `desk-schemas[name]`,
         placeholder:`-- enter a Desk Schema name --`,
         required:   true,
-        label:      `Name for this new Desk Schema`
+        label:      `Name for this new Desk Schema :
     } ) }
     
     <table  data-ru-incrementable-group="column-definition"
@@ -53,13 +53,13 @@ const innerHTML = async () => `
             </td>
             <td>
                 <label>
-                    Add a Column for this new Desk Schema
+                    Add a Column for this new Desk Schema :
                     <h6>&nbsp;</h6>
                     </label>
             </td>
             <td>
                 <label>
-                    Specify the type of data in this Column
+                    Specify the type of data in this Column 
                     <h6>'string' and 'number' are efficient</h6>
                     </label>
             </td>
