@@ -26,17 +26,25 @@ await rus.appUrl ( [
                 rel="stylesheet">
         
         <style>
+            
             /* Application overrides */
         
             .material-icons {
                 vertical-align: middle;
             }
             
+            .button code {
+                background-color: none;
+            }
+            
+            /* Application Original Content  */
+            
             .ru-card { 
                 border-radius: 0.5em;
                 padding: 1em;
                 border: 1px solid #ccc;
             }
+            
         </style>
         
         <script     nomodule 
