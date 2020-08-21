@@ -7,15 +7,21 @@ const readDeskSchema = async ( data ) => {
     return `
     
         <h2>Desk Schema : <code>read one</code> </h2>
-    
-        ${  await rus.html.form ( {
-                action: await rus.appUrl( [ 
-                    [ 'route','virtual' ], 
-                    [ 'type','desk-schemas' ] 
-                ] ),
-                innerHTML: '-'
-            } ) 
-        }
+        
+        <h3><code><pre></code></h3>
+        <pre>
+            ${ 'placeholder' }
+        </pre>    
+        
+        <h3><code><code></code></h3>
+        <pre>
+            ${ 'placeholder' }
+        </pre>    
+
+        <h3><code><pre> > <code></code></h3>
+        <pre>
+            ${ 'placeholder' }
+        </pre>    
     `
     
 }
