@@ -16,6 +16,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 const status400 = require(`/var/task/tasks/status-400.js`)
 const status403 = require(`/var/task/tasks/status-403.js`)
 const status404 = require(`/var/task/tasks/status-404.js`)
+const status500 = require(`/var/task/tasks/status-500.js`)
 const status501 = require(`/var/task/tasks/status-501.js`)
 
 rus.conf.verbosity > 0 &&
@@ -41,8 +42,17 @@ const deskSchemasGetSuccess = async(DATA, deskSchemaName) => {
     return ('Item' in DATA.RU.io.deskSchemasGet)
 }
 
-//const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
-//}
+const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
+    const params = {
+        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+        Key: {
+            name: deskSchemaName 
+        },
+        ReturnConsumedCapacity: 'TOTAL'
+    }
+    DATA.RU.io.deskSchemasDelete = await rus.aws.ddbdc.delete(params).promise()
+    return DATA.RU.io.deskSchemasDelete
+}
 
 const virtual = async(data) => {
 
@@ -140,14 +150,10 @@ const virtual = async(data) => {
                                                     //  This is not RESTful; the following may be RESTful: ?type=desk-schema, method: DELETE
                                                 case (`delete-desk-schema`):
 
-                                                    const params = {
-                                                        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-                                                        Key: {
-                                                            name: data.RU.request.queryStringParameters['desk-schema-name'][0]
-                                                        },
-                                                        ReturnConsumedCapacity: 'TOTAL'
+                                                    if (!await deskSchemasDeleteSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
+                                                        await status500(data)
+                                                        return
                                                     }
-                                                    data.RU.io.deskSchemasDelete = await rus.aws.ddbdc.delete(params).promise()
 
                                                     data.RU.signals.sendResponse.body = await formsMarkupDeleteDeskSchema(data)
                                                     return
