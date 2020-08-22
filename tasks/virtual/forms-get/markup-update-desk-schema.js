@@ -105,7 +105,7 @@ const innerHTML = async () => `
                     [ 'route','virtual' ], 
                     [ 'type','desk-schemas' ] 
                 ] ),
-                innerHTML: innerHTML
+                innerHTML: await innerHTML()
             } ) 
         }
     `
