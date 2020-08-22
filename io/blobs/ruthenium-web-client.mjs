@@ -19,9 +19,9 @@
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-})
+//})
 
-window.addEventListener('load', (event) => {
+//window.addEventListener('load', (event) => {
 
     console.warn (`IMPROVE DOCS: Widget RU-INCREMENTAL`)
 
