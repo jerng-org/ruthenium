@@ -173,7 +173,7 @@ const trInTable = async(item) => {
                                     this.value = ''
                                     toggler ( this.parentNode, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )
                                     
-                                    const confirmed = window.confirm('WARNING : You are about to delete the desk schema named "${ item['name'] }" - select CANCEL to reconsider.')
+                                    const confirmed = window.confirm('WARNING : You are about to delete the desk schema named \'${ item['name'] }\' - select CANCEL to reconsider.')
                                     if ( confirmed ) 
                                     {
                                         toggler ( this.closest('td'), '.toggle-set-2', 'input[name=desk-rename-shoes]' )
