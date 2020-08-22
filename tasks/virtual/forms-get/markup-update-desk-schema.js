@@ -95,26 +95,29 @@ const innerHTML = async () => `
 </fieldset>
 
 <script>
-{   // hydrate client-side form
-
-    const appendingElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="append-one"]')
-    const item = ${ JSON.stringify ( data.RU.io.deskSchemasGet.Item, null, 4 ) }
-
-    for ( const column of item.columns )
-    {
-        // add a new row
-        appendingElem.click()
-        
-        console.log(appendingElem)
-        
-        // refer to new row
-        const appendedElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="appended-child"]:last-of-type')
+{   
+    window.addEventListener("load", function(){
     
-        appendedElem.querySelector('input[name*="[name]"]').value = column.name
-        appendedElem.querySelector('input[name*="[type]"]').value = column.type
-        
-    }
+        // hydrate client-side form
     
+        const appendingElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="append-one"]')
+        const item = ${ JSON.stringify ( data.RU.io.deskSchemasGet.Item, null, 4 ) }
+    
+        for ( const column of item.columns )
+        {
+            // add a new row
+            appendingElem.click()
+            
+            console.log(appendingElem)
+            
+            // refer to new row
+            const appendedElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="appended-child"]:last-of-type')
+        
+            appendedElem.querySelector('input[name*="[name]"]').value = column.name
+            appendedElem.querySelector('input[name*="[type]"]').value = column.type
+            
+        }        
+    })
 }
 </script>
         
