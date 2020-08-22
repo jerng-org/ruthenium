@@ -23,7 +23,7 @@ const innerHTML = async () => `
             <td>
                 <i  class="material-icons"
                     data-ru-incrementable-group="column-definition"
-                    data-ru-incrementable-role="append-one""
+                    data-ru-incrementable-role="append-one"
                     data-ru-incrementable-attributes='[
                         {   
                             "attribute":    "name",
@@ -84,7 +84,7 @@ const innerHTML = async () => `
         </tr>
         </template>
 <!---------------------------------------------------------------------------->        
-        
+
     </table>
     
     ${  await rus.html.input ( {
@@ -93,6 +93,15 @@ const innerHTML = async () => `
     } ) }
 
 </fieldset>
+
+<script>
+
+const elem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="append-one"]')
+const item = ${ JSON.stringify ( data.RU.io.deskSchemasGet.Item, null, 4 ) }
+
+</script>
+        
+
 `
 
     

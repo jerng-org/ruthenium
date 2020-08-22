@@ -20,7 +20,7 @@ const innerHTML = async () => `
             <td>
                 <i  class="material-icons"
                     data-ru-incrementable-group="column-definition"
-                    data-ru-incrementable-role="append-one""
+                    data-ru-incrementable-role="append-one"
                     data-ru-incrementable-attributes='[
                         {   
                             "attribute":    "name",
