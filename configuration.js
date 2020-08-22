@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(markup-update-desk-schema.js) grafting of protected submit button in progress` ,
+    gitCommitMessage: `-` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
