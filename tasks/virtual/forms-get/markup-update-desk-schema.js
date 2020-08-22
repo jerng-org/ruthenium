@@ -95,10 +95,25 @@ const innerHTML = async () => `
 </fieldset>
 
 <script>
+{   // hydrate client-side form
 
-const elem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="append-one"]')
-const item = ${ JSON.stringify ( data.RU.io.deskSchemasGet.Item, null, 4 ) }
+    const appendingElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="append-one"]')
+    const item = ${ JSON.stringify ( data.RU.io.deskSchemasGet.Item, null, 4 ) }
 
+    for ( const column of item.columns )
+    {
+        // add a new row
+        appendingElem.click()
+        
+        // refer to new row
+        const appendedElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="appended-child"]:last-of-type')
+    
+        // refer to new row's input[name] 
+        const appendedElem.querySelector('input[name*="[name]"]').value = column.name
+        
+    }
+    
+}
 </script>
         
 
