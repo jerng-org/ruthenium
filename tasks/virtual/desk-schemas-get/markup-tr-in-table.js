@@ -195,29 +195,32 @@ const trInTable = async(item) => {
                                 >
                     </fieldset>
                     
-                    <a  class="button toggle-set-2" 
-                        style="display:none;"
-                        title="delete schema forever"
-                        id="desk-schemas-delete-${ item['name'] }"
-                        href="${
+                    <div class="ru-card toggle-set-2">
                     
-                        await rus.appUrl ([
-                            [ 'route', 'virtual' ],
-                            [ 'type', 'forms' ],
-                            [ 'thing', 'delete-desk-schema' ],
-                            [ 'desk-schema-name', item['name'] ], 
-                            [ 'reader', 'human']
-                        ])
-
-                    }"><i class="material-icons">delete_forever</i></a>
-                    
-                    <button class="button-clear toggle-set-2" 
-                        style="display:none;"
-                        title="hide the link, which deletes this schema"
-                        onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ item['name'] }' )"
-                    >
-                    <i class="material-icons">lock_open</i> rehide this link </button>
-
+                        <a  class="button" 
+                            style="display:none;"
+                            title="delete schema forever"
+                            id="desk-schemas-delete-${ item['name'] }"
+                            href="${
+                        
+                            await rus.appUrl ([
+                                [ 'route', 'virtual' ],
+                                [ 'type', 'forms' ],
+                                [ 'thing', 'delete-desk-schema' ],
+                                [ 'desk-schema-name', item['name'] ], 
+                                [ 'reader', 'human']
+                            ])
+    
+                        }"><i class="material-icons">delete_forever</i></a>
+                        
+                        <button class="button-clear" 
+                            style="display:none;"
+                            title="hide the link, which deletes this schema"
+                            onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ item['name'] }' )"
+                        >
+                        <i class="material-icons">lock_open</i> rehide this link </button>
+                        
+                    </div>
                     
                 </td>
                 
