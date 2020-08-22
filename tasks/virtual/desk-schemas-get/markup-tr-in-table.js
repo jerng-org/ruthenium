@@ -199,10 +199,6 @@ const trInTable = async(item) => {
                         style="display:none;"
                         title="delete schema forever"
                         id="desk-schemas-delete-${ item['name'] }"
-                        onfocus="(e => console.log('focused', e.target))(event)"
-                        onfocusin="(e => console.log('focusined', e.target))(event)"
-                        onfocusout="(e => console.log('focusouted', e.target))(event)"
-                        onblur="(e => console.log('blurred', e.target))(event)"
                         href="${
                     
                         await rus.appUrl ([
@@ -214,6 +210,13 @@ const trInTable = async(item) => {
                         ])
 
                     }"><i class="material-icons">delete_forever</i></a>
+                    
+                    <button class="button-outline toggle-set-2" 
+                        style="display:none;"
+                        title="hide the link, which deletes this schema"
+                        onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ item['name'] }' )"
+                    >
+                    <i class="material-icons">lock_open</i> rehide this link </button>
 
                     
                 </td>
