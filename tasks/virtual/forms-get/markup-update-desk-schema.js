@@ -96,7 +96,7 @@ const updateDeskSchema = async(data) => {
                                 >
                                 
                         <label for="unlock-desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }">
-                            <button     title="show the link which updates this schema" 
+                            <button     title="show the link, which submits this form" 
                                         class="button-outline" 
                                         onclick="return false;"
                                         > 
@@ -111,7 +111,7 @@ const updateDeskSchema = async(data) => {
                         
                         <input  type="text" 
                                 id="unlock-desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }" 
-                                placeholder="type the code, to show the link, which submits this form'" 
+                                placeholder="type the code, to show the link, which submits this form" 
                                 class="toggle-set-1"
                                 style="display:none;"
                                 onclick="(e=>e.stopImmediatePropagation())(event)"
@@ -141,7 +141,8 @@ const updateDeskSchema = async(data) => {
                                 >
                                 <i class='material-icons'>send</i> this action cannot be undone</button>
                         
-                        <button class="button-clear" 
+                        <button type="button"
+                                class="button-clear" 
                                 title="hide the link, which submits the form"
                                 onclick="toggler ( this.closest('form'), '.toggle-set-2', '#desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.nam }' )"
                         >
