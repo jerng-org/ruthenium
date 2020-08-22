@@ -9,8 +9,8 @@ const innerHTML = async () => `
 <fieldset>
 
     ${ await rus.html.input ( {
-        name:       `desk-schemas[name]`,
-        id:         `desk-schemas[name]`,
+        name:       'desk-schemas[name]',
+        id:         'desk-schemas[name]',
         value:      data.RU.io.deskSchemasGet.Item.name,
         required:   true,
         label:      'Name of the schema :'
@@ -66,8 +66,8 @@ const innerHTML = async () => `
             </td>
             <td>
                 ${ await rus.html.input ( {
-                    name:       `desk-schemas[columns]###[name]`,
-                    placeholder:`-- enter a column name --`,
+                    name:       'desk-schemas[columns]###[name]',
+                    placeholder:'-- enter a column name --',
                     required:   true
                 } ) }
             </td>
@@ -88,8 +88,8 @@ const innerHTML = async () => `
     </table>
     
     ${  await rus.html.input ( {
-        value:  `POST it`,
-        type:   `submit`
+        value:  'POST it',
+        type:   'submit'
     } ) }
 
 </fieldset>
