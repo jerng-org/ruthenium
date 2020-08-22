@@ -17,9 +17,6 @@ const deskSchemasPut = async(data) => {
 
   //  end PROTOTYPICAL data validation process.
 
-  // Provide ID
-  candidate['desk-schemas'].id = await rus.uuid4()
-
   // Configure DB client parameters
   const params = {
 
@@ -27,20 +24,14 @@ const deskSchemasPut = async(data) => {
 
     Item: candidate['desk-schemas'],
 
-    ConditionExpression: 'attribute_not_exists(id)',
-    //  This checks data already in the DB;
-    //  it seems we do not use this for validating data that has yet to
-    //  be inserted into the DB.
+    ConditionExpression: 'attribute_exists(id)',
 
     ReturnConsumedCapacity: 'TOTAL'
 
   }
 
   // Call storage layer
-  data.RU.io.put = await rus.aws.ddbdc.put(params).promise()
-
-  rus.conf.versbosity < 1 ||
-    console.warn(`ddbdc.put returned:`, data.RU.io.put)
+  data.RU.io.deskSchemasPut = await rus.aws.ddbdc.put(params).promise()
 
   // View
   data.RU.signals.redirectRoute = 'initial'
