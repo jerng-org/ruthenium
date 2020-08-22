@@ -35,7 +35,7 @@ const tableInMarkup = async(deskSchemasScan) => {
                     
                     <p>System is currently aware of ${ deskSchemasScan.Count } Desk Schemas</p> 
                     
-                    <a class="button float-right" href="${  
+                    <a class="button float-left" href="${  
                         
                         await rus.appUrl ([
                             [ 'route', 'virtual' ],
