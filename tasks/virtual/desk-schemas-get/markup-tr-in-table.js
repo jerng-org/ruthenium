@@ -189,7 +189,7 @@ const trInTable = async(item) => {
                                     {
                                         toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ item['name'] }' )
                                     } else {
-                                        alert ('dev: cleanup required ')
+                                        //alert ('dev: cleanup required ')
                                     }
                                 }"
                                 >
