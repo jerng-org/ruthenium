@@ -105,7 +105,7 @@ const innerHTML = async () => `
     
         for ( const column of item.columns )
         {
-            // add a new row
+            // add a new row (depends on widget RU-INCREMENTAL loaded onDOMContentLoaded in the header library)
             appendingElem.click()
             
             console.log(appendingElem)
@@ -114,7 +114,7 @@ const innerHTML = async () => `
             const appendedElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="appended-child"]:last-of-type')
         
             appendedElem.querySelector('input[name*="[name]"]').value = column.name
-            appendedElem.querySelector('input[name*="[type]"]').value = column.type
+            appendedElem.querySelector('select[name*="[type]"]').value = column.type
             
         }        
     })
