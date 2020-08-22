@@ -13,7 +13,7 @@ const innerHTML = async () => `
         id:         `desk-schemas[name]`,
         value:      data.RU.io.deskSchemasGet.Item.name,
         required:   true,
-        label:      `Name of the schema :`
+        label:      'Name of the schema :'
     } ) }
     
     <table  data-ru-incrementable-group="column-definition"
