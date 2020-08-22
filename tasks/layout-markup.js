@@ -81,7 +81,7 @@ await rus.appUrl ( [
                     if ( (! wasVisible) && focusSelector ) { 
                         const focusTarget = element.querySelector ( focusSelector )
                         focusTarget.focus()
-                        focusTarget.select()
+                        if ( focusTarget.select ) focusTarget.select()
                     }
                 } 
             )
