@@ -26,7 +26,7 @@ const deskSchemasPost = async(data) => {
 
         ConditionExpression: 'attribute_not_exists(id)',
         
-        ReturnValues: '',
+        //ReturnValues: '',
 
         ReturnConsumedCapacity: 'TOTAL'
 
