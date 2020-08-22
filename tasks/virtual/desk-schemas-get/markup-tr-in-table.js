@@ -126,7 +126,9 @@ const trInTable = async(item) => {
                 </td>
                 
                 <td>
-                    <a class="button" href="${
+                    <a  class="button" 
+                        title="read schema"
+                        href="${
                     
                         await rus.appUrl ([
                             [ 'route', 'virtual' ],
@@ -138,7 +140,9 @@ const trInTable = async(item) => {
 
                     }"><i class="material-icons">preview</i></a>
                     
-                    <a class="button" href="${
+                    <a  class="button" 
+                        title="edit schema"
+                        href="${
                     
                         await rus.appUrl ([
                             [ 'route', 'virtual' ],
@@ -153,7 +157,11 @@ const trInTable = async(item) => {
                     
                     <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )">
                         <label for="unlock-desk-schemas-delete-${ item['name'] }">
-                            <button title="click to show the link which deletes this schema" class="button-outline" onclick="return false;"> 
+                            
+                            <button     title="show the link which deletes this schema" 
+                                        class="button-outline toggle-set-2" 
+                                        onclick="return false;"
+                                        > 
                                 <span>
                                     <i class="material-icons">lock</i>
                                     <i class="material-icons">delete</i>
@@ -161,6 +169,7 @@ const trInTable = async(item) => {
                                 <span class="toggle-set-1" style="display:none;">
                                     code: 234806</span>
                             </button>
+                            
                         </label>
                         <input  type="text" 
                                 id="unlock-desk-schemas-delete-${ item['name'] }" 
