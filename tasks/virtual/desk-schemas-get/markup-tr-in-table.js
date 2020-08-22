@@ -153,7 +153,7 @@ const trInTable = async(item) => {
                     
                     <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )">
                         <label for="unlock-desk-schemas-delete-${ item['name'] }">
-                            <button title="click to rename this desk" class="button-outline" onclick="return false;"> 
+                            <button title="click to show the link which deletes this schema" class="button-outline" onclick="return false;"> 
                                 <span>
                                     <i class="material-icons">lock</i>
                                     <i class="material-icons">delete</i>
@@ -164,7 +164,7 @@ const trInTable = async(item) => {
                         </label>
                         <input  type="text" 
                                 id="unlock-desk-schemas-delete-${ item['name'] }" 
-                                placeholder="type the code, to delete the desk schema named: '${ item['name'] }'" 
+                                placeholder="type the code, to show the link, which deletes this schema'" 
                                 class="toggle-set-1"
                                 style="display:none;"
                                 onclick="(e=>e.stopImmediatePropagation())(event)"
@@ -173,7 +173,7 @@ const trInTable = async(item) => {
                                     this.value = ''
                                     toggler ( this.parentNode, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )
                                     
-                                    const confirmed = window.confirm('WARNING : You are about to unlock the link to delete the desk schema named \\'${ item['name'] }\\' forever - select CANCEL to reconsider.')
+                                    const confirmed = window.confirm('WARNING : You are about to display a link which deletes the schema named \\'${ item['name'] }\\' forever - select CANCEL to reconsider.')
                                     if ( confirmed ) 
                                     {
                                         toggler ( this.closest('td'), '.toggle-set-2', null )
