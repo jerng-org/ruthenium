@@ -127,8 +127,12 @@ const innerHTML = async () => `
     
     return `
     
-        <h2>Desk Schema : <code>update one</code> </h2>
+        <h2>Desk Schema : <code>read one</code> </h2>
+
+        <pre><code>${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet.Item ) }</code></pre>
     
+        <h2>Desk Schema : <code>update</code> this schema, by submitting this form :</h2>
+        
         ${  await rus.html.form ( {
                 action: await rus.appUrl( [ 
                     [ 'route','virtual' ], 
