@@ -34,6 +34,8 @@ const deskSchemasPost = async(data) => {
 
     data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
 
+    console.error('data.RU.io.deskSchemasPost',data.RU.io.deskSchemasPost)
+
     rus.conf.versbosity > 0 &&
         console.warn(`(desk-schemas-post.js) PROTOCOL: the HTTP POST method more accurately corresponds to the DynamoDB operation (updateItem) than (putItem) which is used here.`)
 
