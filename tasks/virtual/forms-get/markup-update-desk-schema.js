@@ -127,7 +127,7 @@ const innerHTML = async () => `
     
     return `
     
-        <h2>Desk Schema : <code>read one</code> </h2>
+        <h3>Desk Schema : <code>read</code> the schema :</h3>
 
         <pre><code>${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet.Item ) }</code></pre>
     
