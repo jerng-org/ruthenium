@@ -17,9 +17,6 @@ const deskSchemasPost = async(data) => {
 
     //  end PROTOTYPICAL data validation process.
 
-    // Provide ID
-    candidate['desk-schemas'].id = await rus.uuid4()
-
     // Configure DB client parameters
     const params = {
 
@@ -28,19 +25,17 @@ const deskSchemasPost = async(data) => {
         Item: candidate['desk-schemas'],
 
         ConditionExpression: 'attribute_not_exists(id)',
-        //  This checks data already in the DB;
-        //  it seems we do not use this for validating data that has yet to
-        //  be inserted into the DB.
 
         ReturnConsumedCapacity: 'TOTAL'
 
     }
 
     // Call storage layer
-    data.RU.io.put = await rus.aws.ddbdc.put(params).promise()
 
-    rus.conf.versbosity < 1 ||
-        console.warn(`ddbdc.put returned:`, data.RU.io.put)
+    data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
+
+    rus.conf.versbosity > 0 &&
+        console.warn(`(desk-schemas-post.js) PROTOCOL: the HTTP POST method more accurately corresponds to the DynamoDB operation (updateItem) than (putItem) which is used here.`)
 
     // View
     data.RU.signals.redirectRoute = 'initial'
