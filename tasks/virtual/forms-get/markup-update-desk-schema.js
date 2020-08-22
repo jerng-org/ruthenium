@@ -136,14 +136,13 @@ const updateDeskSchema = async(data) => {
                             >
                     
                         ${  await rus.html.input ( {
-                            value: ``,
+                            value: `<button 
+                                        title="submit form: update schema"
+                                        id="desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }"
+                                        >
+                                        <i class="material-icons">send</i> this action cannot be undone</button>`,
                             type:   'submit'
                         } ) }
-
-                        <button 
-                            title="submit form: update schema"
-                            id="desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }"
-                            ><i class="material-icons">send</i> this action cannot be undone</button>
                         
                         <button class="button-clear" 
                             title="hide the link, which submits the form"
