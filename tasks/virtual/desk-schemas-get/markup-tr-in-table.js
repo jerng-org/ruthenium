@@ -179,7 +179,6 @@ const trInTable = async(item) => {
                                 class="toggle-set-1"
                                 style="display:none;"
                                 onclick="(e=>e.stopImmediatePropagation())(event)"
-                                onblur="toggler ( this.parentNode, '.toggle-set-1', null )"
                                 oninput="if (this.value==234806) { 
                                 
                                     this.value = ''
