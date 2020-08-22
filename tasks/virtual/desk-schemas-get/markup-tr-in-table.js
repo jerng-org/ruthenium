@@ -199,6 +199,10 @@ const trInTable = async(item) => {
                         style="display:none;"
                         title="delete schema forever"
                         id="desk-schemas-delete-${ item['name'] }"
+                        onfocus="(e => console.log('focused', e.target))(event)"
+                        onfocusin="(e => console.log('focusined', e.target))(event)"
+                        onfocusout="(e => console.log('focusouted', e.target))(event)"
+                        onblur="(e => console.log('blurred', e.target))(event)"
                         href="${
                     
                         await rus.appUrl ([
