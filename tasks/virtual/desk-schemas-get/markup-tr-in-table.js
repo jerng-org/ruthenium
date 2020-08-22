@@ -6,12 +6,18 @@ const trInTable = async(item) => {
 
     let markup = `
             <tr>
-            
                 <td>
-                    <h3 class="ru-card"> ${ item['name'] } </h3>
+                    <h3 class="ru-card">
+                        ${ item['name'] }
+                    </h3>
                 </td>
                 
                 <td>
+                
+                    <!--
+                        <a class="button float-right" href="#">Create Column (stub) </a>
+                    -->
+                    
                     
                     <ul class="float-left">
                     ${  
