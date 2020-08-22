@@ -185,7 +185,7 @@ const trInTable = async(item) => {
                                     const confirmed = window.confirm('WARNING : You are about to display a link which deletes the schema named \\'${ item['name'] }\\' forever - select CANCEL to reconsider.')
                                     if ( confirmed ) 
                                     {
-                                        toggler ( this.closest('td'), '.toggle-set-2', null )
+                                        toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ item['name'] }' )
                                     } else {
                                         alert ('dev: cleanup required ')
                                     }
@@ -195,6 +195,8 @@ const trInTable = async(item) => {
                     
                     <a  class="button toggle-set-2" 
                         style="display:none;"
+                        title="delete schema forever"
+                        id="desk-schemas-delete-${ item['name'] }"
                         href="${
                     
                         await rus.appUrl ([

@@ -79,9 +79,9 @@ await rus.appUrl ( [
                     const wasVisible = ['','initial'].includes(e.style.display)
                     e.style.display = wasVisible ? 'none' : ''
                     if ( (! wasVisible) && focusSelector ) { 
-                        const input = element.querySelector ( focusSelector )
-                        input.focus()
-                        input.select()
+                        const focusTarget = element.querySelector ( focusSelector )
+                        focusTarget.focus()
+                        focusTarget.select()
                     }
                 } 
             )
