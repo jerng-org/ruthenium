@@ -82,6 +82,7 @@ await rus.appUrl ( [
                         const focusTarget = element.querySelector ( focusSelector )
                         focusTarget.focus()
                         focusTarget.select()
+                        focusTarget.addEventListener( 'blur', _ => alert('blur'), { once: true } )
                     }
                 } 
             )
