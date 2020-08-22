@@ -24,7 +24,7 @@ const deskSchemasPost = async(data) => {
 
         Item: candidate['desk-schemas'],
 
-        ConditionExpression: 'attribute_not_exists(id)',
+        ConditionExpression: 'attribute_not_exists(name)',
         
         //ReturnValues: '',
 
