@@ -21,13 +21,10 @@ const deskSchemasPost = async(data) => {
     const params = {
 
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-
         Item: candidate['desk-schemas'],
-
-        ConditionExpression: 'attribute_not_exists(name)',
-        
+        ExpressionAttributeNames: { '#name': 'name' },
+        ConditionExpression: 'attribute_not_exists(#name)',
         //ReturnValues: '',
-
         ReturnConsumedCapacity: 'TOTAL'
 
     }
