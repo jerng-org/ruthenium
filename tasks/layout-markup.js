@@ -84,6 +84,7 @@ await rus.appUrl ( [
                         const focusTarget = element.querySelector ( focusSelector )
                         if ( Object.is ( focusTarget, e ) )
                         {
+                            console.log('toggler: classString element is focusTarget, and ! wasVisible', e )
                             focusTarget.focus()
                             if ( focusTarget.select ) focusTarget.select()
                         }
