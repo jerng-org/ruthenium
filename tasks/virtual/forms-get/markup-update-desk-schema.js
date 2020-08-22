@@ -111,7 +111,7 @@ const updateDeskSchema = async(data) => {
                         
                         <input  type="text" 
                                 id="unlock-desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }" 
-                                placeholder="type the code, to show the link, which deletes this schema'" 
+                                placeholder="type the code, to show the link, which submits this form'" 
                                 class="toggle-set-1"
                                 style="display:none;"
                                 onclick="(e=>e.stopImmediatePropagation())(event)"
@@ -123,7 +123,7 @@ const updateDeskSchema = async(data) => {
                                     const confirmed = window.confirm('WARNING : You are about to display a link which updates the schema named \\'${ data.RU.io.deskSchemasGet.Item.name }\\' forever - select CANCEL to reconsider.')
                                     if ( confirmed ) 
                                     {
-                                        toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }' )
+                                        toggler ( this.closest('form'), '.toggle-set-2', '#desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }' )
                                     } else {
                                         //alert ('dev: cleanup required ')
                                     }
@@ -147,7 +147,7 @@ const updateDeskSchema = async(data) => {
                         
                         <button class="button-clear" 
                             title="hide the link, which submits the form"
-                            onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.nam }' )"
+                            onclick="toggler ( this.closest('form'), '.toggle-set-2', '#desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.nam }' )"
                         >
                         <i class="material-icons">lock_open</i> hide link </button>
                         
