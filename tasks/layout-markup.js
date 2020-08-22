@@ -87,8 +87,8 @@ await rus.appUrl ( [
                             const focusTarget = scopingElement.querySelector ( focusSelector )
                             if ( Object.is ( focusTarget, e ) )
                             {
-                                focusTarget.focus()
-                                if ( focusTarget.select ) focusTarget.select()
+                                //focusTarget.focus()
+                                //if ( focusTarget.select ) focusTarget.select()
                             }
                         }
                     } 
