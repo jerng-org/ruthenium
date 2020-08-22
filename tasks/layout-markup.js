@@ -71,17 +71,17 @@ await rus.appUrl ( [
        
             /* Application Original Content (move to io/blobs/ later) */
          
-            const toggler = ( element, classString, focusSelector ) => {
+            const toggler = ( scopingElement, classString, focusSelector ) => {
             
             Array.prototype.forEach.call ( 
-                element.querySelectorAll( classString ), 
+                scopingElement.querySelectorAll( classString ), 
                 e => {
                     const wasVisible = ['','initial'].includes(e.style.display)
                     e.style.display = wasVisible ? 'none' : ''
                     
                     if (    (! wasVisible) && focusSelector ) 
                     { 
-                        const focusTarget = element.querySelector ( focusSelector )
+                        const focusTarget = scopingElement.querySelector ( focusSelector )
                         if ( Object.is ( focusTarget, e ) )
                         {
                             focusTarget.focus()
