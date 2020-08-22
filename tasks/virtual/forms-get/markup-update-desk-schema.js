@@ -108,8 +108,8 @@ const innerHTML = async () => `
         // refer to new row
         const appendedElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="appended-child"]:last-of-type')
     
-        // refer to new row's input[name] 
-        const appendedElem.querySelector('input[name*="[name]"]').value = column.name
+        const appendedElemInputName.querySelector('input[name*="[name]"]').value = column.name
+        const appendedElemInputName.querySelector('input[name*="[type]"]').value = column.name
         
     }
     
