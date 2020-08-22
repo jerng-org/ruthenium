@@ -76,8 +76,6 @@ await rus.appUrl ( [
             Array.prototype.forEach.call ( 
                 element.querySelectorAll( classString ), 
                 e => {
-                    console.log ('toggler classString element:', e )
-                    
                     const wasVisible = ['','initial'].includes(e.style.display)
                     e.style.display = wasVisible ? 'none' : ''
                     
