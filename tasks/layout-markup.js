@@ -77,8 +77,6 @@ await rus.appUrl ( [
                     scopingElement.querySelectorAll( classString ), 
                     e => {
                     
-                        console.log('toggler classString element', e)
-                    
                         const wasVisible = ['','initial'].includes(e.style.display)
                         e.style.display = wasVisible ? 'none' : ''
                         
@@ -87,11 +85,11 @@ await rus.appUrl ( [
                             const focusTarget = scopingElement.querySelector ( focusSelector )
                             if ( Object.is ( focusTarget, e ) )
                             {
-                                console.log('focusTarget:',focusTarget)
-                                console.log('e:',e)
-                                
+                            
+                                console.warn('Not yet understanding why the events are triggered on focusTarget: focus->blur->focus ')
+                                    
                                 focusTarget.focus()
-                                //if ( focusTarget.select ) focusTarget.select()
+                                if ( focusTarget.select ) focusTarget.select()
                             }
                         }
                     } 
