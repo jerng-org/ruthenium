@@ -3,8 +3,8 @@
 const desksGet = require('/var/task/tasks/virtual/desks-get.js')
 
 const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js')
-
 const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
+const deskSchemasPut = require('/var/task/tasks/virtual/desk-schemas-put.js')
 
 const formsMarkupCreateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)
 const formsMarkupReadDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)
@@ -46,7 +46,7 @@ const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
     const params = {
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
         Key: {
-            name: deskSchemaName 
+            name: deskSchemaName
         },
         ReturnConsumedCapacity: 'TOTAL'
     }
@@ -132,12 +132,20 @@ const virtual = async(data) => {
                                             }
 
                                             rus.conf.verbosity > 0 &&
-                                                console.warn(`(virtual.js) manipulation of (desk-schemas) is not RESTful (current arrangement is just to colocate code by filename); some RESTful adjustments are suggested.`) &&
-                                                console.warn(`(virtual.js) manipulation of (desk-schemas) is not RESTful (all CRUD is implemented via GET).`)
+                                                console.warn(`(virtual.js) manipulation of (desk-schemas) 
+                                                    is not RESTful (current arrangement is just to colocate code by filename); 
+                                                    some RESTful adjustments are suggested.`) &&
+                                                console.warn(`(virtual.js) manipulation of (desk-schemas) 
+                                                    is not RESTful (all CRUD is implemented via GET).`) &&
+                                                console.warn(`(virtual.js) manipulation of (desk-schemas) 
+                                                    is not RESTful (HTML forms should not be their own resource/URI, 
+                                                    but rather they should be REPRESENTATIONS of given resources, 
+                                                    e.g. a request to POST (create) a desk-schema which is malformed 
+                                                    should result in a response which says "fill in this form".).`)
 
                                             switch (data.RU.request.queryStringParameters.thing[0]) {
 
-                                                //  This is not RESTful; the following may be RESTful: ?type=desk-schema, method: GET
+                                                //  This is not RESTful; the following may be RESTful: ?type=desk-schema &thing=x, method: GET
                                                 case (`read-desk-schema`):
                                                     data.RU.signals.sendResponse.body = await formsMarkupReadDeskSchema(data)
                                                     return
@@ -147,7 +155,7 @@ const virtual = async(data) => {
                                                     data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
                                                     return
 
-                                                    //  This is not RESTful; the following may be RESTful: ?type=desk-schema, method: DELETE
+                                                    //  This is not RESTful; the following may be RESTful: ?type=desk-schema &thing=x, method: DELETE
                                                 case (`delete-desk-schema`):
 
                                                     if (!await deskSchemasDeleteSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
@@ -213,7 +221,31 @@ const virtual = async(data) => {
                             switch (queryScope) {
 
                                 case ('all'):
+
+                                    //  PROTOCOL: HTTP POST - request encloses an entity, for server to accept as a 
+                                    //              SUBORDINATE of the URI's resource 
                                     await deskSchemasPost(data)
+                                    return
+
+                                default:
+                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    await status404(data)
+                                    return
+                            }
+                            // switch
+                            // ( queryScope )
+
+                        case ('PUT'):
+
+                            //  DIMENSION C
+                            //  POST (desk-schemas) ... all of them, or just one?
+                            switch (queryScope) {
+
+                                case ('one'):
+
+                                    //  PROTOCOL: HTTP PUT - request encloses an entity, for server to accept as a 
+                                    //              REPLACEMENT of the URI's resource 
+                                    await deskSchemasPut(data)
                                     return
 
                                 default:
