@@ -105,6 +105,8 @@ const innerHTML = async () => `
         // add a new row
         appendingElem.click()
         
+        console.log(appendingElem)
+        
         // refer to new row
         const appendedElem = document.querySelector('[data-ru-incrementable-group="column-definition"][data-ru-incrementable-role="appended-child"]:last-of-type')
     
