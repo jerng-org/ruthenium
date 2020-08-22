@@ -199,6 +199,7 @@ const trInTable = async(item) => {
                         style="display:none;"
                         title="delete schema forever"
                         id="desk-schemas-delete-${ item['name'] }"
+                        onblur="(e => console.log(e.target))(event)"
                         href="${
                     
                         await rus.appUrl ([
