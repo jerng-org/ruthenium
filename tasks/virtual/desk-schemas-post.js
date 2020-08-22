@@ -24,16 +24,20 @@ const deskSchemasPost = async(data) => {
         Item: candidate['desk-schemas'],
         ExpressionAttributeNames: { '#name': 'name' },
         ConditionExpression: 'attribute_not_exists(#name)',
-        //ReturnValues: '',
         ReturnConsumedCapacity: 'TOTAL'
 
     }
 
     // Call storage layer
 
-    data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
-
-    console.error('data.RU.io.deskSchemasPost',data.RU.io.deskSchemasPost)
+    try {
+        data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
+    }
+    catch (e) {
+        console.error('e', e)
+        console.error('Object.keys(e)', Object.keys(e))
+    }
+    finally { throw 'thrown'}
 
     rus.conf.versbosity > 0 &&
         console.warn(`(desk-schemas-post.js) PROTOCOL: the HTTP POST method more accurately corresponds to the DynamoDB operation (updateItem) than (putItem) which is used here.`)
