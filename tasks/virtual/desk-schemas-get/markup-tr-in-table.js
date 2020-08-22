@@ -195,10 +195,11 @@ const trInTable = async(item) => {
                                 >
                     </fieldset>
                     
-                    <div class="ru-card toggle-set-2">
+                    <div    class="ru-card toggle-set-2"
+                            style="display:none;"
+                            >
                     
                         <a  class="button" 
-                            style="display:none;"
                             title="delete schema forever"
                             id="desk-schemas-delete-${ item['name'] }"
                             href="${
@@ -214,7 +215,6 @@ const trInTable = async(item) => {
                         }"><i class="material-icons">delete_forever</i></a>
                         
                         <button class="button-clear" 
-                            style="display:none;"
                             title="hide the link, which deletes this schema"
                             onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ item['name'] }' )"
                         >
