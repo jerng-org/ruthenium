@@ -76,9 +76,9 @@ await rus.appUrl ( [
             Array.prototype.forEach.call ( 
                 element.querySelectorAll( classString ), 
                 e => {
-                    const wasVisible = ['','initial'].includes(e.style.display);
-                    e.style.display = wasVisible ? 'none' : 'initial';
-                    if ( (! wasVisible) ) { 
+                    const wasVisible = ['','initial'].includes(e.style.display)
+                    e.style.display = wasVisible ? 'none' : 'initial'
+                    if ( (! wasVisible) && focusSelector ) { 
                         const input = element.querySelector ( focusSelector )
                         input.focus()
                         input.select()
