@@ -211,7 +211,7 @@ const trInTable = async(item) => {
 
                     }"><i class="material-icons">delete_forever</i></a>
                     
-                    <button class="button-outline toggle-set-2" 
+                    <button class="button-clear toggle-set-2" 
                         style="display:none;"
                         title="hide the link, which deletes this schema"
                         onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ item['name'] }' )"
