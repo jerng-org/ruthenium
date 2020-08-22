@@ -103,7 +103,8 @@ const createDeskSchema = async ( data ) => {
                     [ 'route','virtual' ], 
                     [ 'type','desk-schemas' ] 
                 ] ),
-                innerHTML: await innerHTML()
+                innerHTML: await innerHTML(),
+                class: 'ru-card'
             } ) 
         }
     `

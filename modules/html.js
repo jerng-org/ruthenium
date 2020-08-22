@@ -37,6 +37,7 @@ const html      =  {
             const markup 
                 = `<form    method=${ conf.method ? conf.method : defaults.method }
                             action=${ conf.action }
+                            class=${ conf.class }
                             >
                             ${ conf.innerHTML }
                             </form>`
