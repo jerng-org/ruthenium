@@ -155,11 +155,13 @@ const trInTable = async(item) => {
                     }"><i class="material-icons">edit</i> <i class="material-icons">construction</i></a>
                     
                     
-                    <fieldset onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )">
+                    <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )"
+                                class="toggle-set-2"
+                                >
+                                
                         <label for="unlock-desk-schemas-delete-${ item['name'] }">
-                            
                             <button     title="show the link which deletes this schema" 
-                                        class="button-outline toggle-set-2" 
+                                        class="button-outline" 
                                         onclick="return false;"
                                         > 
                                 <span>
@@ -169,8 +171,8 @@ const trInTable = async(item) => {
                                 <span class="toggle-set-1" style="display:none;">
                                     code: 234806</span>
                             </button>
-                            
                         </label>
+                        
                         <input  type="text" 
                                 id="unlock-desk-schemas-delete-${ item['name'] }" 
                                 placeholder="type the code, to show the link, which deletes this schema'" 
@@ -197,6 +199,7 @@ const trInTable = async(item) => {
                         style="display:none;"
                         title="delete schema forever"
                         id="desk-schemas-delete-${ item['name'] }"
+                        onblur="toggler ( this.closest('td'), '.toggle-set-2', null )"
                         href="${
                     
                         await rus.appUrl ([
