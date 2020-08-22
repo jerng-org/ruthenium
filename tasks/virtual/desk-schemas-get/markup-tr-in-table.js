@@ -212,13 +212,13 @@ const trInTable = async(item) => {
                                 [ 'reader', 'human']
                             ])
     
-                        }"><i class="material-icons">delete_forever</i></a>
+                        }"><i class="material-icons">delete_forever</i> this action cannot be undone</a>
                         
                         <button class="button-clear" 
                             title="hide the link, which deletes this schema"
                             onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ item['name'] }' )"
                         >
-                        <i class="material-icons">lock_open</i> rehide this link </button>
+                        <i class="material-icons">lock_open</i> hide link </button>
                         
                     </div>
                     
