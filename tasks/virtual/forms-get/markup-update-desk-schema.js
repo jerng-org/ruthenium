@@ -86,6 +86,80 @@ const innerHTML = async () => `
 <!---------------------------------------------------------------------------->        
 
     </table>
+
+
+<!---------------------------------------------------------------------------->        
+<!--    grafted code begins here -->
+
+                    <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ 1 }' )"
+                                class="toggle-set-2"
+                                >
+                                
+                        <label for="unlock-desk-schemas-delete-${ 1 }">
+                            <button     title="show the link which deletes this schema" 
+                                        class="button-outline" 
+                                        onclick="return false;"
+                                        > 
+                                <span>
+                                    <i class="material-icons">lock</i>
+                                    <i class="material-icons">delete</i>
+                                </span>
+                                <span class="toggle-set-1" style="display:none;">
+                                    code: 234806</span>
+                            </button>
+                        </label>
+                        
+                        <input  type="text" 
+                                id="unlock-desk-schemas-delete-${ 1 }" 
+                                placeholder="type the code, to show the link, which deletes this schema'" 
+                                class="toggle-set-1"
+                                style="display:none;"
+                                onclick="(e=>e.stopImmediatePropagation())(event)"
+                                oninput="if (this.value==234806) { 
+                                
+                                    this.value = ''
+                                    toggler ( this.parentNode, '.toggle-set-1', '#unlock-desk-schemas-delete-${ 1 }' )
+                                    
+                                    const confirmed = window.confirm('WARNING : You are about to display a link which deletes the schema named \\'${ 1 }\\' forever - select CANCEL to reconsider.')
+                                    if ( confirmed ) 
+                                    {
+                                        toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ 1 }' )
+                                    } else {
+                                        //alert ('dev: cleanup required ')
+                                    }
+                                }"
+                                >
+                    </fieldset>
+                    
+                    <div    class="ru-card toggle-set-2"
+                            style="display:none;"
+                            >
+                    
+                        <a  class="button" 
+                            title="delete schema forever"
+                            id="desk-schemas-delete-${ 1 }"
+                            href="${
+                        
+                            await rus.appUrl ([
+                                [ 'route', 'virtual' ],
+                                [ 'type', 'forms' ],
+                                [ 'thing', 'delete-desk-schema' ],
+                                [ 'desk-schema-name', 999 ], 
+                                [ 'reader', 'human']
+                            ])
+    
+                        }"><i class="material-icons">delete_forever</i> this action cannot be undone</a>
+                        
+                        <button class="button-clear" 
+                            title="hide the link, which deletes this schema"
+                            onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-schemas-delete-${ 1 }' )"
+                        >
+                        <i class="material-icons">lock_open</i> hide link </button>
+                        
+                    </div>
+                    
+<!--    grafted code ends here -->
+<!---------------------------------------------------------------------------->        
     
     ${  await rus.html.input ( {
         value:  'POST it',
