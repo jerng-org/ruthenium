@@ -154,6 +154,7 @@ const updateDeskSchema = async(data) => {
                     </div>
 
 -- end of code to hide -->                    
+<div class="ru-card"><button><i class='material-icons'>block</i> this operation is temporarily disallowed <i class='material-icons'>construction</i> </button></div>
                     
 <!---------------------------------------------------------------------------->        
     

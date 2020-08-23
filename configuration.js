@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `-` ,
+    gitCommitMessage: `(desk-schemas) CRUD is mostly in place; UPDATE is contingent on code that updates all cells when the schema changes` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
