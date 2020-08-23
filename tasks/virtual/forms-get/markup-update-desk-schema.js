@@ -197,7 +197,8 @@ const updateDeskSchema = async(data) => {
         ${  await rus.html.form ( {
                 action: await rus.appUrl( [ 
                     [ 'route','virtual' ], 
-                    [ 'type','desk-schemas' ] 
+                    [ 'type','desk-schemas' ],
+                    [ 'form-method','PUT' ] 
                 ] ),
                 innerHTML: await innerHTML(),
                 class: 'ru-card'
