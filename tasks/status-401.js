@@ -4,7 +4,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const status401 = async ( data ) => {
     data.RU.signals.sendResponse.statusCode = 401
-    data.RU.signals.sendResponse.body = 'HTTP Response Status Code <h2>401 Unauthorized</h2><h3>Perhaps you have not logged in.</h3>'
+    data.RU.signals.sendResponse.body = '<h3>HTTP Response Status Code</h3><h2>401 Unauthorized</h2>Perhaps you have not logged in.'
 }
 
 module.exports = status401 
