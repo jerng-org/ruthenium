@@ -4,7 +4,9 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
 
+const status404 = require(`/var/task/tasks/status-404.js`)
 const status422 = require(`/var/task/tasks/status-422.js`)
+const status500 = require(`/var/task/tasks/status-500.js`)
 
 const deskSchemasPut = async(data) => {
 
@@ -21,18 +23,29 @@ const deskSchemasPut = async(data) => {
   const params = {
 
     TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-
     Item: candidate['desk-schemas'],
-
     ConditionExpression: 'attribute_exists(id)',
-
     ReturnConsumedCapacity: 'TOTAL'
 
   }
 
   // Call storage layer
-  data.RU.io.deskSchemasPut = await rus.aws.ddbdc.put(params).promise()
 
+  try {
+    data.RU.io.deskSchemasPut = await rus.aws.ddbdc.put(params).promise()
+  }
+  catch (e) {
+        console.error(e)
+        switch (e.code) {
+            case 'ConditionalCheckFailedException':
+                await status404(data)
+                return
+            default: // do nothing
+                await status500(data)
+                return
+        }
+  }
+  
   // View
   data.RU.signals.redirectRoute = 'initial'
 
