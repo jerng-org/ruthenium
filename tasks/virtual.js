@@ -16,6 +16,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 const status400 = require(`/var/task/tasks/status-400.js`)
 const status403 = require(`/var/task/tasks/status-403.js`)
 const status404 = require(`/var/task/tasks/status-404.js`)
+const status423 = require(`/var/task/tasks/status-423.js`)
 const status500 = require(`/var/task/tasks/status-500.js`)
 const status501 = require(`/var/task/tasks/status-501.js`)
 
@@ -152,7 +153,9 @@ const virtual = async(data) => {
 
                                                     //  This is RESTful;
                                                 case (`update-desk-schema`):
-                                                    data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
+                                                    //data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
+                                                    await status423(data)
+                                                    console.error('re-enable this when schema-cell semantics have been ironed out')
                                                     return
 
                                                     //  This is not RESTful; the following may be RESTful: ?type=desk-schema &thing=x, method: DELETE
