@@ -4,6 +4,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
 
+const status409 = require(`/var/task/tasks/status-409.js`)
 const status422 = require(`/var/task/tasks/status-422.js`)
 
 const deskSchemasPost = async(data) => {
@@ -34,10 +35,14 @@ const deskSchemasPost = async(data) => {
         data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
     }
     catch (e) {
-        console.error('e', e)
-        console.error('Object.keys(e)', Object.keys(e))
+        data.errors.push(e)
+        switch (e.code) {
+            case 'ConditionalCheckFailedException':
+                await status409(data)
+                return
+            default: // do nothing
+        }
     }
-    finally { throw 'thrown'}
 
     rus.conf.versbosity > 0 &&
         console.warn(`(desk-schemas-post.js) PROTOCOL: the HTTP POST method more accurately corresponds to the DynamoDB operation (updateItem) than (putItem) which is used here.`)
@@ -52,3 +57,5 @@ const deskSchemasPost = async(data) => {
 
 }
 module.exports = deskSchemasPost
+
+/*  CREATES A DESK-SCHEMA */
