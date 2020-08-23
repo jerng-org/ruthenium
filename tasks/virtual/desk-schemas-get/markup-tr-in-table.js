@@ -46,7 +46,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }"><i class="material-icons">preview</i>READ</a>
+                    }"><i class="material-icons">preview</i> READ</a>
                     
                     <a  class="button" 
                         title="UPDATE schema"
@@ -60,7 +60,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }"><i class="material-icons">edit</i>UPDATE</a>
+                    }"><i class="material-icons">edit</i> UPDATE</a>
                     
                     
                     <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )"
