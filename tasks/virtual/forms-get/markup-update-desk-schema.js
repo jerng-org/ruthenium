@@ -89,8 +89,9 @@ const updateDeskSchema = async(data) => {
     </table>
 
 
-<!---------------------------------------------------------------------------->        
-<!--    grafted code begins here -->
+<!---------------------------------------------------------------------------->      
+
+<!-- hide these elements until we figure out Schema -> Cell semantics --
 
                     <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }' )"
                                 class="toggle-set-2"
@@ -151,8 +152,9 @@ const updateDeskSchema = async(data) => {
                         <i class="material-icons">lock_open</i> hide link </button>
                         
                     </div>
+
+-- end of code to hide -->                    
                     
-<!--    grafted code ends here -->
 <!---------------------------------------------------------------------------->        
     
 </fieldset>
