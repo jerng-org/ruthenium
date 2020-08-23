@@ -198,6 +198,7 @@ const updateDeskSchema = async(data) => {
                 action: await rus.appUrl( [ 
                     [ 'route','virtual' ], 
                     [ 'type','desk-schemas' ],
+                    [ 'thing', data.RU.io.deskSchemasGet.Item.name ],
                     [ 'form-method','PUT' ] 
                 ] ),
                 innerHTML: await innerHTML(),
