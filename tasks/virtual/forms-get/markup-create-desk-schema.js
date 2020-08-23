@@ -84,11 +84,12 @@ const innerHTML = async () => `
         
     </table>
     
-    ${  await rus.html.input ( {
-        value:  `POST it`,
-        type:   `submit`
-    } ) }
-
+    <button type="submit"
+            title="submit form: create schema"
+            >
+            <i class='material-icons'>send</i> SUBMIT FORM</button>
+                        
+                        
 </fieldset>
 `
 

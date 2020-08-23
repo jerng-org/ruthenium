@@ -59,7 +59,7 @@ const updateDeskSchema = async(data) => {
             data-ru-incrementable-role="appended-child"
             >
             <td>
-                <i  class="material-icons"stub
+                <i  class="material-icons"
                     data-ru-incrementable-group="column-definition"
                     data-ru-incrementable-role="remove-closest"
                     >
@@ -104,6 +104,7 @@ const updateDeskSchema = async(data) => {
                                 <span>
                                     <i class="material-icons">lock</i>
                                     <i class="material-icons">send</i>
+                                    SUBMIT FORM
                                 </span>
                                 <span class="toggle-set-1" style="display:none;">
                                     code: 234806</span>
@@ -138,7 +139,7 @@ const updateDeskSchema = async(data) => {
                     
                         <button type="submit"
                                 title="submit form: update schema"
-                                id="desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }""
+                                id="desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }"
                                 >
                                 <i class='material-icons'>send</i> this action cannot be undone</button>
                         
