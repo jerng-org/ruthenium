@@ -24,7 +24,8 @@ const deskSchemasPut = async(data) => {
 
     TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
     Item: candidate['desk-schemas'],
-    ConditionExpression: 'attribute_exists(id)',
+    ExpressionAttributeNames: { '#name': 'name' },
+    ConditionExpression: 'attribute_exists(#name)',
     ReturnConsumedCapacity: 'TOTAL'
 
   }
