@@ -35,7 +35,7 @@ const trInTable = async(item) => {
                 
                 <td>
                     <a  class="button" 
-                        title="read schema"
+                        title="READ schema"
                         href="${
                     
                         await rus.appUrl ([
@@ -46,10 +46,10 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }"><i class="material-icons">preview</i></a>
+                    }"><i class="material-icons">preview</i>READ</a>
                     
                     <a  class="button" 
-                        title="edit schema"
+                        title="UPDATE schema"
                         href="${
                     
                         await rus.appUrl ([
@@ -60,7 +60,7 @@ const trInTable = async(item) => {
                             [ 'reader', 'human']
                         ])
 
-                    }"><i class="material-icons">edit</i> <i class="material-icons">construction</i></a>
+                    }"><i class="material-icons">edit</i>UPDATE</a>
                     
                     
                     <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )"
@@ -75,6 +75,7 @@ const trInTable = async(item) => {
                                 <span>
                                     <i class="material-icons">lock</i>
                                     <i class="material-icons">delete</i>
+                                    DELETE
                                 </span>
                                 <span class="toggle-set-1" style="display:none;">
                                     code: 234806</span>
