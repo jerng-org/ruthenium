@@ -35,7 +35,7 @@ const deskSchemasPost = async(data) => {
         data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
     }
     catch (e) {
-        data.errors.push(e)
+        data.RU.errors.push(e)
         switch (e.code) {
             case 'ConditionalCheckFailedException':
                 await status409(data)
