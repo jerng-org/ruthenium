@@ -6,6 +6,7 @@ const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
 
 const status409 = require(`/var/task/tasks/status-409.js`)
 const status422 = require(`/var/task/tasks/status-422.js`)
+const status500 = require(`/var/task/tasks/status-500.js`)
 
 const deskSchemasPost = async(data) => {
 
@@ -35,12 +36,14 @@ const deskSchemasPost = async(data) => {
         data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
     }
     catch (e) {
-        data.RU.errors.push(e)
+        console.error(e)
         switch (e.code) {
             case 'ConditionalCheckFailedException':
                 await status409(data)
                 return
             default: // do nothing
+                await status500(data)
+                return
         }
     }
 
