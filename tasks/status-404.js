@@ -4,7 +4,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const status404 = async ( data ) => {
     data.RU.signals.sendResponse.statusCode = 404
-    data.RU.signals.sendResponse.body = 'HTTP Response Status 404 : Not Found : What were you looking for?'
+    data.RU.signals.sendResponse.body = '<h2>HTTP Response Status 404 : Not Found</h2><h3>What were you looking for?</h3>'
 }
 
 module.exports = status404
