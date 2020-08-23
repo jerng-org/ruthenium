@@ -79,6 +79,9 @@ const html      =  {
                                                 : '' }
                             ${ conf.value       ? `value="${ conf.value }"` 
                                                 : '' }
+                            ${ conf.readonly    ? `readonly`
+                                                : ''
+                            }
                             >`
                             
             return markup

@@ -13,6 +13,7 @@ const updateDeskSchema = async(data) => {
         id:         'desk-schemas[name]',
         value:      data.RU.io.deskSchemasGet.Item.name,
         required:   true,
+        readonly:   true,
         label:      'Name of the schema :'
     } ) }
     
