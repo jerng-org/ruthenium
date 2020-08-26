@@ -46,8 +46,8 @@ const setSessionIdWithPersistence = async(validated) => {
     if (validated.id_token.sub != validated.id_token['cognito:username'] ||
         validated.id_token.sub != validated.access_token.sub ||
         validated.id_token.sub != validated.access_token.username ||
-        validated.id_token.aud != validated.access_token.client_id ||
-        validated.id_token.exp != validated.access_token.exp
+        validated.id_token.aud != validated.access_token.client_id
+        // || validated.id_token.exp != validated.access_token.exp
     ) {
         console.error(`(oidc-session.js) (setSessionIdWithPersistence) (validated)`, validated)
         throw Error(`input data did not pass consistency checks;`)
@@ -116,7 +116,7 @@ const setSessionFromRequestCookie = async DATA => {
             ]: DATA.RU.request.headers.cookies['__Host-' +
                 conf.obfuscations.sessionCookieName][0]
         },
-        ReturnConsumedCapacity:'TOTAL'
+        ReturnConsumedCapacity: 'TOTAL'
     }
 
     DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
