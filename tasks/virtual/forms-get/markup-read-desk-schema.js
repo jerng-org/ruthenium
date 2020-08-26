@@ -21,7 +21,7 @@ const readDeskSchema = async ( data ) => {
             }"
             
             >
-            <h3>View Desk <i class='material-icons'>table_chart</i></h3> 
+            <i class='material-icons'>table_chart View Desk Cel</i> 
         </a>
         `
     
