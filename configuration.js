@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(desk-schemas) CRUD is mostly in place; UPDATE is contingent on code that updates all cells when the schema changes` ,
+    gitCommitMessage: `oidc-session.js : removed a conditional check which seemed inflexible in hind-sight (not sure why it was there)` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
