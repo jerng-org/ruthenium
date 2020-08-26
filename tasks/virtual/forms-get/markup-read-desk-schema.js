@@ -10,6 +10,19 @@ const readDeskSchema = async ( data ) => {
         
         <pre><code>${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet.Item ) }</code></pre>
         
+        <a  class="button"
+            href="${                         
+                        await rus.appUrl ([
+                            [ 'route', 'virtual' ],
+                            [ 'type', 'desks' ],
+                            [ 'thing', data.RU.io.deskSchemasGet.Item.name ],
+                            [ 'reader', 'human']
+                        ])
+            }"
+            
+            >
+            <i class='material-icons'>send</i>
+        </a>
         `
     
 }
