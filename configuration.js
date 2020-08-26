@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `-` ,
+    gitCommitMessage: `removed WebDAV status codes` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2

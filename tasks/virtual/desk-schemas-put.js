@@ -5,7 +5,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
 
 const status404 = require(`/var/task/tasks/status-404.js`)
-const status422 = require(`/var/task/tasks/status-422.js`)
+const status400 = require(`/var/task/tasks/status-400.js`)
 const status500 = require(`/var/task/tasks/status-500.js`)
 
 const deskSchemasPut = async(data) => {
@@ -13,7 +13,7 @@ const deskSchemasPut = async(data) => {
   const candidate = data.RU.request.formStringParameters
 
   if (!await rus.validateFormData(data, 'desk-schemas')) {
-    await status422(data)
+    await status400(data)
     return
   }
 
