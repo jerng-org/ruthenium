@@ -43,7 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `oidc-session.js : removed a conditional check which seemed inflexible in hind-sight (not sure why it was there)` ,
+    gitCommitMessage: `-` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
