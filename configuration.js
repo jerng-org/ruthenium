@@ -43,8 +43,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `-` ,
-//    gitCommitMessage: `NEXT: check if desks-get.js is sufficiently generic` ,
+    gitCommitMessage: `(desks-get-markup) : prepared for development of desk-C_UD` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
