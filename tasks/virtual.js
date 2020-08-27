@@ -187,6 +187,7 @@ const virtual = async(data) => {
 
                                                 case (`create-desk-row`):
                                                     data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(data) 
+                                                    
                                                     /* UNIMPLEMENTED POST to DESK-CELLS */
                                                     return
 
@@ -356,6 +357,8 @@ const virtual = async(data) => {
                             // ( queryScope )
 
                         case ('POST'):
+
+                            console.error(data)
 
                             //  DIMENSION C
                             //  POST (desk-cells) ... all of them, or just one?
