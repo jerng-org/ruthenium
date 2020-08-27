@@ -50,7 +50,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(virtual.js) prepared branches for (desk-cell) C_` ,
+    gitCommitMessage: `-` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
