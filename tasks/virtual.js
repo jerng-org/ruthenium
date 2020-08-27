@@ -331,7 +331,7 @@ const virtual = async(data) => {
                                 case ('all'):
                                     rus.log.error(data, `(virtual.js) (?type=desk-cells) (GET) (?thing=) was not provided. You should specify the (desk) whose (cells) you wish to GET.`)
                                     await status403(data)
-                                    return
+                                    return 
 
                                 default:
 
