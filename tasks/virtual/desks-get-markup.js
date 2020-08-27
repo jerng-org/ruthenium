@@ -38,7 +38,9 @@ const desksGetMarkup = async(data) => {
         <tr>
         ${ colNames.reduce(
             (accumulator, colName)=>{
-                return accumulator + `<td>${deskCells[rowID][colName]}</td>`
+                return accumulator + `  <td>    ${deskCells[rowID][colName]}
+                                                <i class="material-icons">construction</i>
+                                        </td>`
             },
             `
             <th>
@@ -56,6 +58,7 @@ const desksGetMarkup = async(data) => {
                                 <i class="material-icons">lock</i>
                                 <i class="material-icons">delete</i>
                                 DELETE
+                                <i class="material-icons">construction</i>
                             </span>
                             <span class="toggle-set-1" style="display:none;">
                                 code: 234806</span>
