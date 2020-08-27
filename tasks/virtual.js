@@ -358,7 +358,7 @@ const virtual = async(data) => {
 
                         case ('POST'):
 
-                            console.error(rus.print.dataDebug (data))
+                            console.error( await rus.print.dataDebug (data))
 
                             //  DIMENSION C
                             //  POST (desk-cells) ... all of them, or just one?
