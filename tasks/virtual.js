@@ -186,7 +186,7 @@ const virtual = async(data) => {
                                                     return
 
                                                 case (`create-desk-row`):
-                                                    data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(dat)
+                                                    data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(data) 
                                                     /* UNIMPLEMENTED POST to DESK-CELLS */
                                                     return
 
