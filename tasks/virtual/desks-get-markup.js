@@ -46,7 +46,7 @@ const desksGetMarkup = async(data) => {
                     ${ ++rowCount } 
                     : 
                     <i      class="material-icons toggle-set-1"
-                            onclick="toggler ( this.parent, '.toggle-set-1', null )"
+                            onclick="toggler ( this.parentElement, '.toggle-set-1', null )"
                             >
                             fingerprint</i>
                     <span   class="toggle-set-1" 
