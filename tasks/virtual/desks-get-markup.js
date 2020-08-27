@@ -16,7 +16,7 @@ const desksGetMarkup = async(data) => {
         th1s += `<th scope="col">${ col.name }<sub>${ rus.conf.labels.deskCellTypes[col.type] }</sub></th>`
     }
 
-    th1s += `<th scope="col" rowspan="2">Operations on each Object</th>`
+    th1s += `<th scope="col">Operations on each Object</th>`
 
     let deskColumnTypes = {}
     data.RU.io.deskSchemasQuery.Items[0].columns
