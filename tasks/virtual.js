@@ -367,6 +367,8 @@ const virtual = async(data) => {
                             }
                             // switch
                             // ( queryScope )
+                            
+                            
 
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-cells), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
@@ -377,6 +379,7 @@ const virtual = async(data) => {
                     // switch 
                     // ( .method )
 
+// Should just be desk-cells; deprecate this
                 case ('desks'):
 
                     //  DIMENSION B

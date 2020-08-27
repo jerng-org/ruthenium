@@ -97,12 +97,12 @@ const createDeskRow = async ( data ) => {
     
     return `
     
-        <h2>Desk Schema : <code>creation</code> </h2>
+        <h2><code>${data.RU.io.deskSchemasGet.Item.name}</code> : object creation </h2>
     
         ${  await rus.html.form ( {
-                action: await rus.appUrl( [ 
+                action: await rus.appUrl( [ /* TBD
                     [ 'route','virtual' ], 
-                    [ 'type','desk-schemas' ] 
+                    [ 'type','desk-cells' ] */
                 ] ),
                 innerHTML: await innerHTML(),
                 class: 'ru-card'
