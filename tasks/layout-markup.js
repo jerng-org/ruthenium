@@ -65,6 +65,14 @@ await rus.appUrl ( [
                 border: 1px solid #ccc;
             }
             
+            .ru-hover-visible {
+                visibility: hidden;
+            }
+            
+            .ru-hover-visible:hover {
+                visibility: visible;
+            }
+            
         </style>
         
         <script     nomodule 
