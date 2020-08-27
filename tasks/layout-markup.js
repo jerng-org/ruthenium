@@ -65,12 +65,12 @@ await rus.appUrl ( [
                 border: 1px solid #ccc;
             }
             
-            .ru-hover-visible {
-                visibility: hidden;
+            .ru-hover-opaque {
+                opacity:0;
             }
             
-            .ru-hover-visible:hover {
-                visibility: visible;
+            .ru-hover-opaque:hover {
+                opacity:1;
             }
             
         </style>
