@@ -37,11 +37,11 @@ await rus.appUrl ( [
                 background-color: inherit;
             }
             
-            th[scope=row] {
+            thead > th[scope=row] {
                 background-color: #ccc;
             }
             
-            th[scope=col] {
+            thead > th[scope=col] {
                 background-color: #eee;
             }
             
