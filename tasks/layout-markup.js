@@ -49,8 +49,11 @@ await rus.appUrl ( [
                 
             }
 
-            th[scope=col]:first-child,
-            tbody > tr:nth-child(odd) {
+            th[scope=col]:first-child {
+                background-color: #eee;                
+            }
+            
+            tbody > tr:nth-child(even) {
                 background-color: #f8f8f8;                
             }
 
