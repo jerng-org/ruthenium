@@ -103,7 +103,10 @@ const desksGetMarkup = async(data) => {
                         */
                         ])
 
-                    }"><i class="material-icons">delete_forever</i> this action cannot be undone</a>
+                    }"> <i class="material-icons">delete_forever</i> 
+                        this action cannot be undone
+                        <i class="material-icons">construction</i>
+                    </a>
                     
                     <button class="button-clear" 
                         title="hide the link, which deletes this object"
@@ -144,7 +147,7 @@ const desksGetMarkup = async(data) => {
 
     <thead>
         <tr>
-            <th colspan="4">
+            <th colspan="999">
             
                 <a class="button float-left" href="${  
                         
@@ -155,7 +158,11 @@ const desksGetMarkup = async(data) => {
                         [ 'reader', 'human']
                     ])
                     
-                }">CREATE <i class="material-icons">fiber_new</i> Object <i class="material-icons">fiber_new</i></a>
+                }"> CREATE
+                    <i class="material-icons">fiber_new</i>
+                    Object 
+                    <i class="material-icons">construction</i>
+                </a>
                         
             </th>
         </tr>
