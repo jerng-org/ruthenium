@@ -38,11 +38,13 @@ await rus.appUrl ( [
             }
             
             thead th[scope=row] {
-                background-color: #ccc;
+                //background-color: #ccc;
+                border-bottom: 0.1rem solid #ddd;
             }
             
             thead th[scope=col] {
-                background-color: #eee;
+                //background-color: #eee;
+                border-right: 0.1rem solid #ddd;
             }
 
             tbody th[scope=row] {
