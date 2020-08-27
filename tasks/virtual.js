@@ -11,6 +11,8 @@ const formsMarkupReadDeskSchema = require(`/var/task/tasks/virtual/forms-get/mar
 const formsMarkupUpdateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)
 const formsMarkupDeleteDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-delete-desk-schema.js`)
 
+const formsMarkupCreateDeskRow = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-row.js`)
+
 const rus = require('/var/task/modules/r-u-s.js')
 
 const status400 = require(`/var/task/tasks/status-400.js`)
@@ -52,6 +54,20 @@ const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
     }
     DATA.RU.io.deskSchemasDelete = await rus.aws.ddbdc.delete(params).promise()
     return DATA.RU.io.deskSchemasDelete
+}
+
+const deskRowGetSuccess = async(DATA, deskSchemaName) => {
+    /*
+    const params = {
+        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+        Key: {
+            name: deskSchemaName
+        },
+        ReturnConsumedCapacity: 'TOTAL'
+    }
+    DATA.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
+    return ('Item' in DATA.RU.io.deskSchemasGet)
+    */
 }
 
 const virtual = async(data) => {
@@ -119,11 +135,12 @@ const virtual = async(data) => {
                                         case (`create-desk-schema`):
                                             data.RU.signals.sendResponse.body = await formsMarkupCreateDeskSchema()
                                             return
-
+                                        
+                                        // (thing) switch level 1
                                         default:
                                             if (!data.RU.request.queryStringParameters['desk-schema-name'] ||
                                                 !data.RU.request.queryStringParameters['desk-schema-name'][0]) {
-                                                rus.log.error(data, `(virtual.js) (?type=forms) (GET) (?thing=update-desk-schema) (?desk-schema-name ... was unspecified.)`)
+                                                rus.log.error(data, `(virtual.js) (?type=forms) (GET) (?desk-schema-name ... was unspecified.)`)
                                             }
 
                                             if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
@@ -168,10 +185,41 @@ const virtual = async(data) => {
                                                     data.RU.signals.sendResponse.body = await formsMarkupDeleteDeskSchema(data)
                                                     return
 
-                                                default:
-                                                    rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
-                                                    await status404(data)
+                                                case (`create-desk-row`):
+                                                    data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow()
+                                                    /* UNIMPLEMENTED POST to DESK-CELLS */
                                                     return
+
+                                                // (thing) switch level 2
+                                                default:
+
+                                                    if (!data.RU.request.queryStringParameters['desk-row-id'] ||
+                                                        !data.RU.request.queryStringParameters['desk-row-id'][0]) {
+                                                        rus.log.error(data, `(virtual.js) (?type=forms) (GET) (?desk-row-id ... was unspecified.)`)
+                                                    }
+
+                                                    if (!await deskRowGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
+                                                        await status404(data)
+                                                        return
+                                                    }
+
+                                                    switch (data.RU.request.queryStringParameters.thing[0]) {
+
+                                                        case ('update-desk-cell'):
+                                                            /* UNIMPLEMENTED PUT to DESK-CELLS */
+                                                            return
+                                                            
+                                                        case ('delete-desk-row'):
+                                                            /* UNIMPLEMENTED DELETE to DESK-CELLS */
+                                                            return
+                                                            
+                                                        // (thing) switch level 3
+                                                        default:
+                                                            rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case tree)`)
+                                                            await status404(data)
+                                                            return
+
+                                                    }
                                             }
                                     }
 
@@ -387,6 +435,8 @@ const virtual = async(data) => {
 
                 default:
                     //  (NOT desk-schemas) (NOT desk-cells) (NOT desks) and (NOT forms)
+
+                    // Expect a valid (desk-schema.name)
 
                     rus.log.error(data, `(virtual.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
                     await status404(data)

@@ -166,8 +166,9 @@ const desksGetMarkup = async(data) => {
                         
                     await rus.appUrl ([
                         [ 'route', 'virtual' ],
-                        [ 'type', 'desk' ],
-                        [ 'thing', data.RU.io.deskSchemasQuery.Items[0].name ],
+                        [ 'type', 'forms' ],
+                        [ 'thing', 'create-desk-row' ],
+                        [ 'desk-schema-name', data.RU.io.deskSchemasQuery.Items[0].name ],
                         [ 'reader', 'human']
                     ])
                     

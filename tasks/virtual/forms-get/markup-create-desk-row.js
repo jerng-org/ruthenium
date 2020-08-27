@@ -93,7 +93,7 @@ const innerHTML = async () => `
 </fieldset>
 `
 
-const createDeskRow = async ( data ) => {
+const createDeskSchema = async ( data ) => {
     
     return `
     
@@ -110,4 +110,4 @@ const createDeskRow = async ( data ) => {
         }
     `
 }
-module.exports = createDeskRow
+module.exports = createDeskSchema
