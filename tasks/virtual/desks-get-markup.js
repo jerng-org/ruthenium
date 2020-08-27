@@ -6,9 +6,9 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const desksGetMarkup = async(data) => {
 
-    let th1s = '<th scope="row">Column Names :</th>'
-    let th2s = '<th scope="row">Column Types :</th>'
-    let th3s = '<th scope="col">Row Count :</th>'
+    let th1s = '<th scope="row">Property Name</th>'
+    let th2s = '<th scope="row">Property Type</th>'
+    let th3s = `<th scope="col"><code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code>Object Count</th>`
     let colNames = []
     for (const col of data.RU.io.deskSchemasQuery.Items[0].columns) {
         colNames.push(col.name)
@@ -60,13 +60,28 @@ const desksGetMarkup = async(data) => {
 
     let markup = `
 <h3><i>GET</i> a Desk </h3>
-<h4>id:     <code>${ data.RU.io.deskSchemasQuery.Items[0].id }</code></h4>
 <h1>name:   <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code></h1>
         <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }</pre>
         <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre>
 <table>
 
     <thead>
+        <tr>
+            <th colspan="4">
+            
+                <a class="button float-left" href="${  
+                        
+                    await rus.appUrl ([
+                        [ 'route', 'virtual' ],
+                        [ 'type', 'forms' ],
+                        [ 'thing', 'create-desk-schema' ],
+                        [ 'reader', 'human']
+                    ])
+                    
+                }">CREATE <i class="material-icons">fiber_new</i> Row</a>
+                        
+            </th>
+        </tr>
         <tr>${ th1s }</tr>        
         <tr>${ th2s }</tr>        
         <tr>${ th3s }</tr>        
