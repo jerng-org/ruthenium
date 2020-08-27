@@ -25,6 +25,13 @@ module.exports = {
         
     },
 
+    defaults: {
+        
+        cookie: {
+            ['Max-Age'] : 3600 // << seconds >>
+        }
+    },
+
     /*  faultTolerance:
      *
      *      0   :   always break on first error
@@ -43,7 +50,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(desks-get-markup) : prepared for development of desk-C_UD` ,
+    gitCommitMessage: `session cookie max-age: unlinked from configuration file; unlinked from id_token; linked to access_token` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
