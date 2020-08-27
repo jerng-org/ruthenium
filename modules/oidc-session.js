@@ -47,7 +47,6 @@ const setSessionIdWithPersistence = async(validated) => {
         validated.id_token.sub != validated.access_token.sub ||
         validated.id_token.sub != validated.access_token.username ||
         validated.id_token.aud != validated.access_token.client_id
-        // || validated.id_token.exp != validated.access_token.exp
     ) {
         console.error(`(oidc-session.js) (setSessionIdWithPersistence) (validated)`, validated)
         throw Error(`input data did not pass consistency checks;`)
@@ -63,7 +62,7 @@ const setSessionIdWithPersistence = async(validated) => {
             ['cognitoGroups']: validated.id_token['cognito:groups'],
             ['cognitoRoles']: validated.id_token['cognito:roles'],
             iss: validated.id_token.iss,
-            exp: validated.id_token.exp,
+            exp: validated.access_token.exp,
             email_verified: validated.id_token.email_verified,
             access_token: {
                 jti: validated.access_token.jti, // JWT ID
@@ -94,7 +93,10 @@ const setSessionFromOidcAccessToken = async DATA => {
     await cookie.__HostSet(
         DATA,
         conf.obfuscations.sessionCookieName,
-        DATA.RU.signals.oidc.validated.access_token.sub
+        DATA.RU.signals.oidc.validated.access_token.sub,
+        {
+            ['Max-Age'] : DATA.RU.signals.oidc.validated.access_token.exp - ( new Date().getTime() / 1000 )
+        }
     )
 
     //  set internal signals;
@@ -105,8 +107,8 @@ const setSessionFromOidcAccessToken = async DATA => {
 
 const setSessionFromRequestCookie = async DATA => {
 
-    // TODO check and expire client session cookie, if DATABASE says sessions has expired
-    console.warn('session.js : expire session cookies')
+    // DynamoDB table is currently set with TTL configuration to expire the 
+    //  the object at the time specified by (access_token.exp)
 
     const params = {
         TableName: 'TEST-APP-SESSIONS',

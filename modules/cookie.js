@@ -120,7 +120,7 @@ const defaultAttributes = {
     
     ... defaultIdAttributes,
     Expires: false,     //  << ['Max-Age'] has precedence >>
-    ['Max-Age']: 3600,  //  << seconds; could be init in rus.conf TODO >>
+    ['Max-Age']: conf.defaults.cookie['Max-Age'],  //  << seconds >>
     Secure: true,       //  << typically: client only sends cookie over TLS >>
     HttpOnly: true,     //  << client omits cookie from "non-HTTP" APIs >>
     SameSite: 'Strict'  //  << client omits cookies if server is hit via cross-site request [RFC 6265 5.3.7.1. ] >>
