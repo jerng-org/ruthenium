@@ -64,8 +64,6 @@ const desksGetMarkup = async(data) => {
 <h1>name:   <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code></h1>
         <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }</pre>
         <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre>
-
-<pre>
 <table>
 
     <thead>
@@ -79,9 +77,7 @@ const desksGetMarkup = async(data) => {
     <tfoot>
     </tfoot>
     
-</table>
-</pre>
-`
+</table>`
 
 
     rus.mark(`~/tasks/virtual/desks-get-markup.js EXECUTED`)
