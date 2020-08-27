@@ -56,6 +56,7 @@ await rus.appUrl ( [
             tbody > tr:nth-child(odd) {
                 background-color: #f8f8f8;                
             }
+            
 
         /* Application Original Content  */
             
