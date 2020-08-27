@@ -74,7 +74,7 @@ const desksGetMarkup = async(data) => {
                             id="unlock-desk-row-delete-${ rowID }" 
                             placeholder="type the code, to show the link, which deletes this object" 
                             class="toggle-set-1"
-                            style="display:none;"
+                            style="display:none;margin-top:0.5rem;"
                             onclick="(e=>e.stopImmediatePropagation())(event)"
                             oninput="if (this.value==234806) { 
                             
