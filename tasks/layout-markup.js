@@ -45,8 +45,8 @@ await rus.appUrl ( [
                 border-left: 0.1rem solid #ddd;
             }
 
-            th[scope=col]:first-child {
-                border-right: 0.1rem solid #ddd;
+            tbody > tr:nth-child(odd) {
+                background-color: #e8e8e8                
             }
 
         /* Application Original Content  */
