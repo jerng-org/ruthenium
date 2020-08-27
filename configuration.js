@@ -43,7 +43,8 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `NEXT: check if desks-get.js is sufficiently generic` ,
+    gitCommitMessage: `CSS table adjustments` ,
+//    gitCommitMessage: `NEXT: check if desks-get.js is sufficiently generic` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
