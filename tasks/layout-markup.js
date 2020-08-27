@@ -37,20 +37,16 @@ await rus.appUrl ( [
                 background-color: inherit;
             }
             
-            thead th[scope=row] {
+            th[scope=row] {
                 //background-color: #ccc;
                 border-bottom: 0.1rem solid #ddd;
             }
             
-            thead th[scope=col] {
+            th[scope=col] {
                 //background-color: #eee;
-                border-right: 0.1rem solid #ddd;
+                border-left: 0.1rem solid #ddd;
             }
 
-            tbody th[scope=row] {
-                background-color: #ccc;
-            }
-            
         /* Application Original Content  */
             
             .ru-card { 
