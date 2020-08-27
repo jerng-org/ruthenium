@@ -6,9 +6,9 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const desksGetMarkup = async(data) => {
 
-    let th1s = '<th scope="row"><h6>Column Names :</h6></th>'
-    let th2s = '<th scope="row"><h6>Column Types :</h6></th>'
-    let th3s = '<th scope="col"><h6>Row Count :</h6></th>'
+    let th1s = '<th scope="row">Column Names :</th>'
+    let th2s = '<th scope="row">Column Types :</th>'
+    let th3s = '<th scope="col">Row Count :</th>'
     let colNames = []
     for (const col of data.RU.io.deskSchemasQuery.Items[0].columns) {
         colNames.push(col.name)
