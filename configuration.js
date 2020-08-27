@@ -1,19 +1,19 @@
 module.exports = {
 
     app: {
-        
+
         uri: {
-            
+
             scheme: 'https',
+            
             authority: {
-                
                 userinfo: null,
                 host: 'ruthenium-v1.dev.sudo.coffee',
                 port: null
-                
             },
-            path: '',
             
+            path: '',
+
             /*
             
             query: '',
@@ -22,14 +22,15 @@ module.exports = {
             
             */
         }
-        
+
     },
 
     defaults: {
         
         cookie: {
-            ['Max-Age'] : 3600 // << seconds >>
+            ['Max-Age']: 3600 // << seconds >>
         }
+        
     },
 
     /*  faultTolerance:
@@ -50,7 +51,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `-` ,
+    gitCommitMessage: `-`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
@@ -113,6 +114,13 @@ module.exports = {
          */
         reducer500Body: `Framework caught: an error in the reducer. Please examine logs.`,
 
+        /* Specific to the current storage system.
+         */
+        deskCellTypes: {
+            N:      'number',
+            S:      'string',
+            other:  'other'
+        }
     },
 
     obfuscations: {
@@ -145,14 +153,14 @@ module.exports = {
              *  -   this data should be sufficient documentation for the
              *      recreation of a fungible table for this application;
              */
-            sessions: { 
+            sessions: {
                 tableName: `TEST-APP-SESSIONS`,
                 primaryKey: 'cognitoUsername',
                 //sortKey: 'exp',   //  we cannot "getItem()" when the (exp) is unknown
-                                    //  so exp needs to be a LSI
-                                    //  TODO rename this 'hashKey'
-                ttlKey: 'exp'   
-                
+                //  so exp needs to be a LSI
+                //  TODO rename this 'hashKey'
+                ttlKey: 'exp'
+
             }
         }
     },
