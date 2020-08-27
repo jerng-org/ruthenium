@@ -59,7 +59,11 @@ const desksGetMarkup = async(data) => {
                             >
                             ${rowID}</span>
             </th>
+            ` /*initial accumulator value*/)
             
+            + // after all the other cells in this row, add one more ...
+            
+            `            
             <th>
             
                 <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
@@ -140,9 +144,7 @@ const desksGetMarkup = async(data) => {
                     
                 </div>
                 
-            </th>
-
-            ` /*initial accumulator value*/) 
+            </th>`
         }
         </tr>`
     }
