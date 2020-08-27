@@ -129,13 +129,12 @@ const desksGetMarkup = async(data) => {
             <th    scope="row" 
                     id="${rowID}"
                     >
-                    ${ ++rowCount } 
-                    : 
+                    <span class="toggle-set-1">${ ++rowCount } : </span> 
                     <i      class="material-icons toggle-set-1"
                             onclick="toggler ( this.parentElement, '.toggle-set-1', null )"
                             >
                             fingerprint</i>
-                    <span   class="toggle-set-1 ru-card" 
+                    <span   class="toggle-set-1" 
                             style="display:none;"
                             >
                             ${rowID}</span>
