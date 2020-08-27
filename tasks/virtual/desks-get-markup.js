@@ -8,8 +8,7 @@ const desksGetMarkup = async(data) => {
 
     let th1s = '<th scope="row" colspan="2">Property Name</th>'
     let th2s = '<th scope="row" colspan="2">Property Type</th>' 
-    let th3s = `    <th></th>
-                    <th scope="col" colspan="999">
+    let th3s = `<th scope="col" colspan="999">
                         <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code>Object Count (click to show ID)
                     </th>`
     let colNames = []
@@ -47,6 +46,20 @@ const desksGetMarkup = async(data) => {
                                         </td>`
             },
             `
+            <th    scope="row" 
+                    id="${rowID}"
+                    >
+                    <span class="toggle-set-1">${ ++rowCount } : </span> 
+                    <i      class="material-icons toggle-set-1"
+                            onclick="toggler ( this.parentElement, '.toggle-set-1', null )"
+                            >
+                            fingerprint</i>
+                    <span   class="toggle-set-1" 
+                            style="display:none;"
+                            >
+                            ${rowID}</span>
+            </th>
+            
             <th>
             
                 <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
@@ -129,20 +142,6 @@ const desksGetMarkup = async(data) => {
                 
             </th>
 
-            <th    scope="row" 
-                    id="${rowID}"
-                    >
-                    <span class="toggle-set-1">${ ++rowCount } : </span> 
-                    <i      class="material-icons toggle-set-1"
-                            onclick="toggler ( this.parentElement, '.toggle-set-1', null )"
-                            >
-                            fingerprint</i>
-                    <span   class="toggle-set-1" 
-                            style="display:none;"
-                            >
-                            ${rowID}</span>
-            </th>
-            
             ` /*initial accumulator value*/) 
         }
         </tr>`
