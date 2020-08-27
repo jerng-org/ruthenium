@@ -50,7 +50,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `session cookie max-age: unlinked from configuration file; unlinked from id_token; linked to access_token` ,
+    gitCommitMessage: `-` ,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2

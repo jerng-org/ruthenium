@@ -176,7 +176,7 @@ try {
 
                 `v2:
                 -   MIME multipart content for 1->N request->response-representations;
-                -   Etags for updated data;
+                -   Etags for updated data; also see "last modified" header;
                 -   Probably no WebDAV, unless, we FIRST figure out a morphism
                     which uses JSON (popular) instead of XML (unpopular) wtf
                 
