@@ -27,7 +27,7 @@ await rus.appUrl ( [
         
         <style>
             
-            /* Application Milligram-Overrides */
+        /* Application Milligram-Overrides */
         
             .material-icons {
                 vertical-align: middle;
@@ -37,7 +37,15 @@ await rus.appUrl ( [
                 background-color: inherit;
             }
             
-            /* Application Original Content  */
+            th[scope=row] {
+                background-color: #ccc;
+            }
+            
+            th[scope=col] {
+                background-color: #eee;
+            }
+            
+        /* Application Original Content  */
             
             .ru-card { 
                 border-radius: 0.5em;
