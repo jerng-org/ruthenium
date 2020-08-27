@@ -73,12 +73,12 @@ const desksGetMarkup = async(data) => {
                         
                     await rus.appUrl ([
                         [ 'route', 'virtual' ],
-                        [ 'type', 'forms' ],
-                        [ 'thing', 'create-desk-schema' ],
+                        [ 'type', 'desk' ],
+                        [ 'thing', data.RU.io.deskSchemasQuery.Items[0].name ],
                         [ 'reader', 'human']
                     ])
                     
-                }">CREATE <i class="material-icons">fiber_new</i> Row</a>
+                }">CREATE <i class="material-icons">fiber_new</i> Object</a>
                         
             </th>
         </tr>
