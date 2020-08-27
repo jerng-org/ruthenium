@@ -48,13 +48,16 @@ const desksGetMarkup = async(data) => {
             
                 <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
                             class="toggle-set-2"
-                            style="margin:0"
+                            style="margin:0;"
                             >
                             
-                    <label for="unlock-desk-row-delete-${ rowID }">
+                    <label  for="unlock-desk-row-delete-${ rowID }"
+                            style="margin:0;"
+                            >
                         <button     title="show the link which deletes this object" 
                                     class="button-outline" 
                                     onclick="return false;"
+                                    style="margin:0;"
                                     > 
                             <span>
                                 <i class="material-icons">lock</i>
