@@ -14,7 +14,7 @@ const innerHTML = async DATA => `
                     name:           `desk-cells###[${ currentValue.name }]`,
                     placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
                     
-                } )
+                } ) 
             },
             `` /* initial value */
         )
