@@ -12,7 +12,7 @@ const innerHTML = async DATA => `
                     id:             currentValue.name,
                     label:          currentValue.name,
                     name:           `desk-cells###[${ currentValue.name }]`,
-                    placeholder:    `-- enter a ${ currentValue.type } --`
+                    placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
                     
                 } )
             },
