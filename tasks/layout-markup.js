@@ -44,6 +44,10 @@ await rus.appUrl ( [
             thead th[scope=col] {
                 background-color: #eee;
             }
+
+            tbody th[scope=row] {
+                background-color: #ccc;
+            }
             
         /* Application Original Content  */
             
