@@ -64,7 +64,7 @@ const desksGetMarkup = async(data) => {
                     
                     <input  type="text" 
                             id="unlock-desk-row-delete-${ rowID }" 
-                            placeholder="type the code, to show the link, which deletes this object'" 
+                            placeholder="type the code, to show the link, which deletes this object" 
                             class="toggle-set-1"
                             style="display:none;"
                             onclick="(e=>e.stopImmediatePropagation())(event)"
@@ -76,7 +76,7 @@ const desksGetMarkup = async(data) => {
                                 const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\'${ rowID }\\' forever - select CANCEL to reconsider.')
                                 if ( confirmed ) 
                                 {
-                                    toggler ( this.closest('td'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )
+                                    toggler ( this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )
                                 } else {
                                     //alert ('dev: cleanup required ')
                                 }
@@ -107,7 +107,7 @@ const desksGetMarkup = async(data) => {
                     
                     <button class="button-clear" 
                         title="hide the link, which deletes this object"
-                        onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )"
+                        onclick="toggler ( this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )"
                     >
                     <i class="material-icons">lock_open</i> hide link </button>
                     
