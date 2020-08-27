@@ -40,7 +40,20 @@ const desksGetMarkup = async(data) => {
             (accumulator, colName)=>{
                 return accumulator + `<td>${deskCells[rowID][colName]}</td>`
             },
-            `<th scope="row" id="${rowID}">${ ++rowCount } : ${rowID}</th>` /*initial accumulator value*/) 
+            `<th    scope="row" 
+                    id="${rowID}"
+                    onclick="toggler ( this, '.toggle-set-1', null )"
+                    >
+                    ${ ++rowCount } 
+                    : 
+                    <i      class="material-icons toggle-set-1"
+                            >
+                            fingerprint</i>
+                    <span   class="toggle-set-1" 
+                            style="display:none;"
+                            >
+                            ${rowID}</span>
+            </th>` /*initial accumulator value*/) 
         }
         </tr>`
     }
