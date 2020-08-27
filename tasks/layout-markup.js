@@ -41,7 +41,7 @@ await rus.appUrl ( [
                 border-bottom: 0.1rem solid #ddd;
             }
             
-            th[scope=col] {
+            th[scope=col]:not(:first-child) {
                 border-left: 0.1rem solid #ddd;
             }
 
