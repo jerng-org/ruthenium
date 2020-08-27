@@ -41,16 +41,16 @@ await rus.appUrl ( [
                 font-weight:300;
             }
             
+            thead tr:last-child th[scope=col]:first-child {
+                border-bottom:none;
+            }
+
             th[scope=row] {
                 border-bottom: 0.1rem solid #ddd;
             }
             
             th[scope=col]:not(:first-child) {
                 border-left: 0.1rem solid #ddd;
-            }
-
-            th[scope=col]:first-child) {
-                
             }
 
             tbody > tr:nth-child(odd) {
