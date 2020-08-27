@@ -8,13 +8,14 @@ const innerHTML = async DATA => `
     ${  
         DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
             ( accumulator, currentValue, index, array ) => {
-                return accumulator + ( await rus.html.input ( {
+                const _html = await rus.html.input ( {
                     id:             currentValue.name,
                     label:          currentValue.name,
                     name:           `desk-cells###[${ currentValue.name }]`,
                     placeholder:    `-- enter a ${ currentValue.type } --`
                     
-                } ) )
+                } )
+                return accumulator + _html
             },
             `` /* initial value */
         )
