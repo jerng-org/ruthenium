@@ -93,16 +93,16 @@ const innerHTML = async () => `
 </fieldset>
 `
 
-const createDeskRow = async ( data ) => {
+const createDeskSchema = async ( data ) => {
     
     return `
     
-        <h2><code>${data.RU.io.deskSchemasGet.Item.name}</code> : object creation </h2>
+        <h2>Desk Schema : <code>creation</code> </h2>
     
         ${  await rus.html.form ( {
-                action: await rus.appUrl( [ /* TBD
+                action: await rus.appUrl( [ 
                     [ 'route','virtual' ], 
-                    [ 'type','desk-cells' ] */
+                    [ 'type','desk-schemas' ] 
                 ] ),
                 innerHTML: await innerHTML(),
                 class: 'ru-card'
@@ -110,4 +110,4 @@ const createDeskRow = async ( data ) => {
         }
     `
 }
-module.exports = createDeskRow
+module.exports = createDeskSchema

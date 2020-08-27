@@ -2,90 +2,26 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHTML = async () => `
+const innerHTML = async DATA => `
 <fieldset>
 
-    ${ await rus.html.input ( {
-        name:       `desk-schemas[name]`,
-        id:         `desk-schemas[name]`,
-        placeholder:`-- enter a schema name --`,
-        required:   true,
-        label:      `Name the schema :`
-    } ) }
-    
-    <table  data-ru-incrementable-group="column-definition"
-            data-ru-incrementable-role="parent"
-            >
-        <tr>
-            <td>
-                <i  class="material-icons"
-                    data-ru-incrementable-group="column-definition"
-                    data-ru-incrementable-role="append-one"
-                    data-ru-incrementable-attributes='[
-                        {   
-                            "attribute":    "name",
-                            "baseValue":    "desk-schemas[columns]###[name]"
-                        },
-                        {   
-                            "attribute":    "name",
-                            "baseValue":    "desk-schemas[columns]###[type]"
-                        }
-                    ]'
-                    >
-                    add_circle_outline</i>
-            
-            </td>
-            <td>
-                <label>
-                    Add columns to the schema :
-                    <h6>&nbsp;</h6>
-                    </label>
-            </td>
-            <td>
-                <label>
-                    Specify column type :
-                    <h6>'string' and 'number' are efficient</h6> 
-                    </label>
-            </td>
-        </tr>
+    ${  
+        DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
+            ( accumulator, currentValue, index, array ) => {
+                return accumulator + rus.html.input ( {
+                    id:             currentValue.name,
+                    label:          currentValue.name,
+                    name:           `desk-cells###[${ currentValue.name }]`,
+                    placeholder:    `-- enter a ${ currentValue.type } --`
+                    
+                } )
+            },
+            `` /* initial value */
+        )
+    } 
 
-<!---------------------------------------------------------------------------->        
-        <template data-ru-incrementable-group="column-definition">
-        <tr data-ru-incrementable-group="column-definition"
-            data-ru-incrementable-role="appended-child"
-            >
-            <td>
-                <i  class="material-icons"stub
-                    data-ru-incrementable-group="column-definition"
-                    data-ru-incrementable-role="remove-closest"
-                    >
-                    remove_circle_outline</i>
-            </td>
-            <td>
-                ${ await rus.html.input ( {
-                    name:       `desk-schemas[columns]###[name]`,
-                    placeholder:`-- enter a column name --`,
-                    required:   true
-                } ) }
-            </td>
-            <td>
-                <select name="desk-schemas[columns]###[type]"
-                        required
-                        >
-                    <option disabled selected value> -- select an option -- </option>
-                    <option value="S">string</option>
-                    <option value="N">number</option>
-                    <option value="other">other</option>
-                    </select>
-            </td>
-        </tr>
-        </template>
-<!---------------------------------------------------------------------------->        
-        
-    </table>
-    
     <button type="submit"
-            title="submit form: create schema"
+            title="submit form: create object"
             >
             <i class='material-icons'>send</i> SUBMIT FORM</button>
                         
@@ -93,21 +29,21 @@ const innerHTML = async () => `
 </fieldset>
 `
 
-const createDeskSchema = async ( data ) => {
+const createDeskRow = async ( data ) => {
     
     return `
     
-        <h2>Desk Schema : <code>creation</code> </h2>
+        <h2><code>${data.RU.io.deskSchemasGet.Item.name}</code> : object creation </h2>
     
         ${  await rus.html.form ( {
-                action: await rus.appUrl( [ 
+                action: await rus.appUrl( [ /* TBD
                     [ 'route','virtual' ], 
-                    [ 'type','desk-schemas' ] 
+                    [ 'type','desk-cells' ] */
                 ] ),
-                innerHTML: await innerHTML(),
+                innerHTML: await innerHTML(data),
                 class: 'ru-card'
             } ) 
         }
     `
 }
-module.exports = createDeskSchema
+module.exports = createDeskRow
