@@ -38,13 +38,15 @@ await rus.appUrl ( [
             }
             
             th[scope=row] {
-                //background-color: #ccc;
                 border-bottom: 0.1rem solid #ddd;
             }
             
             th[scope=col] {
-                //background-color: #eee;
                 border-left: 0.1rem solid #ddd;
+            }
+
+            th[scope=col]:first-child {
+                border-right: 0.1rem solid #ddd;
             }
 
         /* Application Original Content  */
