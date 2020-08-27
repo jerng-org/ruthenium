@@ -37,6 +37,10 @@ await rus.appUrl ( [
                 background-color: inherit;
             }
             
+            thead th:first-child {
+                font-weight:300;
+            }
+            
             th[scope=row] {
                 border-bottom: 0.1rem solid #ddd;
             }
