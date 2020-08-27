@@ -42,11 +42,11 @@ const desksGetMarkup = async(data) => {
             },
             `<th    scope="row" 
                     id="${rowID}"
-                    onclick="toggler ( this, '.toggle-set-1', null )"
                     >
                     ${ ++rowCount } 
                     : 
                     <i      class="material-icons toggle-set-1"
+                            onclick="toggler ( this.parent, '.toggle-set-1', null )"
                             >
                             fingerprint</i>
                     <span   class="toggle-set-1" 
@@ -78,7 +78,7 @@ const desksGetMarkup = async(data) => {
                         [ 'reader', 'human']
                     ])
                     
-                }">CREATE <i class="material-icons">fiber_new</i> Object</a>
+                }">CREATE <i class="material-icons">fiber_new</i> Object <i class="material-icons">fiber_new</i></a>
                         
             </th>
         </tr>
