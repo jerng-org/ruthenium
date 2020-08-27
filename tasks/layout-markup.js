@@ -37,25 +37,30 @@ await rus.appUrl ( [
                 background-color: inherit;
             }
             
-            thead th:first-child {
-                font-weight:300;
+            table {
+                border-collapse: collapse;
             }
             
-            thead tr:last-child th[scope=col]:first-child {
-                border-bottom:none;
-            }
-
-            th[scope=row] {
-                border-bottom: 0.1rem solid #ddd;
-            }
-            
-            th[scope=col]:not(:first-child) {
-                border-left: 0.1rem solid #ddd;
-            }
-
-            tbody > tr:nth-child(odd) {
-                background-color: #f8f8f8;                
-            }
+                thead th:first-child {
+                    font-weight:300;
+                }
+                
+                thead tr:last-child th[scope=col]:first-child {
+                    border-bottom:none;
+                }
+    
+                th[scope=row] {
+                    border-bottom: 0.1rem solid #ddd;
+                }
+                
+                th[scope=col]:not(:first-child) {
+                    border-left: 0.1rem solid #ddd;
+                    border-right: 0.1rem solid #ddd;
+                }
+    
+                tbody > tr:nth-child(odd) {
+                    background-color: #f8f8f8;                
+                }
             
 
         /* Application Original Content  */
