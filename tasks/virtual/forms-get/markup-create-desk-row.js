@@ -6,7 +6,7 @@ const innerHTML = async DATA => `
 <fieldset>
 
     ${  
-        DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
+        await DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
             async ( accumulator, currentValue, index, array ) => {
                 return accumulator + await rus.html.input ( {
                     id:             currentValue.name,
