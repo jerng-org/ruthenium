@@ -42,7 +42,77 @@ const desksGetMarkup = async(data) => {
             },
             `
             <th>
-                operations
+            
+                <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
+                            class="toggle-set-2"
+                            >
+                            
+                    <label for="unlock-desk-row-delete-${ rowID }">
+                        <button     title="show the link which deletes this object" 
+                                    class="button-outline" 
+                                    onclick="return false;"
+                                    > 
+                            <span>
+                                <i class="material-icons">lock</i>
+                                <i class="material-icons">delete</i>
+                                DELETE
+                            </span>
+                            <span class="toggle-set-1" style="display:none;">
+                                code: 234806</span>
+                        </button>
+                    </label>
+                    
+                    <input  type="text" 
+                            id="unlock-desk-row-delete-${ rowID }" 
+                            placeholder="type the code, to show the link, which deletes this object'" 
+                            class="toggle-set-1"
+                            style="display:none;"
+                            onclick="(e=>e.stopImmediatePropagation())(event)"
+                            oninput="if (this.value==234806) { 
+                            
+                                this.value = ''
+                                toggler ( this.parentNode, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )
+                                
+                                const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\'${ rowID }\\' forever - select CANCEL to reconsider.')
+                                if ( confirmed ) 
+                                {
+                                    toggler ( this.closest('td'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )
+                                } else {
+                                    //alert ('dev: cleanup required ')
+                                }
+                            }"
+                            >
+                </fieldset>
+                
+                <div    class="ru-card toggle-set-2"
+                        style="display:none;"
+                        >
+                
+                    <a  class="button" 
+                        title="delete object forever"
+                        id="desk-row-delete-${ rowID }"
+                        href="${
+                    
+                        await rus.appUrl ([
+                        /*
+                            [ 'route', 'virtual' ],
+                            [ 'type', 'forms' ],
+                            [ 'thing', 'delete-desk-schema' ],
+                            [ 'desk-schema-name', rowID ], 
+                            [ 'reader', 'human']
+                        */
+                        ])
+
+                    }"><i class="material-icons">delete_forever</i> this action cannot be undone</a>
+                    
+                    <button class="button-clear" 
+                        title="hide the link, which deletes this object"
+                        onclick="toggler ( this.closest('td'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )"
+                    >
+                    <i class="material-icons">lock_open</i> hide link </button>
+                    
+                </div>
+                
             </th>
 
             <th    scope="row" 
