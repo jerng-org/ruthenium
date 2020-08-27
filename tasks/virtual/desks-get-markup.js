@@ -6,7 +6,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const desksGetMarkup = async(data) => {
 
-    let th1s = '<th scope="row" >Property Name<sub>type</sub></th>'
+    let th1s = '<th scope="row" ><super>Property Name<<sub>type</sub></th>'
     let th2s = `<th scope="col" colspan="999">
                         <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code>Object Count (click to show ID)
                     </th>`
@@ -16,7 +16,7 @@ const desksGetMarkup = async(data) => {
         th1s += `<th scope="col">${ col.name }<sub>${ rus.conf.labels.deskCellTypes[col.type] }</sub></th>`
     }
 
-    th1s += `<th scope="col">Operations <sub>on each object</sub></th>`
+    th1s += `<th scope="col"><sub>Operations on each Object</sub></th>`
 
     let deskColumnTypes = {}
     data.RU.io.deskSchemasQuery.Items[0].columns
