@@ -186,15 +186,68 @@ try {
                 -   Etags for updated data; also see "last modified" header;
                     (middleware?)
                 
-                -   Clean up the data model : clear delineation of :
+                -   Clean up the data model : 
                 
-                    -   resources;                  
+                    -   a conceptually discrete RESOURCE can be intrinsically
+                        a COLLECTION OF OTHER RESOURCES
+                        
+                    -   clear delineation of :
+                
+                        -   RESOURCEs;                  
+                        
+                            -   RESOURCE METADATA;
+                        
+                        -   resource REPRESENTATIONs;   
+                        
+                            -   resource REPRESENTATION METADATA
+                            
+                    -   Lee (1997) defines metadata as being machine readable
                     
-                        -   resource metadata;
+                    -   URIs should not include HTTP METHODS (perhaps except
+                            when we have to tunnel weird methods over
+                            form-POSTs) (RFC 7231.2)
+                                
+                    -   Unsafe Methods, full scope (listed by increasing complexity)
                     
-                    -   resource representations;   
+                        -   DELETE  : delete                                any entire RESOURCE
+                        
+                        -   PUT     : create / update                       any entire RESOURCE
+                        
+                        -   PATCH   : create / update / delete 
+                                                      CHILD-RESOURCES of    a COLLECTION-RESOURCE
+                        
+                                    :   or                                  any entire RESOURCE
+                        
+                        -   POST    : create a CHILD-RESOURCE of            a COLLECTION-RESOURCE
+                                    
+                                    :   or                                  any entire RESOURCE
+                                    
+                                    :   POST is messy because HTML 
+                                        only supports POST as a tunnel for
+                                        PUT, PATCH, and DELETE
+                                        
+                    -   Unsafe Methods, reduced scope, Approach 1:
                     
-                        -   resource representation metadata
+                        -   Since POST's unique characteristic is that it is the 
+                                only unsafe (RFC 2612) method supported by HTML,
+                                we *may* feasibly scope the role of POST to
+                                the tunneling of other methods, such that it 
+                                interpreted to have no other use on its own;
+                                
+                        -   In this approach: 
+                        
+                            -   POST    : performs no CRUD operations 
+                            
+                            -   DELETE  : deletes
+                                            : any entire RESOURCE
+                            
+                            -   PUT     : creates / updates
+                                            : any entire RESOURCE
+                            
+                            -   PATCH   : creates / updates / deletes
+                                            : CHILD-RESOURCES of
+                                                a COLLECTION-RESOURCE
+                        
                 `,
 
                 `RULE:

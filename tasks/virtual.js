@@ -225,7 +225,7 @@ const virtual = async(data) => {
                                     }
 
                                 default:
-                                    rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
@@ -258,7 +258,7 @@ const virtual = async(data) => {
                                     return
 
                                 default:
-                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
@@ -279,7 +279,7 @@ const virtual = async(data) => {
                                     return
 
                                 default:
-                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
@@ -300,7 +300,7 @@ const virtual = async(data) => {
                                     return
 
                                 default:
-                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
@@ -335,7 +335,7 @@ const virtual = async(data) => {
 
                                 default:
 
-                                    rus.log.error(data, `(virtual.js) (?type=desk-cells) (GET) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=desk-cells) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                     await status404(data)
 
 
@@ -364,7 +364,7 @@ const virtual = async(data) => {
                             //  POST (desk-cells) ... all of them, or just one?
                             switch (queryScope) {
 
-                                default: rus.log.error(data, `(virtual.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                default: rus.log.error(data, `(virtual.js) (?type=desk-cells) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                 await status404(data)
                                 return
                             }
@@ -396,10 +396,22 @@ const virtual = async(data) => {
                             switch (queryScope) {
 
                                 case ('all'):
+                                    
+                                    //  This is simply the case where 'thing='
+                                    //      is not specified; so it includes
+                                    //      the cases where we want to request
+                                    //      the (collection / type) with the 
+                                    //      POST method, in order to create
+                                    //      sub-entities under it. (per-spec)
+                                    
+                                    switch
+                                    
+                                    /*
                                     rus.log.error(data, `(virtual.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
                                     await status403(data)
                                     return
-
+                                    */
+                                    
                                 case ('one'):
 
                                     //  DIMENSION D
@@ -422,7 +434,7 @@ const virtual = async(data) => {
                                     return
 
                                 default:
-                                    rus.log.error(data, `(virtual.js) (?type=desk-cells) (POST) ... (queryScope): ${queryScope} not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=desk-cells) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
