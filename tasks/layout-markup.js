@@ -56,11 +56,11 @@ await rus.appUrl ( [
             }
 
             tbody > tr:nth-child(odd) > td {
-                background-color: #f8f8f8;                
+                background-color: #f0f0f0;                
             }
             
             tbody > tr:nth-child(odd) > th {
-                background-color: #eee;                
+                background-color: #f8f8f8;                
             }
             
 
