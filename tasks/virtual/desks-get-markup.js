@@ -50,16 +50,17 @@ const desksGetMarkup = async(data) => {
                     id="${rowID}"
                     >
                     
+                    <i  class="material-icons toggle-set-1"
+                        title="hide the id"
+                        onclick="toggler ( this.closest('th'), '.toggle-set-1', null )"
+                        >
+                        visibility_off</i>
+                        
                     <span   class="toggle-set-1" 
                             style="display:none;"
                             >
+                            &nbsp;
                             ${rowID}
-                            
-                        <i  class="material-icons float-left"
-                            title="hide the id"
-                            onclick="toggler ( this.closest('th'), '.toggle-set-1', null )"
-                            >
-                            visibility_off</i>
                     </span>
                             
                     <i      class="material-icons toggle-set-1"
