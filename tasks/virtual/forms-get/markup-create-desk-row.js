@@ -11,7 +11,7 @@ const innerHTML = async DATA => `
                 return await accumulator + await rus.html.input ( {
                     id:             currentValue.name,
                     label:          currentValue.name,
-                    name:           `desk-cell[${ currentValue.name }]`,
+                    name:           `desk-cell[columns][${ currentValue.name }]`,
                     placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
                     
                 } ) 

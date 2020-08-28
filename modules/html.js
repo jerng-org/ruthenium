@@ -69,15 +69,17 @@ const html      =  {
                         : ``
                     }
                     <input  type="${ conf.type ? conf.type : defaults.type }"
-                            ${ conf.name        ? `name="${conf.name}"` 
-                                                : '' }"
-                            ${ conf.placeholder ? `placeholder="${conf.placeholder}"`
+                            ${ conf.type        ? `type="${conf.type}"`
                                                 : '' }
                             ${ conf.id          ? `id="${conf.id}"`
                                                 : '' }
-                            ${ conf.required    ? 'required'
-                                                : '' }
+                            ${ conf.name        ? `name="${conf.name}"` 
+                                                : '' }"
                             ${ conf.value       ? `value="${ conf.value }"` 
+                                                : '' }
+                            ${ conf.placeholder ? `placeholder="${conf.placeholder}"`
+                                                : '' }
+                            ${ conf.required    ? 'required'
                                                 : '' }
                             ${ conf.readonly    ? `readonly`
                                                 : ''
