@@ -51,6 +51,7 @@ const desksGetMarkup = async(data) => {
                     >
                     
                     <i  class="material-icons toggle-set-1"
+                        style="display:none;"
                         title="hide the id"
                         onclick="toggler ( this.closest('th'), '.toggle-set-1', null )"
                         >
