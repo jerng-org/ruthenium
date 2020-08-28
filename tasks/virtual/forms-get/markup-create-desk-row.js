@@ -49,7 +49,8 @@ const createDeskRow = async ( data ) => {
         ${  await rus.html.form ( {
                 action: await rus.appUrl( [
                     [ 'route','virtual' ], 
-                    [ 'type','desk-cells' ] 
+                    [ 'type','desk-cells' ], 
+                    [ 'form-method','PATCH' ] 
                 ] ),
                 innerHTML: await innerHTML(data),
                 class: 'ru-card'

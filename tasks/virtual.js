@@ -356,6 +356,21 @@ const virtual = async(data) => {
                             // switch
                             // ( queryScope )
 
+                        case ('PATCH'):
+
+                            console.error( await rus.print.dataDebug (data))
+
+                            //  DIMENSION C
+                            //  PATCH (desk-cells) ... all of them, or just one?
+                            switch (queryScope) {
+
+                                default: rus.log.error(data, `(virtual.js) (?type=desk-cells) (PATCH) ... (queryScope): '${queryScope}' not in (switch-case)`)
+                                await status404(data)
+                                return
+                            }
+                            // switch
+                            // ( queryScope )
+                            
                         case ('POST'):
 
                             console.error( await rus.print.dataDebug (data))
