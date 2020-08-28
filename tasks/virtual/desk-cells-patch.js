@@ -66,7 +66,7 @@ const deskCellsPatch = async(data) => {
 */
 
     // View
-    data.RU.signals.sendResponse.body = '(desk-cells-patch.js) W'
+    data.RU.signals.sendResponse.body = '(desk-cells-patch.js) WIP' 
 
 
     // manipulate (data.RU), for example
