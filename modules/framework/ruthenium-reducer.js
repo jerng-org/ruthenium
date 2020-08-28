@@ -57,6 +57,9 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
         //  normal operation;
         const intermediateData = await CURRENT_MIDDLEWARE(DATA)
 
+console.error(CURRENT_MIDDLEWARE.name, ':', intermediateData.LAMBDA.event.requestContext.http.method)
+
+
         /* THROWN? This line does not run, if CURRENT_MIDDLEWARE erred */
 
         rus.mark(`middleware executed: ${ CURRENT_MIDDLEWARE.name }`)
