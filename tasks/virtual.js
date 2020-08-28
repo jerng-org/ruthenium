@@ -101,7 +101,7 @@ const virtual = async(data) => {
 
             let queryScope
             if (queryHasType) {
-                queryScope = (queryHasThing ? 'one' : 'all')
+                queryScope = (queryHasThing ? 'individual' : 'collection')
             }
             else {
                 rus.log.error(data, `(virtual.js) (?type=) was not provided.`)
@@ -126,7 +126,7 @@ const virtual = async(data) => {
                             //  GET (forms) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('one'):
+                                case ('individual'):
 
                                     //  DIMENSION D
                                     //  GET (forms), which one? 
@@ -253,7 +253,7 @@ const virtual = async(data) => {
                             //  GET (desk-schemas) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('all'):
+                                case ('collection'):
                                     await deskSchemasGet(data)
                                     return
 
@@ -271,7 +271,7 @@ const virtual = async(data) => {
                             //  POST (desk-schemas) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('all'):
+                                case ('collection'):
 
                                     //  PROTOCOL: HTTP POST - request encloses an entity, for server to accept as a 
                                     //              SUBORDINATE of the URI's resource 
@@ -292,7 +292,7 @@ const virtual = async(data) => {
                             //  POST (desk-schemas) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('one'):
+                                case ('individual'):
 
                                     //  PROTOCOL: HTTP PUT - request encloses an entity, for server to accept as a 
                                     //              REPLACEMENT of the URI's resource 
@@ -328,7 +328,7 @@ const virtual = async(data) => {
                             //  GET (desk-cells) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('all'):
+                                case ('collection'):
                                     rus.log.error(data, `(virtual.js) (?type=desk-cells) (GET) (?thing=) was not provided. You should specify the (desk) whose (cells) you wish to GET.`)
                                     await status403(data)
                                     return 
@@ -412,7 +412,7 @@ const virtual = async(data) => {
                             //  GET (desks) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('all'):
+                                case ('collection'):
                                     
                                     //  This is simply the case where 'thing='
                                     //      is not specified; so it includes
@@ -429,7 +429,7 @@ const virtual = async(data) => {
                                     return
                                     */
                                     
-                                case ('one'):
+                                case ('individual'):
 
                                     //  DIMENSION D
                                     //  GET (desks), which one? 

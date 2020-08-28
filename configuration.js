@@ -51,7 +51,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `-`,
+    gitCommitMessage: `virtual.js : replaced one/all with individual/collection`,
 //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
     /*  USES:
      *  Merge order     :   1
