@@ -32,7 +32,7 @@ const lambdaCopyRequestParameters = async ( data ) => {
 
     data.RU.request.queryStringParameters = 
         data.LAMBDA.event.queryStringParameters
-        ?   data.LAMBDA.event.queryStringParameters
+        ?   JSON.parse(JSON.stringify(data.LAMBDA.event.queryStringParameters))
         :   {}
     // Values with same key stored as: CSV string
 
@@ -49,7 +49,9 @@ const lambdaCopyRequestParameters = async ( data ) => {
     data.RU.request.http = 
         data.LAMBDA.event.requestContext
         ?   (   data.LAMBDA.event.requestContext.http
-                ?   data.LAMBDA.event.requestContext.http : {} )
+                ? JSON.parse(JSON.stringify(data.LAMBDA.event.requestContext.http))
+                : {} 
+            )
         :   {}
                         
     return data
