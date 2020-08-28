@@ -49,15 +49,27 @@ const desksGetMarkup = async(data) => {
             <th    scope="row" 
                     id="${rowID}"
                     >
+                    
                     <span class="toggle-set-1">${ ++rowCount } : </span> 
+                    
                     <i      class="material-icons toggle-set-1"
                             onclick="toggler ( this.parentElement, '.toggle-set-1', null )"
                             >
                             fingerprint</i>
+                    
                     <span   class="toggle-set-1" 
                             style="display:none;"
                             >
-                            ${rowID}</span>
+                            ${rowID}
+                            
+                        <i  class="material-icons"
+                            title="hide the id"
+                            onclick="toggler ( this.closest('th'), '.toggle-set-1', null )"
+                            >
+                            visibility_off</i>
+                    </span>
+                            
+                    
             </th>
             ` /*initial accumulator value*/)
             
