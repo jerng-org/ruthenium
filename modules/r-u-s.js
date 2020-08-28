@@ -167,37 +167,43 @@ DEBUG HIGHLIGHTS:
     await rus.print.inspectInfinity ( rutheniumDataObject.RU.errors ) }                 
 
 [ Object.keys ( data ) ] renders ${ 
-    typeof rutheniumDataObject == 'object' 
+    typeof rutheniumDataObject == 'object'
+    && rutheniumDataObject != null
     ? JSON.stringify( Object.keys ( rutheniumDataObject ), null, 4 ) 
     : `<< not an object >> : ${ rutheniumDataObject }`
 }                 
 
 [ Object.keys ( data.RU ) ] renders ${ 
     typeof rutheniumDataObject.RU == 'object' 
+    && rutheniumDataObject.RU != null
     ? JSON.stringify( Object.keys ( rutheniumDataObject.RU ), null, 4 ) 
     : `<< not an object >> : ${ rutheniumDataObject.RU }`
 }                 
 
 [ Object.keys ( data.RU.request ) ] renders ${
     typeof rutheniumDataObject.RU.request == 'object' 
+    && rutheniumDataObject.RU.request != null
     ? JSON.stringify( Object.keys ( rutheniumDataObject.RU.request ), null, 4 ) 
     : `<< not an object >> : ${ rutheniumDataObject.RU.request }`
 }
 
 [ Object.keys ( data.RU.signals ) ] renders ${
     typeof rutheniumDataObject.RU.signals == 'object' 
+    && rutheniumDataObject.RU.signals != null
     ? JSON.stringify( Object.keys ( rutheniumDataObject.RU.signals ), null, 4 ) 
     : `<< not an object >> : ${ rutheniumDataObject.RU.signals }`
 }
 
 [ Object.keys ( data.RU.io ) ] renders ${
     typeof rutheniumDataObject.RU.io == 'object' 
+    && rutheniumDataObject.RU.io != null
     ? JSON.stringify( Object.keys ( rutheniumDataObject.RU.io ), null, 4 ) 
     : `<< not an object >> : ${ rutheniumDataObject.RU.io }`
 }
 
 [ Object.keys ( data.RU.response ) ] renders ${ // READONLY for DEBUG
     typeof rutheniumDataObject.RU.response == 'object' 
+    && rutheniumDataObject.RU.response != null
     ? JSON.stringify( Object.keys ( rutheniumDataObject.RU.response ), null, 4 ) 
     : `<< not an object >> : ${ rutheniumDataObject.RU.response }`
 }
