@@ -9,15 +9,22 @@ const innerHTML = async DATA => `
         await DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
             async ( accumulator, currentValue, index, array ) => {
                 return await accumulator + await rus.html.input ( {
-                    id:             currentValue.name,
-                    label:          currentValue.name,
-                    name:           `desk-cell[columns][${ currentValue.name }]`,
-                    placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
-                    
-                } ) 
+                        id:             currentValue.name,
+                        label:          currentValue.name,
+                        name:           `desk-cell[columns][${ currentValue.name }]`,
+                        placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
+                        
+                    } ) 
             },
             `` /* initial value */
         )
+        
+        + 
+        await rus.html.input ( {
+            type:   'hidden',
+            name:   `desk-cell[name]`,
+            value:  DATA.RU.io.deskSchemasGet.Item.name
+        } ) 
     } 
 
     <button type="submit"
