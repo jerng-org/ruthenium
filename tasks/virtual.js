@@ -6,6 +6,9 @@ const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-sc
 const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
 const deskSchemasPut = require('/var/task/tasks/virtual/desk-schemas-put.js')
 
+const deskCellsPatch = require('/var/task/tasks/virtual/desk-cells-patch.js')
+
+
 const formsMarkupCreateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)
 const formsMarkupReadDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)
 const formsMarkupUpdateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)
@@ -135,8 +138,8 @@ const virtual = async(data) => {
                                         case (`create-desk-schema`):
                                             data.RU.signals.sendResponse.body = await formsMarkupCreateDeskSchema()
                                             return
-                                        
-                                        // (thing) switch level 1
+
+                                            // (thing) switch level 1
                                         default:
                                             if (!data.RU.request.queryStringParameters['desk-schema-name'] ||
                                                 !data.RU.request.queryStringParameters['desk-schema-name'][0]) {
@@ -186,12 +189,12 @@ const virtual = async(data) => {
                                                     return
 
                                                 case (`create-desk-row`):
-                                                    data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(data) 
-                                                    
+                                                    data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(data)
+
                                                     /* UNIMPLEMENTED POST to DESK-CELLS */
                                                     return
 
-                                                // (thing) switch level 2
+                                                    // (thing) switch level 2
                                                 default:
 
                                                     if (!data.RU.request.queryStringParameters['desk-row-id'] ||
@@ -209,12 +212,12 @@ const virtual = async(data) => {
                                                         case ('update-desk-cell'):
                                                             /* UNIMPLEMENTED PUT to DESK-CELLS */
                                                             return
-                                                            
+
                                                         case ('delete-desk-row'):
                                                             /* UNIMPLEMENTED DELETE to DESK-CELLS */
                                                             return
-                                                            
-                                                        // (thing) switch level 3
+
+                                                            // (thing) switch level 3
                                                         default:
                                                             rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case tree)`)
                                                             await status404(data)
@@ -331,7 +334,7 @@ const virtual = async(data) => {
                                 case ('collection'):
                                     rus.log.error(data, `(virtual.js) (?type=desk-cells) (GET) (?thing=) was not provided. You should specify the (desk) whose (cells) you wish to GET.`)
                                     await status403(data)
-                                    return 
+                                    return
 
                                 default:
 
@@ -358,24 +361,25 @@ const virtual = async(data) => {
 
                         case ('PATCH'):
 
-                            console.error( await rus.print.dataDebug (data))
-
                             //  DIMENSION C
                             //  PATCH (desk-cells) ... all of them, or just one?
                             switch (queryScope) {
 
-                                
-
-                                default: rus.log.error(data, `(virtual.js) (?type=desk-cells) (PATCH) ... (queryScope): '${queryScope}' not in (switch-case)`)
-                                await status404(data)
-                                return
+                                case ('collection'):
+                                    await deskCellsPatch(data)
+                                    return
+                                    
+                                default:
+                                    rus.log.error(data, `(virtual.js) (?type=desk-cells) (PATCH) ... (queryScope): '${queryScope}' not in (switch-case)`)
+                                    await status404(data)
+                                    return
                             }
                             // switch
                             // ( queryScope )
-                            
+
                         case ('POST'):
 
-                            console.error( await rus.print.dataDebug (data))
+//console.error(await rus.print.dataDebug(data))
 
                             //  DIMENSION C
                             //  POST (desk-cells) ... all of them, or just one?
@@ -387,8 +391,8 @@ const virtual = async(data) => {
                             }
                             // switch
                             // ( queryScope )
-                            
-                            
+
+
 
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-cells), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
@@ -399,7 +403,7 @@ const virtual = async(data) => {
                     // switch 
                     // ( .method )
 
-// Should just be desk-cells; deprecate this
+                    // Should just be desk-cells; deprecate this
                 case ('desks'):
 
                     //  DIMENSION B
@@ -413,22 +417,22 @@ const virtual = async(data) => {
                             switch (queryScope) {
 
                                 case ('collection'):
-                                    
+
                                     //  This is simply the case where 'thing='
                                     //      is not specified; so it includes
                                     //      the cases where we want to request
                                     //      the (collection / type) with the 
                                     //      POST method, in order to create
                                     //      sub-entities under it. (per-spec)
-                                    
+
                                     //switch
-                                    
+
                                     /*
                                     rus.log.error(data, `(virtual.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
                                     await status403(data)
                                     return
                                     */
-                                    
+
                                 case ('individual'):
 
                                     //  DIMENSION D

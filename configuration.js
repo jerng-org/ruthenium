@@ -5,13 +5,13 @@ module.exports = {
         uri: {
 
             scheme: 'https',
-            
+
             authority: {
                 userinfo: null,
                 host: 'ruthenium-v1.dev.sudo.coffee',
                 port: null
             },
-            
+
             path: '',
 
             /*
@@ -26,11 +26,11 @@ module.exports = {
     },
 
     defaults: {
-        
+
         cookie: {
             ['Max-Age']: 3600 // << seconds >>
         }
-        
+
     },
 
     /*  faultTolerance:
@@ -51,8 +51,8 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `virtual.js : replaced one/all with individual/collection`,
-//    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
+    gitCommitMessage: `(desk-cells-patch.js) WIP and next steps listed`,
+    //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
@@ -118,9 +118,9 @@ module.exports = {
         /* Specific to the current storage system.
          */
         deskCellTypes: {
-            N:      'number',
-            S:      'string',
-            other:  'other'
+            N: 'number',
+            S: 'string',
+            other: 'other'
         }
     },
 

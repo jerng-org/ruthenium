@@ -1,47 +1,47 @@
 'use strict'
 
 
-const mark      = require ( '/var/task/modules/mark.js' )
+const mark = require('/var/task/modules/mark.js')
 
-const fs = require ('fs')
+const fs = require('fs')
 
 let models = {}
-const modelFileNames = fs.readdirSync ('/var/task/io/models')
-modelFileNames.forEach ( ( current, index, array ) => {
-    
-    if (        current[0] != '_'
-            &&  current.toLowerCase().slice ( -3 ) == '.js' )
-    {
-        models[ current.slice (0, -3) ]
-            = require ( '/var/task/io/models/' + current )
+const modelFileNames = fs.readdirSync('/var/task/io/models')
+modelFileNames.forEach((current, index, array) => {
+
+    if (current[0] != '_' &&
+        current.toLowerCase().slice(-3) == '.js') {
+        models[current.slice(0, -3)] = require('/var/task/io/models/' + current)
     }
-} /* , thisArg */ ) 
+} /* , thisArg */ )
 
 /*  See validate(), PARAMETER 2 - modelKey
  *
  *  -   the Array treatment is not yet implemented TODO
  */
- 
+
 const scopeModel = async _modelKey => {
-            
+
     let _currentModel
-    
-    if ( typeof _modelKey == 'string' ) {
-        
-        if ( _modelKey in models ) {
-            
-            _currentModel = models[ _modelKey ]
+
+    if (typeof _modelKey == 'string') {
+
+        if (_modelKey in models) {
+
+            _currentModel = models[_modelKey]
         }
-        else {  throw Error (   `(validate.js:scopeModel) the requested 
+        else {
+            throw Error(`(validate.js:scopeModel) the requested 
                                 modelKey (${_modelKey}) was not 
                                 found in (models).
                                 `)
         }
-        
-    } else if ( _modelKey instanceof Array ) {
-        
-        throw Error ( `(validate.js:scopeModel) (_modelKey instanceof Array)
-                      NOT YET IMPLEMENTED - TODO` )
+
+    }
+    else if (_modelKey instanceof Array) {
+
+        throw Error(`(validate.js:scopeModel) (_modelKey instanceof Array)
+                      NOT YET IMPLEMENTED - TODO`)
     }
     return _currentModel
 }
@@ -185,131 +185,128 @@ const scopeModel = async _modelKey => {
  *      
  *      
  */
-    
-    
-const validate = async (    dataToValidate, 
-                            modelKey, 
-                            
-                            scopedModel = null,
-                            keyTrace    = modelKey,
-                            
-                            report      = { [modelKey]: {} },
-                            shortReport =   
-                                Object.defineProperty ( [], 'summary', {
-                                    configurable:   true,
-                                    enumerable:     false,
-                                    value:          true, // defaults to 'pass'
-                                    writable:       true
-                                } )
-                            
-                        ) => 
-{
-    scopedModel = ( ! scopedModel && modelKey )
-        ? await scopeModel( modelKey )
-        : scopedModel
-        // Now, (scopedModel) should be !null under all circustances.
 
-if ( ! dataToValidate ){
-    //throw Error ( keyTrace )    
-}
-    const _scopedData           = dataToValidate[ modelKey ]
-    const _scopedDataIsArray    = Array.isArray ( _scopedData ) 
 
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
+const validate = async(dataToValidate,
+    modelKey,
 
-    report[ modelKey ].self = await validateRules (  _scopedData, 
-                                                    scopedModel, 
-                                                    keyTrace, 
-                                                    shortReport   
-                                                    )
-    if ( shortReport.summary ) {
+    scopedModel = null,
+    keyTrace = modelKey,
+
+    report = {
+        [modelKey]: {} },
+    shortReport =
+    Object.defineProperty([], 'summary', {
+        configurable: true,
+        enumerable: false,
+        value: true, // defaults to 'pass'
+        writable: true
+    })
+
+) => {
+    scopedModel = (!scopedModel && modelKey) ?
+        await scopeModel(modelKey) :
+        scopedModel
+    // Now, (scopedModel) should be !null under all circustances.
+
+    if (!dataToValidate) {
+        //throw Error ( keyTrace )    
+    }
+    const _scopedData = dataToValidate[modelKey]
+    const _scopedDataIsArray = Array.isArray(_scopedData)
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
+    report[modelKey].self = await validateRules(_scopedData,
+        scopedModel,
+        keyTrace,
+        shortReport
+    )
+    if (shortReport.summary) {
 
         //  If we reached here without a 'fail', it means (_scopedData)
         //  checks out. Now we traverse subModels, if the value is a
         //  non-Array object.
-        
-        report[ modelKey ].subs 
-            =   scopedModel.self.many 
-                //(       'subs' in scopedModel 
-                //    &&  Object.keys ( scopedModel.subs ).length )
-                ? new Array ( _scopedDataIsArray ? _scopedData.length : 0 )
-                            .fill(0)
-                            .map( _ => ({}) )  
-                : {}
-            
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
 
-        for ( const _scopedSubModelKey in scopedModel.subs ) {
+        report[modelKey].subs = scopedModel.self.many
+            //(       'subs' in scopedModel 
+            //    &&  Object.keys ( scopedModel.subs ).length )
+            ?
+            new Array(_scopedDataIsArray ? _scopedData.length : 0)
+            .fill(0)
+            .map(_ => ({})) :
+            {}
+
+        //////////
+        //      //
+        //  !!  //  Make way.
+        //      //
+        //////////
+
+        for (const _scopedSubModelKey in scopedModel.subs) {
             // EXAMPLE: Iterates through 'name', 'columns' (keys in _scopedModel)
-    
-            if ( _scopedDataIsArray ) // double-check logic on this line; TODO; 
+
+            if (_scopedDataIsArray) // double-check logic on this line; TODO; 
             {
                 let _count = 0
-                for ( const _scopedDataSubItem of _scopedData )
-                {
-                    report[ modelKey ].subs[ _count ][ _scopedSubModelKey ]
-                        = ( await validate (_scopedDataSubItem, 
-                                            //  Whereby, if the key is missing it will 
-                                            //  caught by the subsequent (call to
-                                            //  validateRules) in the body of 
-                                            //  (validate)
-                    
-                                            _scopedSubModelKey,
-                                            
-                                            scopedModel.subs[ _scopedSubModelKey ],
-                                            keyTrace 
-                                                + '.[' + _count + '].' 
-                                                + _scopedSubModelKey,
-                                                
-                                            undefined,
-                                            shortReport
-                        
-                        )   ) [ _scopedSubModelKey ]
-                    _count ++
+                for (const _scopedDataSubItem of _scopedData) {
+                    report[modelKey].subs[_count][_scopedSubModelKey] = (await validate(_scopedDataSubItem,
+                        //  Whereby, if the key is missing it will 
+                        //  caught by the subsequent (call to
+                        //  validateRules) in the body of 
+                        //  (validate)
+
+                        _scopedSubModelKey,
+
+                        scopedModel.subs[_scopedSubModelKey],
+                        keyTrace +
+                        '.[' + _count + '].' +
+                        _scopedSubModelKey,
+
+                        undefined,
+                        shortReport
+
+                    ))[_scopedSubModelKey]
+                    _count++
                 }
             }
-            else    // ! scopedModel.self.many
-            {   
-                report[ modelKey ].subs[ _scopedSubModelKey ]
-                    =   ( await validate(   _scopedData, 
-                                            //  Whereby, if the key is missing it will 
-                                            //  caught by the subsequent (call to
-                                            //  validateRules) in the body of 
-                                            //  (validate)
-                
-                                            _scopedSubModelKey,
-                                            
-                                            scopedModel.subs[ _scopedSubModelKey ],
-                                            keyTrace + '.' + _scopedSubModelKey,
-                                            
-                                            undefined,
-                                            shortReport
-                        
-                        ) ) [ _scopedSubModelKey ]
+            else // ! scopedModel.self.many
+            {
+                report[modelKey].subs[_scopedSubModelKey] = (await validate(_scopedData,
+                    //  Whereby, if the key is missing it will 
+                    //  caught by the subsequent (call to
+                    //  validateRules) in the body of 
+                    //  (validate)
+
+                    _scopedSubModelKey,
+
+                    scopedModel.subs[_scopedSubModelKey],
+                    keyTrace + '.' + _scopedSubModelKey,
+
+                    undefined,
+                    shortReport
+
+                ))[_scopedSubModelKey]
             }
             // if scopedModel.self.many / else-block ends
         }
         // for _scopedSubModelKey
-    }                                                
+    }
     // if ( shortReport.summary )
-    
-    
+
+
     //shortReport.push ( [ keyTrace, 'something' ] )
-        // Perhaps this would be more idiomatic as as Map, but I am avoiding thought about it for now.
-    
-    Object.defineProperty ( report, 'shortReport', {
+    // Perhaps this would be more idiomatic as as Map, but I am avoiding thought about it for now.
+
+    Object.defineProperty(report, 'shortReport', {
         enumerable: false,
-        value:      shortReport
-    } )
-    
+        value: shortReport
+    })
+
     return report
 }
 // (validate)
@@ -386,186 +383,177 @@ if ( ! dataToValidate ){
  *  break    // (rule)
  *           
  */
-    
-const validateRules = async (   scopedDatum, 
-                                scopedModel, 
-                                keyTrace, 
-                                shortReport          
-                                                ) => {
-                                                    
-    const _rulesToTest  = scopedModel.self.rules
-    let report          = {
-        rules:      {},
-        
-        //candidate: scopedDatum, 
-            // we could add the candidate data here, but this does not seem 
-            // helpful yet; 
-    }
-    
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
-    
-    for ( const _ruleKey in _rulesToTest ) {
-        
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
 
-        report.rules[ _ruleKey ] = {
-            argument:   _rulesToTest[ _ruleKey ],
-            result:     undefined, // 'ok' or new Error
+const validateRules = async(scopedDatum,
+    scopedModel,
+    keyTrace,
+    shortReport
+) => {
+
+    const _rulesToTest = scopedModel.self.rules
+    let report = {
+        rules: {},
+
+        //candidate: scopedDatum, 
+        // we could add the candidate data here, but this does not seem 
+        // helpful yet; 
+    }
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
+    for (const _ruleKey in _rulesToTest) {
+
+        //////////
+        //      //
+        //  !!  //  Make way.
+        //      //
+        //////////
+
+        report.rules[_ruleKey] = {
+            argument: _rulesToTest[_ruleKey],
+            result: undefined, // 'ok' or new Error
         }
-        shortReport.push ( [ keyTrace ] )
-        
+        shortReport.push([keyTrace])
+
         const setResult = _maybeError => {
-            if ( _maybeError instanceof Error )
-            {
+            if (_maybeError instanceof Error) {
                 shortReport.summary = false
-                report.rules[ _ruleKey ].result         = 
-                shortReport[ shortReport.length -1 ][1] = [ `fail`, _maybeError ]
+                report.rules[_ruleKey].result =
+                    shortReport[shortReport.length - 1][1] = [`fail`, _maybeError]
             }
-            else
-            {
+            else {
                 //  shortReport.summary is true by default; 
                 //  if it is becomes false, it should not reset to true;
-                report.rules[ _ruleKey ].result             = 
-                shortReport[ shortReport.length - 1 ][1]    = [ 'pass' ]
+                report.rules[_ruleKey].result =
+                    shortReport[shortReport.length - 1][1] = ['pass']
             }
         }
         setResult() // default pass
-        
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
-        
-switch ( _ruleKey ) {
 
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
-        
-case ( 'count_gt' ):
-/*  This is a really stupendous amount of code just to check if something exists
-*   or not. I really have no faith in this design at the moment. But it should
-*   work. -2020-06-12
-*
-*   We should probably combine the "existential quantifier" and "naive 
-*   comparison" checks. -2020-06-19
-*/
-if ( scopedModel.self.many ) // this pattern should recur for 'count_xyz'
-{
-    // existential quantifier
-    if  (   _rulesToTest.count_gt === 0
-            && 
-            (       ! Array.isArray( scopedDatum )
-                ||  (   scopedDatum = scopedDatum.filter(
-                            e => ! [ undefined, null, NaN ].includes(e)
-                        ),
-                        scopedDatum.length == 0
-                     )
-            )
-        ) 
-    {
-        setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:true) 
+        //////////
+        //      //
+        //  !!  //  Make way.
+        //      //
+        //////////
+
+        switch (_ruleKey) {
+
+            //////////
+            //      //
+            //  !!  //  Make way.
+            //      //
+            //////////
+
+            case ('count_gt'):
+                /*  This is a really stupendous amount of code just to check if something exists
+                 *   or not. I really have no faith in this design at the moment. But it should
+                 *   work. -2020-06-12
+                 *
+                 *   We should probably combine the "existential quantifier" and "naive 
+                 *   comparison" checks. -2020-06-19
+                 */
+                if (scopedModel.self.many) // this pattern should recur for 'count_xyz'
+                {
+                    // existential quantifier
+                    if (_rulesToTest.count_gt === 0 &&
+                        (!Array.isArray(scopedDatum) ||
+                            (scopedDatum = scopedDatum.filter(
+                                    e => ![undefined, null, NaN].includes(e)
+                                ),
+                                scopedDatum.length == 0
+                            )
+                        )
+                    ) {
+                        setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:true) 
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
                       }) failed; scopedDatum was: (${
                           scopedDatum
-                      })`) )        
-    }
+                      })`))
+                    }
 
-    // naive comparison
-    if (        ! Array.isArray( scopedDatum )
-            ||  scopedDatum.length <= _rulesToTest.count_gt )
-    {
-        setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
+                    // naive comparison
+                    if (!Array.isArray(scopedDatum) ||
+                        scopedDatum.length <= _rulesToTest.count_gt) {
+                        setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt:${
                         scopedModel.self.rules.count_gt
                       }) failed; scopedDatum was: (${
                         scopedDatum
-                      })` ) ) 
-    }
-}
-else // not-'many', ergo is not an Array
-{
-    // existential quantifier
-    if  (   _rulesToTest.count_gt === 0 
-            && 
-            [ undefined, null, NaN ].includes ( scopedDatum )
-        )   
-    {
-        setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
+                      })`))
+                    }
+                }
+                else // not-'many', ergo is not an Array
+                {
+                    // existential quantifier
+                    if (_rulesToTest.count_gt === 0 &&
+                        [undefined, null, NaN].includes(scopedDatum)
+                    ) {
+                        setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
                       }) failed; scopedDatum was: (${
                           scopedDatum
-                      })`) )
-    }
-    
-    // naive comparison
-    if ( _rulesToTest.count_gt > 1 ) {
-        setResult ( Error ( `(validateRules) (${keyTrace}) (model.self.many:false)
+                      })`))
+                    }
+
+                    // naive comparison
+                    if (_rulesToTest.count_gt > 1) {
+                        setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt was greater than 1) so this
                       is a contradiction; your actual data may or may 
-                      not be ok.` ) )
-    }
-} // if (many), else [end of block]
-break // count_gt
+                      not be ok.`))
+                    }
+                } // if (many), else [end of block]
+                break // count_gt
 
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
-        
-case ('included_in'):
-if ( scopedModel.self.many ) 
-{
+                //////////
+                //      //
+                //  !!  //  Make way.
+                //      //
+                //////////
 
-}       // if (many); if-block ends
-else    // not-'many', ergo is not an Array
-{
+            case ('included_in'):
+                if (scopedModel.self.many) {
 
-}       // if (many); else-block ends
-break   // regex_text
+                } // if (many); if-block ends
+                else // not-'many', ergo is not an Array
+                {
 
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
-        
-case ('regex_text'):
-if ( scopedModel.self.many ) 
-{
+                } // if (many); else-block ends
+                break // regex_text
 
-}       // if (many); if-block ends
-else    // not-'many', ergo is not an Array
-{
+                //////////
+                //      //
+                //  !!  //  Make way.
+                //      //
+                //////////
 
-}       // if (many); else-block ends
-break   // regex_text
+            case ('regex_text'):
+                if (scopedModel.self.many) {
+
+                } // if (many); if-block ends
+                else // not-'many', ergo is not an Array
+                {
+
+                } // if (many); else-block ends
+                break // regex_text
 
 
-}
-// switch _ruleKey
+        }
+        // switch _ruleKey
 
     }
     // _ruleKey in _rulesToTest
-    
+
     return report
 }
 // (validateRules)
 
 
-module.exports  = validate
-mark (`~/modules/validate.js LOADED`)
+module.exports = validate
+mark(`~/modules/validate.js LOADED`)
