@@ -404,7 +404,7 @@ const virtual = async(data) => {
                                     //      POST method, in order to create
                                     //      sub-entities under it. (per-spec)
                                     
-                                    switch
+                                    //switch
                                     
                                     /*
                                     rus.log.error(data, `(virtual.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
