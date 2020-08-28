@@ -65,10 +65,8 @@ const deskCellsPatch = async(data) => {
     }
 */
 
-throw 'WIP: desk-cells-patch'
-
     // View
-    data.RU.signals.redirectRoute = 'initial'
+    data.RU.signals.sendResponse.body = '(desk-cells-patch.js) W'
 
 
     // manipulate (data.RU), for example

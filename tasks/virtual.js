@@ -342,18 +342,6 @@ const virtual = async(data) => {
                                     await status404(data)
 
 
-                                    /*  Validation for (thing) should allow:
-                                    
-                                        LITERAL
-                                        -   GET one entire desk-column-row
-
-                                        ABSTRACTION
-                                        -   GET one entire desk
-                                        -   GET one entire desk-column
-                                        -   GET one entire desk-row
-            
-                                    */
-
                                     return
                             }
                             // switch
