@@ -12,30 +12,23 @@ const innerHTML = async DATA => `
                     await rus.html.input ( {
                         id:             currentValue.name,
                         label:          currentValue.name,
-                        name:           `desk-cells[${ currentValue.type }]`,
+                        name:           `desk-cells###${index}###[${ currentValue.type }]`,
                         placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
                         
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
-                        name:   `desk-cells[DHC]`,
+                        name:   `desk-cells###${index}###[DHC]`,
                         value:  DATA.RU.io.deskSchemasGet.Item.name + '#' + currentValue.name
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
-                        name:   `desk-cells[D]`,
+                        name:   `desk-cells###${index}###[D]`,
                         value:  DATA.RU.io.deskSchemasGet.Item.name
                     } )
             },
             `` /* initial value */
         )
-        
-        + 
-        await rus.html.input ( {
-            type:   'hidden',
-            name:   `desk-cells[D]`,
-            value:  DATA.RU.io.deskSchemasGet.Item.name
-        } ) 
     } 
 
     <button type="submit"
