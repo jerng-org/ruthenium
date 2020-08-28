@@ -167,22 +167,40 @@ DEBUG HIGHLIGHTS:
     await rus.print.inspectInfinity ( rutheniumDataObject.RU.errors ) }                 
 
 [ Object.keys ( data ) ] renders ${ 
-    JSON.stringify( Object.keys ( rutheniumDataObject ), null, 4 ) }                 
+    typeof rutheniumDataObject == 'object' 
+    ? JSON.stringify( Object.keys ( rutheniumDataObject ), null, 4 ) 
+    : `<< not an object >> : ${ rutheniumDataObject }`
+}                 
 
 [ Object.keys ( data.RU ) ] renders ${ 
-    JSON.stringify( Object.keys ( rutheniumDataObject.RU ), null, 4 ) }                 
+    typeof rutheniumDataObject.RU == 'object' 
+    ? JSON.stringify( Object.keys ( rutheniumDataObject.RU ), null, 4 ) 
+    : `<< not an object >> : ${ rutheniumDataObject.RU }`
+}                 
 
 [ Object.keys ( data.RU.request ) ] renders ${
-    JSON.stringify( Object.keys ( rutheniumDataObject.RU.request ), null, 4 ) }                 
+    typeof rutheniumDataObject.RU.request == 'object' 
+    ? JSON.stringify( Object.keys ( rutheniumDataObject.RU.request ), null, 4 ) 
+    : `<< not an object >> : ${ rutheniumDataObject.RU.request }`
+}
 
 [ Object.keys ( data.RU.signals ) ] renders ${
-    JSON.stringify( Object.keys ( rutheniumDataObject.RU.signals ), null, 4 ) }                 
+    typeof rutheniumDataObject.RU.signals == 'object' 
+    ? JSON.stringify( Object.keys ( rutheniumDataObject.RU.signals ), null, 4 ) 
+    : `<< not an object >> : ${ rutheniumDataObject.RU.signals }`
+}
 
 [ Object.keys ( data.RU.io ) ] renders ${
-    JSON.stringify( Object.keys ( rutheniumDataObject.RU.io ), null, 4 ) }                 
+    typeof rutheniumDataObject.RU.io == 'object' 
+    ? JSON.stringify( Object.keys ( rutheniumDataObject.RU.io ), null, 4 ) 
+    : `<< not an object >> : ${ rutheniumDataObject.RU.io }`
+}
 
 [ Object.keys ( data.RU.response ) ] renders ${ // READONLY for DEBUG
-    JSON.stringify( Object.keys ( rutheniumDataObject.RU.response ), null, 4 ) }                 
+    typeof rutheniumDataObject.RU.response == 'object' 
+    ? JSON.stringify( Object.keys ( rutheniumDataObject.RU.response ), null, 4 ) 
+    : `<< not an object >> : ${ rutheniumDataObject.RU.response }`
+}
 
 DEBUG EVERYTHING:
 
