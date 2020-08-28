@@ -51,7 +51,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `-`,
+    gitCommitMessage: `(desks-get-markup.js) improved UX`,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
