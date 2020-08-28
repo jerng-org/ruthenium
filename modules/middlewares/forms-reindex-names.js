@@ -239,8 +239,15 @@ WARNING :   the code as implemented CAN produce SPARSE arrays;
     
     let temp1               = {}
     let objectifiedFormData = {}
+    
+    /*  Capital Letters Allowed */
+    const validationRegex   = /^((?!###)[^\[\]\s])+(\[((?!###)[^\[\]\s])+\])*(###\d+###)*(\[((?!###)[^\[\]\s])+\])*$/
+    const lexerRegex        = /(?<head>^((?!###)[^\[\]\s])+)|(\[(?<asIs>(?!###)[^\[\]\s]+)\]+?)|###(?<toArrayIndex>\d+)###/g
+
+    /*  Capital Letters Disallowed
     const validationRegex   = /^((?!###)[^A-Z\[\]\s])+(\[((?!###)[^A-Z\[\]\s])+\])*(###\d+###)*(\[((?!###)[^A-Z\[\]\s])+\])*$/
     const lexerRegex        = /(?<head>^((?!###)[^A-Z\[\]\s])+)|(\[(?<asIs>(?!###)[^A-Z\[\]\s]+)\]+?)|###(?<toArrayIndex>\d+)###/g
+    */
 
     for ( const name in data.RU.request.formStringParameters ) {
         
