@@ -364,6 +364,8 @@ const virtual = async(data) => {
                             //  PATCH (desk-cells) ... all of them, or just one?
                             switch (queryScope) {
 
+                                
+
                                 default: rus.log.error(data, `(virtual.js) (?type=desk-cells) (PATCH) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                 await status404(data)
                                 return
