@@ -8,13 +8,24 @@ const innerHTML = async DATA => `
     ${  
         await DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
             async ( accumulator, currentValue, index, array ) => {
-                return await accumulator + await rus.html.input ( {
+                return await accumulator + 
+                    await rus.html.input ( {
                         id:             currentValue.name,
                         label:          currentValue.name,
-                        name:           `desk-cells[C][${ currentValue.name }]`,
+                        name:           `desk-cells[${ currentValue.type }]`,
                         placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
                         
-                    } ) 
+                    } ) +
+                    await rus.html.input ( {
+                        type:   'hidden',
+                        name:   `desk-cells[DHC]`,
+                        value:  DATA.RU.io.deskSchemasGet.Item.name + '#' + currentValue.name
+                    } ) +
+                    await rus.html.input ( {
+                        type:   'hidden',
+                        name:   `desk-cells[D]`,
+                        value:  DATA.RU.io.deskSchemasGet.Item.name
+                    } )
             },
             `` /* initial value */
         )
