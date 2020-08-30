@@ -4,9 +4,9 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const status404 = require(`/var/task/tasks/status-404.js`)
 rus.conf.verbosity > 0 &&
-    console.warn(`(desk-get.js) FIXME: rendering an error page should not involve a require() here;`)
+    console.warn(`(desk-read.js) FIXME: rendering an error page should not involve a require() here;`)
 
-const markup = require('/var/task/tasks/virtual/desks-get-markup.js')
+const markup = require('/var/task/tasks/virtual/desks-read-markup.js')
 rus.conf.verbosity > 0 &&
     console.warn(`(desk-schemas-get.js) FIXME: rendering (-markup.js) should not involve a require() here;`)
 
@@ -41,7 +41,7 @@ const deskRead = async(data) => {
     }).promise()
     
     rus.conf.verbosity > 0
-    && console.warn(`FIXME: (desks-get.js) implement (for-of) with (Promise.allSettled)`)
+    && console.warn(`FIXME: (desks-read.js) implement (for-of) with (Promise.allSettled)`)
 
     data.RU.signals.sendResponse.body = await markup(data)
 
