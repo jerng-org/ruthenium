@@ -1,6 +1,6 @@
 'use strict'
 
-const desksGet = require('/var/task/tasks/virtual/desks-get.js')
+const desksRead = require('/var/task/tasks/virtual/desks-read.js')
 
 const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js')
 const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
@@ -319,6 +319,8 @@ const virtual = async(data) => {
                     // switch 
                     // ( .method )
 
+
+                /*
                 case ('desk-cells'):
 
                     //  DIMENSION B
@@ -390,8 +392,8 @@ const virtual = async(data) => {
                     }
                     // switch 
                     // ( .method )
-
-                    // Should just be desk-cells; deprecate this
+                */
+                
                 case ('desks'):
 
                     //  DIMENSION B
@@ -405,51 +407,46 @@ const virtual = async(data) => {
                             switch (queryScope) {
 
                                 case ('collection'):
-
-                                    //  This is simply the case where 'thing='
-                                    //      is not specified; so it includes
-                                    //      the cases where we want to request
-                                    //      the (collection / type) with the 
-                                    //      POST method, in order to create
-                                    //      sub-entities under it. (per-spec)
-
-                                    //switch
-
-                                    /*
                                     rus.log.error(data, `(virtual.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
                                     await status403(data)
                                     return
-                                    */
 
                                 case ('individual'):
 
                                     //  DIMENSION D
                                     //  GET (desks), which one? 
-                                    await desksGet(data)
-
-
-                                    /*
-                                    
-                                        ddbdc lookups here;
-                                        
-                                        
-                                        
-                                        if not found, fail:
-                                    
-                                    
-                                        console.error(`(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case)`)
-                                        await status404(data)
-                                    */
+                                    await desksRead(data)
                                     return
 
                                 default:
-                                    rus.log.error(data, `(virtual.js) (?type=desk-cells) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=desks) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                     await status404(data)
                                     return
                             }
-                            // switch
-                            // ( queryScope )
 
+                        case ('PATCH'):
+
+                            //  DIMENSION C
+                            //  GET (desks) ... all of them, or just one?
+                            switch (queryScope) {
+
+                                case ('collection'):
+                                    rus.log.error(data, `(virtual.js) (?type=desks) (PATCH) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
+                                    await status403(data)
+                                    return
+
+                                case ('individual'):
+
+                                    //  DIMENSION D
+                                    //  GET (desks), which one? 
+                                    await desksCreateRow(data)
+                                    return
+
+                                default:
+                                    rus.log.error(data, `(virtual.js) (?type=desks) (PATCH) ... (queryScope): '${queryScope}' not in (switch-case)`)
+                                    await status404(data)
+                                    return
+                            }
 
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desks), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
