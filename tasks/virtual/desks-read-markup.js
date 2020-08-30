@@ -203,7 +203,7 @@ const desksReadMarkup = async(data) => {
 </table>`
 
 
-    rus.mark(`~/tasks/virtual/desks-get-markup.js EXECUTED`)
+    rus.mark(`~/tasks/virtual/desks-read-markup.js EXECUTED`)
 
     return markup
 }
@@ -212,4 +212,4 @@ const desksReadMarkup = async(data) => {
 
 
 module.exports = desksReadMarkup
-rus.mark(`~/tasks/virtual/desks-get-markup.js LOADED`)
+rus.mark(`~/tasks/virtual/desks-read-markup.js LOADED`)
