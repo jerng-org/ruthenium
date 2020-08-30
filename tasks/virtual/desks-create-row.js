@@ -12,7 +12,7 @@ const deskCellsPatch = async(data) => {
 
     const candidates = data.RU.request.formStringParameters
 
-    console.warn ('(desk-cells-patch.js) form input validation skipped for now; fixme')
+    console.warn ('(desks-create-row.js) form input validation skipped for now; fixme')
 
     /*  THIS SHOULD PROCEED UNDER THE ASSUMPTION THAT (desk-cells items) are
         MECE with respective (desk-schema items); currenlty (desk-schema) items
@@ -20,7 +20,7 @@ const deskCellsPatch = async(data) => {
         relevant (desk-cells columns) and complete implied maintenance CRUD
         before releasing the lock;
         
-        This is (desk-cells-patch), so formStringParameters are expected to be
+        This is (desks-create-row), so formStringParameters are expected to be
         explicitly cell-by-cell; this is NOT (desk-rows-patch), so it cannot be 
         simply assumed that an absent [desk-name#column-name,row-id] implies 
         deletion of that row; deletion of a row should only be conducted on
@@ -127,7 +127,7 @@ const deskCellsPatch = async(data) => {
 */
 
     // View
-    data.RU.signals.sendResponse.body = '(desk-cells-patch.js) WIP' 
+    data.RU.signals.sendResponse.body = '(desks-create-row.js) WIP' 
 
 
     // manipulate (data.RU), for example
