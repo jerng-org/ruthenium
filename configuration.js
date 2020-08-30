@@ -51,7 +51,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(desk-cells-patch.js) WIP and next steps listed`,
+    gitCommitMessage: `-`,
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
     /*  USES:
      *  Merge order     :   1
