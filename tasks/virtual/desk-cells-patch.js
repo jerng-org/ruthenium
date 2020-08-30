@@ -13,7 +13,62 @@ const deskCellsPatch = async(data) => {
     const candidates = data.RU.request.formStringParameters
 
     console.warn ('(desk-cells-patch.js) form input validation skipped for now; fixme')
+
+    /*  THIS SHOULD PROCEED UNDER THE ASSUMPTION THAT (desk-cells items) are
+        MECE with respective (desk-schema items); currenlty (desk-schema) items
+        cannot be updated, and future code which allows updates should lock 
+        relevant (desk-cells columns) and complete implied maintenance CRUD
+        before releasing the lock;
+        
+        !!! WARNING !!! - read above first;
     
+        Expect formStringParameters of the form 
+        
+        0.  desk-cells[ << desk-schema.name >> ][ << ITEMS >> ]
+      
+        1.  get the keys of desk-cells, K
+        2.  loads schemas of K; if schemas is not found, THROW EXCEPTION
+        3.  validate (0.) against (2.); THROW ANY EXCEPTIONS
+      
+        << all cells now validated >>
+
+        << implement CREATE / UPDATE as (DynamoDB's PutItem) >>
+      
+        4.  -   separate items without 'R'      : to be CREATED (6a.)
+            -   separate items with 'R', by 'R' : to be UPDATED (6b.)
+      
+        5a,5b.  Array.reduce cells to batches of 25
+        
+        6a. Generate UUID;
+        
+            If 1 batch, then TransactWriteItems;
+        
+            If > 1 batches, then ASYNCHRONOUSLY TransactWriteItems ... PUT each
+                batch;
+            
+                If NO BATCHES ARE REJECTED, then return success;
+            
+            If ANY BATCHES ARE REJECTED, then TransactWriteItems DELETE all
+            items by R=UUID; if this deletion transaction fails, report a
+            massive error;
+                
+        6b. For each UUID ('R'):
+            
+                -   check for lock on << desk-cells >> table
+                -   if table is locked, THROW EXCEPTION
+                -   otherwise lock table with UUID key as << string >>
+                -   draft object example:
+                
+                    { 
+                        DHC:    'DESK#COLUMN',     // Partition Key--+
+                        R:      '__COLUMN_LOCK__'// Sort Key     --+- Primary Key
+                        LOCK_ID:<< uuid >>,
+                        EXPIRES:<< table TTL >>
+                    }
+                
+                -   TransactWriteItems
+    */ 
+
 /*  
     if (!await rus.validateFormData(data, 'desk-schemas')) {
         await status400(data)
