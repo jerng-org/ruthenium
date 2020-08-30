@@ -1,13 +1,11 @@
 'use strict'
 
 const desksRead = require('/var/task/tasks/virtual/desks-read.js')
+const desksCreateRow = require('/var/task/tasks/virtual/desk-create-row.js')
 
 const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js')
 const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
 const deskSchemasPut = require('/var/task/tasks/virtual/desk-schemas-put.js')
-
-const deskCellsPatch = require('/var/task/tasks/virtual/desk-cells-patch.js')
-
 
 const formsMarkupCreateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)
 const formsMarkupReadDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)
