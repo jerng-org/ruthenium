@@ -12,7 +12,7 @@ rus.conf.verbosity > 0 &&
 
 // const deskSchemasModel  = require (`/var/task/io/models/desk-schemas.js`)
 
-const deskGet = async(data) => {
+const deskRead = async(data) => {
 
     const deskName = data.RU.request.queryStringParameters.thing[0]
 
@@ -47,4 +47,4 @@ const deskGet = async(data) => {
 
     // no need to return (data)
 }
-module.exports = deskGet
+module.exports = deskRead
