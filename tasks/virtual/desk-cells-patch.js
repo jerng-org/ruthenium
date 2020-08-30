@@ -20,6 +20,12 @@ const deskCellsPatch = async(data) => {
         relevant (desk-cells columns) and complete implied maintenance CRUD
         before releasing the lock;
         
+        This is (desk-cells-patch), so formStringParameters are expected to be
+        explicitly cell-by-cell; this is NOT (desk-rows-patch), so it cannot be 
+        simply assumed that an absent [desk-name#column-name,row-id] implies 
+        deletion of that row; deletion of a row should only be conducted on
+        explicit specification from the form values;
+        
         !!! WARNING !!! - read above first;
     
         Expect formStringParameters of the form 
@@ -35,7 +41,7 @@ const deskCellsPatch = async(data) => {
         << implement CREATE / UPDATE as (DynamoDB's PutItem) >>
       
         4.  -   separate items without 'R'      : to be CREATED (6a.)
-            -   separate items with 'R', by 'R' : to be UPDATED (6b.)
+            -   separate items with 'R'         : to be UPDATED (6b.)
       
         5a,5b.  Array.reduce cells to batches of 25
         
@@ -52,7 +58,7 @@ const deskCellsPatch = async(data) => {
             items by R=UUID; if this deletion transaction fails, report a
             massive error;
                 
-        6b. For each UUID ('R'):
+        6b. Compile a list of UUIDs ('R's) to be updated;
             
                 -   check for lock on << desk-cells >> table
                 -   if table is locked, THROW EXCEPTION
