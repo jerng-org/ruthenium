@@ -1,7 +1,7 @@
 'use strict'
 
 const desksRead = require('/var/task/tasks/virtual/desks-read.js')
-const desksCreateRow = require('/var/task/tasks/virtual/desk-create-row.js')
+const desksCreateRow = require('/var/task/tasks/virtual/desks-create-row.js')
 
 const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js')
 const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
