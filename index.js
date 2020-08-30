@@ -177,6 +177,13 @@ try {
 
                 `v2:
                 
+                -   Tunneled form methods should be in REQUEST HEADERS or
+                    HIDDEN INPUT ELEMENTS not in URI
+                    
+                    -   Also E-tags
+                    
+                    -   Also CSRF tokens
+                
                 -   Probably no WebDAV, unless, we FIRST figure out a morphism
                     which uses JSON (popular) instead of XML (unpopular) wtf
                 
