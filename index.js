@@ -213,7 +213,7 @@ try {
                     
                     -   URIs should not include HTTP METHODS (perhaps except
                             when we have to tunnel weird methods over
-                            form-POSTs) (RFC 7231.2)
+                            form-POSTs) (RFC 7231.2) !!! NO VERBS !!!
                                 
                     -   Unsafe Methods, full scope (listed by increasing complexity)
                     
