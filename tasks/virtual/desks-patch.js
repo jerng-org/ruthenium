@@ -38,8 +38,13 @@ const desksPatch = async(data) => {
       
         << all cells now validated >>
 
-        << implement CREATE / UPDATE as (DynamoDB's PutItem) >>
+        << implement CREATE child/row/cells with (DynamoDB's PutItem) >>
       
+        << implement UPDATE child/row/cells with (DynamoDB's UpdateItem) >>
+            https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html
+            
+        << implement DELETE child/row/cells with (DynamoDB's DeleteItem) >>
+        
         4.  -   separate items without 'R'      : to be CREATED (6a.)
             -   separate items with 'R'         : to be UPDATED (6b.)
       

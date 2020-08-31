@@ -12,18 +12,18 @@ const innerHTML = async DATA => `
                     await rus.html.input ( {
                         id:             currentValue.name,
                         label:          currentValue.name,
-                        name:           `desk-cells###${index}###[${ currentValue.type }]`,
+                        name:           `desk-cells[CREATE]###${index}###[${ currentValue.type }]`,
                         placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
                         
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
-                        name:   `desk-cells###${index}###[DHC]`,
+                        name:   `desk-cells[CREATE]###${index}###[DHC]`,
                         value:  DATA.RU.io.deskSchemasGet.Item.name + '#' + currentValue.name
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
-                        name:   `desk-cells###${index}###[D]`,
+                        name:   `desk-cells[CREATE]###${index}###[D]`,
                         value:  DATA.RU.io.deskSchemasGet.Item.name
                     } )
             },

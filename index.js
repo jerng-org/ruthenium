@@ -234,7 +234,7 @@ try {
                                         only supports POST as a tunnel for
                                         PUT, PATCH, and DELETE
                                         
-                    -   Unsafe Methods, reduced scope, Approach 1:
+                    -   Unsafe Methods, reduced scope, Approach 1.1. (updated):
                     
                         -   Since POST's unique characteristic is that it is the 
                                 only unsafe (RFC 2612) method supported by HTML,
@@ -255,6 +255,11 @@ try {
                             -   PATCH   : creates / updates / deletes
                                             : CHILD-RESOURCES of
                                                 a COLLECTION-RESOURCE
+                                        
+                                        : create / update - should work exactly
+                                            like PUT (possible? impossible?)
+                                            
+                                        : delete - should be specified
                         
                 `,
 
