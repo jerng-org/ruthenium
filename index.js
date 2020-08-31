@@ -256,12 +256,18 @@ try {
                                             : CHILD-RESOURCES of
                                                 a COLLECTION-RESOURCE
                                         
-                                        : create / update - should work exactly
-                                            like PUT (possible? impossible?)
+                                        : recursively, semantics for child C_ UD
+                                            should be precisely like    - PUT
+                                                                        - DELETE
+                                                                        
+                                        : custom semantics for arbitrary
+                                            verbs/operations should be allowed,
+                                            e.g. INCREMENT_BY_ONE
                                             
-                                        : delete - should be specified
-                        
-                `,
+                                            ... however that is beyond the scope
+                                            of a standard interface definition,
+                                            at this time.
+                `,                                                      
 
                 `RULE:
                 

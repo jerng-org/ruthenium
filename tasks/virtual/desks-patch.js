@@ -28,10 +28,23 @@ const desksPatch = async(data) => {
         
         !!! WARNING !!! - read above first;
     
-        Expect formStringParameters of the form 
+        0.  Backend storage is the (desk-cells) DynamoDB table, where each Item
+            is a cell.
         
-        0.  desk-cells[ << desk-schema.name >> ][ << ITEMS >> ]
-      
+            Expect formStringParameters of the form 
+        
+            -   desk-cells[PUT]   INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
+            -   desk-cells[DELETE]INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
+            
+            DynamoDB's UpdateItem interface is much more flexible and would 
+            support more complex verbs/operations such as:
+
+            -   desk-cells[INCREMENT_BY_ONE]   INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
+            
+            ... but these should be left to a future implementation which is
+            more detailed, as we are rushing for basic CRUD of desk-cells at
+            the moment.
+                
         1.  get the keys of desk-cells, K
         2.  loads schemas of K; if schemas is not found, THROW EXCEPTION
         3.  validate (0.) against (2.); THROW ANY EXCEPTIONS
