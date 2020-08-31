@@ -51,7 +51,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(desks-create-row.js) continue here, with PATCH in (virtual.js)`,
+    gitCommitMessage: `-`,
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
     /*  USES:
      *  Merge order     :   1

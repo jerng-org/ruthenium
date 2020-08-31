@@ -8,11 +8,11 @@ const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
 //const status400 = require(`/var/task/tasks/status-400.js`)
 //const status500 = require(`/var/task/tasks/status-500.js`)
 
-const deskCellsPatch = async(data) => {
+const desksPatch = async(data) => {
 
     const candidates = data.RU.request.formStringParameters
 
-    console.warn ('(desks-create-row.js) form input validation skipped for now; fixme')
+    console.warn ('(desks-patch.js) form input validation skipped for now; fixme')
 
     /*  THIS SHOULD PROCEED UNDER THE ASSUMPTION THAT (desk-cells items) are
         MECE with respective (desk-schema items); currenlty (desk-schema) items
@@ -20,7 +20,7 @@ const deskCellsPatch = async(data) => {
         relevant (desk-cells columns) and complete implied maintenance CRUD
         before releasing the lock;
         
-        This is (desks-create-row), so formStringParameters are expected to be
+        This is (desks-patch), so formStringParameters are expected to be
         explicitly cell-by-cell; this is NOT (desk-rows-patch), so it cannot be 
         simply assumed that an absent [desk-name#column-name,row-id] implies 
         deletion of that row; deletion of a row should only be conducted on
@@ -52,12 +52,6 @@ const deskCellsPatch = async(data) => {
             If > 1 batches, then ASYNCHRONOUSLY TransactWriteItems ... PUT each
                 batch;
             
-                If NO BATCHES ARE REJECTED, then return success;
-            
-            If ANY BATCHES ARE REJECTED, then TransactWriteItems DELETE all
-            items by R=UUID; if this deletion transaction fails, report a
-            massive error;
-                
         6b. Compile a list of UUIDs ('R's) to be updated;
             
                 -   check for lock on << desk-cells >> table
@@ -73,6 +67,13 @@ const deskCellsPatch = async(data) => {
                     }
                 
                 -   TransactWriteItems
+        
+        7.  If NO BATCHES ARE REJECTED, then return success;
+            
+            If ANY BATCHES ARE REJECTED, then TransactWriteItems DELETE all
+            items by R=UUID; if this deletion transaction fails, report a
+            massive error;
+                
     */ 
 
 /*  
@@ -127,11 +128,11 @@ const deskCellsPatch = async(data) => {
 */
 
     // View
-    data.RU.signals.sendResponse.body = '(desks-create-row.js) WIP' 
+    data.RU.signals.sendResponse.body = '(desks-patch.js) WIP' 
 
 
     // manipulate (data.RU), for example
 
     // no need to return (data)
 }
-module.exports = deskCellsPatch
+module.exports = desksPatch
