@@ -51,40 +51,38 @@ const desksPatch = async(data) => {
       
         << all cells now validated >>
 
+        4.    
+
         << implement CREATE child/row/cells with (DynamoDB's PutItem) >>
       
-        << implement UPDATE child/row/cells with (DynamoDB's UpdateItem) >>
-            https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html
+        << implement UPDATE child/row/cells with (DynamoDB's PutItem) >>
+
+            When a future more detailed set of verbs is standardised, we can
+            use UpdateItem's extensive API:
+            
+                https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html
+
+            ... meanwhile, that API will need to be hidden behind other URLs
+            
+                (Also it's still not clear to me how we should tunnel specific
+                verbs over the standard few verbs; example of a custom verb ...
+                "increment this resource by 1")
             
         << implement DELETE child/row/cells with (DynamoDB's DeleteItem) >>
         
-        4.  -   separate items without 'R'      : to be CREATED (6a.)
-            -   separate items with 'R'         : to be UPDATED (6b.)
-      
         5a,5b.  Array.reduce cells to batches of 25
         
-        6a. Generate UUID;
+        6a. Where missing, generate a UUID, and append it to all relevant items;
         
-            If 1 batch, then TransactWriteItems;
+        6a, 6b. 
         
-            If > 1 batches, then ASYNCHRONOUSLY TransactWriteItems ... PUT each
-                batch;
-            
-        6b. Compile a list of UUIDs ('R's) to be updated;
-            
-                -   check for lock on << desk-cells >> table
-                -   if table is locked, THROW EXCEPTION
-                -   otherwise lock table with UUID key as << string >>
-                -   draft object example:
+            ASYNCHRONOUSLY  TransactWriteItems ... PutItem each batch;
+                configure   ReturnValues=ALL_OLD
                 
-                    { 
-                        DHC:    'DESK#COLUMN',     // Partition Key--+
-                        R:      '__COLUMN_LOCK__'// Sort Key     --+- Primary Key
-                        LOCK_ID:<< uuid >>,
-                        EXPIRES:<< table TTL >>
-                    }
-                
-                -   TransactWriteItems
+            OR
+            
+            ASYNCHRONOUSLY  TransactWriteItems ... DeleteItem each batch;
+                configure   ReturnValues=ALL_OLD
         
         7.  If NO BATCHES ARE REJECTED, then return success;
             
