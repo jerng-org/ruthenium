@@ -12,7 +12,7 @@ const desksPatch = async(data) => {
 
     const candidates = data.RU.request.formStringParameters
 
-    console.warn ('(desks-patch.js) form input validation skipped for now; fixme')
+    console.warn('(desks-patch.js) form input validation skipped for now; fixme')
 
     /*  THIS SHOULD PROCEED UNDER THE ASSUMPTION THAT (desk-cells items) are
         MECE with respective (desk-schema items); currenlty (desk-schema) items
@@ -44,7 +44,31 @@ const desksPatch = async(data) => {
             ... but these should be left to a future implementation which is
             more detailed, as we are rushing for basic CRUD of desk-cells at
             the moment.
+        */
+
+    rus.conf.verbosity > 1 && console.log(` Discussion:
+            We should really nail down how a client requests for a CREATE
+                versus how to request for an UPDATE. For example, a common
+                convention which we follow here for the time being is to simply
+                "not specify the primary key" in which case the system interprets
+                the PUT as (CREATE RESOURCE); however it seems more normalised
+                to have the client explicitly specify a primary key as, 
+                for example, "__NEW__". The question remains about whether this
+                is a corruption of how PUTs in general should be used.
                 
+    `)
+
+    /*  
+        if (!await rus.validateFormData(data, 'desk-schemas')) {
+            await status400(data)
+            return
+        }
+    */
+
+
+
+
+    /*                
         1.  get the keys of desk-cells, K
         2.  loads schemas of K; if schemas is not found, THROW EXCEPTION
         3.  validate (0.) against (2.); THROW ANY EXCEPTIONS
@@ -90,61 +114,54 @@ const desksPatch = async(data) => {
             items by R=UUID; if this deletion transaction fails, report a
             massive error;
                 
-    */ 
-
-/*  
-    if (!await rus.validateFormData(data, 'desk-schemas')) {
-        await status400(data)
-        return
-    }
-*/
+    */
 
 
-/*  NEXT:
+    /*  NEXT:
 
--   count incoming cells
--   break into batches of 25
--   validate
--   figure out how to transactionally write multiple batches of 25
+    -   count incoming cells
+    -   break into batches of 25
+    -   validate
+    -   figure out how to transactionally write multiple batches of 25
 
-*/
+    */
 
 
-/*  homologous code, from copied code, needs to be customised:
+    /*  homologous code, from copied code, needs to be customised:
 
 
 
-    // Configure DB client parameters
-    const params = {
+        // Configure DB client parameters
+        const params = {
 
-        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-        Item: candidate['desk-schemas'],
-        ExpressionAttributeNames: { '#name': 'name' },
-        ConditionExpression: 'attribute_not_exists(#name)',
-        ReturnConsumedCapacity: 'TOTAL'
+            TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+            Item: candidate['desk-schemas'],
+            ExpressionAttributeNames: { '#name': 'name' },
+            ConditionExpression: 'attribute_not_exists(#name)',
+            ReturnConsumedCapacity: 'TOTAL'
 
-    }
-
-    // Call storage layer
-
-    try {
-        data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
-    }
-    catch (e) {
-        console.error(e)
-        switch (e.code) {
-            case 'ConditionalCheckFailedException':
-                await status409(data)
-                return
-            default: // do nothing
-                await status500(data)
-                return
         }
-    }
-*/
+
+        // Call storage layer
+
+        try {
+            data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
+        }
+        catch (e) {
+            console.error(e)
+            switch (e.code) {
+                case 'ConditionalCheckFailedException':
+                    await status409(data)
+                    return
+                default: // do nothing
+                    await status500(data)
+                    return
+            }
+        }
+    */
 
     // View
-    data.RU.signals.sendResponse.body = '(desks-patch.js) WIP' 
+    data.RU.signals.sendResponse.body = '(desks-patch.js) WIP'
 
 
     // manipulate (data.RU), for example
