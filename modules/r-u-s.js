@@ -275,8 +275,15 @@ DEBUG EVERYTHING:
      * 
      */
     
-    validateFormMethod: async(data, modelKey, methodModelKey ) => {
-        
+    validateFormDataByMethod: async(data) => {
+        const _report = await rus.validate(
+            data.RU.request.formStringParameters,
+            // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
+            // third parameter : scopedModel
+        )
+        data.RU.signals.formDataValidByMethod = _report.shortReport.summary
+        data.RU.signals.formReportByMethod = _report
+        return data.RU.signals.formDataValid
     },
     
     /*  VALIDATE_FORM_DATA

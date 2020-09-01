@@ -30,6 +30,9 @@ const _patch = {
         many:   false,      // perhaps 'true' for a future "batchPatch"
         rules:  {
             count_gt:   0   // existence?
+            
+            // does our new rule go here? ( )
+            
         },
         notes:  ''
     }
