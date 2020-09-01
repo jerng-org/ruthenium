@@ -51,7 +51,8 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `(desks-patch.js) algorithm drafted`,
+    gitCommitMessage: `(r-u-s.js) working on validateFormMethod()`,
+    //gitCommitMessage: `(desks-patch.js) algorithm drafted`,
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
     /*  USES:
      *  Merge order     :   1

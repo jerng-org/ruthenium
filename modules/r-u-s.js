@@ -263,6 +263,22 @@ DEBUG EVERYTHING:
 
     validate: require(`/var/task/io/validate.js`),
 
+    /*  VALIDATE_FORM_METHOD
+     * 
+     *  This is experimental. We may figure out how to combine this with 
+     *      VALIDATE_FORM_METHOD at a later point in time.
+     * 
+     *  For now they are uncoupled. 
+     * 
+     * 
+     * 
+     * 
+     */
+    
+    validateFormMethod: async(data, modelKey, methodModelKey ) => {
+        
+    },
+    
     /*  VALIDATE_FORM_DATA
      *
      *  Returns (data.RU.signals.formDataValid); so you can use this call in
