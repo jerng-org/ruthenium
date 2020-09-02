@@ -201,11 +201,13 @@ module.exports = {
      *
      *      4   :   3       + (raw database output)         -> response.body
      *
-     *      5   :   4       + (development meta-narrative)  -> logs
+     *      5   :   4       
      *
      *      6   :   5       + (data)                        -> logs
      *
-     *      7   :   undefined as yet
+     *      7   :   6       + (development meta-narrative)  -> logs
+     *
+     *      8   :   undefined as yet
      */
     verbosity: 6,
 

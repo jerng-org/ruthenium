@@ -277,7 +277,7 @@ DEBUG EVERYTHING:
     
     validateFormDataByMethod: async (data, httpMethodModelKey) => {
         
-        const scopedModel = rus.validation.scopeModel ( httpMethodModelKey )
+        const scopedModel = await rus.validation.scopeModel ( httpMethodModelKey )
         
         console.error('(r-u-s.js) (scopedModel): ', scopedModel)
         

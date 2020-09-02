@@ -20,7 +20,7 @@ try {
     //      //
     //////////
 
-    rus.conf.verbosity > 4 && (
+    rus.conf.verbosity > 6 && (
         console.warn(`
         
     !!! WARNING !!! -   ANYTHING OUTSIDE (exports.handler) 
