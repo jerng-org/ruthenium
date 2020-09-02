@@ -1,6 +1,6 @@
 'use strict'
 
-const desksRead = require('/var/task/tasks/virtual/desks-read.js')
+const desksGet = require('/var/task/tasks/virtual/desks-get.js')
 const desksPatch = require('/var/task/tasks/virtual/desks-patch.js')
 
 const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js')
@@ -413,7 +413,7 @@ const virtual = async(data) => {
 
                                     //  DIMENSION D
                                     //  GET (desks), which one? 
-                                    await desksRead(data)
+                                    await desksGet(data)
                                     return
 
                                 default:
