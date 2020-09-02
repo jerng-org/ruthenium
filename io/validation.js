@@ -488,7 +488,11 @@ const validateRules = async(scopedDatum,
                                 
                                 ${   scopedModel.self.rules.all_subs_test_true  }
                                 
-                                ) failed; scopedDatum [ __modelKey ]  was: (${ scopedDatum[ __modelKey ] })`)
+                                ) failed; scopedDatum [ __modelKey ]  was: (
+                                    
+                                ${ JSON.stringify( scopedDatum[ __modelKey ], null, 4 ) }
+                                
+                                )`)
                             )
                         }
                     }
