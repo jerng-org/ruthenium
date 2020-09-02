@@ -484,13 +484,16 @@ const validateRules = async(scopedDatum,
 
                         if ( ! _rulesToTest.all_subs_test_true ( scopedDatum[ __modelKey ] ) ) {
                             setResult(
-                                Error(`(validateRules) (${ keyTrace }) (model.self.many:false) (model.rules.all_subs_test_true:
+                                Error(`(validateRules) (${ keyTrace }) 
                                 
-                                ${   scopedModel.self.rules.all_subs_test_true  }
+                                (model.self.many:false) 
+                                (model.rules.all_subs_test_true:
+                                
+                                    ${   scopedModel.self.rules.all_subs_test_true  }
                                 
                                 ) failed; scopedDatum [ __modelKey ]  was: (
                                     
-                                ${ JSON.stringify( scopedDatum[ __modelKey ], null, 4 ) }
+                                    ${ JSON.stringify( scopedDatum[ __modelKey ], null, 4 ) }
                                 
                                 )`)
                             )
