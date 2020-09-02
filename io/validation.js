@@ -1,5 +1,6 @@
 'use strict'
 
+const conf = require(`/var/task/configuration.js`)
 
 const mark = require('/var/task/modules/mark.js')
 
@@ -194,7 +195,8 @@ const validate = async(dataToValidate,
     keyTrace = modelKey,
 
     report = {
-        [modelKey]: {} },
+        [modelKey]: {}
+    },
     shortReport =
     Object.defineProperty([], 'summary', {
         configurable: true,
@@ -238,8 +240,7 @@ const validate = async(dataToValidate,
             ?
             new Array(_scopedDataIsArray ? _scopedData.length : 0)
             .fill(0)
-            .map(_ => ({})) :
-            {}
+            .map(_ => ({})) : {}
 
         //////////
         //      //
@@ -390,7 +391,7 @@ const validateRules = async(scopedDatum,
     shortReport
 ) => {
 
-    console.log(`(validation.js) (validateRules) (scopedModel)`, scopedModel )
+    console.log(`(validation.js) (validateRules) (scopedModel)`, scopedModel)
 
     const _rulesToTest = scopedModel.self.rules
     let report = {
@@ -450,6 +451,21 @@ const validateRules = async(scopedDatum,
             //      //
             //////////
 
+            case ('all_subs_test_true'):
+
+                conf.verbosity > 0 && console.log(`(validate.js) (rule: all_subs_test_true) PARTIALLY ... UNDEFINED`)
+
+                if (scopedModel.self.many) {
+
+                    // define later; case where {}
+                }
+                else {
+
+                    console.log(`(validation.js) (rule: all_subs_test_true) (scopedDatum):`, scopedDatum)
+                    console.log(`(validation.js) (rule: all_subs_test_true) (_rulesToTest.all_subs_test_true):`, _rulesToTest.all_subs_test_true)
+                }
+                break
+
             case ('count_gt'):
                 /*  This is a really stupendous amount of code just to check if something exists
                  *   or not. I really have no faith in this design at the moment. But it should
@@ -492,9 +508,7 @@ const validateRules = async(scopedDatum,
                 else // not-'many', ergo is not an Array
                 {
                     // existential quantifier
-                    if (_rulesToTest.count_gt === 0 &&
-                        [undefined, null, NaN].includes(scopedDatum)
-                    ) {
+                    if (_rulesToTest.count_gt === 0 && [undefined, null, NaN].includes(scopedDatum)) {
                         setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:false)
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
@@ -520,6 +534,9 @@ const validateRules = async(scopedDatum,
                 //////////
 
             case ('included_in'):
+
+                conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
+
                 if (scopedModel.self.many) {
 
                 } // if (many); if-block ends
@@ -536,6 +553,9 @@ const validateRules = async(scopedDatum,
                 //////////
 
             case ('regex_text'):
+
+                conf.verbosity > 0 && console.log(`(validate.js) (rule: regex_text) UNDEFINED`)
+
                 if (scopedModel.self.many) {
 
                 } // if (many); if-block ends
@@ -558,9 +578,9 @@ const validateRules = async(scopedDatum,
 
 
 module.exports = {
-    validate:       validate,
-    validateRules:  validateRules,
-    models:         models,
-    scopeModel:     scopeModel
+    validate: validate,
+    validateRules: validateRules,
+    models: models,
+    scopeModel: scopeModel
 }
 mark(`~/modules/validation.js LOADED`)
