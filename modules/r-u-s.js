@@ -261,7 +261,7 @@ DEBUG EVERYTHING:
     //      //
     //////////
 
-    validate: require(`/var/task/io/validate.js`),
+    validation: require(`/var/task/io/validation.js`),
 
     /*  VALIDATE_FORM_METHOD
      * 
@@ -275,15 +275,16 @@ DEBUG EVERYTHING:
      * 
      */
     
-    validateFormDataByMethod: async(data) => {
-        const _report = await rus.validate(
-            data.RU.request.formStringParameters,
-            // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
-            // third parameter : scopedModel
+    validateFormDataByMethod: async (data, httpMethodModelKey) => {
+        
+        const _report = await rus.validation.validate(
+            data.RU.request,
+            'formStringParameters',                             // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
+            rus.validation.scopeModel ( httpMethodModelKey )    // third parameter : scopedModel
         )
         data.RU.signals.formDataValidByMethod = _report.shortReport.summary
         data.RU.signals.formReportByMethod = _report
-        return data.RU.signals.formDataValid
+        return data.RU.signals.formDataValidByMethod
     },
     
     /*  VALIDATE_FORM_DATA
@@ -298,7 +299,8 @@ DEBUG EVERYTHING:
      */
 
     validateFormData: async(data, modelKey) => {
-        const _report = await rus.validate(
+        
+        const _report = await rus.validation.validate(
             data.RU.request.formStringParameters,
             modelKey
         )

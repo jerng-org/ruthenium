@@ -24,7 +24,7 @@ Our target data looks LIKE this:
 
 
 // Types and Sub-types
-const _patch = {
+const httpPatch = {
 
     self:   {
         many:   false,      // perhaps 'true' for a future "batchPatch"
@@ -46,4 +46,4 @@ const _patch = {
 }
 // desk-schemas
     
-module.exports = _patch
+module.exports = httpPatch 

@@ -31,7 +31,7 @@ const scopeModel = async _modelKey => {
             _currentModel = models[_modelKey]
         }
         else {
-            throw Error(`(validate.js:scopeModel) the requested 
+            throw Error(`(validation.js:scopeModel) the requested 
                                 modelKey (${_modelKey}) was not 
                                 found in (models).
                                 `)
@@ -40,7 +40,7 @@ const scopeModel = async _modelKey => {
     }
     else if (_modelKey instanceof Array) {
 
-        throw Error(`(validate.js:scopeModel) (_modelKey instanceof Array)
+        throw Error(`(validation.js:scopeModel) (_modelKey instanceof Array)
                       NOT YET IMPLEMENTED - TODO`)
     }
     return _currentModel
@@ -99,7 +99,7 @@ const scopeModel = async _modelKey => {
  *                  } 
  *              }
  *          
- *              scopedModel =   // returned by (validate.js:scopeModel)
+ *              scopedModel =   // returned by (validation.js:scopeModel)
  *              { 
  *                  self: etc.
  *                  subs: {
@@ -118,7 +118,7 @@ const scopeModel = async _modelKey => {
  *  
  *      If PARAMETER 3 is not filled by the user, infer it from PARAMETER 2.
  *      
- *      We don't want to be running (validate.js:scopeModel) on every recursing
+ *      We don't want to be running (validation.js:scopeModel) on every recursing
  *      call, so here we control calls to happen only if (scopedModel)
  *      is not provided ... we then use (modelKey) to find 
  *      (scopedModel); but for the initiating call you can 
@@ -361,7 +361,7 @@ const validate = async(dataToValidate,
  *                                  }
  *                              }
  *                          }
- *                      // returned by (validate.js:scopeModel) 
+ *                      // returned by (validation.js:scopeModel) 
  *  
  *  OPERATION 1
  *  
@@ -555,5 +555,10 @@ const validateRules = async(scopedDatum,
 // (validateRules)
 
 
-module.exports = validate
-mark(`~/modules/validate.js LOADED`)
+module.exports = {
+    validate:       validate,
+    validateRules:  validateRules,
+    models:         models,
+    scopeModel:     scopeModel
+}
+mark(`~/modules/validation.js LOADED`)
