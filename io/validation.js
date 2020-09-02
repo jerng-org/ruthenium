@@ -476,21 +476,18 @@ const validateRules = async(scopedDatum,
                     
                     */
 
-                    console.log(`(validation.js) (rule: all_subs_test_true) (scopedDatum):`, scopedDatum)
-                    console.log(`(validation.js) (rule: all_subs_test_true) (_rulesToTest.all_subs_test_true):`, _rulesToTest.all_subs_test_true)
-
                     for (const __modelKey in scopedDatum) {
                         /*  Where, for example: __modelKey = 'desk-cells' */
 
                         if ( ! _rulesToTest.all_subs_test_true ( scopedDatum[ __modelKey ] ) ) {
                             setResult(
                                 Error(`
-(validateRules) (${ keyTrace }) 
-
-(model.self.many:false) 
+(validateRules)
+(keyTrace: ${ keyTrace }) 
+(model.self.many: false) 
 (model.rules.all_subs_test_true:
 
-    ${   scopedModel.self.rules.all_subs_test_true  }
+    ${ scopedModel.self.rules.all_subs_test_true }
 
 ) failed; scopedDatum [ __modelKey ]  was: (
     
