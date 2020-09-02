@@ -283,8 +283,8 @@ DEBUG EVERYTHING:
         
         const _report = await rus.validation.validate(
             data.RU.request,
-            'formStringParameters',                             // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
-            rus.validation.scopeModel ( httpMethodModelKey )    // third parameter : scopedModel
+            'formStringParameters', // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
+            scopedModel             // third parameter : scopedModel
         )
         data.RU.signals.formDataValidByMethod = _report.shortReport.summary
         data.RU.signals.formReportByMethod = _report
