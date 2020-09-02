@@ -26,23 +26,31 @@ Our target data looks LIKE this:
 // Types and Sub-types
 const httpPatch = {
 
-    self:   {
-        many:   false,      // perhaps 'true' for a future "batchPatch"
-        rules:  {
-            count_gt:   0,  // existence?
-            all_subs_test_true:  _scopedDataSubItem => true // dummy-test-function    
+    self: {
+        many: false, // perhaps 'true' for a future "batchPatch"
+        rules: {
+            
+            count_gt: 0, // existence?
+            
+            all_subs_test_true: _scopedDatumSubItem => {
+
+                const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
+                    //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
+                const _allowedMethodKeys = ['PUT', 'DELETE']
+                return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
+            }
 
         },
-        notes:  ''
+        notes: ''
     }
-    
+
     /*
     
     We don't 
     
-    */ 
-    
+    */
+
 }
 // desk-schemas
-    
-module.exports = httpPatch 
+
+module.exports = httpPatch

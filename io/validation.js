@@ -435,7 +435,7 @@ const validateRules = async(scopedDatum,
                     shortReport[shortReport.length - 1][1] = ['pass']
             }
         }
-        setResult() // default pass
+        setResult() // set: default pass
 
         //////////
         //      //
@@ -453,7 +453,7 @@ const validateRules = async(scopedDatum,
 
             case ('all_subs_test_true'):
 
-                conf.verbosity > 0 && console.log(`(validate.js) (rule: all_subs_test_true) PARTIALLY ... UNDEFINED`)
+                conf.verbosity > 0 && console.log(`(validation.js) (rule: all_subs_test_true) PARTIALLY ... UNDEFINED`)
 
                 if (scopedModel.self.many) {
 
@@ -461,8 +461,38 @@ const validateRules = async(scopedDatum,
                 }
                 else {
 
+                    /*  Where, for example:
+                        
+                        scopedDatum = 
+                        {
+                          'desk-cells': {
+                            PUT: [
+                              { N: '99', DHC: 'shoes#size', D: 'shoes' },
+                              { S: 'hihi', DHC: 'shoes#material', D: 'shoes' },
+                              { S: 'hi', DHC: 'shoes#color', D: 'shoes' }
+                            ]
+                          }
+                        },
+                    
+                    */
+
                     console.log(`(validation.js) (rule: all_subs_test_true) (scopedDatum):`, scopedDatum)
                     console.log(`(validation.js) (rule: all_subs_test_true) (_rulesToTest.all_subs_test_true):`, _rulesToTest.all_subs_test_true)
+
+                    for (const __modelKey in scopedDatum) {
+                        /*  Where, for example: __modelKey = 'desk-cells' */
+
+                        if ( ! _rulesToTest.all_subs_test_true ( scopedDatum[ __modelKey ] ) ) {
+                            setResult(
+                                Error(`(validateRules) (${                                          keyTrace
+                                    }) (model.self.many:false) (model.rules.all_subs_test_true:${   scopedModel.self.rules.all_subs_test_true 
+                                    }) failed; scopedDatum [ __modelKey ]  was: (${                 scopedDatum[ __modelKey ] 
+                                    })`)
+                            )
+                        }
+                    }
+
+
                 }
                 break
 
