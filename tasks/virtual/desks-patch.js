@@ -58,6 +58,11 @@ const desksPatch = async(data) => {
                 
     `)
 
+    if (!await rus.validateFormData(data, 'desk-schemas')) {
+        await status400(data)
+        return
+    }
+
     /*  
         if (!await rus.validateFormData(data, 'desk-schemas')) {
             await status400(data)

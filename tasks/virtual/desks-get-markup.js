@@ -4,7 +4,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 
 
-const desksReadMarkup = async(data) => {
+const desksGetMarkup = async(data) => {
 
     let th1s = '<th scope="row" ><sup>property name</sup> <sub>type</sub></th>'
     let th2s = `<th scope="col" colspan="999">
@@ -203,7 +203,7 @@ const desksReadMarkup = async(data) => {
 </table>`
 
 
-    rus.mark(`~/tasks/virtual/desks-read-markup.js EXECUTED`)
+    rus.mark(`~/tasks/virtual/desks-get-markup.js EXECUTED`)
 
     return markup
 }
@@ -211,5 +211,5 @@ const desksReadMarkup = async(data) => {
 //      (data.RU.response.body) by (compose-response.js).
 
 
-module.exports = desksReadMarkup
-rus.mark(`~/tasks/virtual/desks-read-markup.js LOADED`)
+module.exports = desksGetMarkup
+rus.mark(`~/tasks/virtual/desks-get-markup.js LOADED`)
