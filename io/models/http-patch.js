@@ -29,10 +29,9 @@ const httpPatch = {
     self:   {
         many:   false,      // perhaps 'true' for a future "batchPatch"
         rules:  {
-            count_gt:   0   // existence?
-            
-            // does our new rule go here? ( )
-            
+            count_gt:   0,  // existence?
+            all_subs_test_true:  _scopedDataSubItem => true // dummy-test-function    
+
         },
         notes:  ''
     }
