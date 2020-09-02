@@ -36,7 +36,7 @@ const httpPatch = {
 
                 const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
                     //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
-                const _allowedMethodKeys = ['DELETE']//['PUT', 'DELETE']
+                const _allowedMethodKeys = ['PUT', 'DELETE']
                 return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
             }
 
