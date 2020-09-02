@@ -287,7 +287,7 @@ DEBUG EVERYTHING:
             scopedModel             // third parameter : scopedModel
         )
         data.RU.signals.formDataValidByMethod = _report.shortReport.summary
-        data.RU.signals.formReportByMethod = _report
+        data.RU.signals.formDataValidReportByMethod = _report
         return data.RU.signals.formDataValidByMethod
     },
     
@@ -309,7 +309,7 @@ DEBUG EVERYTHING:
             modelKey
         )
         data.RU.signals.formDataValid = _report.shortReport.summary
-        data.RU.signals.formReport = _report
+        data.RU.signals.formDataValidationReport = _report
         return data.RU.signals.formDataValid
     },
 
