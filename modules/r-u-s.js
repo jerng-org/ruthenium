@@ -279,7 +279,7 @@ DEBUG EVERYTHING:
         
         const scopedModel = await rus.validation.scopeModel ( httpMethodModelKey )
         
-        console.error('(r-u-s.js) (scopedModel): ', scopedModel)
+        console.log('(r-u-s.js) (scopedModel): ', scopedModel)
         
         const _report = await rus.validation.validate(
             data.RU.request,

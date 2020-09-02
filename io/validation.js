@@ -390,6 +390,8 @@ const validateRules = async(scopedDatum,
     shortReport
 ) => {
 
+    console.log(`(validation.js) (validateRules) (scopedModel)`, scopedModel )
+
     const _rulesToTest = scopedModel.self.rules
     let report = {
         rules: {},
