@@ -171,8 +171,9 @@ await rus.appUrl ( [
         </div>
         
         ${ rus.conf.verbosity > 2 ? '<hr><h4>(rus.conf.verbosity > 2) :</h4>' : ''}
-        ${ rus.conf.verbosity > 2 ? ( "<pre>cookies:\n" + await rus.print.stringify4 ( data.RU.request.headers.cookies ) + '</pre>' ) : ''}
-        ${ rus.conf.verbosity > 3 ? ( "<pre>io:\n" + await rus.print.stringify4 ( data.RU.io ) + '</pre>' ) : ''}
+        ${ rus.conf.verbosity > 2 ? ( "<pre>cookies (data.RU.request.headers.cookies):\n" + await rus.print.stringify4 ( data.RU.request.headers.cookies ) + '</pre>' ) : ''}
+        ${ rus.conf.verbosity > 3 ? ( "<pre>form data (data.RU.request...):\n" + await rus.print.stringify4 ( data.RU.request ) + '</pre>' ) : ''}
+        ${ rus.conf.verbosity > 3 ? ( "<pre>io (data.RU.io):\n" + await rus.print.stringify4 ( data.RU.io ) + '</pre>' ) : ''}
     </body>
 </html>`
 

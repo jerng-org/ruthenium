@@ -199,8 +199,8 @@ module.exports = {
      *
      *      3   :   2       + (data)                        -> response.body
      *
-     *      4   :   3       + (raw database output)         -> response.body
-     *
+     *      4   :   3       + (reindexed form data; 
+     *                          raw database output)        -> response.body
      *      5   :   4       
      *
      *      6   :   5       + (data)                        -> logs
