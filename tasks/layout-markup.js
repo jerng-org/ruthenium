@@ -172,12 +172,10 @@ await rus.appUrl ( [
         
         ${ rus.conf.verbosity > 2 ? '<hr><h4>(rus.conf.verbosity > 2) :</h4>' : ''}
         ${ rus.conf.verbosity > 2 ? ( "<pre>cookies (data.RU.request.headers.cookies):\n" + await rus.print.stringify4 ( data.RU.request.headers.cookies ) + '</pre>' ) : ''}
-        
-        ${ rus.conf.verbosity > 3 ? '<hr><h4>(rus.conf.verbosity > 3) :</h4>' : ''}
-        ${ rus.conf.verbosity > 3 ? ( "<pre>io (data.RU.io):\n" + await rus.print.stringify4 ( data.RU.io ) + '</pre>' ) : ''}
-        ${ rus.conf.verbosity > 3 ? ( "<pre>form data (data.RU.request.formStringParameters):\n" + await rus.print.stringify4 ( data.RU.request.formStringParameters ) + '</pre>' ) : ''}
-        ${ rus.conf.verbosity > 3 ? ( "<pre>form data (data.RU.request.formStringParametersBeforeReindex):\n" + await rus.print.stringify4 ( data.RU.request.formStringParametersBeforeReindex ) + '</pre>' ) : ''}
-        ${ rus.conf.verbosity > 3 ? ( "<pre>form data (data.RU.request.rawFormString):\n" + await rus.print.stringify4 ( data.RU.request.rawFormString ) + '</pre>' ) : ''}
+        ${ rus.conf.verbosity > 2 ? ( "<pre>io (data.RU.io):\n" + await rus.print.stringify4 ( data.RU.io ) + '</pre>' ) : ''}
+        ${ rus.conf.verbosity > 2 ? ( "<pre>form data (data.RU.request.formStringParameters):\n" + await rus.print.stringify4 ( data.RU.request.formStringParameters ) + '</pre>' ) : ''}
+        ${ rus.conf.verbosity > 2 ? ( "<pre>form data (data.RU.request.formStringParametersBeforeReindex):\n" + await rus.print.stringify4 ( data.RU.request.formStringParametersBeforeReindex ) + '</pre>' ) : ''}
+        ${ rus.conf.verbosity > 2 ? ( "<pre>form data (data.RU.request.rawFormString):\n" + await rus.print.stringify4 ( data.RU.request.rawFormString ) + '</pre>' ) : ''}
     </body>
 </html>`
 

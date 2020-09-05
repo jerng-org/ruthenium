@@ -180,7 +180,8 @@ try {
                 -   Tunneled form methods should be in REQUEST HEADERS or
                     HIDDEN INPUT ELEMENTS not in URI
                     
-                    -   Also E-tags
+                    -   Also E-tags; PUT If-Match, etc. for optimistic 
+                        concurrency control (locking); framework wide;
                     
                     -   Also CSRF tokens
                 

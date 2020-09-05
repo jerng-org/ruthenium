@@ -200,10 +200,11 @@ module.exports = {
      *
      *      2   :   1       + console.info  -> logs
      *
-     *      3   :   2       + (data)                        -> response.body
-     *
-     *      4   :   3       + (reindexed form data; 
+     *      3   :   2       + (reindexed form data; 
      *                          raw database output)        -> response.body
+     *
+     *      4   :   3       + (data)                        -> response.body
+     *
      *      5   :   4       
      *
      *      6   :   5       + (data)                        -> logs
@@ -212,6 +213,6 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 4,
+    verbosity: 3,
 
 }
