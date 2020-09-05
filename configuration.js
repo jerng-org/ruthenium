@@ -51,7 +51,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `updated CSS framework from repo`,
+    gitCommitMessage: `linked in Roboto font to layout`,
     //gitCommitMessage: `(desks-patch.js) algorithm drafted`,
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
     /*  USES:
