@@ -100,7 +100,7 @@ try {
 
                 `single-page-app framework; history API`,
                 
-                `(status-xxx.js) implement a custom message passing mechanism.`,
+                `(statustep-functions/s-xxx.js) implement a custom message passing mechanism.`,
 
                 `memory link; redirect to attempted URI after login`,
 
