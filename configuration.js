@@ -1,3 +1,8 @@
+// Dev: easy to find and edit
+const gitCommitMessage = `HTML Layout - improved debug for form data (now at same level as DB results)`
+    //gitCommitMessage: `(desks-patch.js) algorithm drafted`,
+    //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
+
 module.exports = {
 
     app: {
@@ -51,9 +56,7 @@ module.exports = {
      *
      */
     gitCommit: 1,
-    gitCommitMessage: `linked in Roboto font to layout`,
-    //gitCommitMessage: `(desks-patch.js) algorithm drafted`,
-    //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
+    gitCommitMessage: gitCommitMessage,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
