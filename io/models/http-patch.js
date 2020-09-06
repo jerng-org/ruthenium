@@ -27,28 +27,53 @@ Our target data looks LIKE this:
 const httpPatch = {
 
     self: {
-        many: false, // perhaps 'true' for a future "batchPatch"
+        many: false,
         rules: {
             
-            count_gt: 0, // existence?
+            count_gt: 0,
             
-            all_subs_test_true: _scopedDatumSubItem => {
-
-                const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
-                    //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
-                const _allowedMethodKeys = ['PUT', 'DELETE']
-                return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
-            }
+            allowed_keys_only: ['PUT','DELETE']
 
         },
         notes: ''
+    },
+
+    subs: {
+
+        'PUT': {},
+        'DELETE': {}
     }
 
-    /*
-    
-    We don't 
-    
-    */
+    /*  Approach #1 (redundant with certain basic functionality of validation.validate())
+
+        self: {
+            many: false, // perhaps 'true' for a future "batchPatch"
+            rules: {
+                
+                count_gt: 0, // existence?
+                
+                all_subs_test_true: _scopedDatumSubItem => {
+
+                    const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
+                        //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
+                    const _allowedMethodKeys = ['PUT', 'DELETE']
+                    return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
+                
+                    //  Is this the right approach, or should we just
+                    //  test for sub-models PUT and DELETE ? 2020-09 COMMENT
+                    //
+                    
+                }
+
+            },
+            notes: ''
+        }
+        */
+
+    /*  Approach 2 */
+
+
+
 
 }
 // desk-schemas

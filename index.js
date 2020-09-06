@@ -56,6 +56,14 @@ try {
 
                 `CURRENT:`,
                 
+                `(http-METHOD) validation models COULD possibly ADDITIONALLY
+                automatically check other models (e.g. after the (http-patch.js)
+                validation check is positive, it could additionally check 
+                subfields for the (desk-schemas) if that was the resource being
+                PATCHed).`,
+                
+                `Route should be properly documented in (data.RU)`,
+                
                 `1. Abandon RESTful approaches, temporarily.
                 
                 2. Turn focus to making virtual tables work (desks).`,

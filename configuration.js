@@ -1,5 +1,6 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `return to work on: (desks-patch.js) algorithm drafted`
+const gitCommitMessage = `(http-patch).js - validation.js, 'allowed_keys_only' experimental architecture`
+//const gitCommitMessage = `return to work on: (desks-patch.js) algorithm drafted`
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
 module.exports = {

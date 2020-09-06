@@ -479,7 +479,7 @@ const validateRules = async(scopedDatum,
                     for (const __modelKey in scopedDatum) {
                         /*  Where, for example: __modelKey = 'desk-cells' */
 
-                        if ( ! _rulesToTest.all_subs_test_true ( scopedDatum[ __modelKey ] ) ) {
+                        if (!_rulesToTest.all_subs_test_true(scopedDatum[__modelKey])) {
                             setResult(
                                 Error(`
 (validateRules)
@@ -570,37 +570,90 @@ const validateRules = async(scopedDatum,
                 //      //
                 //////////
 
-            case ('included_in'):
+            case ('allowed_keys_only'):
 
-                conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
+                conf.verbosity > 0 && console.log(`(validate.js) (rule: allowed_keys_only) UNDEFINED`)
 
-                if (scopedModel.self.many) {
+                /* experimental architecture */
 
-                } // if (many); if-block ends
-                else // not-'many', ergo is not an Array
-                {
+                const test = __datum => {
+                    for (const __key in __datum) {
+                        if (!scopedModel.self.rules.allowed_keys_only.includes(__key)) {
+                            setResult(Error(`(validateRules) (${keyTrace}) 
+                            (model.self.many: ${scopedModel.self.many}) 
+                            (model.rules.allowed_keys_only does not include
+                            the key (${__key}) found in the datum.`))
+                        }
+                    }
+                }
 
-                } // if (many); else-block ends
-                break // regex_text
+                const mapTest = (testFun, testModel, testDatum) => {
+                    if (testModel.self.many) {
+                        for (const testSubDatum of testDatum) {
+                            testFun(testSubDatum)
+                        }
+                    } // if (many); if-block ends
+                    else // not-'many', ergo is not an Array
+                    {
+                        testFun(testDatum)
+                    } // if (many); else-block ends
+                }
 
-                //////////
-                //      //
-                //  !!  //  Make way.
-                //      //
-                //////////
+                mapTest ( test, scopedModel, scopedDatum )
 
-            case ('regex_text'):
+                /*             
+                                if (scopedModel.self.many) {
+                                    for (const __datum of scopedDatum) {
+                                        __test ( __datum )
+                                    }
+                                } // if (many); if-block ends
+                                else // not-'many', ergo is not an Array
+                                {
+                                    __test ( scopedDatum )
+                                } // if (many); else-block ends
+                */
 
-                conf.verbosity > 0 && console.log(`(validate.js) (rule: regex_text) UNDEFINED`)
 
-                if (scopedModel.self.many) {
 
-                } // if (many); if-block ends
-                else // not-'many', ergo is not an Array
-                {
+                break // allowed_keys_only
 
-                } // if (many); else-block ends
-                break // regex_text
+
+                /*
+                            case ('included_in'):
+
+                                conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
+
+                                if (scopedModel.self.many) {
+
+                                } // if (many); if-block ends
+                                else // not-'many', ergo is not an Array
+                                {
+
+                                } // if (many); else-block ends
+                                break // regex_text
+
+                                //////////
+                                //      //
+                                //  !!  //  Make way.
+                                //      //
+                                //////////
+
+                            case ('regex_text'):
+
+                                conf.verbosity > 0 && console.log(`(validate.js) (rule: regex_text) UNDEFINED`)
+
+                                if (scopedModel.self.many) {
+
+                                } // if (many); if-block ends
+                                else // not-'many', ergo is not an Array
+                                {
+
+                                } // if (many); else-block ends
+                                break // regex_text
+                */
+            default:
+
+                throw (Error(`(validation.js) (validateRules) : (_ruleKey : ${ _ruleKey } ) not found in (switch-case).`))
 
 
         }
