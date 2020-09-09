@@ -690,7 +690,7 @@ const validateRules = async(
                 }
                 break
 
-                /*
+                //*
                 case ('included_in'):
 
                     conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
@@ -722,7 +722,7 @@ const validateRules = async(
 
                     } // if (many); else-block ends
                     break // regex_text
-                */
+                //*/
 
                 //////////
                 //      //
