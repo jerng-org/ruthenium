@@ -267,8 +267,8 @@ const validate = async(dataToValidate,
 
                         scopedModel.subs[_scopedSubModelKey],
                         keyTrace +
-                        '.[' + _count + '].' +
-                        _scopedSubModelKey,
+                        '[' + _count + '][' +
+                        _scopedSubModelKey + ']',
 
                         undefined,
                         shortReport
@@ -288,7 +288,7 @@ const validate = async(dataToValidate,
                     _scopedSubModelKey,
 
                     scopedModel.subs[_scopedSubModelKey],
-                    keyTrace + '.' + _scopedSubModelKey,
+                    keyTrace + '[' + _scopedSubModelKey + ']',
 
                     undefined,
                     shortReport
@@ -592,14 +592,18 @@ const validateRules = async(scopedDatum,
                         const __report = await validateRules(
                             scopedDatum[__key],
                             scopedModel.self.rules.subs_all_fit_model,
-                            //keyTrace,
-                            //shortReport
                             
-                            // 2020-09 : I have legit forgotten how to use these
-                            //              last two parameters, and shall have
-                            //              to revisit this later.
+                            keyTrace + `[${ __key }]`,
+                            shortReport
                             
                         )
+                        console.warn(`validation.js: ...: subs_all_fit_model: validateRules FUNCTION CALL:
+                        
+                            // 2020-09 : I have legit forgotten how to use these
+                            //              last two parameters, and shall have
+                            //              to revisit this later; present usage
+                            //              might screw up the reports.
+                            `)
 
 
 
