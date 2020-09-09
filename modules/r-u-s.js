@@ -280,7 +280,7 @@ DEBUG EVERYTHING:
         const scopedModel = await rus.validation.scopeModel(httpMethodModelKey)
 
         const _report = await rus.validation.validate({
-                [httpMethodModelKey]: data.RU.request[httpMethodModelKey]
+                [httpMethodModelKey]: data.RU.request.formStringParameters
             },
             httpMethodModelKey, // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
             scopedModel // third parameter : scopedModel
