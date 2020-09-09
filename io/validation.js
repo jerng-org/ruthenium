@@ -223,7 +223,7 @@ const validate = async(dataToValidate,
     //      //
     //////////
 
-    console.log(`(validation.validate) (modelKey) `,modelKey)
+    console.log(`(validation.validate) (modelKey) :`,modelKey)
 
     report[modelKey].self = await validateRules(_scopedData,
         scopedModel,
@@ -572,18 +572,18 @@ const validateRules = async(scopedDatum,
                 //      //
                 //////////
 
-            case ('allowed_keys_only'):
+            case ('only_allowed_keys'):
 
-                conf.verbosity > 0 && console.log(`(validate.js) (rule: allowed_keys_only) UNDEFINED`)
+                conf.verbosity > 0 && console.log(`(validate.js) (rule: only_allowed_keys) UNDEFINED`)
 
                 /* experimental architecture */
 
                 const test = __datum => {
                     for (const __key in __datum) {
-                        if (!scopedModel.self.rules.allowed_keys_only.includes(__key)) {
+                        if (!scopedModel.self.rules.only_allowed_keys.includes(__key)) {
                             setResult(Error(`(validateRules) (${keyTrace}) 
                             (model.self.many: ${scopedModel.self.many}) 
-                            (model.rules.allowed_keys_only does not include
+                            (model.rules.only_allowed_keys does not include
                             the key (${__key}) found in the datum.`))
                         }
                     }
@@ -617,7 +617,7 @@ const validateRules = async(scopedDatum,
 
 
 
-                break // allowed_keys_only
+                break // only_allowed_keys
 
 
                 /*
