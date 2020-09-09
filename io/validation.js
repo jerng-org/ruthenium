@@ -596,29 +596,20 @@ const validateRules = async(
 
             case ('subs_all_fit_model'):
                 if (scopedModel.self.many) {
-
                     throw (`validation.js: validateRules: switch(_ruleKey): subs_all_fit_model: scopedModel.self.many: BRANCH BODY UNDEFINED`)
                     // define later; case where {}
-
                 } // if (many); if-block ends
                 else // not-'many', ergo is not an Array
                 {
+                    report.rules[_ruleKey].report = {}
                     for (const __key in scopedDatum) {
+                        report.rules[_ruleKey].report[__key] = await validateRules(
 
-
-
-                        report.rules[_ruleKey].report = await validateRules(
                             scopedDatum[__key],
                             scopedModel.self.rules.subs_all_fit_model,
-
                             keyTrace + `[${ __key }]`,
                             shortReport
-
                         )
-
-
-
-
 
                     }
                 } // if (many); else-block ends
