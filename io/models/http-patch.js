@@ -29,51 +29,31 @@ const httpPatch = {
     self: {
         many: false,
         rules: {
-            
+
             count_gt: 0,
-            
-            only_allowed_keys: ['PUT','DELETE']
+
+            //only_allowed_keys: ['PUT','DELETE']
+
+            subs_all_test_true: _scopedDatumSubItem => {
+                
+                /*
+                                const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
+                                //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
+                                const _allowedMethodKeys = ['PUT', 'DELETE']
+                                return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
+                */
+                
+                //  Is this the right approach, or should we just
+                //  test for sub-models PUT and DELETE ? 2020-09 COMMENT
+                //
+
+            }
 
         },
         notes: ''
     },
 
-    subs: {
-
-        //'PUT': {},
-        //'DELETE': {}
-    }
-
-    /*  Approach #1 (redundant with certain basic functionality of validation.validate())
-
-        self: {
-            many: false, // perhaps 'true' for a future "batchPatch"
-            rules: {
-                
-                count_gt: 0, // existence?
-                
-                all_subs_test_true: _scopedDatumSubItem => {
-
-                    const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
-                        //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
-                    const _allowedMethodKeys = ['PUT', 'DELETE']
-                    return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
-                
-                    //  Is this the right approach, or should we just
-                    //  test for sub-models PUT and DELETE ? 2020-09 COMMENT
-                    //
-                    
-                }
-
-            },
-            notes: ''
-        }
-        */
-
-    /*  Approach 2 */
-
-
-
+    subs: undefined
 
 }
 // desk-schemas
