@@ -49,9 +49,9 @@ const scopeModel = async _modelKey => {
 
 /*  In summary, (validate) walks through a tree of document 
  *  (models), and at each model looks for the corresponding 
- *  (dataToValidate), then calls (validateRules) upon that pair.
+ *  (unscopedData), then calls (validateRules) upon that pair.
  *  
- *  PARAMETER 1 - dataToValidate 
+ *  PARAMETER 1 - unscopedData 
  *          
  *      REQUIRED;
  *                          
@@ -156,7 +156,7 @@ const scopeModel = async _modelKey => {
  *          CASE 1.0
  *          The following are to be checked against scopedModel:
  *      
- *          _scopedData == undefined   // ! ( modelKey key in dataToValidate)
+ *          _scopedData == undefined   // ! ( modelKey key in unscopedData)
  *          _scopedData == value       // individual datum
  *          
  *              CASE 1.1
@@ -188,17 +188,21 @@ const scopeModel = async _modelKey => {
  */
 
 
-const validate = async(dataToValidate,
+const validate = async(
+
+    unscopedData,
+
     modelKey,
 
     scopedModel = null,
+
     keyTrace = modelKey,
 
     report = {
         [modelKey]: {}
     },
-    shortReport =
-    Object.defineProperty([], 'summary', {
+
+    shortReport = Object.defineProperty([], 'summary', {
         configurable: true,
         enumerable: false,
         value: true, // defaults to 'pass'
@@ -206,15 +210,15 @@ const validate = async(dataToValidate,
     })
 
 ) => {
-    scopedModel = (!scopedModel && modelKey) ?
-        await scopeModel(modelKey) :
+    scopedModel = (!scopedModel && modelKey) ? await scopeModel(modelKey) :
         scopedModel
+
     // Now, (scopedModel) should be !null under all circustances.
 
-    if (!dataToValidate) {
-        //throw Error ( keyTrace )    
+    if (!unscopedData) {
+        throw Error(`validation.js: validate: (unscopedData was falsy): keyTrace ${keyTrace}`)
     }
-    const _scopedData = dataToValidate[modelKey]
+    const _scopedData = unscopedData[modelKey]
     const _scopedDataIsArray = Array.isArray(_scopedData)
 
     //////////
@@ -225,7 +229,9 @@ const validate = async(dataToValidate,
 
     console.log(`(validation.validate) (modelKey) :`, modelKey)
 
-    report[modelKey].self = await validateRules(_scopedData,
+    report[modelKey].self = await validateRules(
+
+        _scopedData,
         scopedModel,
         keyTrace,
         shortReport
@@ -257,7 +263,9 @@ const validate = async(dataToValidate,
             {
                 let _count = 0
                 for (const _scopedDataSubItem of _scopedData) {
-                    report[modelKey].subs[_count][_scopedSubModelKey] = (await validate(_scopedDataSubItem,
+                    report[modelKey].subs[_count][_scopedSubModelKey] = (await validate(
+
+                        _scopedDataSubItem,
                         //  Whereby, if the key is missing it will 
                         //  caught by the subsequent (call to
                         //  validateRules) in the body of 
@@ -266,11 +274,13 @@ const validate = async(dataToValidate,
                         _scopedSubModelKey,
 
                         scopedModel.subs[_scopedSubModelKey],
+
                         keyTrace +
                         '[' + _count + '][' +
                         _scopedSubModelKey + ']',
 
                         undefined,
+
                         shortReport
 
                     ))[_scopedSubModelKey]
@@ -279,7 +289,9 @@ const validate = async(dataToValidate,
             }
             else // ! scopedModel.self.many
             {
-                report[modelKey].subs[_scopedSubModelKey] = (await validate(_scopedData,
+                report[modelKey].subs[_scopedSubModelKey] = (await validate(
+
+                    _scopedData,
                     //  Whereby, if the key is missing it will 
                     //  caught by the subsequent (call to
                     //  validateRules) in the body of 
@@ -288,9 +300,11 @@ const validate = async(dataToValidate,
                     _scopedSubModelKey,
 
                     scopedModel.subs[_scopedSubModelKey],
+
                     keyTrace + '[' + _scopedSubModelKey + ']',
 
                     undefined,
+
                     shortReport
 
                 ))[_scopedSubModelKey]
@@ -342,7 +356,7 @@ const validate = async(dataToValidate,
  *  
  *              THESE ARE EXPECTED:
  *      
- *              scopedDatum == undefined       // ! ( modelKey key in dataToValidate)
+ *              scopedDatum == undefined       // ! ( modelKey key in unscopedData)
  *              scopedDatum == value           // individual datum
  *              scopedDatum == []              // empty Array object
  *              scopedDatum == [ values ]      // non-empty Array object
@@ -387,17 +401,23 @@ const validate = async(dataToValidate,
  *           
  */
 
-const validateRules = async(scopedDatum,
+const validateRules = async(
+
+    scopedDatum,
+
     scopedModel,
+
     keyTrace,
+
     shortReport
+
 ) => {
 
     console.log(`(validation.js) (validateRules) (scopedModel)`, scopedModel)
 
     const _rulesToTest = scopedModel.self.rules
-    let report = {
-        rules: {},
+    const report = {
+        rules: {}
 
         //candidate: scopedDatum, 
         // we could add the candidate data here, but this does not seem 
@@ -412,11 +432,7 @@ const validateRules = async(scopedDatum,
 
     for (const _ruleKey in _rulesToTest) {
 
-        //////////
-        //      //
-        //  !!  //  Make way.
-        //      //
-        //////////
+        /* STEP 1 : INITIALISE REPORTING FUNCTION, INITIALISE REPORT */
 
         report.rules[_ruleKey] = {
             argument: _rulesToTest[_ruleKey],
@@ -439,11 +455,7 @@ const validateRules = async(scopedDatum,
         }
         setResult() // set: default pass
 
-        //////////
-        //      //
-        //  !!  //  Make way.
-        //      //
-        //////////
+        /* STEP 2 : "DO THE RULE" */
 
         switch (_ruleKey) {
 
@@ -576,6 +588,12 @@ const validateRules = async(scopedDatum,
                 } // if (many); else-block ends
                 break // only_allowed_keys
 
+                //////////
+                //      //
+                //  !!  //  Make way.
+                //      //
+                //////////
+
             case ('subs_all_fit_model'):
                 if (scopedModel.self.many) {
 
@@ -587,15 +605,15 @@ const validateRules = async(scopedDatum,
                 {
                     for (const __key in scopedDatum) {
 
-                        
-                        
-                        const __report = await validateRules(
+
+
+                        report.rules[_ruleKey].__report = await validateRules(
                             scopedDatum[__key],
                             scopedModel.self.rules.subs_all_fit_model,
-                            
+
                             keyTrace + `[${ __key }]`,
                             shortReport
-                            
+
                         )
                         console.warn(`validation.js: ...: subs_all_fit_model: validateRules FUNCTION CALL:
                         
@@ -612,6 +630,12 @@ const validateRules = async(scopedDatum,
                     }
                 } // if (many); else-block ends
                 break
+
+                //////////
+                //      //
+                //  !!  //  Make way.
+                //      //
+                //////////
 
             case ('subs_all_test_true'):
 
@@ -699,6 +723,12 @@ const validateRules = async(scopedDatum,
                     } // if (many); else-block ends
                     break // regex_text
                 */
+
+                //////////
+                //      //
+                //  !!  //  Make way.
+                //      //
+                //////////
 
             default:
 
