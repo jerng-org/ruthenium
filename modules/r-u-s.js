@@ -286,10 +286,10 @@ DEBUG EVERYTHING:
             'formStringParameters', // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
             scopedModel             // third parameter : scopedModel
         )
-        data.RU.signals.formDataByMethodValidationReport = _report
-        data.RU.signals.formDataByMethodShortValidationReport = _report.shortReport
-        data.RU.signals.formDataByMethodValid = _report.shortReport.summary
-        return data.RU.signals.formDataByMethodV
+        data.RU.signals.formDataMethodValidationReport = _report
+        data.RU.signals.formDataMethodValidationShortReport = _report.shortReport
+        data.RU.signals.formDataMethodValidationShortReportSummary = _report.shortReport.summary
+        return data.RU.signals.formDataMethodValidationShortReportSummary
     },
     
     /*  VALIDATE_FORM_DATA
@@ -310,9 +310,9 @@ DEBUG EVERYTHING:
             modelKey
         )
         data.RU.signals.formDataValidationReport = _report
-        data.RU.signals.formDataShortValidationReport = _report.shortReport
-        data.RU.signals.formDataValid = _report.shortReport.summary
-        return data.RU.signals.formDataValid
+        data.RU.signals.formDataValidationShortReport = _report.shortReport
+        data.RU.signals.formDataValidationShortReportSummary = _report.shortReport.summary
+        return data.RU.signals.formDataValidationShortReportSummary
     },
 
     //////////
