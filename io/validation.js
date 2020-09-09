@@ -440,17 +440,21 @@ const validateRules = async(
         }
         shortReport.push([keyTrace, _ruleKey])
 
-        const setResult = _maybeError => {
+
+        // _shortMaybeError is optional; used to keep shortReports ... short;
+        const setResult = (_maybeError, _shortMaybeError) => {
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
-                report.rules[_ruleKey].result =
-                    shortReport[shortReport.length - 1][2] = [`fail`, _maybeError]
+                report.rules[_ruleKey].result = [`fail`, _maybeError]
+                shortReport[shortReport.length - 1][2] = 
+                    _shortMaybeError ? _shortMaybeError : report.rules[_ruleKey].result
             }
             else {
                 //  shortReport.summary is true by default; 
                 //  if it is becomes false, it should not reset to true;
-                report.rules[_ruleKey].result =
-                    shortReport[shortReport.length - 1][2] = [`pass`, _maybeError]
+                report.rules[_ruleKey].result = [`pass`, _maybeError]
+                shortReport[shortReport.length - 1][2] = 
+                    _shortMaybeError ? _shortMaybeError : report.rules[_ruleKey].result
             }
         }
         setResult('default') // set: default pass
