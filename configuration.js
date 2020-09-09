@@ -213,6 +213,6 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 4,
+    verbosity: 6,
 
 }
