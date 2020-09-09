@@ -35,14 +35,15 @@ const httpPatch = {
 
             count_gt: 0,
 
-            /* Approach 2 */
+            /* Approach 3 */
             subs_all_fit_model: {
 
                 
                 self: {
                     many: false,
                     rules: {
-                        only_allowed_keys: ['PUT', 'DELETE']
+                        //only_allowed_keys: ['PUT', 'DELETE']
+                        only_allowed_keys: [ 'DELETE']
                         //  ... we DO care about the grand-subs;
                     }
                 },
@@ -51,6 +52,10 @@ const httpPatch = {
                 // but it remains to be observed whether we should do it here or in
                 // the usual main model tree of (model.subs[?].subs).
             }
+
+            /* Approach 2
+            only_allowed_keys: ['PUT','DELETE']
+            */
 
             /*  Approach 1
             subs_all_test_true: _scopedDatumSubItem => {
