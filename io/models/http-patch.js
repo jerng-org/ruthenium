@@ -35,17 +35,11 @@ const httpPatch = {
             //only_allowed_keys: ['PUT','DELETE']
 
             subs_all_test_true: _scopedDatumSubItem => {
-                
-                /*
-                                const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
-                                //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
-                                const _allowedMethodKeys = ['PUT', 'DELETE']
-                                return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
-                */
-                
-                //  Is this the right approach, or should we just
-                //  test for sub-models PUT and DELETE ? 2020-09 COMMENT
-                //
+
+                const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
+                //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
+                const _allowedMethodKeys = ['PUT', 'DELETE']
+                return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
 
             }
 
