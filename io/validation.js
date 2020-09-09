@@ -607,7 +607,7 @@ const validateRules = async(
 
 
 
-                        report.rules[_ruleKey].__report = await validateRules(
+                        report.rules[_ruleKey].report = await validateRules(
                             scopedDatum[__key],
                             scopedModel.self.rules.subs_all_fit_model,
 
@@ -615,13 +615,6 @@ const validateRules = async(
                             shortReport
 
                         )
-                        console.warn(`validation.js: ...: subs_all_fit_model: validateRules FUNCTION CALL:
-                        
-                            // 2020-09 : I have legit forgotten how to use these
-                            //              last two parameters, and shall have
-                            //              to revisit this later; present usage
-                            //              might screw up the reports.
-                            `)
 
 
 
@@ -693,7 +686,7 @@ const validateRules = async(
                 //*
             case ('included_in'):
 
-                conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
+                console.error(`(validate.js) (rule: included_in) BRANCH BODY UNDEFINED`)
 
                 if (scopedModel.self.many) {
 
@@ -712,7 +705,7 @@ const validateRules = async(
 
             case ('regex_test'):
 
-                conf.verbosity > 0 && console.log(`(validate.js) (rule: regex_test) UNDEFINED`)
+                console.error(`(validate.js) (rule: regex_test) BRANCH BODY UNDEFINED`)
 
                 if (scopedModel.self.many) {
 
