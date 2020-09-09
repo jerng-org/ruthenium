@@ -26,28 +26,46 @@ Our target data looks LIKE this:
 // Types and Sub-types
 const httpPatch = {
 
+    subs: undefined, //  We don't really care 
+    //  about the subs, BUT
+
     self: {
         many: false,
         rules: {
 
             count_gt: 0,
 
-            //only_allowed_keys: ['PUT','DELETE']
+            /* Approach 2 */
+            subs_all_fit_model: {
 
+                
+                self: {
+                    many: false,
+                    rules: {
+                        only_allowed_keys: ['PUT', 'DELETE']
+                        //  ... we DO care about the grand-subs;
+                    }
+                },
+                
+                subs: undefined
+                // but it remains to be observed whether we should do it here or in
+                // the usual main model tree of (model.subs[?].subs).
+            }
+
+            /*  Approach 1
             subs_all_test_true: _scopedDatumSubItem => {
 
                 const _candidateMethodKeys = Object.keys(_scopedDatumSubItem)
                 //  Where, for example: expectedMethodKeys = [ 'PUT' ] 
-                const _allowedMethodKeys = [/*'PUT',*/ 'DELETE']
+                const _allowedMethodKeys = ['PUT', 'DELETE']
                 return _candidateMethodKeys.every(cmk => _allowedMethodKeys.includes(cmk))
 
             }
+            */
 
         },
         notes: ''
-    },
-
-    subs: undefined
+    }
 
 }
 // desk-schemas

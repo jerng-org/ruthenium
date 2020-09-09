@@ -223,7 +223,7 @@ const validate = async(dataToValidate,
     //      //
     //////////
 
-    console.log(`(validation.validate) (modelKey) :`,modelKey)
+    console.log(`(validation.validate) (modelKey) :`, modelKey)
 
     report[modelKey].self = await validateRules(_scopedData,
         scopedModel,
@@ -447,64 +447,25 @@ const validateRules = async(scopedDatum,
 
         switch (_ruleKey) {
 
+
+            /* TEMPLATE 
+            
+            case ('SOMETHING'):    
+                if (scopedModel.self.many) {
+    
+                } // if (many); if-block ends
+                else // not-'many', ergo is not an Array
+                {
+    
+                } // if (many); else-block ends
+                break // SOMETHING
+            */
+
             //////////
             //      //
             //  !!  //  Make way.
             //      //
             //////////
-
-            case ('subs_all_test_true'):
-
-                conf.verbosity > 0 && console.log(`(validation.js) (rule: subs_all_test_true) PARTIALLY ... UNDEFINED`)
-
-                if (scopedModel.self.many) {
-
-                    throw (`validation.js: validateRules: switch(_ruleKey): subs_all_test_true: scopedModel.self.many: BRANCH BODY UNDEFINED`)
-                    // define later; case where {}
-                }
-                else {
-
-                    /*  Where, for example:
-                        
-                        scopedDatum = 
-                        {
-                          'desk-cells': {
-                            PUT: [
-                              { N: '99', DHC: 'shoes#size', D: 'shoes' },
-                              { S: 'hihi', DHC: 'shoes#material', D: 'shoes' },
-                              { S: 'hi', DHC: 'shoes#color', D: 'shoes' }
-                            ]
-                          }
-                        },
-                    
-                    */
-
-                    for (const __modelKey in scopedDatum) {
-                        /*  Where, for example: __modelKey = 'desk-cells' */
-
-                        if (!_rulesToTest.subs_all_test_true(scopedDatum[__modelKey])) {
-                            setResult(
-                                Error(`
-(validateRules)
-(keyTrace: ${ keyTrace }) 
-(model.self.many: false) 
-(model.rules.subs_all_test_true:
-
-    ${ scopedModel.self.rules.subs_all_test_true }
-
-) failed; scopedDatum [ __modelKey ]  was: (
-    
-    ${ JSON.stringify( scopedDatum[ __modelKey ], null, 4 ) }
-
-)
-                                `)
-                            )
-                        }
-                    }
-
-
-                }
-                break
 
             case ('count_gt'):
                 /*  This is a really stupendous amount of code just to check if something exists
@@ -575,70 +536,166 @@ const validateRules = async(scopedDatum,
 
             case ('only_allowed_keys'):
 
-                conf.verbosity > 0 && console.log(`(validate.js) (rule: only_allowed_keys) UNDEFINED`)
+                if (scopedModel.self.many) {
 
-                /* experimental architecture */
+                    throw (`validation.js: validateRules: switch(_ruleKey): only_allowed_keys: scopedModel.self.many: BRANCH BODY UNDEFINED`)
+                    // define later; case where {}
 
-                const test = __datum => {
-                    for (const __key in __datum) {
-                        if (!scopedModel.self.rules.only_allowed_keys.includes(__key)) {
-                            setResult(Error(`(validateRules) (${keyTrace}) 
+                } // if (many); if-block ends
+
+                else // not-'many', ergo is not an Array
+                {
+
+                    // Perhaps this should be lifted up to a higher level in this
+                    //  file for general use?
+                    const mapTest = (testFun, testModel, testDatum) => {
+                        if (testModel.self.many) {
+                            for (const testSubDatum of testDatum) {
+                                testFun(testSubDatum)
+                            }
+                        } // if (many); if-block ends
+                        else // not-'many', ergo is not an Array
+                        {
+                            testFun(testDatum)
+                        } // if (many); else-block ends
+                    }
+
+                    const testFun1 = __datum => {
+                        for (const __key in __datum) {
+                            if (!scopedModel.self.rules.only_allowed_keys.includes(__key)) {
+                                setResult(Error(`(validateRules) (${keyTrace}) 
                             (model.self.many: ${scopedModel.self.many}) 
                             (model.rules.only_allowed_keys does not include
                             the key (${__key}) found in the datum.`))
+                            }
                         }
                     }
-                }
 
-                const mapTest = (testFun, testModel, testDatum) => {
-                    if (testModel.self.many) {
-                        for (const testSubDatum of testDatum) {
-                            testFun(testSubDatum)
+                    mapTest(testFun1, scopedModel, scopedDatum)
+
+                } // if (many); else-block ends
+                break // only_allowed_keys
+
+            case ('subs_all_fit_model'):
+                if (scopedModel.self.many) {
+
+                    throw (`validation.js: validateRules: switch(_ruleKey): subs_all_fit_model: scopedModel.self.many: BRANCH BODY UNDEFINED`)
+                    // define later; case where {}
+
+                } // if (many); if-block ends
+                else // not-'many', ergo is not an Array
+                {
+                    for (const __key in scopedDatum) {
+
+                        
+                        
+                        const __report = await validateRules(
+                            scopedDatum[__key],
+                            scopedModel.self.rules.subs_all_fit_model,
+                            //keyTrace,
+                            //shortReport
+                            
+                            // 2020-09 : I have legit forgotten how to use these
+                            //              last two parameters, and shall have
+                            //              to revisit this later.
+                            
+                        )
+
+
+
+
+
+                    }
+                } // if (many); else-block ends
+                break
+
+            case ('subs_all_test_true'):
+
+                conf.verbosity > 0 && console.log(`(validation.js) (rule: subs_all_test_true) PARTIALLY ... UNDEFINED`)
+
+                if (scopedModel.self.many) {
+
+                    throw (`validation.js: validateRules: switch(_ruleKey): subs_all_test_true: scopedModel.self.many: BRANCH BODY UNDEFINED`)
+                    // define later; case where {}
+                }
+                else {
+
+                    /*  Where, for example:
+                        
+                        scopedDatum = 
+                        {
+                          'desk-cells': {
+                            PUT: [
+                              { N: '99', DHC: 'shoes#size', D: 'shoes' },
+                              { S: 'hihi', DHC: 'shoes#material', D: 'shoes' },
+                              { S: 'hi', DHC: 'shoes#color', D: 'shoes' }
+                            ]
+                          }
+                        },
+                    
+                    */
+
+                    for (const __modelKey in scopedDatum) {
+                        /*  Where, for example: __modelKey = 'desk-cells' */
+
+                        if (!_rulesToTest.subs_all_test_true(scopedDatum[__modelKey])) {
+                            setResult(
+                                Error(`
+(validateRules)
+(keyTrace: ${ keyTrace }) 
+(model.self.many: false) 
+(model.rules.subs_all_test_true:
+
+    ${ scopedModel.self.rules.subs_all_test_true }
+
+) failed; scopedDatum [ __modelKey ]  was: (
+    
+    ${ JSON.stringify( scopedDatum[ __modelKey ], null, 4 ) }
+
+)
+                                `)
+                            )
                         }
+                    }
+
+
+                }
+                break
+
+                /*
+                case ('included_in'):
+
+                    conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
+
+                    if (scopedModel.self.many) {
+
                     } // if (many); if-block ends
                     else // not-'many', ergo is not an Array
                     {
-                        testFun(testDatum)
+
                     } // if (many); else-block ends
-                }
+                    break // regex_text
 
-                mapTest ( test, scopedModel, scopedDatum )
-                break // only_allowed_keys
+                    //////////
+                    //      //
+                    //  !!  //  Make way.
+                    //      //
+                    //////////
 
+                case ('regex_text'):
 
-                /*
-                            case ('included_in'):
+                    conf.verbosity > 0 && console.log(`(validate.js) (rule: regex_text) UNDEFINED`)
 
-                                conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
+                    if (scopedModel.self.many) {
 
-                                if (scopedModel.self.many) {
+                    } // if (many); if-block ends
+                    else // not-'many', ergo is not an Array
+                    {
 
-                                } // if (many); if-block ends
-                                else // not-'many', ergo is not an Array
-                                {
-
-                                } // if (many); else-block ends
-                                break // regex_text
-
-                                //////////
-                                //      //
-                                //  !!  //  Make way.
-                                //      //
-                                //////////
-
-                            case ('regex_text'):
-
-                                conf.verbosity > 0 && console.log(`(validate.js) (rule: regex_text) UNDEFINED`)
-
-                                if (scopedModel.self.many) {
-
-                                } // if (many); if-block ends
-                                else // not-'many', ergo is not an Array
-                                {
-
-                                } // if (many); else-block ends
-                                break // regex_text
+                    } // if (many); else-block ends
+                    break // regex_text
                 */
+
             default:
 
                 throw (Error(`(validation.js) (validateRules) : (_ruleKey : ${ _ruleKey } ) not found in (switch-case).`))
