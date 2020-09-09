@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `(http-patch).js - validation.js, 'allowed_keys_only' experimental architecture`
+const gitCommitMessage = `(http-patch).js - validation.js, 'only_allowed_keys' experimental architecture`
 //const gitCommitMessage = `return to work on: (desks-patch.js) algorithm drafted`
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 

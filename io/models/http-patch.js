@@ -32,7 +32,7 @@ const httpPatch = {
             
             count_gt: 0,
             
-            allowed_keys_only: ['PUT','DELETE']
+            only_allowed_keys: ['PUT','DELETE']
 
         },
         notes: ''
