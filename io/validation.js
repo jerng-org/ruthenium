@@ -691,37 +691,37 @@ const validateRules = async(
                 break
 
                 //*
-                case ('included_in'):
+            case ('included_in'):
 
-                    conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
+                conf.verbosity > 0 && console.log(`(validate.js) (rule: included_in) UNDEFINED`)
 
-                    if (scopedModel.self.many) {
+                if (scopedModel.self.many) {
 
-                    } // if (many); if-block ends
-                    else // not-'many', ergo is not an Array
-                    {
+                } // if (many); if-block ends
+                else // not-'many', ergo is not an Array
+                {
 
-                    } // if (many); else-block ends
-                    break // regex_text
+                } // if (many); else-block ends
+                break // regex_test
 
-                    //////////
-                    //      //
-                    //  !!  //  Make way.
-                    //      //
-                    //////////
+                //////////
+                //      //
+                //  !!  //  Make way.
+                //      //
+                //////////
 
-                case ('regex_text'):
+            case ('regex_test'):
 
-                    conf.verbosity > 0 && console.log(`(validate.js) (rule: regex_text) UNDEFINED`)
+                conf.verbosity > 0 && console.log(`(validate.js) (rule: regex_test) UNDEFINED`)
 
-                    if (scopedModel.self.many) {
+                if (scopedModel.self.many) {
 
-                    } // if (many); if-block ends
-                    else // not-'many', ergo is not an Array
-                    {
+                } // if (many); if-block ends
+                else // not-'many', ergo is not an Array
+                {
 
-                    } // if (many); else-block ends
-                    break // regex_text
+                } // if (many); else-block ends
+                break // regex_test
                 //*/
 
                 //////////
