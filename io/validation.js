@@ -623,7 +623,10 @@ const validateRules = async(
                         //  should naturally follow that pattern; except for more 
                         //  performance optimisation, there is no need to break here;
 
-                        if (!branchReports.shortReportSummaries[__key]) {
+                        if (branchReports.shortReportSummaries[__key]) {
+                            setResult(branchReports)
+                        }
+                        else {
                             setResult(Error(`
                                 validation.js: 
                                   validateRules: 
