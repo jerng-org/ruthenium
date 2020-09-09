@@ -446,16 +446,14 @@ const validateRules = async(
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
                 report.rules[_ruleKey].result = [`fail`, _maybeError]
-                shortReport[shortReport.length - 1][2] = 
-                    _shortMaybeError ? _shortMaybeError : report.rules[_ruleKey].result
             }
             else {
                 //  shortReport.summary is true by default; 
                 //  if it is becomes false, it should not reset to true;
                 report.rules[_ruleKey].result = [`pass`, _maybeError]
-                shortReport[shortReport.length - 1][2] = 
-                    _shortMaybeError ? _shortMaybeError : report.rules[_ruleKey].result
             }
+            shortReport[shortReport.length - 1][2] =
+                _shortMaybeError ? _shortMaybeError : report.rules[_ruleKey].result
         }
         setResult('default') // set: default pass
 
@@ -626,7 +624,7 @@ const validateRules = async(
                         //  performance optimisation, there is no need to break here;
 
                         if (branchReports.shortReportSummaries[__key]) {
-                            setResult(branchReports)
+                            setResult(branchReports, branchReports.shortReports)
                         }
                         else {
                             setResult(Error(`
@@ -635,7 +633,7 @@ const validateRules = async(
                                     ${keyTrace}: 
                                       model.self.many==false: 
                                         model.rules.subs_all_fit_model: failed
-                            ` + JSON.stringify(branchReports, null, 4)))
+                                ` + JSON.stringify(branchReports, null, 4)))
                         }
 
                     }
