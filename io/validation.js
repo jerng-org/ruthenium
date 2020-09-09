@@ -445,7 +445,7 @@ const validateRules = async(
         const setResult = (_maybeError, _shortMaybeError) => {
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
-                report.rules[_ruleKey].result = [`fail`, _maybeError.message]
+                report.rules[_ruleKey].result = [`fail`, _maybeError]
             }
             else {
                 //  shortReport.summary is true by default; 
@@ -587,7 +587,7 @@ const validateRules = async(
                         console.log(`testFun1: `, {
                             shortReportSummary: shortReport.summary,
                             shortReport: shortReport,
-                            report: report.rules[_ruleKey].result
+                            report: report.rules[_ruleKey].resul
                         })
                     }
 
@@ -633,13 +633,22 @@ const validateRules = async(
                             setResult(branchReports, branchReports.shortReports)
                         }
                         else {
-                            setResult(Error(`
-                                validation.js: 
-                                  validateRules: 
-                                    ${keyTrace}: 
-                                      model.self.many==false: 
-                                        model.rules.subs_all_fit_model: failed
-                                ` + JSON.stringify(branchReports, null, 4)))
+                            setResult(
+                                Error(`
+                                    validation.js: 
+                                      validateRules: 
+                                        ${keyTrace}: 
+                                          model.self.many==false: 
+                                            model.rules.subs_all_fit_model: failed
+                                    ` + JSON.stringify(branchReports, null, 4)),
+                                Error(`
+                                    validation.js: 
+                                      validateRules: 
+                                        ${keyTrace}: 
+                                          model.self.many==false: 
+                                            model.rules.subs_all_fit_model: failed
+                                    ` + JSON.stringify(branchReports.shortReports, null, 4)),
+                            )
                         }
 
                     }
