@@ -453,12 +453,13 @@ const validateRules = async(scopedDatum,
             //      //
             //////////
 
-            case ('all_subs_test_true'):
+            case ('subs_all_test_true'):
 
-                conf.verbosity > 0 && console.log(`(validation.js) (rule: all_subs_test_true) PARTIALLY ... UNDEFINED`)
+                conf.verbosity > 0 && console.log(`(validation.js) (rule: subs_all_test_true) PARTIALLY ... UNDEFINED`)
 
                 if (scopedModel.self.many) {
 
+                    throw (`validation.js: validateRules: switch(_ruleKey): subs_all_test_true: scopedModel.self.many: BRANCH BODY UNDEFINED`)
                     // define later; case where {}
                 }
                 else {
@@ -481,15 +482,15 @@ const validateRules = async(scopedDatum,
                     for (const __modelKey in scopedDatum) {
                         /*  Where, for example: __modelKey = 'desk-cells' */
 
-                        if (!_rulesToTest.all_subs_test_true(scopedDatum[__modelKey])) {
+                        if (!_rulesToTest.subs_all_test_true(scopedDatum[__modelKey])) {
                             setResult(
                                 Error(`
 (validateRules)
 (keyTrace: ${ keyTrace }) 
 (model.self.many: false) 
-(model.rules.all_subs_test_true:
+(model.rules.subs_all_test_true:
 
-    ${ scopedModel.self.rules.all_subs_test_true }
+    ${ scopedModel.self.rules.subs_all_test_true }
 
 ) failed; scopedDatum [ __modelKey ]  was: (
     
@@ -602,21 +603,6 @@ const validateRules = async(scopedDatum,
                 }
 
                 mapTest ( test, scopedModel, scopedDatum )
-
-                /*             
-                                if (scopedModel.self.many) {
-                                    for (const __datum of scopedDatum) {
-                                        __test ( __datum )
-                                    }
-                                } // if (many); if-block ends
-                                else // not-'many', ergo is not an Array
-                                {
-                                    __test ( scopedDatum )
-                                } // if (many); else-block ends
-                */
-
-
-
                 break // only_allowed_keys
 
 
