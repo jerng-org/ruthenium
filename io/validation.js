@@ -612,8 +612,8 @@ const validateRules = async(
                             keyTrace + `[${ __key }]`,
                             shortReport
                         )
-                        report.rules[_ruleKey].shortReports[__key] = report.rules[_ruleKey].reports[__key].shortReport
-                        report.rules[_ruleKey].shortReportSummaries[__key] = report.rules[_ruleKey].reports[__key].shortReport.summary
+                        report.rules[_ruleKey].shortReports[__key]          = report.rules[_ruleKey].reports[__key].shortReport
+                        //report.rules[_ruleKey].shortReportSummaries[__key]  = report.rules[_ruleKey].reports[__key].shortReport.summary
 
                     }
                 } // if (many); else-block ends
