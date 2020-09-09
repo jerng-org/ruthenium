@@ -438,7 +438,7 @@ const validateRules = async(
             argument: _rulesToTest[_ruleKey],
             result: undefined, // 'ok' or new Error
         }
-        shortReport.push([keyTrace])
+        shortReport.push([keyTrace, _ruleKey])
 
         const setResult = _maybeError => {
             if (_maybeError instanceof Error) {
