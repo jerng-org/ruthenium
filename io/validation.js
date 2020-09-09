@@ -583,6 +583,12 @@ const validateRules = async(
                             the key (${__key}) found in the datum.`))
                             }
                         }
+                        
+                        console.log(`testFun1: `, {
+                            shortReportSummary: shortReport.summary,
+                            shortReport: shortReport,
+                            report: report.rules[_ruleKey].result
+                        })
                     }
 
                     mapTest(testFun1, scopedModel, scopedDatum)
