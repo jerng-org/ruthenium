@@ -450,7 +450,9 @@ const validateRules = async(
                 //  shortReport.summary is true by default; 
                 //  if it is becomes false, it should not reset to true;
                 report.rules[_ruleKey].result = ['pass', _maybeError]
-                shortReport[shortReport.length - 1][2] = ('shortReport' in _maybeError) ? _maybeError.shortReport : report.rules[_ruleKey].result
+                shortReport[shortReport.length - 1][2] = (typeof _maybeError == 'object' && 'shortReport' in _maybeError) ?
+                    _maybeError.shortReport :
+                    report.rules[_ruleKey].result
             }
         }
         setResult('default') // set: default pass
