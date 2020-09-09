@@ -614,8 +614,24 @@ const validateRules = async(
                         )
                         report.rules[_ruleKey].shortReports[__key] = report.rules[_ruleKey].reports[__key].shortReport
                         report.rules[_ruleKey].shortReportSummaries[__key] = report.rules[_ruleKey].reports[__key].shortReport.summary
-
+                        
+                        // validation.js: validate: always checks shortReport.summary
+                        //  and when it is false, does not proceed, so this loop 
+                        //  should naturally follow that pattern; except for more 
+                        //  performance optimisation, there is no need to break here;
+                        
+                        if (!report.rules[_ruleKey].shortReportSummaries[__key]) {
+                            setResult(Error(`
+validation.js: 
+  validateRules: 
+    ${keyTrace}: 
+      model.self.many==false: 
+        model.rules.subs_all_fit_model: failed`))
+                        }
+                        
                     }
+                    
+                    
                 } // if (many); else-block ends
                 break
 
