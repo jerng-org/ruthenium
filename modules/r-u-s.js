@@ -274,24 +274,23 @@ DEBUG EVERYTHING:
      * 
      * 
      */
-    
-    validateFormDataByMethod: async (data, httpMethodModelKey) => {
-        
-        const scopedModel = await rus.validation.scopeModel ( httpMethodModelKey )
-        
-        console.log('(r-u-s.js) (scopedModel): ', scopedModel)
-        
-        const _report = await rus.validation.validate(
-            data.RU.request,
-            'formStringParameters', // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
-            scopedModel             // third parameter : scopedModel
+
+    validateFormDataByMethod: async(data, httpMethodModelKey) => {
+
+        const scopedModel = await rus.validation.scopeModel(httpMethodModelKey)
+
+        const _report = await rus.validation.validate({
+                [httpMethodModelKey]: data.RU.request[httpMethodModelKey]
+            },
+            httpMethodModelKey, // second parameter : modelKey ( where scopedData will be firstParameter[modelKey] )
+            scopedModel // third parameter : scopedModel
         )
         data.RU.signals.formDataMethodValidationReport = _report
         data.RU.signals.formDataMethodValidationShortReport = _report.shortReport
         data.RU.signals.formDataMethodValidationShortReportSummary = _report.shortReport.summary
         return data.RU.signals.formDataMethodValidationShortReportSummary
     },
-    
+
     /*  VALIDATE_FORM_DATA
      *
      *  Returns (data.RU.signals.formDataValid); so you can use this call in
@@ -304,7 +303,7 @@ DEBUG EVERYTHING:
      */
 
     validateFormData: async(data, modelKey) => {
-        
+
         const _report = await rus.validation.validate(
             data.RU.request.formStringParameters,
             modelKey
