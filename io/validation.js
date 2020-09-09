@@ -450,10 +450,10 @@ const validateRules = async(
                 //  shortReport.summary is true by default; 
                 //  if it is becomes false, it should not reset to true;
                 report.rules[_ruleKey].result =
-                    shortReport[shortReport.length - 1][2] = ['pass']
+                    shortReport[shortReport.length - 1][2] = ['pass', _maybeError]
             }
         }
-        setResult() // set: default pass
+        setResult('default') // set: default pass
 
         /* STEP 2 : "DO THE RULE" */
 
@@ -601,32 +601,35 @@ const validateRules = async(
                 } // if (many); if-block ends
                 else // not-'many', ergo is not an Array
                 {
-                    report.rules[_ruleKey].reports = {}
-                    report.rules[_ruleKey].shortReports = {}
-                    report.rules[_ruleKey].shortReportSummaries = {}
+                    const branchReports = {
+                        reports:{},
+                        shortReports:{},
+                        shortReportSummaries:{}
+                    }
                     for (const __key in scopedDatum) {
-                        report.rules[_ruleKey].reports[__key] = await validate(
+                        branchReports.reports[__key] = await validate(
                             {
                                 [__key]: scopedDatum[__key]
                             },
                             __key,
                             scopedModel.self.rules.subs_all_fit_model
                         )
-                        report.rules[_ruleKey].shortReports[__key] = report.rules[_ruleKey].reports[__key].shortReport
-                        report.rules[_ruleKey].shortReportSummaries[__key] = report.rules[_ruleKey].reports[__key].shortReport.summary
+                        branchReports.shortReports[__key] = branchReports.reports[__key].shortReport
+                        branchReports.shortReportSummaries[__key] = branchReports.reports[__key].shortReport.summary
                         
                         // validation.js: validate: always checks shortReport.summary
                         //  and when it is false, does not proceed, so this loop 
                         //  should naturally follow that pattern; except for more 
                         //  performance optimisation, there is no need to break here;
                         
-                        if (!report.rules[_ruleKey].shortReportSummaries[__key]) {
+                        if (!branchReports.shortReportSummaries[__key]) {
                             setResult(Error(`
-validation.js: 
-  validateRules: 
-    ${keyTrace}: 
-      model.self.many==false: 
-        model.rules.subs_all_fit_model: failed`))
+                                validation.js: 
+                                  validateRules: 
+                                    ${keyTrace}: 
+                                      model.self.many==false: 
+                                        model.rules.subs_all_fit_model: failed
+                            ` + JSON.stringify ( branchReports, null, 4 ) ))
                         }
                         
                     }
