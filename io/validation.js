@@ -601,15 +601,19 @@ const validateRules = async(
                 } // if (many); if-block ends
                 else // not-'many', ergo is not an Array
                 {
-                    report.rules[_ruleKey].report = {}
+                    report.rules[_ruleKey].reports = {}
+                    report.rules[_ruleKey].shortReports = {}
+                    report.rules[_ruleKey].shortReportSummaries = {}
                     for (const __key in scopedDatum) {
-                        report.rules[_ruleKey].report[__key] = await validateRules(
+                        report.rules[_ruleKey].reports[__key] = await validateRules(
 
                             scopedDatum[__key],
                             scopedModel.self.rules.subs_all_fit_model,
                             keyTrace + `[${ __key }]`,
                             shortReport
                         )
+                        report.rules[_ruleKey].shortReports[__key] = report.rules[_ruleKey].reports[__key].shortReport
+                        report.rules[_ruleKey].shortReportSummaries[__key] = report.rules[_ruleKey].reports[__key].shortReport.summary
 
                     }
                 } // if (many); else-block ends
