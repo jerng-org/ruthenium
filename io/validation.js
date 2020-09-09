@@ -449,8 +449,8 @@ const validateRules = async(
             else {
                 //  shortReport.summary is true by default; 
                 //  if it is becomes false, it should not reset to true;
-                report.rules[_ruleKey].result =
-                    shortReport[shortReport.length - 1][2] = ['pass', _maybeError]
+                report.rules[_ruleKey].result = ['pass', _maybeError]
+                shortReport[shortReport.length - 1][2] = ('shortReport' in _maybeError) ? _maybeError.shortReport : report.rules[_ruleKey].result
             }
         }
         setResult('default') // set: default pass
@@ -602,13 +602,12 @@ const validateRules = async(
                 else // not-'many', ergo is not an Array
                 {
                     const branchReports = {
-                        reports:{},
-                        shortReports:{},
-                        shortReportSummaries:{}
+                        reports: {},
+                        shortReports: {},
+                        shortReportSummaries: {}
                     }
                     for (const __key in scopedDatum) {
-                        branchReports.reports[__key] = await validate(
-                            {
+                        branchReports.reports[__key] = await validate({
                                 [__key]: scopedDatum[__key]
                             },
                             __key,
@@ -616,12 +615,12 @@ const validateRules = async(
                         )
                         branchReports.shortReports[__key] = branchReports.reports[__key].shortReport
                         branchReports.shortReportSummaries[__key] = branchReports.reports[__key].shortReport.summary
-                        
+
                         // validation.js: validate: always checks shortReport.summary
                         //  and when it is false, does not proceed, so this loop 
                         //  should naturally follow that pattern; except for more 
                         //  performance optimisation, there is no need to break here;
-                        
+
                         if (!branchReports.shortReportSummaries[__key]) {
                             setResult(Error(`
                                 validation.js: 
@@ -629,12 +628,12 @@ const validateRules = async(
                                     ${keyTrace}: 
                                       model.self.many==false: 
                                         model.rules.subs_all_fit_model: failed
-                            ` + JSON.stringify ( branchReports, null, 4 ) ))
+                            ` + JSON.stringify(branchReports, null, 4)))
                         }
-                        
+
                     }
-                    
-                    
+
+
                 } // if (many); else-block ends
                 break
 
