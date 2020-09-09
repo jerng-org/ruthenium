@@ -40,8 +40,8 @@ const httpPatch = {
 
     subs: {
 
-        'PUT': {},
-        'DELETE': {}
+        //'PUT': {},
+        //'DELETE': {}
     }
 
     /*  Approach #1 (redundant with certain basic functionality of validation.validate())
