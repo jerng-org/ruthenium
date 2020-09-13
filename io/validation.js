@@ -657,20 +657,20 @@ const validateRules = async(
                             setResult(branchReports, branchReports.shortReports)
                         }
                         else {
-                            const __shortErrorMessage = `
+                            setResult(
+                                Error(`
 /---/
 |validation.js:
 | validateRules: 
 |   ${keyTrace}: 
 |     model.self.many==false: 
 |       model.rules.subs_all_fit_model: failed
-v`
-                            const __longErrorMessage = `
-${ __shortErrorMessage }
+v
 ${ await print.inspectInfinity ( branchReports, null, 4) }
 ^
-|---/`
-                            setResult(Error(__longErrorMessage), __shortErrorMessage)
+|---/`),
+                                branchReports.shortReports[__key]
+                            )
                         }
 
                     }
