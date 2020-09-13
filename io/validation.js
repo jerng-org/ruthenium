@@ -669,7 +669,7 @@ v
 ${ await print.inspectInfinity ( branchReports, null, 4) }
 ^
 |---/`),
-                                branchReports.shortReports[__key]
+                                branchReports.reports[__key].shortReport
                             )
                         }
 
