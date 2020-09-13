@@ -139,8 +139,12 @@ const setSessionFromRequestCookie = async DATA => {
         ReturnConsumedCapacity: 'TOTAL'
     }
 
+    mark(`oidc-session.js: hotspot: begin1`)
+    
     DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
 
+    mark(`oidc-session.js: hotspot: end1`)
+    
     if (DATA.RU.io.sessionsGet.Item) {
         //  (no need to) set any session cookies; this is the source;
 
