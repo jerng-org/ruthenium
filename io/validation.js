@@ -653,8 +653,9 @@ const validateRules = async(
                         //  should naturally follow that pattern; except for more 
                         //  performance optimisation, there is no need to break here;
 
-                        if (branchReports.shortReportSummaries[__key]) {
-                            setResult(branchReports, branchReports.shortReports)
+                        //if (branchReports.shortReportSummaries[__key]) {
+                        if (branchReports.reports[__key].shortReport.summary) {
+                            setResult(branchReports/*, branchReports.shortReports*/)
                         }
                         else {
                             setResult(
