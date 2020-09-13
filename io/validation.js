@@ -668,7 +668,7 @@ const validateRules = async(
 v
 ${ JSON.stringify(branchReports, null, 4) }
 ^
-\---/`))
+\---/`)) 
                         }
 
                     }
