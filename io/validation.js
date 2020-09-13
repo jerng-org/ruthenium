@@ -661,11 +661,12 @@ const validateRules = async(
                             setResult(
                                 Error(
                                     `
-                                    validation.js: 
-                                      validateRules: 
-                                        ${keyTrace}: 
-                                          model.self.many==false: 
-                                            model.rules.subs_all_fit_model: failed
+                                    /validation.js: 
+                                    | validateRules: 
+                                    |   ${keyTrace}: 
+                                    |     model.self.many==false: 
+                                    |       model.rules.subs_all_fit_model: failed
+                                    v
                                     ` + JSON.stringify(branchReports, null, 4)
                                 ))
                         }
