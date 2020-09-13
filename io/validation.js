@@ -657,7 +657,7 @@ const validateRules = async(
                         if (branchReports.shortReportSummaries[__key]) {
                             setResult(branchReports, branchReports.shortReports)
                         }
-                        else {
+                        else { 
                             setResult(Error(`
 /---\
 |validation.js:
