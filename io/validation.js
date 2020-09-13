@@ -662,10 +662,9 @@ const validateRules = async(
                     */
 
                     const branchReports = {
-                        reports: {}
                     }
                     for (const __key in scopedDatum) {
-                        branchReports.reports[__key] = await validate({
+                        branchReports[__key] = await validate({
                                 [__key]: scopedDatum[__key]
                             },
                             __key,
@@ -677,7 +676,7 @@ const validateRules = async(
                         //  should naturally follow that pattern; except for more 
                         //  performance optimisation, there is no need to break here;
 
-                        if (branchReports.reports[__key].shortReport.summary) {
+                        if (branchReports[__key].shortReport.summary) {
                             setResult(branchReports)
                         }
 
@@ -694,7 +693,7 @@ v
 ${ await print.inspectInfinity ( branchReports, null, 4) }
 ^
 |---/`),
-                                branchReports.reports[__key].shortReport
+                                branchReports[__key].shortReport
                             )
                         }
 
