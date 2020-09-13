@@ -446,9 +446,9 @@ const validateRules = async(
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
                 report.rules[_ruleKey].result = [`fail`, _maybeError]
-                shortReport[shortReport.length - 1][2] = _shortErrorMessage ? [`fail`, _shortErrorMessage] :
-                    report.rules[_ruleKey].result
-
+                shortReport[shortReport.length - 1][2] = _shortErrorMessage ?
+                    [`fail`, _shortErrorMessage] :
+                    [`fail`, _maybeError.message]
             }
             else {
                 //  shortReport.summary is true by default; 
