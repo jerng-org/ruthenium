@@ -445,8 +445,7 @@ const validateRules = async(
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
                 report.rules[_ruleKey].result = [`fail`, _maybeError]
-                shortReport[shortReport.length - 1][2] = _shortErrorMessage ?
-                    [`fail`, _shortErrorMessage] :
+                shortReport[shortReport.length - 1][2] = _shortErrorMessage ? [`fail`, _shortErrorMessage] :
                     report.rules[_ruleKey].result
 
             }
@@ -660,17 +659,19 @@ const validateRules = async(
                             setResult(branchReports, branchReports.shortReports)
                         }
                         else {
-                            setResult(Error(`
-/---/
-|validation.js:
-| validateRules: 
-|   ${keyTrace}: 
-|     model.self.many==false: 
-|       model.rules.subs_all_fit_model: failed
-v
-${ JSON.stringify(branchReports, null, 4) }
-^
-|---/`, 'SHORT_ERROR_MESSAGE'))
+                            setResult(
+                                Error(`
+    /---/
+    |validation.js:
+    | validateRules: 
+    |   ${keyTrace}: 
+    |     model.self.many==false: 
+    |       model.rules.subs_all_fit_model: failed
+    v
+    ${ JSON.stringify(branchReports, null, 4) }
+    ^
+    |---/`),
+                                'SHORT_ERROR_MESSAGE')
                         }
 
                     }
