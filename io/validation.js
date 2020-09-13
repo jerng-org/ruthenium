@@ -446,9 +446,7 @@ const validateRules = async(
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
                 report.rules[_ruleKey].result = [`fail`, _maybeError]
-                shortReport[shortReport.length - 1][2] = _shortErrorMessage ?
-                    [`fail`, _shortErrorMessage] :
-                    [`fail`, _maybeError.message]
+                shortReport[shortReport.length - 1][2] = _shortErrorMessage ? [`fail`, _shortErrorMessage] : [`fail`, _maybeError.message + ` (This is a minimal error message; check the full report for more information.)`]
             }
             else {
                 //  shortReport.summary is true by default; 
@@ -659,19 +657,20 @@ const validateRules = async(
                             setResult(branchReports, branchReports.shortReports)
                         }
                         else {
-                            setResult(
-                                Error(`
-    /---/
-    |validation.js:
-    | validateRules: 
-    |   ${keyTrace}: 
-    |     model.self.many==false: 
-    |       model.rules.subs_all_fit_model: failed
-    v
-    ${ await print.inspectInfinity ( branchReports, null, 4) }
-    ^
-    |---/`),
-                                'SHORT_ERROR_MESSAGE')
+                            const __shortErrorMessage = `
+/---/
+|validation.js:
+| validateRules: 
+|   ${keyTrace}: 
+|     model.self.many==false: 
+|       model.rules.subs_all_fit_model: failed
+v`
+                            const __longErrorMessage = `
+${ __shortErrorMessage }
+${ await print.inspectInfinity ( branchReports, null, 4) }
+^
+|---/`
+                            setResult(Error(__longErrorMessage), __shortErrorMessage)
                         }
 
                     }
