@@ -441,6 +441,22 @@ const validateRules = async(
         shortReport.push([keyTrace, _ruleKey])
 
 
+        const setResult = (_maybeError) => {
+            if (_maybeError instanceof Error) {
+                shortReport.summary = false
+                report.rules[_ruleKey].result = [`fail`, _maybeError]
+                shortReport[shortReport.length - 1][2] = [`fail`, _maybeError.message]
+
+            }
+            else {
+                //  shortReport.summary is true by default; 
+                //  if it is becomes false, it should not reset to true;
+                report.rules[_ruleKey].result = [`pass`, _maybeError]
+                shortReport[shortReport.length - 1][2] = report.rules[_ruleKey].result
+            }
+        }
+        /* Alternatively: 
+
         // _shortMaybeError is optional; used to keep shortReports ... short;
         const setResult = (_maybeError, _shortMaybeError) => {
             if (_maybeError instanceof Error) {
@@ -463,6 +479,7 @@ const validateRules = async(
             //    _shortMaybeError.message :
             //  report.rules[_ruleKey].result
         }
+        */
         setResult('default') // set: default pass
 
         /* STEP 2 : "DO THE RULE" */
@@ -643,23 +660,14 @@ const validateRules = async(
                         else {
                             setResult(
                                 Error(
-                                    /*`
-                                                                        validation.js: 
-                                                                          validateRules: 
-                                                                            ${keyTrace}: 
-                                                                              model.self.many==false: 
-                                                                                model.rules.subs_all_fit_model: failed
-                                                                        ` + JSON.stringify(branchReports, null, 4)*/
-                                    `LONG_ERROR_MESSAGE`),
-                                /*`
-                                                                    validation.js: 
-                                                                      validateRules: 
-                                                                        ${keyTrace}: 
-                                                                          model.self.many==false: 
-                                                                            model.rules.subs_all_fit_model: failed
-                                                                    ` + JSON.stringify(branchReports.shortReports, null, 4)*/
-                                `SHORT_ERROR_MESSAGE`,
-                            )
+                                    `
+                                    validation.js: 
+                                      validateRules: 
+                                        ${keyTrace}: 
+                                          model.self.many==false: 
+                                            model.rules.subs_all_fit_model: failed
+                                    ` + JSON.stringify(branchReports, null, 4)
+                                ))
                         }
 
                     }
