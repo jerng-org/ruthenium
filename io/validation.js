@@ -453,9 +453,9 @@ const validateRules = async(
                 report.rules[_ruleKey].result = [`pass`, _maybeError]
             }
             
-            shortReport[shortReport.length - 1][2] = report.rules[_ruleKey].result
+            //shortReport[shortReport.length - 1][2] = report.rules[_ruleKey].result
             if ( _shortMaybeError ) {
-                shortReport[shortReport.length - 1][2][1] = _shortMaybeError.message
+            //    shortReport[shortReport.length - 1][2][1] = _shortMaybeError.message
             }
             
             
