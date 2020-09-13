@@ -42,8 +42,8 @@ const httpPatch = {
                 self: {
                     many: false,
                     rules: {
-                        //only_allowed_keys: ['PUT', 'DELETE']
-                        only_allowed_keys: [ 'DELETE']
+                        only_allowed_keys: ['PUT', 'DELETE']
+                        //only_allowed_keys: [ 'DELETE']
                         //  ... we DO care about the grand-subs;
                     }
                 },
