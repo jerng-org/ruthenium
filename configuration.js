@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `(http-patch).js - validation.js, 'subs_all_fit_model/only_allowed_keys' experimental architecture - figure out what is going on with LONG_ERROR_MESSAGE and SHORT_ERROR_MESSAGE`
+const gitCommitMessage = `(http-patch).js - validation.js, 'subs_all_fit_model/only_allowed_keys' experimental architecture - _shortErrorMessage parameter now featured`
 //const gitCommitMessage = `return to work on: (desks-patch.js) algorithm drafted`
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
