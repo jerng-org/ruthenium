@@ -658,17 +658,14 @@ const validateRules = async(
                             setResult(branchReports, branchReports.shortReports)
                         }
                         else {
-                            setResult(
-                                Error(
-                                    `
-                                    /validation.js: 
-                                    | validateRules: 
-                                    |   ${keyTrace}: 
-                                    |     model.self.many==false: 
-                                    |       model.rules.subs_all_fit_model: failed
-                                    v
-                                    ` + JSON.stringify(branchReports, null, 4)
-                                ))
+                            setResult(Error(`
+/validation.js: 
+| validateRules: 
+|   ${keyTrace}: 
+|     model.self.many==false: 
+|       model.rules.subs_all_fit_model: failed
+v
+` + JSON.stringify(branchReports, null, 4)))
                         }
 
                     }
