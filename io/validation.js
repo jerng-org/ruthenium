@@ -669,7 +669,7 @@ const validateRules = async(
     |     model.self.many==false: 
     |       model.rules.subs_all_fit_model: failed
     v
-    ${ print.inspectInfinity ( branchReports, null, 4) }
+    ${ await print.inspectInfinity ( branchReports, null, 4) }
     ^
     |---/`),
                                 'SHORT_ERROR_MESSAGE')
