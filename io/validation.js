@@ -659,7 +659,7 @@ const validateRules = async(
                         }
                         else { 
                             setResult(Error(`
-/---\\
+/---/
 |validation.js:
 | validateRules: 
 |   ${keyTrace}: 
@@ -668,7 +668,7 @@ const validateRules = async(
 v
 ${ JSON.stringify(branchReports, null, 4) }
 ^
-\---/`)) 
+|---/`)) 
                         }
 
                     }
