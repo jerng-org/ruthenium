@@ -11,6 +11,8 @@ const ddbdc = require('/var/task/io/ddbdc.js')
 
 const setSessionIdInSignals = async(DATA, id) => {
     
+    mark(`oidc-session.js: setSessionIdInSignals: begin`)
+    
     DATA.RU.signals.session = { id: id }
     
     mark(`oidc-session.js: setSessionIdInSignals: end`)
@@ -24,6 +26,8 @@ const setSessionIdInSignals = async(DATA, id) => {
 
 const setSessionIdWithPersistence = async(validated) => {
 
+    mark(`oidc-session.js: setSessionIdWithPersistence: begin`)
+    
     //  Consistency checks
     //
     //  id.iss
@@ -95,6 +99,8 @@ const setSessionIdWithPersistence = async(validated) => {
 
 const setSessionFromOidcAccessToken = async DATA => {
 
+    mark(`oidc-session.js: setSessionFromOidcAccessToken: begin`)
+    
     //  set any session cookies;
     await cookie.__HostSet(
         DATA,
@@ -115,6 +121,8 @@ const setSessionFromOidcAccessToken = async DATA => {
 }
 
 const setSessionFromRequestCookie = async DATA => {
+    
+    mark(`oidc-session.js: setSessionFromRequestCookie: begin`)
     
     // DynamoDB table is currently set with TTL configuration to expire the 
     //  the object at the time specified by (access_token.exp)
@@ -150,6 +158,8 @@ const setSessionFromRequestCookie = async DATA => {
 
 const expireSession = async DATA => {
 
+    mark(`oidc-session.js: expireSession: begin`)
+    
     //  expire any session cookies;
     await cookie.__HostExpire(DATA, conf.obfuscations.sessionCookieName)
 
