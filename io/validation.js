@@ -455,7 +455,7 @@ const validateRules = async(
             
             shortReport[shortReport.length - 1][2] = report.rules[_ruleKey].result
             if ( _shortMaybeError ) {
-            //    shortReport[shortReport.length - 1][2][1] = _shortMaybeError.message
+                shortReport[shortReport.length - 1][2][1] = _shortMaybeError
             }
             
             
@@ -650,7 +650,6 @@ const validateRules = async(
                                                                                 model.rules.subs_all_fit_model: failed
                                                                         ` + JSON.stringify(branchReports, null, 4)*/
                                     `LONG_ERROR_MESSAGE`),
-                                Error(
                                     /*`
                                                                         validation.js: 
                                                                           validateRules: 
@@ -658,7 +657,7 @@ const validateRules = async(
                                                                               model.self.many==false: 
                                                                                 model.rules.subs_all_fit_model: failed
                                                                         ` + JSON.stringify(branchReports.shortReports, null, 4)*/
-                                    `SHORT_ERROR_MESSAGE`),
+                                    `SHORT_ERROR_MESSAGE`,
                             )
                         }
 
