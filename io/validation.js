@@ -454,7 +454,7 @@ const validateRules = async(
             }
 
             shortReport[shortReport.length - 1][2] = _shortMaybeError ?
-                report.rules[_ruleKey].result.slice(0, 2).push(_shortMaybeError) :
+                report.rules[_ruleKey].result.slice(0, 2)/*.push(_shortMaybeError)*/ :
                 report.rules[_ruleKey].result
 
             //    _shortMaybeError.message :
