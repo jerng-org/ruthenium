@@ -141,7 +141,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 0,
+    performance: 1,
 
     /*  platform:
      *  
@@ -213,6 +213,6 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 6,
+    verbosity: 0,
 
 }
