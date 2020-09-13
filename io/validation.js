@@ -456,7 +456,7 @@ const validateRules = async(
             let __shortResult
             shortReport[shortReport.length - 1][2] = _shortMaybeError ?
                 (__shortResult = Array.from(report.rules[_ruleKey].result),
-                    __shortResult[2][1] = _shortMaybeError,
+                    __shortResult[1] = _shortMaybeError,
                     __shortResult) :
                 report.rules[_ruleKey].result
 
