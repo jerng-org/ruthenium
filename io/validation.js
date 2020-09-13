@@ -660,7 +660,7 @@ const validateRules = async(
                         else {
                             setResult(Error(`
 /---\
-|validation.js: 
+|validation.js:
 | validateRules: 
 |   ${keyTrace}: 
 |     model.self.many==false: 
