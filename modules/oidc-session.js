@@ -11,11 +11,11 @@ const ddbdc = require('/var/task/io/ddbdc.js')
 
 const setSessionIdInSignals = async(DATA, id) => {
 
-    mark(`oidc-session.js: setSessionIdInSignals: begin`)
+    //mark(`oidc-session.js: setSessionIdInSignals: begin`)
 
     DATA.RU.signals.session = { id: id }
 
-    mark(`oidc-session.js: setSessionIdInSignals: end`)
+    //mark(`oidc-session.js: setSessionIdInSignals: end`)
 }
 
 //////////
@@ -26,7 +26,7 @@ const setSessionIdInSignals = async(DATA, id) => {
 
 const setSessionIdWithPersistence = async(validated) => {
 
-    mark(`oidc-session.js: setSessionIdWithPersistence: begin`)
+    //mark(`oidc-session.js: setSessionIdWithPersistence: begin`)
 
     //  Consistency checks
     //
@@ -93,13 +93,13 @@ const setSessionIdWithPersistence = async(validated) => {
     const WIP = await ddbdc.put(params).promise()
     console.warn(`(oidc-session.js) stuff this into (data.RU.io.dynamoDB`)
 
-    mark(`oidc-session.js: setSessionIdWithPersistence: end`)
+    //mark(`oidc-session.js: setSessionIdWithPersistence: end`)
 
 }
 
 const setSessionFromOidcAccessToken = async DATA => {
 
-    mark(`oidc-session.js: setSessionFromOidcAccessToken: begin`)
+    //mark(`oidc-session.js: setSessionFromOidcAccessToken: begin`)
 
     //  set any session cookies;
     await cookie.__HostSet(
@@ -115,15 +115,13 @@ const setSessionFromOidcAccessToken = async DATA => {
     await setSessionIdInSignals(DATA, _id)
     await setSessionIdWithPersistence(DATA.RU.signals.oidc.validated)
 
-    mark(`oidc-session.js: setSessionFromOidcAccessToken: end`)
+    //mark(`oidc-session.js: setSessionFromOidcAccessToken: end`)
 
 }
 
 const setSessionFromRequestCookie = async DATA => {
 
-    mark(`oidc-session.js: setSessionFromRequestCookie: begin`)
-
-    mark(`oidc-session.js: hotspot: begin`)
+    //mark(`oidc-session.js: setSessionFromRequestCookie: begin`)
 
     // DynamoDB table is currently set with TTL configuration to expire the 
     //  the object at the time specified by (access_token.exp)
@@ -153,20 +151,18 @@ const setSessionFromRequestCookie = async DATA => {
             '__Host-' + conf.obfuscations.sessionCookieName
         ][0]
 
-        mark(`oidc-session.js: hotspot: end`)
-
         await setSessionIdInSignals(DATA, _id)
     }
     else {
         await expireSession(DATA)
     }
 
-    mark(`oidc-session.js: setSessionFromRequestCookie: end`)
+    //mark(`oidc-session.js: setSessionFromRequestCookie: end`)
 }
 
 const expireSession = async DATA => {
 
-    mark(`oidc-session.js: expireSession: begin`)
+    //mark(`oidc-session.js: expireSession: begin`)
 
     //  expire any session cookies;
     await cookie.__HostExpire(DATA, conf.obfuscations.sessionCookieName)
@@ -174,7 +170,7 @@ const expireSession = async DATA => {
     //  expire internal signals;
     delete DATA.RU.signals.session
 
-    mark(`oidc-session.js: expireSession: end`)
+    //mark(`oidc-session.js: expireSession: end`)
 
 }
 

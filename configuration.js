@@ -1,7 +1,6 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `oidc-session.js: performance tuning`
-//`rus.validateFormDataByMethod - feature considered complete`
-//const gitCommitMessage = `return to work on: (desks-patch.js) algorithm drafted`
+const gitCommitMessage = `return to work on: (desks-patch.js) algorithm drafted`
+
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
 module.exports = {
