@@ -634,8 +634,8 @@ const validateRules = async(
                 else // not-'many', ergo is not an Array
                 {
                     const branchReports = {
-                        shortReportSummaries: {},
-                        shortReports: {},
+                        //shortReportSummaries: {},
+                        //shortReports: {},
                         reports: {}
                     }
                     for (const __key in scopedDatum) {
@@ -645,8 +645,8 @@ const validateRules = async(
                             __key,
                             scopedModel.self.rules.subs_all_fit_model
                         )
-                        branchReports.shortReports[__key] = branchReports.reports[__key].shortReport
-                        branchReports.shortReportSummaries[__key] = branchReports.reports[__key].shortReport.summary
+                        //branchReports.shortReports[__key] = branchReports.reports[__key].shortReport
+                        //branchReports.shortReportSummaries[__key] = branchReports.reports[__key].shortReport.summary
 
                         // validation.js: validate: always checks shortReport.summary
                         //  and when it is false, does not proceed, so this loop 
