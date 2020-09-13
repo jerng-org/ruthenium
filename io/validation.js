@@ -414,7 +414,7 @@ const validateRules = async(
 
 ) => {
 
-    console.log(`(validation.js) (validateRules) (scopedModel)`, scopedModel)
+    //console.log(`(validation.js) (validateRules) (scopedModel)`, scopedModel)
 
     const _rulesToTest = scopedModel.self.rules
     const report = {
@@ -608,11 +608,11 @@ const validateRules = async(
                             }
                         }
 
-                        console.log(`testFun1: `, {
+                        /*console.log(`testFun1: `, {
                             shortReportSummary: shortReport.summary,
                             shortReport: shortReport,
                             report: report.rules[_ruleKey].resul
-                        })
+                        })*/
                     }
 
                     mapTest(testFun1, scopedModel, scopedDatum)
