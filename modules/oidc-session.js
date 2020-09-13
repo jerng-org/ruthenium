@@ -94,6 +94,8 @@ const setSessionIdWithPersistence = async(validated) => {
 
 const setSessionFromOidcAccessToken = async DATA => {
 
+    mark(`oidc-session.js: setSessionFromOidcAccessToken: begin`)
+
     //  set any session cookies;
     await cookie.__HostSet(
         DATA,
