@@ -3,6 +3,7 @@
 const conf = require(`/var/task/configuration.js`)
 
 const mark = require('/var/task/modules/mark.js')
+const print = require('/var/task/modules/print.js')
 
 const fs = require('fs')
 
@@ -668,7 +669,7 @@ const validateRules = async(
     |     model.self.many==false: 
     |       model.rules.subs_all_fit_model: failed
     v
-    ${ JSON.stringify(branchReports, null, 4) }
+    ${ print.inspectInfinity ( branchReports, null, 4) }
     ^
     |---/`),
                                 'SHORT_ERROR_MESSAGE')
