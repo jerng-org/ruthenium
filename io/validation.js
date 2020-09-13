@@ -441,11 +441,11 @@ const validateRules = async(
         shortReport.push([keyTrace, _ruleKey])
 
 
-        const setResult = (_maybeError) => {
+        const setResult = (_maybeError, _shortErrorMessage) => {
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
                 report.rules[_ruleKey].result = [`fail`, _maybeError]
-                shortReport[shortReport.length - 1][2] = [`fail`, _maybeError.message]
+                shortReport[shortReport.length - 1][2] = [`fail`, _shortErrorMessage]
 
             }
             else {
