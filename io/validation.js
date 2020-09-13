@@ -659,7 +659,7 @@ const validateRules = async(
                         }
                         else { 
                             setResult(Error(`
-/---\
+/---\\
 |validation.js:
 | validateRules: 
 |   ${keyTrace}: 
