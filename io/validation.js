@@ -445,7 +445,9 @@ const validateRules = async(
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
                 report.rules[_ruleKey].result = [`fail`, _maybeError]
-                shortReport[shortReport.length - 1][2] = [`fail`, _shortErrorMessage]
+                shortReport[shortReport.length - 1][2] = _shortErrorMessage ?
+                    [`fail`, _shortErrorMessage] :
+                    report.rules[_ruleKey].result
 
             }
             else {
@@ -657,7 +659,7 @@ const validateRules = async(
                         if (branchReports.shortReportSummaries[__key]) {
                             setResult(branchReports, branchReports.shortReports)
                         }
-                        else { 
+                        else {
                             setResult(Error(`
 /---/
 |validation.js:
@@ -668,7 +670,7 @@ const validateRules = async(
 v
 ${ JSON.stringify(branchReports, null, 4) }
 ^
-|---/`)) 
+|---/`))
                         }
 
                     }
