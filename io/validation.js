@@ -453,8 +453,11 @@ const validateRules = async(
                 report.rules[_ruleKey].result = [`pass`, _maybeError]
             }
 
+            let __shortResult
             shortReport[shortReport.length - 1][2] = _shortMaybeError ?
-                report.rules[_ruleKey].result.slice(0, 2)/*.push(_shortMaybeError)*/ :
+                (__shortResult = Array.from(report.rules[_ruleKey].result),
+                    __shortResult[2][1] = _shortMaybeError,
+                    __shortResult) :
                 report.rules[_ruleKey].result
 
             //    _shortMaybeError.message :
