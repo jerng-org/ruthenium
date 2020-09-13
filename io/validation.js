@@ -670,7 +670,7 @@ const validateRules = async(
 v
 ${ JSON.stringify(branchReports, null, 4) }
 ^
-|---/`))
+|---/`, 'SHORT_ERROR_MESSAGE'))
                         }
 
                     }
