@@ -633,9 +633,12 @@ const validateRules = async(
                 } // if (many); if-block ends
                 else // not-'many', ergo is not an Array
                 {
+
+                    /* Previous, alternative algorithm for this area:
+                        
                     const branchReports = {
-                        //shortReportSummaries: {},
-                        //shortReports: {},
+                        shortReportSummaries: {},
+                        shortReports: {},
                         reports: {}
                     }
                     for (const __key in scopedDatum) {
@@ -645,18 +648,39 @@ const validateRules = async(
                             __key,
                             scopedModel.self.rules.subs_all_fit_model
                         )
-                        //branchReports.shortReports[__key] = branchReports.reports[__key].shortReport
-                        //branchReports.shortReportSummaries[__key] = branchReports.reports[__key].shortReport.summary
+                        branchReports.shortReports[__key] = branchReports.reports[__key].shortReport
+                        branchReports.shortReportSummaries[__key] = branchReports.reports[__key].shortReport.summary
 
                         // validation.js: validate: always checks shortReport.summary
                         //  and when it is false, does not proceed, so this loop 
                         //  should naturally follow that pattern; except for more 
                         //  performance optimisation, there is no need to break here;
 
-                        //if (branchReports.shortReportSummaries[__key]) {
-                        if (branchReports.reports[__key].shortReport.summary) {
-                            setResult(branchReports/*, branchReports.shortReports*/)
+                        if (branchReports.shortReportSummaries[__key]) {
+                            setResult(branchReports, branchReports.shortReports)
                         }
+                    */
+
+                    const branchReports = {
+                        reports: {}
+                    }
+                    for (const __key in scopedDatum) {
+                        branchReports.reports[__key] = await validate({
+                                [__key]: scopedDatum[__key]
+                            },
+                            __key,
+                            scopedModel.self.rules.subs_all_fit_model
+                        )
+
+                        // validation.js: validate: always checks shortReport.summary
+                        //  and when it is false, does not proceed, so this loop 
+                        //  should naturally follow that pattern; except for more 
+                        //  performance optimisation, there is no need to break here;
+
+                        if (branchReports.reports[__key].shortReport.summary) {
+                            setResult(branchReports)
+                        }
+
                         else {
                             setResult(
                                 Error(`
