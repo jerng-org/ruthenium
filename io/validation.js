@@ -605,9 +605,8 @@ const validateRules = async(
                         for (const __key in __datum) {
                             if (!scopedModel.self.rules.only_allowed_keys.includes(__key)) {
                                 setResult(Error(`(validateRules) (${keyTrace}) 
-                            (model.self.many: ${scopedModel.self.many}) 
-                            (model.rules.only_allowed_keys does not include
-                            the key (${__key}) found in the datum.`))
+(model.self.many: ${scopedModel.self.many}) 
+(model.rules.only_allowed_keys: does not include the key (${__key}) found in the datum.)`))
                             }
                         }
 
