@@ -659,13 +659,16 @@ const validateRules = async(
                         }
                         else {
                             setResult(Error(`
-/validation.js: 
+/---\
+|validation.js: 
 | validateRules: 
 |   ${keyTrace}: 
 |     model.self.many==false: 
 |       model.rules.subs_all_fit_model: failed
 v
-` + JSON.stringify(branchReports, null, 4)))
+${ JSON.stringify(branchReports, null, 4) }
+^
+\---/`))
                         }
 
                     }
