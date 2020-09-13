@@ -442,12 +442,12 @@ const validateRules = async(
         shortReport.push([keyTrace, _ruleKey])
 
 
-        const setResult = (_maybeError/*, _shortErrorMessage*/) => {
+        const setResult = (_maybeError, _shortErrorMessage) => {
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
                 report.rules[_ruleKey].result = [`fail`, _maybeError]
-                shortReport[shortReport.length - 1][2] = /*_shortErrorMessage ?
-                    [`fail`, _shortErrorMessage] :*/
+                shortReport[shortReport.length - 1][2] = _shortErrorMessage ?
+                    [`fail`, _shortErrorMessage] :
                     [`fail`, _maybeError.message]
             }
             else {
@@ -670,8 +670,8 @@ const validateRules = async(
     v
     ${ await print.inspectInfinity ( branchReports, null, 4) }
     ^
-    |---/`)/*,
-                                'SHORT_ERROR_MESSAGE'*/)
+    |---/`),
+                                'SHORT_ERROR_MESSAGE')
                         }
 
                     }
