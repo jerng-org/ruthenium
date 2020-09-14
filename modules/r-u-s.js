@@ -215,9 +215,9 @@ const rus = {
             scopedModel // third parameter : scopedModel
         )
         data.RU.signals.formDataMethodValidationReport = _report
-        data.RU.signals.formDataMethodValidationShortReport = _report.shortReport
-        data.RU.signals.formDataMethodValidationShortReportSummary = _report.shortReport.summary
-        return data.RU.signals.formDataMethodValidationShortReportSummary
+        //data.RU.signals.formDataMethodValidationShortReport = _report.shortReport
+        //data.RU.signals.formDataMethodValidationShortReportSummary = _report.shortReport.summary
+        return data.RU.signals.formDataMethodValidationReport.shortReport.summary
     },
 
     /*  VALIDATE_FORM_DATA
@@ -238,9 +238,9 @@ const rus = {
             modelKey
         )
         data.RU.signals.formDataValidationReport = _report
-        data.RU.signals.formDataValidationShortReport = _report.shortReport
-        data.RU.signals.formDataValidationShortReportSummary = _report.shortReport.summary
-        return data.RU.signals.formDataValidationShortReportSummary
+        //data.RU.signals.formDataValidationShortReport = _report.shortReport
+        //data.RU.signals.formDataValidationShortReportSummary = _report.shortReport.summary
+        return data.RU.signals.formDataValidation.shortReport.summary
     },
 
     //////////
