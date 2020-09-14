@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `return to work on: (desks-patch.js) algorithm drafted`
+const gitCommitMessage = `WIP: (models/desk-cells.js), then (desks-patch.js) algorithm drafted`
 
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
