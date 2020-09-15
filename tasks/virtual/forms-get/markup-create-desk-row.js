@@ -27,7 +27,15 @@ const innerHTML = async DATA => `
                         value:  DATA.RU.io.deskSchemasGet.Item.name
                     } )
             },
-            `` /* initial value */
+            
+            /* initial value (second argument) */
+            await rus.html.input ( {
+                        id:     `id-placeholder`,
+                        label:  `label-placeholder`,
+                        name:   `value-placeholder`,
+                        hidden: true
+                        
+                    } )  
         )
     } 
 
