@@ -2,13 +2,19 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHTML = async DATA => `
+const innerHTML = async ( DATA, uuid ) => `
 <fieldset>
 
     ${  
         await DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
             async ( accumulator, currentValue, index, array ) => {
                 return await accumulator + 
+                    await rus.html.input ( {
+                        id:     `id`,
+                        name:   `desk-cells[PUT]###${index}###[R]`,
+                        type:   `hidden`,
+                        value:  uuid
+                    } ) +
                     await rus.html.input ( {
                         id:             currentValue.name,
                         label:          currentValue.name,
@@ -28,13 +34,8 @@ const innerHTML = async DATA => `
                     } )
             },
             
-            /* initial value (second argument) */
-            await rus.html.input ( {
-                        id:     `id-placeholder`,
-                        name:   `name-placeholder`,
-                        type:   `hidden`,
-                        value:  await rus.uuid4()
-                    } )  
+            `` /* initial value (second argument) */
+            
         )
     } 
 
@@ -49,6 +50,8 @@ const innerHTML = async DATA => `
 
 const createDeskRow = async ( data ) => {
     
+    const newUuid = await rus.uuid4()
+    
     return `
     
         <h2><code>${ data.RU.io.deskSchemasGet.Item.name }</code> : object creation </h2>
@@ -60,7 +63,7 @@ const createDeskRow = async ( data ) => {
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
                     [ 'form-method','PATCH' ] 
                 ] ),
-                innerHTML: await innerHTML(data),
+                innerHTML: await innerHTML(data, newUuid),
                 class: 'ru-card'
             } ) 
         }
