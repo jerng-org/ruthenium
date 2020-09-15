@@ -414,7 +414,7 @@ const validateRules = async(
 
 ) => {
 
-    console.log(`(validation.js) (validateRules) (scopedModel: scopedModel)`)
+    console.log(`(validation.js) (validateRules) (scopedModel: ${JSON.stringify(scopedModel,null,4)})`)
 
     //////////
     //      //
