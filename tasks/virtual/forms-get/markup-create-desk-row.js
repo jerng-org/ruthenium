@@ -31,10 +31,9 @@ const innerHTML = async DATA => `
             /* initial value (second argument) */
             await rus.html.input ( {
                         id:     `id-placeholder`,
-                        label:  `label-placeholder`,
-                        name:   `value-placeholder`,
-                        hidden: true
-                        
+                        name:   `name-placeholder`,
+                        type:   `hidden`,
+                        value:  await rus.uuid4()
                     } )  
         )
     } 
