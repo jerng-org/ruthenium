@@ -548,13 +548,11 @@ const validateRules = async(
             //////////
 
             case ('count_gt'):
-                /*  This is a really stupendous amount of code just to check if something exists
-                 *   or not. I really have no faith in this design at the moment. But it should
-                 *   work. -2020-06-12
-                 *
-                 *   We should probably combine the "existential quantifier" and "naive 
-                 *   comparison" checks. -2020-06-19
-                 */
+
+
+
+                console.log(`count_gt debug: (scopedDatum, ${scopedDatum}): (scopedModel, ${scopedModel})`)
+
                 if (scopedModel.self.many) // this pattern should recur for 'count_xyz'
                 {
                     if (_rulesToTest.count_gt < scopedDatum.filter(e => e !== undefined).length) {
