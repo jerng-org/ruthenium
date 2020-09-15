@@ -444,21 +444,21 @@ const validateRules = async(
     if (scopedModel.self.many) {
         // expect Array; apply rules to elements of scopedData
         if (Array.isArray(scopedDatum)) {
-            report.many = ['pass']
+            report.many = ['pass', 'Expected Array; found Array.' ]
         }
         else {
-            report.many = ['fail', Error(``)]
+            report.many = ['fail', Error(`Expected Array; found not-Array.`)]
             return report
         }
     }
     else {
         // expect non-Array; apply rules to scopedData itself
         if (Array.isArray(scopedDatum)) {
-            report.many = ['fail', Error(``)]
+            report.many = ['fail', Error(`Expected not-Array; found Array.`)]
             return report
         }
         else {
-            report.many = ['pass']
+            report.many = ['pass', 'Expected not-Array; found not-Array.']
         }
     }
 
