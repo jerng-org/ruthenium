@@ -526,7 +526,7 @@ const validateRules = async(
                             )
                         )
                     ) {
-                        setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:true) 
+                        setResult(Error(`(validateRules) (${keyTrace}) (model.many:true) 
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
                       }) failed; scopedDatum was: (${
@@ -537,7 +537,7 @@ const validateRules = async(
                     // naive comparison
                     if (!Array.isArray(scopedDatum) ||
                         scopedDatum.length <= _rulesToTest.count_gt) {
-                        setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:false)
+                        setResult(Error(`(validateRules) (${keyTrace}) (model.many:false)
                       (model.rules.count_gt:${
                         scopedModel.self.rules.count_gt
                       }) failed; scopedDatum was: (${
@@ -549,7 +549,7 @@ const validateRules = async(
                 {
                     // existential quantifier
                     if (_rulesToTest.count_gt === 0 && [undefined, null, NaN].includes(scopedDatum)) {
-                        setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:false)
+                        setResult(Error(`(validateRules) (${keyTrace}) (model.many:false)
                       (model.rules.count_gt:${
                           scopedModel.self.rules.count_gt
                       }) failed; scopedDatum was: (${
@@ -559,7 +559,7 @@ const validateRules = async(
 
                     // naive comparison
                     if (_rulesToTest.count_gt > 1) {
-                        setResult(Error(`(validateRules) (${keyTrace}) (model.self.many:false)
+                        setResult(Error(`(validateRules) (${keyTrace}) (model.many:false)
                       (model.rules.count_gt was greater than 1) so this
                       is a contradiction; your actual data may or may 
                       not be ok.`))
@@ -573,20 +573,53 @@ const validateRules = async(
                 //      //
                 //////////
 
-            case ('only_allowed_keys'):
+            case ('keys_included_counts'):
+
+                /*
+                    argument : {
+                        min:    << integer : minimum allowed count of keys in keyList >>,
+                        max:    << integer : maximum allowed count of keys in keyList >>,
+                        keyList:<< array of {{ string }} keys >>
+                    }
+                */
 
                 if (scopedModel.self.many) {
 
-                    throw (`validation.js: validateRules: switch(_ruleKey): only_allowed_keys: scopedModel.self.many: BRANCH BODY UNDEFINED`)
+                    throw (`validation.js: validateRules: switch(_ruleKey): keys_included_counts: scopedModel.self.many: BRANCH BODY UNDEFINED`)
                     // define later; case where {}
 
+                } // if (many); if-block ends
+                else // not-'many', ergo is not an Array
+                {
+                    const __scopedDatumKeys = Object.keys(scopedDatum)
+                    const __keyCount = 0
+                    for (const __key of scopedModel.self.rules.keys_included_counts.keyList) {
+                        if (__key in __scopedDatumKeys) __keyCount++
+                    }
+                    
+                    // 'undefined' min or max will error out;
+                    if (__keyCount < scopedModel.self.rules.min) {
+                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: LESS THAN ${scopedModel.self.rules.min} KEYS WERE FOUND)`))
+                    }
+                    else
+                    if (__keyCount > scopedModel.self.rules.max) {
+                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: MORE THAN ${scopedModel.self.rules.max} KEYS WERE FOUND)`))
+                    }
+                } // if (many); else-block ends
+                break // keys_included_counts
+
+            case ('only_allowed_keys'):
+
+                if (scopedModel.self.many) {
+                    throw (`validation.js: validateRules: switch(_ruleKey): only_allowed_keys: scopedModel.self.many: BRANCH BODY UNDEFINED`)
+                    // define later; case where {}
                 } // if (many); if-block ends
 
                 else // not-'many', ergo is not an Array
                 {
 
-                    // Perhaps this should be lifted up to a higher level in this
-                    //  file for general use?
+                    // Perhaps this should be lifted up out of the if-else
+                    conf.verbosity > 6 && console.warn(`validation.js: only_allowed_keys: see comment`)
                     const mapTest = (testFun, testModel, testDatum) => {
                         if (testModel.self.many) {
                             for (const testSubDatum of testDatum) {
@@ -603,7 +636,7 @@ const validateRules = async(
                         for (const __key in __datum) {
                             if (!scopedModel.self.rules.only_allowed_keys.includes(__key)) {
                                 setResult(Error(`(validateRules) (${keyTrace}) 
-(model.self.many: ${scopedModel.self.many}) 
+(model.many: ${scopedModel.self.many}) 
 (model.rules.only_allowed_keys: does not include the key (${__key}) found in the datum.)`))
                             }
                         }
@@ -661,8 +694,7 @@ const validateRules = async(
                         }
                     */
 
-                    const branchReports = {
-                    }
+                    const branchReports = {}
                     for (const __key in scopedDatum) {
                         branchReports[__key] = await validate({
                                 [__key]: scopedDatum[__key]
@@ -687,7 +719,7 @@ const validateRules = async(
 |validation.js:
 | validateRules: 
 |   ${keyTrace}: 
-|     model.self.many==false: 
+|     model.many==false: 
 |       model.rules.subs_all_fit_model: failed
 v
 ${ await print.inspectInfinity ( branchReports, null, 4) }
@@ -743,7 +775,7 @@ ${ await print.inspectInfinity ( branchReports, null, 4) }
                                 Error(`
 (validateRules)
 (keyTrace: ${ keyTrace }) 
-(model.self.many: false) 
+(model.many: false) 
 (model.rules.subs_all_test_true:
 
     ${ scopedModel.self.rules.subs_all_test_true }

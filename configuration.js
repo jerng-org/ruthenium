@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: (models/desk-cells.js), then (desks-patch.js) algorithm drafted`
+const gitCommitMessage = `(models/desk-cells.js ... keys_included_counts DEV), then (desks-patch.js) algorithm drafted`
 
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
@@ -124,12 +124,12 @@ module.exports = {
         deskCellTypes: {
             N: 'number',
             S: 'string',
-            other: 'other'
+            B: 'binary'
         }
     },
 
     obfuscations: {
-        sessionCookieName: 'SONCHUSJD'
+        sessionCookieName: 'SONCHUSJD' // some random characters
     },
 
     /*  performance monitoring
@@ -190,6 +190,10 @@ module.exports = {
         regExps: [
             /^status-\d{3}$/ // status code pages
         ]
+    },
+
+    storage : {
+        deskCellTypeKeys: ['S','N','B']
     },
 
     /*  verbosity
