@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `(models/desk-cells.js ... keys_included_counts DEV), then (desks-patch.js) algorithm drafted`
+const gitCommitMessage = `(desks-patch.js) testing new model`
 
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
