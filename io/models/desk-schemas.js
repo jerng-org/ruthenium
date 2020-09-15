@@ -1,5 +1,7 @@
 'use strict'
 
+const conf = require(`/var/task/configuration.js`)
+
 // Types and Sub-types
 const deskSchemas = {
 
@@ -51,11 +53,7 @@ const deskSchemas = {
                         many:   false,
                         rules:  {
                             count_gt:       0,
-                            included_in:    [
-                                "S",
-                                "N",
-                                "other"
-                            ]
+                            included_in:    conf.storage.deskCellTypeKeys
                         },
                         notes:  ''
                     }

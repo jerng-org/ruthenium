@@ -4,6 +4,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const thisIsMyName =   { 
         self:{ 
+            many: undefined, // boolean
             notes: '', 
             rules: {} 
         }, 
