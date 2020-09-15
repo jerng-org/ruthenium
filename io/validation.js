@@ -228,7 +228,7 @@ const validate = async(
     //      //
     //////////
 
-    console.log(`(validation.validate) (modelKey) :`, modelKey)
+    //console.log(`(validation.validate) (modelKey) :`, modelKey)
 
     report[modelKey].self = await validateRules(
 
@@ -414,7 +414,7 @@ const validateRules = async(
 
 ) => {
 
-    console.log(`(validation.js) (validateRules) (scopedModel: ${JSON.stringify(scopedModel,null,4)})`)
+    //console.log(`(validation.js) (validateRules) (scopedModel: ${JSON.stringify(scopedModel,null,4)})`)
 
     //////////
     //      //

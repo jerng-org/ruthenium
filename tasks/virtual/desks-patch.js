@@ -62,15 +62,6 @@ const desksPatch = async(data) => {
         return
     }
 
-    // later, this can be incorporated into the model for 'http-METHOD', or a meta method which calls the other two methods can be created
-    rus.conf.verbosity > 6 && console.log(`desks-patch.js: validateFormData call ... see comment: WIP`)
-    for (const __item in data.RU.request.formStringParameters['desk-cells'].PUT) {
-        if (!await rus.validateFormData(data, 'desk-cells')) {
-            await status400(data)
-            return
-        }
-    }
-
     // CONTINUE HERE
 
 
