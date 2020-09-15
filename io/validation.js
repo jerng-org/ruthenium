@@ -557,14 +557,14 @@ const validateRules = async(
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:true) 
                       (model.rules.count_gt:${
                           _rulesToTest.count_gt
-                      }) failed; scopedDatum had too few elements (!undefined): (${
+                      }) failed; scopedDatum had too few elements (undefined were excluded): (${
                           scopedDatum
                       })`))
                     }
                 }
                 else // not-'many', ergo is not an Array
                 {
-                    if (undefined !== scopedDatum) {
+                    if (undefined === scopedDatum) {
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:false)
                       (model.rules.count_gt:${
                           _rulesToTest.count_gt
