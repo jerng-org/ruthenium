@@ -444,7 +444,7 @@ const validateRules = async(
     if (scopedModel.self.many) {
         // expect Array; apply rules to elements of scopedData
         if (Array.isArray(scopedDatum)) {
-            report.many = ['pass', 'Expected Array; found Array.' ]
+            report.many = ['pass', 'Expected Array; found Array.']
         }
         else {
             report.many = ['fail', Error(`Expected Array; found not-Array.`)]
@@ -591,7 +591,7 @@ const validateRules = async(
 
                 if (scopedModel.self.many) {
 
-                    throw (`validation.js: validateRules: switch(_ruleKey): keys_included_counts: scopedModel.self.many: BRANCH BODY UNDEFINED`)
+                    throw (`validation.js: validateRules: switch(_ruleKey): keys_included_counts: (model.many:true) BRANCH BODY UNDEFINED`)
                     // define later; case where {}
 
                 } // if (many); if-block ends
@@ -617,7 +617,7 @@ const validateRules = async(
             case ('only_allowed_keys'):
 
                 if (scopedModel.self.many) {
-                    throw (`validation.js: validateRules: switch(_ruleKey): only_allowed_keys: scopedModel.self.many: BRANCH BODY UNDEFINED`)
+                    throw (`validation.js: validateRules: switch(_ruleKey): only_allowed_keys: (model.many:true) BRANCH BODY UNDEFINED`)
                     // define later; case where {}
                 } // if (many); if-block ends
 
@@ -665,44 +665,131 @@ const validateRules = async(
                 //      //
                 //////////
 
+            case ('subs0_keys_applied_to_subs2'):
+
+                /* There has got to be a prettier way to do this ... later. 2020-09-16 */
+
+                //////////
+                //      //
+                //  !!  //  FORK:
+                //      //
+                //////////
+
+                if (scopedModel.self.many) {
+                    throw (`validation.js: validateRules: 
+                        switch(_ruleKey): subs0_keys_applied_to_subs2: 
+                        (model.many:true) BRANCH BODY UNDEFINED`)
+                } // if (many); if-block ends
+                else // not-'many', ergo is not an Array
+                {
+                    const subs2Report = {}
+                    //////////
+                    //      //
+                    //  !!  //  FORK:
+                    //      //
+                    //////////
+                    switch (_rulesToTest.subs0_keys_applied_to_subs2.subs1) {
+                        case ('all'):
+                            for (const __sub0Key in scopedDatum) {
+                                //////////
+                                //      //
+                                //  !!  //  FORK:
+                                //      //
+                                //////////
+                                if (Array.isArray(scopedDatum[__sub0Key])) {
+                                    setResult(Error(`validate.js: validateRules:
+                                        switch(_ruleKey): subs0_keys_applied_to_subs2: 
+                                        (model.many:false) 
+                                        (rule argument:${ _rulesToTest.subs0_keys_applied_to_subs2})
+                                        (scopedDatum[${__sub0Key}] is an Array) BRANCH BODY UNDEFINED `))
+                                }
+                                else {
+                                    subs2Report[__sub0Key] = {}
+                                    for (const __sub1Key in scopedDatum[__sub0Key]) {
+                                        //////////
+                                        //      //
+                                        //  !!  //  FORK:
+                                        //      //
+                                        //////////
+                                        if (Array.isArray(scopedDatum[__sub0Key][__sub1Key])) {
+                                            subs2Report[__sub0Key][__sub1Key] = []
+                                            for (const __sub2 of scopedDatum[__sub0Key][__sub1Key]) {
+
+                                                const __sub2Report = await validate({
+                                                        [__sub0Key]: __sub2
+                                                    },
+                                                    scopeModel(__sub0Key)
+                                                )
+                                                subs2Report[__sub0Key][__sub1Key].push(__sub2Report)
+
+                                                /* 
+Reporting code copied from subs_all_fit_model, and not yet checked */
+
+                                                // validation.js: validate: always checks shortReport.summary
+                                                //  and when it is false, does not proceed, so this loop 
+                                                //  should naturally follow that pattern; except for more 
+                                                //  performance optimisation, there is no need to break here;
+
+                                                if (__sub2Report.shortReport.summary) {
+                                                    setResult(subs2Report)
+
+                                                    // maybe rather redundant? check.
+                                                }
+                                                else {
+                                                    setResult(Error(`validate.js: validateRules:
+                                                        switch(_ruleKey): subs0_keys_applied_to_subs2: 
+                                                        (model.many:false)
+                                                        (rule argument:${ _rulesToTest.subs0_keys_applied_to_subs2})
+                                                        (scopedDatum[${__sub0Key}][${__sub1Key}] is an Array)
+                                                        __sub2 element failed: 
+                                                        
+                                                            ${ await print.inspectInfinity ( subs2Report, null, 4) }
+                                                        
+                                                        `, __sub2Report.shortReport))
+                                                }
+                                                // end of inner-most loop
+
+
+                                            }
+                                        }
+                                        else {
+                                            setResult(Error(`validate.js: validateRules:
+                                                switch(_ruleKey): subs0_keys_applied_to_subs2: 
+                                                (model.many:false) 
+                                                (rule argument:${ _rulesToTest.subs0_keys_applied_to_subs2})
+                                                (scopedDatum[${__sub0Key}][${__sub1Key}] is NOT an Array) BRANCH BODY UNDEFINED `))
+                                        }
+                                    }
+                                }
+                            }
+                            break
+
+                        default:
+                            setResult(Error(`validate.js: validateRules:
+                                switch(_ruleKey): subs0_keys_applied_to_subs2: 
+                                (model.many:false) 
+                                (rule argument:${ _rulesToTest.subs0_keys_applied_to_subs2}) BRANCH BODY UNDEFINED `))
+                    } // switch (_rulesToTest.subs0_keys_applied_to_subs2.subs1) ends
+
+                } // if (many); else-block ends
+                break // subs0_keys_applied_to_subs2
+
+                //////////
+                //      //
+                //  !!  //  Make way.
+                //      //
+                //////////
+
             case ('subs_all_fit_model'):
                 if (scopedModel.self.many) {
                     throw (`validation.js: validateRules: switch(_ruleKey): subs_all_fit_model: scopedModel.self.many: BRANCH BODY UNDEFINED`)
-                    // define later; case where {}
                 } // if (many); if-block ends
                 else // not-'many', ergo is not an Array
                 {
 
-                    /* Previous, alternative algorithm for this area:
-                        
-                    const branchReports = {
-                        shortReportSummaries: {},
-                        shortReports: {},
-                        reports: {}
-                    }
+                    const subsReport = {}
                     for (const __key in scopedDatum) {
-                        branchReports.reports[__key] = await validate({
-                                [__key]: scopedDatum[__key]
-                            },
-                            __key,
-                            scopedModel.self.rules.subs_all_fit_model
-                        )
-                        branchReports.shortReports[__key] = branchReports.reports[__key].shortReport
-                        branchReports.shortReportSummaries[__key] = branchReports.reports[__key].shortReport.summary
-
-                        // validation.js: validate: always checks shortReport.summary
-                        //  and when it is false, does not proceed, so this loop 
-                        //  should naturally follow that pattern; except for more 
-                        //  performance optimisation, there is no need to break here;
-
-                        if (branchReports.shortReportSummaries[__key]) {
-                            setResult(branchReports, branchReports.shortReports)
-                        }
-                    */
-
-                    const branchReports = {}
-                    for (const __key in scopedDatum) {
-                        branchReports[__key] = await validate({
+                        subsReport[__key] = await validate({
                                 [__key]: scopedDatum[__key]
                             },
                             __key,
@@ -714,8 +801,8 @@ const validateRules = async(
                         //  should naturally follow that pattern; except for more 
                         //  performance optimisation, there is no need to break here;
 
-                        if (branchReports[__key].shortReport.summary) {
-                            setResult(branchReports)
+                        if (subsReport[__key].shortReport.summary) {
+                            setResult(subsReport)
                         }
 
                         else {
@@ -728,10 +815,10 @@ const validateRules = async(
 |     model.many==false: 
 |       model.rules.subs_all_fit_model: failed
 v
-${ await print.inspectInfinity ( branchReports, null, 4) }
+${ await print.inspectInfinity ( subsReport, null, 4) }
 ^
 |---/`),
-                                branchReports[__key].shortReport
+                                subsReport[__key].shortReport
                             )
                         }
 
@@ -759,19 +846,19 @@ ${ await print.inspectInfinity ( branchReports, null, 4) }
                 else {
 
                     /*  Where, for example:
-                        
-                        scopedDatum = 
-                        {
-                          'desk-cells': {
-                            PUT: [
-                              { N: '99', DHC: 'shoes#size', D: 'shoes' },
-                              { S: 'hihi', DHC: 'shoes#material', D: 'shoes' },
-                              { S: 'hi', DHC: 'shoes#color', D: 'shoes' }
-                            ]
-                          }
-                        },
+                                        
+                                        scopedDatum = 
+                                        {
+                                          'desk-cells': {
+                                            PUT: [
+                                              { N: '99', DHC: 'shoes#size', D: 'shoes' },
+                                              { S: 'hihi', DHC: 'shoes#material', D: 'shoes' },
+                                              { S: 'hi', DHC: 'shoes#color', D: 'shoes' }
+                                            ]
+                                          }
+                                        },
                     
-                    */
+                                    */
 
                     for (const __modelKey in scopedDatum) {
                         /*  Where, for example: __modelKey = 'desk-cells' */
