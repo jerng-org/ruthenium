@@ -1,6 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `validation.js: validateRules: rewriting how self.many is handled; before the switch-case`
-//`(desks-patch.js) testing new model`
+const gitCommitMessage = `(virtual/desks-patch.js: models/desk-cell.js: subs0_keys_applied_to_subs2 should fail, but does not`
 
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 

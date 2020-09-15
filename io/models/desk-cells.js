@@ -22,7 +22,7 @@ const deskCells = {
             self: {
                 //many: false,
                 rules: {
-                    count_gt: 1
+                    count_gt: 0
                 }
             },
             //subs: false
