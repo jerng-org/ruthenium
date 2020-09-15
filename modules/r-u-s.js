@@ -240,7 +240,7 @@ const rus = {
         data.RU.signals.formDataValidationReport = _report
         //data.RU.signals.formDataValidationShortReport = _report.shortReport
         //data.RU.signals.formDataValidationShortReportSummary = _report.shortReport.summary
-        return data.RU.signals.formDataValidation.shortReport.summary
+        return data.RU.signals.formDataValidationReport .shortReport.summary
     },
 
     //////////
