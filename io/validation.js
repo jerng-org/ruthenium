@@ -416,6 +416,12 @@ const validateRules = async(
 
     //console.log(`(validation.js) (validateRules) (scopedModel)`, scopedModel)
 
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
     const _rulesToTest = scopedModel.self.rules
     const report = {
         rules: {}
@@ -424,6 +430,39 @@ const validateRules = async(
         // we could add the candidate data here, but this does not seem 
         // helpful yet; 
     }
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
+    //  There is a pre-rule:                self.many = << boolean >>,
+    //  which must be 
+    //  evaluated before the other rules:   self.rules = << object >>
+
+    if (scopedModel.self.many) {
+        // expect Array; apply rules to elements of scopedData
+        if (Array.isArray(scopedDatum)) {
+            report.many = ['pass']
+        }
+        else {
+            report.many = ['fail', Error(``)]
+            return report
+        }
+    }
+    else {
+        // expect non-Array; apply rules to scopedData itself
+        if (Array.isArray(scopedDatum)) {
+            report.many = ['fail', Error(``)]
+            return report
+        }
+        else {
+            report.many = ['pass']
+        }
+    }
+
+    // After this line: (scopedModel.self.many) has been validated.
 
     //////////
     //      //
@@ -486,6 +525,8 @@ const validateRules = async(
 
         switch (_ruleKey) {
 
+            //  Every CASE branch has to apply different logic to 
+            //  scopedModel.self.many (true and false) (Ouch)
 
             /* TEMPLATE 
             
@@ -516,53 +557,22 @@ const validateRules = async(
                  */
                 if (scopedModel.self.many) // this pattern should recur for 'count_xyz'
                 {
-                    // existential quantifier
-                    if (_rulesToTest.count_gt === 0 &&
-                        (!Array.isArray(scopedDatum) ||
-                            (scopedDatum = scopedDatum.filter(
-                                    e => ![undefined, null, NaN].includes(e)
-                                ),
-                                scopedDatum.length == 0
-                            )
-                        )
-                    ) {
+                    if (_rulesToTest.count_gt < scopedDatum.filter(e => e !== undefined).length) {
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:true) 
                       (model.rules.count_gt:${
-                          scopedModel.self.rules.count_gt
-                      }) failed; scopedDatum was: (${
+                          _rulesToTest.count_gt
+                      }) failed; scopedDatum had too few elements (!undefined): (${
                           scopedDatum
-                      })`))
-                    }
-
-                    // naive comparison
-                    if (!Array.isArray(scopedDatum) ||
-                        scopedDatum.length <= _rulesToTest.count_gt) {
-                        setResult(Error(`(validateRules) (${keyTrace}) (model.many:false)
-                      (model.rules.count_gt:${
-                        scopedModel.self.rules.count_gt
-                      }) failed; scopedDatum was: (${
-                        scopedDatum
                       })`))
                     }
                 }
                 else // not-'many', ergo is not an Array
                 {
-                    // existential quantifier
-                    if (_rulesToTest.count_gt === 0 && [undefined, null, NaN].includes(scopedDatum)) {
+                    if (undefined !== scopedDatum) {
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:false)
                       (model.rules.count_gt:${
-                          scopedModel.self.rules.count_gt
-                      }) failed; scopedDatum was: (${
-                          scopedDatum
-                      })`))
-                    }
-
-                    // naive comparison
-                    if (_rulesToTest.count_gt > 1) {
-                        setResult(Error(`(validateRules) (${keyTrace}) (model.many:false)
-                      (model.rules.count_gt was greater than 1) so this
-                      is a contradiction; your actual data may or may 
-                      not be ok.`))
+                          _rulesToTest.count_gt
+                      }) failed; scopedDatum was: undefined)`))
                     }
                 } // if (many), else [end of block]
                 break // count_gt
@@ -596,7 +606,7 @@ const validateRules = async(
                     for (const __key of scopedModel.self.rules.keys_included_counts.keyList) {
                         if (__key in __scopedDatumKeys) __keyCount++
                     }
-                    
+
                     // 'undefined' min or max will error out;
                     if (__keyCount < scopedModel.self.rules.min) {
                         setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: LESS THAN ${scopedModel.self.rules.min} KEYS WERE FOUND)`))
