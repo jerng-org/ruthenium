@@ -549,9 +549,7 @@ const validateRules = async(
 
             case ('count_gt'):
 
-
-
-                console.log(`count_gt debug: (scopedDatum, ${scopedDatum}): (scopedModel, ${scopedModel})`)
+                console.log(`count_gt debug: (scopedDatum, ${JSON.stringify(scopedDatum,null,4)}): (scopedModel, ${JSON.stringify(scopedModel,null,4)})`)
 
                 if (scopedModel.self.many) // this pattern should recur for 'count_xyz'
                 {
