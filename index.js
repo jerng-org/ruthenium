@@ -416,7 +416,7 @@ try {
     exports.handler = async function() {
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
-        console.log(`Lambda Handler ENTRY Point:`,
+        console.log(`Lambda Handler ENTRxY Point:`,
             arguments[0].requestContext.http.method,
             arguments[0].requestContext.domainName,
             arguments[0].requestContext.http.path,
