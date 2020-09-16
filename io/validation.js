@@ -735,6 +735,8 @@ const validateRules = async(
                                                 )
                                                 subs2Report[__sub0Key][__sub1Key].push(__sub2Report)
 
+                                                console.log (`sub2Report`, __sub2Report)
+
                                                 /* 
 Reporting code copied from subs_all_fit_model, and not yet checked */
 
@@ -744,7 +746,7 @@ Reporting code copied from subs_all_fit_model, and not yet checked */
                                                 //  performance optimisation, there is no need to break here;
 
                                                 if (__sub2Report.shortReport.summary) {
-                                                    setResult(subs2Report)
+                                                    //setResult(subs2Report)
 
                                                     // maybe rather redundant? check.
                                                 }
