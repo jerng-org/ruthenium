@@ -587,6 +587,8 @@ const validateRules = async(
 
             case ('keys_included_counts'):
 
+                console.log (`keys_included_counts`)
+
                 /*
                     argument : {
                         min:    << integer : minimum allowed count of keys in keyList >>,
@@ -608,6 +610,8 @@ const validateRules = async(
                     for (const __key of scopedModel.self.rules.keys_included_counts.keyList) {
                         if (__key in __scopedDatumKeys) __keyCount++
                     }
+
+                    console.log(`keyCount`, __keyCount)
 
                     // 'undefined' min or max will error out;
                     if (__keyCount < scopedModel.self.rules.min) {
