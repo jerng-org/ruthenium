@@ -211,6 +211,10 @@ const validate = async(
     })
 
 ) => {
+    
+    console.log(`(validation.validate) (modelKey) :`, modelKey)
+
+    
     scopedModel = (!scopedModel && modelKey) ? await scopeModel(modelKey) :
         scopedModel
 
@@ -227,8 +231,6 @@ const validate = async(
     //  !!  //  Make way.
     //      //
     //////////
-
-    //console.log(`(validation.validate) (modelKey) :`, modelKey)
 
     report[modelKey].self = await validateRules(
 
@@ -671,7 +673,7 @@ const validateRules = async(
 
             case ('subs0_keys_applied_to_subs2'):
 
-                console.log(`subs0_keys_applied_to_sub`)
+                console.log(`subs0_keys_applied_to_subs2`)
 
                 /* There has got to be a prettier way to do this ... later. 2020-09-16 */
 
