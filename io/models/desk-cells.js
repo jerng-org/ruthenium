@@ -13,8 +13,8 @@ const deskCells = {
             keys_included_counts: {
                 min: 1,
                 max: 1,
-                keyList: ['X','Y']//conf.storage.deskCellTypeKeys
-            }
+                keyList: conf.storage.deskCellTypeKeys
+            } 
         }
     },
     subs: {
