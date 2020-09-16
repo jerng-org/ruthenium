@@ -671,6 +671,8 @@ const validateRules = async(
 
             case ('subs0_keys_applied_to_subs2'):
 
+                console.log(`subs0_keys_applied_to_sub`)
+
                 /* There has got to be a prettier way to do this ... later. 2020-09-16 */
 
                 //////////
