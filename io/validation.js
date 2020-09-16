@@ -211,10 +211,10 @@ const validate = async(
     })
 
 ) => {
-    
+
     console.log(`(validation.validate) (modelKey) :`, modelKey)
 
-    
+
     scopedModel = (!scopedModel && modelKey) ? await scopeModel(modelKey) :
         scopedModel
 
@@ -704,6 +704,7 @@ const validateRules = async(
                                 //  !!  //  FORK:
                                 //      //
                                 //////////
+                                console.log(`sub0Key`, __sub0Key)
                                 if (Array.isArray(scopedDatum[__sub0Key])) {
                                     setResult(Error(`validate.js: validateRules:
                                         switch(_ruleKey): subs0_keys_applied_to_subs2: 
@@ -719,9 +720,12 @@ const validateRules = async(
                                         //  !!  //  FORK:
                                         //      //
                                         //////////
+                                        console.log(`sub1Key`, __sub1Key)
                                         if (Array.isArray(scopedDatum[__sub0Key][__sub1Key])) {
                                             subs2Report[__sub0Key][__sub1Key] = []
                                             for (const __sub2 of scopedDatum[__sub0Key][__sub1Key]) {
+
+                                                console.log(`sub2`, __sub2)
 
                                                 const __sub2Report = await validate({
                                                         [__sub0Key]: __sub2
