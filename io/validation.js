@@ -607,19 +607,19 @@ const validateRules = async(
                 {
                     const __scopedDatumKeys = Object.keys(scopedDatum)
                     const __keyCount = 0
-                    for (const __key of scopedModel.self.rules.keys_included_counts.keyList) {
+                    for (const __key of _rulesToTest.keys_included_counts.keyList) {
                         if (__key in __scopedDatumKeys) __keyCount++
                     }
 
                     console.log(`keyCount`, __keyCount)
 
                     // 'undefined' min or max will error out;
-                    if (__keyCount < scopedModel.self.rules.min) {
-                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: LESS THAN ${scopedModel.self.rules.min} KEYS WERE FOUND)`))
+                    if (__keyCount < _rulesToTest.keys_included_counts.min) {
+                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: LESS THAN ${_rulesToTest.keys_included_counts.min} KEYS WERE FOUND)`))
                     }
                     else
-                    if (__keyCount > scopedModel.self.rules.max) {
-                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: MORE THAN ${scopedModel.self.rules.max} KEYS WERE FOUND)`))
+                    if (__keyCount > _rulesToTest.keys_included_counts.max) {
+                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: MORE THAN ${_rulesToTest.keys_included_counts.max} KEYS WERE FOUND)`))
                     }
                 } // if (many); else-block ends
                 break // keys_included_counts
