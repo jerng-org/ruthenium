@@ -605,18 +605,10 @@ const validateRules = async(
                 } // if (many); if-block ends
                 else // not-'many', ergo is not an Array
                 {
-                    const __scopedDatumKeys = Object.keys(scopedDatum)
                     let __keyCount = 0
-
-                    for (const __key of __scopedDatumKeys) {
-
+                    for (const __key in scopedDatum) {
                         if (_rulesToTest.keys_included_counts.keyList.includes(__key)) {
-                            
-                            console.log(`__key (${__key}) included in __scopedDatumKeys (${_rulesToTest.keys_included_counts.keyList})`)
                             __keyCount++
-                        }
-                        else {
-                            console.log(`__key (${__key}) NOT included in __scopedDatumKeys (${_rulesToTest.keys_included_counts.keyList})`)
                         }
                     }
 
