@@ -62,6 +62,10 @@ const desksPatch = async(data) => {
         return
     }
 
+data.RU.signals.formDataMethodValidationShortReport = data.RU.signals.formDataMethodValidationReport.shortReport
+data.RU.signals.formDataMethodValidationShortReportSummary = data.RU.signals.formDataMethodValidationReport.shortReport.summary
+
+
     if (data.RU.signals.formDataMethodValidationReport.shortReport.summary) {
         
     }
