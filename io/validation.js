@@ -587,7 +587,7 @@ const validateRules = async(
 
             case ('keys_included_counts'):
 
-                console.log (`keys_included_counts`)
+                console.log(`keys_included_counts`)
 
                 /*
                     argument : {
@@ -713,7 +713,7 @@ const validateRules = async(
                                     setResult(Error(`validate.js: validateRules:
                                         switch(_ruleKey): subs0_keys_applied_to_subs2: 
                                         (model.many:false) 
-                                        (rule argument:${ _rulesToTest.subs0_keys_applied_to_subs2})
+                                        (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2,null,4)})
                                         (scopedDatum[${__sub0Key}] is an Array) BRANCH BODY UNDEFINED `))
                                 }
                                 else {
@@ -739,7 +739,7 @@ const validateRules = async(
                                                 )
                                                 subs2Report[__sub0Key][__sub1Key].push(__sub2Report)
 
-                                                console.log (`sub2Report`, __sub2Report)
+                                                console.log(`sub2Report`, __sub2Report)
 
                                                 /* 
 Reporting code copied from subs_all_fit_model, and not yet checked */
@@ -758,7 +758,7 @@ Reporting code copied from subs_all_fit_model, and not yet checked */
                                                     setResult(Error(`validate.js: validateRules:
                                                         switch(_ruleKey): subs0_keys_applied_to_subs2: 
                                                         (model.many:false)
-                                                        (rule argument:${ _rulesToTest.subs0_keys_applied_to_subs2})
+                                                        (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2,null,4)})
                                                         (scopedDatum[${__sub0Key}][${__sub1Key}] is an Array)
                                                         __sub2 element failed: 
                                                         
@@ -775,7 +775,7 @@ Reporting code copied from subs_all_fit_model, and not yet checked */
                                             setResult(Error(`validate.js: validateRules:
                                                 switch(_ruleKey): subs0_keys_applied_to_subs2: 
                                                 (model.many:false) 
-                                                (rule argument:${ _rulesToTest.subs0_keys_applied_to_subs2})
+                                                (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2,null,4)})
                                                 (scopedDatum[${__sub0Key}][${__sub1Key}] is NOT an Array) BRANCH BODY UNDEFINED `))
                                         }
                                     }
@@ -787,7 +787,7 @@ Reporting code copied from subs_all_fit_model, and not yet checked */
                             setResult(Error(`validate.js: validateRules:
                                 switch(_ruleKey): subs0_keys_applied_to_subs2: 
                                 (model.many:false) 
-                                (rule argument:${ _rulesToTest.subs0_keys_applied_to_subs2}) BRANCH BODY UNDEFINED `))
+                                (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2,null,4) }) BRANCH BODY UNDEFINED `))
                     } // switch (_rulesToTest.subs0_keys_applied_to_subs2.subs1) ends
 
                 } // if (many); else-block ends
