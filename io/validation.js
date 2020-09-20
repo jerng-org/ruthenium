@@ -212,9 +212,6 @@ const validate = async(
 
 ) => {
 
-    console.log(`(validation.validate) (modelKey) :`, modelKey)
-
-
     scopedModel = (!scopedModel && modelKey) ? await scopeModel(modelKey) :
         scopedModel
 
@@ -587,8 +584,6 @@ const validateRules = async(
 
             case ('keys_included_counts'):
 
-                console.log(`keys_included_counts`)
-
                 /*
                     argument : {
                         min:    << integer : minimum allowed count of keys in keyList >>,
@@ -611,8 +606,6 @@ const validateRules = async(
                             __keyCount++
                         }
                     }
-
-                    console.log(`keyCount`, __keyCount)
 
                     // 'undefined' min or max will error out;
                     if (__keyCount < _rulesToTest.keys_included_counts.min) {
@@ -684,8 +677,6 @@ const validateRules = async(
 
             case ('subs0_keys_applied_to_subs2'):
 
-                console.log(`subs0_keys_applied_to_subs2`)
-
                 /* There has got to be a prettier way to do this ... later. 2020-09-16 */
 
                 //////////
@@ -733,12 +724,9 @@ const validateRules = async(
                                         //  !!  //  FORK:
                                         //      //
                                         //////////
-                                        console.log(`sub1Key`, __sub1Key)
                                         if (Array.isArray(scopedDatum[__sub0Key][__sub1Key])) {
                                             subs2Report[__sub0Key][__sub1Key] = []
                                             for (const __sub2 of scopedDatum[__sub0Key][__sub1Key]) {
-
-                                                console.log(`sub2`, __sub2)
 
                                                 const __sub2Report = await validate({
                                                         [__sub0Key]: __sub2
@@ -747,8 +735,6 @@ const validateRules = async(
                                                     await scopeModel(__sub0Key)
                                                 )
                                                 subs2Report[__sub0Key][__sub1Key].push(__sub2Report)
-
-                                                console.log(`sub2Report`, __sub2Report)
 
                                                 /* 
 Reporting code copied from subs_all_fit_model, and not yet checked */
