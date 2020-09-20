@@ -27,11 +27,15 @@ const desksPatch = async(data) => {
         3.  size limits have not been coded for here
         4.  By the time we want to code for 3,4, we should probably have a 
             generalised framework-wise method for this
+            
+        5.  Also ... coercion to Number types acceptable by the DDB-JS-DocumentClient
+            needs to be softcoded into (4)
         `)
 
-    console.log(data.RU.request.formStringParameters['desk-cells'].PUT.map(
-        __element => { return { PutRequest: { Item: __element } } }
-    ))
+    // hardcoded
+    for (const __deskCell of data.RU.request.formStringParameters['desk-cells'].PUT) {
+        if ( 'N' in __deskCell ) __deskCell.N = Number(__deskCell.N)
+    }
 
     // Configure DB client parameters
     const params = {
