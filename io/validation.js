@@ -607,14 +607,22 @@ const validateRules = async(
                 {
                     const __scopedDatumKeys = Object.keys(scopedDatum)
                     let __keyCount = 0
-                    
-                    console.log( `__scopedDatumKeys ${ __scopedDatumKeys}`)
-                    
+
+                    console.log(`__scopedDatumKeys ${ __scopedDatumKeys}`)
+
                     for (const __key of _rulesToTest.keys_included_counts.keyList) {
-                        
-                        console.log( `__key ${ __key}`)
-                    
-                        if (__key in __scopedDatumKeys) __keyCount++
+
+                        console.log(`__key ${ __key}`)
+
+                        if (__key in __scopedDatumKeys) {
+                            
+                            console.log(`__key in __scopedDatumKeys`)
+                            __keyCount++
+                        }
+                        else {
+                            console.log(`__key NOT in __scopedDatumKeys`)
+                            
+                        }
                     }
 
                     console.log(`keyCount`, __keyCount)
