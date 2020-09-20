@@ -13,6 +13,7 @@ const formsMarkupUpdateDeskSchema = require(`/var/task/tasks/virtual/forms-get/m
 const formsMarkupDeleteDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-delete-desk-schema.js`)
 
 const formsMarkupCreateDeskRow = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-row.js`)
+const formsMarkupUpdateDeskRow = require(`/var/task/tasks/virtual/forms-get/markup-update-desk-row.js`)
 
 const rus = require('/var/task/modules/r-u-s.js')
 
@@ -188,8 +189,10 @@ const virtual = async(data) => {
 
                                                 case (`create-desk-row`):
                                                     data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(data)
+                                                    return
 
-                                                    /* UNIMPLEMENTED POST to DESK-CELLS */
+                                                case (`update-desk-row`):
+                                                    data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskRow(data)
                                                     return
 
                                                     // (thing) switch level 2
