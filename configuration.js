@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `fixed some error messages in subs0_keys_applied_to_subs2/`//`(virtual/desks-patch.js: models/desk-cell.js: keys_included_counts starting to fail as expected; proceed to test`
+const gitCommitMessage = `(virtual/desks-patch.js: models/desk-cell.js: keys_included_counts starting to fail as expected; proceed to test`
 
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
