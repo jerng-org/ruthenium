@@ -616,7 +616,7 @@ const validateRules = async(
 
                         if (__key in __scopedDatumKeys) {
                             
-                            console.log(`__key in __scopedDatumKeys`)
+                            console.log(`__key (${__key}) in __scopedDatumKeys (${__scopedDatumKeys})`)
                             __keyCount++
                         }
                         else {
