@@ -56,6 +56,8 @@ try {
  
                 `CURRENT:`,
                 
+                `Security: (data) object should probably not get passed lock-stock-barrel to markup files.`,
+                
                 `(http-METHOD) validation models COULD possibly ADDITIONALLY
                 automatically check other models (e.g. after the (http-patch.js)
                 validation check is positive, it could additionally check 
