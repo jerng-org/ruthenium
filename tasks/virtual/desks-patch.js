@@ -6,43 +6,100 @@ const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
 
 const status400 = require(`/var/task/tasks/status-400.js`)
 //const status409 = require(`/var/task/tasks/status-409.js`)
-//const status500 = require(`/var/task/tasks/status-500.js`)
+const status500 = require(`/var/task/tasks/status-500.js`)
 
 const desksPatch = async(data) => {
 
     const candidates = data.RU.request.formStringParameters
 
-    /*  THIS SHOULD PROCEED UNDER THE ASSUMPTION THAT (desk-cells items) are
-        MECE with respective (desk-schema items); currenlty (desk-schema) items
-        cannot be updated, and future code which allows updates should lock 
-        relevant (desk-cells columns) and complete implied maintenance CRUD
-        before releasing the lock;
-        
-        This is (desks-patch), so formStringParameters are expected to be
-        explicitly cell-by-cell; this is NOT (desk-rows-patch), so it cannot be 
-        simply assumed that an absent [desk-name#column-name,row-id] implies 
-        deletion of that row; deletion of a row should only be conducted on
-        explicit specification from the form values;
-        
-        !!! WARNING !!! - read above first;
-    
-        0.  Backend storage is the (desk-cells) DynamoDB table, where each Item
-            is a cell.
-        
-            Expect formStringParameters of the form 
-        
-            -   desk-cells[PUT]   INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
-            -   desk-cells[DELETE]INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
-            
-            DynamoDB's UpdateItem interface is much more flexible and would 
-            support more complex verbs/operations such as:
+    if (!await rus.validateFormDataByMethod(data, 'http-patch')) {
+        await status400(data)
+        return
+    }
 
-            -   desk-cells[INCREMENT_BY_ONE]   INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
-            
-            ... but these should be left to a future implementation which is
-            more detailed, as we are rushing for basic CRUD of desk-cells at
-            the moment.
-        */
+    //  end PROTOTYPICAL data validation process.
+
+    console.warn(`desks-patch.js: "patching" 
+        0.  PUT should be hitting DynamoDB
+        1.  DELETE not yet hitting DynamoDB
+        2.  DDB-JS-DocumentClient docs say "max 10 items"; lower level API docs
+            say "max 25 items"; neither have been coded for here
+        3.  size limits have not been coded for here
+        4.  By the time we want to code for 3,4, we should probably have a 
+            generalised framework-wise method for this
+        `)
+
+    // Configure DB client parameters
+    const params = {
+        RequestItems: {
+            'TEST-APP-DESK-CELLS': [
+                
+                ... data.RU.request.formStringParameters['desk-cells'].PUT
+                
+                /*
+                {
+                    PutRequest: {
+                        Item:{
+                            
+                        }
+                    },
+                },
+                */
+                
+                //... data.RU.request.formStringParameters['desk-cells'].DELETE.map()
+                //{ DeleteRequest: {} },
+            ]
+        },
+        ReturnConsumedCapacity: `INDEXES`,
+        ReturnItemCollectionMetrics: `SIZE`
+    }
+
+    // Call storage layer
+
+    try {
+        data.RU.io.deskSchemasPatch = await rus.aws.ddbdc.batchWrite(params).promise()
+    }
+    catch (e) {
+        console.error(e)
+        switch (e.code) {
+            default: // do nothing
+                await status500(data)
+                return
+        }
+    }
+
+
+    /*  THIS SHOULD PROCEED UNDER THE ASSUMPTION THAT (desk-cells items) are
+                MECE with respective (desk-schema items); currenlty (desk-schema) items
+                cannot be updated, and future code which allows updates should lock 
+                relevant (desk-cells columns) and complete implied maintenance CRUD
+                before releasing the lock;
+                
+                This is (desks-patch), so formStringParameters are expected to be
+                explicitly cell-by-cell; this is NOT (desk-rows-patch), so it cannot be 
+                simply assumed that an absent [desk-name#column-name,row-id] implies 
+                deletion of that row; deletion of a row should only be conducted on
+                explicit specification from the form values;
+                
+                !!! WARNING !!! - read above first;
+    
+                0.  Backend storage is the (desk-cells) DynamoDB table, where each Item
+                    is a cell.
+                
+                    Expect formStringParameters of the form 
+                
+                    -   desk-cells[PUT]   INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
+                    -   desk-cells[DELETE]INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
+                    
+                    DynamoDB's UpdateItem interface is much more flexible and would 
+                    support more complex verbs/operations such as:
+
+                    -   desk-cells[INCREMENT_BY_ONE]   INDEX [ << desk-schema.name >> ][ << ITEMS >> ]
+                    
+                    ... but these should be left to a future implementation which is
+                    more detailed, as we are rushing for basic CRUD of desk-cells at
+                    the moment.
+                */
 
     rus.conf.verbosity > 6 && console.log(` Discussion:
             We should really nail down how a client requests for a CREATE
@@ -56,19 +113,6 @@ const desksPatch = async(data) => {
                 by the form. 
                 
     `)
-
-    if (!await rus.validateFormDataByMethod(data, 'http-patch')) {
-        await status400(data)
-        return
-    }
-
-data.RU.signals.formDataMethodValidationShortReport = data.RU.signals.formDataMethodValidationReport.shortReport
-data.RU.signals.formDataMethodValidationShortReportSummary = data.RU.signals.formDataMethodValidationReport.shortReport.summary
-
-
-    if (data.RU.signals.formDataMethodValidationReport.shortReport.summary) {
-        
-    }
 
     // CONTINUE HERE
 
