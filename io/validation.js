@@ -620,7 +620,7 @@ const validateRules = async(
                             __keyCount++
                         }
                         else {
-                            console.log(`__key NOT in __scopedDatumKeys`)
+                            console.log(`__key (${__key}) NOT in __scopedDatumKeys (${__scopedDatumKeys})`)
                             
                         }
                     }
