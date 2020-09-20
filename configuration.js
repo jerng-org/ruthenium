@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `(virtual/desks-patch.js: models/desk-cell.js: [ validation.js : subs0_keys_applied_to_subs2 appears to be fixed]`
+const gitCommitMessage = `(virtual/desks-patch.js: models/desk-cell.js: [ validation.js : subs0_keys_applied_to_subs2 error messages improved]`
 
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 

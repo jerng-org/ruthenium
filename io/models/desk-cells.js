@@ -11,10 +11,11 @@ const deskCells = {
         //notes: undefined,
         rules: {
             keys_included_counts: {
-                min: 1,
+                //min: 1,
+                min: 2,
                 max: 1,
-                //keyList: conf.storage.deskCellTypeKeys
-                keyList: ['X','Y']
+                keyList: conf.storage.deskCellTypeKeys
+                //keyList: ['X','Y']
             } 
         }
     },
