@@ -1,5 +1,6 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `(virtual/desks-patch.js: sub-PUTs are working, DELETEs are not;`
+const gitCommitMessage = `virtual.js: deskRowGetSuccesss WIP (for forms-get/markup-update-desk-row)`
+//`(virtual/desks-patch.js: sub-PUTs are working, DELETEs are not;`
 
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
