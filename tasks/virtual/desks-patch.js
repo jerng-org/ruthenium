@@ -30,7 +30,7 @@ const desksPatch = async(data) => {
         `)
 
     console.log(data.RU.request.formStringParameters['desk-cells'].PUT.map(
-        __element => { PutRequest: { Item: __element } }
+        __element => { return { PutRequest: { Item: __element } } }
     ))
 
     // Configure DB client parameters
@@ -39,7 +39,7 @@ const desksPatch = async(data) => {
             'TEST-APP-DESK-CELLS': [
 
                 ...data.RU.request.formStringParameters['desk-cells'].PUT.map(
-                    __element => { PutRequest: { Item: __element } }
+                    __element => { return { PutRequest: { Item: __element } } }
                 )
 
                 /*
