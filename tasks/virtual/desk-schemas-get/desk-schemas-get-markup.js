@@ -10,9 +10,8 @@ const tableInMarkup = require(`/var/task/tasks/virtual/desk-schemas-get/markup-t
 
 const deskSchemasMarkup = async(data) => {
 
-    rus.conf.verbosity > 0 &&
-        console.warn(`(desk-schemas-get.js) FIXME: (data.RU.io) fieldname no-longer coheres with convention established in (template-markup);`)
-
+    rus.conf.verbosity > 6 &&
+        console.warn(`(desk-schemas-get-markup.js : rewire file naming conventions so that instead of "markup-table-in-markup.js" we have "desk-schemas-get-markup-table-in-markup.js)`)
 
     const markup = await tableInMarkup(data.RU.io.deskSchemasScan)
 

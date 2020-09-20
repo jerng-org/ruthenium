@@ -19,7 +19,7 @@ const desksPatch = async(data) => {
 
     //  end PROTOTYPICAL data validation process.
 
-    console.warn(`desks-patch.js: "patching" 
+    console.warn(`WIP: desks-patch.js: "patching" 
         0.  PUT should be hitting DynamoDB
         1.  DELETE not yet hitting DynamoDB
         2.  DDB-JS-DocumentClient docs say "max 10 items"; lower level API docs
@@ -60,8 +60,8 @@ const desksPatch = async(data) => {
                 //{ DeleteRequest: {} },
             ]
         },
-        ReturnConsumedCapacity: `INDEXES`,
-        ReturnItemCollectionMetrics: `SIZE`
+        //ReturnConsumedCapacity: `INDEXES`,
+        //ReturnItemCollectionMetrics: `SIZE`
     }
 
     // Call storage layer
