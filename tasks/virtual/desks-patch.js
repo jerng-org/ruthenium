@@ -29,6 +29,10 @@ const desksPatch = async(data) => {
             generalised framework-wise method for this
         `)
 
+    console.log(data.RU.request.formStringParameters['desk-cells'].PUT.map(
+        __element => { PutRequest: { Item: __element } }
+    ))
+
     // Configure DB client parameters
     const params = {
         RequestItems: {
