@@ -606,7 +606,7 @@ const validateRules = async(
                 else // not-'many', ergo is not an Array
                 {
                     const __scopedDatumKeys = Object.keys(scopedDatum)
-                    const __keyCount = 0
+                    let __keyCount = 0
                     
                     console.log( `__scopedDatumKeys ${ __scopedDatumKeys}`)
                     
