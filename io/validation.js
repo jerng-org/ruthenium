@@ -413,8 +413,6 @@ const validateRules = async(
 
 ) => {
 
-    //console.log(`(validation.js) (validateRules) (scopedModel: ${JSON.stringify(scopedModel,null,4)})`)
-
     //////////
     //      //
     //  !!  //  Make way.
@@ -707,7 +705,6 @@ const validateRules = async(
                                 //  !!  //  FORK:
                                 //      //
                                 //////////
-                                console.log(`sub0Key`, __sub0Key)
                                 if (Array.isArray(scopedDatum[__sub0Key])) {
                                     setResult(Error(`validate.js: validateRules:
                                         switch(_ruleKey): subs0_keys_applied_to_subs2: 
@@ -853,8 +850,6 @@ ${ await print.inspectInfinity ( subsReport, null, 4) }
                 //////////
 
             case ('subs_all_test_true'):
-
-                conf.verbosity > 0 && console.log(`(validation.js) (rule: subs_all_test_true) PARTIALLY ... UNDEFINED`)
 
                 if (scopedModel.self.many) {
 
