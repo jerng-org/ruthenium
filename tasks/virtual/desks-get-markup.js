@@ -33,6 +33,8 @@ const desksGetMarkup = async(data) => {
         deskCells[cell.R][_colName] = cell[_colType]
     })
 
+    rus.conf.verbosity > 6 && `desks-get-markup.js: the code above should probably be made more framework-wise generic`
+
     let tbodyTrs = ''
     let rowCount = 0
     for (const rowID in deskCells) {
@@ -79,6 +81,19 @@ const desksGetMarkup = async(data) => {
             `            
             <th>
             
+                <a  class="button" 
+                    title="UPDATE desk row"
+                    href="${
+                    await rus.appUrl ([
+                        [ 'route', 'virtual' ],
+                        [ 'type', 'forms' ],
+                        [ 'thing', 'update-desk-row' ],
+                        [ 'desk-schema-name', data.RU.io.deskSchemasQuery.Items[0]['name'] ], 
+                        [ 'desk-schema-row', rowID ], 
+                        [ 'reader', 'human']
+                    ])
+                }"><i class="material-icons">edit</i> UPDATE</a>
+                
                 <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
                             class="toggle-set-2"
                             style="margin:0;"
@@ -96,7 +111,6 @@ const desksGetMarkup = async(data) => {
                                 <i class="material-icons">lock</i>
                                 <i class="material-icons">delete</i>
                                 DELETE
-                                <i class="material-icons">construction</i>
                             </span>
                             <span class="toggle-set-1" style="display:none;">
                                 code: 234806</span>
