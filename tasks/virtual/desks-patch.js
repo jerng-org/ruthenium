@@ -33,9 +33,11 @@ const desksPatch = async(data) => {
     const params = {
         RequestItems: {
             'TEST-APP-DESK-CELLS': [
-                
-                ... data.RU.request.formStringParameters['desk-cells'].PUT
-                
+
+                ...data.RU.request.formStringParameters['desk-cells'].PUT.map(
+                    __element => { PutRequest: { Item: __element } }
+                )
+
                 /*
                 {
                     PutRequest: {
@@ -45,7 +47,7 @@ const desksPatch = async(data) => {
                     },
                 },
                 */
-                
+
                 //... data.RU.request.formStringParameters['desk-cells'].DELETE.map()
                 //{ DeleteRequest: {} },
             ]
@@ -64,7 +66,7 @@ const desksPatch = async(data) => {
         switch (e.code) {
             default: // do nothing
                 await status500(data)
-                return
+            return
         }
     }
 
