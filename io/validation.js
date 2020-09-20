@@ -616,11 +616,17 @@ const validateRules = async(
 
                     // 'undefined' min or max will error out;
                     if (__keyCount < _rulesToTest.keys_included_counts.min) {
-                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: LESS THAN ${_rulesToTest.keys_included_counts.min} KEYS WERE FOUND)`))
+                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: 
+                            scopedDatum keys (${Object.keys(scopedDatum)}) included
+                            FEWER THAN ${_rulesToTest.keys_included_counts.min} elements of the 
+                            keyList (${_rulesToTest.keys_included_counts.keyList})`))
                     }
                     else
                     if (__keyCount > _rulesToTest.keys_included_counts.max) {
-                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts: MORE THAN ${_rulesToTest.keys_included_counts.max} KEYS WERE FOUND)`))
+                        setResult(Error(`validate.js: validateRules: switch(_ruleKey): keys_included_counts:
+                            scopedDatum keys (${Object.keys(scopedDatum)}) included
+                            MORE THAN ${_rulesToTest.keys_included_counts.min} elements of the 
+                            keyList (${_rulesToTest.keys_included_counts.keyList})`))
                     }
                 } // if (many); else-block ends
                 break // keys_included_counts
