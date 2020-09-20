@@ -40,7 +40,7 @@ const deskSchemasGetSuccess = async(DATA, deskSchemaName) => {
         Key: {
             name: deskSchemaName
         },
-        ReturnConsumedCapacity: 'TOTAL'
+        ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
     return ('Item' in DATA.RU.io.deskSchemasGet)
@@ -52,20 +52,46 @@ const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
         Key: {
             name: deskSchemaName
         },
-        ReturnConsumedCapacity: 'TOTAL'
+        ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskSchemasDelete = await rus.aws.ddbdc.delete(params).promise()
     return DATA.RU.io.deskSchemasDelete
 }
 
-const deskRowGetSuccess = async(DATA, deskSchemaName) => {
+const deskRowGetSuccess = async(DATA, deskName, deskRowID) => {
+    
+    
+    data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
+        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+        KeyConditionExpression: '#name = :deskName',
+        ExpressionAttributeValues: { ':deskName': deskName },
+        ExpressionAttributeNames: { '#name': 'name' },
+        Limit: 1,
+        ReturnConsumedCapacity: 'TOTAL'
+    }).promise()
+
+    if (!data.RU.io.deskSchemasQuery.Items.length) {
+        await status404(data)
+        return
+    }
+
+    data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
+        TableName: 'TEST-APP-DESK-CELLS',
+        IndexName: 'D-GSI',
+        KeyConditionExpression: 'D = :deskName',
+        ExpressionAttributeValues: { ':deskName': deskName },
+        ReturnConsumedCapacity: 'TOTAL'
+    }).promise()
+    
+    
+    
     /*
     const params = {
-        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+        TableName: 'TEST-APP-DESK-CELLS',
         Key: {
-            name: deskSchemaName
+            name: deskName
         },
-        ReturnConsumedCapacity: 'TOTAL'
+        ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
     return ('Item' in DATA.RU.io.deskSchemasGet)
