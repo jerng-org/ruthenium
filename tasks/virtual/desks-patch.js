@@ -62,6 +62,10 @@ const desksPatch = async(data) => {
         return
     }
 
+    if (data.RU.signals.formDataMethodValidationReport.shortReport.summary) {
+        
+    }
+
     // CONTINUE HERE
 
 
