@@ -121,8 +121,8 @@ const desksGetMarkup = async(data) => {
         class = "toggle-set-1"
         style = "display:none;margin-top:0.5rem;"
         onclick = "(e=>e.stopImmediatePropagation())(event)"
-        oninput = "console.log('onInput');/*if (this.value==234806) { 
-
+        oninput = "console.log('onInput');if (this.value==234806) { 
+/*
         this.value = ''
         toggler(this.parentNode, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }')
 
@@ -135,8 +135,9 @@ const desksGetMarkup = async(data) => {
         else {
             //alert ('dev: cleanup required ')
         }
+*/
     }
-    */" > </ fieldset >
+    " > </ fieldset >
 
     <div class = "ru-card toggle-set-2"
     style = "display:none;" >
