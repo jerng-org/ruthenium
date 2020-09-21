@@ -18,28 +18,8 @@ const desksGetMarkup = async(data) => {
 
     th1s += `<th scope="col"><sub>Operations on each Object</sub></th>`
     
-    const tempFun = (_deskSchemaItem, _deskCellItems) => {
 
-        let __deskColumnTypes = {}
-        let __deskCells = {}
-        
-        _deskSchemaItem.columns
-            .forEach((__column) => { __deskColumnTypes[__column.name] = __column.type })
-
-        _deskCellItems
-            .forEach((__cell) => {
-
-                if (!(__cell.R in __deskCells)) {
-                    __deskCells[__cell.R] = {}
-                }
-                const _colName = __cell.DHC.slice(__cell.D.length + 1)
-                const _colType = __deskColumnTypes[_colName]
-                __deskCells[__cell.R][_colName] = __cell[_colType]
-            })
-        return __deskCells
-    }
-
-    const deskCells = tempFun(
+    const deskCells = rus.limbo.ddbDeskCellsByRowID(
         data.RU.io.deskSchemasQuery.Items[0],
         data.RU.io.deskCellsQuery.Items)
 
@@ -128,14 +108,14 @@ const desksGetMarkup = async(data) => {
             const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\
                 ${ rowID }\\
                 forever - select CANCEL to reconsider.')
-/*
+
             if (confirmed) {
                 toggler(this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }')
             }
             else {
                 //alert ('dev: cleanup required ')
             }
-*/
+
         }
     " > </fieldset >
 
