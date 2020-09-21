@@ -49,13 +49,13 @@ const innerHTML = async ( DATA, uuid ) => `
 `
 
 const updateDeskRow = async(data) => {
-
+/*
     const deskCells = rus.limbo.ddbDeskCellsByRowID(
         data.RU.io.deskSchemasGet.Item,
         data.RU.io.deskCellsQuery.Items)
 
     data.RU.io.wip = deskCells
-
+*/
     const oldUuid = await rus.uuid4()
 
     return `
