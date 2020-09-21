@@ -137,7 +137,7 @@ const desksGetMarkup = async(data) => {
             }
 */
         }
-    " > </ fieldset >
+    " > </fieldset >
 
     <div class = "ru-card toggle-set-2"
     style = "display:none;" >
