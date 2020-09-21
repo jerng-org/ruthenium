@@ -59,28 +59,15 @@ const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
 }
 
 const deskRowGetSuccess = async(DATA, deskRowID) => {
-
-    DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
+    const params = {
         TableName: 'TEST-APP-DESK-CELLS',
         IndexName: 'R-GSI',
         KeyConditionExpression: 'R = :deskRowID',
         ExpressionAttributeValues: { ':deskRowID': deskRowID },
         ReturnConsumedCapacity: 'INDEXES'
-    }).promise()
-
-
-
-    /*
-    const params = {
-        TableName: 'TEST-APP-DESK-CELLS',
-        Key: {
-            name: deskName
-        },
-        ReturnConsumedCapacity: 'INDEXES'
     }
-    DATA.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
-    return ('Item' in DATA.RU.io.deskSchemasGet)
-    */
+    DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query().promise()
+    return DATA.RU.io.deskCellsQuery.Items.length
 }
 
 const virtual = async(data) => {
