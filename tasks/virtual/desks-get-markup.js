@@ -54,12 +54,11 @@ const desksGetMarkup = async(data) => {
             (accumulator, colName)=>{
                 return accumulator + `  <td>    ${deskCells[rowID][colName]}
                                                 
-                                                <i class="material-icons ru-hover-opaque">edit<i class="material-icons">construction</i></i>
+                                                <i class="material-icons ru-hover-opaque">edit</i>
+                                                <i class="material-icons">construction</i>
                                         </td>`
             },
-            ` <th scope = "row"
-        id = "${rowID}" >
-
+            ` <th scope = "row" id = "${rowID}" > 
             <i  class="material-icons toggle-set-1"
                         style="display:none;"
                         title="hide the id"
@@ -67,11 +66,7 @@ const desksGetMarkup = async(data) => {
                         >
                         visibility_off</i>
 
-            <span class = "toggle-set-1"
-        style = "display:none;" >
-            &nbsp;
-        ${ rowID }
-         </ span >
+            <span class = "toggle-set-1" style = "display:none;" > &nbsp; ${ rowID } </span>
 
         <i class = "material-icons toggle-set-1"
         onclick = "toggler ( this.parentElement, '.toggle-set-1', null )" >
@@ -84,7 +79,7 @@ const desksGetMarkup = async(data) => {
             
             + // after all the other cells in this row, add one more ...
             
-            ` <th >
+            ` <th>
 
             <a  class="button" 
                     title="UPDATE desk row"
@@ -213,8 +208,7 @@ a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</c
         <tr>${ th2s }</tr>        
     </thead>
 
-    <tbody > ${ tbodyTrs }
-</ tbody >
+    <tbody > ${ tbodyTrs } </tbody >
 
     <tfoot>
     </tfoot>
