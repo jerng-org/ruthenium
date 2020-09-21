@@ -24,7 +24,7 @@ const desksGet = async(data) => {
         ExpressionAttributeValues: { ':deskName': deskName },
         ExpressionAttributeNames: { '#name': 'name' },
         Limit: 1,
-        ReturnConsumedCapacity: 'TOTAL'
+        ReturnConsumedCapacity: 'INDEXES'
     }).promise()
 
     if (!data.RU.io.deskSchemasQuery.Items.length) {
@@ -37,7 +37,7 @@ const desksGet = async(data) => {
         IndexName: 'D-GSI',
         KeyConditionExpression: 'D = :deskName',
         ExpressionAttributeValues: { ':deskName': deskName },
-        ReturnConsumedCapacity: 'TOTAL'
+        ReturnConsumedCapacity: 'INDEXES'
     }).promise()
     
     rus.conf.verbosity > 0

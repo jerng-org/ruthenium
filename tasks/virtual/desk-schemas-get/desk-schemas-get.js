@@ -10,7 +10,7 @@ const deskSchemasGet = async(data) => {
 
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-        ReturnConsumedCapacity: 'TOTAL'
+        ReturnConsumedCapacity: 'INDEXES'
     }).promise()
 
     switch (data.RU.request.queryStringParameters.reader[0]) {
