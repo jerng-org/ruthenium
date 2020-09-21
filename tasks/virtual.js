@@ -201,10 +201,6 @@ const virtual = async(data) => {
                                                     data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(data)
                                                     return
 
-                                                case (`update-desk-row`):
-                                                    data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskRow(data)
-                                                    return
-
                                                 default:
                                                     //////////
                                                     //      //
@@ -230,6 +226,10 @@ const virtual = async(data) => {
 
                                                         case ('update-desk-cell'):
                                                             /* UNIMPLEMENTED PUT to DESK-CELLS */
+                                                            return
+
+                                                        case (`update-desk-row`):
+                                                            data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskRow(data)
                                                             return
 
                                                         case ('delete-desk-row'):
