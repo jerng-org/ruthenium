@@ -66,7 +66,7 @@ const deskRowGetSuccess = async(DATA, deskRowID) => {
         ExpressionAttributeValues: { ':deskRowID': deskRowID },
         ReturnConsumedCapacity: 'INDEXES'
     }
-    DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query().promise()
+    DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query(params).promise()
     return DATA.RU.io.deskCellsQuery.Items.length
 }
 
