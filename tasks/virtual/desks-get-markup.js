@@ -57,7 +57,7 @@ const desksGetMarkup = async(data) => {
                                                 <i class="material-icons ru-hover-opaque">edit<i class="material-icons">construction</i></i>
                                         </td>`
             },
-            ` < th scope = "row"
+            ` <th scope = "row"
         id = "${rowID}" >
 
             <i  class="material-icons toggle-set-1"
@@ -67,24 +67,24 @@ const desksGetMarkup = async(data) => {
                         >
                         visibility_off</i>
 
-            < span class = "toggle-set-1"
+            <span class = "toggle-set-1"
         style = "display:none;" >
             &nbsp;
         ${ rowID }
          </ span >
 
-        < i class = "material-icons toggle-set-1"
+        <i class = "material-icons toggle-set-1"
         onclick = "toggler ( this.parentElement, '.toggle-set-1', null )" >
             fingerprint </i>
 
-            < span class = "toggle-set-1" > ${++rowCount }. </span> 
+            <span class = "toggle-set-1" > ${++rowCount }. </span> 
 
             </th>
         ` /*initial accumulator value*/)
             
             + // after all the other cells in this row, add one more ...
             
-            ` < th >
+            ` <th >
 
             <a  class="button" 
                     title="UPDATE desk row"
@@ -99,7 +99,7 @@ const desksGetMarkup = async(data) => {
                     ])
                 }"><i class="material-icons">edit</i> UPDATE</a>
 
-            < fieldset onclick = "toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
+            <fieldset onclick = "toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
         class = "toggle-set-2"
         style = "margin:0;" >
 
@@ -121,8 +121,7 @@ const desksGetMarkup = async(data) => {
                         </button>
                     </label>
 
-            <
-            input type = "text"
+            <input type = "text"
         id = "unlock-desk-row-delete-${ rowID }"
         placeholder = "type the code, to show the link, which deletes this object"
         class = "toggle-set-1"
@@ -145,7 +144,7 @@ const desksGetMarkup = async(data) => {
     }
     " > </ fieldset >
 
-    < div class = "ru-card toggle-set-2"
+    <div class = "ru-card toggle-set-2"
     style = "display:none;" >
 
         <a  class="button" 
@@ -168,28 +167,26 @@ const desksGetMarkup = async(data) => {
                         <i class="material-icons">construction</i>
                     </a>
 
-        < button class = "button-clear"
+        <button class = "button-clear"
     title = "hide the link, which deletes this object"
     onclick = "toggler ( this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )" >
         <i class="material-icons">lock_open</i>
     hide link </button>
 
-        <
-        /div>
+        </div>
 
-        <
-        /th>`
+        </th>`
 }
  </ tr > `
 }
 
 let markup = `
 <h3> <i>GET</i>
-a Desk </h3> < h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code> </h1> 
-    < pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }
+a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code> </h1> 
+    <pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }
 </ pre >
     <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre> 
-    < table >
+    <table >
 
     <thead>
         <tr>
@@ -217,14 +214,13 @@ a Desk </h3> < h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</
         <tr>${ th2s }</tr>        
     </thead>
 
-    < tbody > ${ tbodyTrs }
+    <tbody > ${ tbodyTrs }
 </ tbody >
 
     <tfoot>
     </tfoot>
 
-    <
-    /table>`
+    </table>`
 
 
 rus.mark(`~/tasks/virtual/desks-get-markup.js EXECUTED`)
