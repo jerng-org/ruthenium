@@ -8,10 +8,10 @@ const desksGetMarkup = async(data) => {
 
     let th1s = '<th scope="row" ><sup>property name</sup> <sub>type</sub></th>'
     let th2s = `<th scope="col" colspan="999">
-                        <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code>Object Count <sup>click to show ID</sup>
+                        <code>${ data.RU.io.deskSchemasGet.Item.name }</code>Object Count <sup>click to show ID</sup>
                     </th>`
     let colNames = []
-    for (const col of data.RU.io.deskSchemasQuery.Items[0].columns) {
+    for (const col of data.RU.io.deskSchemasGet.Item.columns) {
         colNames.push(col.name)
         th1s += `<th scope="col">${ col.name } <sub>${ rus.conf.labels.deskCellTypes[col.type] }</sub></th>`
     }
@@ -20,7 +20,7 @@ const desksGetMarkup = async(data) => {
     
 
     const deskCells = rus.limbo.ddbDeskCellsByRowID(
-        data.RU.io.deskSchemasQuery.Items[0],
+        data.RU.io.deskSchemasGet.Item.
         data.RU.io.deskCellsQuery.Items)
 
     rus.conf.verbosity > 6 && `desks-get-markup.js: the code above should probably be made more framework-wise generic`
@@ -67,7 +67,7 @@ const desksGetMarkup = async(data) => {
                         [ 'route', 'virtual' ],
                         [ 'type', 'forms' ],
                         [ 'thing', 'update-desk-row' ],
-                        [ 'desk-schema-name', data.RU.io.deskSchemasQuery.Items[0]['name'] ], 
+                        [ 'desk-schema-name', data.RU.io.deskSchemasGet.Item.name ], 
                         [ 'desk-row-id', rowID ], 
                         [ 'reader', 'human']
                     ])
@@ -153,7 +153,7 @@ const desksGetMarkup = async(data) => {
 
 let markup = `
 <h3> <i>GET</i>
-a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code> </h1> 
+a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasGet.Item.name }</code> </h1> 
     <pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }</pre>
     <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre> 
     <table >
@@ -168,7 +168,7 @@ a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</c
                         [ 'route', 'virtual' ],
                         [ 'type', 'forms' ],
                         [ 'thing', 'create-desk-row' ],
-                        [ 'desk-schema-name', data.RU.io.deskSchemasQuery.Items[0].name ],
+                        [ 'desk-schema-name', data.RU.io.deskSchemasGet.Item.name ],
                         [ 'reader', 'human']
                     ])
                     
