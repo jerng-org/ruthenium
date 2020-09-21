@@ -58,16 +58,16 @@ const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
     return DATA.RU.io.deskSchemasDelete
 }
 
-const deskRowGetSuccess = async(DATA, deskName, deskRowID) => {
-    /*
-        DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
-            TableName: 'TEST-APP-DESK-CELLS',
-            IndexName: 'D-GSI',
-            KeyConditionExpression: 'D = :deskName',
-            ExpressionAttributeValues: { ':deskName': deskName },
-            ReturnConsumedCapacity: 'TOTAL'
-        }).promise()
-    */
+const deskRowGetSuccess = async(DATA, deskRowID) => {
+
+    DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
+        TableName: 'TEST-APP-DESK-CELLS',
+        IndexName: 'R-GSI',
+        KeyConditionExpression: 'R = :deskRowID',
+        ExpressionAttributeValues: { ':deskRowID': deskRowID },
+        ReturnConsumedCapacity: 'INDEXES'
+    }).promise()
+
 
 
     /*
