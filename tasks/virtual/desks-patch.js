@@ -68,14 +68,14 @@ const desksPatch = async(data) => {
                 //{ DeleteRequest: {} },
             ]
         },
-        //ReturnConsumedCapacity: `INDEXES`,
-        //ReturnItemCollectionMetrics: `SIZE`
+        ReturnConsumedCapacity: `INDEXES`,
+        ReturnItemCollectionMetrics: `SIZE`
     }
 
     // Call storage layer
 
     try {
-        data.RU.io.deskSchemasPatch = await rus.aws.ddbdc.batchWrite(params).promise()
+        data.RU.io.deskCellsPatch = await rus.aws.ddbdc.batchWrite(params).promise()
     }
     catch (e) {
         console.error(e)
