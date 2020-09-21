@@ -30,11 +30,19 @@ const desksPatch = async(data) => {
             
         5.  Also ... coercion to Number types acceptable by the DDB-JS-DocumentClient
             needs to be softcoded into (4)
+        6.  ... we need a more regular way to deal with empty strings 
+            (where row[S] = ''); the current hack is to slap in a (space)
         `)
 
     // hardcoded
     for (const __deskCell of data.RU.request.formStringParameters['desk-cells'].PUT) {
+        
+        //  WIP Issue 5. 
         if ( 'N' in __deskCell ) __deskCell.N = Number(__deskCell.N)
+       
+        //  WIP Issue 6.
+        if ( 'S' in __deskCell && __deskCell.S == '' ) __deskCell.S = ' '
+        
     }
 
     // Configure DB client parameters

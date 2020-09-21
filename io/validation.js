@@ -560,7 +560,7 @@ const validateRules = async(
                           _rulesToTest.count_gt
                       }) failed; scopedDatum had too few elements (undefined were excluded): (${
                           scopedDatum
-                      })`))
+                      })`))[undefined, '', null]
                     }
                 }
                 else // not-'many', ergo is not an Array
