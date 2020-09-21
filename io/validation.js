@@ -554,7 +554,7 @@ const validateRules = async(
                 const ignoredValues = [undefined, '', null]
                 if (scopedModel.self.many) // this pattern should recur for 'count_xyz'
                 {
-                    if (_rulesToTest.count_gt < scopedDatum.filter(e => !ignoredValues.includes(e)).length) {
+                    if (scopedDatum.filter(e => !ignoredValues.includes(e)).length <= _rulesToTest.count_gt ) {
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:true) 
                       (model.rules.count_gt:${
                           _rulesToTest.count_gt
