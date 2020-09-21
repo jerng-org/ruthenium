@@ -20,7 +20,7 @@ const desksGetMarkup = async(data) => {
     
 
     const deskCells = rus.limbo.ddbDeskCellsByRowID(
-        data.RU.io.deskSchemasGet.Item.
+        data.RU.io.deskSchemasGet.Item,
         data.RU.io.deskCellsQuery.Items)
 
     rus.conf.verbosity > 6 && `desks-get-markup.js: the code above should probably be made more framework-wise generic`
