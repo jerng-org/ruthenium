@@ -2,30 +2,37 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHTML = async ( DATA, uuid ) => `
+const innerHTML = async ( DATA, deskCellsByRowID ) => Object.keys(deskCellsByRowID).map(
+
+    // FOR EACH ROW ...
+
+rowID => `
 <fieldset>
 
     ${  
         await DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
-            async ( accumulator, currentValue, index, array ) => {
+            async ( accumulator, currentColumn, index, array ) => {
+                
+                // FOR EACH COLUMN ...
+                
                 return await accumulator + 
                     await rus.html.input ( {
                         id:     `id`,
                         name:   `desk-cells[PUT]###${index}###[R]`,
                         type:   `hidden`,
-                        value:  uuid
+                        value:  rowID
                     } ) +
                     await rus.html.input ( {
-                        id:             currentValue.name,
-                        label:          currentValue.name,
-                        name:           `desk-cells[PUT]###${index}###[${ currentValue.type }]`,
-                        placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
-                        
+                        id:             currentColumn.name,
+                        label:          currentColumn.name,
+                        name:           `desk-cells[PUT]###${index}###[${ currentColumn.type }]`,
+                        placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentColumn.type ] } --`
+                        value:          `placeholderValue`
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
                         name:   `desk-cells[PUT]###${index}###[DHC]`,
-                        value:  DATA.RU.io.deskSchemasGet.Item.name + '#' + currentValue.name
+                        value:  DATA.RU.io.deskSchemasGet.Item.name + '#' + currentColumn.name
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
@@ -47,16 +54,13 @@ const innerHTML = async ( DATA, uuid ) => `
                         
 </fieldset>
 `
+).join(``)
 
 const updateDeskRow = async(data) => {
 
-    const deskCells = rus.limbo.ddbDeskCellsByRowID(
+    const deskCellsByRowID = rus.limbo.ddbDeskCellsByRowID(
         data.RU.io.deskSchemasGet.Item,
         data.RU.io.deskCellsQuery.Items)
-
-    data.RU.io.wip = deskCells
-
-    const oldUuid = await rus.uuid4()
 
     return `
     
@@ -69,7 +73,7 @@ const updateDeskRow = async(data) => {
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
                     [ 'form-method','PATCH' ] 
                 ] ),
-                innerHTML: await innerHTML(data, oldUuid),
+                innerHTML: await innerHTML(data, deskCellsByRowID),
                 class: 'ru-card'
             } ) 
         }

@@ -16,22 +16,6 @@ const desksGet = async(data) => {
 
     const deskName = data.RU.request.queryStringParameters.thing[0]
 
-    console.warn(`(desks-get.js) queries not yet optimised?`)
-    /*
-        data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
-            TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-            KeyConditionExpression: '#name = :deskName',
-            ExpressionAttributeValues: { ':deskName': deskName },
-            ExpressionAttributeNames: { '#name': 'name' },
-            Limit: 1,
-            ReturnConsumedCapacity: 'INDEXES'
-        }).promise()
-
-        if (!data.RU.io.deskSchemasQuery.Items.length) {
-            await status404(data)
-            return
-        }
-    */
     const params = {
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
         Key: {
