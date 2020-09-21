@@ -551,10 +551,10 @@ const validateRules = async(
             //////////
 
             case ('count_gt'):
-
+                const ignoredValues = [undefined, '', null]
                 if (scopedModel.self.many) // this pattern should recur for 'count_xyz'
                 {
-                    if (_rulesToTest.count_gt < scopedDatum.filter(e => e !== undefined).length) {
+                    if (_rulesToTest.count_gt < scopedDatum.filter(e => !ignoredValues.includes(e)).length) {
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:true) 
                       (model.rules.count_gt:${
                           _rulesToTest.count_gt
@@ -565,11 +565,11 @@ const validateRules = async(
                 }
                 else // not-'many', ergo is not an Array
                 {
-                    if (undefined === scopedDatum) {
+                    if (ignoredValues.includes(scopedDatum)) {
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:false)
                       (model.rules.count_gt:${
                           _rulesToTest.count_gt
-                      }) failed; scopedDatum was: undefined)`))
+                      }) failed; scopedDatum was: (${scopedDatum}))`))
                     }
                 } // if (many), else [end of block]
                 break // count_gt
