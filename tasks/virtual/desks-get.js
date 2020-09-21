@@ -17,17 +17,30 @@ const desksGet = async(data) => {
     const deskName = data.RU.request.queryStringParameters.thing[0]
 
     console.warn(`(desks-get.js) queries not yet optimised?`)
+    /*
+        data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
+            TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+            KeyConditionExpression: '#name = :deskName',
+            ExpressionAttributeValues: { ':deskName': deskName },
+            ExpressionAttributeNames: { '#name': 'name' },
+            Limit: 1,
+            ReturnConsumedCapacity: 'INDEXES'
+        }).promise()
 
-    data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
+        if (!data.RU.io.deskSchemasQuery.Items.length) {
+            await status404(data)
+            return
+        }
+    */
+    const params = {
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-        KeyConditionExpression: '#name = :deskName',
-        ExpressionAttributeValues: { ':deskName': deskName },
-        ExpressionAttributeNames: { '#name': 'name' },
-        Limit: 1,
+        Key: {
+            name: deskName
+        },
         ReturnConsumedCapacity: 'INDEXES'
-    }).promise()
-
-    if (!data.RU.io.deskSchemasQuery.Items.length) {
+    }
+    data.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
+    if (! ('Item' in data.RU.io.deskSchemasGet) ) {
         await status404(data)
         return
     }
@@ -39,9 +52,9 @@ const desksGet = async(data) => {
         ExpressionAttributeValues: { ':deskName': deskName },
         ReturnConsumedCapacity: 'INDEXES'
     }).promise()
-    
-    rus.conf.verbosity > 0
-    && console.warn(`FIXME: (desks-get.js) implement (for-of) with (Promise.allSettled)`)
+
+    rus.conf.verbosity > 0 &&
+        console.warn(`FIXME: (desks-get.js) implement (for-of) with (Promise.allSettled)`)
 
     data.RU.signals.sendResponse.body = await markup(data)
 
