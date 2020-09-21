@@ -122,21 +122,21 @@ const desksGetMarkup = async(data) => {
         style = "display:none;margin-top:0.5rem;"
         onclick = "(e=>e.stopImmediatePropagation())(event)"
         oninput = "console.log('onInput');if (this.value==234806) { 
+            this.value = ''
+            toggler(this.parentNode, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }')
+    
+            const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\'
+                ${ rowID }\\
+                ' forever - select CANCEL to reconsider.')
 /*
-        this.value = ''
-        toggler(this.parentNode, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }')
-
-        const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\'
-            ${ rowID }\\
-            ' forever - select CANCEL to reconsider.')
-        if (confirmed) {
-            toggler(this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }')
-        }
-        else {
-            //alert ('dev: cleanup required ')
-        }
+            if (confirmed) {
+                toggler(this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }')
+            }
+            else {
+                //alert ('dev: cleanup required ')
+            }
 */
-    }
+        }
     " > </ fieldset >
 
     <div class = "ru-card toggle-set-2"
