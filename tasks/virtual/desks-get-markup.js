@@ -183,8 +183,7 @@ const desksGetMarkup = async(data) => {
 let markup = `
 <h3> <i>GET</i>
 a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code> </h1> 
-    <pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }
-</ pre >
+    <pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }</pre>
     <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre> 
     <table >
 
