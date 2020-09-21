@@ -89,7 +89,7 @@ const desksGetMarkup = async(data) => {
                         [ 'type', 'forms' ],
                         [ 'thing', 'update-desk-row' ],
                         [ 'desk-schema-name', data.RU.io.deskSchemasQuery.Items[0]['name'] ], 
-                        [ 'desk-schema-row', rowID ], 
+                        [ 'desk-row-id', rowID ], 
                         [ 'reader', 'human']
                     ])
                 }"><i class="material-icons">edit</i> UPDATE</a>

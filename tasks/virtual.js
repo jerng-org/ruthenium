@@ -59,32 +59,17 @@ const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
 }
 
 const deskRowGetSuccess = async(DATA, deskName, deskRowID) => {
-    
-    
-    data.RU.io.deskSchemasQuery = await rus.aws.ddbdc.query({
-        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-        KeyConditionExpression: '#name = :deskName',
-        ExpressionAttributeValues: { ':deskName': deskName },
-        ExpressionAttributeNames: { '#name': 'name' },
-        Limit: 1,
-        ReturnConsumedCapacity: 'TOTAL'
-    }).promise()
+    /*
+        DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
+            TableName: 'TEST-APP-DESK-CELLS',
+            IndexName: 'D-GSI',
+            KeyConditionExpression: 'D = :deskName',
+            ExpressionAttributeValues: { ':deskName': deskName },
+            ReturnConsumedCapacity: 'TOTAL'
+        }).promise()
+    */
 
-    if (!data.RU.io.deskSchemasQuery.Items.length) {
-        await status404(data)
-        return
-    }
 
-    data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
-        TableName: 'TEST-APP-DESK-CELLS',
-        IndexName: 'D-GSI',
-        KeyConditionExpression: 'D = :deskName',
-        ExpressionAttributeValues: { ':deskName': deskName },
-        ReturnConsumedCapacity: 'TOTAL'
-    }).promise()
-    
-    
-    
     /*
     const params = {
         TableName: 'TEST-APP-DESK-CELLS',
@@ -159,13 +144,21 @@ const virtual = async(data) => {
                                     //  DIMENSION D
                                     //  GET (forms), which one? 
                                     switch (data.RU.request.queryStringParameters.thing[0]) {
-
+                                        //////////
+                                        //      //
+                                        //  !!  //  special (cases) don't require (deskSchemaGetSuccess)
+                                        //      //
+                                        //////////
                                         case (`create-desk-schema`):
                                             data.RU.signals.sendResponse.body = await formsMarkupCreateDeskSchema()
                                             return
 
-                                            // (thing) switch level 1
                                         default:
+                                            //////////
+                                            //      //
+                                            //  !!  //  the following (things of type 'form') require (deskSchemaGetSuccess)
+                                            //      //
+                                            //////////
                                             if (!data.RU.request.queryStringParameters['desk-schema-name'] ||
                                                 !data.RU.request.queryStringParameters['desk-schema-name'][0]) {
                                                 rus.log.error(data, `(virtual.js) (?type=forms) (GET) (?desk-schema-name ... was unspecified.)`)
@@ -189,7 +182,11 @@ const virtual = async(data) => {
                                                     should result in a response which says "fill in this form".).`)
 
                                             switch (data.RU.request.queryStringParameters.thing[0]) {
-
+                                                //////////
+                                                //      //
+                                                //  !!  //  special (cases) don't require (deskRowGetSuccess)
+                                                //      //
+                                                //////////
                                                 //  This is not RESTful; the following may be RESTful: ?type=desk-schema &thing=x, method: GET
                                                 case (`read-desk-schema`):
                                                     data.RU.signals.sendResponse.body = await formsMarkupReadDeskSchema(data)
@@ -221,14 +218,22 @@ const virtual = async(data) => {
                                                     data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskRow(data)
                                                     return
 
-                                                    // (thing) switch level 2
                                                 default:
+                                                    //////////
+                                                    //      //
+                                                    //  !!  //  the following (things of type 'form') require (deskRowGetSuccess)
+                                                    //      //
+                                                    //////////
 
                                                     if (!data.RU.request.queryStringParameters['desk-row-id'] ||
                                                         !data.RU.request.queryStringParameters['desk-row-id'][0]) {
                                                         rus.log.error(data, `(virtual.js) (?type=forms) (GET) (?desk-row-id ... was unspecified.)`)
                                                     }
+                                                    /*
 
+                                                    WIP HERE ----v
+
+                                                    */
                                                     if (!await deskRowGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
                                                         await status404(data)
                                                         return
@@ -347,7 +352,7 @@ const virtual = async(data) => {
                     // ( .method )
 
 
-                /*
+                    /*
                 case ('desk-cells'):
 
                     //  DIMENSION B
@@ -420,7 +425,7 @@ const virtual = async(data) => {
                     // switch 
                     // ( .method )
                 */
-                
+
                 case ('desks'):
 
                     //  DIMENSION B
