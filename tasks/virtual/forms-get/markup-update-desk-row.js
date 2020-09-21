@@ -27,7 +27,7 @@ async rowID => `
                         label:          currentColumn.name,
                         name:           `desk-cells[PUT]###${index}###[${ currentColumn.type }]`,
                         placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentColumn.type ] } --`,
-                        value:          `placeholderValue`
+                        value:          deskCellsByRowID[rowID][currentColumn.name]
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
