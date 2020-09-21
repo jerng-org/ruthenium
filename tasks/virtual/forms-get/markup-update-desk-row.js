@@ -9,7 +9,7 @@ const innerHTML = async ( DATA, deskCellsByRowID ) => Object.keys(deskCellsByRow
 rowID => `
 <fieldset>
 
-    ${  
+    ${  1/*
         await DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
             async ( accumulator, currentColumn, index, array ) => {
                 
@@ -41,9 +41,9 @@ rowID => `
                     } )
             },
             
-            `` /* initial value (second argument) */
+            `` 
             
-        )
+        ) */
     } 
 
     <button type="submit"
