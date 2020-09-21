@@ -48,10 +48,16 @@ const innerHTML = async ( DATA, uuid ) => `
 </fieldset>
 `
 
-const updateDeskRow = async ( data ) => {
-      
+const updateDeskRow = async(data) => {
+
+    const deskCells = rus.limbo.ddbDeskCellsByRowID(
+        data.RU.io.deskSchemasQuery.Items[0],
+        data.RU.io.deskCellsQuery.Items)
+
+    data.RU.io.wip = deskCells
+
     const oldUuid = await rus.uuid4()
-    
+
     return `
     
         <h2><code>${ data.RU.io.deskSchemasGet.Item.name }</code> : object update </h2>
@@ -68,6 +74,6 @@ const updateDeskRow = async ( data ) => {
             } ) 
         }
     `
-      
+
 }
 module.exports = updateDeskRow
