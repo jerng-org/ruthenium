@@ -55,7 +55,6 @@ const desksGetMarkup = async(data) => {
                 return accumulator + `  <td>    ${deskCells[rowID][colName]}
                                                 
                                                 <i class="material-icons ru-hover-opaque">edit</i>
-                                                <i class="material-icons">construction</i>
                                         </td>`
             },
             ` <th scope = "row" id = "${rowID}" > 
@@ -159,7 +158,6 @@ const desksGetMarkup = async(data) => {
 
                     }"> <i class="material-icons">delete_forever</i> 
                         this action cannot be undone
-                        <i class="material-icons">construction</i>
                     </a>
 
         <button class = "button-clear"
@@ -199,7 +197,6 @@ a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</c
                 }"> CREATE
                     <i class="material-icons">fiber_new</i>
                     Object 
-                    <i class="material-icons">construction</i>
                 </a>
                         
             </th>
