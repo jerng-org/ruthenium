@@ -558,9 +558,9 @@ const validateRules = async(
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:true) 
                       (model.rules.count_gt:${
                           _rulesToTest.count_gt
-                      }) failed; scopedDatum had too few elements (undefined were excluded): (${
+                      }) failed; scopedDatum had too few elements (values {undefined, null, ''} were excluded): (${
                           scopedDatum
-                      })`))[undefined, '', null]
+                      })`))
                     }
                 }
                 else // not-'many', ergo is not an Array
