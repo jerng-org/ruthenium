@@ -26,7 +26,7 @@ const deskSchemasPost = async(data) => {
         Item: candidate['desk-schemas'],
         ExpressionAttributeNames: { '#name': 'name' },
         ConditionExpression: 'attribute_not_exists(#name)',
-        ReturnConsumedCapacity: 'TOTAL'
+        ReturnConsumedCapacity: 'INDEXES'
 
     }
 
