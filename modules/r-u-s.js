@@ -144,7 +144,7 @@ const rus = {
             _deskCellItems
                 .forEach((__cell) => {
 
-                    console.error(`__cell`,)
+                    console.error(`__cell`, JSON.stringify(__cell))
 
                     if (!(__cell.R in __deskCells)) {
                         __deskCells[__cell.R] = {}
