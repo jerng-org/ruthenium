@@ -135,6 +135,10 @@ const rus = {
 
         ddbDeskCellsByRowID: (_deskSchemaItem, _deskCellItems) => {
 
+            //  Add property (D) if missing
+
+            //  Check that _deskSchemaItem matches _deskCellItems
+
             let __deskColumnTypes = {}
             let __deskCells = {}
 
@@ -144,17 +148,31 @@ const rus = {
             _deskCellItems
                 .forEach((__cell) => {
 
-                    console.error(`__cell`, JSON.stringify(__cell))
+                    // coherence check
+                    if (!('DHC' in __cell)) {
+                        throw Error(`r-u-s.js: ddbDeskCellsByRowID: key (DHC) not in __cell`)
+                    }
 
+                    const __dhcSplit = __cell.DHC.split('#')
+                    
+                    // coherence check
+                    if (!__dhcSplit.length == 2) {
+                        throw Error(`r-u-s.js: ddbDeskCellsByRowID: '#' appears not exactly once, in __cell.DHC`)
+                    }
+
+                    const [_deskName, _colName] = __dhcSplit
+
+                    // initialisation check
                     if (!(__cell.R in __deskCells)) {
                         __deskCells[__cell.R] = {}
                     }
-                    const _colName = __cell.DHC.slice(__cell.D.length + 1)
+                    
                     const _colType = __deskColumnTypes[_colName]
                     __deskCells[__cell.R][_colName] = __cell[_colType]
                 })
             return __deskCells
-        }
+        },
+
     },
 
     //////////
