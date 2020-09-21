@@ -51,7 +51,7 @@ const innerHTML = async ( DATA, uuid ) => `
 const updateDeskRow = async(data) => {
 
     const deskCells = rus.limbo.ddbDeskCellsByRowID(
-        data.RU.io.deskSchemasQuery.Items[0],
+        data.RU.io.deskSchemasGet.Item,
         data.RU.io.deskCellsQuery.Items)
 
     data.RU.io.wip = deskCells
