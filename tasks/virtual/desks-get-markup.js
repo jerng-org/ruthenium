@@ -125,9 +125,9 @@ const desksGetMarkup = async(data) => {
             this.value = ''
             toggler(this.parentNode, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }')
     
-            const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\'
+            const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\
                 ${ rowID }\\
-                ' forever - select CANCEL to reconsider.')
+                forever - select CANCEL to reconsider.')
 /*
             if (confirmed) {
                 toggler(this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }')
