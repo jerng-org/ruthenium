@@ -141,10 +141,7 @@ const desksGetMarkup = async(data) => {
     <div class = "ru-card toggle-set-2"
     style = "display:none;" >
 
-        <a  class="button" 
-                        title="delete object forever"
-                        id="desk-row-delete-${ rowID }"
-                        href="${
+        <a  class="button"  title="delete object forever" id="desk-row-delete-${ rowID }" href="${
                     
                         await rus.appUrl ([
                         /*
