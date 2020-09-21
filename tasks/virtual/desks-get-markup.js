@@ -190,17 +190,16 @@ const desksGetMarkup = async(data) => {
         <
         /th>`
 }
-< < / tr > `
+ < / tr > `
 }
 
-let markup = ` <
-    h3 > <i>GET</i>
-a Desk < /h3> <
-    h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code> < /h1> <
-    pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }
+let markup = `
+<h3> <i>GET</i>
+a Desk < /h3> < h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code> < /h1> 
+    < pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }
 < / pre >
-    <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre> <
-    table >
+    <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre> 
+    < table >
 
     <thead>
         <tr>
@@ -228,8 +227,7 @@ a Desk < /h3> <
         <tr>${ th2s }</tr>        
     </thead>
 
-    <
-    tbody > ${ tbodyTrs }
+    < tbody > ${ tbodyTrs }
 < / tbody >
 
     <tfoot>
