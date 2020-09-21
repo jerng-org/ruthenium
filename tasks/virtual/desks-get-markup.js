@@ -19,7 +19,7 @@ const desksGetMarkup = async(data) => {
     th1s += `<th scope="col"><sub>Operations on each Object</sub></th>`
     
 
-    const deskCells = rus.limbo.ddbDeskCellsByRowID(
+    const deskCellsByRowID = rus.limbo.ddbDeskCellsByRowID(
         data.RU.io.deskSchemasGet.Item,
         data.RU.io.deskCellsQuery.Items)
 
@@ -27,12 +27,12 @@ const desksGetMarkup = async(data) => {
 
     let tbodyTrs = ''
     let rowCount = 0
-    for (const rowID in deskCells) {
+    for (const rowID in deskCellsByRowID) {
         tbodyTrs += `
         <tr>
         ${ colNames.reduce(
             (accumulator, colName)=>{
-                return accumulator + `  <td>    ${deskCells[rowID][colName]}
+                return accumulator + `  <td>    ${deskCellsByRowID[rowID][colName]}
                                                 
                                                 <i class="material-icons ru-hover-opaque">edit</i>
                                         </td>`
@@ -154,7 +154,7 @@ const desksGetMarkup = async(data) => {
 let markup = `
 <h3> <i>GET</i>
 a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasGet.Item.name }</code> </h1> 
-    <pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }</pre>
+    <pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCellsByRowID) : '' }</pre>
     <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre> 
     <table >
 
