@@ -17,21 +17,31 @@ const desksGetMarkup = async(data) => {
     }
 
     th1s += `<th scope="col"><sub>Operations on each Object</sub></th>`
+    
+    const tempFun = (_deskSchemaItem, _deskCellItems) => {
 
-    let deskColumnTypes = {}
-    data.RU.io.deskSchemasQuery.Items[0].columns
-        .forEach((column) => { deskColumnTypes[column.name] = column.type })
+        let __deskColumnTypes = {}
+        let __deskCells = {}
+        
+        _deskSchemaItem.columns
+            .forEach((__column) => { __deskColumnTypes[__column.name] = __column.type })
 
-    let deskCells = {}
-    data.RU.io.deskCellsQuery.Items.forEach((cell) => {
+        _deskCellItems
+            .forEach((__cell) => {
 
-        if (!(cell.R in deskCells)) {
-            deskCells[cell.R] = {}
-        }
-        const _colName = cell.DHC.slice(cell.D.length + 1)
-        const _colType = deskColumnTypes[_colName]
-        deskCells[cell.R][_colName] = cell[_colType]
-    })
+                if (!(__cell.R in __deskCells)) {
+                    __deskCells[__cell.R] = {}
+                }
+                const _colName = __cell.DHC.slice(__cell.D.length + 1)
+                const _colType = __deskColumnTypes[_colName]
+                __deskCells[__cell.R][_colName] = __cell[_colType]
+            })
+        return __deskCells
+    }
+
+    const deskCells = tempFun(
+        data.RU.io.deskSchemasQuery.Items[0],
+        data.RU.io.deskCellsQuery.Items)
 
     rus.conf.verbosity > 6 && `desks-get-markup.js: the code above should probably be made more framework-wise generic`
 
@@ -47,41 +57,42 @@ const desksGetMarkup = async(data) => {
                                                 <i class="material-icons ru-hover-opaque">edit<i class="material-icons">construction</i></i>
                                         </td>`
             },
-            `
-            <th    scope="row" 
-                    id="${rowID}"
-                    >
-                    
-                    <i  class="material-icons toggle-set-1"
+            ` <
+            th scope = "row"
+        id = "${rowID}" >
+
+            <i  class="material-icons toggle-set-1"
                         style="display:none;"
                         title="hide the id"
                         onclick="toggler ( this.closest('th'), '.toggle-set-1', null )"
                         >
                         visibility_off</i>
-                        
-                    <span   class="toggle-set-1" 
-                            style="display:none;"
-                            >
-                            &nbsp;
-                            ${rowID}
-                    </span>
-                            
-                    <i      class="material-icons toggle-set-1"
-                            onclick="toggler ( this.parentElement, '.toggle-set-1', null )"
-                            >
-                            fingerprint</i>
-                    
-                    <span class="toggle-set-1">${ ++rowCount }.</span> 
-                    
-            </th>
-            ` /*initial accumulator value*/)
+
+            <
+            span class = "toggle-set-1"
+        style = "display:none;" >
+            &nbsp;
+        ${ rowID }
+         < / span >
+
+        <
+        i class = "material-icons toggle-set-1"
+        onclick = "toggler ( this.parentElement, '.toggle-set-1', null )" >
+            fingerprint < /i>
+
+            <
+            span class = "toggle-set-1" > ${++rowCount }. < /span> 
+
+            <
+            /th>
+        ` /*initial accumulator value*/)
             
             + // after all the other cells in this row, add one more ...
             
-            `            
-            <th>
-            
-                <a  class="button" 
+            ` <
+        th >
+
+            <a  class="button" 
                     title="UPDATE desk row"
                     href="${
                     await rus.appUrl ([
@@ -93,13 +104,13 @@ const desksGetMarkup = async(data) => {
                         [ 'reader', 'human']
                     ])
                 }"><i class="material-icons">edit</i> UPDATE</a>
-                
-                <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
-                            class="toggle-set-2"
-                            style="margin:0;"
-                            >
-                            
-                    <label  for="unlock-desk-row-delete-${ rowID }"
+
+            <
+            fieldset onclick = "toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
+        class = "toggle-set-2"
+        style = "margin:0;" >
+
+            <label  for="unlock-desk-row-delete-${ rowID }"
                             style="margin:0;"
                             >
                         <button     title="show the link which deletes this object" 
@@ -116,34 +127,37 @@ const desksGetMarkup = async(data) => {
                                 code: 234806</span>
                         </button>
                     </label>
-                    
-                    <input  type="text" 
-                            id="unlock-desk-row-delete-${ rowID }" 
-                            placeholder="type the code, to show the link, which deletes this object" 
-                            class="toggle-set-1"
-                            style="display:none;margin-top:0.5rem;"
-                            onclick="(e=>e.stopImmediatePropagation())(event)"
-                            oninput="if (this.value==234806) { 
-                            
-                                this.value = ''
-                                toggler ( this.parentNode, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )
-                                
-                                const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\'${ rowID }\\' forever - select CANCEL to reconsider.')
-                                if ( confirmed ) 
-                                {
-                                    toggler ( this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )
-                                } else {
-                                    //alert ('dev: cleanup required ')
-                                }
-                            }"
-                            >
-                </fieldset>
-                
-                <div    class="ru-card toggle-set-2"
-                        style="display:none;"
-                        >
-                
-                    <a  class="button" 
+
+            <
+            input type = "text"
+        id = "unlock-desk-row-delete-${ rowID }"
+        placeholder = "type the code, to show the link, which deletes this object"
+        class = "toggle-set-1"
+        style = "display:none;margin-top:0.5rem;"
+        onclick = "(e=>e.stopImmediatePropagation())(event)"
+        oninput = "if (this.value==234806) { 
+
+        this.value = ''
+        toggler(this.parentNode, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }')
+
+        const confirmed = window.confirm('WARNING : You are about to display a link which deletes the object \\'
+            ${ rowID }\\
+            ' forever - select CANCEL to reconsider.')
+        if (confirmed) {
+            toggler(this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }')
+        }
+        else {
+            //alert ('dev: cleanup required ')
+        }
+    }
+    " > <
+    / fieldset >
+
+    <
+    div class = "ru-card toggle-set-2"
+    style = "display:none;" >
+
+        <a  class="button" 
                         title="delete object forever"
                         id="desk-row-delete-${ rowID }"
                         href="${
@@ -162,26 +176,31 @@ const desksGetMarkup = async(data) => {
                         this action cannot be undone
                         <i class="material-icons">construction</i>
                     </a>
-                    
-                    <button class="button-clear" 
-                        title="hide the link, which deletes this object"
-                        onclick="toggler ( this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )"
-                    >
-                    <i class="material-icons">lock_open</i> hide link </button>
-                    
-                </div>
-                
-            </th>`
-        }
-        </tr>`
-    }
 
-    let markup = `
-<h3><i>GET</i> a Desk </h3>
-<h1>name:   <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code></h1>
-        <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }</pre>
-        <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre>
-<table>
+        <
+        button class = "button-clear"
+    title = "hide the link, which deletes this object"
+    onclick = "toggler ( this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )" >
+        <i class="material-icons">lock_open</i>
+    hide link < /button>
+
+        <
+        /div>
+
+        <
+        /th>`
+}
+< < / tr > `
+}
+
+let markup = ` <
+    h3 > <i>GET</i>
+a Desk < /h3> <
+    h1 > name: <code>${ data.RU.io.deskSchemasQuery.Items[0].name }</code> < /h1> <
+    pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCells) : '' }
+< / pre >
+    <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre> <
+    table >
 
     <thead>
         <tr>
@@ -208,18 +227,21 @@ const desksGetMarkup = async(data) => {
         <tr>${ th1s }</tr>        
         <tr>${ th2s }</tr>        
     </thead>
-    
-    <tbody>${ tbodyTrs }</tbody>
-    
+
+    <
+    tbody > ${ tbodyTrs }
+< / tbody >
+
     <tfoot>
     </tfoot>
-    
-</table>`
+
+    <
+    /table>`
 
 
-    rus.mark(`~/tasks/virtual/desks-get-markup.js EXECUTED`)
+rus.mark(`~/tasks/virtual/desks-get-markup.js EXECUTED`)
 
-    return markup
+return markup
 }
 //  Return markup as string, and it will be assigned to
 //      (data.RU.response.body) by (compose-response.js).
