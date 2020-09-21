@@ -2,20 +2,20 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHTML = async ( DATA, deskCellsByRowID ) => Object.keys(deskCellsByRowID).map(
+const innerHTML = async ( DATA, deskCellsByRowID ) => (await Promise.all(Object.keys(deskCellsByRowID).map(
 
     // FOR EACH ROW ...
 
-rowID => `
+async rowID => `
 <fieldset>
 
-    ${  1/*
+    ${  
         await DATA.RU.io.deskSchemasGet.Item.columns.reduce( 
             async ( accumulator, currentColumn, index, array ) => {
                 
                 // FOR EACH COLUMN ...
                 
-                return await accumulator + 
+                return await accumulator +
                     await rus.html.input ( {
                         id:     `id`,
                         name:   `desk-cells[PUT]###${index}###[R]`,
@@ -26,7 +26,7 @@ rowID => `
                         id:             currentColumn.name,
                         label:          currentColumn.name,
                         name:           `desk-cells[PUT]###${index}###[${ currentColumn.type }]`,
-                        placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentColumn.type ] } --`
+                        placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentColumn.type ] } --`,
                         value:          `placeholderValue`
                     } ) +
                     await rus.html.input ( {
@@ -39,11 +39,11 @@ rowID => `
                         name:   `desk-cells[PUT]###${index}###[D]`,
                         value:  DATA.RU.io.deskSchemasGet.Item.name
                     } )
-            },
+            },  // reducerFn
             
-            `` 
+            ``  // initial value
             
-        ) */
+        ) 
     } 
 
     <button type="submit"
@@ -54,7 +54,7 @@ rowID => `
                         
 </fieldset>
 `
-).join(``)
+))).join(``)
 
 const updateDeskRow = async(data) => {
 
