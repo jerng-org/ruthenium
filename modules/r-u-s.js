@@ -126,6 +126,41 @@ const rus = {
     //      //
     //////////
 
+    /*  All sorts of rubbish for the time being; miscellaneous;
+     *      until these are tidied into their proper place in future architecture;
+     *      the name of the key provides a reminder to refactor;
+     */
+
+    limbo: {
+
+        ddbDeskCellsByRowID: (_deskSchemaItem, _deskCellItems) => {
+
+            let __deskColumnTypes = {}
+            let __deskCells = {}
+
+            _deskSchemaItem.columns
+                .forEach((__column) => { __deskColumnTypes[__column.name] = __column.type })
+
+            _deskCellItems
+                .forEach((__cell) => {
+
+                    if (!(__cell.R in __deskCells)) {
+                        __deskCells[__cell.R] = {}
+                    }
+                    const _colName = __cell.DHC.slice(__cell.D.length + 1)
+                    const _colType = __deskColumnTypes[_colName]
+                    __deskCells[__cell.R][_colName] = __cell[_colType]
+                })
+            return __deskCells
+        }
+    },
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
+
     log: {
 
         error: (DATA, message) => {
@@ -175,6 +210,12 @@ const rus = {
     tag: async(DATA, string, optionalTruthyValue) => {
         DATA.RU.signals[`TAG_` + string.toUpperCase()] = optionalTruthyValue ? optionalTruthyValue : true
     },
+
+    //////////
+    //      //
+    //  !!  //  Make way.
+    //      //
+    //////////
 
     //////////
     //      //
