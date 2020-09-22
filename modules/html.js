@@ -36,12 +36,13 @@ const html = {
             method: 'POST'
         }
 
-        const markup = `<form    method=${ conf.method ? conf.method : defaults.method }
-                            action=${ conf.action }
-                            class=${ conf.class }
-                            >
-                            ${ conf.innerHtml }
-                            </form>`
+        const markup = `<form   method="${ conf.method ? conf.method : defaults.method }"
+                                action="${ conf.action }"
+                                class="${ conf.class }"
+                                id="${ conf.id ? conf.id : `` }"
+                                >
+                                ${ conf.innerHtml }
+                                </form>`
         return markup
     },
 
