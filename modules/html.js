@@ -51,8 +51,8 @@ const html = {
             throw Error(`(rus.html.input) called, without (conf.name) `)
         }
         else
-        if (conf.labelInnerHTML && (!conf.id)) {
-            throw Error(`(rus.html.input) called, (conf.labelInnerHTML) without (conf.id)`)
+        if (conf.labelInnerHtml && (!conf.id)) {
+            throw Error(`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
         }
 
         const defaults = {
@@ -104,8 +104,8 @@ const html = {
                 ${ conf.name        ? `name="${conf.name}"` 
                                     : `` }
             >
-                ${  conf.legend 
-                    ? `<legend>${conf.legend}</legend>`
+                ${  conf.legendInnerHtml 
+                    ? `<legend>${conf.legendInnerHtml}</legend>`
                     : ``
                 }
                 
@@ -121,8 +121,8 @@ const html = {
                     throw Error (`(rus.html.input) called, without (conf.name) `)
                 }
                 else
-                if ( conf.labelInnerHTML && ( ! conf.id ) ) {
-                    throw Error (`(rus.html.input) called, (conf.labelInnerHTML) without (conf.id)`)
+                if ( conf.labelInnerHtml && ( ! conf.id ) ) {
+                    throw Error (`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
                 }
                 
                 const defaults = {
