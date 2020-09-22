@@ -34,7 +34,11 @@ const trInTable = async(item) => {
                 </td>
                 
                 <td>
-                    <a  class="button" 
+                    <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )"
+                                class="toggle-set-2"
+                                >
+                                
+                    <a  class="button toggle-set-1" 
                         title="READ schema"
                         href="${
                     
@@ -48,7 +52,7 @@ const trInTable = async(item) => {
 
                     }"><i class="material-icons">preview</i> READ</a>
                     
-                    <a  class="button" 
+                    <a  class="button toggle-set-1" 
                         title="UPDATE schema"
                         href="${
                     
@@ -63,10 +67,6 @@ const trInTable = async(item) => {
                     }"><i class="material-icons">edit</i> UPDATE</a>
                     
                     
-                    <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-delete-${ item['name'] }' )"
-                                class="toggle-set-2"
-                                >
-                                
                         <label for="unlock-desk-schemas-delete-${ item['name'] }">
                             <button     title="show the link which deletes this schema" 
                                         class="button-outline" 
