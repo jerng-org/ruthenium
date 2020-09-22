@@ -554,7 +554,7 @@ const validateRules = async(
                 const ignoredValues = [undefined, '', null]
                 if (scopedModel.self.many) // this pattern should recur for 'count_xyz'
                 {
-                    if (scopedDatum.filter(e => !ignoredValues.includes(e)).length <= _rulesToTest.count_gt ) {
+                    if (scopedDatum.filter(e => !ignoredValues.includes(e)).length <= _rulesToTest.count_gt) {
                         setResult(Error(`(validateRules) (${keyTrace}) (model.many:true) 
                       (model.rules.count_gt:${
                           _rulesToTest.count_gt
@@ -692,62 +692,70 @@ const validateRules = async(
                 else // not-'many', ergo is not an Array
                 {
                     const subs2Report = {}
-                    //////////
-                    //      //
-                    //  !!  //  FORK:
-                    //      //
-                    //////////
-                    switch (_rulesToTest.subs0_keys_applied_to_subs2.subs1) {
-                        case ('all'):
-                            for (const __sub0Key in scopedDatum) {
-                                //////////
-                                //      //
-                                //  !!  //  FORK:
-                                //      //
-                                //////////
-                                if (Array.isArray(scopedDatum[__sub0Key])) {
-                                    setResult(Error(`validate.js: validateRules:
+
+                    /*
+                                        switch (_rulesToTest.subs0_keys_applied_to_subs2.subs1) {
+                                            case ('all'):
+                                                break
+
+                                            default:
+                                                setResult(Error(`validate.js: validateRules:
+                                                    switch(_ruleKey): subs0_keys_applied_to_subs2: 
+                                                    (model.many:false) 
+                                                    (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2) })
+                                                    BRANCH BODY UNDEFINED `))
+                                        } // switch (_rulesToTest.subs0_keys_applied_to_subs2.subs1) ends
+                    */
+
+                    for (const __sub0Key in scopedDatum) {
+                        //////////
+                        //      //
+                        //  !!  //  FORK:
+                        //      //
+                        //////////
+                        if (Array.isArray(scopedDatum[__sub0Key])) {
+                            setResult(Error(`validate.js: validateRules:
                                         switch(_ruleKey): subs0_keys_applied_to_subs2: 
                                         (model.many:false) 
                                         (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2)})
                                         (scopedDatum[${__sub0Key}] is an Array) 
                                         BRANCH BODY UNDEFINED `))
-                                }
-                                else {
-                                    subs2Report[__sub0Key] = {}
-                                    for (const __sub1Key in scopedDatum[__sub0Key]) {
-                                        //////////
-                                        //      //
-                                        //  !!  //  FORK:
-                                        //      //
-                                        //////////
-                                        if (Array.isArray(scopedDatum[__sub0Key][__sub1Key])) {
-                                            subs2Report[__sub0Key][__sub1Key] = []
-                                            for (const __sub2 of scopedDatum[__sub0Key][__sub1Key]) {
+                        }
+                        else {
+                            subs2Report[__sub0Key] = {}
+                            for (const __sub1Key in scopedDatum[__sub0Key]) {
+                                //////////
+                                //      //
+                                //  !!  //  FORK:
+                                //      //
+                                //////////
+                                if (Array.isArray(scopedDatum[__sub0Key][__sub1Key])) {
+                                    subs2Report[__sub0Key][__sub1Key] = []
+                                    for (const __sub2 of scopedDatum[__sub0Key][__sub1Key]) {
 
-                                                const __sub2Report = await validate({
-                                                        [__sub0Key]: __sub2
-                                                    },
-                                                    __sub0Key,
-                                                    await scopeModel(__sub0Key)
-                                                )
-                                                subs2Report[__sub0Key][__sub1Key].push(__sub2Report)
+                                        const __sub2Report = await validate({
+                                                [__sub0Key]: __sub2
+                                            },
+                                            __sub0Key,
+                                            await scopeModel(__sub0Key)
+                                        )
+                                        subs2Report[__sub0Key][__sub1Key].push(__sub2Report)
 
-                                                /* 
+                                        /* 
 Reporting code copied from subs_all_fit_model, and not yet checked */
 
-                                                // validation.js: validate: always checks shortReport.summary
-                                                //  and when it is false, does not proceed, so this loop 
-                                                //  should naturally follow that pattern; except for more 
-                                                //  performance optimisation, there is no need to break here;
+                                        // validation.js: validate: always checks shortReport.summary
+                                        //  and when it is false, does not proceed, so this loop 
+                                        //  should naturally follow that pattern; except for more 
+                                        //  performance optimisation, there is no need to break here;
 
-                                                if (__sub2Report.shortReport.summary) {
-                                                    setResult(subs2Report)
+                                        if (__sub2Report.shortReport.summary) {
+                                            setResult(subs2Report)
 
-                                                    // maybe rather redundant? check.
-                                                }
-                                                else {
-                                                    setResult(Error(`validate.js: validateRules:
+                                            // maybe rather redundant? check.
+                                        }
+                                        else {
+                                            setResult(Error(`validate.js: validateRules:
                                                         switch(_ruleKey): subs0_keys_applied_to_subs2: 
                                                         (model.many:false)
                                                         (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2)})
@@ -758,33 +766,25 @@ Reporting code copied from subs_all_fit_model, and not yet checked */
                                                             ${ await print.inspectInfinity ( subs2Report, null, 4) }
                                                         
                                                         `, __sub2Report.shortReport))
-                                                }
-                                                // end of inner-most loop
-
-
-                                            }
                                         }
-                                        else {
-                                            setResult(Error(`validate.js: validateRules:
+                                        // end of inner-most loop
+
+
+                                    }
+                                }
+                                else {
+                                    setResult(Error(`validate.js: validateRules:
                                                 switch(_ruleKey): subs0_keys_applied_to_subs2: 
                                                 (model.many:false) 
                                                 (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2)})
                                                 (scopedDatum[${__sub0Key}] is NOT an Array) 
                                                 (scopedDatum[${__sub0Key}][${__sub1Key}] is NOT an Array)
                                                 BRANCH BODY UNDEFINED `))
-                                        }
-                                    }
                                 }
                             }
-                            break
+                        }
+                    }
 
-                        default:
-                            setResult(Error(`validate.js: validateRules:
-                                switch(_ruleKey): subs0_keys_applied_to_subs2: 
-                                (model.many:false) 
-                                (rule argument:${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2) })
-                                BRANCH BODY UNDEFINED `))
-                    } // switch (_rulesToTest.subs0_keys_applied_to_subs2.subs1) ends
 
                 } // if (many); else-block ends
                 break // subs0_keys_applied_to_subs2
