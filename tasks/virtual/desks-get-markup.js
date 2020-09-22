@@ -48,11 +48,17 @@ const desksGetMarkup = async(data) => {
                                 await rus.html.fieldset({
                                     form: deleteDeskRowFormID,
                                     name: `testDeleteFormFieldsetName-${ rowID }-${ colName }`,
-                                    innerHtml: await rus.html.input({
-                                        name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
-                                        type: `hidden`,
-                                        value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
-                                    })
+                                    innerHtml:
+                                        await rus.html.input({
+                                            name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
+                                            type: `hidden`,
+                                            value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
+                                        }) +
+                                        await rus.html.input({
+                                            name: `desk-cells[DELETE]###${ rowCount }###[R]`,
+                                            type: `hidden`,
+                                            value: rowID 
+                                        })
                                 })
                             }
                                         </td>`
@@ -153,42 +159,20 @@ const desksGetMarkup = async(data) => {
                     ['form-method', 'PATCH']
                 ]),
                 id: deleteDeskRowFormID,
-                innerHtml: `deleteRowFormInnerHtml` /*await rus.html.fieldset({
-                    legendInnerHtml: `some legend text`,
-                    innerHtml: await rus.html.input({
-                            name: `desk-cells[DELETE]###${ rowCount }###[R]`,
-                            type: `hidden`,
-                            value: rowID
-                        }) +
-                        await rus.html.input({
-                            name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
-                            type: `hidden`,
-                            value: deskCellsByRowID[rowID].DHC
-                        })
-                })
+                innerHtml: 
                 
-                SUBMIT BUTTON GOES HERE, fieldsets GO IN OTHER tds IN THIS tr
-                
-                */,
+                    `<button    type="submit"
+                                title="delete object forever"
+                                >
+                        
+                        <i class="material-icons">delete_forever</i> 
+                        DELETE FOREVER
+                    
+                    </button>`
+                ,
                 class: 'ru-card'
             } ) 
 
-/*        `<a  class="button"  title="delete object forever" id="desk-row-delete-${ rowID }" href="${
-                    
-                        await rus.appUrl ([
-                        //
-                        //  [ 'route', 'virtual' ],
-                        //  [ 'type', 'forms' ],
-                        //  [ 'thing', 'delete-desk-schema' ],
-                        //  [ 'desk-schema-name', rowID ], 
-                        //  [ 'reader', 'human']
-                        //
-                        ])
-
-                    }"> <i class="material-icons">delete_forever</i> 
-                        this action cannot be undone
-                    </a>`
-*/            
         }
         
         <button class = "button-clear"
