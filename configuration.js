@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `virtual/desks-patch.js: does not support more than 25 puts yet;`
+const gitCommitMessage = `virtual/desks-patch.js: does not support more than 25 puts yet;` 
 
     //    gitCommitMessage: `(index.html) mades notes on Approach 1 for reduction of scope for HTTP Methods`,
 
