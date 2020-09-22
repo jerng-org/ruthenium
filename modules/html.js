@@ -28,8 +28,8 @@ const html = {
             throw Error(`(rus.html.form) called, without (conf.action) `)
         }
         else
-        if (!conf.innerHTML) {
-            throw Error(`(rus.html.form) called, without (conf.innerHTML) `)
+        if (!conf.innerHtml) {
+            throw Error(`(rus.html.form) called, without (conf.innerHtml) `)
         }
 
         const defaults = {
@@ -40,7 +40,7 @@ const html = {
                             action=${ conf.action }
                             class=${ conf.class }
                             >
-                            ${ conf.innerHTML }
+                            ${ conf.innerHtml }
                             </form>`
         return markup
     },

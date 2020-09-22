@@ -2,7 +2,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHTML = async ( DATA, uuid ) => `
+const innerHtml = async ( DATA, uuid ) => `
 <fieldset>
 
     ${  
@@ -63,7 +63,8 @@ const createDeskRow = async ( data ) => {
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
                     [ 'form-method','PATCH' ] 
                 ] ),
-                innerHTML: await innerHTML(data, newUuid),
+                innerHtml: await 
+                            "attribute":    "name",innerHtml(data, newUuid),
                 class: 'ru-card'
             } ) 
         }

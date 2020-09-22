@@ -5,7 +5,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 const updateDeskSchema = async(data) => {
 
 
-    const innerHTML = async() => `
+    const innerHtml = async() => `
 <fieldset>
 
     ${ await rus.html.input ( {
@@ -206,7 +206,7 @@ const updateDeskSchema = async(data) => {
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ],
                     [ 'form-method','PUT' ] 
                 ] ),
-                innerHTML: await innerHTML(),
+                innerHtml: await innerHtml(),
                 class: 'ru-card'
             } ) 
         }

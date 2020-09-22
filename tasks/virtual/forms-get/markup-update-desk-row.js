@@ -2,7 +2,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHTML = async ( DATA, deskCellsByRowID ) => (await Promise.all(Object.keys(deskCellsByRowID).map(
+const innerHtml = async ( DATA, deskCellsByRowID ) => (await Promise.all(Object.keys(deskCellsByRowID).map(
 
     // FOR EACH ROW ...
 
@@ -73,7 +73,7 @@ const updateDeskRow = async(data) => {
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
                     [ 'form-method','PATCH' ] 
                 ] ),
-                innerHTML: await innerHTML(data, deskCellsByRowID),
+                innerHtml: await innerHtml(data, deskCellsByRowID),
                 class: 'ru-card'
             } ) 
         }

@@ -2,7 +2,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHTML = async () => `
+const innerHtml = async () => `
 <fieldset>
 
     ${ await rus.html.input ( {
@@ -104,7 +104,7 @@ const createDeskSchema = async ( data ) => {
                     [ 'route','virtual' ], 
                     [ 'type','desk-schemas' ] 
                 ] ),
-                innerHTML: await innerHTML(),
+                innerHtml: await innerHtml(),
                 class: 'ru-card'
             } ) 
         }
