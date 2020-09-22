@@ -35,7 +35,7 @@ const desksGetMarkup = async(data) => {
         
         tbodyTrs += `
         <tr>
-        ${ colNames.reduce(
+        ${ await colNames.reduce(
             async (accumulator, colName, index, array)=>{
                 return await accumulator + `<td>
 
@@ -53,11 +53,11 @@ const desksGetMarkup = async(data) => {
                                         type: `hidden`,
                                         value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
                                     })
-
                                 })
                             }
                                         </td>`
-            },
+            }, // reducer
+            
             ` <th scope = "row" id = "${rowID}" > 
             <i  class="material-icons toggle-set-1"
                         style="display:none;"
@@ -75,7 +75,8 @@ const desksGetMarkup = async(data) => {
             <span class = "toggle-set-1" > ${rowCount }. </span> 
 
             </th>
-        ` /*initial accumulator value*/)
+        ` /*initial accumulator value*/
+        )
             
             + // after all the other cells in this row, add one more ...
             
