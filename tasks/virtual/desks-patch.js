@@ -88,6 +88,8 @@ const desksPatch = async(data) => {
 
     data.RU.io.deskCellsBatchWrite = {}
 
+    rus.mark(`desks-patch.js: before batchWrites`)
+
     for (processedCount = 0, totalCount = unlimitedRequestItems.length; processedCount < totalCount; processedCount += chunk) {
 
         batchCount++
@@ -115,6 +117,8 @@ const desksPatch = async(data) => {
                 return
             }
         }
+        
+        rus.mark(`desks-patch.js: end batchWrite ${ batchCount }`)
     }
     //  chunking logic from: https://stackoverflow.com/posts/8495740/revisions
     
