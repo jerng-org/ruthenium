@@ -707,11 +707,13 @@ const validateRules = async(
                                 _branchDatum[__sub0Key] = scopedDatum[__sub0Key]
                             }
                             else {
+                                /*
                                 setResult(Error(`validate.js: validateRules:
                                     switch(_ruleKey): subs0_keys_applied_to_subs2: 
                                     (model.many:false) 
                                     (rule argument (Array):${ JSON.stringify(_rulesToTest.subs0_keys_applied_to_subs2) })
                                     required __sub0Key was not found in scopedDatum: (${ __sub0Key })`))
+                                */
                             }
                         }
                     }
