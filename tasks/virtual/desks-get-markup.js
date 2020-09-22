@@ -33,7 +33,7 @@ const desksGetMarkup = async(data) => {
         <tr>
         ${ colNames.reduce(
             (accumulator, colName, index, array)=>{
-                return accumulator + `  <td>    ${deskCellsByRowID[rowID][colName]}
+                return accumulator + `  <td>    ${ deskCellsByRowID[rowID][colName] }
                                                 
                                                 <i class="material-icons ru-hover-opaque">edit</i>
                                         </td>`
@@ -124,23 +124,26 @@ const desksGetMarkup = async(data) => {
     style = "display:none;" >
 
         ${  await rus.html.form ( {
-                action: await rus.appUrl( [
-                    [ 'route','virtual' ], 
-                    [ 'type','desks' ], 
-                    [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
-                    [ 'form-method','PATCH' ] 
-                ] ),
-                innerHtml: await rus.html.fieldset ( {
-                    legendInnerHtml:     `some legend text`,
-                    innerHtml:
-                        await rus.html.input({
-                            id: `desk-row-id-${rowCount}`,
-                            name: `desk-cells[DELETE]###${rowCount}###[R]`,
-                            type: `hidden`,
-                            value: rowID
-                        })
-                } ),
-                class: 'ru-card'
+                action: await rus.appUrl([
+                        ['route', 'virtual'],
+                        ['type', 'desks'],
+                        ['thing', data.RU.io.deskSchemasGet.Item.name],
+                        ['form-method', 'PATCH']
+                    ]),
+                    innerHtml: await rus.html.fieldset({
+                        legendInnerHtml: `some legend text`,
+                        innerHtml: await rus.html.input({
+                                name: `desk-cells[DELETE]###${ rowCount }###[R]`,
+                                type: `hidden`,
+                                value: rowID
+                            }) +
+                            await rus.html.input({
+                                name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
+                                type: `hidden`,
+                                value: deskCellsByRowID[rowID].DHC
+                            })
+                    }),
+                    class: 'ru-card'
             } ) 
 
 /*        `<a  class="button"  title="delete object forever" id="desk-row-delete-${ rowID }" href="${

@@ -17,7 +17,7 @@ async rowID => `
                 
                 return await accumulator +
                     await rus.html.input ( {
-                        id:     `deskid`,
+                        //id:     `desk-row-id`,
                         name:   `desk-cells[PUT]###${index}###[R]`,
                         type:   `hidden`,
                         value:  rowID
