@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `adjusted desk-schemas markup`
+const gitCommitMessage = `adjusted desk-schemas-get-markup for public demo`
 
 
 module.exports = {
