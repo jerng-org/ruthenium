@@ -25,9 +25,9 @@ const desksGetMarkup = async(data) => {
 
     rus.conf.verbosity > 6 && `desks-get-markup.js: the code above should probably be made more framework-wise generic`
     
-    let tbodyTrs    = '',
-        rowCount    = 0,
-        cellCount   = 0
+    let tbodyTrs    = ''
+    ,   rowCount    = 0
+    //, cellCount   = 0
     
     for (const rowID in deskCellsByRowID) {
         
@@ -40,7 +40,7 @@ const desksGetMarkup = async(data) => {
         ${ await colNames.reduce(
             async (accumulator, colName, index, array)=>{
                 
-                cellCount++
+                //cellCount++
                 
                 return await accumulator + `<td>
 
@@ -52,13 +52,25 @@ const desksGetMarkup = async(data) => {
                             ${ 
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
-                                            name: `desk-cells[DELETE]###${ cellCount }###[DHC]`,
+                                            name: `desk-cells[DELETE]###${ 
+                                            
+                                                index
+                                            
+                                                //cellCount 
+                                                
+                                                }###[DHC]`,
                                             type: `hidden`,
                                             value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
                                         }) +
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
-                                            name: `desk-cells[DELETE]###${ cellCount }###[R]`,
+                                            name: `desk-cells[DELETE]###${ 
+                                            
+                                                index
+                                                
+                                                //cellCount
+                                                
+                                                }###[R]`,
                                             type: `hidden`,
                                             value: rowID 
                                         })
