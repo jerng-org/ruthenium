@@ -39,8 +39,6 @@ const desksGetMarkup = async(data) => {
         ${ await colNames.reduce(
             async (accumulator, colName, index, array)=>{
                 
-                const cellCount = rowCount * colNames.length + index
-                
                 return await accumulator + `<td>
 
                             ${ deskCellsByRowID[rowID][colName] }
@@ -51,13 +49,13 @@ const desksGetMarkup = async(data) => {
                             ${ 
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
-                                            name: `desk-cells[DELETE]###${   cellCount   }###[DHC]`,
+                                            name: `desk-cells[DELETE]###${   index   }###[DHC]`,
                                             type: `hidden`,
                                             value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
                                         }) +
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
-                                            name: `desk-cells[DELETE]###${   cellCount  }###[R]`,
+                                            name: `desk-cells[DELETE]###${   index  }###[R]`,
                                             type: `hidden`,
                                             value: rowID 
                                         })
