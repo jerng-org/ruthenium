@@ -35,14 +35,17 @@ const desksPatch = async(data) => {
         `)
 
     // WIP: hardcoded
-    for (const __deskCell of data.RU.request.formStringParameters['desk-cells'].PUT) {
+    if ('PUT' in data.RU.request.formStringParameters['desk-cells']) {
 
-        //  WIP Issue 5. 
-        if ('N' in __deskCell) __deskCell.N = Number(__deskCell.N)
+        for (const __deskCell of data.RU.request.formStringParameters['desk-cells'].PUT) {
 
-        //  WIP Issue 6.
-        if ('S' in __deskCell && __deskCell.S == '') __deskCell.S = ' '
+            //  WIP Issue 5. 
+            if ('N' in __deskCell) __deskCell.N = Number(__deskCell.N)
 
+            //  WIP Issue 6.
+            if ('S' in __deskCell && __deskCell.S == '') __deskCell.S = ' '
+
+        }
     }
     // WIP: hardcoded (end)
 
@@ -56,10 +59,16 @@ const desksPatch = async(data) => {
                 ),
 
                 ...data.RU.request.formStringParameters['desk-cells'].DELETE.map(
-                    __element => { return { DeleteRequest: { Key: {
-                        // hashKeyName: hashKeyValue
-                        // sortKeyName: sortKeyValue
-                    } } } }
+                    __element => {
+                        return {
+                            DeleteRequest: {
+                                Key: {
+                                    // hashKeyName: hashKeyValue
+                                    // sortKeyName: sortKeyValue
+                                }
+                            }
+                        }
+                    }
                 )
             ]
         },
