@@ -122,22 +122,35 @@ const desksGetMarkup = async(data) => {
     <div class = "ru-card toggle-set-2"
     style = "display:none;" >
 
-        <a  class="button"  title="delete object forever" id="desk-row-delete-${ rowID }" href="${
+        ${  await rus.html.form ( {
+                action: await rus.appUrl( [
+                    [ 'route','virtual' ], 
+                    [ 'type','desks' ], 
+                    [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
+                    [ 'form-method','PATCH' ] 
+                ] ),
+                innerHTML: await ,
+                class: 'ru-card'
+            } ) 
+
+/*        `<a  class="button"  title="delete object forever" id="desk-row-delete-${ rowID }" href="${
                     
                         await rus.appUrl ([
-                        /*
-                            [ 'route', 'virtual' ],
-                            [ 'type', 'forms' ],
-                            [ 'thing', 'delete-desk-schema' ],
-                            [ 'desk-schema-name', rowID ], 
-                            [ 'reader', 'human']
-                        */
+                        //
+                        //  [ 'route', 'virtual' ],
+                        //  [ 'type', 'forms' ],
+                        //  [ 'thing', 'delete-desk-schema' ],
+                        //  [ 'desk-schema-name', rowID ], 
+                        //  [ 'reader', 'human']
+                        //
                         ])
 
                     }"> <i class="material-icons">delete_forever</i> 
                         this action cannot be undone
-                    </a>
-
+                    </a>`
+*/            
+        }
+        
         <button class = "button-clear"
     title = "hide the link, which deletes this object"
     onclick = "toggler ( this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )" >
