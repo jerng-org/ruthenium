@@ -34,9 +34,11 @@ const desksPatch = async(data) => {
             (where row[S] = ''); the current hack is to slap in a (space)
         `)
 
-    // WIP: hardcoded
+    let putItems, deleteItems
+
     if ('PUT' in data.RU.request.formStringParameters['desk-cells']) {
 
+        // WIP: hardcoded
         for (const __deskCell of data.RU.request.formStringParameters['desk-cells'].PUT) {
 
             //  WIP Issue 5. 
@@ -44,33 +46,42 @@ const desksPatch = async(data) => {
 
             //  WIP Issue 6.
             if ('S' in __deskCell && __deskCell.S == '') __deskCell.S = ' '
-
         }
-    }
-    // WIP: hardcoded (end)
+        // WIP: hardcoded (end)
 
+        putItems = data.RU.request.formStringParameters['desk-cells'].PUT.map(
+            __element => { return { PutRequest: { Item: __element } } }
+        )
+
+    }
+    else {
+        putItems = {}
+    }
+
+    if ('DELETE' in data.RU.request.formStringParameters['desk-cells']) {
+
+        deleteItems = data.RU.request.formStringParameters['desk-cells'].DELETE.map(
+            __element => {
+                return {
+                    DeleteRequest: {
+                        Key: {
+                            // hashKeyName: hashKeyValue
+                            // sortKeyName: sortKeyValue
+                        }
+                    }
+                }
+            }
+        )
+
+    }
+    else {
+        deleteItems = {}
+    }
+    
     // Configure DB client parameters
     const params = {
         RequestItems: {
-            'TEST-APP-DESK-CELLS': [
-
-                ...data.RU.request.formStringParameters['desk-cells'].PUT.map(
-                    __element => { return { PutRequest: { Item: __element } } }
-                ),
-
-                ...data.RU.request.formStringParameters['desk-cells'].DELETE.map(
-                    __element => {
-                        return {
-                            DeleteRequest: {
-                                Key: {
-                                    // hashKeyName: hashKeyValue
-                                    // sortKeyName: sortKeyValue
-                                }
-                            }
-                        }
-                    }
-                )
-            ]
+            'TEST-APP-DESK-CELLS': [...putItems, ...deleteItems]
         },
         ReturnConsumedCapacity: `INDEXES`,
         ReturnItemCollectionMetrics: `SIZE`
