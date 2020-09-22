@@ -129,7 +129,7 @@ const desksGetMarkup = async(data) => {
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
                     [ 'form-method','PATCH' ] 
                 ] ),
-                innerHTML: await ,
+                innerHTML: await 1,
                 class: 'ru-card'
             } ) 
 
