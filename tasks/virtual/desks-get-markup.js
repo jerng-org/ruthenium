@@ -93,7 +93,7 @@ const desksGetMarkup = async(data) => {
 
             <a  class="button toggle-set-1" 
                     title="UPDATE desk row"
-                    onclick="return false;"
+                    onclick = "(e=>e.stopImmediatePropagation())(event)"
                     href="${
                     await rus.appUrl ([
                         [ 'route', 'virtual' ],
