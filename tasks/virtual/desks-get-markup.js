@@ -130,7 +130,7 @@ const desksGetMarkup = async(data) => {
                     [ 'form-method','PATCH' ] 
                 ] ),
                 innerHtml: await rus.html.fieldset ( {
-                    legend:     `some legend text`,
+                    legendInnerHtml:     `some legend text`,
                     innerHtml:  `some innerHtml`
                 } ),
                 class: 'ru-card'
