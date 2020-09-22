@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `desks-get-markup.js: WIP limits of 25 `
+const gitCommitMessage = `desks-patch.js: batchWrites now running in series `
 //`virtual/desks-patch.js: does not support more than 25 puts yet; `
 
 module.exports = {
@@ -140,7 +140,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 0,
+    performance: 1,
 
     /*  platform:
      *  
@@ -216,6 +216,6 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 4,
+    verbosity: 0,
 
 }
