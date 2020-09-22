@@ -52,7 +52,8 @@ const trInTable = async(item) => {
                         ])
 
                     }"><i class="material-icons">preview</i> READ</a>
-                    
+                   
+                   <!-- 
                     <a  class="button toggle-set-1" 
                         title="UPDATE schema"
                     onclick = "(e=>e.stopImmediatePropagation())(event)"
@@ -67,7 +68,7 @@ const trInTable = async(item) => {
                         ])
 
                     }"><i class="material-icons">edit</i> UPDATE</a>
-                    
+                    -->
                     
                         <label for="unlock-desk-schemas-delete-${ item['name'] }">
                             <button     title="show the link which deletes this schema" 
