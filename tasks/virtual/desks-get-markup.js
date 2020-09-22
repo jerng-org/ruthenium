@@ -50,11 +50,13 @@ const desksGetMarkup = async(data) => {
                                     name: `testDeleteFormFieldsetName-${ rowID }-${ colName }`,
                                     innerHtml:
                                         await rus.html.input({
+                                            form: deleteDeskRowFormID,
                                             name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
                                             type: `hidden`,
                                             value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
                                         }) +
                                         await rus.html.input({
+                                            form: deleteDeskRowFormID,
                                             name: `desk-cells[DELETE]###${ rowCount }###[R]`,
                                             type: `hidden`,
                                             value: rowID 
