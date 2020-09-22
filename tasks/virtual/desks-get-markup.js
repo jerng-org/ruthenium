@@ -24,9 +24,11 @@ const desksGetMarkup = async(data) => {
         data.RU.io.deskCellsQuery.Items)
 
     rus.conf.verbosity > 6 && `desks-get-markup.js: the code above should probably be made more framework-wise generic`
-
-    let tbodyTrs = ''
-    let rowCount = 0
+    
+    let tbodyTrs    = '',
+        rowCount    = 0,
+        cellCount   = 0
+    
     for (const rowID in deskCellsByRowID) {
         
         rowCount++
@@ -37,6 +39,9 @@ const desksGetMarkup = async(data) => {
         <tr>
         ${ await colNames.reduce(
             async (accumulator, colName, index, array)=>{
+                
+                cellCount++
+                
                 return await accumulator + `<td>
 
                             ${ deskCellsByRowID[rowID][colName] }
@@ -45,23 +50,18 @@ const desksGetMarkup = async(data) => {
                             <i class="material-icons">construction</i>
                             
                             ${ 
-                              //await rus.html.fieldset({
-                              //    form: deleteDeskRowFormID,
-                              //    name: `testDeleteFormFieldsetName-${ rowID }-${ colName }`,
-                              //    innerHtml:
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
-                                            name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
+                                            name: `desk-cells[DELETE]###${ cellCount }###[DHC]`,
                                             type: `hidden`,
                                             value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
                                         }) +
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
-                                            name: `desk-cells[DELETE]###${ rowCount }###[R]`,
+                                            name: `desk-cells[DELETE]###${ cellCount }###[R]`,
                                             type: `hidden`,
                                             value: rowID 
                                         })
-                              //})
                             }
                                         </td>`
             }, // reducer
