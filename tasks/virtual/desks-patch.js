@@ -64,10 +64,10 @@ const desksPatch = async(data) => {
             __element => {
                 return {
                     DeleteRequest: {
-                        Key: {
-                            // hashKeyName: hashKeyValue
-                            // sortKeyName: sortKeyValue
-                        }
+                        Key: { ... __element }
+                        //  which is to say, __element should be an object
+                        //  containing the primary key components of the items
+                        //  to be deleted from D
                     }
                 }
             }
