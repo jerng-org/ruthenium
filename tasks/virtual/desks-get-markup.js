@@ -67,20 +67,20 @@ const desksGetMarkup = async(data) => {
             }, // reducer
             
             ` <th scope = "row" id = "${rowID}" > 
-            <i  class="material-icons toggle-set-1"
+            <i  class="material-icons toggle-set-0"
                         style="display:none;"
                         title="hide the id"
-                        onclick="toggler ( this.closest('th'), '.toggle-set-1', null )"
+                        onclick="toggler ( this.closest('th'), '.toggle-set-0', null )"
                         >
                         visibility_off</i>
 
-            <span class = "toggle-set-1" style = "display:none;" > &nbsp; ${ rowID } </span>
+            <span class = "toggle-set-0" style = "display:none;" > &nbsp; ${ rowID } </span>
 
-        <i class = "material-icons toggle-set-1"
-        onclick = "toggler ( this.parentElement, '.toggle-set-1', null )" >
+        <i class = "material-icons toggle-set-0"
+        onclick = "toggler ( this.parentElement, '.toggle-set-0', null )" >
             fingerprint </i>
 
-            <span class = "toggle-set-1" > ${rowCount }. </span> 
+            <span class = "toggle-set-0" > ${rowCount }. </span> 
 
             </th>
         ` /*initial accumulator value*/
