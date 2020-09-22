@@ -1,5 +1,6 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `virtual/desks-patch.js: does not support more than 25 puts yet; `
+const gitCommitMessage = `desks-get-markup.js: WIP delete-row`
+//`virtual/desks-patch.js: does not support more than 25 puts yet; `
 
 module.exports = {
 
