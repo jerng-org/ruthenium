@@ -45,10 +45,10 @@ const desksGetMarkup = async(data) => {
                             <i class="material-icons">construction</i>
                             
                             ${ 
-                                await rus.html.fieldset({
-                                    form: deleteDeskRowFormID,
-                                    name: `testDeleteFormFieldsetName-${ rowID }-${ colName }`,
-                                    innerHtml:
+                              //await rus.html.fieldset({
+                              //    form: deleteDeskRowFormID,
+                              //    name: `testDeleteFormFieldsetName-${ rowID }-${ colName }`,
+                              //    innerHtml:
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
                                             name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
@@ -61,7 +61,7 @@ const desksGetMarkup = async(data) => {
                                             type: `hidden`,
                                             value: rowID 
                                         })
-                                })
+                              //})
                             }
                                         </td>`
             }, // reducer
