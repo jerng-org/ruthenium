@@ -1,8 +1,8 @@
 'use strict'
 
-const rus = require('/var/task/modules/r-u-s.js')
+const rus = require ( '/var/task/modules/r-u-s.js' )
 
-const innerHtml = async(DATA, uuid) => `
+const innerHtml = async ( DATA, uuid ) => `
 <fieldset>
 
     ${  
@@ -10,7 +10,7 @@ const innerHtml = async(DATA, uuid) => `
             async ( accumulator, currentValue, index, array ) => {
                 return await accumulator + 
                     await rus.html.input ( {
-                        id:     `id`,
+                        id:     `desk-row-new-id`,
                         name:   `desk-cells[PUT]###${index}###[R]`,
                         type:   `hidden`,
                         value:  uuid
@@ -18,30 +18,23 @@ const innerHtml = async(DATA, uuid) => `
                     await rus.html.input ( {
                         id:             currentValue.name,
                         label:          currentValue.name,
-                        name:           `
-desk - cells[PUT]### $ { index }###[$ { currentValue.type }]
-`,
-                        placeholder:    `--enter a $ { rus.conf.labels.deskCellTypes[currentValue.type] }--`
+                        name:           `desk-cells[PUT]###${index}###[${ currentValue.type }]`,
+                        placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
                         
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
-                        name:   `
-desk - cells[PUT]### $ { index }###[DHC]
-`,
+                        name:   `desk-cells[PUT]###${index}###[DHC]`,
                         value:  DATA.RU.io.deskSchemasGet.Item.name + '#' + currentValue.name
                     } ) +
                     await rus.html.input ( {
                         type:   'hidden',
-                        name:   `
-desk - cells[PUT]### $ { index }###[D]
-`,
+                        name:   `desk-cells[PUT]###${index}###[D]`,
                         value:  DATA.RU.io.deskSchemasGet.Item.name
                     } )
             },
             
-            `
-` /* initial value (second argument) */
+            `` /* initial value (second argument) */
             
         )
     } 
@@ -55,10 +48,10 @@ desk - cells[PUT]### $ { index }###[D]
 </fieldset>
 `
 
-const createDeskRow = async(data) => {
-
+const createDeskRow = async ( data ) => {
+    
     const newUuid = await rus.uuid4()
-
+    
     return `
     
         <h2><code>${ data.RU.io.deskSchemasGet.Item.name }</code> : object creation </h2>
@@ -69,7 +62,7 @@ const createDeskRow = async(data) => {
                     [ 'type','desks' ], 
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
                     [ 'form-method','PATCH' ] 
-                ] ),
+                ]),
                 innerHtml: await innerHtml(data, newUuid),
                 class: 'ru-card'
             } ) 
