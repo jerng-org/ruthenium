@@ -1,6 +1,6 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `desks-patch.js: batchWrites now running in series `
-//`virtual/desks-patch.js: does not support more than 25 puts yet; `
+const gitCommitMessage = `adjusted desk-schemas markup`
+
 
 module.exports = {
 
