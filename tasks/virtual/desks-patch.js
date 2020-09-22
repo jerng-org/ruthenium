@@ -55,7 +55,7 @@ const desksPatch = async(data) => {
 
     }
     else {
-        putItems = {}
+        putItems = []
     }
 
     if ('DELETE' in data.RU.request.formStringParameters['desk-cells']) {
@@ -75,7 +75,7 @@ const desksPatch = async(data) => {
 
     }
     else {
-        deleteItems = {}
+        deleteItems = []
     }
     
     // Configure DB client parameters
