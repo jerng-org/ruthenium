@@ -10,7 +10,7 @@ const innerHtml = async ( DATA, uuid ) => `
             async ( accumulator, currentValue, index, array ) => {
                 return await accumulator + 
                     await rus.html.input ( {
-                        id:     `desk-row-new-id`,
+                        //id:     `desk-row-new-id`,
                         name:   `desk-cells[PUT]###${index}###[R]`,
                         type:   `hidden`,
                         value:  uuid
