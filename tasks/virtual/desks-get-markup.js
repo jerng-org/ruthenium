@@ -28,10 +28,11 @@ const desksGetMarkup = async(data) => {
     let tbodyTrs = ''
     let rowCount = 0
     for (const rowID in deskCellsByRowID) {
+        rowCount++
         tbodyTrs += `
         <tr>
         ${ colNames.reduce(
-            (accumulator, colName)=>{
+            (accumulator, colName, index, array)=>{
                 return accumulator + `  <td>    ${deskCellsByRowID[rowID][colName]}
                                                 
                                                 <i class="material-icons ru-hover-opaque">edit</i>
@@ -51,7 +52,7 @@ const desksGetMarkup = async(data) => {
         onclick = "toggler ( this.parentElement, '.toggle-set-1', null )" >
             fingerprint </i>
 
-            <span class = "toggle-set-1" > ${++rowCount }. </span> 
+            <span class = "toggle-set-1" > ${rowCount }. </span> 
 
             </th>
         ` /*initial accumulator value*/)
@@ -131,7 +132,13 @@ const desksGetMarkup = async(data) => {
                 ] ),
                 innerHtml: await rus.html.fieldset ( {
                     legendInnerHtml:     `some legend text`,
-                    innerHtml:  `some innerHtml`
+                    innerHtml:
+                        await rus.html.input({
+                            id: `desk-row-id-${rowCount}`,
+                            name: `desk-cells[DELETE]###${rowCount}###[R]`,
+                            type: `hidden`,
+                            value: rowID
+                        })
                 } ),
                 class: 'ru-card'
             } ) 
