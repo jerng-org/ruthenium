@@ -40,6 +40,7 @@ const trInTable = async(item) => {
                                 
                     <a  class="button toggle-set-1" 
                         title="READ schema"
+                    onclick = "(e=>e.stopImmediatePropagation())(event)"
                         href="${
                     
                         await rus.appUrl ([
@@ -54,6 +55,7 @@ const trInTable = async(item) => {
                     
                     <a  class="button toggle-set-1" 
                         title="UPDATE schema"
+                    onclick = "(e=>e.stopImmediatePropagation())(event)"
                         href="${
                     
                         await rus.appUrl ([
