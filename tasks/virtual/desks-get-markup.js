@@ -172,7 +172,7 @@ const desksGetMarkup = async(data) => {
                     
                     </button>`
                 ,
-                class: 'ru-card'
+                //class: 'ru-card'
             } ) 
 
         }
