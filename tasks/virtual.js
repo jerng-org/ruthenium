@@ -34,6 +34,12 @@ console.warn(`(virtual.js) the (rus.log.error) function defined here is a framew
 console.warn(`(virtual.js) we should really break up/curry the giant switch-case into a linear pipeline`)
 console.warn(`TODO: implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
 
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+
 const deskSchemasGetSuccess = async(DATA, deskSchemaName) => {
     const params = {
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
@@ -69,6 +75,12 @@ const deskRowGetSuccess = async(DATA, deskRowID) => {
     DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query(params).promise()
     return DATA.RU.io.deskCellsQuery.Items.length
 }
+
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
 
 const virtual = async(data) => {
 

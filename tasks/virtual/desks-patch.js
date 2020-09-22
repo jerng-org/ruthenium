@@ -34,16 +34,17 @@ const desksPatch = async(data) => {
             (where row[S] = ''); the current hack is to slap in a (space)
         `)
 
-    // hardcoded
+    // WIP: hardcoded
     for (const __deskCell of data.RU.request.formStringParameters['desk-cells'].PUT) {
-        
+
         //  WIP Issue 5. 
-        if ( 'N' in __deskCell ) __deskCell.N = Number(__deskCell.N)
-       
+        if ('N' in __deskCell) __deskCell.N = Number(__deskCell.N)
+
         //  WIP Issue 6.
-        if ( 'S' in __deskCell && __deskCell.S == '' ) __deskCell.S = ' '
-        
+        if ('S' in __deskCell && __deskCell.S == '') __deskCell.S = ' '
+
     }
+    // WIP: hardcoded (end)
 
     // Configure DB client parameters
     const params = {
@@ -52,20 +53,14 @@ const desksPatch = async(data) => {
 
                 ...data.RU.request.formStringParameters['desk-cells'].PUT.map(
                     __element => { return { PutRequest: { Item: __element } } }
+                ),
+
+                ...data.RU.request.formStringParameters['desk-cells'].DELETE.map(
+                    __element => { return { DeleteRequest: { Key: {
+                        // hashKeyName: hashKeyValue
+                        // sortKeyName: sortKeyValue
+                    } } } }
                 )
-
-                /*
-                {
-                    PutRequest: {
-                        Item:{
-                            
-                        }
-                    },
-                },
-                */
-
-                //... data.RU.request.formStringParameters['desk-cells'].DELETE.map()
-                //{ DeleteRequest: {} },
             ]
         },
         ReturnConsumedCapacity: `INDEXES`,

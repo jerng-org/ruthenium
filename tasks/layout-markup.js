@@ -66,6 +66,12 @@ await rus.appUrl ( [
                 background-color: #f8f8f8;                
             }
             
+            legend {
+                padding: 0 1rem;
+                background-color: #ccc;
+                border-radius: 0.5em;
+                font-family: mono
+            }
 
         /* Application Original Content  */
             
