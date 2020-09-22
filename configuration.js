@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `desks-get-markup.js: WIP delete-row`
+const gitCommitMessage = `desks-get-markup.js: WIP delete-row (form data is submitting to desks-patch.js)`
 //`virtual/desks-patch.js: does not support more than 25 puts yet; `
 
 module.exports = {
