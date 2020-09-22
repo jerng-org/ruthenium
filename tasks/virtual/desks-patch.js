@@ -20,18 +20,20 @@ const desksPatch = async(data) => {
     //  end PROTOTYPICAL data validation process.
 
     console.warn(`WIP: desks-patch.js: "patching" 
+        
+        COMPLETE:
         0.  PUT should be hitting DynamoDB
-        1.  DELETE not yet hitting DynamoDB
-        2.  DDB-JS-DocumentClient docs say "max 10 items"; lower level API docs
-            say "max 25 items"; neither have been coded for here
-        3.  size limits have not been coded for here
-        4.  By the time we want to code for 3,4, we should probably have a 
-            generalised framework-wise method for this
-            
+        1.  DELETE should be hitting DynamoDB
+        2.  DDB-JS-DocumentClient "max 25 items"
         5.  Also ... coercion to Number types acceptable by the DDB-JS-DocumentClient
             needs to be softcoded into (4)
         6.  ... we need a more regular way to deal with empty strings 
             (where row[S] = ''); the current hack is to slap in a (space)
+        
+        INCOMPLETE:
+        3.  size limits have not been coded for here
+        4.  By the time we want to code for 3,4, we should probably have a 
+            generalised framework-wise method for this
         7.  "UnprocessedItems" are not yet handled.
         8.  Multiple BatchWrites are not yet parallelised.
         `)
