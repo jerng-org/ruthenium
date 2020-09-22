@@ -67,9 +67,11 @@ const html = {
                                     </label>` 
                         : ``
                     }
-                    <input  type="${ conf.type ? conf.type : defaults.type }"
-                            ${ conf.type        ? `type="${conf.type}"`
+                    <input  ${ conf.type        ? `type="${conf.type}"`
                                                 : '' }
+                            ${ conf.form        ? `form="${conf.form}"`
+                                                : ''
+                            }
                             ${ conf.id          ? `id="${conf.id}"`
                                                 : '' }
                             ${ conf.name        ? `name="${conf.name}"` 
