@@ -32,6 +32,8 @@ const desksPatch = async(data) => {
             needs to be softcoded into (4)
         6.  ... we need a more regular way to deal with empty strings 
             (where row[S] = ''); the current hack is to slap in a (space)
+        7.  "UnprocessedItems" are not yet handled.
+        8.  Multiple BatchWrites are not yet parallelised.
         `)
 
     let putItems, deleteItems
@@ -64,42 +66,58 @@ const desksPatch = async(data) => {
             __element => {
                 return {
                     DeleteRequest: {
-                        Key: { ... __element }
+                        Key: { ...__element }
                         //  which is to say, __element should be an object
                         //  containing the primary key components of the items
-                        //  to be deleted from D
+                        //  to be deleted from DDB
                     }
                 }
             }
         )
-
     }
     else {
         deleteItems = []
     }
-    
-    // Configure DB client parameters
-    const params = {
-        RequestItems: {
-            'TEST-APP-DESK-CELLS': [...putItems, ...deleteItems]
-        },
-        ReturnConsumedCapacity: `INDEXES`,
-        ReturnItemCollectionMetrics: `SIZE`
-    }
 
-    // Call storage layer
+    const unlimitedRequestItems = [...putItems, ...deleteItems]
 
-    try {
-        data.RU.io.deskCellsPatch = await rus.aws.ddbdc.batchWrite(params).promise()
-    }
-    catch (e) {
-        console.error(e)
-        switch (e.code) {
-            default: // do nothing
-                await status500(data)
-            return
+    //  WIP Issue 2.
+    let processedCount, totalCount, limitedRequestItems, chunk = 25, batchCount = 0
+
+    data.RU.io.deskCellsBatchWrite = {}
+
+    for (processedCount = 0, totalCount = unlimitedRequestItems.length; processedCount < totalCount; processedCount += chunk) {
+
+        batchCount++
+
+        limitedRequestItems = unlimitedRequestItems.slice(processedCount, processedCount + chunk)
+
+        // Configure DB client parameters
+        const params = {
+            RequestItems: {
+                'TEST-APP-DESK-CELLS': limitedRequestItems
+            },
+            ReturnConsumedCapacity: `INDEXES`,
+            ReturnItemCollectionMetrics: `SIZE`
+        }
+
+        // Call storage layer
+        try {
+            data.RU.io.deskCellsBatchWrite[ `batch-${ batchCount }` ] = await rus.aws.ddbdc.batchWrite(params).promise()
+        }
+        catch (e) {
+            console.error(e)
+            switch (e.code) {
+                default: // do nothing
+                    await status500(data)
+                return
+            }
         }
     }
+    //  chunking logic from: https://stackoverflow.com/posts/8495740/revisions
+    
+    //  WIP Issue 2. (end)
+
 
 
     /*  THIS SHOULD PROCEED UNDER THE ASSUMPTION THAT (desk-cells items) are
