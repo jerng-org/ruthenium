@@ -90,7 +90,7 @@ const desksGetMarkup = async(data) => {
             
             ` <th>
 
-            <a  class="button toggle-set" 
+            <a  class="button toggle-set-1" 
                     title="UPDATE desk row"
                     href="${
                     await rus.appUrl ([
