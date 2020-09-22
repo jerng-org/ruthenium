@@ -44,7 +44,7 @@ const httpPatch = {
                 },
                 // subs: undefined
             },
-            subs0_keys_applied_to_subs2: { subs1: 'all' } 
+            subs0_keys_applied_to_subs2: { subs1: ['PUT'] } 
 
 
         },
