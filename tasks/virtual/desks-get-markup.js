@@ -90,6 +90,10 @@ const desksGetMarkup = async(data) => {
             
             ` <th>
 
+            <fieldset onclick = "toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
+        class = "toggle-set-2"
+        style = "margin:0;" >
+
             <a  class="button toggle-set-1" 
                     title="UPDATE desk row"
                     href="${
@@ -102,10 +106,6 @@ const desksGetMarkup = async(data) => {
                         [ 'reader', 'human']
                     ])
                 }"><i class="material-icons">edit</i> UPDATE</a>
-
-            <fieldset onclick = "toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
-        class = "toggle-set-2"
-        style = "margin:0;" >
 
             <label  for="unlock-desk-row-delete-${ rowID }"
                             style="margin:0;"
