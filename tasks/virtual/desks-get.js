@@ -21,7 +21,7 @@ const desksGet = async(data) => {
         Key: {
             name: deskName
         },
-        ReturnConsumedCapacity: 'INDEXES'
+        //ReturnConsumedCapacity: 'INDEXES'
     }
     data.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
     if (! ('Item' in data.RU.io.deskSchemasGet) ) {
@@ -34,7 +34,7 @@ const desksGet = async(data) => {
         IndexName: 'D-GSI',
         KeyConditionExpression: 'D = :deskName',
         ExpressionAttributeValues: { ':deskName': deskName },
-        ReturnConsumedCapacity: 'INDEXES'
+        //ReturnConsumedCapacity: 'INDEXES'
     }).promise()
 
     rus.conf.verbosity > 0 &&

@@ -101,8 +101,8 @@ const desksPatch = async(data) => {
             RequestItems: {
                 'TEST-APP-DESK-CELLS': limitedRequestItems
             },
-            ReturnConsumedCapacity: `INDEXES`,
-            ReturnItemCollectionMetrics: `SIZE`
+            //ReturnConsumedCapacity: `INDEXES`,
+            //ReturnItemCollectionMetrics: `SIZE`
         }
 
         // Call storage layer

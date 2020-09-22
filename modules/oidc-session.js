@@ -134,7 +134,7 @@ const setSessionFromRequestCookie = async DATA => {
             ]: DATA.RU.request.headers.cookies['__Host-' +
                 conf.obfuscations.sessionCookieName][0]
         },
-        ReturnConsumedCapacity: 'INDEXES'
+        //ReturnConsumedCapacity: 'INDEXES'
     }
 
     mark(`oidc-session.js: hotspot: begin1`)
