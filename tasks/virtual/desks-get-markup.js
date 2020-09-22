@@ -28,14 +28,34 @@ const desksGetMarkup = async(data) => {
     let tbodyTrs = ''
     let rowCount = 0
     for (const rowID in deskCellsByRowID) {
+        
         rowCount++
+        
+        const deleteDeskRowFormID = `delete-desk-row-${ rowID }`
+        
         tbodyTrs += `
         <tr>
         ${ colNames.reduce(
-            (accumulator, colName, index, array)=>{
-                return accumulator + `  <td>    ${ deskCellsByRowID[rowID][colName] }
-                                                
-                                                <i class="material-icons ru-hover-opaque">edit</i>
+            async (accumulator, colName, index, array)=>{
+                return await accumulator + `<td>
+
+                            ${ deskCellsByRowID[rowID][colName] }
+                            
+                            <i class="material-icons ru-hover-opaque">edit</i>
+                            <i class="material-icons">construction</i>
+                            
+                            ${ 
+                                await rus.html.fieldset({
+                                    form: deleteDeskRowFormID,
+                                    name: `testDeleteFormFieldsetName-${ rowID }-${ colName }`,
+                                    innerHtml: await rus.html.input({
+                                        name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
+                                        type: `hidden`,
+                                        value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
+                                    })
+
+                                })
+                            }
                                         </td>`
             },
             ` <th scope = "row" id = "${rowID}" > 
@@ -124,26 +144,32 @@ const desksGetMarkup = async(data) => {
     style = "display:none;" >
 
         ${  await rus.html.form ( {
+                
                 action: await rus.appUrl([
-                        ['route', 'virtual'],
-                        ['type', 'desks'],
-                        ['thing', data.RU.io.deskSchemasGet.Item.name],
-                        ['form-method', 'PATCH']
-                    ]),
-                    innerHtml: await rus.html.fieldset({
-                        legendInnerHtml: `some legend text`,
-                        innerHtml: await rus.html.input({
-                                name: `desk-cells[DELETE]###${ rowCount }###[R]`,
-                                type: `hidden`,
-                                value: rowID
-                            }) +
-                            await rus.html.input({
-                                name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
-                                type: `hidden`,
-                                value: deskCellsByRowID[rowID].DHC
-                            })
-                    }),
-                    class: 'ru-card'
+                    ['route', 'virtual'],
+                    ['type', 'desks'],
+                    ['thing', data.RU.io.deskSchemasGet.Item.name],
+                    ['form-method', 'PATCH']
+                ]),
+                id: deleteDeskRowFormID,
+                innerHtml: `deleteRowFormInnerHtml` /*await rus.html.fieldset({
+                    legendInnerHtml: `some legend text`,
+                    innerHtml: await rus.html.input({
+                            name: `desk-cells[DELETE]###${ rowCount }###[R]`,
+                            type: `hidden`,
+                            value: rowID
+                        }) +
+                        await rus.html.input({
+                            name: `desk-cells[DELETE]###${ rowCount }###[DHC]`,
+                            type: `hidden`,
+                            value: deskCellsByRowID[rowID].DHC
+                        })
+                })
+                
+                SUBMIT BUTTON GOES HERE, fieldsets GO IN OTHER tds IN THIS tr
+                
+                */,
+                class: 'ru-card'
             } ) 
 
 /*        `<a  class="button"  title="delete object forever" id="desk-row-delete-${ rowID }" href="${
