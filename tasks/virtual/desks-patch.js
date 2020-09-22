@@ -36,6 +36,7 @@ const desksPatch = async(data) => {
             generalised framework-wise method for this
         7.  "UnprocessedItems" are not yet handled.
         8.  Multiple BatchWrites are not yet parallelised.
+        9.  Atomicity is not yet enforced (transactions needed).
         `)
 
     let putItems, deleteItems
@@ -244,7 +245,7 @@ const desksPatch = async(data) => {
             Item: candidate['desk-schemas'],
             ExpressionAttributeNames: { '#name': 'name' },
             ConditionExpression: 'attribute_not_exists(#name)',
-            ReturnConsumedCapacity: 'INDEXES'
+            //ReturnConsumedCapacity: 'INDEXES'
 
         }
 
