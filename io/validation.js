@@ -693,14 +693,13 @@ const validateRules = async(
                 {
                     const subs2Report = {}
 
-                    let _branchDatum = {}
+                    const _branchDatum = {}
 
                     if (_rulesToTest.subs0_keys_applied_to_subs2.subs1 == 'all') {
                         Object.assign(_branchDatum, scopedDatum)
                     }
                     else
                     if (Array.isArray(_rulesToTest.subs0_keys_applied_to_subs2.subs1)) {
-                        _branchDatum = {}
                         for (const __sub0Key of _rulesToTest.subs0_keys_applied_to_subs2.subs1) {
 
                             if (__sub0Key in scopedDatum) {
