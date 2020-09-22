@@ -46,7 +46,7 @@ const deskSchemasGetSuccess = async(DATA, deskSchemaName) => {
         Key: {
             name: deskSchemaName
         },
-        ReturnConsumedCapacity: 'INDEXES'
+        //ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
     return ('Item' in DATA.RU.io.deskSchemasGet)
@@ -58,7 +58,7 @@ const deskSchemasDeleteSuccess = async(DATA, deskSchemaName) => {
         Key: {
             name: deskSchemaName
         },
-        ReturnConsumedCapacity: 'INDEXES'
+        //ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskSchemasDelete = await rus.aws.ddbdc.delete(params).promise()
     return DATA.RU.io.deskSchemasDelete
@@ -70,7 +70,7 @@ const deskRowGetSuccess = async(DATA, deskRowID) => {
         IndexName: 'R-GSI',
         KeyConditionExpression: 'R = :deskRowID',
         ExpressionAttributeValues: { ':deskRowID': deskRowID },
-        ReturnConsumedCapacity: 'INDEXES'
+        //ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskCellsQuery = await rus.aws.ddbdc.query(params).promise()
     return DATA.RU.io.deskCellsQuery.Items.length
