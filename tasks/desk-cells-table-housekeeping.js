@@ -5,64 +5,69 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-let printable = {}
+let printable = []
 
 const deskCellsTableHousekeeping = async(data) => {
     rus.mark(`~/tasks/desk-cells-table-housekeeping.js EXECUTION start`)
 
+    const deskSchemasByName = {}
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
     }).promise()
+    data.RU.io.deskSchemasScan.Items.forEach(_schema => {
+        deskSchemasByName[_schema.name] = _schema
+        // cheaply passes by reference
+    })
+
+    data.RU.io.deskCellsDeletes = []
+    const orphanedCells = []
     data.RU.io.deskCellsScan = await rus.aws.ddbdc.scan({
         TableName: 'TEST-APP-DESK-CELLS',
     }).promise()
+    for (const _deskCell of data.RU.io.deskCellsScan.Items) {
 
-    for ( const _deskCell of data.RU.io.deskCellsScan.Items) {
-        
-    }
-/*    
-    for (const _deskSchema of data.RU.io.deskSchemasScan.Items) {
-        data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
-            TableName: 'TEST-APP-DESK-CELLS',
-            IndexName: 'D-GSI',
-            KeyConditionExpression: 'D = :deskName',
-            ExpressionAttributeValues: { ':deskName': _deskSchema.name },
-        }).promise()
-        
-        const _deskRows = rus.limbo.ddbDeskCellsByRowID ( _deskSchema, data.RU.io.deskCellsQuery.Items ) 
-        
-        //printable[ _deskSchema.name ] = _deskRows
+        const [_deskSchemaName, _column] = _deskCell.DHC.split(`#`)
 
-        for (const _row in _deskRows ) {
-//
-            
+        let orphanFound =
+            _deskSchemaName in deskSchemasByName ?
+            (!
+                (
+                    deskSchemasByName[_deskSchemaName].columns.map(col => col.name).includes(_column)
+                )
+            ) :
+            true
+
+        if (orphanFound) {
+
+
+            let result
+            data.RU.io.deskCellsDeletes.push(result = await rus.aws.ddbdc.delete({
+                TableName: 'TEST-APP-DESK-CELLS',
+                Key: {
+                    DHC: _deskCell.DHC,
+                    R: _deskCell.R
+                },
+                ReturnValues: 'ALL_OLD'
+            }).promise())
+
+            if ('Attributes' in result) {
+                orphanedCells.push(result.Attributes)
+            }
+
         }
-
     }
-*/
+
 
     data.RU.signals.sendResponse = { body: `
 <h1>Housekeeping</h1>
 
 <h2>Desk Schemas found: ${ data.RU.io.deskSchemasScan.Count } </h2>
 
-<!--
-<table>
-
-    <thead>
-    </thead>
-    <tbody>
-    </tbody>
-
-</table>
--->
+<h2>Orphaned Cells deleted: </h2>
+(consider breaking this into two stages: orphaned cells listed, before confirmation for deletion)
 
 <pre><code>
-    ${ 
-    JSON.stringify(data.RU.io.deskCellsScan,null,4) 
-    
-        
-    }
+    ${  JSON.stringify(orphanedCells,null,4)   }
 </code></pre>
 ` }
 
