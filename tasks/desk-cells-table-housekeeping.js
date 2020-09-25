@@ -17,7 +17,7 @@ const deskCellsTableHousekeeping = async(data) => {
         TableName: 'TEST-APP-DESK-CELLS',
     }).promise()
 
-    for ( const _deskCell of data.RU.io.deskCellsScan) {
+    for ( const _deskCell of data.RU.io.deskCellsScan.Items) {
         
     }
 /*    
