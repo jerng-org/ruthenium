@@ -26,7 +26,7 @@ const deskCellsTableHousekeeping = async(data) => {
         
         printable[ _deskSchema.name ] = _deskRows
 
-        for (const _row of _deskRows ) {
+        for (const _row in _deskRows ) {
 //
             
         }
