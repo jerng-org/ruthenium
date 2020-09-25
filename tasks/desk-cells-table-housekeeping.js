@@ -13,7 +13,14 @@ const deskCellsTableHousekeeping = async(data) => {
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
     }).promise()
-    
+    data.RU.io.deskCellsScan = await rus.aws.ddbdc.scan({
+        TableName: 'TEST-APP-DESK-CELLS',
+    }).promise()
+
+    for ( const _deskCell of data.RU.io.deskCellsScan) {
+        
+    }
+/*    
     for (const _deskSchema of data.RU.io.deskSchemasScan.Items) {
         data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
             TableName: 'TEST-APP-DESK-CELLS',
@@ -24,7 +31,7 @@ const deskCellsTableHousekeeping = async(data) => {
         
         const _deskRows = rus.limbo.ddbDeskCellsByRowID ( _deskSchema, data.RU.io.deskCellsQuery.Items ) 
         
-        printable[ _deskSchema.name ] = _deskRows
+        //printable[ _deskSchema.name ] = _deskRows
 
         for (const _row in _deskRows ) {
 //
@@ -32,7 +39,7 @@ const deskCellsTableHousekeeping = async(data) => {
         }
 
     }
-
+*/
 
     data.RU.signals.sendResponse = { body: `
 <h1>Housekeeping</h1>
@@ -52,10 +59,7 @@ const deskCellsTableHousekeeping = async(data) => {
 
 <pre><code>
     ${ 
-    //111 
-    //JSON.stringify(data.RU.io.deskSchemasScan,null,4) 
-    //JSON.stringify(data.RU.io.deskCellsQuery,null,4) 
-    JSON.stringify(printable,null,4) 
+    JSON.stringify(data.RU.io.deskCellsScan,null,4) 
     
         
     }
