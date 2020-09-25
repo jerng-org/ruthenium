@@ -58,12 +58,9 @@ await rus.appUrl ( [
                 border-left: 0.1rem solid #ddd;
             }
 
-            tbody > tr:nth-child(odd) > td {
-                background-color: #f0f0f0;                
-            }
-            
+            tbody > tr:nth-child(odd) > td ,
             tbody > tr:nth-child(odd) > th {
-                background-color: #f8f8f8;                
+                    background-image: linear-gradient(#f8f8f8, #fff, #fff, #fff, #f8f8f8);               
             }
             
             legend {

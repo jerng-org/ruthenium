@@ -2,8 +2,6 @@
 
 const conf = require(`/var/task/configuration.js`)
 
-console.error(`(desk-cells.js) WIP`)
-
 const deskCells = {
 
     self: {
