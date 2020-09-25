@@ -39,7 +39,7 @@ const innerHtml = async ( DATA, uuid ) => `
         )
     } 
 
-b    <button type="submit"
+    <button type="submit"
             title="submit form: create object"
             >
             <i class='material-icons'>send</i> SUBMIT FORM</button>

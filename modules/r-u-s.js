@@ -140,7 +140,7 @@ const rus = {
             //  Check that _deskSchemaItem matches _deskCellItems
 
             let __deskColumnTypes = {}
-            let __deskCells = {}
+            let __deskRows = {}
 
             _deskSchemaItem.columns
                 .forEach((__column) => { __deskColumnTypes[__column.name] = __column.type })
@@ -163,14 +163,14 @@ const rus = {
                     const [_deskName, _colName] = __dhcSplit
 
                     // initialisation check
-                    if (!(__cell.R in __deskCells)) {
-                        __deskCells[__cell.R] = {}
+                    if (!(__cell.R in __deskRows)) {
+                        __deskRows[__cell.R] = {}
                     }
                     
                     const _colType = __deskColumnTypes[_colName]
-                    __deskCells[__cell.R][_colName] = __cell[_colType]
+                    __deskRows[__cell.R][_colName] = __cell[_colType]
                 })
-            return __deskCells
+            return __deskRows
         },
 
     },
