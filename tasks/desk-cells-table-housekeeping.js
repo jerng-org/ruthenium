@@ -24,8 +24,8 @@ const deskCellsTableHousekeeping = async(data) => {
         
         const _deskRows = rus.limbo.ddbDeskCellsByRowID ( _deskSchema, data.RU.io.deskCellsQuery.Items ) 
         
-        printable.deskRows = _deskRows
-        
+        printable[ _deskSchema.name ] = _deskRows
+
         for (const _row of _deskRows ) {
 //
             
