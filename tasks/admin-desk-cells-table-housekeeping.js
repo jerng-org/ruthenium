@@ -39,7 +39,6 @@ const adminDeskCellsTableHousekeeping = async(data) => {
 
         if (orphanFound) {
 
-
             let result
             data.RU.io.deskCellsDeletes.push(result = await rus.aws.ddbdc.delete({
                 TableName: 'TEST-APP-DESK-CELLS',

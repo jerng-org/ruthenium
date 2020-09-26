@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `housekeeping task to delete orphaned cells`
+const gitCommitMessage = `housekeeping task to upload CSV to DESKS`
 
 
 module.exports = {
