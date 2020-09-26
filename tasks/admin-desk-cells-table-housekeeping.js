@@ -70,6 +70,7 @@ If you're reading this, each cell in the (desk-cells) table was deleted IF
 <h2>Orphaned Cells deleted: ${ orphanedCells.length } </h2>
 (consider breaking this into two stages: orphaned cells listed, before confirmation for deletion)
 
+<h3>These were the deleted cells:</h3>
 <pre><code>
     ${  JSON.stringify(orphanedCells,null,4)   }
 </code></pre>
