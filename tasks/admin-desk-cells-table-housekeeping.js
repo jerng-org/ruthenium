@@ -7,8 +7,8 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 let printable = []
 
-const deskCellsTableHousekeeping = async(data) => {
-    rus.mark(`~/tasks/desk-cells-table-housekeeping.js EXECUTION start`)
+const adminDeskCellsTableHousekeeping = async(data) => {
+    rus.mark(`~/tasks/admindesk-cells-table-housekeeping.js EXECUTION start`)
 
     const deskSchemasByName = {}
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
@@ -71,10 +71,10 @@ const deskCellsTableHousekeeping = async(data) => {
 </code></pre>
 ` }
 
-    rus.mark(`~/tasks/desk-cells-table-housekeeping.js EXECUTION end`)
+    rus.mark(`~/tasks/admin-desk-cells-table-housekeeping.js EXECUTION end`)
 }
 // manipulate (data.RU), for example
 // no need to return (data)
 
-module.exports = deskCellsTableHousekeeping
-rus.mark(`~/tasks/desk-cells-table-housekeeping.js LOADED`)
+module.exports = adminDeskCellsTableHousekeeping
+rus.mark(`~/tasks/admin-desk-cells-table-housekeeping.js LOADED`)
