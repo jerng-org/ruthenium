@@ -24,6 +24,15 @@ const html = {
 
     form: async conf => {
 
+        conf = {
+
+            /* defaults */
+            method: 'POST',
+
+            /* explicitly passed */
+            ...conf
+        }
+
         if (!conf.action) {
             throw Error(`(rus.html.form) called, without (conf.action) `)
         }
@@ -32,11 +41,7 @@ const html = {
             throw Error(`(rus.html.form) called, without (conf.innerHtml) `)
         }
 
-        const defaults = {
-            method: 'POST'
-        }
-
-        const markup = `<form   method="${ conf.method ? conf.method : defaults.method }"
+        const markup = `<form   method="${ conf.method }"
                                 action="${ conf.action }"
                                 class="${ conf.class }"
                                 id="${ conf.id ? conf.id : `` }"
@@ -48,6 +53,15 @@ const html = {
 
     input: async conf => {
 
+        conf = {
+
+            /* defaults */
+            type: 'text',
+
+            /* explicitly passed */
+            ...conf
+        }
+
         if ((!conf.name) && (!conf.type == 'submit')) {
             throw Error(`(rus.html.input) called, without (conf.name) `)
         }
@@ -56,14 +70,10 @@ const html = {
             throw Error(`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
         }
 
-        const defaults = {
-            type: 'text'
-        }
-
-        const markup = ` ${  conf.label 
+        const markup = ` ${  conf.labelInnerHtml 
                         ? `<label   for="${ conf.id }"
                                     > 
-                                    ${ conf.label }
+                                    ${ conf.labelInnerHtml }
                                     </label>` 
                         : ``
                     }
@@ -92,11 +102,11 @@ const html = {
 
     fieldset: async conf => {
 
-        if (!conf.innerHtml) {
-            throw Error(`(rus.html.legend) called, without (conf.InnerHtml)`)
-        }
+            if (!conf.innerHtml) {
+                throw Error(`(rus.html.legend) called, without (conf.InnerHtml)`)
+            }
 
-        const markup = `
+            const markup = `
             <fieldset
                 ${ conf.disabled    ? `disabled`            
                                     : `` }
@@ -115,45 +125,97 @@ const html = {
                 ${ conf.innerHtml }
             </fieldset>`
 
+            return markup
+        }
+        /*        
+                select : conf => {
+                    
+                    if ( ! conf.name ) {
+                        throw Error (`(rus.html.input) called, without (conf.name) `)
+                    }
+                    else
+                    if ( conf.labelInnerHtml && ( ! conf.id ) ) {
+                        throw Error (`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
+                    }
+                    
+                    const defaults = {
+                        type: 'text'
+                    }
+                    
+                    const markup 
+                        = ` ${  conf.label 
+                                ? `<label   for="${ conf.id }"
+                                            > 
+                                            ${ conf.label }
+                                            </label>` 
+                                : ``
+                            }
+                            <input  type="${ conf.type ? conf.type : defaults.type }"
+                                    name="${ conf.name }"
+                                    ${ conf.placeholder ? conf.placeholder : '' }
+                                    ${ conf.id ? conf.id : '' }
+                                    ${ conf.required ? 'required' : '' }
+                                    >`
+                                    
+                    return markup
+                },
+
+                table : conf => {
+                }
+
+        */
+        ,
+    textarea: async conf => {
+        
+        conf = {
+
+            /* defaults */
+            type: 'text',
+
+            /* explicitly passed */
+            ...conf
+        }
+
+        if (!conf.name) {
+            throw Error(`(rus.html.textarea) called, without (conf.name) `)
+        }
+        else
+        if (conf.labelInnerHtml && (!conf.id)) {
+            throw Error(`(rus.html.textarea) called, (conf.labelInnerHtml) without (conf.id)`)
+        }
+
+        const markup = ` ${  conf.labelInnerHtml 
+                        ? `<label   for="${ conf.id }"
+                                    > 
+                                    ${ conf.labelInnerHtml }
+                                    </label>` 
+                        : ``
+                        
+                        /* why do we have to repeat this for <input>/<textarea> etc.? FIXME */
+                    }
+                    <textarea   ${ conf.type        ? `type="${conf.type}"`
+                                                    : '' }
+                                ${ conf.form        ? `form="${conf.form}"`
+                                                    : '' }
+                                ${ conf.id          ? `id="${conf.id}"`
+                                                    : '' }
+                                ${ conf.name        ? `name="${conf.name}"` 
+                                                    : '' }"
+                                ${ conf.value       ? `value="${ conf.value }"` 
+                                                    : '' }
+                                ${ conf.placeholder ? `placeholder="${conf.placeholder}"`
+                                                    : '' }
+                                ${ conf.required    ? 'required'
+                                                    : '' }
+                                ${ conf.readonly    ? `readonly`
+                                                    : ''
+                                }
+                            ></textarea>`
+
         return markup
-    }
-    /*        
-            select : conf => {
-                
-                if ( ! conf.name ) {
-                    throw Error (`(rus.html.input) called, without (conf.name) `)
-                }
-                else
-                if ( conf.labelInnerHtml && ( ! conf.id ) ) {
-                    throw Error (`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
-                }
-                
-                const defaults = {
-                    type: 'text'
-                }
-                
-                const markup 
-                    = ` ${  conf.label 
-                            ? `<label   for="${ conf.id }"
-                                        > 
-                                        ${ conf.label }
-                                        </label>` 
-                            : ``
-                        }
-                        <input  type="${ conf.type ? conf.type : defaults.type }"
-                                name="${ conf.name }"
-                                ${ conf.placeholder ? conf.placeholder : '' }
-                                ${ conf.id ? conf.id : '' }
-                                ${ conf.required ? 'required' : '' }
-                                >`
-                                
-                return markup
-            },
+    },
 
-            table : conf => {
-            }
 
-    */
 }
 
 module.exports = html
