@@ -59,7 +59,11 @@ const adminDeskCellsTableHousekeeping = async(data) => {
 
 
     data.RU.signals.sendResponse = { body: `
-<h1>Housekeeping</h1>
+<h1>Administration: Housekeeping</h1>
+If you're reading this, each cell in the (desk-cells) table was deleted IF
+<br> - its desk was not found in the (desk-schemas) table, OR
+<br> - its column was not found in its desk-schema after the latter was 
+        retrieved from the (desk-schemas) table
 
 <h2>Desk Schemas found: ${ data.RU.io.deskSchemasScan.Count } </h2>
 
