@@ -63,7 +63,7 @@ const adminDeskCellsTableHousekeeping = async(data) => {
 
 <h2>Desk Schemas found: ${ data.RU.io.deskSchemasScan.Count } </h2>
 
-<h2>Orphaned Cells deleted: </h2>
+<h2>Orphaned Cells deleted: ${ orphanedCells.length } </h2>
 (consider breaking this into two stages: orphaned cells listed, before confirmation for deletion)
 
 <pre><code>
