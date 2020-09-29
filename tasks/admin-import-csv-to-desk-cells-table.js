@@ -14,12 +14,9 @@ const adminImportCsvToDeskCellsTable = async(data) => {
         //ReturnConsumedCapacity: 'INDEXES'
     }).promise()
 
-    data.RU.signals.sendResponse = {
-        body: `
-<blockquote>
-    WIP: 
-</blockquote>
-<h1>Administration: Load Data</h1>
+    const csvSubmissionFormResponseBody =  async _ => `
+<h1>Administration: Load CSV Data:</h1>
+<h2>Step 1: CSV Submission</h2>
 
 ${ await rus.html.form ( {
     action: await rus.appUrl([
@@ -64,7 +61,25 @@ ${ await rus.html.form ( {
         await rus.html.input({type:`submit`})
 } ) }
     `
+    
+    const putSubmissionFormResponseBody = async _ => `
+<h1>Administration: Load CSV Data:</h1>
+<h2>Step 2: PUT Submission</h2>
+    `
+    
+    data.RU.signals.sendResponse = {
+        body: `
+<blockquote>
+    WIP: 
+</blockquote>` +
+            (
+                data.RU.request.rawFormString ?
+                await putSubmissionFormResponseBody() :
+                await csvSubmissionFormResponseBody()
+            )
     }
+    
+
 
     rus.mark(`~/tasks/admin-import-csv-to-desk-cells-table.js EXECUTION end`)
 }

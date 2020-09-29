@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `housekeeping task to upload CSV to DESKS`
+const gitCommitMessage = `WIP: two views one task <= housekeeping task to upload CSV to DESKS`
 
 
 module.exports = {
@@ -140,7 +140,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 1,
+    performance: 0,
 
     /*  platform:
      *  
@@ -216,6 +216,6 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 0,
+    verbosity: 4,
 
 }
