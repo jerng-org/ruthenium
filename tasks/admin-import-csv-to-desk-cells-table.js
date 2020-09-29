@@ -36,11 +36,11 @@ ${ await rus.html.form ( {
             options: data.RU.io.deskSchemasScan.Items.map(_schema => {
                 return {
                     value: _schema.name,
-                    innerHtml: _schema.
+                    innerHtml: _schema.name
                 }
             })
             
-        }) + 
+        })  + 
         await rus.html.textarea({
             name:`desk-cells-as-csv`,
             id:`desk-cells-as-csv`,
