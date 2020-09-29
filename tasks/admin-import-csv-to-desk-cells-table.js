@@ -8,12 +8,11 @@ const rus = require('/var/task/modules/r-u-s.js')
 const adminImportCsvToDeskCellsTable = async(data) => {
 
     rus.mark(`~/tasks/admin-import-csv-to-desk-cells-table.js EXECUTION start`)
-    // YOUR CODE HERE
 
-    // set data in ( data.RU.io.thisIsMyName )
-
-
-
+    data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
+        TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
+        //ReturnConsumedCapacity: 'INDEXES'
+    }).promise()
 
     data.RU.signals.sendResponse = {
         body: `
