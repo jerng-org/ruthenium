@@ -28,6 +28,16 @@ ${ await rus.html.form ( {
     ]),
     class:`ru-card`,
     innerHtml:  
+        await rus.html.input({
+            name:`desk-schemas[name]`,
+            id:`desk-schemas[name]`,
+            labelInnerHtml:`Desk schema name <sub>Case Sensitive</sub>`,
+            placeholder:`--enter a schema name--`,
+            type: `text`,
+            required:true,
+            
+        }) + 
+        /*  Disfavoured alternative (because it doesn't create a desk if the specified desk is not found):
         await rus.html.select({
             name:`desk-schemas[name]`,
             id:`desk-schemas[name]`,
@@ -40,7 +50,7 @@ ${ await rus.html.form ( {
                 }
             })
             
-        })  + 
+        })  +*/ 
         await rus.html.textarea({
             name:`desk-cells-as-csv`,
             id:`desk-cells-as-csv`,
