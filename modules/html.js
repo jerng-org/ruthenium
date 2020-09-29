@@ -102,11 +102,11 @@ const html = {
 
     fieldset: async conf => {
 
-            if (!conf.innerHtml) {
-                throw Error(`(rus.html.legend) called, without (conf.InnerHtml)`)
-            }
+        if (!conf.innerHtml) {
+            throw Error(`(rus.html.legend) called, without (conf.InnerHtml)`)
+        }
 
-            const markup = `
+        const markup = `
             <fieldset
                 ${ conf.disabled    ? `disabled`            
                                     : `` }
@@ -125,48 +125,40 @@ const html = {
                 ${ conf.innerHtml }
             </fieldset>`
 
-            return markup
+        return markup
+    },
+    select: conf => {
+
+        if (!conf.name) {
+            throw Error(`(rus.html.input) called, without (conf.name) `)
         }
-        /*        
-                select : conf => {
-                    
-                    if ( ! conf.name ) {
-                        throw Error (`(rus.html.input) called, without (conf.name) `)
-                    }
-                    else
-                    if ( conf.labelInnerHtml && ( ! conf.id ) ) {
-                        throw Error (`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
-                    }
-                    
-                    const defaults = {
-                        type: 'text'
-                    }
-                    
-                    const markup 
-                        = ` ${  conf.label 
+        else
+        if (conf.labelInnerHtml && (!conf.id)) {
+            throw Error(`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
+        }
+
+        const defaults = {
+        }
+
+        const markup = ` ${  conf.label 
                                 ? `<label   for="${ conf.id }"
                                             > 
                                             ${ conf.label }
                                             </label>` 
                                 : ``
                             }
-                            <input  type="${ conf.type ? conf.type : defaults.type }"
-                                    name="${ conf.name }"
-                                    ${ conf.placeholder ? conf.placeholder : '' }
+                            <select  name="${ conf.name }"
                                     ${ conf.id ? conf.id : '' }
                                     ${ conf.required ? 'required' : '' }
-                                    >`
-                                    
-                    return markup
-                },
+                                    >
+                            </select>`
 
-                table : conf => {
-                }
+        return markup
+    },
 
-        */
-        ,
+    //table: conf => {}  ,
     textarea: async conf => {
-        
+
         conf = {
 
             /* defaults */
