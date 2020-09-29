@@ -150,7 +150,20 @@ const html = {
                             <select  name="${ conf.name }"
                                     ${ conf.id ? conf.id : '' }
                                     ${ conf.required ? 'required' : '' }
-                                    >
+                            >
+                                    
+                                ${
+                                    conf.options.map( o  => `
+                                    
+                                        <option value="${ o.value }"
+                                        
+                                        >
+                                            ${ o.innerHtml }
+                                        </option>
+                                    
+                                    ` )          
+                                }
+                                    
                             </select>`
 
         return markup

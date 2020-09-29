@@ -28,13 +28,17 @@ ${ await rus.html.form ( {
     ]),
     class:`ru-card`,
     innerHtml:  
-        await rus.html.input({
+        await rus.html.select({
             name:`desk-schemas[name]`,
             id:`desk-schemas[name]`,
-            labelInnerHtml:`Desk schema name <sub>Case Sensitive</sub>`,
-            placeholder:`--enter a schema name--`,
-            type: `text`,
+            labelInnerHtml:`Pick a Desk Schema, by name`,
             required:true,
+            options: data.RU.io.deskSchemasScan.Items.map(_schema => {
+                return {
+                    value: _schema.name,
+                    innerHtml: _schema.
+                }
+            })
             
         }) + 
         await rus.html.textarea({
