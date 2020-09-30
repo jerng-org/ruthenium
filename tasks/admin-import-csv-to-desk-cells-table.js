@@ -66,18 +66,28 @@ Desk cells
             <a href="https://tools.ietf.org/html/rfc4180#section-2">here</a>
         </sup>
     </sub>
-    <span id="desk-cells-as-csv-validity"></span>
 `,
             placeholder:`--enter a PROPER comma-separated value-- (scripted [pattern] regex validation is not yet done)`,
             required:true,
+            'data-pattern':namePattern /* test value */,
             onkeyup:`
-document.getElementById('desk-cells-as-csv-validity').innerText = 11;
+console.log('--start onkeyup--')
+const textarea = document.getElementById('desk-cells-as-csv');
+const pattern = textarea.dataset.pattern;
+const re = new RegExp ( pattern ) ;
+const execReturned = re.exec ( textarea.value );
+const outputElement = document.getElementById('desk-cells-as-csv-validity');
+outputElement.innerText = JSON.stringify(execReturned,null,4);
+console.log('--end onkeyup--', textarea, pattern, re, execReturned)
 ` 
             
             // https://stackoverflow.com/questions/21325188/regex-to-validate-textfield-with-csv-format-using-javascript/21325265
             // https://tools.ietf.org/html/rfc4180#section-2
         })  +
-        await rus.html.input({type:`submit`})
+        `<br>CSV Validation :
+         <br><pre id="desk-cells-as-csv-validity"> nothing yet to show </pre><br>`
+        +
+    await rus.html.input({type:`submit`})
 } ) }
     `
     }
