@@ -69,7 +69,7 @@ Desk cells
 `,
             placeholder:`--enter a PROPER comma-separated value-- (scripted [pattern] regex validation is not yet done)`,
             required:true,
-            'data-pattern':namePattern /* test value */,
+            'data-pattern':`(?<=\r|\n|^)(?!\r|\n|$)(?:(?:"(?<Value>(?:[^"]|"")*)"|(?<Value>(?!")[^,\r\n]+)|"(?<OpenValue>(?:[^"]|"")*)(?=\r|\n|$)|(?<Value>))(?:,|(?=\r|\n|$)))+?(?:(?<=,)(?<Value>))?(?:\r\n|\r|\n|$)`,
             onkeyup:`
 console.log('--start onkeyup--')
 const textarea = document.getElementById('desk-cells-as-csv');
@@ -81,7 +81,7 @@ outputElement.innerText = JSON.stringify(execReturned,null,4);
 console.log('--end onkeyup--', textarea, pattern, re, execReturned)
 ` 
             
-            // https://stackoverflow.com/questions/21325188/regex-to-validate-textfield-with-csv-format-using-javascript/21325265
+            // https://stackoverflow.com/a/39939559
             // https://tools.ietf.org/html/rfc4180#section-2
         })  +
         `<br>CSV Validation :
