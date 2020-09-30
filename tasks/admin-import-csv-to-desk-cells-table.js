@@ -105,7 +105,7 @@ Desk cells
                 });
                 grid.push(row);
             });
-            return grid;
+            return grid; 
         }
 
     </script>
@@ -117,7 +117,7 @@ console.log('--start onkeyup--')
 const textarea = document.getElementById('desk-cells-as-csv');
 const textareaValue = textarea.value;
 const outputElement = document.getElementById('desk-cells-as-csv-validity');
-const csvAsArray = parse(textareaValue);
+const csvAsArray = parseCsv(textareaValue);
 outputElement.innerText = JSON.stringify(csvAsArray,null,4);
 console.log('--end onkeyup--')
 ` 
