@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: (textarea validation done) <= housekeeping task to upload CSV to DESKS`
+const gitCommitMessage = `WIP: (pseudocode parser done) <= housekeeping task to upload CSV to DESKS`
 
 
 module.exports = {
