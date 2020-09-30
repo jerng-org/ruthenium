@@ -127,8 +127,8 @@ Desk cells
                 fieldQuoteType: 0, // (where 0 => unknown, 1 => unquoted, 2 => quoted )
                 headerFields: null,
 
+                currentField: '',
                 currentRecordFields: [],
-                currentFieldChars: [],
                 parsedRecords: []
             }
             const setFieldQuoteType = _type => {
@@ -140,12 +140,14 @@ Desk cells
             }
             
             const appendField = _char => {
-                _store.currentFieldChars.push ( _char )
+                console.log('parseCsv(): appendField()')
+                _store.currentField = _store.currentField + _char
             }
             
             const birthField = _ => {
-                _store.currentRecordFields.push ( _store.currentFieldChars.join() )
-                _store.currentFieldChars = []  // !!! RESET !!!
+                _store.currentRecordFields.push ( _store.currentField )
+                _store.currentField = ''  // !!! RESET !!!
+                _store.fieldQuoteType = 0  // !!! RESET !!!
             }
             
             const birthRecord = _ => {
@@ -154,7 +156,7 @@ Desk cells
             }
             
             const abortField = _ => {
-                _store.currentFieldChars = [] // !!! RESET !!!
+                _store.currentField = '' // !!! RESET !!!
             }
             
             const abortRecord = _ => {
@@ -165,7 +167,7 @@ Desk cells
                 abortField()
                 abortRecord()
                 _store.parseAborted = true
-                _store.summary = _msg
+                _store.summary = 'parse aborted: ' + _msg
             }
             
             const handleLineBreakOutsideDoubleQuote = _ => {
@@ -178,14 +180,22 @@ Desk cells
                 
                 if ( _store.currentRecordFields.length < _store.headerFields.length )
                 {
-                    abortParse ('currentRecordFields.length < headerFields.length, and CRLF was encountered') 
+                    abortParse ('a row had fewer fields than there were header fields') 
+                }
+                
+                else 
+                {
+                    birthRecord()
                 }
                 
             }
             
             console.log('parseCsv(): before loop')
             
-            for ( let index = 0; index < _text.length; index++) {
+            if ( _text[ _text.length -1 ] == '\\n' ) {
+                _text = _text.substring(0, _text.length - 1);
+            }
+            for ( let index = 0; index <= _text.length; index++) {
                 
                 console.log('parseCsv(): char: ' + _text[index])
                 
@@ -193,6 +203,18 @@ Desk cells
                 { 
                     console.log('parseCsv(): parsedAborted==truthy')
                     break 
+                }
+                else 
+                
+                if ( undefined == _text[index] ) 
+                {
+                    if ( _store.fieldQuoteType == 2) {
+                        abortParse('unclosed quoted field encountered at end of text')
+                        break
+                    }
+                    // end of text
+                    birthField()
+                    handleLineBreakOutsideDoubleQuote()
                 }
                 else 
                 {
@@ -223,6 +245,7 @@ Desk cells
                                     setFieldQuoteType(1)
                                     appendField(_text[index])
                             }
+                            break
 
                         case (1): // !!! IN AN UNQUOTED FIELD !!!
 
@@ -247,32 +270,73 @@ Desk cells
                                 default:
                                     appendField(_text[index])
                             }
+                            break
+                            
                         case (2): //  !!! IN A QUOTED FIELD !!!
 
-                            switch (_text[index]) {
-
+                            switch (_text[index]) { // " ... 'it' ... below:"
 
                                 case ('"'):
 
-                                if (_text[index + 1] == '"') 
-                                {
-                                    appendField(_text[index])
-                                    index++ // << skip forward >>
-                                }
-                                else 
-                                {
-                                    birthField()
-                                }
-                                break
+                                    switch (_text[index + 1]) {
+                                    
+                                        case ('"'):
+                                            
+                                            // 'it''s an ESCAPED double-quote
+                                            appendField(_text[index])
+                                            index++ // << skip forward >>
+                                            break
+                                        
+                                       case (','):
+                                       
+                                            // 'it''s the CLOSING double-quote 
+                                            // EO-field
+                                            birthField()
+                                            index++ // << skip forward >>
+                                            break
+                                        
+                                        case ('\\n'):
+                                       
+                                            // 'it''s the CLOSING double-quote 
+                                            // EO-field, EO-record
+                                            birthField()
+                                            birthRecord()
+                                            index++ // << skip forward >>
+                                            break
+                                       
+                                        case ( undefined ): 
+                                        
+                                            // 'it''s the CLOSING double-quote 
+                                            // EO-field, EO-record, EO-text
+                                            birthField()
+                                            birthRecord()
+                                            index++ // << skip forward >>
+                                            break
+                                        
+                                        default:
+                                            // it's the CLOSING double-quote 
+                                            abortParse('a double-quoted field was followed by an illegal character: ' + _text[index+1] )
+                                    }
+                                    break
 
                                 default:
                                     appendField(_text[index])
                             }
+                            break
 
                     }
                 }
                     
+                console.log('parseCsv(): _store: ' + JSON.stringify(_store,null,4))
+                
+            } // for
+            
+            if (!_store.parseAborted) {
+                _store.summary = 'parse succeeded'
             }
+            
+            console.log('parseCsv(): summary: ' + _store.summary)
+            
             return _store.parsedRecords
         }
         
