@@ -139,8 +139,7 @@ const html = {
             throw Error(`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
         }
 
-        const defaults = {
-        }
+        const defaults = {}
 
         const markup = ` ${  conf.label 
                                 ? `<label   for="${ conf.id }"
@@ -213,6 +212,9 @@ const html = {
                                 ${ conf.placeholder ? `placeholder="${conf.placeholder}"`
                                                     : '' }
                                 ${ conf.required    ? 'required'
+                                                    : '' }
+                                ${ conf['data-pattern']
+                                ? `data-pattern="${ conf['data-pattern'] }"`
                                                     : '' }
                                 ${ conf.readonly    ? `readonly`
                                                     : '' }
