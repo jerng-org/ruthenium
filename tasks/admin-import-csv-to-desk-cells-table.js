@@ -82,23 +82,19 @@ Desk cells
             
             Therefore, for any data entered A HEADER IS MANDATORY.
 
-    x.  From RFC's-2:
+    2.  From RFC's-2:
     
         Remove ONE (1) trailing CRLF, if present.
         
-    y.  From RFC's-1
-    
-        Split INPUT by CRLF (\\n), resulting in an ARRAY of RECORDS
-    
-    a.  From RFC's-3
+    3.  From RFC's-3
     
         We COUNT the number of HEADER fields.
         
         If any RECORD has a different number of fields, the parser exits and 
         cleans up. This further enforces the "same number of fields per record"
-        requirement  from the RFC's-4.
+        requirement from the RFC's-4.
 
-    b.  Unquoted fields:
+    4a.  Unquoted fields:
     
             From RFC's-4
     
@@ -111,57 +107,141 @@ Desk cells
                 - comma                         (from RFC's-6)
                 - line-breaks (CRLF) => (\\n)   (from RFC's-6)
     
-    1.  Begin by setting:
-    
-            -   parseSuccess = false
-            
-            -   currentRecordIsHeader = true
-            -   beginningOfLine = true
-            -   expectingNextField = true
-            -   fieldQuoteType = 0
-                    (where 0 => unknown, 1 => unquoted, 2 => quoted )
-            
-            -   headerFields = []
-            -   currentRecordFields = [] 
-            -   currentFieldChars = []
-            -   parsedRecords = []
-            
-    2.  While currentRecordIsHeader==true
-            
-            While beginningOfLine==true
-    
-                While fieldQuoteTypeKnown=falsy
-            
-                    switch ( next char )
-            
-                        case (\n):
-                
-                            - do not push the curren
-    
-    Whenever expectingNextField==true,
-    
-            From RFC's-5
-
-                If the first character read is a line-break, then 
-                
-
-        
-    2a. Quoted fields:
+    4b. Quoted fields:
     
             From RFC's-7
             
                 If a double-(double-quote) is found, this is read as part of the
                 field, and parsing of the field continues.
     
-                Otherwise, we 
-        
+    5.  Begin by setting:
     
+            -   parseAborted = false
+            
+            -   fieldQuoteType = 0
+                    (where 0 => unknown, 1 => unquoted, 2 => quoted )
+            
+            -   headerFields = undefined
+            -   currentRecordFields = [] 
+            -   currentFieldChars = []
+            -   parsedRecords = []
+            
+            setFieldQuoteType = _type => {
+                fieldQuoteType = _type
+            }
+            
+            setHeaders = _ => {
+                headerFields = currentRecordFields
+            }
+            
+            appendField = _char => {
+                currentFieldChars.push ( _char )
+            }
+            
+            birthField = _ => {
+                currentRecordFields.push ( currentFieldChars.join() )
+                currentFieldChars = []  !!! RESET !!!
+            }
+            
+            birthRecord = _ => {
+                parsedRecords.push ( currentRecordFields )
+                currentRecordFields = []    !!! RESET !!!
+            }
+            
+            abortField = _ => {
+                currentFieldChars = []  !!! RESET !!!
+            }
+            
+            abortRecord = _ => {
+                currentRecordFields = []  !!! RESET !!!
+            }
+            
+            abortParse = msg => {
+                abortField()
+                abortRecord()
+                parseAborted = true
+                return msg
+            }
+            
+            handleLineBreakOutsideDoubleQuote = _ => {
+                if 
+                    headerFields==falsy
+                
+                    then
+                        setHeaders()
+                        birthRecord()
+                else
+                if
+                    currentRecordFields.length < headerFields.length
+                   
+                    then 
+                        abortParse ('currentRecordFields.length < headerFields.length, and CRLF was encountered') 
+            }
+            
+    6.  Loop through characters:
     
-   7.  If double-quotes are used to enclose fields, then a double-quote
-       appearing inside a field must be escaped by preceding it with
-       another double quote.  For example:
+        if parseAborted==falsy, then consider NEXT_CHAR, else break loop;
+    
+            case ( fieldQuoteTypeKnown==0)      !!! NOT IN A FIELD !!!
 
-       "aaa","b""bb","ccc"
+                case ( NEXT_CHAR == " ):
+                
+                    - setFieldQuoteType ( 2 )
+                    - break
+                
+                case ( NEXT_CHAR == , ):
+                    
+                    - birthField()
+                    - break
+                    
+                case ( NEXT_CHAR == \\n ):
+                    
+                    - birthField()
+                    - handleLineBreakOutsideDoubleQuote()
+                    - break
+                    
+                default:
+                
+                    - setFieldQuoteType ( 1 )
+                    - appendField ( NEXT_CHAR )
+                    
+            case ( fieldQuoteTypeKnown==1)    !!! UNQUOTED FIELD !!!
+
+                case ( NEXT_CHAR == " ):
+                
+                    - abortParse('double-quote encountered in unquoted field')
+                    - break
+                
+                case ( NEXT_CHAR == , ):
+                    
+                    - birthField()
+                    - break
+                    
+                case ( NEXT_CHAR == \\n ):
+                    
+                    - birthField()
+                    - handleLineBreakOutsideDoubleQuote()
+                    - break
+                    
+                default:
+                    - appendField ( NEXT_CHAR )
+                
+            case ( fieldQuoteTypeKnown==2)    !!! QUOTED FIELD !!!
+
+                case ( NEXT_CHAR == " ):
+                
+                    if 
+                        NEXT_NEXT_CHAR == "
+                    then
+                        appendField ( NEXT_CHAR )
+                        << skip to NEXT_NEXT_NEXT_CHAR >>
+                        break
+                
+                default:
+                    - currentFieldChars.push ( NEXT_CHAR )
+                
+        
+
 */    
         console.warn('<< wrong place to put a script tag (WIP) >>')
         
