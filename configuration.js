@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: two views one task <= housekeeping task to upload CSV to DESKS`
+const gitCommitMessage = `WIP: (models: regex_test passes to input[pattern]) <= housekeeping task to upload CSV to DESKS`
 
 
 module.exports = {

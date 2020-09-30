@@ -88,7 +88,7 @@ const html = {
                                                 : '' }"
                             ${ conf.value       ? `value="${ conf.value }"` 
                                                 : '' }
-                            ${ conf.value       ? `pattern="${ conf.pattern }"` 
+                            ${ conf.pattern     ? `pattern="${ conf.pattern }"` 
                                                 : '' }
                             ${ conf.placeholder ? `placeholder="${conf.placeholder}"`
                                                 : '' }
