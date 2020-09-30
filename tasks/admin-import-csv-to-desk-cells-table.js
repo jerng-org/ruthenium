@@ -114,136 +114,160 @@ Desk cells
                 If a double-(double-quote) is found, this is read as part of the
                 field, and parsing of the field continues.
     
-    5.  Begin by setting:
-    
-            -   parseAborted = false
-            
-            -   fieldQuoteType = 0
-                    (where 0 => unknown, 1 => unquoted, 2 => quoted )
-            
-            -   headerFields = undefined
-            -   currentRecordFields = [] 
-            -   currentFieldChars = []
-            -   parsedRecords = []
-            
-            setFieldQuoteType = _type => {
-                fieldQuoteType = _type
-            }
-            
-            setHeaders = _ => {
-                headerFields = currentRecordFields
-            }
-            
-            appendField = _char => {
-                currentFieldChars.push ( _char )
-            }
-            
-            birthField = _ => {
-                currentRecordFields.push ( currentFieldChars.join() )
-                currentFieldChars = []  !!! RESET !!!
-            }
-            
-            birthRecord = _ => {
-                parsedRecords.push ( currentRecordFields )
-                currentRecordFields = []    !!! RESET !!!
-            }
-            
-            abortField = _ => {
-                currentFieldChars = []  !!! RESET !!!
-            }
-            
-            abortRecord = _ => {
-                currentRecordFields = []  !!! RESET !!!
-            }
-            
-            abortParse = msg => {
-                abortField()
-                abortRecord()
-                parseAborted = true
-                return msg
-            }
-            
-            handleLineBreakOutsideDoubleQuote = _ => {
-                if 
-                    headerFields==falsy
-                
-                    then
-                        setHeaders()
-                        birthRecord()
-                else
-                if
-                    currentRecordFields.length < headerFields.length
-                   
-                    then 
-                        abortParse ('currentRecordFields.length < headerFields.length, and CRLF was encountered') 
-            }
-            
-    6.  Loop through characters:
-    
-        if parseAborted==falsy, then consider NEXT_CHAR, else break loop;
-    
-            case ( fieldQuoteTypeKnown==0)      !!! NOT IN A FIELD !!!
-
-                case ( NEXT_CHAR == " ):
-                
-                    - setFieldQuoteType ( 2 )
-                    - break
-                
-                case ( NEXT_CHAR == , ):
-                    
-                    - birthField()
-                    - break
-                    
-                case ( NEXT_CHAR == \\n ):
-                    
-                    - birthField()
-                    - handleLineBreakOutsideDoubleQuote()
-                    - break
-                    
-                default:
-                
-                    - setFieldQuoteType ( 1 )
-                    - appendField ( NEXT_CHAR )
-                    
-            case ( fieldQuoteTypeKnown==1)    !!! UNQUOTED FIELD !!!
-
-                case ( NEXT_CHAR == " ):
-                
-                    - abortParse('double-quote encountered in unquoted field')
-                    - break
-                
-                case ( NEXT_CHAR == , ):
-                    
-                    - birthField()
-                    - break
-                    
-                case ( NEXT_CHAR == \\n ):
-                    
-                    - birthField()
-                    - handleLineBreakOutsideDoubleQuote()
-                    - break
-                    
-                default:
-                    - appendField ( NEXT_CHAR )
-                
-            case ( fieldQuoteTypeKnown==2)    !!! QUOTED FIELD !!!
-
-                case ( NEXT_CHAR == " ):
-                
-                    if 
-                        NEXT_NEXT_CHAR == "
-                    then
-                        appendField ( NEXT_CHAR )
-                        << skip to NEXT_NEXT_NEXT_CHAR >>
-                        break
-                
-                default:
-                    - currentFieldChars.push ( NEXT_CHAR )
-                
         
 
 */    
         console.warn('<< wrong place to put a script tag (WIP) >>')
+        
+        parseCsv = _text => {
+            
+            const _store = {
+
+                parseAborted: false,
+                fieldQuoteType: 0, // (where 0 => unknown, 1 => unquoted, 2 => quoted )
+                headerFields: null,
+
+                currentRecordFields: [],
+                currentFieldChars: [],
+                parsedRecords: []
+            }
+            const setFieldQuoteType = _type => {
+                _store.fieldQuoteType = _type
+            }
+            
+            const setHeaders = _ => {
+                _store.headerFields = _store.currentRecordFields
+            }
+            
+            const appendField = _char => {
+                _store.currentFieldChars.push ( _char )
+            }
+            
+            const birthField = _ => {
+                _store.currentRecordFields.push ( _store.currentFieldChars.join() )
+                _store.currentFieldChars = []  // !!! RESET !!!
+            }
+            
+            const birthRecord = _ => {
+                _store.parsedRecords.push ( _store.currentRecordFields )
+                _store.currentRecordFields = [] // !!! RESET !!!
+            }
+            
+            const abortField = _ => {
+                _store.currentFieldChars = [] // !!! RESET !!!
+            }
+            
+            const abortRecord = _ => {
+                _store.currentRecordFields = [] // !!! RESET !!!
+            }
+            
+            const abortParse = _msg => {
+                abortField()
+                abortRecord()
+                _store.parseAborted = true
+                _store.summary = _msg
+            }
+            
+            const handleLineBreakOutsideDoubleQuote = _ => {
+                if ( ! _store.headerFields) 
+                {
+                    setHeaders()
+                    birthRecord()
+                }
+                else
+                
+                if ( _store.currentRecordFields.length < _store.headerFields.length )
+                {
+                    abortParse ('currentRecordFields.length < headerFields.length, and CRLF was encountered') 
+                }
+                
+            }
+            for ( const index = 0; index < _text.length; index++) {
+                
+                if ( _store.parseAborted )
+                { 
+                    break 
+                }
+                else 
+                {
+                    switch (_store.fieldQuoteType)
+                    {
+                        case (0): // !!! NOT IN A FIELD !!!
+
+                            switch (_text[index]) {
+
+                                case ('"'):
+
+                                    setFieldQuoteType(2)
+                                    break
+
+                                case (','):
+
+                                    birthField()
+                                    break
+
+                                case ('\\n'):
+
+                                    birthField()
+                                    handleLineBreakOutsideDoubleQuote()
+                                    break
+
+                                default:
+                                    setFieldQuoteType(1)
+                                    appendField(_text[index])
+                            }
+
+                        case (1): // !!! IN AN UNQUOTED FIELD !!!
+
+                            switch (_text[index]) {
+
+                                case ('"'):
+
+                                    abortParse('double-quote encountered in unquoted field')
+                                    break
+
+                                case (','):
+
+                                    birthField()
+                                    break
+
+                                case ('\\n'):
+
+                                    birthField()
+                                    handleLineBreakOutsideDoubleQuote()
+                                    break
+
+                                default:
+                                    appendField(_text[index])
+                            }
+                        case (2): //  !!! IN A QUOTED FIELD !!!
+
+                            switch (_text[index]) {
+
+
+                                case ('"'):
+
+                                if (_text[index + 1] == '"') 
+                                {
+                                    appendField(_text[index])
+                                    index++ // << skip forward >>
+                                }
+                                else 
+                                {
+                                    birthField()
+                                }
+                                break
+
+                                default:
+                                    currentFieldChars.push(_text[index])
+                            }
+
+                    }
+                }
+                    
+            }
+            return _store.parsedRecords
+        }
         
     </script>
 `,
