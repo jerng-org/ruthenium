@@ -53,14 +53,26 @@ ${ await rus.html.form ( {
                 }
             })
             
-        })  +*/ 
+        })  +*/
         await rus.html.textarea({
             name:`desk-cells-as-csv`,
             id:`desk-cells-as-csv`,
-            labelInnerHtml:`Desk cells <sub>CSV <sup>as defined <a href="https://tools.ietf.org/html/rfc4180#section-2">here</a></sup></sub>`,
+            labelInnerHtml:`
+Desk cells 
+    <sub>
+        CSV 
+        <sup>
+            as defined 
+            <a href="https://tools.ietf.org/html/rfc4180#section-2">here</a>
+        </sup>
+    </sub>
+    <span id="desk-cells-as-csv-validity"></span>
+`,
             placeholder:`--enter a PROPER comma-separated value-- (scripted [pattern] regex validation is not yet done)`,
             required:true,
-            onchange:`console.log(1)` 
+            onkeyup:`
+document.getElementById('desk-cells-as-csv-validity').innerText = 11;
+` 
             
             // https://stackoverflow.com/questions/21325188/regex-to-validate-textfield-with-csv-format-using-javascript/21325265
             // https://tools.ietf.org/html/rfc4180#section-2
