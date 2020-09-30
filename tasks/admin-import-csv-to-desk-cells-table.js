@@ -71,6 +71,7 @@ Desk cells
             required:true,
 //            'data-pattern':`(?<=\r|\n|^)(?!\r|\n|$)(?:(?:"(?<Value>(?:[^"]|"")*)"|(?<Value>(?!")[^,\r\n]+)|"(?<OpenValue>(?:[^"]|"")*)(?=\r|\n|$)|(?<Value>))(?:,|(?=\r|\n|$)))+?(?:(?<=,)(?<Value>))?(?:\r\n|\r|\n|$)`,
             'data-pattern':`(?\<=\\r|\\n|^)(?!\\r|\\n|$)(?:(?:\"(?\<Value\>(?:[^\"]|\"\")*)\"|(?\<Value\>(?!\")[^,\\r\\n]+)|\"(?\<OpenValue\>(?:[^\"]|\"\")*)(?=\\r|\\n|$)|(?\<Value\>))(?:,|(?=\\r|\\n|$)))+?(?:(?\<=,)(?\<Value\>))?(?:\\r\\n|\\r|\\n|$)`,
+            
             onkeyup:`
 console.log('--start onkeyup--')
 const textarea = document.getElementById('desk-cells-as-csv');
