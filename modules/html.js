@@ -216,7 +216,7 @@ const html = {
                                                     : '' }
                                 ${ conf.readonly    ? `readonly`
                                                     : '' }
-                                ${ conf.onkeyup    ? `onchange="${  conf.onkeyup }"`
+                                ${ conf.onkeyup    ? `onkeyup="${  conf.onkeyup }"`
                                                     : '' }
                             ></textarea>`
 
