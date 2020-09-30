@@ -86,8 +86,6 @@ Desk cells
             return ret;
         };
 
-let test = '"one","two with escaped """" double quotes""","three, with, commas",four with no quotes,"five with CRLF\r\n"\r\n"2nd line one","two with escaped """" double quotes""","three, with, commas",four with no quotes,"five with CRLF\r\n"';
-console.log(csvToArray(test));
     </script>
 `,
             placeholder:`--enter a PROPER comma-separated value-- (scripted [pattern] regex validation is not yet done)`,
