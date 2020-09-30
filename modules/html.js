@@ -213,9 +213,6 @@ const html = {
                                                     : '' }
                                 ${ conf.required    ? 'required'
                                                     : '' }
-                                ${ conf['data-pattern']
-                                ? `data-pattern="${ conf['data-pattern'] }"`
-                                                    : '' }
                                 ${ conf.readonly    ? `readonly`
                                                     : '' }
                                 ${ conf.onkeyup    ? `onkeyup="${  conf.onkeyup }"`
