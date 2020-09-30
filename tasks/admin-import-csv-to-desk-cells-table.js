@@ -66,20 +66,40 @@ Desk cells
             <a href="https://tools.ietf.org/html/rfc4180#section-2">here</a>
         </sup>
     </sub>
+    <script>
+    
+        console.warn('<< wrong place to put a script tag (WIP) >>')
+        
+        function csvToArray(text) {
+            let p = '', row = [''], ret = [row], i = 0, r = 0, s = !0, l;
+            for (l of text) {
+                if ('"' === l) {
+                    if (s && l === p) row[i] += l;
+                    s = !s;
+                } else if (',' === l && s) l = row[++i] = '';
+                else if ('\\n' === l && s) {
+                    if ('\\r' === p) row[i] = row[i].slice(0, -1);
+                    row = ret[++r] = [l = '']; i = 0;
+                } else row[i] += l;
+                p = l;
+            }
+            return ret;
+        };
+
+let test = '"one","two with escaped """" double quotes""","three, with, commas",four with no quotes,"five with CRLF\r\n"\r\n"2nd line one","two with escaped """" double quotes""","three, with, commas",four with no quotes,"five with CRLF\r\n"';
+console.log(csvToArray(test));
+    </script>
 `,
             placeholder:`--enter a PROPER comma-separated value-- (scripted [pattern] regex validation is not yet done)`,
             required:true,
-//            'data-pattern':`(?<=\r|\n|^)(?!\r|\n|$)(?:(?:"(?<Value>(?:[^"]|"")*)"|(?<Value>(?!")[^,\r\n]+)|"(?<OpenValue>(?:[^"]|"")*)(?=\r|\n|$)|(?<Value>))(?:,|(?=\r|\n|$)))+?(?:(?<=,)(?<Value>))?(?:\r\n|\r|\n|$)`,
-            'data-pattern':`(?<=\\r|\\n|^)(?!\\r|\\n|$)(?:(?:&quot;(?<Value>(?:[^&quot;]|&quot;&quot;)*)&quot;|(?<Value>(?!&quot;)[^,\\r\\n]+)|&quot;(?<OpenValue>(?:[^&quot;]|&quot;&quot;)*)(?=\\r|\\n|$)|(?<Value>))(?:,|(?=\\r|\\n|$)))+?(?:(?<=,)(?<Value>))?(?:\\r\\n|\\r|\\n|$)`,
             onkeyup:`
 console.log('--start onkeyup--')
 const textarea = document.getElementById('desk-cells-as-csv');
-const pattern = textarea.dataset.pattern;
-const re = new RegExp ( pattern ) ;
-const execReturned = re.exec ( textarea.value );
+const textareaValue = textarea.value;
 const outputElement = document.getElementById('desk-cells-as-csv-validity');
-outputElement.innerText = JSON.stringify(execReturned,null,4);
-console.log('--end onkeyup--', textarea, pattern, re, execReturned)
+const csvAsArray = csvToArray(textareaValue);
+outputElement.innerText = JSON.stringify(csvAsArray,null,4);
+console.log('--end onkeyup--')
 ` 
             
             // https://stackoverflow.com/a/39939559
