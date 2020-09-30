@@ -14,7 +14,12 @@ const adminImportCsvToDeskCellsTable = async(data) => {
         //ReturnConsumedCapacity: 'INDEXES'
     }).promise()
 
-    const csvSubmissionFormResponseBody =  async _ => `
+    const csvSubmissionFormResponseBody =  async _ => { 
+    
+        const deskSchemasModel = require('/var/task/io/models/desk-schemas.js')
+        const namePattern = deskSchemasModel.subs.name.self.rules.regex_test
+        
+        return `
 <h1>Administration: Load CSV Data:</h1>
 <h2>Step 1: CSV Submission</h2>
 
@@ -31,6 +36,7 @@ ${ await rus.html.form ( {
             labelInnerHtml:`Desk schema name <sub>Case Sensitive</sub>`,
             placeholder:`--enter a schema name--`,
             type: `text`,
+            pattern: namePattern,
             required:true,
             
         }) + 
@@ -61,6 +67,7 @@ ${ await rus.html.form ( {
         await rus.html.input({type:`submit`})
 } ) }
     `
+    }
     
     const putSubmissionFormResponseBody = async _ => `
 <h1>Administration: Load CSV Data:</h1>

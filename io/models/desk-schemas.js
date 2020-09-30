@@ -5,67 +5,68 @@ const conf = require(`/var/task/configuration.js`)
 // Types and Sub-types
 const deskSchemas = {
 
-    self:   {
-        many:   false,
-        rules:  {
-            count_gt:   0
+    self: {
+        many: false,
+        rules: {
+            count_gt: 0
         },
-        notes:  ''
+        notes: ''
     },
-    subs:   {
-        
+    subs: {
+
         name: {
-            self:   {
-                many:   false,
+            self: {
+                many: false,
                 rules: {
-                    count_gt:   0
+                    count_gt: 0,
+                    regex_test: "/[^A-Z\\[\\]\\s]+/"
                 }
             },
-            notes:  ''
+            notes: ''
         },
         // desk-schemas/name
-        
+
         columns: {
-            
+
             self: {
-                many:   true,
-                rules:  {
-                    count_gt:   0
+                many: true,
+                rules: {
+                    count_gt: 0
                 },
-                notes:  ''
+                notes: ''
             },
             subs: {
-              
+
                 name: {
                     self: {
-                        many:   false,
-                        rules:  {
-                            count_gt:   0,
+                        many: false,
+                        rules: {
+                            count_gt: 0,
                             regex_test: "/[^A-Z\\[\\]\\s]+/"
                         },
                         notes: ''
                     }
                 },
                 // desk-schemas/columns/name
-              
+
                 type: {
                     self: {
-                        many:   false,
-                        rules:  {
-                            count_gt:       0,
-                            included_in:    conf.storage.deskCellTypeKeys
+                        many: false,
+                        rules: {
+                            count_gt: 0,
+                            included_in: conf.storage.deskCellTypeKeys
                         },
-                        notes:  ''
+                        notes: ''
                     }
                 }
                 // desk-schemas/columns/type
             }
-        } 
+        }
         // desk-schemas/columns
     }
 }
 // desk-schemas
-    
+
 /*
     name:   "desk-schemas",
     
