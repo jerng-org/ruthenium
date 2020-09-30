@@ -182,7 +182,7 @@ Desk cells
                 }
                 
             }
-            for ( const index = 0; index < _text.length; index++) {
+            for ( let index = 0; index < _text.length; index++) {
                 
                 if ( _store.parseAborted )
                 { 
