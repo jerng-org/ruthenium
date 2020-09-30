@@ -38,7 +38,7 @@ ${ await rus.html.form ( {
             type: `text`,
             pattern: namePattern,
             required:true,
-            onchange:`console.log(1)
+            onchange:`console.log(1)` 
             
         }) + 
         /*  Disfavoured alternative (because it doesn't create a desk if the specified desk is not found):
