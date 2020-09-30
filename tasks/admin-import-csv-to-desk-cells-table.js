@@ -259,7 +259,7 @@ Desk cells
                                 break
 
                                 default:
-                                    currentFieldChars.push(_text[index])
+                                    appendField(_text[index])
                             }
 
                     }
