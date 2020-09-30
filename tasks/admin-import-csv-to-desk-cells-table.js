@@ -187,6 +187,8 @@ Desk cells
             
             for ( let index = 0; index < _text.length; index++) {
                 
+                console.log('parseCsv(): char: ' + _text[index])
+                
                 if ( _store.parseAborted )
                 { 
                     console.log('parseCsv(): parsedAborted==truthy')
