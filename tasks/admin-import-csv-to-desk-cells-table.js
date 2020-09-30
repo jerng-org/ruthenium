@@ -38,7 +38,6 @@ ${ await rus.html.form ( {
             type: `text`,
             pattern: namePattern,
             required:true,
-            onchange:`console.log(1)` 
             
         }) + 
         /*  Disfavoured alternative (because it doesn't create a desk if the specified desk is not found):
@@ -61,6 +60,7 @@ ${ await rus.html.form ( {
             labelInnerHtml:`Desk cells <sub>CSV <sup>as defined <a href="https://tools.ietf.org/html/rfc4180#section-2">here</a></sup></sub>`,
             placeholder:`--enter a PROPER comma-separated value-- (scripted [pattern] regex validation is not yet done)`,
             required:true,
+            onchange:`console.log(1)` 
             
             // https://stackoverflow.com/questions/21325188/regex-to-validate-textfield-with-csv-format-using-javascript/21325265
             // https://tools.ietf.org/html/rfc4180#section-2
