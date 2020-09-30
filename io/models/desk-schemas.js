@@ -19,7 +19,7 @@ const deskSchemas = {
                 many: false,
                 rules: {
                     count_gt: 0,
-                    regex_test: "/[^A-Z\\[\\]\\s]+/"
+                    regex_test: "[^A-Z\\[\\]\\s]+"
                 }
             },
             notes: ''
@@ -42,7 +42,7 @@ const deskSchemas = {
                         many: false,
                         rules: {
                             count_gt: 0,
-                            regex_test: "/[^A-Z\\[\\]\\s]+/"
+                            regex_test: "[^A-Z\\[\\]\\s]+"
                         },
                         notes: ''
                     }
