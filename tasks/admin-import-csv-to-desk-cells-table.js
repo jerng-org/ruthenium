@@ -182,14 +182,19 @@ Desk cells
                 }
                 
             }
+            
+            console.log('parseCsv(): before loop')
+            
             for ( let index = 0; index < _text.length; index++) {
                 
                 if ( _store.parseAborted )
                 { 
+                    console.log('parseCsv(): parsedAborted==truthy')
                     break 
                 }
                 else 
                 {
+                    console.log('parseCsv(): fieldQuoteType: ' + _store.fieldQuoteType)
                     switch (_store.fieldQuoteType)
                     {
                         case (0): // !!! NOT IN A FIELD !!!
