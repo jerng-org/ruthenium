@@ -215,8 +215,9 @@ const html = {
                                 ${ conf.required    ? 'required'
                                                     : '' }
                                 ${ conf.readonly    ? `readonly`
-                                                    : ''
-                                }
+                                                    : '' }
+                                ${ conf.onchange    ? `onchange`
+                                                    : '' }
                             ></textarea>`
 
         return markup
