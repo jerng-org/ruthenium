@@ -117,7 +117,7 @@ console.log('--start onkeyup--')
 const textarea = document.getElementById('desk-cells-as-csv');
 const textareaValue = textarea.value;
 const outputElement = document.getElementById('desk-cells-as-csv-validity');
-const csvAsArray = csvParse(textareaValue);
+const csvAsArray = parse(textareaValue);
 outputElement.innerText = JSON.stringify(csvAsArray,null,4);
 console.log('--end onkeyup--')
 ` 
