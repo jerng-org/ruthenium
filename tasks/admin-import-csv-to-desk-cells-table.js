@@ -67,47 +67,104 @@ Desk cells
         </sup>
     </sub>
     <script>
+
+/* RFC 4180 Section 2 - delineated
+
+    0.  Stricter than the RFC
     
+            If any RECORD is aborted, the entire parse is aborted.        
+    
+    1.  From RFC's-3
+    
+            Header presence is indicated by meta-data, so parser should ignore 
+            this, HOWEVER, in our implementation we break from the RFC, and 
+            ASSUME THE PRESENCE OF A HEADER.
+            
+            Therefore, for any data entered A HEADER IS MANDATORY.
+
+    x.  From RFC's-2:
+    
+        Remove ONE (1) trailing CRLF, if present.
+        
+    y.  From RFC's-1
+    
+        Split INPUT by CRLF (\\n), resulting in an ARRAY of RECORDS
+    
+    a.  From RFC's-3
+    
+        We COUNT the number of HEADER fields.
+        
+        If any RECORD has a different number of fields, the parser exits and 
+        cleans up. This further enforces the "same number of fields per record"
+        requirement  from the RFC's-4.
+
+    b.  Unquoted fields:
+    
+            From RFC's-4
+    
+                Spaces are part of the field.
+                
+            Any of the following characters result in abortion of the
+            record:
+            
+                - double-quote                  (from RFC's-4, 6)
+                - comma                         (from RFC's-6)
+                - line-breaks (CRLF) => (\\n)   (from RFC's-6)
+    
+    1.  Begin by setting:
+    
+            -   parseSuccess = false
+            
+            -   currentRecordIsHeader = true
+            -   beginningOfLine = true
+            -   expectingNextField = true
+            -   fieldQuoteType = 0
+                    (where 0 => unknown, 1 => unquoted, 2 => quoted )
+            
+            -   headerFields = []
+            -   currentRecordFields = [] 
+            -   currentFieldChars = []
+            -   parsedRecords = []
+            
+    2.  While currentRecordIsHeader==true
+            
+            While beginningOfLine==true
+    
+                While fieldQuoteTypeKnown=falsy
+            
+                    switch ( next char )
+            
+                        case (\n):
+                
+                            - do not push the curren
+    
+    Whenever expectingNextField==true,
+    
+            From RFC's-5
+
+                If the first character read is a line-break, then 
+                
+
+        
+    2a. Quoted fields:
+    
+            From RFC's-7
+            
+                If a double-(double-quote) is found, this is read as part of the
+                field, and parsing of the field continues.
+    
+                Otherwise, we 
+        
+    
+    
+   7.  If double-quotes are used to enclose fields, then a double-quote
+       appearing inside a field must be escaped by preceding it with
+       another double quote.  For example:
+
+       "aaa","b""bb","ccc"
+*/    
         console.warn('<< wrong place to put a script tag (WIP) >>')
         
-        function csvToArray(text) {
-            let p = '', row = [''], ret = [row], i = 0, r = 0, s = !0, l;
-            for (l of text) {
-                if ('"' === l) {
-                    if (s && l === p) row[i] += l;
-                    s = !s;
-                } else if (',' === l && s) l = row[++i] = '';
-                else if ('\\n' === l && s) {
-                    if ('\\r' === p) row[i] = row[i].slice(0, -1);
-                    row = ret[++r] = [l = '']; i = 0;
-                } else row[i] += l;
-                p = l;
-            }
-            return ret;
-        };
-        
-        function parseCsv(data, fieldSep, newLine) {
-            fieldSep = fieldSep || ',';
-            newLine = newLine || '\\n';
-            var nSep = '\\x1D';
-            var qSep = '\\x1E';
-            var cSep = '\\x1F';
-            var nSepRe = new RegExp(nSep, 'g');
-            var qSepRe = new RegExp(qSep, 'g');
-            var cSepRe = new RegExp(cSep, 'g');
-            var fieldRe = new RegExp('(?<=(^|[' + fieldSep + '\\\\n]))&quot;(|[\\\\s\\\\S]+?(?<![^&quot;]&quot;))&quot;(?=($|[' + fieldSep + '\\\\n]))', 'g');
-            var grid = [];
-            data.replace(/\\r/g, '').replace(/\\n+$/, '').replace(fieldRe, function(match, p1, p2) {
-                return p2.replace(/\\n/g, nSep).replace(/&quot;&quot;/g, qSep).replace(/,/g, cSep);
-            }).split(/\\n/).forEach(function(line) {
-                var row = line.split(fieldSep).map(function(cell) {
-                    return cell.replace(nSepRe, newLine).replace(qSepRe, '&quot;').replace(cSepRe, ',');
-                });
-                grid.push(row);
-            });
-            return grid; 
-        }
-
     </script>
 `,
             placeholder:`--enter a PROPER comma-separated value-- (scripted [pattern] regex validation is not yet done)`,
