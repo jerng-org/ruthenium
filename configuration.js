@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: (pseudocode parser testing cases) <= housekeeping task to upload CSV to DESKS`
+const gitCommitMessage = `WIP: (CSV validator done; NEXT: schema name select element) <= housekeeping task to upload CSV to DESKS`
 
 
 module.exports = {
@@ -184,7 +184,7 @@ module.exports = {
 
     sessionExemptedRoutes: {
         strings: [
-            'file'
+            'file',
         ],
         regExps: [
             /^status-\d{3}$/ // status code pages
@@ -216,6 +216,6 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 4,
+    verbosity: 0,
 
 }

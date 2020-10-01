@@ -5,9 +5,9 @@ const blobs = {}
 
 // SAFELIST - until we add something like https://www.npmjs.com/package/mime
 const blobMimeTypes = {
-    'index.html':`text/html`,
     'milligram.min.css':`text/css`,
     'ruthenium-web-client.mjs':`text/javascript`,
+    'csv-validation-demo.html':'text/html'
 }
 
 if ( rus.conf.verbosity > 0 )
