@@ -71,6 +71,15 @@ with stricter requirements:
 <br>(2) unclosed quoted fields will result in a field abortion,
 <br>(3) any failures will abort the overall parse
 <br>( but good headers and records parsed so far, will be shown )
+<br>
+<br>Optional loosening:
+<br>    <input  type="checkbox" 
+                id="allow-padded-quoted-fields"
+                onchange="validateAndDisplay()"
+        >
+            allow quoted fields to be padded with whitespaces
+        </input>
+        
 </blockquote>
         </sup>
     </sub>
@@ -78,12 +87,23 @@ with stricter requirements:
 
         console.warn('<< wrong place to put a script tag (WIP) >>')
         
-        parseCsv = _text => {
-            
+        const debug = false
+                    
+        parseCsv = ( _text, _conf ) => {
+
             const _store = {
 
                 parseAborted: false,
-                fieldQuoteType: 0, // (where 0 => unknown, 1 => unquoted, 2 => quoted )
+                fieldQuoteType: 0, 
+                    
+                    //  (where  0 => unknown, 
+                    //          1 => unquoted, 
+                    //          2 => quoted,
+                    //          3 => limboed:   following a closed quoted field,
+                    //                          but prior to encountering a
+                    //                          formal field delimiter (comma,
+                    //                          CRLF, or EOF)
+                
                 headerFields: null,
 
                 currentField: '',
@@ -99,7 +119,7 @@ with stricter requirements:
             }
             
             const appendField = _char => {
-                console.log('parseCsv(): appendField()')
+                debug && console.log('parseCsv(): appendField()')
                 _store.currentField = _store.currentField + _char
             }
             
@@ -132,6 +152,8 @@ with stricter requirements:
             const recordLengthPass = _ => {
                 const pass = _store.currentRecordFields.length == _store.headerFields.length
                 if ( ! pass ) {
+                    debug && console.log('parseCsv(): recordLengthPass: currentRecordFields: '
+                        + JSON.stringify(_store.currentRecordFields))
                     abortParse ('a record field-count was different from the header field-count') 
                 }
                 return pass 
@@ -142,7 +164,6 @@ with stricter requirements:
                 {
                     setHeaders()
                     abortRecord()
-                    //birthRecord()
                 }
                 else
                 
@@ -153,35 +174,51 @@ with stricter requirements:
                 
             }
             
-            console.log('parseCsv(): before loop')
+            debug && console.log('parseCsv(): before loop')
             
             if ( _text[ _text.length -1 ] == '\\n' ) {
                 _text = _text.substring(0, _text.length - 1);
             }
             for ( let index = 0; index <= _text.length; index++) {
                 
-                console.log('parseCsv(): char: ' + _text[index])
+                debug && console.log('parseCsv(): char: ' + _text[index])
                 
+                debug && console.log('parseCsv(): fieldQuoteType: ' + _store.fieldQuoteType)
+                    
                 if ( _store.parseAborted )
                 { 
-                    console.log('parseCsv(): parsedAborted==truthy')
+                    debug && console.log('parseCsv(): parsedAborted==truthy')
                     break 
                 }
                 else 
                 
                 if ( undefined == _text[index] ) 
                 {
-                    if ( _store.fieldQuoteType == 2) {
-                        abortParse('unclosed quoted field encountered at end of text')
-                        break
+                
+                    /*  INTEGRATE all of this with the switch in the ELSE
+                     *  then remove this surrounding IF-ELSE
+                     *
+                     */
+                
+                    switch(_store.fieldQuoteType) {
+                    
+                        case (2):
+                            abortParse('unclosed quoted field encountered at end of text')
+                            break
+                    
+                        case (3):
+                            handleRecordEndOfTerm()
+                            break
+                    
+                        default:
+                            
+                            // end of text
+                            birthField()
+                            handleRecordEndOfTerm()
                     }
-                    // end of text
-                    birthField()
-                    handleRecordEndOfTerm()
                 }
                 else 
                 {
-                    console.log('parseCsv(): fieldQuoteType: ' + _store.fieldQuoteType)
                     switch (_store.fieldQuoteType)
                     {
                         case (0): // !!! NOT IN A FIELD !!!
@@ -218,7 +255,23 @@ with stricter requirements:
 
                                 case ('"'):
 
-                                    abortParse('double-quote encountered in unquoted field')
+                                    if (_conf.allowPaddedQuotedFields &&
+                                        Array.from(_store.currentField).every(c => c == ' ')) 
+                                    {
+                                        //  Since all preceding characters in this
+                                        //  field are white space, assert that 
+                                        //  those are non-data characters leading
+                                        //  a quoted field;
+
+                                        // switch types, and thus rules
+                                        setFieldQuoteType(2)
+
+                                        // reset field
+                                        abortField()
+                                    }
+                                    else {
+                                        abortParse('double-quote encountered in unquoted field')
+                                    }
                                     break
 
                                 case (','):
@@ -254,7 +307,7 @@ with stricter requirements:
                                             index++ // << skip forward >>
                                             break
                                         
-                                       case (','):
+                                        case (','):
                                        
                                             // 'it''s the CLOSING double-quote 
                                             // EO-field
@@ -262,6 +315,23 @@ with stricter requirements:
                                             index++ // << skip forward >>
                                             break
                                         
+                                        case (' '):
+                                        
+                                            // 'it''s the CLOSING double-quote 
+                                            // EO-field
+                                            if (_conf.allowPaddedQuotedFields) {
+                                                
+                                                birthField()
+                                                
+                                                // overwrite
+                                                setFieldQuoteType(3)
+                                                index++ // << skip forward >>
+                                            
+                                                break
+                                            } 
+                                            
+                                            // otherwise will cascade to default:
+                                            
                                         case ('\\n'):
                                        
                                             // 'it''s the CLOSING double-quote 
@@ -290,11 +360,45 @@ with stricter requirements:
                                     appendField(_text[index])
                             }
                             break
+                            
+                        case (3):   //  !!! FOLLOWING A QUOTED FIELD !!!
+                                    //  !!! NOT YET FORMALLY DELIMITED !!!
 
+                            switch (_text[index]) {
+
+                                case (' '):
+
+                                    //  simply ignore further whitespace
+                                    break
+
+                                case (','):
+
+                                    // back to normal, carry on
+                                    setFieldQuoteType(0)
+                                    break
+
+                                case ('\\n'):
+
+                                    // back to normal, carry on
+                                    setFieldQuoteType(0)
+                                    handleRecordEndOfTerm()
+                                    break
+                                    
+                                case (undefined):
+
+                                    // back to normal, carry on
+                                    setFieldQuoteType(0)
+                                    handleRecordEndOfTerm()
+                                    break
+                                    
+                                default:
+                                    abortParse('a double-quoted field was closed, then followed by an illegal character: ' + _text[index])
+                            }
+                            break
                     }
                 }
                     
-                console.log('parseCsv(): _store: ' + JSON.stringify(_store,null,4))
+                debug && console.log('parseCsv(): _store: ' + JSON.stringify(_store,null,4))
                 
             } // for
             
@@ -302,26 +406,52 @@ with stricter requirements:
                 _store.summary = 'parse succeeded'
             }
             
-            console.log('parseCsv(): summary: ' + _store.summary)
+            debug && console.log('parseCsv(): summary: ' + _store.summary)
             
             return _store
         }
         
+        let textarea, 
+            outputElement
+        
+        document.addEventListener('DOMContentLoaded', (event) => {
+        
+            textarea 
+                = document.getElementById('desk-cells-as-csv');
+            
+            outputElement 
+                = document.getElementById('desk-cells-as-csv-validity');
+        })            
+        
+        validateAndDisplay = _ => {
+            
+            debug && console.log('--start validate and display--')
+            
+            const textareaValue 
+                = textarea.value;
+            
+            const allowPaddedQuotedFields 
+                = document.getElementById('allow-padded-quoted-fields').checked
+            
+            const parseResults
+                = parseCsv(
+                    textareaValue,
+                    { allowPaddedQuotedFields: allowPaddedQuotedFields });
+            
+            outputElement.innerText 
+                = 'Summary : ' + parseResults.summary + '\\n' +
+                'Headers : ' + JSON.stringify(parseResults.headerFields, null, 4) + '\\n' +
+                'Records : ' + JSON.stringify(parseResults.parsedRecords, null, 4);
+            
+            debug && console.log('--end validate and display--')
+
+        }
+                
     </script>
 `,
             placeholder:`--enter a PROPER comma-separated value--`,
             required:true,
-            onkeyup:`
-console.log('--start onkeyup--')
-const textarea = document.getElementById('desk-cells-as-csv');
-const textareaValue = textarea.value;
-const outputElement = document.getElementById('desk-cells-as-csv-validity');
-const parseResults = parseCsv(textareaValue);
-outputElement.innerText = 'Summary : ' + parseResults.summary + '\\n' +
-    'Headers : ' + JSON.stringify(parseResults.headerFields,null,4) + '\\n' +
-    'Records : ' + JSON.stringify(parseResults.parsedRecords,null,4);
-console.log('--end onkeyup--')
-` 
+            onkeyup:`validateAndDisplay()` 
             
             // https://stackoverflow.com/a/39939559
             // https://tools.ietf.org/html/rfc4180#section-2
@@ -346,6 +476,7 @@ h,i,j,k
 "x,,,x","y,
 
 y",,""""
+  "a", "b", "c" ,"d"
     ------ STOP ABOVE ------      
 
          

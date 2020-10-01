@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: (CSV validator done; NEXT: schema name select element) <= housekeeping task to upload CSV to DESKS`
+const gitCommitMessage = `WIP: (CSV validator upgraded with space-padded quotes option; NEXT: schema name select element) <= housekeeping task to upload CSV to DESKS`
 
 
 module.exports = {
