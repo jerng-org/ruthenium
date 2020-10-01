@@ -95,8 +95,9 @@ const html = {
                             ${ conf.required    ? 'required'
                                                 : '' }
                             ${ conf.readonly    ? `readonly`
-                                                : ''
-                            }
+                                                : '' }
+                            ${ conf.disabled    ? `disabled`
+                                                : '' }
                             >`
 
         return markup
