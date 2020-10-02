@@ -9,7 +9,7 @@ const uuid4Create = async ( data ) => {
 
     data.RU.signals.noLayout = true
     
-    data.RU.response.body = rus.uuid4()
+    data.RU.response = { body : rus.uuid4() }
 
     rus.mark ( `~/tasks/_template-task.js EXECUTED` )
 }
