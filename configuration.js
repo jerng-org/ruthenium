@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: (CSV validator upgraded with space-padded quotes option; NEXT: schema name select element) <= housekeeping task to upload CSV to DESKS`
+const gitCommitMessage = `WIP: (uuid4-create.js; NEXT: schema name select element) <= housekeeping task to upload CSV to DESKS`
 
 
 module.exports = {
@@ -140,7 +140,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 0,
+    performance: 1,
 
     /*  platform:
      *  
