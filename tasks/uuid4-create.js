@@ -14,7 +14,7 @@ const uuid4Create = async(data) => {
         1
 
     data.RU.signals.sendResponse = { body: JSON.stringify( 
-        await Promise.allSettled( Array.from ( Array( Number(quantity) )) /*.map( async _ => await rus.uuid4() )*/ ) 
+        (await Promise.allSettled( Array.from ( Array( Number(quantity) )).map( async _ => await rus.uuid4() ) ) ).map( a => a.value ) 
     ) } 
 
     rus.mark(`~/tasks/_template-task.js EXECUTED`)
