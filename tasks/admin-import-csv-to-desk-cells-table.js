@@ -29,6 +29,7 @@ ${ await rus.html.form ( {
         ['form-method', `PATCH`]
     ]),
     class:`ru-card`,
+    onsubmit:`return false`,
     innerHtml:  
         await rus.html.input({
             name:`desk-schemas[name]`,
@@ -38,7 +39,7 @@ ${ await rus.html.form ( {
             type: `text`,
             pattern: namePattern,
             required:true,
-            disabled:true
+            //disabled:true
             
         }) + 
         /*  Disfavoured alternative (because it doesn't create a desk if the specified desk is not found):
@@ -75,7 +76,7 @@ with stricter requirements:
 <br>Optional loosening:
 <br>    <input  type="checkbox" 
                 id="allow-padded-quoted-fields"
-                onchange="validateAndDisplay()"
+                onchange="reviewFormReadiness()"
         >
             allow quoted fields to be padded with whitespaces
         </input>
@@ -421,9 +422,12 @@ with stricter requirements:
             
             outputElement 
                 = document.getElementById('desk-cells-as-csv-validity');
+                
+            submitInputElement
+                = document.querySelector('input[type=submit]')
         })            
         
-        validateAndDisplay = _ => {
+        reviewFormReadiness = _ => {
             
             debug && console.log('--start validate and display--')
             
@@ -433,16 +437,23 @@ with stricter requirements:
             const allowPaddedQuotedFields 
                 = document.getElementById('allow-padded-quoted-fields').checked
             
+            // VALIDATION
             const parseResults
                 = parseCsv(
                     textareaValue,
                     { allowPaddedQuotedFields: allowPaddedQuotedFields });
             
+            // UI DISPLAY
             outputElement.innerText 
                 = 'Summary : ' + parseResults.summary + '\\n' +
                 'Headers : ' + JSON.stringify(parseResults.headerFields, null, 4) + '\\n' +
                 'Records : ' + JSON.stringify(parseResults.parsedRecords, null, 4);
             
+            // SET FORM READINESS
+            submitInputElement.disabled
+                =   parseResults.parseAborted
+                    || ( ! parseResults.parsedRecords.length )
+                    
             debug && console.log('--end validate and display--')
 
         }
@@ -451,18 +462,26 @@ with stricter requirements:
 `,
             placeholder:`--enter a PROPER comma-separated value--`,
             required:true,
-            onkeyup:`validateAndDisplay()` 
+            onkeyup:`reviewFormReadiness()` 
             
             // https://stackoverflow.com/a/39939559
             // https://tools.ietf.org/html/rfc4180#section-2
-        })  +
-        `<br>CSV Validation :
-         <br><pre id="desk-cells-as-csv-validity"> nothing yet to show </pre><br>
-         <pre>
+        })  
+        +
+        await rus.html.input({
+                type: `submit`,
+                disabled: true
+            }) +
+        `
+        <br>
+        <div class="ru-card">
+            <h3>CSV Validation :</h3>
+            <pre id="desk-cells-as-csv-validity"> nothing yet to show </pre>
+        </div>
+        <br>
 
-TEST CSV INPUT DATA:
-
-    ------ START BELOW ------      
+<h4>TEST CSV INPUT DATA :</h4>
+<pre>
 "h1",h2,h3,h4
 a,b,c,d
 e,f,g,""
@@ -477,10 +496,10 @@ h,i,j,k
 
 y",,""""
   "a", "b", "c" ,"d"
-    ------ STOP ABOVE ------      
+</pre>
 
-         
-RULES - based on RFC 4180 Section 2:
+<h4>RULES - based on RFC 4180 Section 2 :</h4>
+<pre>
 
     0.  (Stricter than the RFC)
     
@@ -539,12 +558,10 @@ RULES - based on RFC 4180 Section 2:
          
          
          `
-        +
-    await rus.html.input({
-        type: `submit`,
-        disabled: true
-    })
-} ) }
+} ) // form
+
+    
+}
     `
     }
     
