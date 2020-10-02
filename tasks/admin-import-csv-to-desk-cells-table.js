@@ -29,7 +29,16 @@ ${ await rus.html.form ( {
         ['form-method', `PATCH`]
     ]),
     class:`ru-card`,
-    onsubmit:`return false`,
+    onsubmit:`
+//  WIP
+
+console.log (
+    Array.from(new  FormData(document.getElementsByTagName('form')[0]).entries() )
+
+)
+
+return false;
+    `,
     innerHtml:  
         await rus.html.input({
             name:`desk-schemas[name]`,
