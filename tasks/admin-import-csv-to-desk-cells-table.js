@@ -34,7 +34,9 @@ ${ await rus.html.form ( {
 //  WIP
 
     const formData = new FormData(document.getElementsByTagName('form')[0]).entries() 
-    
+
+    console.log ( 'Next: remove textarea from form, append hidden elements based on successful parsedRecords textarea' )
+
     console.log ( JSON.stringify ( Array.from(formData), null,  4 ) )
 
 return false;
