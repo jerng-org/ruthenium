@@ -30,12 +30,12 @@ ${ await rus.html.form ( {
     ]),
     class:`ru-card`,
     onsubmit:`
+    
 //  WIP
 
-console.log (
-    Array.from(new  FormData(document.getElementsByTagName('form')[0]).entries() )
-
-)
+    const formData = new FormData(document.getElementsByTagName('form')[0]).entries() 
+    
+    console.log ( JSON.stringify ( Array.from(formData), null,  4 ) )
 
 return false;
     `,
