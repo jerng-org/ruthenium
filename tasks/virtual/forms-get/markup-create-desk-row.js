@@ -50,7 +50,7 @@ const innerHtml = async ( DATA, uuid ) => `
 
 const createDeskRow = async ( data ) => {
     
-    const newUuid = await rus.uuid4()
+    const newUuid4 = await rus.uuid4()
     
     return `
     
@@ -63,7 +63,7 @@ const createDeskRow = async ( data ) => {
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
                     [ 'form-method','PATCH' ] 
                 ]),
-                innerHtml: await innerHtml(data, newUuid),
+                innerHtml: await innerHtml(data, newUuid4),
                 class: 'ru-card'
             } ) 
         }
