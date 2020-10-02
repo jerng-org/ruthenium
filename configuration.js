@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: (uuid4-create.js; NEXT: schema name select element) <= housekeeping task to upload CSV to DESKS`
+const gitCommitMessage = `WIP: (uuid4-create.js; onsubmit callback; NEXT: schema name select element) <= housekeeping task to upload CSV to DESKS`
 
 
 module.exports = {

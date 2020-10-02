@@ -43,8 +43,12 @@ const html = {
 
         const markup = `<form   method="${ conf.method }"
                                 action="${ conf.action }"
-                                class="${ conf.class }"
-                                id="${ conf.id ? conf.id : `` }"
+                                ${ conf.id          ? `id="${conf.id}"`
+                                                    : '' }
+                                ${ conf.class       ? `class="${conf.class}"`
+                                                    : '' }
+                                ${ conf.onsubmit    ? `onsubmit="${conf.onsubmit}"`
+                                                    : '' }
                                 >
                                 ${ conf.innerHtml }
                                 </form>`
