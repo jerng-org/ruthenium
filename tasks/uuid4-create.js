@@ -13,9 +13,9 @@ const uuid4Create = async(data) => {
         data.RU.request.queryStringParameters.quantity :
         1
 
-    data.RU.signals.sendResponse = { body: //JSON.stringify( 
+    data.RU.signals.sendResponse = { body: JSON.stringify( 
         (await Promise.allSettled( Array.from ( Array( Number(quantity) )).map( async _ => await rus.uuid4() ) ) ).map( a => a.value ) 
-    //) 
+    ) 
         
     } 
 
