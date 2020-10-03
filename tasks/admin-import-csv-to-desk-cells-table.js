@@ -33,6 +33,8 @@ ${ await rus.html.form ( {
     
 //  WIP
 
+async _ => {
+
     const formData = new FormData()
     const deskSchemasName = document.getElementById('desk-schemas[name]').value
     const parseResults = document.getElementById('desk-cells-as-csv')._parseResults
@@ -80,6 +82,8 @@ ${ await rus.html.form ( {
     console.log ( newUuid4s ) 
 
     console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
+
+}
 
 return false;
     `,
