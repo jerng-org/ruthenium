@@ -85,9 +85,8 @@ ${ await rus.html.form ( {
         '${ await rus.appUrl( [
             [ 'route','virtual' ], 
             [ 'type','desks' ], 
-            [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
             [ 'form-method','PATCH' ] 
-        ])}', 
+        ])}&thing=' + deskSchemasName, 
         {
             body : formData
         }
