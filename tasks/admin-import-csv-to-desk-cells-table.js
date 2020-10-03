@@ -36,11 +36,13 @@ ${ await rus.html.form ( {
     const formData = new FormData(document.getElementsByTagName('form')[0]) 
     formData.delete('desk-cells-as-csv-textarea-value')
     
+    const textarea = document.getElementById('desk-cells-as-csv')
+    
     console.log ( 'Next: remove textarea from form, append hidden elements based on successful parsedRecords textarea' )
 
-    
-
     console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
+
+    console.log ( textarea._ )
 
 return false;
     `,
@@ -467,6 +469,9 @@ with stricter requirements:
             submitInputElement.disabled
                 =   parseResults.parseAborted
                     || ( ! parseResults.parsedRecords.length )
+            
+            // PASS DATA TO form[onsubmit] VIA ...
+            textarea._parseResults = parseResults
                     
             debug && console.log('--end validate and display--')
 
