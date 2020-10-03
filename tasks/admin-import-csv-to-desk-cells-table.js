@@ -33,16 +33,44 @@ ${ await rus.html.form ( {
     
 //  WIP
 
-    const formData = new FormData(document.getElementsByTagName('form')[0]) 
-    formData.delete('desk-cells-as-csv-textarea-value')
+    const formData = new FormData()
+    const deskSchemasName = document.getElementById('desk-schemas[name]').value
+    const parseResults = document.getElementById('desk-cells-as-csv')._parseResults
     
-    const textarea = document.getElementById('desk-cells-as-csv')
+    {
+        formData.set('desk-schemas[name]',deskSchemasName)
+
+        parseResults.parsedRecords.forEach (
+            ( cellValue, columnIndex, array) => {
+                
+                // Primary Key
+                formData.set ( 
+                    'desk-cells[PUT]###' + columnIndex + '###[DHC]', 
+                    deskSchemasName + '#' + parseResults.headerFields[columnIndex] 
+                )
+                formData.set ( 
+                    'desk-cells[PUT]###' + columnIndex + '###[R]', 
+                    'customisedUUID'
+                )
+                
+                // Other Attributes
+                formData.set ( 
+                    'desk-cells[PUT]###' + columnIndex + '###[D]', 
+                    deskSchemasName
+                )
+                formData.set ( 
+                    'desk-cells[PUT]###' + columnIndex + '###[S]', 
+                    cellValue 
+                )
+            }
+            // , thisArg
+        )
+        
+    }
     
-    console.log ( 'Next: remove textarea from form, append hidden elements based on successful parsedRecords textarea' )
+    console.log ( 'Next: append hidden elements based on successful parsedRecords textarea' )
 
     console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
-
-    console.log ( textarea._ )
 
 return false;
     `,
@@ -472,6 +500,7 @@ with stricter requirements:
             
             // PASS DATA TO form[onsubmit] VIA ...
             textarea._parseResults = parseResults
+            
                     
             debug && console.log('--end validate and display--')
 
