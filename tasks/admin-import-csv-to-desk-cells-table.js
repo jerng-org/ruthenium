@@ -68,7 +68,7 @@ return false;
             
         })  +*/
         await rus.html.textarea({
-            name:`desk-cells-as-csv`,
+            /name:`desk-cells-as-csv`,
             id:`desk-cells-as-csv`,
             labelInnerHtml:`
 Desk cells 
