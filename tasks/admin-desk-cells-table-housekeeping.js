@@ -116,6 +116,7 @@ ${
         innerHtml: ``
             +
             await rus.html.fieldset({
+                class:'ru-card',
                 legendInnerHtml: `WARNING : Save any of the data above, \
 in case you need to undo changes. You may simply save this webpage.`,
                 innerHtml: await rus.html.input({
