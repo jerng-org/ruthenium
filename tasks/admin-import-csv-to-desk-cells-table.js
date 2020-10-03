@@ -92,7 +92,7 @@ ${ await rus.html.form ( {
         }
     )
     
-    console.log ( response.body.text() )
+    console.log ( response.text() )
     
 
 })();
