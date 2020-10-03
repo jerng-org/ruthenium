@@ -13,24 +13,24 @@ const adminDeskCellsTableHousekeeping = async(data) => {
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
     }).promise()
     data.RU.io.deskSchemasScan.Items.forEach(_schema => {
-        deskSchemasByName[ _schema.name ] = _schema.columns.reduce (
-            ( accumulator, currentColumn, index, array ) => {
-                accumulator[ currentColumn.name ] = currentColumn.type
+        deskSchemasByName[_schema.name] = _schema.columns.reduce(
+            (accumulator, currentColumn, index, array) => {
+                accumulator[currentColumn.name] = currentColumn.type
                 return accumulator
-            },
-            {} /* initialValue */
+            }, {} /* initialValue */
         )
     })
 
     //data.RU.io.deskCellsDeletes = []
     const orphanedCells = []
     const mistypedCells = []
-    let patchRowIndex =  0
-    
+    let patchRowIndex = 0
+    let hiddenInputs = ``
+
     data.RU.io.deskCellsScan = await rus.aws.ddbdc.scan({
         TableName: 'TEST-APP-DESK-CELLS',
     }).promise()
-    
+
     for (const _deskCell of data.RU.io.deskCellsScan.Items) {
 
         const [_deskSchemaName, _column] = _deskCell.DHC.split(`#`)
@@ -40,7 +40,7 @@ const adminDeskCellsTableHousekeeping = async(data) => {
                 _deskSchemaName in deskSchemasByName ?
                 (!
                     (
-                        _column in deskSchemasByName[ _deskSchemaName ]
+                        _column in deskSchemasByName[_deskSchemaName]
                     )
                 ) :
                 true
@@ -64,17 +64,17 @@ const adminDeskCellsTableHousekeeping = async(data) => {
                 orphanedCells.push(_deskCell)
 
             }
-            
-            let mistypedFound = ( ! orphanFound ) && 
-                ! ( deskSchemasByName[ _deskSchemaName ][ _column ] in _deskCell )
-                
+
+            let mistypedFound = (!orphanFound) &&
+                !(deskSchemasByName[_deskSchemaName][_column] in _deskCell)
+
             if (mistypedFound) {
-                mistypedCells.push( {
-                    
-                    ... _deskCell,
-                    expected_but_missing_data_type: deskSchemasByName[ _deskSchemaName ][ _column ]
-                    
-                }  )
+                mistypedCells.push({
+
+                    ..._deskCell,
+                    expected_but_missing_data_type: deskSchemasByName[_deskSchemaName][_column]
+
+                })
             }
         }
     }
@@ -114,7 +114,7 @@ ${
             ['form-method', `PATCH`]
         ]),
         class:'ru-card',
-        innerHtml: ``
+        innerHtml: hiddenInputs
             +
             await rus.html.fieldset({
                 class:'ru-card',
