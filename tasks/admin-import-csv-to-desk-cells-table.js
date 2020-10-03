@@ -83,8 +83,8 @@ ${ await rus.html.form ( {
 
     console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
 
-    return false
-})()
+})();
+return false
     `,
     innerHtml:  
         await rus.html.input({
