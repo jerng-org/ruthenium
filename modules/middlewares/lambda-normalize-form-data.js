@@ -10,9 +10,15 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 const lambdaNormalizeFormData = async ( data ) => {
 
     if (    data.LAMBDA.event.headers
-            &&  (   data.LAMBDA.event.headers['content-type'] 
-                    == 'application/x-www-form-urlencoded'
-                )
+            &&  
+            ( 'content-type' in data.LAMBDA.event.headers )
+            &&
+            (   data.LAMBDA.event.headers['content-type']
+                        .toLowerCase()
+                        .indexOf( 
+                            'application/x-www-form-urlencoded'
+                        )  >= 0
+            )
     )
     {
         data.RU.request.rawFormString =

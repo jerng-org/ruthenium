@@ -92,7 +92,9 @@ ${ await rus.html.form ( {
         }
     )
     
-    console.log ( await response.text() )
+    alert('Load CSV to desk-cells table, (fetch API call) response status : ' + response.status ) 
+    
+    //console.log ( await response.text() )
     
 
 })();

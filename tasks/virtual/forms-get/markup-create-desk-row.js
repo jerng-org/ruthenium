@@ -61,7 +61,8 @@ const createDeskRow = async ( data ) => {
                     [ 'route','virtual' ], 
                     [ 'type','desks' ], 
                     [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
-                    [ 'form-method','PATCH' ] 
+                    [ 'form-method','PATCH' ],
+                    [ 'reader', 'human']
                 ]),
                 innerHtml: await innerHtml(data, newUuid4),
                 class: 'ru-card'
