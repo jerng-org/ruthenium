@@ -77,6 +77,8 @@ ${ await rus.html.form ( {
     
     console.log ( 'Next: append hidden elements based on successful parsedRecords textarea' )
 
+    console.log ( newUuid4s ) 
+
     console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
 
 return false;
