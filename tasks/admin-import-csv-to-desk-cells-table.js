@@ -33,7 +33,7 @@ ${ await rus.html.form ( {
     
 //  WIP
 
-async _ => {
+(async _ => {
 
     const formData = new FormData()
     const deskSchemasName = document.getElementById('desk-schemas[name]').value
@@ -83,9 +83,8 @@ async _ => {
 
     console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
 
-}
-
-return false;
+    return false
+})()
     `,
     innerHtml:  
         await rus.html.input({
