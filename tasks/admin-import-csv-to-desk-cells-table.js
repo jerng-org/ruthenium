@@ -36,28 +36,34 @@ ${ await rus.html.form ( {
     const formData = new FormData()
     const deskSchemasName = document.getElementById('desk-schemas[name]').value
     const parseResults = document.getElementById('desk-cells-as-csv')._parseResults
+    let cellCount = 0
     
     {
         parseResults.parsedRecords.forEach ( ( record, rowIndex, recordsArray ) => {
+        
+            const rowUuid = 'tempRowUuid' + rowIndex
+        
             record.forEach ( ( cellValue, columnIndex, cellValuesArray ) => {
+                
+                cellCount ++
                     
                 // Primary Key
                 formData.set ( 
-                    'desk-cells[PUT]###' + rowIndex + '###[DHC]', 
+                    'desk-cells[PUT]###' + cellCount + '###[DHC]', 
                     deskSchemasName + '#' + parseResults.headerFields[columnIndex] 
                 )
                 formData.set ( 
-                    'desk-cells[PUT]###' + rowIndex + '###[R]', 
-                    'customisedUUID'
+                    'desk-cells[PUT]###' + cellCount + '###[R]', 
+                    rowUuid
                 )
                 
                 // Other Attributes
                 formData.set ( 
-                    'desk-cells[PUT]###' + rowIndex + '###[D]', 
+                    'desk-cells[PUT]###' + cellCount + '###[D]', 
                     deskSchemasName
                 )
                 formData.set ( 
-                    'desk-cells[PUT]###' + rowIndex + '###[S]', 
+                    'desk-cells[PUT]###' + cellCount + '###[S]', 
                     cellValue 
                 )
             
@@ -545,9 +551,9 @@ y",,""""
 
 <h4>TEST CSV INPUT DATA (nice):</h4>
 <pre>
-header1, header2
-r1h1, r1h2
-r2h1, r2h2
+header1,header2
+r1h1,r1h2
+r2h1,r2h2
 </pre>
 
 <h4>RULES - based on RFC 4180 Section 2 :</h4>
