@@ -38,9 +38,11 @@ ${ await rus.html.form ( {
     const formData = new FormData()
     const deskSchemasName = document.getElementById('desk-schemas[name]').value
     const parseResults = document.getElementById('desk-cells-as-csv')._parseResults
-    const newUuid4s = await  (await fetch ( '/?route=uuid4-create', {
-        
-    } )).json()
+    const newUuid4s = await (
+        await fetch ( 
+            '/?route=uuid4-create&quantity=' + parseResults.parsedRecords.length, 
+            {} )
+        ).json()
     let cellIndex = 0
     
     {
