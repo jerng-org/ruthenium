@@ -123,6 +123,8 @@ const html = {
                 }
                 ${ conf.name        ? `name="${conf.name}"` 
                                     : `` }
+                ${ conf.class       ? `class="${conf.class}"` 
+                                    : `` }
             >
                 ${  conf.legendInnerHtml 
                     ? `<legend>${conf.legendInnerHtml}</legend>`
