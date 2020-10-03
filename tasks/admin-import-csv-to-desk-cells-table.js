@@ -83,7 +83,8 @@ ${ await rus.html.form ( {
     const response = await fetch( 
         '${ await rus.appUrl( [
             [ 'route','virtual' ], 
-            [ 'type','desks' ]
+            [ 'type','desks' ],
+            ['form-methohd','PATCH']
         ])}&thing=' + deskSchemasName, 
         {
             method: 'POST',
