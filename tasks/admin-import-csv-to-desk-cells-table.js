@@ -35,7 +35,8 @@ ${ await rus.html.form ( {
 
 (async _ => {
 
-    const formData = new FormData()
+    const urlSearchParams = new URLSearchParams()
+    
     const deskSchemasName = document.getElementById('desk-schemas[name]').value
     const parseResults = document.getElementById('desk-cells-as-csv')._parseResults
     const newUuid4s = await (
@@ -54,21 +55,21 @@ ${ await rus.html.form ( {
                 
                     
                 // Primary Key
-                formData.set ( 
+                urlSearchParams.append ( 
                     'desk-cells[PUT]###' + cellIndex + '###[DHC]', 
                     deskSchemasName + '#' + parseResults.headerFields[columnIndex] 
                 )
-                formData.set ( 
+                urlSearchParams.append ( 
                     'desk-cells[PUT]###' + cellIndex + '###[R]', 
                     newUuid4s[ rowIndex ]
                 )
                 
                 // Other Attributes
-                formData.set ( 
+                urlSearchParams.append ( 
                     'desk-cells[PUT]###' + cellIndex + '###[D]', 
                     deskSchemasName
                 )
-                formData.set ( 
+                urlSearchParams.append ( 
                     'desk-cells[PUT]###' + cellIndex + '###[S]', 
                     cellValue 
                 )
@@ -79,8 +80,6 @@ ${ await rus.html.form ( {
         } /*, thisArg */ )
     }
     
-    // console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
-
     const response = await fetch( 
         '${ await rus.appUrl( [
             [ 'route','virtual' ], 
@@ -88,11 +87,11 @@ ${ await rus.html.form ( {
         ])}&thing=' + deskSchemasName, 
         {
             method: 'PATCH',
-            body : formData
+            body : urlSearchParams
         }
     )
     
-    console.log ( response.text() )
+    console.log ( await response.text() )
     
 
 })();
