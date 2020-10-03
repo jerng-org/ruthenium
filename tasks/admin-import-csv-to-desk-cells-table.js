@@ -86,7 +86,7 @@ ${ await rus.html.form ( {
             [ 'type','desks' ]
         ])}&thing=' + deskSchemasName, 
         {
-            method: 'PATCH',
+            method: 'POST',
             body : urlSearchParams
         }
     )
