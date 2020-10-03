@@ -38,34 +38,31 @@ ${ await rus.html.form ( {
     const parseResults = document.getElementById('desk-cells-as-csv')._parseResults
     
     {
-        formData.set('desk-schemas[name]',deskSchemasName)
-
-        parseResults.parsedRecords.forEach (
-            ( cellValue, columnIndex, array) => {
-                
+        parseResults.parsedRecords.forEach ( ( record, rowIndex, recordsArray ) => {
+            record.forEach ( ( cellValue, columnIndex, cellValuesArray ) => {
+                    
                 // Primary Key
                 formData.set ( 
-                    'desk-cells[PUT]###' + columnIndex + '###[DHC]', 
+                    'desk-cells[PUT]###' + rowIndex + '###[DHC]', 
                     deskSchemasName + '#' + parseResults.headerFields[columnIndex] 
                 )
                 formData.set ( 
-                    'desk-cells[PUT]###' + columnIndex + '###[R]', 
+                    'desk-cells[PUT]###' + rowIndex + '###[R]', 
                     'customisedUUID'
                 )
                 
                 // Other Attributes
                 formData.set ( 
-                    'desk-cells[PUT]###' + columnIndex + '###[D]', 
+                    'desk-cells[PUT]###' + rowIndex + '###[D]', 
                     deskSchemasName
                 )
                 formData.set ( 
-                    'desk-cells[PUT]###' + columnIndex + '###[S]', 
+                    'desk-cells[PUT]###' + rowIndex + '###[S]', 
                     cellValue 
                 )
-            }
-            // , thisArg
-        )
-        
+            
+            } /*, thisArg */ ) 
+        } /*, thisArg */ )
     }
     
     console.log ( 'Next: append hidden elements based on successful parsedRecords textarea' )
