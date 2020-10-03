@@ -36,7 +36,7 @@ ${ await rus.html.form ( {
     const formData = new FormData()
     const deskSchemasName = document.getElementById('desk-schemas[name]').value
     const parseResults = document.getElementById('desk-cells-as-csv')._parseResults
-    let cellCount = 0
+    let cellIndex = 0
     
     {
         parseResults.parsedRecords.forEach ( ( record, rowIndex, recordsArray ) => {
@@ -45,27 +45,28 @@ ${ await rus.html.form ( {
         
             record.forEach ( ( cellValue, columnIndex, cellValuesArray ) => {
                 
-                cellCount ++
                     
                 // Primary Key
                 formData.set ( 
-                    'desk-cells[PUT]###' + cellCount + '###[DHC]', 
+                    'desk-cells[PUT]###' + cellIndex + '###[DHC]', 
                     deskSchemasName + '#' + parseResults.headerFields[columnIndex] 
                 )
                 formData.set ( 
-                    'desk-cells[PUT]###' + cellCount + '###[R]', 
+                    'desk-cells[PUT]###' + cellIndex + '###[R]', 
                     rowUuid
                 )
                 
                 // Other Attributes
                 formData.set ( 
-                    'desk-cells[PUT]###' + cellCount + '###[D]', 
+                    'desk-cells[PUT]###' + cellIndex + '###[D]', 
                     deskSchemasName
                 )
                 formData.set ( 
-                    'desk-cells[PUT]###' + cellCount + '###[S]', 
+                    'desk-cells[PUT]###' + cellIndex + '###[S]', 
                     cellValue 
                 )
+
+                cellIndex ++
             
             } /*, thisArg */ ) 
         } /*, thisArg */ )
