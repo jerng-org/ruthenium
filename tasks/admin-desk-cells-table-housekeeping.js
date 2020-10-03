@@ -107,22 +107,22 @@ ${  JSON.stringify(mistypedCells,null,4)   }
 <h1>Administration: Address Housekeeping Report</h1>
 Proceed to delete orphans, and to attempt to retype mistyped cells.
 
-<h3>WARNING:</h3>
-Save any of the data above, in case you need to undo changes. You may simply save this webpage.
-
 ${
     await rus.html.form({
         action: await rus.appUrl([
             ['route', `admin-import-csv-to-desk-cells-table`],
             ['form-method', `PATCH`]
         ]),
-        class: `ru-card`,
         innerHtml: ``
             +
-            await rus.html.input({
-                type: `submit`,
-                disabled: true
-            }) 
+            await rus.html.fieldset({
+                legendInnerHtml: `WARNING : Save any of the data above, \
+in case you need to undo changes. You may simply save this webpage.`,
+                innerHtml: await rus.html.input({
+                    type: `submit`,
+                    disabled: true
+                })
+            })
     })
 }
 
