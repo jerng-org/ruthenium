@@ -33,12 +33,14 @@ ${ await rus.html.form ( {
     
 //  WIP
 
-    const formData = new FormData(document.getElementsByTagName('form')[0]).entries() 
+    const formData = new FormData(document.getElementsByTagName('form')[0]) 
     formData.delete('desk-cells-as-csv-textarea-value')
     
     console.log ( 'Next: remove textarea from form, append hidden elements based on successful parsedRecords textarea' )
 
-    console.log ( JSON.stringify ( Array.from(formData), null,  4 ) )
+    
+
+    console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
 
 return false;
     `,
