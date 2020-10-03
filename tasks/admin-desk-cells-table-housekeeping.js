@@ -113,6 +113,7 @@ ${
             ['route', `admin-import-csv-to-desk-cells-table`],
             ['form-method', `PATCH`]
         ]),
+        class:'ru-card',
         innerHtml: ``
             +
             await rus.html.fieldset({
