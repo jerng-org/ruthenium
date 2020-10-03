@@ -60,7 +60,7 @@ ${ await rus.html.form ( {
                 )
                 formData.set ( 
                     'desk-cells[PUT]###' + cellIndex + '###[R]', 
-                    rowUuid
+                    newUuid4s[ rowIndex ]
                 )
                 
                 // Other Attributes
