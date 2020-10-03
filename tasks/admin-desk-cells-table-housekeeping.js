@@ -22,12 +22,15 @@ const adminDeskCellsTableHousekeeping = async(data) => {
         )
     })
 
-    data.RU.io.deskCellsDeletes = []
+    //data.RU.io.deskCellsDeletes = []
     const orphanedCells = []
     const mistypedCells = []
+    let patchRowIndex =  0
+    
     data.RU.io.deskCellsScan = await rus.aws.ddbdc.scan({
         TableName: 'TEST-APP-DESK-CELLS',
     }).promise()
+    
     for (const _deskCell of data.RU.io.deskCellsScan.Items) {
 
         const [_deskSchemaName, _column] = _deskCell.DHC.split(`#`)
@@ -103,6 +106,26 @@ ${  JSON.stringify(mistypedCells,null,4)   }
 
 <h1>Administration: Address Housekeeping Report</h1>
 Proceed to delete orphans, and to attempt to retype mistyped cells.
+
+<h3>WARNING:</h3>
+Save any of the data above, in case you need to undo changes. You may simply save this webpage.
+
+${
+    await rus.html.form({
+        action: await rus.appUrl([
+            ['route', `admin-import-csv-to-desk-cells-table`],
+            ['form-method', `PATCH`]
+        ]),
+        class: `ru-card`,
+        innerHtml: ``
+            +
+            await rus.html.input({
+                type: `submit`,
+                disabled: true
+            }) 
+    })
+}
+
 
 ` }
 
