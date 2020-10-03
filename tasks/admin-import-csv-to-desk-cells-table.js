@@ -84,7 +84,7 @@ ${ await rus.html.form ( {
     const response = await fetch( 
         '${ await rus.appUrl( [
             [ 'route','virtual' ], 
-            [ 'type','desks' ],
+            [ 'type','desks' ]
         ])}&thing=' + deskSchemasName, 
         {
             method: 'PATCH',
@@ -92,7 +92,7 @@ ${ await rus.html.form ( {
         }
     )
     
-    console.log ( response )
+    console.log ( response.body.text() )
     
 
 })();
