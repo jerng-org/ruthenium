@@ -40,6 +40,10 @@ await rus.appUrl ( [
                 background-color: inherit;
             }
             
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 2.0rem;
+            }
+            
             thead sub,
             thead th:first-child
             {
