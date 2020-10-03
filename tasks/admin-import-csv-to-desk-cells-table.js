@@ -81,7 +81,20 @@ ${ await rus.html.form ( {
     
     // console.log ( JSON.stringify ( Array.from ( formData.entries() ), null,  4 ) )
 
-    console.log(formData.toString())
+    const response = await fetch( 
+        '${ await rus.appUrl( [
+            [ 'route','virtual' ], 
+            [ 'type','desks' ], 
+            [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
+            [ 'form-method','PATCH' ] 
+        ])}', 
+        {
+            body : formData
+        }
+    )
+    
+    console.log ( response )
+    
 
 })();
 return false
