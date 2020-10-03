@@ -525,7 +525,7 @@ with stricter requirements:
         </div>
         <br>
 
-<h4>TEST CSV INPUT DATA :</h4>
+<h4>TEST CSV INPUT DATA (naughty):</h4>
 <pre>
 "h1",h2,h3,h4
 a,b,c,d
@@ -541,6 +541,13 @@ h,i,j,k
 
 y",,""""
   "a", "b", "c" ,"d"
+</pre>
+
+<h4>TEST CSV INPUT DATA (nice):</h4>
+<pre>
+header1, header2
+r1h1, r1h2
+r2h1, r2h2
 </pre>
 
 <h4>RULES - based on RFC 4180 Section 2 :</h4>
