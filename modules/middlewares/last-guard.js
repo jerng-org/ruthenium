@@ -62,12 +62,13 @@ const lastGuard = async(data) => {
             data.RU.signals.sendResponse.body = await rus.print.xml300(data.RU.signals.sendResponse.body)
         }
 
-        // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
-
-        response.body +=
-            `<hr>(verbosity > 3: [ Debug of (data) by last-guard.js ] :
+        if (data.RU.request.queryStringParameters.reader == 'human') {
+            // MODIFY (COPY OF ORIGINAL VALUE) TO INCLUDE (NEW VALUE)
+            response.body +=
+                `<hr>(verbosity > 3: [ Debug of (data) by last-guard.js ] :
             <pre><code>${ 
-            await rus.print.dataDebug ( data ) }</code></pre>`
+            await rus.print.dataDebug ( data ) }</code></pre>`    
+        }
 
         // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
         data.RU.response = response
