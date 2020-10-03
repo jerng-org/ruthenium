@@ -84,10 +84,10 @@ ${ await rus.html.form ( {
     const response = await fetch( 
         '${ await rus.appUrl( [
             [ 'route','virtual' ], 
-            [ 'type','desks' ], 
-            [ 'form-method','PATCH' ] 
+            [ 'type','desks' ],
         ])}&thing=' + deskSchemasName, 
         {
+            method: 'PATCH',
             body : formData
         }
     )
