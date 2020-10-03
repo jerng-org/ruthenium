@@ -54,7 +54,7 @@ module.exports = {
      *
      *
      */
-    gitCommit: 1,
+    gitCommit: 01,
     gitCommitMessage: gitCommitMessage,
     /*  USES:
      *  Merge order     :   1
