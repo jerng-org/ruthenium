@@ -70,7 +70,7 @@ const desksGetMarkup = async(data) => {
                                     tempPointer.showModal()
                                     tempPointer.innerHtml = '<pre>' + JSON.stringify(deskCell) + '</pre>' 
                                     
-                                    event.stopPropagation()
+                                    event.stopImmediatePropagation()
                                 }
                                 "
                                 
