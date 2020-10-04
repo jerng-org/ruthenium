@@ -24,7 +24,7 @@ const adminDeskCellsTableHousekeeping = async(data) => {
     //data.RU.io.deskCellsDeletes = []
     const orphanedCells = []
     const mistypedCells = []
-    let patchRowIndex = 0
+    let postRowIndex = 0
     let hiddenInputs = ``
 
     data.RU.io.deskCellsScan = await rus.aws.ddbdc.scan({
@@ -45,6 +45,9 @@ const adminDeskCellsTableHousekeeping = async(data) => {
                 ) :
                 true
 
+            let mistypedFound = (!orphanFound) &&
+                !(deskSchemasByName[_deskSchemaName][_column] in _deskCell)
+
             if (orphanFound) {
                 /*    
                 let result
@@ -62,19 +65,61 @@ const adminDeskCellsTableHousekeeping = async(data) => {
                 }
                 */
                 orphanedCells.push(_deskCell)
-
+                hiddenInputs += 
+                    await rus.html.input({
+                        name: `desk-cells[DELETE]###${postRowIndex}###[DHC]`,
+                        type: `hidden`,
+                        value: _deskCell.DHC
+                    }) +
+                    await rus.html.input({
+                        name: `desk-cells[DELETE]###${postRowIndex}###[R]`,
+                        type: `hidden`,
+                        value: _deskCell.R 
+                    })
+            
+                postRowIndex++
             }
-
-            let mistypedFound = (!orphanFound) &&
-                !(deskSchemasByName[_deskSchemaName][_column] in _deskCell)
+            else
 
             if (mistypedFound) {
                 mistypedCells.push({
 
                     ..._deskCell,
-                    expected_but_missing_data_type: deskSchemasByName[_deskSchemaName][_column]
+                    expected_but_missing_data_type: deskSchemasByName[ _deskSchemaName ][ _column ]
 
                 })
+                hiddenInputs += 
+                    await rus.html.input({
+                        name: `desk-cells[PUT]###${postRowIndex}###[DHC]`,
+                        type: `hidden`,
+                        value: _deskCell.DHC
+                    }) +
+                    await rus.html.input({
+                        name: `desk-cells[PUT]###${postRowIndex}###[R]`,
+                        type: `hidden`,
+                        value: _deskCell.R
+                    }) +
+                    await rus.html.input({
+                        name: `desk-cells[PUT]###${postRowIndex}###[D]`,
+                        type: `hidden`,
+                        value: _deskCell.D
+                    }) +
+                    await rus.html.input({
+                        name: `desk-cells[PUT]###${postRowIndex}###[${ deskSchemasByName[ _deskSchemaName ][ _column ] }]`,
+                        type: `hidden`,
+                        value: _deskCell[ rus
+                                            .conf
+                                            .storage
+                                            .deskCellTypeKeys
+                                            .filter( 
+                                                key => Object
+                                                        .keys(_deskCell)
+                                                        .includes(key) 
+                                            )[0] 
+                                        ]
+                    })
+                    
+                postRowIndex++
             }
         }
     }
@@ -105,13 +150,16 @@ ${  JSON.stringify(mistypedCells,null,4)   }
 </code></pre>
 
 <h1>Administration: Address Housekeeping Report</h1>
-Proceed to delete orphans, and to attempt to retype mistyped cells.
+Proceed to delete orphans, and to attempt to retype mistyped cells. Mistyped
+cells may be deleted if their data cannot be coerced successfully.
 
 ${
     await rus.html.form({
         action: await rus.appUrl([
-            ['route', `admin-import-csv-to-desk-cells-table`],
-            ['form-method', `PATCH`]
+            ['route', `virtual`],
+            ['type', 'desks'],
+            ['form-method', 'PATCH'],
+            ['reader', 'human']
         ]),
         class:'ru-card',
         innerHtml: hiddenInputs
@@ -122,7 +170,6 @@ ${
 in case you need to undo changes. You may simply save this webpage.`,
                 innerHtml: await rus.html.input({
                     type: `submit`,
-                    disabled: true
                 })
             })
     })

@@ -193,9 +193,7 @@ const virtual = async(data) => {
 
                                                     //  This is RESTful;
                                                 case (`update-desk-schema`):
-                                                    //data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
-                                                    await status404(data)
-                                                    console.error('re-enable this when schema-cell semantics have been ironed out')
+                                                    data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskSchema(data)
                                                     return
 
                                                     //  This is not RESTful; the following may be RESTful: ?type=desk-schema &thing=x, method: DELETE
@@ -462,8 +460,9 @@ const virtual = async(data) => {
                             switch (queryScope) {
 
                                 case ('collection'):
-                                    rus.log.error(data, `(virtual.js) (?type=desks) (PATCH) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
-                                    await status403(data)
+                                    //rus.log.error(data, `(virtual.js) (?type=desks) (PATCH) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
+                                    //await status403(data)
+                                    await desksPatch(data)
                                     return
 
                                 case ('individual'):

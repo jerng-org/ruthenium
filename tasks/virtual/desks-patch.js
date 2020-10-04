@@ -43,14 +43,37 @@ const desksPatch = async(data) => {
 
     if ('PUT' in data.RU.request.formStringParameters['desk-cells']) {
 
+        let putIndex = 0
+
         // WIP: hardcoded
         for (const __deskCell of data.RU.request.formStringParameters['desk-cells'].PUT) {
 
             //  WIP Issue 5. 
-            if ('N' in __deskCell) __deskCell.N = Number(__deskCell.N)
-
+            if ('N' in __deskCell) 
+            {
+                 const coercedNumber = Number(__deskCell.N)
+                 if (isNaN(coercedNumber)) {
+                     
+                    if ( ! ( 'DELETE' in data.RU.request.formStringParameters['desk-cells'] ) ) {
+                         data.RU.request.formStringParameters['desk-cells'].DELETE = []
+                    } 
+                    data.RU.request.formStringParameters['desk-cells'].DELETE.push(
+                       {
+                           DHC: __deskCell.DHC,
+                           R:__deskCell.R
+                       }
+                    )
+                    
+                    data.RU.request.formStringParameters['desk-cells'].PUT.splice(putIndex, 1)
+                 }
+                 else {
+                     __deskCell.N = coercedNumber
+                 }
+            }
             //  WIP Issue 6.
             if ('S' in __deskCell && __deskCell.S == '') __deskCell.S = ' '
+            
+            putIndex++
         }
         // WIP: hardcoded (end)
 
