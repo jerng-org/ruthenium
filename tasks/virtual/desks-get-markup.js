@@ -55,7 +55,7 @@ const desksGetMarkup = async(data) => {
                             ${ deskCellsByRowID[rowID][colName] }
                             
                             <i  class="material-icons ru-hover-opaque"
-                                onclick="
+                                onclick=" event => {
                                 
                                     const deskCell = 
                                         JSON.parse(
@@ -69,8 +69,10 @@ const desksGetMarkup = async(data) => {
                                     const tempPointer = document.getElementsByTagName('dialog')[0]
                                     tempPointer.showModal()
                                     tempPointer.innerHtml = '<pre>' + JSON.stringify(deskCell) + '</pre>' 
-                                
-                                    "
+                                    
+                                    event.stopPropagation()
+                                }
+                                "
                                 
                             >edit</i>
                             
