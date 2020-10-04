@@ -68,14 +68,12 @@ await rus.appUrl ( [
             }
             
             legend {
-                /*
-                padding: 0 1rem;
-                background-color: #ccc;
-                border-radius: 0.5em;
-                font-family: mono
-                */
             }
-
+            
+            dialog::backdrop {
+                backdrop-filter: blur(3px);
+            } 
+            
         /* Application Original Content  */
             
             .ru-card { 

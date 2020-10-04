@@ -188,6 +188,10 @@ const desksGetMarkup = async(data) => {
 }
 
 let markup = `
+<dialog open>
+    I'm open.
+</dialog>
+
 <h3> <i>GET</i>
 a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasGet.Item.name }</code> </h1> 
     <table >
