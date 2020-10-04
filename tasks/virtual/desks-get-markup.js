@@ -55,7 +55,7 @@ const desksGetMarkup = async(data) => {
                             ${ deskCellsByRowID[rowID][colName] }
                             
                             <i  class="material-icons ru-hover-opaque"
-                                onclick"
+                                onclick="
                                     alert(
                                         JSON.parse(
                                             decodeURIComponent(
