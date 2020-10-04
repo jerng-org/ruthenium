@@ -56,7 +56,7 @@ const desksGetMarkup = async(data) => {
                             
                             <i  class="material-icons ru-hover-opaque"
                                 onclick="
-                                    alert(
+                                    console.log(
                                         JSON.parse(
                                             decodeURIComponent(
                                                 this
