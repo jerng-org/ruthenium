@@ -55,7 +55,7 @@ const desksGetMarkup = async(data) => {
                             ${ deskCellsByRowID[rowID][colName] }
                             
                             <i  class="material-icons ru-hover-opaque"
-                                onclick=" //event => {
+                                onclick="
                                     
                                     const deskCell = 
                                         JSON.parse(
@@ -71,7 +71,6 @@ const desksGetMarkup = async(data) => {
                                     tempPointer.innerHtml = '<pre>' + JSON.stringify(deskCell) + '</pre>' 
                                     
                                     event.stopImmediatePropagation()
-                                //}
                                 "
                                 
                             >edit</i>
@@ -123,7 +122,7 @@ const desksGetMarkup = async(data) => {
 
             <a  class="button toggle-set-1" 
                     title="UPDATE desk row"
-                    onclick = "(e=>e.stopImmediatePropagation())(event)"
+                    onclick = " event.stopImmediatePropagation() // (e=>e.stopImmediatePropagation())(event)"
                     href="${
                     await rus.appUrl ([
                         [ 'route', 'virtual' ],
