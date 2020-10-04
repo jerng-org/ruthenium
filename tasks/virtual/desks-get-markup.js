@@ -56,7 +56,8 @@ const desksGetMarkup = async(data) => {
                             
                             <i  class="material-icons ru-hover-opaque"
                                 onclick="
-                                    console.log(
+                                
+                                    const deskCell = 
                                         JSON.parse(
                                             decodeURIComponent(
                                                 this
@@ -65,7 +66,11 @@ const desksGetMarkup = async(data) => {
                                                 .deskCell
                                             )
                                         )
-                                    )"
+                                    const tempPointer = document.getElementsByTagName('dialog')[0]
+                                    tempPointer.showModal()
+                                    tempPointer.innerHtml = '<pre>' + JSON.stringify(deskCell) + '</pre>' 
+                                
+                                    "
                                 
                             >edit</i>
                             
@@ -212,7 +217,7 @@ const desksGetMarkup = async(data) => {
 }
 
 let markup = `
-<dialog open>
+<dialog>
     I'm open.
 </dialog>
 
