@@ -218,7 +218,7 @@ const desksGetMarkup = async(data) => {
 }
 
 let markup = `
-<dialog>
+<dialog onclick="event.stopImmediatePropagation()">
     <script>
         const tempPointer = document.getElementsByTagName('dialog')[0]
         document.getElementsByTagName('body')[0].onclick = _ => {
