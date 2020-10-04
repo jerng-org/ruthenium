@@ -46,7 +46,7 @@ const desksGetMarkup = async(data) => {
                 return await accumulator + `<td     data-desk-cell-dhc="${ dhc }" 
                                                     data-desk-cell-r="${ rowID }
                                                     data-desk-cell-d="${ data.RU.io.deskSchemasGet.Item.name }"
-                                                    data-desk-cell-${ data.RU.io.deskSchemasGet.Item.columns[ colName ].type }="${ deskCellsByRowID[rowID][colName] }"
+                                                    data-desk-cell-${ data.RU.io.deskSchemasGet.Item.columns.find( c => c.name == colName ).type }="${ deskCellsByRowID[rowID][colName] }"
                                             >
 
                             ${ deskCellsByRowID[rowID][colName] }
