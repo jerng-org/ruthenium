@@ -55,8 +55,8 @@ const desksGetMarkup = async(data) => {
                             ${ deskCellsByRowID[rowID][colName] }
                             
                             <i  class="material-icons ru-hover-opaque"
-                                onclick=" event => {
-                                
+                                onclick=" //event => {
+                                    
                                     const deskCell = 
                                         JSON.parse(
                                             decodeURIComponent(
@@ -71,7 +71,7 @@ const desksGetMarkup = async(data) => {
                                     tempPointer.innerHtml = '<pre>' + JSON.stringify(deskCell) + '</pre>' 
                                     
                                     event.stopImmediatePropagation()
-                                }
+                                //}
                                 "
                                 
                             >edit</i>
