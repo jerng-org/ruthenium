@@ -43,22 +43,28 @@ const desksGetMarkup = async(data) => {
                 
                 const dhc = data.RU.io.deskSchemasGet.Item.name + '#' + colName
                 
-                return await accumulator + `<td     data-desk-cell-dhc="${ dhc }" 
-                                                    data-desk-cell-r="${ rowID }
-                                                    data-desk-cell-d="${ data.RU.io.deskSchemasGet.Item.name }"
-                                                    data-desk-cell-${ data.RU.io.deskSchemasGet.Item.columns.find( c => c.name == colName ).type }="${ deskCellsByRowID[rowID][colName] }"
-                                                    data-desk-cell="${ encodeURIComponent(JSON.stringify({
-                                                        DHC: dhc ,
-                                                        R: rowID,
-                                                        D: data.RU.io.deskSchemasGet.Item.name,
-                                                        [data.RU.io.deskSchemasGet.Item.columns.find( c => c.name == colName ).type] : deskCellsByRowID[rowID][colName]
-                                                        
-                                                    })) }"
+                return await accumulator + `<td data-desk-cell="${ encodeURIComponent(JSON.stringify({
+                                                    DHC: dhc ,
+                                                    R: rowID,
+                                                    D: data.RU.io.deskSchemasGet.Item.name,
+                                                    [data.RU.io.deskSchemasGet.Item.columns.find( c => c.name == colName ).type] : deskCellsByRowID[rowID][colName]
+                                                    
+                                                })) }"
                                             >
 
                             ${ deskCellsByRowID[rowID][colName] }
                             
-                            <i class="material-icons ru-hover-opaque">edit</i>
+                            <i  class="material-icons ru-hover-opaque"
+                                onclick"
+                                    alert(
+                                        JSON.parse(
+                                            decodeURIComponent(
+                                                this.closest('[data-desk-cell]')
+                                            )
+                                        )
+                                    )"
+                                
+                            >edit</i>
                             
                             ${ 
                                         await rus.html.input({
