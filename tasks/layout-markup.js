@@ -71,8 +71,8 @@ await rus.appUrl ( [
             }
             
             dialog::backdrop {
-                background: linear - gradient(45 deg, rgba(0, 143, 104, .5), rgba(250, 224, 66, .5));
-            }
+                background: linear-gradient(45deg, rgba(0,143,104,.5), rgba(250,224,66,.5));
+            } 
             
         /* Application Original Content  */
             
