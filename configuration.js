@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `(testing import of large CSV data)`
+const gitCommitMessage = `CSS added: dialog::backdrop`
 
 
 module.exports = {
