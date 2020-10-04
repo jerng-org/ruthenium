@@ -218,6 +218,12 @@ const desksGetMarkup = async(data) => {
 
 let markup = `
 <dialog>
+    <script>
+        const tempPointer = document.getElementsByTagName('dialog')[0]
+        document.getElementsByTagName('body')[0].onclick = _ => {
+            if ( tempPointer.open ) tempPointer.close()
+        }
+    </script>
     I'm open.
 </dialog>
 
