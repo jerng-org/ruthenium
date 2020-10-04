@@ -68,7 +68,7 @@ const desksGetMarkup = async(data) => {
                                         )
                                     const tempPointer = document.getElementsByTagName('dialog')[0]
                                     tempPointer.showModal()
-                                    tempPointer.innerHtml = '<pre>' + JSON.stringify(deskCell) + '</pre>' 
+                                    tempPointer.innerHTML = '<pre>' + JSON.stringify(deskCell) + '</pre>' 
                                     
                                     event.stopImmediatePropagation()
                                 "
@@ -122,7 +122,7 @@ const desksGetMarkup = async(data) => {
 
             <a  class="button toggle-set-1" 
                     title="UPDATE desk row"
-                    onclick = " event.stopImmediatePropagation() // (e=>e.stopImmediatePropagation())(event)"
+                    onclick = " event.stopImmediatePropagation() "
                     href="${
                     await rus.appUrl ([
                         [ 'route', 'virtual' ],
@@ -218,7 +218,7 @@ const desksGetMarkup = async(data) => {
 }
 
 let markup = `
-<dialog onclick="event.stopPropagation()">
+<dialog>
     <script>
         const tempPointer = document.getElementsByTagName('dialog')[0]
         document.getElementsByTagName('body')[0].onclick = _ => {
