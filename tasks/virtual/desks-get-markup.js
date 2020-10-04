@@ -39,7 +39,15 @@ const desksGetMarkup = async(data) => {
         ${ await colNames.reduce(
             async (accumulator, colName, index, array)=>{
                 
-                return await accumulator + `<td>
+                // Rather un-optimised for performance and verbosity:
+                
+                const dhc = data.RU.io.deskSchemasGet.Item.name + '#' + colName
+                
+                return await accumulator + `<td     data-desk-cell-dhc="${ dhc }" 
+                                                    data-desk-cell-r="${ rowID }
+                                                    data-desk-cell-d="${ data.RU.io.deskSchemasGet.Item.name }"
+                                                    data-desk-cell-${ data.RU.io.deskSchemasGet.Item.columns[ colName ].type }="${ deskCellsByRowID[rowID][colName] }"
+                                            >
 
                             ${ deskCellsByRowID[rowID][colName] }
                             
@@ -50,7 +58,7 @@ const desksGetMarkup = async(data) => {
                                             form: deleteDeskRowFormID,
                                             name: `desk-cells[DELETE]###${   index   }###[DHC]`,
                                             type: `hidden`,
-                                            value: `${ data.RU.io.deskSchemasGet.Item.name }#${ colName }`
+                                            value: dhc
                                         }) +
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
