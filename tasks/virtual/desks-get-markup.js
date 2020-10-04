@@ -47,6 +47,13 @@ const desksGetMarkup = async(data) => {
                                                     data-desk-cell-r="${ rowID }
                                                     data-desk-cell-d="${ data.RU.io.deskSchemasGet.Item.name }"
                                                     data-desk-cell-${ data.RU.io.deskSchemasGet.Item.columns.find( c => c.name == colName ).type }="${ deskCellsByRowID[rowID][colName] }"
+                                                    data-desk-cell="${ encodeURIComponent(JSON.stringify({
+                                                        DHC: dhc ,
+                                                        R: rowID,
+                                                        D: data.RU.io.deskSchemasGet.Item.name,
+                                                        [data.RU.io.deskSchemasGet.Item.columns.find( c => c.name == colName ).type] : deskCellsByRowID[rowID][colName]
+                                                        
+                                                    })) }"
                                             >
 
                             ${ deskCellsByRowID[rowID][colName] }
