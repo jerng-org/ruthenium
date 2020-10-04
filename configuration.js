@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: (uuid4-create.js; (admin-desk-cells-table-housekeeping, NEXT: generate hidden inputs)) <= housekeeping task to upload CSV to DESKS`
+const gitCommitMessage = `(testing import of large CSV data)`
 
 
 module.exports = {
@@ -216,6 +216,6 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 6,
+    verbosity: 0,
 
 }

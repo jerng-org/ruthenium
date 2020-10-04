@@ -44,7 +44,6 @@ const desksGetMarkup = async(data) => {
                             ${ deskCellsByRowID[rowID][colName] }
                             
                             <i class="material-icons ru-hover-opaque">edit</i>
-                            <i class="material-icons">construction</i>
                             
                             ${ 
                                         await rus.html.input({
@@ -191,8 +190,6 @@ const desksGetMarkup = async(data) => {
 let markup = `
 <h3> <i>GET</i>
 a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasGet.Item.name }</code> </h1> 
-    <pre > ${ rus.conf.verbosity > 3 ? await rus.print.stringify4(deskCellsByRowID) : '' }</pre>
-    <pre>${ rus.conf.verbosity > 3 ? await rus.print.stringify4(colNames) : '' }</pre> 
     <table >
 
     <thead>

@@ -91,7 +91,6 @@ const updateDeskSchema = async(data) => {
 
 <!---------------------------------------------------------------------------->      
 
-<!-- hide these elements until we figure out Schema -> Cell semantics --
 
                     <fieldset   onclick="toggler ( this, '.toggle-set-1', '#unlock-desk-schemas-update-${ data.RU.io.deskSchemasGet.Item.name }' )"
                                 class="toggle-set-2"
@@ -153,9 +152,7 @@ const updateDeskSchema = async(data) => {
                         
                     </div>
 
--- end of code to hide -->                    
-<div class="ru-card"><button><i class='material-icons'>block</i> this operation is temporarily disallowed <i class='material-icons'>construction</i> </button></div>
-                    
+
 <!---------------------------------------------------------------------------->        
     
 </fieldset>
