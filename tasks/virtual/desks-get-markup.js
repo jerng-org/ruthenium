@@ -59,7 +59,10 @@ const desksGetMarkup = async(data) => {
                                     alert(
                                         JSON.parse(
                                             decodeURIComponent(
-                                                this.closest('[data-desk-cell]')
+                                                this
+                                                .closest('[data-desk-cell]')
+                                                .dataset
+                                                .deskCell
                                             )
                                         )
                                     )"
