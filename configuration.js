@@ -140,7 +140,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 0,
+    performance: 1,
 
     /*  platform:
      *  
