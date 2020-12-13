@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `(migrated to theunicorn.coffee); WIP: desks-get-markup.js: cell by cell updates`
+const gitCommitMessage = `WIP: desks-get-markup.js: cell by cell updates`
 
 
 module.exports = {
