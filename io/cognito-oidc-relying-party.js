@@ -61,7 +61,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     const issuerRedirectUri = process.env.COGNITO_REDIRECT_URI
 
     //  3.
-    //  OIDC Relying Party (RP) / Client Application / sudo.coffee;
+    //  OIDC Relying Party (RP) / Client Application / theu.coffee;
     const relyingPartyId = process.env.COGNITO_RELYING_PARTY_ID
     const relyingPartySecret = process.env.COGNITO_RELYING_PARTY_SECRET
 
