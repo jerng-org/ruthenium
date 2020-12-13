@@ -12,7 +12,7 @@ module.exports = {
 
             authority: {
                 userinfo: null,
-                host: 'ruthenium-v1.dev.sudo.coffee',
+                host: 'ruthenium-v1.dev.theunicorn.coffee',
                 port: null
             },
 
