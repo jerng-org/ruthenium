@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `[fn:ruthenium-v1-dev_THEUNICORN]; WIP: desks-get-markup.js: cell by cell updates`
+const gitCommitMessage = `(migrated to theunicorn.coffee); WIP: desks-get-markup.js: cell by cell updates`
 
 
 module.exports = {
