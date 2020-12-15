@@ -77,7 +77,11 @@ await rus.appUrl ( [
             } 
             
             label {
-                
+                margin-top: 1 rem;
+            }
+            
+            input {
+                margin-left: 1 rem;
             }
             
         /* Application Original Content  */
