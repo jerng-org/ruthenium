@@ -68,12 +68,17 @@ await rus.appUrl ( [
             }
             
             legend {
+                margin-top: 1 rem;
             }
             
             dialog::backdrop {
                 background: linear-gradient(45deg, rgba(0,143,104,.5), rgba(250,224,66,.5));
                 /* .showModal() will display the  */
             } 
+            
+            label {
+                
+            }
             
         /* Application Original Content  */
             
