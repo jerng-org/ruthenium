@@ -24,7 +24,7 @@ async rowID => `
                     } ) +
                     await rus.html.input ( {
                         id:             currentColumn.name,
-                        label:          currentColumn.name,
+                        labelInnerHtml:  currentColumn.name,
                         name:           `desk-cells[PUT]###${index}###[${ currentColumn.type }]`,
                         placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentColumn.type ] } --`,
                         value:          deskCellsByRowID[rowID][currentColumn.name]
@@ -64,7 +64,7 @@ const updateDeskRow = async(data) => {
 
     return `
     
-        <h2><code>${ data.RU.io.deskSchemasGet.Item.name }</code> : object update x</h2>
+        <h2><code>${ data.RU.io.deskSchemasGet.Item.name }</code> : object update</h2>
     
         ${  await rus.html.form ( {
                 action: await rus.appUrl( [
