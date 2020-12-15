@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `(CSS updated) WIP: desks-get-markup.js: cell by cell updates`
+const gitCommitMessage = `(debugged label->labelInnerHtml) WIP: desks-get-markup.js: cell by cell updates`
 
 
 module.exports = {
