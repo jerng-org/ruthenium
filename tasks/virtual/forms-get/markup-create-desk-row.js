@@ -17,7 +17,7 @@ const innerHtml = async ( DATA, uuid ) => `
                     } ) +
                     await rus.html.input ( {
                         id:             currentValue.name,
-                        label:          currentValue.name,
+                        labelInnerHtml:  currentValue.name,
                         name:           `desk-cells[PUT]###${index}###[${ currentValue.type }]`,
                         placeholder:    `-- enter a ${ rus.conf.labels.deskCellTypes[ currentValue.type ] } --`
                         
