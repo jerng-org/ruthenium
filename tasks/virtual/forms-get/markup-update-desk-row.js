@@ -64,7 +64,7 @@ const updateDeskRow = async(data) => {
 
     return `
     
-        <h2><code>${ data.RU.io.deskSchemasGet.Item.name }</code> : object update </h2>
+        <h2><code>${ data.RU.io.deskSchemasGet.Item.name }</code> : object update x</h2>
     
         ${  await rus.html.form ( {
                 action: await rus.appUrl( [
