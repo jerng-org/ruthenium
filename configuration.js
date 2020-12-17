@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `Added 'sharp' node module layer; WIP: desks-get-markup.js: cell by cell updates`
+const gitCommitMessage = `documentation folder; WIP: desks-get-markup.js: cell by cell updates`
 
 
 module.exports = {

@@ -1,8 +1,0 @@
-{
-    "name": "OIDC - JWT Validation - ",
-    "version": "0.0.0",
-    "dependencies": {
-        "jwk-to-pem": "~2.0.3",
-        "jsonwebtoken": "~8.5.1"
-    }
-}
