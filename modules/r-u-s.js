@@ -92,8 +92,9 @@ const rus = {
     //////////
 
     aws: {
-        ddbdc: require('/var/task/io/ddbdc.js'),
-        cognito: require(`/var/task/io/cognito-oidc-relying-party.js`)
+        ddbdc: require('/var/task/io/ddb-dc.js'),
+        cognito: require(`/var/task/io/cognito-oidc-relying-party.js`),
+        s3pre: require('/var/task/io/s3-pre.js')
     },
 
     //////////

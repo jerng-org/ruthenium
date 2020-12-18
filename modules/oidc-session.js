@@ -3,7 +3,7 @@
 const mark = require('/var/task/modules/mark.js')
 const cookie = require('/var/task/modules/cookie.js')
 const conf = require(`/var/task/configuration.js`)
-const ddbdc = require('/var/task/io/ddbdc.js')
+const ddbdc = require('/var/task/io/ddb-dc.js')
 
 /*  Given any DATA, exerts control over DATA.RU.signals.session;
  *
