@@ -85,7 +85,8 @@ const trInTable = async(item) => {
                         
                         <input  type="text" 
                                 id="unlock-desk-schemas-delete-${ item['name'] }" 
-                                placeholder="type the code, to show the link, which deletes this schema" 
+                                title="type the code, to show the link, which deletes this schema" 
+                                placeholder="type the code, to show the link ..." 
                                 class="toggle-set-1"
                                 style="display:none;"
                                 onclick="(e=>e.stopImmediatePropagation())(event)"
