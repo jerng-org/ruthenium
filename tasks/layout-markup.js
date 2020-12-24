@@ -81,9 +81,7 @@ await rus.appUrl ( [
             }
             
             input {
-                /* margin-left: 1rem; */
-                /* width: calc( 100% - 2rem ) !important; */
-                border-left: 3px dotted #;
+                border-left: 3px dotted #d1d1d1;
             }
             
         /* Application Original Content  */
