@@ -62,6 +62,14 @@ await rus.appUrl ( [
                 border-left: 0.1rem solid #ddd;
             }
 
+            th:first-child, td:first-child {
+                padding-left: 1.5rem;
+            }
+            
+            th:last-child, td:last-child {
+                padding-right: 1.5rem;
+            }
+
             tbody > tr:nth-child(odd) > td ,
             tbody > tr:nth-child(odd) > th {
                     background-image: linear-gradient(#f8f8f8, #fff, #fff, #fff, #f8f8f8);               
