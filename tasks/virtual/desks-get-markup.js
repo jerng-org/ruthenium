@@ -154,7 +154,8 @@ const desksGetMarkup = async(data) => {
 
             <input type = "text"
         id = "unlock-desk-row-delete-${ rowID }"
-        placeholder = "type the code, to show the link, which deletes this object"
+        title = "type the code, to show the link, which deletes this object"
+        placeholder = "type the code, to show the link..."
         class = "toggle-set-1"
         style = "display:none;margin-top:0.5rem;"
         onclick = "(e=>e.stopImmediatePropagation())(event)"
