@@ -81,7 +81,7 @@ await rus.appUrl ( [
             }
             
             input {
-                border-left: 3px dotted #d1d1d1;
+                border-left: 3px dotted grey ;
             }
             
         /* Application Original Content  */
