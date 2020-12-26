@@ -26,7 +26,7 @@ const ddb = require(`aws-sdk/clients/dynamodb`)
 const ddbdc = new ddb.DocumentClient()
 
 module.exports = ddbdc 
-mark(`~/io/ddbdc.js LOADED`)
+mark(`~/io/ddb-dc.js LOADED`)
 
 /*  TODO
 
