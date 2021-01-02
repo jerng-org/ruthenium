@@ -19,7 +19,7 @@ const s3PostPolicyTest = async ( data ) => {
         <br> - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html">https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html</a>
         <br> - <a href="https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html">https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html</a>
         <br> - <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html">https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html</a>
-        
+        <br> - <a href="https://s3.console.aws.amazon.com/s3/home?region=us-east-1#">https://s3.console.aws.amazon.com/s3/home?region=us-east-1#</a>
         <form action="http://sigv4examplebucket.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
             Key to upload: 
             <input type="input"  name="key" value="user/user1/\${filename}" /><br />
