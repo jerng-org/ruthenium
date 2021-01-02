@@ -14,7 +14,12 @@ const s3PostPolicyTest = async ( data ) => {
 
     data.RU.signals.sendResponse.body = `
         <h3>temporary body (s3-post-policy-test.js)</h3>
-
+        
+        From: 
+        <br> - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html">https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html</a>
+        <br> - <a href="https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html">https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html</a>
+        <br> - <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html">https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html</a>
+        
         <form action="http://sigv4examplebucket.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
             Key to upload: 
             <input type="input"  name="key" value="user/user1/\${filename}" /><br />
