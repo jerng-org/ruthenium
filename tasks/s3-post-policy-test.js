@@ -12,6 +12,8 @@ const s3PostPolicyTest = async ( data ) => {
     // set data in ( data.RU.io.thisIsMyName )
 
 
+    data.RU.signals.sendResponse.body = 'temporary body (s3-post-policy-test.js)'
+
     rus.mark ( `~/tasks/s3-post-policy-test.js EXECUTED` )
 }
 // manipulate (data.RU), for example
