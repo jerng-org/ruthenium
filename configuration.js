@@ -1,5 +1,5 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `WIP: s3-pre.js; WIP: desks-get-markup.js: cell by cell updates`
+const gitCommitMessage = `WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 
 module.exports = {
