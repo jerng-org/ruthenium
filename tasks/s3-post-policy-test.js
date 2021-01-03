@@ -19,7 +19,7 @@ const s3PostPolicyTest = async ( data ) => {
         
         <br> - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-UsingHTTPPOST.html">https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-UsingHTTPPOST.html</a>
         <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTForms.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTForms.html</b></a>
-        <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTConstructPolicy.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTConstructPolicy.html</</a>
+        <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTConstructPolicy.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTConstructPolicy.html</b> </a>
         <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html</b></a>
         
         <br> - <a href="https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html">https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html</a>
