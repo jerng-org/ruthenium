@@ -18,8 +18,8 @@ const s3PostPolicyTest = async ( data ) => {
         <h4>References:</h4>
         
         <br> - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-UsingHTTPPOST.html">https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-UsingHTTPPOST.html</a>
-        <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTForms.html">https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTForms.html</a>
-        <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html">https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html</a>
+        <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTForms.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTForms.html</b></a>
+        <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html</b></a>
         
         <br> - <a href="https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html">https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html</a>
         <br> - <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html">https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html</a>
@@ -29,7 +29,7 @@ const s3PostPolicyTest = async ( data ) => {
         <br> - <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-overview.html">https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-overview.html</a>
         <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html">https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html</a>
         
-        <br> - <a href=""></a>
+        <br> - <a href="https://medium.com/@shamnad.p.s/how-to-create-an-s3-bucket-and-aws-access-key-id-and-secret-access-key-for-accessing-it-5653b6e54337"><b>https://medium.com/@shamnad.p.s/how-to-create-an-s3-bucket-and-aws-access-key-id-and-secret-access-key-for-accessing-it-5653b6e54337</b></a>
         <br> - <a href=""></a>
         <br> - <a href=""></a>
         <br> - <a href=""></a>
