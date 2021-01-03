@@ -19,6 +19,7 @@ const s3PostPolicyTest = async ( data ) => {
         
         <br> - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-UsingHTTPPOST.html">https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-UsingHTTPPOST.html</a>
         <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTForms.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTForms.html</b></a>
+        <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTConstructPolicy.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTConstructPolicy.html</</a>
         <br> - - <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html"><b>https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html</b></a>
         
         <br> - <a href="https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html">https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html</a>
@@ -35,16 +36,13 @@ const s3PostPolicyTest = async ( data ) => {
         <br> - <a href=""></a>
         <br> - <a href=""></a>
         <br> - <a href=""></a>
-        <br> - <a href=""></a>
 
         <h4>POST Policy:</h4>
         <pre>
             <code id="post-policy-code-element">{ "expiration": "2021-12-30T12:00:00.000Z",
   "conditions": [
     {"bucket": "ruthenium-v1-dev"},
-    ["starts-with", "$key", "user/user1/"],
     {"acl": "public-read"},
-    {"success_action_redirect": "http://sigv4examplebucket.s3.amazonaws.com/successful_upload.html"},
     ["starts-with", "$Content-Type", "image/"],
     {"x-amz-meta-uuid": "14365123651274"},
     {"x-amz-server-side-encryption": "AES256"},
@@ -52,7 +50,7 @@ const s3PostPolicyTest = async ( data ) => {
 
     {"x-amz-credential": "AKIAIOSFODNN7EXAMPLE/20151229/us-east-1/s3/aws4_request"},
     {"x-amz-algorithm": "AWS4-HMAC-SHA256"},
-    {"x-amz-date": "20151229T000000Z" }
+    {"x-amz-date": "20211229T000000Z" }
   ]
 }</code>
         </pre>
@@ -64,8 +62,7 @@ const s3PostPolicyTest = async ( data ) => {
             <input type="input"  name="key" value="user/user1/\${filename}" /><br />
             
             <input type="hidden" name="acl" value="public-read" />
-            <input type="hidden" name="success_action_redirect" value="http://sigv4examplebucket.s3.amazonaws.com/successful_upload.html" />
-            
+
             Content-Type: 
             <input type="input"  name="Content-Type" value="image/jpeg" /><br />
             
