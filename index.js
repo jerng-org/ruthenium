@@ -85,7 +85,7 @@ try {
                     -   (b.1) a JSON response can INVITE the client to switch
                         to protocol (a)
                         
-                We need to investigate how the history API achives simultaneous:
+                We need to investigate how the history API achieves simultaneous:
                     -   display of URI-x in the navigation bar
                     -   no      request of URI-x from the client
                     -   actual  request of URI-y from the client
@@ -93,7 +93,7 @@ try {
 
                 `UUID4 to base64 !`,
 
-                `Refactor (DESK-SCHEMAS id to be name)`,
+                `Refactor (DESK-SCHEMAS id to become name)`,
 
                 `There should be a (task stack) so that we can trace tasks?`,
 
@@ -127,7 +127,7 @@ try {
                 `(lastGuard.js) needs to be updated to disallow certain
                 responses that Lambda allows (like JSON).`,
 
-                `Some ideas for form buildes: https://www.facebook.com/groups/railsrocks/permalink/10151412423849957/`,
+                `Some ideas for form builders: https://www.facebook.com/groups/railsrocks/permalink/10151412423849957/`,
 
                 `Currently, (router.js)'s (despatcher phase) calls a (task), and
                 that (task) may be manually programmed to call other (tasks); but 
