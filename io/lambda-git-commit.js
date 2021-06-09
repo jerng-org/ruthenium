@@ -8,7 +8,8 @@ Lambda layer        :   https://github.com/lambci/git-lambda-layer
 
 Git repository      :   https://github.com/jerng-org/ruthenium.git
 
-    This repository must BELONG to a (GitHub Organization)
+    This repository must BELONG to a (GitHub Organization), in order to obtain
+    granular role-based access control.
 
 Git branch          :   jerng-machines-writeable
 
