@@ -15,6 +15,7 @@ const initiateAccumulator
                         ? Object.defineProperty ( [], 'isAnArray', {  value: true } ) 
                         : {}
 
+/* Recursive function : this is an anti-pattern : TODO : convert to loop */
 const buildDeepPath =   (   htmlNameAttribute, 
                             keyObjectList, 
                             objectReference, 
