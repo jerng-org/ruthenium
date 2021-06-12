@@ -1,7 +1,6 @@
 // Dev: easy to find and edit
-const gitCommitMessage = `Documentation update.`
-//`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
-
+const gitCommit = 1
+const gitCommitMessage = 'comment; and ergonomic variable addition' //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
 
@@ -55,7 +54,7 @@ module.exports = {
      *
      *
      */
-    gitCommit: 1,
+    gitCommit: gitCommit,
     gitCommitMessage: gitCommitMessage,
     /*  USES:
      *  Merge order     :   1
