@@ -11,6 +11,7 @@ let models = {}
 const modelFileNames = fs.readdirSync('/var/task/io/models')
 modelFileNames.forEach((current, index, array) => {
 
+        /* TODO : these naming assumptions : centralise the documentation */
     if (current[0] != '_' &&
         current.toLowerCase().slice(-3) == '.js') {
         models[current.slice(0, -3)] = require('/var/task/io/models/' + current)
@@ -50,53 +51,60 @@ const scopeModel = async _modelKey => {
 
 /*  In summary, (validate) walks through a tree of document 
  *  (models), and at each model looks for the corresponding 
- *  (unscopedData), then calls (validateRules) upon that pair.
- *  
+ *  (unscopedData), then calls (validateRules) upon that pair
+ *                                       << model, unscopedData >>
+ *      
+ *      We should PROBABLY FOR READABILITY ... migrate this to YAML. TODO.    
+ *      
  *  PARAMETER 1 - unscopedData 
  *          
- *      REQUIRED;
+ *  REQUIRED;
  *                          
- *          EXAMPLE
+ *  EXAMPLE
  *      
- *              { 'desk-schemas': { 
- *                  name:       'myName',
- *                  columns:    [
- *                      { name:     'iAmColumn1',
- *                        type:     'other'
+ *              { 'DESK-SCHEMAS': { 
+ *                  NAME:       'myName',
+ *                  COLUMNS:    [
+ *                      { NAME:     'iAmColumn1',
+ *                        TYPE:     'other'
  *                      },
- *                      { name:     'iAmColumn2',
- *                        type:     'S'
+ *                      { NAME:     'iAmColumn2',
+ *                        TYPE:     'S'
  *                      }
  *                  ]
  *              } }
  *  
  *  PARAMETER 2 - modelKey
  *  
- *      REQUIRED;
+ *  REQUIRED;
  *      
  *          String  -   string_key of the (models) object
  *  
- *              EXAMPLE 'desk-schemas'
+ *                      EXAMPLE 'DESK-SCHEMAS'
+ *              or
  *          
  *          Array   -   [ string_key, string_sub_key, string_sub_sub_key, etc. ] 
  *          
- *              Where is the (models) object?
+ *                      Where is the (models) object?
  *              
- *              Answer: framework should have loaded it already.
+ *                      Answer: framework should have loaded it already.
+ *                      
+ *                      TODO : CHECK : I'm not sure that the code, for this 
+ *                                           <<Array>> bit, has been written.
  *                      
  *  PARAMETER 3 - scopedModel         
  *                      
- *      OPTIONAL;
+ *  OPTIONAL;
  *                      
- *          EXAMPLE
+ *  EXAMPLE
  *      
  *              models =        // built in (r-u-s.js)
  *              { 
- *                  'desk-schemas' : { 
+ *                  'DESK-SCHEMAS' : { 
  *                      self: etc.
  *                      subs: {
- *                          name:   { self: etc. },
- *                          columns:{ self: etc. }
+ *                          NAME:   { self: etc. },
+ *                          COLUMNS:{ self: etc. }
  *                      }
  *                  } 
  *              }
@@ -105,12 +113,12 @@ const scopeModel = async _modelKey => {
  *              { 
  *                  self: etc.
  *                  subs: {
- *                      name:   { self: etc. },
- *                      columns:{ 
+ *                      NAME:   { self: etc. },
+ *                      COLUMNS:{ 
  *                          self: etc. 
  *                          subs: {
- *                              name: { self, etc. },
- *                              type: { self, etc. }
+ *                              NAME: { self, etc. },
+ *                              TYPE: { self, etc. }
  *                          }
  *                      }
  *                  }
@@ -118,7 +126,8 @@ const scopeModel = async _modelKey => {
  *              
  *  OPERATION 1
  *  
- *      If PARAMETER 3 is not filled by the user, infer it from PARAMETER 2.
+ *      If PARAMETER 3 is not filled by the user,       << scopedModel >>
+ *          infer it from PARAMETER 2.                  << modelKey >>
  *      
  *      We don't want to be running (validation.js:scopeModel) on every recursing
  *      call, so here we control calls to happen only if (scopedModel)
@@ -128,29 +137,33 @@ const scopeModel = async _modelKey => {
  *  
  *  OPERATION 2
  *  
- *      Use PARAMETER 1 and PARAMETER 2 to determine (_scopedData);
- *      (_scopedData) should be isomorphic with (scopedModel ... PARAMETER 3)
+ *      Use PARAMETER 1 and                     << unscopedData >>
+ *          PARAMETER 2                         << modelKey >>
+ *              to determine (_scopedData);
+ *
+ *      "PARAMETER 4"                           << _scopedData >>
  *  
- *      "PARAMETER 4"
+ *      (_scopedData) should be isomorphic with (scopedModel ... PARAMETER 3)
  *  
  *      EXAMPLE:
  *          
  *          _scopedData ==
  *          { 
- *              name:       'myName',
- *              columns:    [
- *                  { name:     'iAmColumn1',
- *                    type:     'other'
+ *              NAME:       'myName',
+ *              COLUMNS:    [
+ *                  { NAME:     'iAmColumn1',
+ *                    TYPE:     'other'
  *                  },
- *                  { name:     'iAmColumn2',
- *                    type:     'S'
+ *                  { NAME:     'iAmColumn2',
+ *                    TYPE:     'S'
  *                  }
  *              ]
  *          }
  *  
  *  OPERATION 3
  *  
- *      PARAMETERS 3,4 can now be compared; they are isomorphic.
+ *      PARAMETERS 3,4           << scopedModel>>, << _scopedData >>
+ *          can now be compared; they are isomorphic.
  *  
  *      DISCUSSION:
  *                  
