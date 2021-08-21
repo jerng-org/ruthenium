@@ -89,7 +89,7 @@ const lambdaGitCommit =  commitMessage => { try {
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
     notes.gitPush = childProcess.execSync(
-        'git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PASSWORD@github.com/jerng-org/ruthenium.git', 
+        'git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
     mark ( `gitCommit.js Execution complete` )

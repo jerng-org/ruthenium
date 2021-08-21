@@ -1,13 +1,16 @@
 'use strict'
 
-//  rewrites the contents of (data.RU.request.http),
-//  therefore must executed only after the middleware (copyRequestParamters.js)
-
-//  Addresses this issue by using a conventional tunnel approach: 
-//  https://softwareengineering.stackexchange.com/questions/114156/why-are-there-are-no-put-and-delete-methods-on-html-forms
-
-//  Provide a debuggable function name, 
-//  in order to avoid debuggin (function).toString()
+/*  rewrites the contents of (data.RU.request.http),
+ *  therefore must executed only after the middleware (copyRequestParamters.js)
+ *
+ *  Addresses this issue by using a conventional tunnel approach: 
+ *  https://softwareengineering.stackexchange.com/questions/114156/why-are-there-are-no-put-and-delete-methods-on-html-forms
+ *
+ *  Provide a debuggable function name, 
+ *  in order to avoid debuggin (function).toString()
+ * 
+ *  TODO : check : this appears to do nothing for the time being 
+ */
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
