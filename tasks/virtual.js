@@ -1,5 +1,13 @@
 'use strict'
 
+/*  This TASK is special.
+*
+*   The project here refers to TYPES called DESK-SCHEMAS, which can be CRUD-ed
+*   from a web GUI. 
+*
+*
+*/
+
 const desksGet = require('/var/task/tasks/virtual/desks-get.js')
 const desksPatch = require('/var/task/tasks/virtual/desks-patch.js')
 

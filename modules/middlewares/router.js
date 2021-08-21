@@ -114,16 +114,18 @@ const router = async(data) => {
         customDetermineTaskName() :
         defaultDetermineTaskName()
 
-    // redirects: short-circuit
+    /* redirects: short-circuit
+    */
     if (data.RU.signals.redirectRoute) {
         return data
     }
 
     /* no redirects: 
-     * Run the task, if its module is found.
-     *
-     *      TODO: perhaps we want another reducer here for multiple tasks?
-     */
+    *
+    *      Run the task, if its module is found.
+    *
+    *      TODO: perhaps we want another reducer here for multiple tasks?
+    */
 
     else
     if (data.RU.signals.taskName in tasks) {
