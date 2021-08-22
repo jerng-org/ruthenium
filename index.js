@@ -522,6 +522,27 @@ try {
                 //                      << setCookies >>
                 //                      << applyLayout >>
             
+            // attributeBasedAccessControl,
+                // currently NO implementation
+                
+                //  DISCUSS : design on DynamoDB
+                //
+                //  Accessor
+                //      1ry/Partition   Key : STRING : USER_ID
+                //      2dy/Sort        Key : unnecessary?
+                //      Attribute           : MAP : TAGS 
+                //                                  ... as TAG_NAME => TAG_VALUE
+                //
+                //
+                //
+                //  Resource
+                //      1ry/Partition   Key : STRING : RESOURCE_ID
+                //      2dy/Sort        Key : unnecessary?
+                //      Attribute           : MAP : TAGS 
+                //                                  ... as TAG_NAME => TAG_VALUE
+                //
+                
+            
             // executeCodePath,
                 
                 // currently under << router >>
