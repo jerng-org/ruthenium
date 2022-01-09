@@ -1,6 +1,7 @@
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage = `notes on implementing ABAC`//`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
+const gitCommitMessage =    'housekeeping'
+                            //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
 
@@ -216,6 +217,6 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 0,
+    verbosity: 1,
 
 }
