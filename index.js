@@ -52,31 +52,31 @@ try {
         console.warn(
 
             `DEBT_NOTE`, [
- 
+
                 `CURRENT:`,
-                
+
                 `io/models/X validation isn't linked to form input names, but it should be`,
-                
+
                 `Security: (data) object should probably not get passed lock-stock-barrel to markup files.`,
-                
+
                 `(http-METHOD) validation models COULD possibly ADDITIONALLY
                 automatically check other models (e.g. after the (http-patch.js)
                 validation check is positive, it could additionally check 
                 subfields for the (desk-schemas) if that was the resource being
                 PATCHed).`,
-                
+
                 `Route should be properly documented in (data.RU)`,
-                
+
                 `1. Abandon RESTful approaches, temporarily.
                 
                 2. Turn focus to making virtual tables work (desks).`,
-                
+
                 `Perhaps the best way to nested guards is with (x in object),
                 and perhaps we thus need a routing table, or a routing tree 
                 object.`,
-                
+
                 `Oidc does not fail on bad code (bug)`,
-                
+
                 `Rendering options, to be REQUESTED by the client:
                 (a) all server responses are HTML
                     -   (a.1) a HTML response can INVITE the client to switch 
@@ -98,7 +98,7 @@ try {
                 `There should be a (task stack) so that we can trace tasks?`,
 
                 `make ?type=(singular) : desk-schemas -> type=desk-schema`,
-                
+
                 `(desk) CRUD ... (desk-cells- xx .js)
                 
                 CONSIDER renaming API endpoints (not storage structures):  
@@ -110,7 +110,7 @@ try {
                 `cognito - sign-out link; persistent session store, and related policy, next.`,
 
                 `single-page-app framework; history API`,
-                
+
                 `(statustep-functions/s-xxx.js) implement a custom message passing mechanism.`,
 
                 `memory link; redirect to attempted URI after login`,
@@ -279,7 +279,7 @@ try {
                                             ... however that is beyond the scope
                                             of a standard interface definition,
                                             at this time.
-                `,                                                      
+                `,
 
                 `RULE:
                 
@@ -471,7 +471,7 @@ try {
             oidcValidation,
             setOidcSession,
             sessionGuard,
-                // CONSIDER RENAMING / NORMALISING NAMES OF THESE : TODO
+            // CONSIDER RENAMING / NORMALISING NAMES OF THESE : TODO
 
             //  HTML Request - Form Protocols & Data Structures
             //
@@ -479,13 +479,13 @@ try {
             //      (sessionExemption)? This seems to sit on the presumption
             //      that (session state) will NEVER depend on form data.
             //
-            formsTunnelRestfulMethods, 
-                // CONSIDER removing "restful" from this name: TODO
-                
+            formsTunnelRestfulMethods,
+            // CONSIDER removing "restful" from this name: TODO
+
             formsReindexNames,
             formsValidateData,
 
-            
+
 
             //  Business Logic
             //
@@ -495,69 +495,69 @@ try {
             //      the assertion that (routes ... i.e. business logic) may
             //      depend on form data.
             //
-            
-            
-            
-            
-            
+
+
+
+
+
             //  2020-08-05 follow-up on notes from spa-prototype.js (2020-08-04)
             //
             //  NEW ROUTING ARCHITECTURE PROPOSAL
             //
             // routeResponseStrategy,
-            
-                // for example:     << simple HTTP >>
-                //                  << RESTful >>
-                //                  << CORBA >>
-                //                  << TEAPOT >> etc.
-            
+
+            // for example:     << simple HTTP >>
+            //                  << RESTful >>
+            //                  << CORBA >>
+            //                  << TEAPOT >> etc.
+
             // routeResponseMimeType,
-            
+
             // routeCodePath,
-            
-                // currently under << router >>
-                
-                // << routeCodePath >> will have to include all of what is
-                //  currently under     << composeResponse >>
-                //                      << setCookies >>
-                //                      << applyLayout >>
-            
+
+            // currently under << router >>
+
+            // << routeCodePath >> will have to include all of what is
+            //  currently under     << composeResponse >>
+            //                      << setCookies >>
+            //                      << applyLayout >>
+
             // attributeBasedAccessControl,
-                // currently NO implementation
-                
-                //  DISCUSS : design on DynamoDB
-                //
-                //  Accessor
-                //      1ry/Partition   Key : STRING : USER_ID
-                //      2dy/Sort        Key : unnecessary?
-                //      Attribute           : MAP : TAGS 
-                //                                  ... as TAG_NAME => TAG_VALUE
-                //
-                //
-                //
-                //  Resource
-                //      1ry/Partition   Key : STRING : RESOURCE_ID
-                //      2dy/Sort        Key : unnecessary?
-                //      Attribute           : MAP : TAGS 
-                //                                  ... as TAG_NAME => TAG_VALUE
-                //
-                
-            
+            // currently NO implementation
+
+            //  DISCUSS : design on DynamoDB
+            //
+            //  Accessor
+            //      1ry/Partition   Key : STRING : USER_ID
+            //      2dy/Sort        Key : unnecessary?
+            //      Attribute           : MAP : TAGS 
+            //                                  ... as TAG_NAME => TAG_VALUE
+            //
+            //
+            //
+            //  Resource
+            //      1ry/Partition   Key : STRING : RESOURCE_ID
+            //      2dy/Sort        Key : unnecessary?
+            //      Attribute           : MAP : TAGS 
+            //                                  ... as TAG_NAME => TAG_VALUE
+            //
+
+
             // executeCodePath,
-                
-                // currently under << router >>
-                
-                // << executeCodePath >> should terminate in a decisive opinion 
-                //  on  << response headers, including status code>>, and
-                //      << response body >>
-                
+
+            // currently under << router >>
+
+            // << executeCodePath >> should terminate in a decisive opinion 
+            //  on  << response headers, including status code>>, and
+            //      << response body >>
+
             //  << lastGuard >> follows as is currently the case, where missing
             //                  opinons are caught and handled;   
-                
-                
-                
-                
-            
+
+
+
+
+
             router, // each route points to a tree of tasks ("sub-routines")
             //
             //      Question :      Why do we not separate the router and the 
@@ -569,7 +569,7 @@ try {
             applyLayout, // - can this switch places with (setCookies)?
             lastGuard, //  Final Checkpoint
             returnResponse
-            
+
             // HTTP Response - Host System Integration (AWS Lambda) Protocols & Data Structures
             // (none at this time)
         ]
@@ -585,7 +585,7 @@ try {
                 `(ruthenium.js) responded with typeof (neither a string nor an object); we might have a problem.` :
                 (`status code: ${ rutheniumResponse.statusCode }`)
             ),
-            
+
             arguments[0].requestContext.http.method,
             arguments[0].requestContext.domainName,
             arguments[0].requestContext.http.path,
@@ -605,6 +605,9 @@ try {
     //////////
 
 
+    if (rus.conf.customLogging) {
+        console.initialLog(rus.customLogString)
+    }
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }

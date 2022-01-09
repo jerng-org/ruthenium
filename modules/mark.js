@@ -102,14 +102,14 @@ const mark = async ( taskLabel, firstInHandler ) => {
                 
                 String(`prior: `    + Math.round(preInvocationTime) 
                                         + ` ms`)
-                    .padStart ( 2 * padLength + 4, ` `) , 
+                    .padStart ( 2 * padLength + 4, ` `) + 
 
                 String(`"${memoryUsageKey}"`)
-                    .padStart ( 2 * padLength + 6, ` `) , 
+                    .padStart ( 2 * padLength + 6, ` `) + 
                 
                 String(`prior: `    + Math.round(preInvocationCPUsum/1000) 
                                         + ` ms`)
-                    .padStart ( 2 * padLength + 4, ` `) , 
+                    .padStart ( 2 * padLength + 4, ` `) + 
 
                 String(`throttle ⚠️ ㇏㇏`)
                     .padStart ( 2 * padLength + 6, ` `)
@@ -134,11 +134,11 @@ const mark = async ( taskLabel, firstInHandler ) => {
                                     + invocationStartCPU.system
         _log (
             String(`WALL-🕓:(Δ,Σ)`)
-                .padStart ( 5 + 2 * padLength, ` ` ),
+                .padStart ( 5 + 2 * padLength, ` ` )+
             String(`RAM:(Δ,Σ)`)
-                .padStart ( 5 + 2 * padLength, ` ` ),
+                .padStart ( 5 + 2 * padLength, ` ` )+
             String(`CPU-🕓:(Δ,Σ)`)
-                .padStart ( 5 + 2 * padLength, ` ` ),
+                .padStart ( 5 + 2 * padLength, ` ` )+
             String(`[CPU-🕓/WALL-🕓]:(Δ,Σ)`)
                 .padStart ( 8 + 2 * padLength, ` ` )
         )
@@ -179,13 +179,13 @@ const mark = async ( taskLabel, firstInHandler ) => {
                                         - invocationStartTime 
                         ) - lastTime 
                      
-        ).toString().padStart ( padLength, ` ` ), 
+        ).toString().padStart ( padLength, ` ` )+ 
     
         // total runtime;
         Math.round ( lastTime = tempTime 
-        ).toString().padStart ( padLength, ` ` ), 
+        ).toString().padStart ( padLength, ` ` )+ 
     
-        `ms|`,
+        `ms|`+
     
         //
         //
@@ -205,7 +205,7 @@ const mark = async ( taskLabel, firstInHandler ) => {
                 / Math.pow( 1024, 2 )   // B to MB conversion;
                 * 100) / 100            // decimal point formatting;
         )
-        .toString().padStart ( padLength, ` ` ), 
+        .toString().padStart ( padLength, ` ` )+ 
     
         // total RAM usage;
         
@@ -214,8 +214,8 @@ const mark = async ( taskLabel, firstInHandler ) => {
                 ( lastMem = tempMem )
                 / Math.pow ( 1024, 2 )  // B to MB conversion;:
                 * 100) / 100            // decimal point formatting;
-        ).toString().padStart ( padLength, ` ` ),
-        `MB|`, 
+        ).toString().padStart ( padLength, ` ` )+
+        `MB|`+ 
        
         //
         //
@@ -237,15 +237,15 @@ const mark = async ( taskLabel, firstInHandler ) => {
                         - lastCPUsum 
                     )
                     / 1000              // microsecond to millisecond conversion;
-        ).toString().padStart ( padLength, ` ` ),
+        ).toString().padStart ( padLength, ` ` )+
     
         // total CPU time consumed;
         
         Math.round (
             (   lastCPUsum  = tempCPUsum ) 
             / 1000                      // microsecond to millisecond conversion;
-        ).toString().padStart( padLength, ` ` ), 
-        `ms|`, 
+        ).toString().padStart( padLength, ` ` )+ 
+        `ms|`+ 
     
         //
         //
@@ -257,7 +257,7 @@ const mark = async ( taskLabel, firstInHandler ) => {
         
         Math.round (
             dCPUsum / dTime 
-        ).toString().padStart ( padLength, ` ` ), 
+        ).toString().padStart ( padLength, ` ` )+ 
         
         //
         //
@@ -275,15 +275,15 @@ const mark = async ( taskLabel, firstInHandler ) => {
         
         Math.round (
             lastCPUsum / lastTime 
-        ).toString().padStart ( padLength, ` ` ), 
-        `µs/ms|`,
+        ).toString().padStart ( padLength, ` ` )+ 
+        `µs/ms|`+
         
         //
         //
         //
         //
         
-        taskLabel,
+        taskLabel+
         ( nthInvocation % 3  ?  "": "\n" )
     )
 

@@ -1,6 +1,6 @@
 // Dev: easy to find and edit
-const gitCommit = 1
-const gitCommitMessage =    'housekeeping'
+const gitCommit = 1 
+const gitCommitMessage =    'debugging : custom logger'
                             //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
@@ -30,6 +30,17 @@ module.exports = {
 
     },
 
+    /*  customLogging
+     *  
+     *      0 : console behaves normally
+     *
+     *      1 : console is redirected to a customised logger
+     *
+     *      2 : undefined ... maybe have a hybrid mode
+     */
+
+    customLogging : 1,
+    
     defaults: {
 
         cookie: {
@@ -141,7 +152,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 0,
+    performance: 1,
 
     /*  platform:
      *  
@@ -217,6 +228,7 @@ module.exports = {
      *
      *      8   :   undefined as yet
      */
-    verbosity: 1,
+    verbosity: 8,
+
 
 }

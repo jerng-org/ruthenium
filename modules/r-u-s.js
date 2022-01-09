@@ -3,8 +3,43 @@
 //  require()       executes modules; 
 //  require.res()   resolves paths without execution;
 
-const mark = require('/var/task/modules/mark.js')
 const conf = require(`/var/task/configuration.js`)
+
+var customLogString 
+
+if (conf.customLogging) {
+
+    customLogString = "\n\nCustomLogString START : "
+    
+    var customLogStringDate = new Date
+
+    // Customisation of "console"
+    {
+        console.initialError = console.error
+        console.error = function(msg) {
+            console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
+        }
+    } {
+        console.initialWarn = console.warn
+        console.warn = function(msg) {
+            console.initialWarn.apply(this, arguments)
+            customLogString += "\n" + customLogStringDate.toISOString() +
+                ` WARN ` +
+                msg
+        }
+    } {
+        console.initialLog = console.log
+        console.log = function(msg) {
+            console.initialLog.apply(this, arguments)
+            customLogString += "\n" + customLogStringDate.toISOString() +
+                ` INFO ` +
+                msg
+        }
+    }
+
+}
+
+const mark = require('/var/task/modules/mark.js')
 
 mark(`r-u-s.js (ruthenium utilities) LOADING ...`)
 
@@ -107,7 +142,9 @@ const rus = {
 
     conf: conf,
 
-    html: require('/var/task/modules/html'),
+    customLogString: customLogString,
+
+    html: require('/var/task/modules/html.js'),
 
     //////////
     //      //
@@ -155,7 +192,7 @@ const rus = {
                     }
 
                     const __dhcSplit = __cell.DHC.split('#')
-                    
+
                     // coherence check
                     if (!__dhcSplit.length == 2) {
                         throw Error(`r-u-s.js: ddbDeskCellsByRowID: '#' appears not exactly once, in __cell.DHC`)
@@ -167,7 +204,7 @@ const rus = {
                     if (!(__cell.R in __deskRows)) {
                         __deskRows[__cell.R] = {}
                     }
-                    
+
                     const _colType = __deskColumnTypes[_colName]
                     __deskRows[__cell.R][_colName] = __cell[_colType]
                 })
@@ -228,7 +265,7 @@ const rus = {
     //      //
     //////////
 
-    tag: async(DATA, string, optionalTruthyValue) => {
+    tag: async (DATA, string, optionalTruthyValue) => {
         DATA.RU.signals[`TAG_` + string.toUpperCase()] = optionalTruthyValue ? optionalTruthyValue : true
     },
 
@@ -266,7 +303,7 @@ const rus = {
      * 
      */
 
-    validateFormDataByMethod: async(data, httpMethodModelKey) => {
+    validateFormDataByMethod: async (data, httpMethodModelKey) => {
 
         const scopedModel = await rus.validation.scopeModel(httpMethodModelKey)
 
@@ -293,7 +330,7 @@ const rus = {
      *  (undefined), hence falsy;
      */
 
-    validateFormData: async(data, modelKey) => {
+    validateFormData: async (data, modelKey) => {
 
         const _report = await rus.validation.validate(
             data.RU.request.formStringParameters,
