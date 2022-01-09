@@ -14,7 +14,7 @@ const _log      = conf.performance ? console.log : _ => _
 /*  EXAMPLE OF USE: 
  *
    'use strict'
-    const P = require ( './perf.js')
+    const P = require ( './mark.js')
     
     exports.handler = async (event, context) =>  {
         
@@ -93,7 +93,7 @@ const mark = async ( taskLabel, firstInHandler ) => {
                                     + preInvocationCPU.system
             preInvocationTime       = performance.now()
             
-            _log (`⚠ perf.js : these figures are loose and fast; ⚠`)
+            _log (`⚠ mark.js : these figures are loose and fast; ⚠`)
             _log (`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB; ⚠`)
             _log (
                 String('').padEnd ( 26 + 8 * padLength, `-` )
@@ -119,9 +119,9 @@ const mark = async ( taskLabel, firstInHandler ) => {
             )
             
         } else {
-            throw   new Error ( `perf.js; mark(_,_,firstInHandler); firstInHandler needs to 
+            throw   new Error ( `mark.js; mark(_,_,firstInHandler); firstInHandler needs to 
                     be set to true, if this is the first time you are calling 
-                    (mark); you can view an example in the comments of perf.js` )
+                    (mark); you can view an example in the comments of mark.js` )
         }
     } 
 
