@@ -419,7 +419,7 @@ try {
     exports.handler = async function() {
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
-        console.log(`Lambda Handler ENTRY Point:`,
+        console.log(`index.js : Lambda Handler ENTRY Point:`,
             arguments[0].requestContext.http.method,
             arguments[0].requestContext.domainName,
             arguments[0].requestContext.http.path,
@@ -577,7 +577,7 @@ try {
         const rutheniumResponse = await ruthenium(hostInitializedData, middlewares)
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
-        console.log(`Lambda Handler EXIT Point:`,
+        console.log(`index.js : Lambda Handler EXIT Point:`,
 
             (typeof rutheniumResponse == 'string') ?
             `rutheniumResponse.slice(0,50) ... [truncated]` :
@@ -592,6 +592,10 @@ try {
             '?', // literal
             arguments[0].rawQueryString
         )
+        
+        if (rus.conf.customLogging) {
+            console.initialLog(rus.customLogString)
+        }
 
         return rutheniumResponse
     }
@@ -605,9 +609,9 @@ try {
     //////////
 
 
-    if (rus.conf.customLogging) {
-        console.initialLog(rus.customLogString)
-    }
+    //    if (rus.conf.customLogging) {
+    //        console.initialLog(rus.customLogString)
+    //    }
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }

@@ -1,6 +1,9 @@
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage =    'debugging : custom logger : examining BUG ... rus.customLogString ends after loading cookie.js, whereas its parent function is still running as evidenced by console.initialLog/Warn(msg)s'
+const gitCommitMessage =    `debugging : custom logger : moved logging of
+customLogString, from outside index.js/handler to inside it; examining BUG ...
+rus.customLogString ends after loading cookie.js, whereas its parent function is
+still running as evidenced by console.initialLog/Warn(msg)s`
                             //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
