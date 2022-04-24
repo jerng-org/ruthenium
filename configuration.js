@@ -1,6 +1,6 @@
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage =    'debugging : custom logger : new Date on info(), warn(), error()'
+const gitCommitMessage =    'debugging : custom logger : repaired bad use of (arguments)'
                             //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
