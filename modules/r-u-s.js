@@ -11,17 +11,19 @@ if (conf.customLogging) {
 
     customLogString = "\n\nCustomLogString START : "
     
-    var customLogStringDate = new Date
-
     // Customisation of "console"
     {
         console.initialError = console.error
         console.error = function(msg) {
+            
+            var customLogStringDate = new Date
             console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
         }
     } {
         console.initialWarn = console.warn
         console.warn = function(msg) {
+            
+            var customLogStringDate = new Date
             console.initialWarn.apply(this, arguments)
             customLogString += "\n" + customLogStringDate.toISOString() +
                 ` WARN ` +
@@ -30,6 +32,8 @@ if (conf.customLogging) {
     } {
         console.initialLog = console.log
         console.log = function(msg) {
+            
+            var customLogStringDate = new Date
             console.initialLog.apply(this, arguments)
             customLogString += "\n" + customLogStringDate.toISOString() +
                 ` INFO ` +
