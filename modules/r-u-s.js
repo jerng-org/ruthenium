@@ -16,16 +16,18 @@ if (conf.customLogging) {
         console.initialError = console.error
         console.error = function() {
 
-            var customLogStringDate = new Date
+            //var customLogStringDate = new Date
             console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
         }
     } {
         console.initialWarn = console.warn
         console.warn = function() {
 
-            var customLogStringDate = new Date
+            arguments[0] = 'INTERCEPTED ' + arguments[0] 
             console.initialWarn.apply(this, arguments)
-            customLogString += "\n" + customLogStringDate.toISOString() +
+            
+            var customLogStringDate = new Date
+            customLogString += "\nCUSTOM " + customLogStringDate.toISOString() +
                 ` WARN ` +
                 Array.from(arguments).join(' ')
         }
@@ -33,9 +35,11 @@ if (conf.customLogging) {
         console.initialLog = console.log
         console.log = function() {
 
-            var customLogStringDate = new Date
+            arguments[0] = 'INTERCEPTED ' + arguments[0] 
             console.initialLog.apply(this, arguments)
-            customLogString += "\n" + customLogStringDate.toISOString() +
+            
+            var customLogStringDate = new Date
+            customLogString += "\nCUSTOM " + customLogStringDate.toISOString() +
                 ` INFO ` +
                 Array.from(arguments).join(' ')
         }
