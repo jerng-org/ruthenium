@@ -1,7 +1,7 @@
 'use strict'
 
-const mark      = require ( `/var/task/modules/mark.js` )
-const conf      = require ( `/var/task/configuration.js` )
+const mark = require(`/var/task/modules/mark.js`)
+const conf = require(`/var/task/configuration.js`)
 
 /*  QUICK START
  *
@@ -110,50 +110,52 @@ const conf      = require ( `/var/task/configuration.js` )
  */
 
 const __HostDefaultIdAttributes = {
-    Path :'/',
-    Domain: false,  //  << origin only, min. surface, max. security; a subset of the __Host- prefix specification >>
+    Path: '/',
+    Domain: false, //  << origin only, min. surface, max. security; a subset of the __Host- prefix specification >>
 }
 
-const defaultIdAttributes = __HostDefaultIdAttributes   // This relationship is not necessarily the case in the future
+const defaultIdAttributes = __HostDefaultIdAttributes // This relationship is not necessarily the case in the future
 
 const defaultAttributes = {
-    
-    ... defaultIdAttributes,
-    Expires: false,     //  << ['Max-Age'] has precedence >>
-    ['Max-Age']: conf.defaults.cookie['Max-Age'],  //  << seconds >>
-    Secure: true,       //  << typically: client only sends cookie over TLS >>
-    HttpOnly: true,     //  << client omits cookie from "non-HTTP" APIs >>
-    SameSite: 'Strict'  //  << client omits cookies if server is hit via cross-site request [RFC 6265 5.3.7.1. ] >>
-    
-                                //  DRAFT TODO Explicit Consent for cross-site links: 
-                                //      if page is 404 due to this policy,
-                                //      then note the (intended/href) URL,
-                                //      read the (referer) request header, then note that URL,
-                                //      read the user's current (session) then note its state,
-                                //      display the noted URLs and session state in a clear
-                                //      !!! WARNING !!! to the user, beside a continuation link * Note at the bottom
+
+    ...defaultIdAttributes,
+    Expires: false, //  << ['Max-Age'] has precedence >>
+    ['Max-Age']: conf.defaults.cookie['Max-Age'], //  << seconds >>
+    Secure: true, //  << typically: client only sends cookie over TLS >>
+    HttpOnly: true, //  << client omits cookie from "non-HTTP" APIs >>
+    SameSite: 'Strict' //  << client omits cookies if server is hit via cross-site request [RFC 6265 5.3.7.1. ] >>
+
+    //  DRAFT TODO Explicit Consent for cross-site links: 
+    //      if page is 404 due to this policy,
+    //      then note the (intended/href) URL,
+    //      read the (referer) request header, then note that URL,
+    //      read the user's current (session) then note its state,
+    //      display the noted URLs and session state in a clear
+    //      !!! WARNING !!! to the user, beside a continuation link * Note at the bottom
 }
 
-const __SecureDefaultAttributes = { ... defaultAttributes, Secure: true }
-    // redundant safety, in case defaultAttributes is modified in the future
+const __SecureDefaultAttributes = { ...defaultAttributes, Secure: true }
+// redundant safety, in case defaultAttributes is modified in the future
 
-const __HostDefaultAttributes = {   ... __SecureDefaultAttributes, 
-                                    Path: '/', 
-                                    Domain: false }
-    // redundant safety, in case defaultAttributes is modified in the future
+const __HostDefaultAttributes = {
+    ...__SecureDefaultAttributes,
+    Path: '/',
+    Domain: false
+}
+// redundant safety, in case defaultAttributes is modified in the future
 
 
 const checkId = id => {
 
-    switch ( typeof id ) {
+    switch (typeof id) {
         case ('string'):
-            id = { name: id } 
+            id = { name: id }
             break
         case ('object'):
-            checkIdObject ( id )    // throws if id.name is missing
+            checkIdObject(id) // throws if id.name is missing
             break
         default:
-            throw Error (`(cookie.js) (cookie.checkId) argument (id) (usually the 2nd argument of Xset or Xexpire) was typeof neither (string) nor (object)`)
+            throw Error(`(cookie.js) (cookie.checkId) argument (id) (usually the 2nd argument of Xset or Xexpire) was typeof neither (string) nor (object)`)
     }
     // therefore, id.name by now MUST exist
 
@@ -163,49 +165,49 @@ const checkId = id => {
 /*  This function does NOT SET any missing EXPECTED arguments.
  */
 const checkIdObject = idObject => {
-    
-    if ( ! ( 'name' in idObject ) ) {
-        throw Error (   `(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'name' was not found;` )
+
+    if (!('name' in idObject)) {
+        throw Error(`(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'name' was not found;`)
     }
-    if ( ! ( 'Path' in idObject ) ) {
-        conf.verbosity > 0 
-            && console.warn (   `(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'Path' was not found; may default` )
+    if (!('Path' in idObject)) {
+        conf.verbosity > 0 &&
+            console.warn(`(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'Path' was not found; may default`)
     }
-    if ( ! ( 'Domain' in idObject ) ) {
-        conf.verbosity > 0 
-            && console.warn (   `(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'Path' was not found; may default` )
+    if (!('Domain' in idObject)) {
+        conf.verbosity > 0 &&
+            console.warn(`(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'Path' was not found; may default`)
     }
 }
 
-const setCookieSignal = ( DATA, id, value, attributes ) => {
-            
-    if ( ! value ) throw Error ( `(cookie.js) (cookie.set) third argument (value) is falsy` )
-    
-    const checkedId = checkId ( id )
+const setCookieSignal = (DATA, id, value, attributes) => {
 
-    // enforce defaults; give (checkedId) props precedence over (attribute)
-    return { 
-        
-        ... defaultAttributes,
-        ... attributes,
-        ... checkedId,          // must have (name), but may be missing Path or Domain
-        value : value           // goes last to ensure it isn't overwritten
-    }
-}
+    if (!value) throw Error(`(cookie.js) (cookie.set) third argument (value) is falsy`)
 
-const expireCookieSignal = ( DATA, id ) => {
-    
-    const checkedId = checkId ( id )
-    
+    const checkedId = checkId(id)
+
     // enforce defaults; give (checkedId) props precedence over (attribute)
     return {
-        
-        ... defaultIdAttributes,
-        ... checkedId,                  // must have (name), but may be missing Path or Domain
-        Secure:         defaultAttributes.Secure,
-        Expires:        new Date (0),   // << ['Max-Age'] has precedence >> // set-cookies.js is responsible for conversion to.toUTCString()
-        ['Max-Age']:    -1,             // RFC 6265.4.1.1. "non-zero digit" thus encourages a negative number
-        value:          'expired'
+
+        ...defaultAttributes,
+        ...attributes,
+        ...checkedId, // must have (name), but may be missing Path or Domain
+        value: value // goes last to ensure it isn't overwritten
+    }
+}
+
+const expireCookieSignal = (DATA, id) => {
+
+    const checkedId = checkId(id)
+
+    // enforce defaults; give (checkedId) props precedence over (attribute)
+    return {
+
+        ...defaultIdAttributes,
+        ...checkedId, // must have (name), but may be missing Path or Domain
+        Secure: defaultAttributes.Secure,
+        Expires: new Date(0), // << ['Max-Age'] has precedence >> // set-cookies.js is responsible for conversion to.toUTCString()
+        ['Max-Age']: -1, // RFC 6265.4.1.1. "non-zero digit" thus encourages a negative number
+        value: 'expired'
     }
 
 }
@@ -228,75 +230,69 @@ const cookie = {
      *  to entities between keyboard and chair, however these errors ought to
      *  to be transparent to, and thus manageable by such entities;
      */
-    set:            
-        async ( DATA, id, value, attributes ) => {
-           
-            const cookieSignal = setCookieSignal ( DATA, id, value, attributes ) 
-            
-            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
-            
-console.warn(`test cookie-value string='false' and check what happens`) 
-            
-        },
-    
-    __SecureSet:    
-        async ( DATA, suffix, value, attributes ) => {
-            
-            const cookieSignal  = setCookieSignal ( DATA, suffix, value, attributes ) 
-            
-            cookieSignal.name   = `__Secure-` + cookieSignal.name
-            cookieSignal.Secure = true
-            
-            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
-        },
-    
-    __HostSet:      
-        async ( DATA, suffix, value, attributes ) => {
-        
-            const cookieSignal  = setCookieSignal ( DATA, suffix, value, attributes ) 
-            
-            cookieSignal.name   = `__Host-` + cookieSignal.name
-            cookieSignal.Secure = true
-            cookieSignal.Path   = __HostDefaultIdAttributes.Path
-            cookieSignal.Domain = __HostDefaultIdAttributes.Domain
-            
-            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
-        },
-    
-    expire:         
-        async ( DATA, id ) => {
-            
-            const cookieSignal  = expireCookieSignal ( DATA, id ) 
-            
-            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
-        },
-    
-    __SecureExpire: 
-        async ( DATA, suffix ) => {
-        
-            const cookieSignal  = expireCookieSignal ( DATA, suffix ) 
-            cookieSignal.name   = `__Secure-` + cookieSignal.name
-            cookieSignal.Secure = true
-            
-            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
-        },
-    
-    __HostExpire:   
-        async ( DATA, suffix ) => {
-        
-            const cookieSignal  = expireCookieSignal ( DATA, suffix ) 
-            cookieSignal.name   = `__Host-` + cookieSignal.name
-            cookieSignal.Secure = true
-            cookieSignal.Path   = __HostDefaultIdAttributes.Path
-            cookieSignal.Domain = __HostDefaultIdAttributes.Domain
-            
-            DATA.RU.signals.sendResponse.setCookies.push ( cookieSignal )
-        },
-    
+    set: async (DATA, id, value, attributes) => {
+
+        const cookieSignal = setCookieSignal(DATA, id, value, attributes)
+
+        DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+
+        console.warn(`test cookie-value string='false' and check what happens`)
+
+    },
+
+    __SecureSet: async (DATA, suffix, value, attributes) => {
+
+        const cookieSignal = setCookieSignal(DATA, suffix, value, attributes)
+
+        cookieSignal.name = `__Secure-` + cookieSignal.name
+        cookieSignal.Secure = true
+
+        DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+    },
+
+    __HostSet: async (DATA, suffix, value, attributes) => {
+
+        const cookieSignal = setCookieSignal(DATA, suffix, value, attributes)
+
+        cookieSignal.name = `__Host-` + cookieSignal.name
+        cookieSignal.Secure = true
+        cookieSignal.Path = __HostDefaultIdAttributes.Path
+        cookieSignal.Domain = __HostDefaultIdAttributes.Domain
+
+        DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+    },
+
+    expire: async (DATA, id) => {
+
+        const cookieSignal = expireCookieSignal(DATA, id)
+
+        DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+    },
+
+    __SecureExpire: async (DATA, suffix) => {
+
+        const cookieSignal = expireCookieSignal(DATA, suffix)
+        cookieSignal.name = `__Secure-` + cookieSignal.name
+        cookieSignal.Secure = true
+
+        DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+    },
+
+    __HostExpire: async (DATA, suffix) => {
+
+        const cookieSignal = expireCookieSignal(DATA, suffix)
+        cookieSignal.name = `__Host-` + cookieSignal.name
+        cookieSignal.Secure = true
+        cookieSignal.Path = __HostDefaultIdAttributes.Path
+        cookieSignal.Domain = __HostDefaultIdAttributes.Domain
+
+        DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+    },
+
 }
 
-module.exports  = cookie 
-mark (`~/modules/cookie.js LOADED`)
+module.exports = cookie
+mark(`~/modules/cookie.js LOADED`)
 
 /*
 I'm not sure if it's relevant to your use case: affiliate

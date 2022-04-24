@@ -5,39 +5,39 @@
 
 const conf = require(`/var/task/configuration.js`)
 
-var customLogString 
+var customLogString
 
 if (conf.customLogging) {
 
     customLogString = "\n\nCustomLogString START : "
-    
+
     // Customisation of "console"
     {
         console.initialError = console.error
-        console.error = function(msg) {
-            
+        console.error = function() {
+
             var customLogStringDate = new Date
             console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
         }
     } {
         console.initialWarn = console.warn
-        console.warn = function(msg) {
-            
+        console.warn = function() {
+
             var customLogStringDate = new Date
             console.initialWarn.apply(this, arguments)
             customLogString += "\n" + customLogStringDate.toISOString() +
                 ` WARN ` +
-                msg
+                Array.from(arguments).join(' ')
         }
     } {
         console.initialLog = console.log
-        console.log = function(msg) {
-            
+        console.log = function() {
+
             var customLogStringDate = new Date
             console.initialLog.apply(this, arguments)
             customLogString += "\n" + customLogStringDate.toISOString() +
                 ` INFO ` +
-                msg
+                Array.from(arguments).join(' ')
         }
     }
 
