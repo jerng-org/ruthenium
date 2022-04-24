@@ -419,7 +419,7 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogString = "\n\nCustomLogString START : "
+            rus.customLogString = "\n\nindex.js/handler : CustomLogString RE-START : "
         }
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
@@ -605,6 +605,10 @@ try {
     }
     // exports.handler()
     rus.mark(`index.js LOADED`)
+
+    if (rus.conf.customLogging) {
+        console.initialLog(rus.customLogString += 'index.js/handler : CustomLogString LOGGED')
+    }
 
 }
 catch (e) { console.error(`

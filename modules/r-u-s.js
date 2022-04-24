@@ -9,6 +9,7 @@ var customLogString
 
 if (conf.customLogging) {
 
+    customLogString = "\n\nr-u-s.js : CustomLogString START : "
 
     // Customisation of "console"
     {
