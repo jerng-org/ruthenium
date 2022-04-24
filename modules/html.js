@@ -1,6 +1,7 @@
 'use strict'
 
 const mark = require('/var/task/modules/mark.js')
+const conf = require(`/var/task/configuration.js`)
 
 const html = {
 
