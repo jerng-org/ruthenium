@@ -5,11 +5,11 @@
 
 const conf = require(`/var/task/configuration.js`)
 
-var customLogString
+var _holder = {}
 
 if (conf.customLogging) {
 
-    customLogString = "\n\nr-u-s.js : CustomLogString START : "
+    _holder._customLogString = "\n\nr-u-s.js : CustomLogString START : "
 
     // Customisation of "console"
     {
@@ -27,7 +27,7 @@ if (conf.customLogging) {
             console.initialWarn.apply(this, arguments)
 
             var customLogStringDate = new Date
-            customLogString += "\nCUSTOM " +
+            _holder._customLogString += "\nCUSTOM " +
                 customLogStringDate.toISOString() +
                 ` WARN ` +
                 Array.from(arguments).join(' ')
@@ -40,7 +40,7 @@ if (conf.customLogging) {
             console.initialLog.apply(this, arguments)
 
             var customLogStringDate = new Date
-            customLogString += "\nCustomLogString " +
+            _holder._customLogString += "\nCustomLogString " +
                 customLogStringDate.toISOString() +
                 ` INFO ` +
                 Array.from(arguments).join(' ')
@@ -53,7 +53,7 @@ if (conf.customLogging) {
             console.initialInfo.apply(this, arguments)
 
             var customLogStringDate = new Date
-            customLogString += "\nCustomLogString " +
+            _holder._customLogString += "\nCustomLogString " +
                 customLogStringDate.toISOString() +
                 ` INFO ` +
                 Array.from(arguments).join(' ')
@@ -165,7 +165,7 @@ const rus = {
 
     conf: conf,
 
-    customLogString: customLogString,
+    customLogString: _holder._customLogString,
 
     html: require('/var/task/modules/html.js'),
 
