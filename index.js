@@ -418,6 +418,10 @@ try {
     // LAMBDA HANDLER
     exports.handler = async function() {
 
+        if (rus.conf.customLogging) {
+            rus.customLogString = "\n\nCustomLogString START : "
+        }
+
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
         console.log(`index.js : Lambda Handler ENTRY Point:`,
             arguments[0].requestContext.http.method,
@@ -592,7 +596,7 @@ try {
             '?', // literal
             arguments[0].rawQueryString
         )
-        
+
         if (rus.conf.customLogging) {
             console.initialLog(rus.customLogString)
         }
@@ -602,16 +606,6 @@ try {
     // exports.handler()
     rus.mark(`index.js LOADED`)
 
-    //////////
-    //      //
-    //  !!  //  Make way.
-    //      //
-    //////////
-
-
-    //    if (rus.conf.customLogging) {
-    //        console.initialLog(rus.customLogString)
-    //    }
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
