@@ -1,6 +1,6 @@
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage = `housekeeping`
+const gitCommitMessage = `conf.frameworkDescriptionLog : WIP`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
@@ -40,7 +40,6 @@ module.exports = {
      */
 
     customLogging: 1,
-    
     customLoggingAllowsNativeLogging: 0,
 
     defaults: {
@@ -59,6 +58,8 @@ module.exports = {
      *              the queue of middlewares, executing subsequent middlewares;
      */
     faultTolerance: 0,
+
+    frameworkDescriptionLogging : 1,
 
     /*  gitCommit
      *

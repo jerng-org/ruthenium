@@ -111,6 +111,10 @@ const rus = {
     customLogger: conf.customLogging ?
         require(`/var/task/modules/custom-logger.js`) : undefined,
 
+    // Please reconsider this design decision in the future 2022-04-26 :
+    frameworkDescriptionLogger: 
+        require(`/var/task/modules/framework-description-logger.js`) ,
+
     html: require('/var/task/modules/html.js'),
 
     //////////
