@@ -186,7 +186,7 @@ const mark = async (taskLabel, firstInHandler) => {
         // total runtime;
         Math.round(lastTime = tempTime).toString().padStart(padLength, ` `) +
 
-        `ms|` +
+        `ms | ` +
 
         //
         //
