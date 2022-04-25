@@ -420,6 +420,7 @@ try {
 
         if (rus.conf.customLogging) {
             rus.customLogString = "\n\nindex.js/handler : CustomLogString RE-START : "
+            //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:

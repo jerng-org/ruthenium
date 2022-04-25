@@ -4,64 +4,6 @@
 //  require.res()   resolves paths without execution;
 
 const conf = require(`/var/task/configuration.js`)
-
-var customLogString
-
-if (conf.customLogging) {
-
-    customLogString = "\n\nr-u-s.js : CustomLogString START : "
-
-    // Customisation of "console"
-    {
-        console.initialError = console.error
-        console.error = function() {
-
-            //var customLogStringDate = new Date
-            console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
-        }
-    } {
-        console.initialWarn = console.warn
-        console.warn = function() {
-
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialWarn.apply(this, arguments)
-
-            var customLogStringDate = new Date
-            customLogString += "\nCUSTOM " +
-                customLogStringDate.toISOString() +
-                ` WARN ` +
-                Array.from(arguments).join(' ')
-        }
-    } {
-        console.initialLog = console.log
-        console.log = function() {
-
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialLog.apply(this, arguments)
-
-            var customLogStringDate = new Date
-            customLogString += "\nCustomLogString " +
-                customLogStringDate.toISOString() +
-                ` INFO ` +
-                Array.from(arguments).join(' ')
-        }
-    } {
-        console.initialInfo = console.info
-        console.info = function() {
-
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialInfo.apply(this, arguments)
-
-            var customLogStringDate = new Date
-            customLogString += "\nCustomLogString " +
-                customLogStringDate.toISOString() +
-                ` INFO ` +
-                Array.from(arguments).join(' ')
-        }
-    }
-
-}
-
 const mark = require('/var/task/modules/mark.js')
 
 mark(`r-u-s.js (ruthenium utilities) LOADING ...`)
@@ -165,7 +107,7 @@ const rus = {
 
     conf: conf,
 
-    customLogString: customLogString, // TODO: needa setter here
+    customLogString: undefined, // TODO: needa setter here
 
     html: require('/var/task/modules/html.js'),
 
@@ -376,6 +318,67 @@ const rus = {
         const start = new Date().getTime()
         while (new Date().getTime() < start + ms);
     },
+
+}
+
+//////////
+//      //
+//  !!  //  Make way.
+//      //
+//////////
+
+if (conf.customLogging) {
+
+    rus.customLogString = "\n\nr-u-s.js : CustomLogString START : "
+
+    // Customisation of "console"
+    {
+        console.initialError = console.error
+        console.error = function() {
+
+            //var customLogStringDate = new Date
+            console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
+        }
+    } {
+        console.initialWarn = console.warn
+        console.warn = function() {
+
+            arguments[0] = 'INTERCEPTED ' + arguments[0]
+            console.initialWarn.apply(this, arguments)
+
+            var customLogStringDate = new Date
+            rus.customLogString += "\nCUSTOM " +
+                customLogStringDate.toISOString() +
+                ` WARN ` +
+                Array.from(arguments).join(' ')
+        }
+    } {
+        console.initialLog = console.log
+        console.log = function() {
+
+            arguments[0] = 'INTERCEPTED ' + arguments[0]
+            console.initialLog.apply(this, arguments)
+
+            var customLogStringDate = new Date
+            rus.customLogString += "\nCustomLogString " +
+                customLogStringDate.toISOString() +
+                ` INFO ` +
+                Array.from(arguments).join(' ')
+        }
+    } {
+        console.initialInfo = console.info
+        console.info = function() {
+
+            arguments[0] = 'INTERCEPTED ' + arguments[0]
+            console.initialInfo.apply(this, arguments)
+
+            var customLogStringDate = new Date
+            rus.customLogString += "\nCustomLogString " +
+                customLogStringDate.toISOString() +
+                ` INFO ` +
+                Array.from(arguments).join(' ')
+        }
+    }
 
 }
 
