@@ -12,7 +12,7 @@ var customLogger = {}
 
 if (conf.customLogging) {
 
-    customLogger.customLogString = "\n\n(custom-logger.js) CustomLogString START : "
+    customLogger.customLogString = "\n\n(custom-logger.js) CLS START : "
 
     // Customisation of "console"
     {
@@ -32,7 +32,7 @@ if (conf.customLogging) {
                 console.initialWarn.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCustomLogString " +
+            customLogger.customLogString += "\nCLS " +
                 customLogStringDate.toISOString() +
                 ` WARN ` +
                 Array.from(arguments).join(' ')
@@ -47,7 +47,7 @@ if (conf.customLogging) {
                 console.initialLog.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCustomLogString " +
+            customLogger.customLogString += "\nCLS " +
                 customLogStringDate.toISOString() +
                 ` INFO ` +
                 Array.from(arguments).join(' ')
@@ -62,7 +62,7 @@ if (conf.customLogging) {
                 console.initialInfo.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCustomLogString " +
+            customLogger.customLogString += "\nCLS " +
                 customLogStringDate.toISOString() +
                 ` INFO ` +
                 Array.from(arguments).join(' ')
