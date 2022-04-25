@@ -1,6 +1,7 @@
 'use strict'
 
 const conf = require(`/var/task/configuration.js`)
+const customLogger = require(`/var/task/modules/custom-logger.js`)
 
 const _log = conf.performance ? console.log : _ => _
 
