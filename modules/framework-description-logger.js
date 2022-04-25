@@ -14,6 +14,10 @@ if (conf.frameworkDescriptionLogging) {
 
     frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString STARTED (framework-description-logger.js) : "
 
+    frameworkDescriptionLogger.endLog = _ => {
+        frameworkDescriptionLogger.frameworkDescriptionLogString += '\n|\n| ... FrameworkDescriptionLogString ENDED (framework-description-logger.js)' 
+    }
+
     frameworkDescriptionLogger.log = _input => {
         frameworkDescriptionLogger.frameworkDescriptionLogString += '\n|\n| ... ' + _input
     }
@@ -28,4 +32,4 @@ else {
 //      //
 //////////
 
-module.exports = frameworkDescriptionLogger 
+module.exports = frameworkDescriptionLogger
