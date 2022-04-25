@@ -280,7 +280,7 @@ const mark = async (taskLabel, firstInHandler) => {
         Math.round(
             lastCPUsum / lastTime
         ).toString().padStart(padLength, ` `) +
-        `µs/ms|` +
+        `µs/ms | ` +
 
         //
         //
