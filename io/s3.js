@@ -9,4 +9,4 @@ const s3 = require(`aws-sdk/clients/s3`)
 
 module.exports = s3
 
-mark ( `~/ios3.js LOADED` )
+mark ( `~/io/s3.js LOADED` )
