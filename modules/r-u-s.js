@@ -108,12 +108,9 @@ const rus = {
     conf: conf,
 
     // Please reconsider this design decision in the future 2022-04-26 :
-    customLogString: conf.customLogging 
-        ? require(`/var/task/modules/custom-logger.js`).customLogString
-        : undefined,
-        
-        
-        
+    customLogger: conf.customLogging ?
+        require(`/var/task/modules/custom-logger.js`) : undefined,
+
     html: require('/var/task/modules/html.js'),
 
     //////////
