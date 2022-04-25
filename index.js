@@ -421,8 +421,11 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.customLogString = "\n\n(index.js/handler) CLS RE-STARTED : "
+            rus.customLogger.customLogString = "\n\nCLS RE-STARTED : (index.js/handler)"
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
+        }
+        if (rus.conf.frameworkDescriptionLogging) {
+            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString RE-STARTED : (index.js/handler) : "
         }
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
@@ -601,6 +604,10 @@ try {
         )
 
         // runs when (handler) is executed 
+        if (rus.conf.frameworkDescriptionLogging) {
+            rus.frameworkDescriptionLogger.endLog()
+            console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
+        }
         if (rus.conf.customLogging) {
             console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CLS LOGGED\n\n')
         }
@@ -616,7 +623,7 @@ try {
         console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
     if (rus.conf.customLogging) {
-        console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CLS LOGGED\n\n')
+        console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CLS LOGGED.\n\n')
     }
 
 }
