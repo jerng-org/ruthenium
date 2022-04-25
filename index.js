@@ -419,7 +419,7 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogString = "\n\nindex.js/handler : CustomLogString RE-START : "
+            rus.customLogger.customLogString = "\n\nindex.js/handler : CustomLogString RE-START : "
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
 
@@ -598,8 +598,9 @@ try {
             arguments[0].rawQueryString
         )
 
+        // runs when (handler) is executed 
         if (rus.conf.customLogging) {
-            console.initialLog(rus.customLogString)
+            console.initialLog(rus.customLogger.customLogString += 'index.js/handler : CustomLogString LOGGED')
         }
 
         return rutheniumResponse
@@ -607,8 +608,9 @@ try {
     // exports.handler()
     rus.mark(`index.js LOADED`)
 
+    // runs when (handler) is initialised
     if (rus.conf.customLogging) {
-        console.initialLog(rus.customLogString += 'index.js/handler : CustomLogString LOGGED')
+        console.initialLog(rus.customLogger.customLogString += 'index.js/handler : CustomLogString LOGGED')
     }
 
 }
