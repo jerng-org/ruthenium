@@ -12,7 +12,7 @@ var customLogger = {}
 
 if (conf.customLogging) {
 
-    customLogger.customLogString = "\n\ncustom-logger.js : CustomLogString START : "
+    customLogger.customLogString = "\n\n(custom-logger.js) CustomLogString START : "
 
     // Customisation of "console"
     {
