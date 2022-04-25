@@ -419,12 +419,12 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.customLogString = "\n\n(index.js/handler) CustomLogString RE-START : "
+            rus.customLogger.customLogString = "\n\n(index.js/handler) CLS RE-START : "
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
-        console.log(`index.js : Lambda Handler ENTRY Point:`,
+        console.log(`lambda>node>handler, ENTRY Point (~/index.js)`,
             arguments[0].requestContext.http.method,
             arguments[0].requestContext.domainName,
             arguments[0].requestContext.http.path,
@@ -432,12 +432,12 @@ try {
             arguments[0].rawQueryString
         )
 
-        rus.mark(`index.js, first mark in handler`, true)
+        rus.mark(`lambda>node>handler, first mark (~/index.js)`, true)
 
         const hostInitializedData = {
             LAMBDA: {
                 //  Things we must include because they are principal arguments of 
-                //  Lambda invocation handlers.
+                //  Lambda invocation handlers. 
                 event: arguments[0],
                 context: arguments[1],
                 callback: arguments[2],
@@ -582,7 +582,7 @@ try {
         const rutheniumResponse = await ruthenium(hostInitializedData, middlewares)
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
-        console.log(`(index.js) : Lambda Handler EXIT Point:`,
+        console.log(`lambda>node>handler, EXIT Point (~/index.js)`,
 
             (typeof rutheniumResponse == 'string') ?
             `rutheniumResponse.slice(0,50) ... [truncated]` :
