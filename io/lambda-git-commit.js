@@ -43,7 +43,7 @@ const lambdaGitCommit =  commitMessage => { try {
         `git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git`, 
         { encoding: 'utf8', stdio: 'inherit', cwd: '/tmp' })
 
-    mark ( `gitCommit.js Repository cloned ... ` )
+    mark ( `~/io/lambda-git-commit.js Repository cloned ... ` )
 ///////////////////////////////////////////////////////////////////////////////
 
     /*
@@ -92,10 +92,10 @@ const lambdaGitCommit =  commitMessage => { try {
         'git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git', 
         { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
 
-    mark ( `gitCommit.js Execution complete` )
+    mark ( `~/io/lambda-git-commit.js Execution complete ` )
 ///////////////////////////////////////////////////////////////////////////////
 
 } catch (e) { console.error ( `gitCommit.js`, e.stack ) } }
 
 module.exports = lambdaGitCommit
-mark (`~/modules/lambda-git-commit.js LOADED`)
+mark (`~/io/lambda-git-commit.js LOADED`)
