@@ -12,10 +12,10 @@ var frameworkDescriptionLogger = {}
 
 if (conf.frameworkDescriptionLogging) {
 
-    frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString STARTED (framework-description-logger.js) : "
+    frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString STARTED : (framework-description-logger.js) : "
 
     frameworkDescriptionLogger.endLog = _ => {
-        frameworkDescriptionLogger.frameworkDescriptionLogString += '\n|\n| ... FrameworkDescriptionLogString ENDED (framework-description-logger.js)' 
+        frameworkDescriptionLogger.frameworkDescriptionLogString += '\n|\n| ... FrameworkDescriptionLogString ENDED. (framework-description-logger.js)\n' 
     }
 
     frameworkDescriptionLogger.log = _input => {
