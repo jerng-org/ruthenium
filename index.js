@@ -419,7 +419,7 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.customLogString = "\n\nindex.js/handler : CustomLogString RE-START : "
+            rus.customLogger.customLogString = "\n\n(index.js/handler) CustomLogString RE-START : "
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
 
