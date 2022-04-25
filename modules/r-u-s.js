@@ -107,8 +107,13 @@ const rus = {
 
     conf: conf,
 
-    customLogString: undefined, // TODO: needa setter here
-
+    // Please reconsider this design decision in the future 2022-04-26 :
+    customLogString: conf.customLogging 
+        ? require(`/var/task/modules/custom-logger.js`).customLogString
+        : undefined,
+        
+        
+        
     html: require('/var/task/modules/html.js'),
 
     //////////
@@ -318,67 +323,6 @@ const rus = {
         const start = new Date().getTime()
         while (new Date().getTime() < start + ms);
     },
-
-}
-
-//////////
-//      //
-//  !!  //  Make way.
-//      //
-//////////
-
-if (conf.customLogging) {
-
-    rus.customLogString = "\n\nr-u-s.js : CustomLogString START : "
-
-    // Customisation of "console"
-    {
-        console.initialError = console.error
-        console.error = function() {
-
-            //var customLogStringDate = new Date
-            console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
-        }
-    } {
-        console.initialWarn = console.warn
-        console.warn = function() {
-
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialWarn.apply(this, arguments)
-
-            var customLogStringDate = new Date
-            rus.customLogString += "\nCUSTOM " +
-                customLogStringDate.toISOString() +
-                ` WARN ` +
-                Array.from(arguments).join(' ')
-        }
-    } {
-        console.initialLog = console.log
-        console.log = function() {
-
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialLog.apply(this, arguments)
-
-            var customLogStringDate = new Date
-            rus.customLogString += "\nCustomLogString " +
-                customLogStringDate.toISOString() +
-                ` INFO ` +
-                Array.from(arguments).join(' ')
-        }
-    } {
-        console.initialInfo = console.info
-        console.info = function() {
-
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialInfo.apply(this, arguments)
-
-            var customLogStringDate = new Date
-            rus.customLogString += "\nCustomLogString " +
-                customLogStringDate.toISOString() +
-                ` INFO ` +
-                Array.from(arguments).join(' ')
-        }
-    }
 
 }
 
