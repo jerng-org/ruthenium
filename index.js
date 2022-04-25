@@ -600,7 +600,7 @@ try {
 
         // runs when (handler) is executed 
         if (rus.conf.customLogging) {
-            console.initialLog(rus.customLogger.customLogString += '(index.js/handler) CustomLogString LOGGED')
+            console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CustomLogString LOGGED\n\n')
         }
 
         return rutheniumResponse
@@ -610,7 +610,7 @@ try {
 
     // runs when (handler) is initialised
     if (rus.conf.customLogging) {
-        console.initialLog(rus.customLogger.customLogString += '(index.js/handler) CustomLogString LOGGED')
+        console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CustomLogString LOGGED\n\n')
     }
 
 }
