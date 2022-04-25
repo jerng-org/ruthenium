@@ -32,7 +32,7 @@ if (conf.customLogging) {
                 console.initialWarn.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCUSTOM " +
+            customLogger.customLogString += "\nCustom " +
                 customLogStringDate.toISOString() +
                 ` WARN ` +
                 Array.from(arguments).join(' ')
