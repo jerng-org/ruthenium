@@ -45,7 +45,7 @@ module.exports = {
 
     customLogging: 1,
     
-    customLoggingMutesNativeLogging: 0,
+    customLoggingAllowsNativeLogging: 0,
 
     defaults: {
 
