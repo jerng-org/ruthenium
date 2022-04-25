@@ -582,7 +582,7 @@ try {
         const rutheniumResponse = await ruthenium(hostInitializedData, middlewares)
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
-        console.log(`index.js : Lambda Handler EXIT Point:`,
+        console.log(`(index.js) : Lambda Handler EXIT Point:`,
 
             (typeof rutheniumResponse == 'string') ?
             `rutheniumResponse.slice(0,50) ... [truncated]` :
@@ -600,7 +600,7 @@ try {
 
         // runs when (handler) is executed 
         if (rus.conf.customLogging) {
-            console.initialLog(rus.customLogger.customLogString += 'index.js/handler : CustomLogString LOGGED')
+            console.initialLog(rus.customLogger.customLogString += '(index.js/handler) CustomLogString LOGGED')
         }
 
         return rutheniumResponse
@@ -610,7 +610,7 @@ try {
 
     // runs when (handler) is initialised
     if (rus.conf.customLogging) {
-        console.initialLog(rus.customLogger.customLogString += 'index.js/handler : CustomLogString LOGGED')
+        console.initialLog(rus.customLogger.customLogString += '(index.js/handler) CustomLogString LOGGED')
     }
 
 }
