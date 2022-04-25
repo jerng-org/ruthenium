@@ -8,11 +8,11 @@ const conf = require(`/var/task/configuration.js`)
 //      //
 //////////
 
+var customLogger = {}
+
 if (conf.customLogging) {
 
-    var customLogString
-
-    customLogString = "\n\ncustom-logger.js : CustomLogString START : "
+    customLogger.customLogString = "\n\ncustom-logger.js : CustomLogString START : "
 
     // Customisation of "console"
     {
@@ -30,7 +30,7 @@ if (conf.customLogging) {
             console.initialWarn.apply(this, arguments)
 
             var customLogStringDate = new Date
-            customLogString += "\nCUSTOM " +
+            customLogger.customLogString += "\nCUSTOM " +
                 customLogStringDate.toISOString() +
                 ` WARN ` +
                 Array.from(arguments).join(' ')
@@ -43,7 +43,7 @@ if (conf.customLogging) {
             console.initialLog.apply(this, arguments)
 
             var customLogStringDate = new Date
-            customLogString += "\nCustomLogString " +
+            customLogger.customLogString += "\nCustomLogString " +
                 customLogStringDate.toISOString() +
                 ` INFO ` +
                 Array.from(arguments).join(' ')
@@ -56,7 +56,7 @@ if (conf.customLogging) {
             console.initialInfo.apply(this, arguments)
 
             var customLogStringDate = new Date
-            customLogString += "\nCustomLogString " +
+            customLogger.customLogString += "\nCustomLogString " +
                 customLogStringDate.toISOString() +
                 ` INFO ` +
                 Array.from(arguments).join(' ')
@@ -71,8 +71,4 @@ if (conf.customLogging) {
 //      //
 //////////
 
-var customLogger = {
-    customLogString: customLogString
-}
-
-module.exports = customLogger
+module.exports = conf.customLogging ? customLogger : undefined
