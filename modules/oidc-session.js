@@ -184,4 +184,4 @@ const oidcSession = {
 }
 
 module.exports = oidcSession
-mark(`~/modules/oidcSession.js LOADED`)
+mark(`~/modules/oidc-session.js LOADED`)
