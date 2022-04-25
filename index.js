@@ -13,6 +13,8 @@ try {
 
     rus.mark(`~/index.js loaded mark.js`)
 
+    rus.frameworkDescriptionLogger.log(`we are now in ~/index.js, and the first line says 'use strict', and immediately after this is a try-catch block;`)
+
     //////////
     //      //
     //  !!  //  Make way.
@@ -419,7 +421,7 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.customLogString = "\n\n(index.js/handler) CLS RE-START : "
+            rus.customLogger.customLogString = "\n\n(index.js/handler) CLS RE-STARTED : "
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
 
@@ -600,7 +602,7 @@ try {
 
         // runs when (handler) is executed 
         if (rus.conf.customLogging) {
-            console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CustomLogString LOGGED\n\n')
+            console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CLS LOGGED\n\n')
         }
 
         return rutheniumResponse
@@ -609,8 +611,11 @@ try {
     rus.mark(`index.js LOADED`)
 
     // runs when (handler) is initialised
+    if (rus.conf.frameworkDescriptionLogging) {
+        console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
+    }
     if (rus.conf.customLogging) {
-        console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CustomLogString LOGGED\n\n')
+        console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CLS LOGGED\n\n')
     }
 
 }
