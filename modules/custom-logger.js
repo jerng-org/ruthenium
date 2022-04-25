@@ -16,23 +16,21 @@ if (conf.customLogging) {
 
     // Customisation of "console"
     {
-        console.initialError = conf.customLoggingMutesNativeLogging ?
-            _ => _ :
-            console.error
+        console.initialError = console.error
         console.error = function() {
 
             //var customLogStringDate = new Date
             console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
         }
     } {
-        console.initialWarn = conf.customLoggingMutesNativeLogging ?
-            _ => _ :
-            console.warn
+        console.initialWarn = console.warn
         console.warn = function() {
 
             arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialWarn.apply(this, arguments)
 
+            if (conf.customLoggingAllowsNativeLogging) {
+                console.initialWarn.apply(this, arguments)
+            }
             var customLogStringDate = new Date
             customLogger.customLogString += "\nCUSTOM " +
                 customLogStringDate.toISOString() +
@@ -40,14 +38,14 @@ if (conf.customLogging) {
                 Array.from(arguments).join(' ')
         }
     } {
-        console.initialLog = conf.customLoggingMutesNativeLogging ?
-            _ => _ :
-            console.log
+        console.initialLog = console.log
         console.log = function() {
 
             arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialLog.apply(this, arguments)
 
+            if (conf.customLoggingAllowsNativeLogging) {
+                console.initialLog.apply(this, arguments)
+            }
             var customLogStringDate = new Date
             customLogger.customLogString += "\nCustomLogString " +
                 customLogStringDate.toISOString() +
@@ -55,14 +53,14 @@ if (conf.customLogging) {
                 Array.from(arguments).join(' ')
         }
     } {
-        console.initialInfo = conf.customLoggingMutesNativeLogging ?
-            _ => _ :
-            console.info
+        console.initialInfo = console.info
         console.info = function() {
 
             arguments[0] = 'INTERCEPTED ' + arguments[0]
-            console.initialInfo.apply(this, arguments)
 
+            if (conf.customLoggingAllowsNativeLogging) {
+                console.initialInfo.apply(this, arguments)
+            }
             var customLogStringDate = new Date
             customLogger.customLogString += "\nCustomLogString " +
                 customLogStringDate.toISOString() +
