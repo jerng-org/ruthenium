@@ -219,7 +219,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 *
                 100) / 100 // decimal point formatting;
         ).toString().padStart(padLength, ` `) +
-        `MB|` +
+        `MB |` +
 
         //
         //
@@ -249,7 +249,7 @@ const mark = async (taskLabel, firstInHandler) => {
             (lastCPUsum = tempCPUsum) /
             1000 // microsecond to millisecond conversion;
         ).toString().padStart(padLength, ` `) +
-        `ms|` +
+        `ms | ` +
 
         //
         //
