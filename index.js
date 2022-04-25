@@ -612,6 +612,7 @@ try {
 
     // runs when (handler) is initialised
     if (rus.conf.frameworkDescriptionLogging) {
+        rus.frameworkDescriptionLogger.endLog()
         console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
     if (rus.conf.customLogging) {
