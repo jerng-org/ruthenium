@@ -6,7 +6,7 @@
 const conf = require(`/var/task/configuration.js`)
 const mark = require('/var/task/modules/mark.js')
 
-mark(`r-u-s.js (ruthenium utilities) LOADING ...`)
+mark(`~/modules/r-u-s.js (ruthenium utilities) LOADING ...`)
 
 const fs = require('fs')
 const url = require('url')

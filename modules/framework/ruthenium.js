@@ -79,4 +79,4 @@ const ruthenium = async ( HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE ) => {
     return finalData 
 }
 module.exports = ruthenium
-rus.mark (`ruthenium.js LOADED`)
+rus.mark (`~/modules/framework/ruthenium.js LOADED`)

@@ -11,7 +11,7 @@ try {
 
     const rus = require('/var/task/modules/r-u-s.js')
 
-    rus.mark(`index.js loaded mark.js`)
+    rus.mark(`~/index.js loaded mark.js`)
 
     //////////
     //      //
