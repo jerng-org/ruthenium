@@ -421,11 +421,11 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.customLogString = "\n\nCLS RE-STARTED : (index.js/handler)"
+            rus.customLogger.customLogString = "\n\nCLS RE-STARTED : (~/index.js/handler)\n"
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
         if (rus.conf.frameworkDescriptionLogging) {
-            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString RE-STARTED : (index.js/handler) : "
+            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString RE-STARTED : (~/index.js/handler) \n"
         }
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
@@ -609,7 +609,7 @@ try {
             console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
         }
         if (rus.conf.customLogging) {
-            console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CLS LOGGED\n\n')
+            console.initialLog(rus.customLogger.customLogString += '\nCLS LOGGED (~/index.js/handler)\n\n')
         }
 
         return rutheniumResponse
@@ -623,7 +623,7 @@ try {
         console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
     if (rus.conf.customLogging) {
-        console.initialLog(rus.customLogger.customLogString += '\n(index.js/handler) CLS LOGGED.\n\n')
+        console.initialLog(rus.customLogger.customLogString += '\nCLS LOGGED (~/index.js/handler)\n\n')
     }
 
 }
