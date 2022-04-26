@@ -13,7 +13,19 @@ try {
 
     rus.mark(`~/index.js loaded mark.js`)
 
-    rus.frameworkDescriptionLogger.log(`we are now in ~/index.js, and the first line says 'use strict', and immediately after this is a try-catch block;`)
+    rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
+    
+    -   the first line says 'use strict', and immediately after this is a try-catch block; 
+    
+        SECTION 1
+        
+        -   right below us, is a WARNING on how the AWS Lambda environment handles (exports.handler) in the (node.js) runtime, which we are in; 
+    
+        -   immediately after this we have some key technical DEBT NOTES;
+    
+        -   then, a hack that commits this codebase to git ! ;
+        
+        -   many (requires) occur next, including the framework sources, and middlewares;`)
 
     //////////
     //      //
@@ -411,6 +423,33 @@ try {
 
     const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
 
+    rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
+    
+    -   many (requires) just occured;
+        
+    -   next, (exports.handler) is defined : so what happens when it runs?
+        
+            (EXPORTS.HANDLER)
+            
+            -   (rus.customLogger.customLogString) is re-started;
+            
+            -   (rus.frameworkDescriptionLogger.frameworkDescriptionLogString) is re-started;
+            
+            -   then some actual logging;
+            
+            -   then two things are prepared
+            
+                1. (hostInitializedData) which is here crafted for the AWS Lambda environment, (hostInitializedData.LAMBDA) though it is meant to be crafted othewise if you want to run this framework in another environment (hostInitializedData.SOMETHING_ELSE);
+                
+                2. (middlewares) which is an array of middlewares obtained via (requires)-ment above, which will be executed later, in sequence;
+                
+            -   these two things are passed as arguments to (ruthenium) which is expected to return a (rutheniumResponse)
+            
+            -   more logging happens;
+            
+            -   then (rutheniumResponse) is returned by (exports.handler)
+    
+    -   `)
     //////////
     //      //
     //  !!  //  Make way.
@@ -617,6 +656,17 @@ try {
     // exports.handler()
     rus.mark(`index.js LOADED`)
 
+    rus.frameworkDescriptionLogger.log(`we are still in (~/index.js), but following the definition of (exports.handler)
+    
+    -   some logging occurs;
+    
+    -   the try-catch block ends; 
+    
+    -   some AWS API Gateway logging variables are documented here for convenience only;
+    
+    -   thus ends the source of this file; 
+    `)
+    
     // runs when (handler) is initialised
     if (rus.conf.frameworkDescriptionLogging) {
         rus.frameworkDescriptionLogger.endLog()
