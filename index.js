@@ -11,14 +11,25 @@ try {
 
     const rus = require('/var/task/modules/r-u-s.js')
 
+    rus.frameworkDescriptionLogger.log(`(~/index.js) SUMMARY
+    -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
+    -   The role of (exports.handler) in this runtime is documented by AWS
+    
+    -   We run everything in a try-catch block
+    -   We include miscellaneous documentation here
+    -   We perform various logging activities throughout, including this log
+    -   DEVELOPMENT : We commit the codebase to (git) here
+    -   We (require) framework and middleware files
+    
+    -   (exports.handler) is then defined to capture each HTTP requests' (hostInitializedData) and (middlewares), run this through (ruthenium) and get (rutheniumResponse), then return it
+    `)
+    
     rus.mark(`~/index.js loaded mark.js`)
 
     rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
     
     -   the first line says 'use strict', and immediately after this is a try-catch block; 
     
-        SECTION 1
-        
         -   right below us, is a WARNING on how the AWS Lambda environment handles (exports.handler) in the (node.js) runtime, which we are in; 
     
         -   immediately after this we have some key technical DEBT NOTES;
