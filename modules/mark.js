@@ -186,7 +186,7 @@ const mark = async (taskLabel, firstInHandler) => {
         // total runtime;
         Math.round(lastTime = tempTime).toString().padStart(padLength, ` `) +
 
-        `ms | ` +
+        ` | ` +
 
         //
         //
@@ -206,7 +206,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 /
                 Math.pow(1024, 2) // B to MB conversion;
                 *
-                100) / 100 // decimal point formatting;
+                10) / 10 // decimal point formatting;
         )
         .toString().padStart(padLength, ` `) +
 
@@ -217,9 +217,9 @@ const mark = async (taskLabel, firstInHandler) => {
                 (lastMem = tempMem) /
                 Math.pow(1024, 2) // B to MB conversion;:
                 *
-                100) / 100 // decimal point formatting;
+                10) / 10 // decimal point formatting;
         ).toString().padStart(padLength, ` `) +
-        `MB |` +
+        ` |` +
 
         //
         //
@@ -249,7 +249,7 @@ const mark = async (taskLabel, firstInHandler) => {
             (lastCPUsum = tempCPUsum) /
             1000 // microsecond to millisecond conversion;
         ).toString().padStart(padLength, ` `) +
-        `ms | ` +
+        ` | ` +
 
         //
         //
@@ -280,7 +280,7 @@ const mark = async (taskLabel, firstInHandler) => {
         Math.round(
             lastCPUsum / lastTime
         ).toString().padStart(padLength, ` `) +
-        `µs/ms | ` +
+        ` | ` +
 
         //
         //
