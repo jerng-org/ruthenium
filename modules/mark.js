@@ -206,7 +206,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 /
                 Math.pow(1024, 2) // B to MB conversion;
                 *
-                10) / 10 // decimal point formatting;
+                100) / 100 // decimal point formatting;
         )
         .toString().padStart(padLength, ` `) +
 
@@ -217,7 +217,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 (lastMem = tempMem) /
                 Math.pow(1024, 2) // B to MB conversion;:
                 *
-                10) / 10 // decimal point formatting;
+                100) / 100 // decimal point formatting;
         ).toString().padStart(padLength, ` `) +
         ` |` +
 
