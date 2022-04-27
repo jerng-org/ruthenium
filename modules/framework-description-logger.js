@@ -35,16 +35,21 @@ if (conf.frameworkDescriptionLogging) {
         console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 
-    frameworkDescriptionLogger.callStarts = _currentFunctionDescription => {
+    frameworkDescriptionLogger.callStarts = function() {
         frameworkDescriptionLogger.callDepth++
-        frameworkDescriptionLogger.currentFunctionDescription = _currentFunctionDescription
-        frameworkDescriptionLogger.log('Starting execution (' + _currentFunctionDescription + ')')
+        frameworkDescriptionLogger.currentFunctionDescription = Array.from(arguments).join(' : ')
+        frameworkDescriptionLogger
+            .log('Starting execution (' +
+                frameworkDescriptionLogger.currentFunctionDescription +
+                ')')
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
         frameworkDescriptionLogger
-            .log('Ending execution (' + frameworkDescriptionLogger.currentFunctionDescription + ')')
-        delete frameworkDescriptionLogger.currentFunctionDescription 
+            .log('Ending execution (' +
+                frameworkDescriptionLogger.currentFunctionDescription +
+                ')')
+        delete frameworkDescriptionLogger.currentFunctionDescription
         frameworkDescriptionLogger.callDepth--
     }
 
