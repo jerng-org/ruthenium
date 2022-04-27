@@ -101,7 +101,7 @@ const mark = async (taskLabel, firstInHandler) => {
             _log(
 
                 String(`"${memoryUsageKey}"`)
-                .padStart(10, ` `) +
+                .padStart(16, ` `) +
 
                 String(`prior:` + Math.round(preInvocationCPUsum / 1000))
                 .padStart(14, ` `) +
@@ -136,7 +136,7 @@ const mark = async (taskLabel, firstInHandler) => {
         )
         _log(
             String(`RAM:`)
-            .padStart(10, ` `) +
+            .padStart(16, ` `) +
             String(`CPU🕓:`)
             .padStart(14, ` `) +
             String(`WALL🕓:`)
@@ -146,7 +146,7 @@ const mark = async (taskLabel, firstInHandler) => {
         )
         _log(
             String(`(Δ,Σ) MB`)
-            .padStart(10, ` `) +
+            .padStart(16, ` `) +
             String(`(Δ,Σ) ms`)
             .padStart(14, ` `) +
             String(`(Δ,Σ) ms`)
@@ -187,24 +187,28 @@ const mark = async (taskLabel, firstInHandler) => {
 
         // delta of RAM usage;
 
-        Math.ceil( 
+        (Math.round(
 
             ((tempMem = process.memoryUsage()[memoryUsageKey]) -
                 lastMem)
 
             /
             Math.pow(1024, 2) // B to MB conversion;
-
-        )
-        .toString().padStart(5, ` `) +
+            *
+            1000
+        ) / 1000)
+        .toString().padStart(8, ` `) +
 
         // total RAM usage;
 
-        Math.ceil( 
+        (Math.round(
 
             (lastMem = tempMem) /
             Math.pow(1024, 2) // B to MB conversion;:
-        ).toString().padStart(5, ` `) +
+            *
+            1000
+        ) / 1000)
+        .toString().padStart(8, ` `) +
 
         //
         //
