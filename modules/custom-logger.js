@@ -31,8 +31,8 @@ if (conf.customLogging) {
                 console.initialWarn.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCLS WARN" +
-                customLogStringDate.toISOString() +
+            customLogger.customLogString += "\nCLS WARN " +
+                customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }
     } {
@@ -43,8 +43,8 @@ if (conf.customLogging) {
                 console.initialLog.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCLS INFO" +
-                customLogStringDate.toISOString() +
+            customLogger.customLogString += "\nCLS INFO " +
+                customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }
     } {
@@ -55,8 +55,8 @@ if (conf.customLogging) {
                 console.initialInfo.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCLS INFO" +
-                customLogStringDate.toISOString() +
+            customLogger.customLogString += "\nCLS INFO " +
+                customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }
     }
