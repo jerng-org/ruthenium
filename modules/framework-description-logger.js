@@ -42,10 +42,10 @@ if (conf.frameworkDescriptionLogging) {
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
-        frameworkDescriptionLogger.callDepth--
         frameworkDescriptionLogger
             .log('Ending execution (' + frameworkDescriptionLogger.currentFunctionDescription + ')')
         delete frameworkDescriptionLogger.currentFunctionDescription 
+        frameworkDescriptionLogger.callDepth--
     }
 
 }
