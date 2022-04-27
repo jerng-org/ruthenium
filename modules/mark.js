@@ -135,13 +135,13 @@ const mark = async (taskLabel, firstInHandler) => {
         invocationStartCPUsum = invocationStartCPU.user +
             invocationStartCPU.system
         _log(
-            String(`WALL-🕓:(Δ,Σ)ms`)
+            String(`WALL🕓:(Δ,Σ)ms`)
             .padStart(1 + 2 * padLength, ` `) +
             String(`RAM:(Δ,Σ)MB`)
             .padStart(4 + 2 * padLength, ` `) +
-            String(`CPU-🕓:(Δ,Σ)ms`)
+            String(`CPU🕓:(Δ,Σ)ms`)
             .padStart(2 + 2 * padLength, ` `) +
-            String(`[CPU-🕓/WALL-🕓]:(Δ,Σ)µs/ms`)
+            String(`[CPU🕓/WALL🕓]:(Δ,Σ)µs/ms`)
             .padStart(8 + 2 * padLength, ` `)
         )
         _log(
@@ -205,8 +205,9 @@ const mark = async (taskLabel, firstInHandler) => {
 
                 /
                 Math.pow(1024, 2) // B to MB conversion;
-                *
-                10) / 10 // decimal point formatting;
+                //*
+                //10
+                ) /// 10 // decimal point formatting;
         )
         .toString().padStart(padLength, ` `) +
 
@@ -216,8 +217,9 @@ const mark = async (taskLabel, firstInHandler) => {
 
                 (lastMem = tempMem) /
                 Math.pow(1024, 2) // B to MB conversion;:
-                *
-                10) / 10 // decimal point formatting;
+                //*
+                //10
+                ) /// 10 // decimal point formatting;
         ).toString().padStart(padLength, ` `) +
         ` |` +
 
