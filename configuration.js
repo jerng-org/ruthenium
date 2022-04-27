@@ -59,7 +59,7 @@ module.exports = {
      */
     faultTolerance: 0,
 
-    frameworkDescriptionLogging : 0,
+    frameworkDescriptionLogging : 1,
 
     /*  gitCommit
      *
