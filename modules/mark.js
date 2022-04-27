@@ -209,7 +209,8 @@ const mark = async (taskLabel, firstInHandler) => {
                 //10
                 ) /// 10 // decimal point formatting;
         )
-        .toString().padStart(padLength, ` `) +
+        //.toString().padStart(padLength, ` `) 
+        +
 
         // total RAM usage;
 
@@ -220,7 +221,9 @@ const mark = async (taskLabel, firstInHandler) => {
                 //*
                 //10
                 ) /// 10 // decimal point formatting;
-        ).toString().padStart(padLength, ` `) +
+        )
+        .toString().padStart(padLength, ` `) 
+        +
         ` |` +
 
         //
