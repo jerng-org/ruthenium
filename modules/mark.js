@@ -99,13 +99,13 @@ const mark = async (taskLabel, firstInHandler) => {
                 String('').padEnd(70, `-`)
             )
             _log(
-                String(`RAM :`)
+                String(`RAM:`)
                 .padStart(10, ` `) +
-                String(`CPU🕓 :`)
+                String(`CPU🕓:`)
                 .padStart(14, ` `) +
-                String(`WALL🕓 :`)
+                String(`WALL🕓:`)
                 .padStart(12, ` `) +
-                String(`[CPU/WALL]🕓 :`)
+                String(`[CPU/WALL]🕓:`)
                 .padStart(16, ` `)
             )
             _log(
@@ -261,8 +261,8 @@ const mark = async (taskLabel, firstInHandler) => {
         //  ( delta of CPU time consumed / delta of runtime ); 
         //  stage-to-stage CPU allocation; volatile; subject to long-term average;
 
-        (Math.round(dCPUsum / dTime ) /
-            1000
+        (Math.round(dCPUsum / dTime * 10) /
+            10000
         ).toString().padStart(8, ` `) +
 
         //
@@ -279,8 +279,8 @@ const mark = async (taskLabel, firstInHandler) => {
         //                                      ==  80      ( us of CPU time, per 
         //                                                    ms of runtime );
 
-        (Math.round(lastCPUsum / lastTime ) /
-            1000
+        (Math.round(lastCPUsum / lastTime * 10) /
+            10000
         ).toString().padStart(8, ` `) +
 
         //
