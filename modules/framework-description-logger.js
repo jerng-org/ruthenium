@@ -8,18 +8,24 @@ const conf = require(`/var/task/configuration.js`)
 //      //
 //////////
 
-var frameworkDescriptionLogger = {}
+var frameworkDescriptionLogger = {
+    frameworkDescriptionLogString: '',
+}
 
 if (conf.frameworkDescriptionLogging) {
 
-    frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString STARTED (framework-description-logger.js INITIALISATION)"
+    frameworkDescriptionLogger.frameworkDescriptionLogString =
+        "\n\nFrameworkDescriptionLogString STARTED (framework-description-logger.js INITIALISATION)"
 
     frameworkDescriptionLogger.endLog = _ => {
-        frameworkDescriptionLogger.frameworkDescriptionLogString += '\n|\n| ... FrameworkDescriptionLogString ENDED (framework-description-logger.js/endLog EXECUTION)\n' 
+        frameworkDescriptionLogger.frameworkDescriptionLogString +=
+            '\n|\n| ... FrameworkDescriptionLogString ENDED (framework-description-logger.js/endLog EXECUTION)\n'
     }
 
     frameworkDescriptionLogger.log = _input => {
-        frameworkDescriptionLogger.frameworkDescriptionLogString += '\n|\n| ... ' + _input
+        frameworkDescriptionLogger.frameworkDescriptionLogString += '\n|\n| ... ' +
+            _input
+        console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 }
 else {
