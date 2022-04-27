@@ -30,26 +30,35 @@ if (conf.frameworkDescriptionLogging) {
     }
 
     frameworkDescriptionLogger.log = _input => {
-        frameworkDescriptionLogger.frameworkDescriptionLogString +=
-            ('\n|\n|' + _input).replace(/\n/g, '\n' + '... '.repeat(frameworkDescriptionLogger.callDepth))
+        {
+            let err = {}
+            Error.captureStackTrace(err)
+
+            frameworkDescriptionLogger.frameworkDescriptionLogString +=
+                (
+                    '\n|\n|' +
+                    '(' +
+                    err.stack.match(/\n.*\n(.*)\n/)[1] + // third line 
+                    ')' +
+                    _input
+                )
+                .replace(
+                    /\n/g,
+                    '\n' +
+                    '... '.repeat(frameworkDescriptionLogger.callDepth)
+                )
+        }
         console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 
     frameworkDescriptionLogger.callStarts = function() {
         frameworkDescriptionLogger.callDepth++
         frameworkDescriptionLogger.currentFunctionDescription = Array.from(arguments).join(' : ')
-
-        {
-            let err = {}
-            Error.captureStackTrace(err)
-            frameworkDescriptionLogger
-                .log(
-                    'Starting execution (' +
-                    err.stack.match(/\n.*\n(.*)\n/)[1] + // third line 
-                    ')' +
-                    frameworkDescriptionLogger.currentFunctionDescription
-                )
-        }
+        frameworkDescriptionLogger
+            .log(
+                'Starting execution : ' +
+                frameworkDescriptionLogger.currentFunctionDescription
+            )
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
