@@ -43,6 +43,7 @@ if (conf.frameworkDescriptionLogging) {
         ('\n|\n|' + _input).replace(/\n/g,'\n' + '... '.repeat(frameworkDescriptionLogger.callDepth))
         console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
+    
 }
 else {
     frameworkDescriptionLogger.log = _ => _

@@ -10,7 +10,7 @@ try {
     //  See pertinent (nodeJS-specific) documentation at /var/task/modules/r-u-s.js
 
     const rus = require('/var/task/modules/r-u-s.js')
-
+    
     rus.frameworkDescriptionLogger.log(`(~/index.js) SUMMARY
     -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
     -   The role of (exports.handler) in this runtime is documented by AWS

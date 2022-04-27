@@ -1,5 +1,8 @@
 'use strict'
 
+const rus = require ( '/var/task/modules/r-u-s.js' )
+rus.frameworkDescriptionLogger.callStarts()
+
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
 const lambdaNormalizeHeaders = async ( data ) => {
@@ -49,3 +52,7 @@ const lambdaNormalizeHeaders = async ( data ) => {
     return data
 }
 module.exports = lambdaNormalizeHeaders
+
+rus.frameworkDescriptionLogger.log('blah blah')
+
+rus.frameworkDescriptionLogger.callEnds()
