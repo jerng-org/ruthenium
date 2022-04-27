@@ -94,7 +94,7 @@ const mark = async (taskLabel, firstInHandler) => {
             preInvocationTime = performance.now()
 
             _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
-            _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB; ⚠`)
+            _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB-60M; ⚠`)
             _log(
                 String('').padEnd(70, `-`)
             )
