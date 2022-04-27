@@ -2,7 +2,7 @@
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
 console.log(console.trace())
-rus.frameworkDescriptionLogger.callStarts(console.trace(''))
+rus.frameworkDescriptionLogger.callStarts( console.getOwnPropertyNames() )
 
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
