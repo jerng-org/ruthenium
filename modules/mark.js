@@ -96,7 +96,7 @@ const mark = async (taskLabel, firstInHandler) => {
             _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
             _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB; ⚠`)
             _log(
-                String('').padEnd(26 + 8 * padLength, `-`)
+                String('').padEnd(70, `-`)
             )
             _log(
                 String(`WALL🕓:(Δ,Σ)`)
@@ -119,7 +119,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 .padStart(18, ` `)
             )
             _log(
-                String('').padEnd(26 + 8 * padLength, `-`)
+                String('').padEnd(70, `-`)
             )
 
         }
