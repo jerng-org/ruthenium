@@ -93,29 +93,18 @@ const mark = async (taskLabel, firstInHandler) => {
                 preInvocationCPU.system
             preInvocationTime = performance.now()
 
-            _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
-            _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB; ⚠`)
             _log(
-                String('').padEnd(70, `-`)
-            )
-            _log(
-                String(`RAM:`)
+
+                String(`"${memoryUsageKey}"`)
                 .padStart(10, ` `) +
-                String(`CPU🕓:`)
+
+                String(`prior:` + Math.round(preInvocationCPUsum / 1000))
                 .padStart(14, ` `) +
-                String(`WALL🕓:`)
+
+                String(`prior:` + Math.round(preInvocationTime))
                 .padStart(12, ` `) +
-                String(`[CPU/WALL]🕓:`)
-                .padStart(16, ` `)
-            )
-            _log(
-                String(`(Δ,Σ) MB`)
-                .padStart(10, ` `) +
-                String(`(Δ,Σ) ms`)
-                .padStart(14, ` `) +
-                String(`(Δ,Σ) ms`)
-                .padStart(12, ` `) +
-                String(`(Δ,Σ) %`)
+
+                String(`throttle⚠️ ㇏㇏`)
                 .padStart(16, ` `)
             )
             _log(
@@ -137,18 +126,29 @@ const mark = async (taskLabel, firstInHandler) => {
         const invocationStartCPU = process.cpuUsage()
         invocationStartCPUsum = invocationStartCPU.user +
             invocationStartCPU.system
+        _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
+        _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB; ⚠`)
         _log(
-
-            String(`RAM:"${memoryUsageKey}"`)
+            String('').padEnd(70, `-`)
+        )
+        _log(
+            String(`RAM:`)
             .padStart(10, ` `) +
-
-            String(`prior:` + Math.round(preInvocationCPUsum / 1000))
+            String(`CPU🕓:`)
             .padStart(14, ` `) +
-
-            String(`prior:` + Math.round(preInvocationTime))
+            String(`WALL🕓:`)
             .padStart(12, ` `) +
-
-            String(`throttle⚠️ ㇏㇏`)
+            String(`[CPU/WALL]🕓:`)
+            .padStart(16, ` `)
+        )
+        _log(
+            String(`(Δ,Σ) MB`)
+            .padStart(10, ` `) +
+            String(`(Δ,Σ) ms`)
+            .padStart(14, ` `) +
+            String(`(Δ,Σ) ms`)
+            .padStart(12, ` `) +
+            String(`(Δ,Σ) %`)
             .padStart(16, ` `)
         )
         _log(
