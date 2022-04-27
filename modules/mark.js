@@ -103,10 +103,10 @@ const mark = async (taskLabel, firstInHandler) => {
 
                 String(`prior: ` + Math.round(preInvocationTime) +
                     ` ms`)
-                .padStart(2 * padLength + 2, ` `) +
+                .padStart(2 * padLength + 1, ` `) +
 
                 String(`"${memoryUsageKey}"`)
-                .padStart(2 * padLength + 3, ` `) +
+                .padStart(2 * padLength + 5, ` `) +
 
                 String(`prior: ` + Math.round(preInvocationCPUsum / 1000) +
                     ` ms`)
