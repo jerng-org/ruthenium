@@ -27,8 +27,6 @@ if (conf.customLogging) {
         console.initialWarn = console.warn
         console.warn = function() {
 
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
-
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialWarn.apply(this, arguments)
             }
@@ -42,8 +40,6 @@ if (conf.customLogging) {
         console.initialLog = console.log
         console.log = function() {
 
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
-
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialLog.apply(this, arguments)
             }
@@ -56,8 +52,6 @@ if (conf.customLogging) {
     } {
         console.initialInfo = console.info
         console.info = function() {
-
-            arguments[0] = 'INTERCEPTED ' + arguments[0]
 
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialInfo.apply(this, arguments)
