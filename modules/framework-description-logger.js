@@ -37,8 +37,8 @@ if (conf.frameworkDescriptionLogging) {
 
     frameworkDescriptionLogger.callStarts = _currentFunctionDescription => {
         frameworkDescriptionLogger.callDepth++
-        frameworkDescriptionLogger.log('Starting execution (' + _currentFunctionDescription + ')')
         frameworkDescriptionLogger.currentFunctionDescription = _currentFunctionDescription
+        frameworkDescriptionLogger.log('Starting execution (' + _currentFunctionDescription + ')')
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
