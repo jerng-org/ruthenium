@@ -10,7 +10,6 @@ const conf = require(`/var/task/configuration.js`)
 
 var frameworkDescriptionLogger = {
     frameworkDescriptionLogString: '',
-    currentFunctionDescription: undefined,
     log: undefined,
     endLog: undefined,
     callDepth: 0,
@@ -39,7 +38,7 @@ if (conf.frameworkDescriptionLogging) {
                     '\n|\n|' +
                     '(' +
                     err.stack.match(/\n.*\n(.*)\n/)[1] + // third line 
-                    ')' +
+                    ')\n' +
                     _input
                 )
                 .replace(
@@ -51,22 +50,11 @@ if (conf.frameworkDescriptionLogging) {
         console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 
-    frameworkDescriptionLogger.callStarts = function() {
+    frameworkDescriptionLogger.callStarts = _ => {
         frameworkDescriptionLogger.callDepth++
-        frameworkDescriptionLogger.currentFunctionDescription = Array.from(arguments).join(' : ')
-        frameworkDescriptionLogger
-            .log(
-                'Starting execution : ' +
-                frameworkDescriptionLogger.currentFunctionDescription
-            )
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
-        frameworkDescriptionLogger
-            .log('Ending execution (' +
-                frameworkDescriptionLogger.currentFunctionDescription +
-                ')')
-        delete frameworkDescriptionLogger.currentFunctionDescription
         frameworkDescriptionLogger.callDepth--
     }
 
