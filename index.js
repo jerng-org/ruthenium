@@ -48,7 +48,6 @@ try {
         console.warn(`
         
     !!! WARNING !!! -   ANYTHING OUTSIDE (exports.handler) 
-
                             persists across all  function calls, possibly for the 
                             lifetime of the function's container;
                         
@@ -57,7 +56,6 @@ try {
                             FROM MIDDLEWARES, OR FROM ANYWHERE ELSE IN CODE CALLED
                             BY (exports.handler), AS THIS MAY RESULT IN
                             SECURITY BREACHES, OR SPACE LEAKS;
-
                         DO NOT WRITE ANYTHING TO THESE OBJECTS,
                         
                             MOST IMPORTANTLY DO NOT WRITE (data) from MIDDLEWARES
@@ -335,7 +333,6 @@ try {
                     -   "storage=virtual & type=Deskname     & thing=Rowid"
                     -   "storage=actual  & type=desk-schemas & thing=Deskname"
                     -   "storage=actual  & type=desk-cells   & thing=Deskname#Columnname,Rowid"
-
                     (we've stopped caring if "type" and "Columnname" are singular or plural)        
                     
                     User-story:     
@@ -471,7 +468,7 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.customLogString = "\n\nCLS RE-STARTED (~/index.js/handler EXECUTION)\n"
+            rus.customLogger.restartCustomLogString( '(~/index.js/handler EXECUTION)')
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
         if (rus.conf.frameworkDescriptionLogging) {
@@ -659,7 +656,7 @@ try {
             console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
         }
         if (rus.conf.customLogging) {
-            console.initialLog(rus.customLogger.customLogString += '\nCLS LOGGED (~/index.js/handler EXECUTION)\n\n')
+            rus.customLogger.logCustomLogString ('(~/index.js/handler EXECUTION)')
         }
 
         return rutheniumResponse
@@ -684,7 +681,7 @@ try {
         console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
     if (rus.conf.customLogging) {
-        console.initialLog(rus.customLogger.customLogString += '\nCLS LOGGED (~/index.js/handler INITIALISATION)\n\n')
+            rus.customLogger.logCustomLogString ('(~/index.js/handler INITIALISATION)')
     }
 
 }
@@ -692,10 +689,8 @@ catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
 
 /*
-
 API Gateway - HTTP API - logging variables :
 https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-logging-variables.html
-
     const inner = ["$context.accountId", "$context.apiId", "$context.authorizer.claims.property",
     "$context.awsEndpointRequestId", "$context.dataProcessed",
     "$context.domainName", "$context.domainPrefix", "$context.error.message",
@@ -711,9 +706,7 @@ https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-logging-va
     .map(a=>(`"${a.slice(7)}":"${a}"`)).join(',')
     
     `{"context":{${inner}}}`
-
 LAMBDA ENVIRONMENTAL VARIABLES :
-
     AWS_NODEJS_CONNECTION_REUSE_ENABLED	(value=1)
     COGNITO_ISSUER_HOST	(secret)
     COGNITO_JWKS_URI	(secret)
@@ -721,13 +714,10 @@ LAMBDA ENVIRONMENTAL VARIABLES :
     COGNITO_RELYING_PARTY_ID	(secret)
     COGNITO_RELYING_PARTY_SECRET	(secret)
     GITHUB_JERNG_MACHINES_USER_PASSWORD	(secret)
-
 LAMBDA & SERVER-SIDE EVENTS
-
     Doing this in Node.js is currently expensive, and Lambdas won't stay alive
     for very long anyway. So it is best not to try this yet, until a reasonably
     cost-efficient architecture is discovered. (AWS may add features later.)
     
     https://html.spec.whatwg.org/multipage/server-sent-events.html
-
 */

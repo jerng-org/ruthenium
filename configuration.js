@@ -1,6 +1,6 @@
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage = `documentation`
+const gitCommitMessage = `housekeeping of customLogger`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {

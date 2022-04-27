@@ -12,8 +12,6 @@ var customLogger = {}
 
 if (conf.customLogging) {
 
-    customLogger.customLogString = "\n\nCustomLogString STARTED (~/modules/custom-logger.js INITIALISATION)\n"
-
     // Customisation of "console"
     {
         console.initialError = console.error
@@ -67,6 +65,24 @@ if (conf.customLogging) {
                 ` INFO ` +
                 Array.from(arguments).join(' ')
         }
+    }
+
+    // other definitions
+    customLogger.customLogString = "\n\nCustomLogString STARTED (~/modules/custom-logger.js INITIALISATION)\n"
+
+    customLogger.restartCustomLogString = function() {
+        customLogger.customLogString = 'CustomLogString RE-STARTED : ' +
+            Array.from(arguments).join(' : ') +
+            '\n'
+    }
+
+    customLogger.logCustomLogString = function() {
+        console.initialLog(
+            customLogger.customLogString +
+            '\nCLS LOGGED : ' +
+            Array.from(arguments).join(':') +
+            '\n\n'
+        )
     }
 
 }
