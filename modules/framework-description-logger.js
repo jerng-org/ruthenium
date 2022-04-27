@@ -10,12 +10,12 @@ const conf = require(`/var/task/configuration.js`)
 
 var frameworkDescriptionLogger = {
     frameworkDescriptionLogString: '',
-    log: undefined,
-    endLog: undefined,
+    log: _ => _,
+    endLog: _ => _,
     callDepth: 0,
     callEnumeration: [],
-    callStarts: undefined,
-    callEnds: undefined,
+    callStarts: _ => _,
+    callEnds: _ => _,
 }
 
 if (conf.frameworkDescriptionLogging) {
@@ -58,9 +58,6 @@ if (conf.frameworkDescriptionLogging) {
         frameworkDescriptionLogger.callDepth--
     }
 
-}
-else {
-    frameworkDescriptionLogger.log = _ => _
 }
 
 //////////
