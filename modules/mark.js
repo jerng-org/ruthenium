@@ -131,8 +131,6 @@ const mark = async (taskLabel, firstInHandler) => {
         const invocationStartCPU = process.cpuUsage()
         invocationStartCPUsum = invocationStartCPU.user +
             invocationStartCPU.system
-        _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
-        _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB; ⚠`)
         _log(
             String('').padEnd(70, `-`)
         )
