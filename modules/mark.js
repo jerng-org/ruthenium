@@ -100,9 +100,9 @@ const mark = async (taskLabel, firstInHandler) => {
             )
             _log(
                 String(`WALL🕓:(Δ,Σ)`)
-                .padStart(14, ` `) +
+                .padStart(12, ` `) +
                 String(`RAM:(Δ,Σ)`)
-                .padStart(16, ` `) +
+                .padStart(14, ` `) +
                 String(`CPU🕓:(Δ,Σ)`)
                 .padStart(14, ` `) +
                 String(`[CPU🕓/WALL🕓]:(Δ,Σ)`)
@@ -110,9 +110,9 @@ const mark = async (taskLabel, firstInHandler) => {
             )
             _log(
                 String(`ms`)
-                .padStart(14, ` `) +
+                .padStart(12, ` `) +
                 String(`MB`)
-                .padStart(16, ` `) +
+                .padStart(14, ` `) +
                 String(`ms`)
                 .padStart(14, ` `) +
                 String(`µs/ms`)
@@ -140,10 +140,10 @@ const mark = async (taskLabel, firstInHandler) => {
         _log(
 
             String(`prior: ` + Math.round(preInvocationTime))
-            .padStart(14, ` `) +
+            .padStart(12, ` `) +
 
             String(`RAM: "${memoryUsageKey}"`)
-            .padStart(16, ` `) +
+            .padStart(14, ` `) +
 
             String(`prior: ` + Math.round(preInvocationCPUsum / 1000))
             .padStart(14, ` `) +
@@ -188,12 +188,12 @@ const mark = async (taskLabel, firstInHandler) => {
                 invocationStartTime
             ) - lastTime
 
-        ).toString().padStart(7, ` `) +
+        ).toString().padStart(6, ` `) +
 
         // total runtime;
         Math.round(
             lastTime = tempTime
-        ).toString().padStart(7, ` `) +
+        ).toString().padStart(6, ` `) +
 
         //
         //
@@ -205,26 +205,23 @@ const mark = async (taskLabel, firstInHandler) => {
 
         // delta of RAM usage;
 
-        (Math.round( // decimal point formatting;
+        Math.round( // decimal point formatting;
 
-                ((tempMem = process.memoryUsage()[memoryUsageKey]) -
-                    lastMem)
+            ((tempMem = process.memoryUsage()[memoryUsageKey]) -
+                lastMem)
 
-                /
-                Math.pow(1024, 2) // B to MB conversion;
-                *
-                10) / 10 // decimal point formatting;
+            /
+            Math.pow(1024, 2) // B to MB conversion;
+
         )
         .toString().padStart(7, ` `) +
 
         // total RAM usage;
 
-        (Math.round( // decimal point formatting;
+        Math.round( // decimal point formatting;
 
-                (lastMem = tempMem) /
-                Math.pow(1024, 2) // B to MB conversion;:
-                *
-                10) / 10 // decimal point formatting;
+            (lastMem = tempMem) /
+            Math.pow(1024, 2) // B to MB conversion;:
         ).toString().padStart(7, ` `) +
 
         //
