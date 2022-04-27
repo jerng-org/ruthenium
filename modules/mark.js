@@ -65,7 +65,7 @@ let invocationStartTime
 //  Measuring RAM usage.
 //      `node.process.memoryUsage` keys: rss, heapTotal, heapUsed, external
 //      AWS Lambda: Billed memory seems to include 35-40MB over ['rss'].
-const memoryUsageKey = 'rss'
+const memoryUsageKey = 'resident set size'
 const padLength = 7
 let lastMem = process.memoryUsage()[memoryUsageKey]
 // There exists a similar Web API
@@ -103,7 +103,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
                 String(`prior: ` + Math.round(preInvocationTime) +
                     ` ms`)
-                .padStart(2 * padLength + 4, ` `) +
+                .padStart(2 * padLength + 2, ` `) +
 
                 String(`"${memoryUsageKey}"`)
                 .padStart(2 * padLength + 6, ` `) +
