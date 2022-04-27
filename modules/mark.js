@@ -187,7 +187,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         // delta of RAM usage;
 
-        Math.round( // decimal point formatting;
+        Math.ceil( 
 
             ((tempMem = process.memoryUsage()[memoryUsageKey]) -
                 lastMem)
@@ -200,7 +200,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         // total RAM usage;
 
-        Math.round( // decimal point formatting;
+        Math.ceil( 
 
             (lastMem = tempMem) /
             Math.pow(1024, 2) // B to MB conversion;:
