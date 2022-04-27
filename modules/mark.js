@@ -103,7 +103,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 String(`WALL🕓:(Δ,Σ)`)
                 .padStart(14, ` `) +
                 String(`RAM:(Δ,Σ)`)
-                .padStart(14, ` `) +
+                .padStart(16, ` `) +
                 String(`CPU🕓:(Δ,Σ)`)
                 .padStart(14, ` `) +
                 String(`[CPU🕓/WALL🕓]:(Δ,Σ)`)
@@ -117,7 +117,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 String(`ms`)
                 .padStart(14, ` `) +
                 String(`µs/ms`)
-                .padStart(14, ` `)
+                .padStart(18, ` `)
             )
             _log(
                 String('').padEnd(26 + 8 * padLength, `-`)
@@ -140,15 +140,13 @@ const mark = async (taskLabel, firstInHandler) => {
             invocationStartCPU.system
         _log(
 
-            String(`prior: ` + Math.round(preInvocationTime) +
-                ` ms`)
+            String(`prior: ` + Math.round(preInvocationTime) )
             .padStart(2 * padLength + 2, ` `) +
 
             String(`RAM: "${memoryUsageKey}"`)
             .padStart(0 * padLength + 1, ` `) +
 
-            String(`prior: ` + Math.round(preInvocationCPUsum / 1000) +
-                ` ms`)
+            String(`prior: ` + Math.round(preInvocationCPUsum / 1000) )
             .padStart(2 * padLength + 2, ` `) +
 
             String(`throttle ⚠️ ㇏㇏`)
