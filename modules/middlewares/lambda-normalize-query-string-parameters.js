@@ -59,7 +59,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const lambdaNormalizeQueryStringParameters = async (data) => {
 
-    rus.frameworkDescriptionLogger.callStarts(console.trace(''))
+    rus.frameworkDescriptionLogger.callStarts()
 
     if (data.LAMBDA.event.rawQueryString) {
 

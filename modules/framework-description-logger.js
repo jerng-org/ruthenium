@@ -38,10 +38,18 @@ if (conf.frameworkDescriptionLogging) {
     frameworkDescriptionLogger.callStarts = function() {
         frameworkDescriptionLogger.callDepth++
         frameworkDescriptionLogger.currentFunctionDescription = Array.from(arguments).join(' : ')
-        frameworkDescriptionLogger
-            .log('Starting execution (' +
-                frameworkDescriptionLogger.currentFunctionDescription +
-                ')')
+
+        {
+            let err = {}
+            Error.captureStackTrace(err)
+            frameworkDescriptionLogger
+                .log(
+                    'Starting execution (' +
+                    err.match(/at.*\)/) +
+                    ')' +
+                    frameworkDescriptionLogger.currentFunctionDescription
+                )
+        }
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
