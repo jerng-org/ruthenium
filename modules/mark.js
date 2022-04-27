@@ -135,13 +135,13 @@ const mark = async (taskLabel, firstInHandler) => {
         invocationStartCPUsum = invocationStartCPU.user +
             invocationStartCPU.system
         _log(
-            String(`WALL-🕓:(Δ,Σ)`)
+            String(`WALL-🕓:(Δ,Σ)ms`)
             .padStart(5 + 2 * padLength, ` `) +
-            String(`RAM:(Δ,Σ)`)
+            String(`RAM:(Δ,Σ)MB`)
             .padStart(5 + 2 * padLength, ` `) +
-            String(`CPU-🕓:(Δ,Σ)`)
+            String(`CPU-🕓:(Δ,Σ)ms`)
             .padStart(5 + 2 * padLength, ` `) +
-            String(`[CPU-🕓/WALL-🕓]:(Δ,Σ)`)
+            String(`[CPU-🕓/WALL-🕓]:(Δ,Σ)µs/ms`)
             .padStart(8 + 2 * padLength, ` `)
         )
         _log(
