@@ -152,7 +152,7 @@ const mark = async (taskLabel, firstInHandler) => {
             .padStart(18, ` `)
         )
         _log(
-            String('').padEnd(26 + 8 * padLength, `-`)
+            String('').padEnd(70, `-`)
         )
     }
     nthInvocation++
