@@ -106,7 +106,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 .padStart(2 * padLength + 2, ` `) +
 
                 String(`"${memoryUsageKey}"`)
-                .padStart(2 * padLength + 6, ` `) +
+                .padStart(2 * padLength + 3, ` `) +
 
                 String(`prior: ` + Math.round(preInvocationCPUsum / 1000) +
                     ` ms`)
@@ -136,9 +136,9 @@ const mark = async (taskLabel, firstInHandler) => {
             invocationStartCPU.system
         _log(
             String(`WALL-🕓:(Δ,Σ)ms`)
-            .padStart(3 + 2 * padLength, ` `) +
+            .padStart(2 + 2 * padLength, ` `) +
             String(`RAM:(Δ,Σ)MB`)
-            .padStart(0 + 2 * padLength, ` `) +
+            .padStart(2 + 2 * padLength, ` `) +
             String(`CPU-🕓:(Δ,Σ)ms`)
             .padStart(5 + 2 * padLength, ` `) +
             String(`[CPU-🕓/WALL-🕓]:(Δ,Σ)µs/ms`)
