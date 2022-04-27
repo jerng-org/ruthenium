@@ -6,11 +6,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const lambdaCopyRequestParameters = async (data) => {
 
-    {
-        let err = {}
-        Error.captureStackTrace(err)
-        rus.frameworkDescriptionLogger.callStarts(err.stack.match(/at.*\)/)[0])
-    }
+    rus.frameworkDescriptionLogger.callStarts()
     //  Section on reserved characters:
     //  -   https://tools.ietf.org/html/rfc3986#section-2.2
     //

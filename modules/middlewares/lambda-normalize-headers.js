@@ -6,7 +6,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const lambdaNormalizeHeaders = async (data) => {
 
-    rus.frameworkDescriptionLogger.callStarts(console.trace(''))
+    rus.frameworkDescriptionLogger.callStarts()
 
     if (data.LAMBDA.event.headers) {
         data.RU.request.headers = data.LAMBDA.event.headers
