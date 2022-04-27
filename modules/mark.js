@@ -99,24 +99,24 @@ const mark = async (taskLabel, firstInHandler) => {
                 String('').padEnd(70, `-`)
             )
             _log(
-                String(`RAM:(Δ,Σ)`)
-                .padStart(12, ` `) +
-                String(`CPU🕓:(Δ,Σ)`)
+                String(`RAM :`)
+                .padStart(10, ` `) +
+                String(`CPU🕓 :`)
                 .padStart(14, ` `) +
-                String(`WALL🕓:(Δ,Σ)`)
+                String(`WALL🕓 :`)
                 .padStart(12, ` `) +
-                String(`[CPU🕓/WALL🕓]:`)
-                .padStart(20, ` `)
+                String(`[CPU🕓/WALL🕓] :`)
+                .padStart(16, ` `)
             )
             _log(
-                String(`MB`)
-                .padStart(12, ` `) +
-                String(`ms`)
+                String(`(Δ,Σ) MB`)
+                .padStart(10, ` `) +
+                String(`(Δ,Σ) ms`)
                 .padStart(14, ` `) +
-                String(`ms`)
+                String(`(Δ,Σ) ms`)
                 .padStart(12, ` `) +
                 String(`(Δ,Σ) µs/ms`)
-                .padStart(20, ` `)
+                .padStart(16, ` `)
             )
             _log(
                 String('').padEnd(70, `-`)
@@ -140,7 +140,7 @@ const mark = async (taskLabel, firstInHandler) => {
         _log(
 
             String(`RAM:"${memoryUsageKey}"`)
-            .padStart(12, ` `) +
+            .padStart(10, ` `) +
 
             String(`prior:` + Math.round(preInvocationCPUsum / 1000))
             .padStart(14, ` `) +
@@ -149,7 +149,7 @@ const mark = async (taskLabel, firstInHandler) => {
             .padStart(12, ` `) +
 
             String(`throttle⚠️ ㇏㇏`)
-            .padStart(20, ` `)
+            .padStart(16, ` `)
         )
         _log(
             String('').padEnd(70, `-`)
@@ -193,7 +193,7 @@ const mark = async (taskLabel, firstInHandler) => {
             Math.pow(1024, 2) // B to MB conversion;
 
         )
-        .toString().padStart(6, ` `) +
+        .toString().padStart(5, ` `) +
 
         // total RAM usage;
 
@@ -201,7 +201,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
             (lastMem = tempMem) /
             Math.pow(1024, 2) // B to MB conversion;:
-        ).toString().padStart(6, ` `) +
+        ).toString().padStart(5, ` `) +
 
         //
         //
@@ -263,7 +263,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         Math.round(
             dCPUsum / dTime
-        ).toString().padStart(10, ` `) +
+        ).toString().padStart(8, ` `) +
 
         //
         //
@@ -281,7 +281,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         Math.round(
             lastCPUsum / lastTime
-        ).toString().padStart(10, ` `) +
+        ).toString().padStart(8, ` `) +
 
         //
         //
