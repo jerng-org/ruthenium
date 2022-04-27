@@ -9,7 +9,7 @@ const lambdaCopyRequestParameters = async (data) => {
     {
         let err = {}
         Error.captureStackTrace(err)
-        rus.frameworkDescriptionLogger.callStarts(__dirname, __filename, err.stack)
+        rus.frameworkDescriptionLogger.callStarts(err.stack.match(/Error at.*$/))
     }
     //  Section on reserved characters:
     //  -   https://tools.ietf.org/html/rfc3986#section-2.2
