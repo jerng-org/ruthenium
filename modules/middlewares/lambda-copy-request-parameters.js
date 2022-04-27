@@ -56,6 +56,15 @@ const lambdaCopyRequestParameters = async (data) => {
 
     rus.frameworkDescriptionLogger.log('blah blah')
 
+    rus.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.log('blah blah')
+    
+    rus.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.log('blah blah')
+    
+    rus.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.log('blah blah')
+    
     rus.frameworkDescriptionLogger.callEnds()
 
     return data
