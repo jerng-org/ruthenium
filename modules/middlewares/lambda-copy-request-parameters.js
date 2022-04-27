@@ -1,6 +1,7 @@
 'use strict'
 
 const rus = require ( '/var/task/modules/r-u-s.js' )
+console.log(console.trace())
 rus.frameworkDescriptionLogger.callStarts(console.trace())
 
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
