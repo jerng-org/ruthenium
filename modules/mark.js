@@ -66,7 +66,7 @@ let invocationStartTime
 //      `node.process.memoryUsage` keys: rss, heapTotal, heapUsed, external
 //      AWS Lambda: Billed memory seems to include 35-40MB over ['rss'].
 const memoryUsageKey = 'rss'
-const padLength = 9
+const padLength = 6
 let lastMem = process.memoryUsage()[memoryUsageKey]
 // There exists a similar Web API
 
