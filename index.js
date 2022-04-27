@@ -653,7 +653,6 @@ try {
         // runs when (handler) is executed 
         if (rus.conf.frameworkDescriptionLogging) {
             rus.frameworkDescriptionLogger.endLog()
-            console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
         }
         if (rus.conf.customLogging) {
             rus.customLogger.logCustomLogString ('(~/index.js/handler EXECUTION)')
@@ -678,7 +677,6 @@ try {
     // runs when (handler) is initialised
     if (rus.conf.frameworkDescriptionLogging) {
         rus.frameworkDescriptionLogger.endLog()
-        console.log(rus.frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
     if (rus.conf.customLogging) {
             rus.customLogger.logCustomLogString ('(~/index.js/handler INITIALISATION)')
