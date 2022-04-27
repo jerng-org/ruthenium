@@ -66,7 +66,6 @@ let invocationStartTime
 //      `node.process.memoryUsage` keys: rss, heapTotal, heapUsed, external
 //      AWS Lambda: Billed memory seems to include 35-40MB over ['rss'].
 const memoryUsageKey = 'rss'
-const padLength = 7
 let lastMem = process.memoryUsage()[memoryUsageKey]
 // There exists a similar Web API
 
@@ -140,17 +139,17 @@ const mark = async (taskLabel, firstInHandler) => {
             invocationStartCPU.system
         _log(
 
-            String(`prior: ` + Math.round(preInvocationTime) )
+            String(`prior: ` + Math.round(preInvocationTime))
             .padStart(14, ` `) +
 
             String(`RAM: "${memoryUsageKey}"`)
             .padStart(16, ` `) +
 
-            String(`prior: ` + Math.round(preInvocationCPUsum / 1000) )
+            String(`prior: ` + Math.round(preInvocationCPUsum / 1000))
             .padStart(14, ` `) +
 
             String(`throttle ⚠️ ㇏㇏`)
-            .padStart(1, ` `)
+            .padStart(18, ` `)
         )
         _log(
             String('').padEnd(26 + 8 * padLength, `-`)
@@ -189,10 +188,12 @@ const mark = async (taskLabel, firstInHandler) => {
                 invocationStartTime
             ) - lastTime
 
-        ).toString().padStart(padLength, ` `) +
+        ).toString().padStart(7, ` `) +
 
         // total runtime;
-        Math.round(lastTime = tempTime).toString().concat(`|`).padStart(padLength, ` `) +
+        Math.round(
+            lastTime = tempTime
+        ).toString().concat(` |`).padStart(7, ` `) +
 
         //
         //
@@ -214,7 +215,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 *
                 10) / 10 // decimal point formatting;
         )
-        .toString().padStart(padLength, ` `) +
+        .toString().padStart(7, ` `) +
 
         // total RAM usage;
 
@@ -224,7 +225,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 Math.pow(1024, 2) // B to MB conversion;:
                 *
                 10) / 10 // decimal point formatting;
-        ).toString().concat(` |`).padStart(padLength, ` `) +
+        ).toString().concat(` |`).padStart(7, ` `) +
 
         //
         //
@@ -246,14 +247,14 @@ const mark = async (taskLabel, firstInHandler) => {
                 lastCPUsum
             ) /
             1000 // microsecond to millisecond conversion;
-        ).toString().padStart(padLength, ` `) +
+        ).toString().padStart(7, ` `) +
 
         // total CPU time consumed;
 
         Math.round(
             (lastCPUsum = tempCPUsum) /
             1000 // microsecond to millisecond conversion;
-        ).toString().concat(` |`).padStart(padLength, ` `) +
+        ).toString().concat(` |`).padStart(7, ` `) +
 
         //
         //
@@ -265,7 +266,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         Math.round(
             dCPUsum / dTime
-        ).toString().padStart(padLength, ` `) +
+        ).toString().padStart(7, ` `) +
 
         //
         //
@@ -283,7 +284,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         Math.round(
             lastCPUsum / lastTime
-        ).toString().concat(` |`).padStart(padLength, ` `) +
+        ).toString().concat(` |`).padStart(7, ` `) +
 
         //
         //
