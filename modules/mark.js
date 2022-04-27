@@ -65,7 +65,7 @@ let invocationStartTime
 //  Measuring RAM usage.
 //      `node.process.memoryUsage` keys: rss, heapTotal, heapUsed, external
 //      AWS Lambda: Billed memory seems to include 35-40MB over ['rss'].
-const memoryUsageKey = 'RAM RSS'
+const memoryUsageKey = 'rss'
 const padLength = 7
 let lastMem = process.memoryUsage()[memoryUsageKey]
 // There exists a similar Web API
@@ -105,8 +105,8 @@ const mark = async (taskLabel, firstInHandler) => {
                     ` ms`)
                 .padStart(2 * padLength + 2, ` `) +
 
-                String(`"${memoryUsageKey}"`)
-                .padStart(0 * padLength + 5, ` `) +
+                String(`RAM: "${memoryUsageKey}"`)
+                .padStart(0 * padLength + 1, ` `) +
 
                 String(`prior: ` + Math.round(preInvocationCPUsum / 1000) +
                     ` ms`)
@@ -205,12 +205,10 @@ const mark = async (taskLabel, firstInHandler) => {
 
                 /
                 Math.pow(1024, 2) // B to MB conversion;
-                //*
-                //10
-                ) /// 10 // decimal point formatting;
+                *
+                10) / 10 // decimal point formatting;
         )
-        //.toString().padStart(padLength, ` `) 
-        +
+        .toString().padStart(padLength, ` `) +
 
         // total RAM usage;
 
@@ -218,12 +216,9 @@ const mark = async (taskLabel, firstInHandler) => {
 
                 (lastMem = tempMem) /
                 Math.pow(1024, 2) // B to MB conversion;:
-                //*
-                //10
-                ) /// 10 // decimal point formatting;
-        )
-        .toString().padStart(padLength, ` `) 
-        +
+                *
+                10) / 10 // decimal point formatting;
+        ).toString().padStart(padLength, ` `) +
         ` |` +
 
         //
