@@ -5,7 +5,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
 const lambdaCopyRequestParameters = async (data) => {
-    rus.frameworkDescriptionLogger.callStarts( typeof console.trace )
+    rus.frameworkDescriptionLogger.callStarts( console.trace() )
 
     //  Section on reserved characters:
     //  -   https://tools.ietf.org/html/rfc3986#section-2.2
