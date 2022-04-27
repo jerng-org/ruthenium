@@ -9,7 +9,8 @@ const conf = require(`/var/task/configuration.js`)
 //////////
 
 var customLogger = {
-    customLogString : ''
+    customLogString: '',
+    logCustomLogString: undefined
 }
 
 if (conf.customLogging) {
