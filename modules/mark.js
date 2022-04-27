@@ -99,22 +99,22 @@ const mark = async (taskLabel, firstInHandler) => {
                 String('').padEnd(70, `-`)
             )
             _log(
-                String(`WALL🕓:(Δ,Σ)`)
-                .padStart(12, ` `) +
                 String(`RAM:(Δ,Σ)`)
                 .padStart(12, ` `) +
                 String(`CPU🕓:(Δ,Σ)`)
                 .padStart(14, ` `) +
+                String(`WALL🕓:(Δ,Σ)`)
+                .padStart(12, ` `) +
                 String(`[CPU🕓/WALL🕓]:`)
                 .padStart(20, ` `)
             )
             _log(
-                String(`ms`)
-                .padStart(12, ` `) +
                 String(`MB`)
                 .padStart(12, ` `) +
                 String(`ms`)
                 .padStart(14, ` `) +
+                String(`ms`)
+                .padStart(12, ` `) +
                 String(`(Δ,Σ) µs/ms`)
                 .padStart(20, ` `)
             )
@@ -139,14 +139,14 @@ const mark = async (taskLabel, firstInHandler) => {
             invocationStartCPU.system
         _log(
 
-            String(`prior:` + Math.round(preInvocationTime))
-            .padStart(12, ` `) +
-
             String(`RAM:"${memoryUsageKey}"`)
             .padStart(12, ` `) +
 
             String(`prior:` + Math.round(preInvocationCPUsum / 1000))
             .padStart(14, ` `) +
+
+            String(`prior:` + Math.round(preInvocationTime))
+            .padStart(12, ` `) +
 
             String(`throttle⚠️ ㇏㇏`)
             .padStart(20, ` `)
@@ -195,27 +195,6 @@ const mark = async (taskLabel, firstInHandler) => {
             lastTime = tempTime
         ).toString().padStart(6, ` `) +
 
-        //
-        //
-        //
-        //  (Block 2)
-
-        //  d : stage-to-stage difference in memory (whichever metric you keyed);
-        //  t : to-stage total memory consumed for (whichever metric you keyed );
-
-        // delta of RAM usage;
-
-        Math.round( // decimal point formatting;
-
-            ((tempMem = process.memoryUsage()[memoryUsageKey]) -
-                lastMem)
-
-            /
-            Math.pow(1024, 2) // B to MB conversion;
-
-        )
-        .toString().padStart(6, ` `) +
-
         // total RAM usage;
 
         Math.round( // decimal point formatting;
@@ -227,7 +206,7 @@ const mark = async (taskLabel, firstInHandler) => {
         //
         //
         //
-        //  (Block 3)
+        //  (Block 2)
 
         //  dCPU : stage-to-stage difference in CPU time consumed; 
         //  tCPU : to-stage total CPU time consumed;
@@ -256,7 +235,28 @@ const mark = async (taskLabel, firstInHandler) => {
         //
         //
         //
-        //  (Block 4)
+        //  (Block 3)
+
+        //  d : stage-to-stage difference in memory (whichever metric you keyed);
+        //  t : to-stage total memory consumed for (whichever metric you keyed );
+
+        // delta of RAM usage;
+
+        Math.round( // decimal point formatting;
+
+            ((tempMem = process.memoryUsage()[memoryUsageKey]) -
+                lastMem)
+
+            /
+            Math.pow(1024, 2) // B to MB conversion;
+
+        )
+        .toString().padStart(6, ` `) +
+
+        //
+        //
+        //
+        //  (Block 4a)
 
         //  ( delta of CPU time consumed / delta of runtime ); 
         //  stage-to-stage CPU allocation; volatile; subject to long-term average;
@@ -268,7 +268,7 @@ const mark = async (taskLabel, firstInHandler) => {
         //
         //
         //
-        //  (Block 5)
+        //  (Block 4b)
 
         //  ( total CPU time consumed / total runtime );
         //  to-stage average CPU allocation; the long-term average;
@@ -288,7 +288,7 @@ const mark = async (taskLabel, firstInHandler) => {
         //
         //
 
-        taskLabel +
+        ` ` + taskLabel +
         (nthInvocation % 3 ? "" : "\n")
     )
 
