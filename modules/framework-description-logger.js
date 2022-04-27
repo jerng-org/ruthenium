@@ -45,7 +45,7 @@ if (conf.frameworkDescriptionLogging) {
             frameworkDescriptionLogger
                 .log(
                     'Starting execution (' +
-                    err.match(/at.*\)/) +
+                    err.stack +
                     ')' +
                     frameworkDescriptionLogger.currentFunctionDescription
                 )
