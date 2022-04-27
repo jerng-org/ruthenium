@@ -1,7 +1,6 @@
 'use strict'
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
-rus.frameworkDescriptionLogger.callStarts(console.trace(''))
+const rus = require('/var/task/modules/r-u-s.js')
 
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
@@ -58,29 +57,30 @@ rus.frameworkDescriptionLogger.callStarts(console.trace(''))
         
 */
 
-const lambdaNormalizeQueryStringParameters = async ( data ) => {
+const lambdaNormalizeQueryStringParameters = async (data) => {
+
+    rus.frameworkDescriptionLogger.callStarts(console.trace(''))
 
     if (data.LAMBDA.event.rawQueryString) {
-        
-        data.RU.request.queryStringParameters = rus.node.querystring.parse ( data.LAMBDA.event.rawQueryString )  
-        
-        for ( const prop in data.RU.request.queryStringParameters ) {
-            
 
-            if ( typeof data.RU.request.queryStringParameters[ prop ] == 'string' ) {
-                data.RU.request.queryStringParameters[ prop ] 
-                    =   [ 
-                            data.RU.request.queryStringParameters[ prop ] 
-                        ]
+        data.RU.request.queryStringParameters = rus.node.querystring.parse(data.LAMBDA.event.rawQueryString)
+
+        for (const prop in data.RU.request.queryStringParameters) {
+
+
+            if (typeof data.RU.request.queryStringParameters[prop] == 'string') {
+                data.RU.request.queryStringParameters[prop] = [
+                    data.RU.request.queryStringParameters[prop]
+                ]
             }
-            
+
         }
-        
+
     }
+    rus.frameworkDescriptionLogger.log('blah blah')
+
+    rus.frameworkDescriptionLogger.callEnds()
+
     return data
 }
 module.exports = lambdaNormalizeQueryStringParameters
-
-rus.frameworkDescriptionLogger.log('blah blah')
-
-rus.frameworkDescriptionLogger.callEnds()
