@@ -179,21 +179,21 @@ const mark = async (taskLabel, firstInHandler) => {
         //
         //  (Block 1)
 
-        //  dRUN : stage-to-stage difference in wallclock time in milliseconds;
-        //  tRUN : to-stage total wallclock time in milliseconds;
+        //  d : stage-to-stage difference in memory (whichever metric you keyed);
+        //  t : to-stage total memory consumed for (whichever metric you keyed );
 
-        // delta of runtime;
-        Math.round(dTime =
-            (tempTime = performance.now() -
-                invocationStartTime
-            ) - lastTime
+        // delta of RAM usage;
 
-        ).toString().padStart(6, ` `) +
+        Math.round( // decimal point formatting;
 
-        // total runtime;
-        Math.round(
-            lastTime = tempTime
-        ).toString().padStart(6, ` `) +
+            ((tempMem = process.memoryUsage()[memoryUsageKey]) -
+                lastMem)
+
+            /
+            Math.pow(1024, 2) // B to MB conversion;
+
+        )
+        .toString().padStart(6, ` `) +
 
         // total RAM usage;
 
@@ -237,21 +237,21 @@ const mark = async (taskLabel, firstInHandler) => {
         //
         //  (Block 3)
 
-        //  d : stage-to-stage difference in memory (whichever metric you keyed);
-        //  t : to-stage total memory consumed for (whichever metric you keyed );
+        //  dRUN : stage-to-stage difference in wallclock time in milliseconds;
+        //  tRUN : to-stage total wallclock time in milliseconds;
 
-        // delta of RAM usage;
+        // delta of runtime;
+        Math.round(dTime =
+            (tempTime = performance.now() -
+                invocationStartTime
+            ) - lastTime
 
-        Math.round( // decimal point formatting;
+        ).toString().padStart(6, ` `) +
 
-            ((tempMem = process.memoryUsage()[memoryUsageKey]) -
-                lastMem)
-
-            /
-            Math.pow(1024, 2) // B to MB conversion;
-
-        )
-        .toString().padStart(6, ` `) +
+        // total runtime;
+        Math.round(
+            lastTime = tempTime
+        ).toString().padStart(6, ` `) +
 
         //
         //
