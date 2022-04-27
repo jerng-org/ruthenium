@@ -99,22 +99,16 @@ const mark = async (taskLabel, firstInHandler) => {
             _log(
                 String('').padEnd(26 + 8 * padLength, `-`)
             )
-            _log(
-
-                String(`prior: ` + Math.round(preInvocationTime) +
-                    ` ms`)
-                .padStart(2 * padLength + 2, ` `) +
-
-                String(`RAM: "${memoryUsageKey}"`)
-                .padStart(0 * padLength + 1, ` `) +
-
-                String(`prior: ` + Math.round(preInvocationCPUsum / 1000) +
-                    ` ms`)
-                .padStart(2 * padLength + 2, ` `) +
-
-                String(`throttle ⚠️ ㇏㇏`)
-                .padStart(2 * padLength + 2, ` `)
-            )
+        _log(
+            String(`WALL🕓:(Δ,Σ)ms`)
+            .padStart(1 + 2 * padLength, ` `) +
+            String(`RAM:(Δ,Σ)MB`)
+            .padStart(4 + 2 * padLength, ` `) +
+            String(`CPU🕓:(Δ,Σ)ms`)
+            .padStart(2 + 2 * padLength, ` `) +
+            String(`[CPU🕓/WALL🕓]:(Δ,Σ)µs/ms`)
+            .padStart(8 + 2 * padLength, ` `)
+        )
             _log(
                 String('').padEnd(26 + 8 * padLength, `-`)
             )
@@ -134,16 +128,22 @@ const mark = async (taskLabel, firstInHandler) => {
         const invocationStartCPU = process.cpuUsage()
         invocationStartCPUsum = invocationStartCPU.user +
             invocationStartCPU.system
-        _log(
-            String(`WALL🕓:(Δ,Σ)ms`)
-            .padStart(1 + 2 * padLength, ` `) +
-            String(`RAM:(Δ,Σ)MB`)
-            .padStart(4 + 2 * padLength, ` `) +
-            String(`CPU🕓:(Δ,Σ)ms`)
-            .padStart(2 + 2 * padLength, ` `) +
-            String(`[CPU🕓/WALL🕓]:(Δ,Σ)µs/ms`)
-            .padStart(8 + 2 * padLength, ` `)
-        )
+            _log(
+
+                String(`prior: ` + Math.round(preInvocationTime) +
+                    ` ms`)
+                .padStart(2 * padLength + 2, ` `) +
+
+                String(`RAM: "${memoryUsageKey}"`)
+                .padStart(0 * padLength + 1, ` `) +
+
+                String(`prior: ` + Math.round(preInvocationCPUsum / 1000) +
+                    ` ms`)
+                .padStart(2 * padLength + 2, ` `) +
+
+                String(`throttle ⚠️ ㇏㇏`)
+                .padStart(2 * padLength + 2, ` `)
+            )
         _log(
             String('').padEnd(26 + 8 * padLength, `-`)
         )
