@@ -1,7 +1,6 @@
 'use strict'
 
 const conf = require(`/var/task/configuration.js`)
-const customLogger = require(`/var/task/modules/custom-logger.js`)
 
 //////////
 //      //
@@ -27,6 +26,7 @@ if (conf.frameworkDescriptionLogging) {
     frameworkDescriptionLogger.endLog = _ => {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             '\n|\n| ... FrameworkDescriptionLogString ENDED (framework-description-logger.js/endLog EXECUTION)\n'
+        console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 
     frameworkDescriptionLogger.log = _input => {
