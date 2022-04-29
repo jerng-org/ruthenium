@@ -48,7 +48,6 @@ if (conf.frameworkDescriptionLogging) {
                     '... '.repeat(frameworkDescriptionLogger.callDepth)
                 )
         }
-        console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 
     frameworkDescriptionLogger.callStarts = _ => {
