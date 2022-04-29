@@ -644,9 +644,9 @@ try {
             ),
 
             arguments[0].requestContext.http.method,
-            arguments[0].requestContext.domainName,
-            arguments[0].requestContext.http.path,
-            '?', // literal
+            arguments[0].requestContext.domainName +
+            arguments[0].requestContext.http.path +
+            '?' + // literal
             arguments[0].rawQueryString
         )
 

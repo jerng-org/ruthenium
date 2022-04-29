@@ -94,7 +94,7 @@ const mark = async (taskLabel, firstInHandler) => {
             preInvocationTime = performance.now()
 
             _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
-            _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB-60M; ⚠`)
+            _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB-60MB; ⚠`)
             _log(
                 String('').padEnd(70, `-`)
             )
@@ -136,7 +136,7 @@ const mark = async (taskLabel, firstInHandler) => {
             .padStart(16, ` `) +
             String(`CPU🕓:`)
             .padStart(14, ` `) +
-            String(`WALL🕓:`)
+            String(`($)WALL🕓:`)
             .padStart(12, ` `) +
             String(`[CPU/WALL]🕓:`)
             .padStart(16, ` `)
