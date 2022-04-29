@@ -10,7 +10,7 @@ try {
     //  See pertinent (nodeJS-specific) documentation at /var/task/modules/r-u-s.js
 
     const rus = require('/var/task/modules/r-u-s.js')
-    
+
     rus.frameworkDescriptionLogger.log(`(~/index.js) SUMMARY
     -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
     -   The role of (exports.handler) in this runtime is documented by AWS
@@ -23,7 +23,7 @@ try {
     
     -   (exports.handler) is then defined to capture each HTTP requests' (hostInitializedData) and (middlewares), run this through (ruthenium) and get (rutheniumResponse), then return it
     `)
-    
+
     rus.mark(`~/index.js loaded mark.js`)
 
     rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
@@ -468,7 +468,7 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.restartCustomLogString( '(~/index.js/handler EXECUTION)')
+            rus.customLogger.restartCustomLogString('(~/index.js/handler EXECUTION)')
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
         if (rus.conf.frameworkDescriptionLogging) {
@@ -478,9 +478,9 @@ try {
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
         console.log(`lambda>node>handler, ENTRY Point (~/index.js)`,
             arguments[0].requestContext.http.method,
-            arguments[0].requestContext.domainName,
-            arguments[0].requestContext.http.path,
-            '?', // literal
+            arguments[0].requestContext.domainName +
+            arguments[0].requestContext.http.path +
+            '?' + // literal
             arguments[0].rawQueryString
         )
 
@@ -655,7 +655,7 @@ try {
             rus.frameworkDescriptionLogger.endLog()
         }
         if (rus.conf.customLogging) {
-            rus.customLogger.logCustomLogString ('(~/index.js/handler EXECUTION)')
+            rus.customLogger.logCustomLogString('(~/index.js/handler EXECUTION)')
         }
 
         return rutheniumResponse
@@ -673,13 +673,13 @@ try {
     
     -   thus ends the source of this file; 
     `)
-    
+
     // runs when (handler) is initialised
     if (rus.conf.frameworkDescriptionLogging) {
         rus.frameworkDescriptionLogger.endLog()
     }
     if (rus.conf.customLogging) {
-            rus.customLogger.logCustomLogString ('(~/index.js/handler INITIALISATION)')
+        rus.customLogger.logCustomLogString('(~/index.js/handler INITIALISATION)')
     }
 
 }
