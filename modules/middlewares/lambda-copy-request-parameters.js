@@ -54,17 +54,6 @@ const lambdaCopyRequestParameters = async (data) => {
             JSON.parse(JSON.stringify(data.LAMBDA.event.requestContext.http)) : {}
         ) : {}
 
-    rus.frameworkDescriptionLogger.log('blah blah')
-
-    rus.frameworkDescriptionLogger.callStarts()
-    rus.frameworkDescriptionLogger.log('blah blah')
-    
-    rus.frameworkDescriptionLogger.callStarts()
-    rus.frameworkDescriptionLogger.log('blah blah')
-    
-    rus.frameworkDescriptionLogger.callStarts()
-    rus.frameworkDescriptionLogger.log('blah blah')
-    
     rus.frameworkDescriptionLogger.callEnds()
 
     return data
