@@ -11,6 +11,8 @@ try {
 
     const rus = require('/var/task/modules/r-u-s.js')
 
+    rus.frameworkDescriptionLogger.callStarts()
+
     rus.frameworkDescriptionLogger.summary(`(~/index.js) SUMMARY
     -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
     -   The role of (exports.handler) in this runtime is documented by AWS
@@ -684,6 +686,7 @@ try {
         rus.customLogger.logCustomLogString('(~/index.js/handler INITIALISATION)')
     }
 
+    rus.frameworkDescriptionLogger.endLog()
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
