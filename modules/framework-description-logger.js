@@ -68,6 +68,7 @@ if (conf.frameworkDescriptionLogging) {
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
+        frameworkDescriptionLogger.log('function returns ... ')
         frameworkDescriptionLogger.callDepth--
     }
 

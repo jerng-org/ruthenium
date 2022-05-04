@@ -6,6 +6,8 @@ const status401 = require(`/var/task/tasks/status-401.js`)
 
 const sessionGuard = async(data) => {
 
+    rus.conf.frameworkDescriptionLogger.callStarts()
+
     /*  
      *  Complain if no session cookie is found in (request), and no exemption
      *  was granted by (session-exemption.js);
@@ -18,6 +20,9 @@ const sessionGuard = async(data) => {
     }
     await status401(data)
     data.RU.signals.skipToMiddlewareName = 'composeResponse'
+    
+    rus.conf.frameworkDescriptionLogger.callEnds()
+    
     return data
 }
 

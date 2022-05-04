@@ -12,7 +12,9 @@ taskFileNames.forEach((current, index, array) => {
     }
 } /* , thisArg */ )
 
-const router = async(data) => {
+const router = async (data) => {
+
+    rus.conf.frameworkDescriptionLogger.callStarts()
 
     /*  By this point in the pipeline, (data.RU) should provide:    
      *       (.headers)
@@ -33,24 +35,26 @@ const router = async(data) => {
     // Default here
     const defaultDetermineTaskName = () => {
 
+        rus.conf.frameworkDescriptionLogger.callStarts()
+
         if (data.RU.request.queryStringParameters.route &&
             data.RU.request.queryStringParameters.route[0]) {
             switch (data.RU.request.queryStringParameters.route[0]) {
-                
+
                 /***************************************************************
                  *  TODO :  improve the documentation in this area, to explain
                  *          where the << cases >> are supposed to be written,
                  *          before they are read here.
                  ***************************************************************
-                 */                
-                
+                 */
+
                 case ('initial'):
                     data.RU.signals.taskName = 'initial'
                     break
 
                 case ('virtual'):
                     data.RU.signals.taskName = 'virtual'
-                    
+
                     /* Single Item: METHOD, &type=M, &thing=N, &value/s=V
                      * Batch:       METHOD, &batch=[ 
                      *                          [ { method: type: thing: etc. } ]
@@ -59,7 +63,7 @@ const router = async(data) => {
                      *
                      *  TODO : Check : This proposal is not yet implemented?
                      */
-                     
+
                     break
 
                 case ('text'):
@@ -75,17 +79,17 @@ const router = async(data) => {
 
                 default:
                     data.RU.signals.taskName = data.RU.request.queryStringParameters.route[0]
-                        // request ?query parameter was set, but is not one of the above cases;
+                    // request ?query parameter was set, but is not one of the above cases;
             }
         }
-        
+
         /*  IF (queryStringParameters.route[0] was truthy)
          *  THEN
          *  EITHER  (queryStringParameters.route[0] was not defined)
          *  OR      (... it was defined as a falsy value, then conferred to .signals.taskName )
          *
          */
-         
+
         if (!data.RU.signals.taskName) {
             // request ?query parameter was not set;
             data.RU.signals.redirectRoute = 'initial'
@@ -99,6 +103,7 @@ const router = async(data) => {
                     `&message=(via router.js)${data.RU.request.queryStringParameters.message[0]}` :
                     '')
         }
+        rus.conf.frameworkDescriptionLogger.callEnds()
     }
 
     /*******************************************************************************
@@ -108,36 +113,38 @@ const router = async(data) => {
      *
      *  Determine the task.
      */
-     
+
     customDetermineTaskName
         ?
         customDetermineTaskName() :
         defaultDetermineTaskName()
 
     /* redirects: short-circuit
-    */
+     */
     if (data.RU.signals.redirectRoute) {
         return data
     }
 
     /* no redirects: 
-    *
-    *      Run the task, if its module is found.
-    *
-    *      TODO: perhaps we want another reducer here for multiple tasks?
-    */
+     *
+     *      Run the task, if its module is found.
+     *
+     *      TODO: perhaps we want another reducer here for multiple tasks?
+     */
 
     else
     if (data.RU.signals.taskName in tasks) {
 
         await tasks[data.RU.signals.taskName](data)
-            // Important things happen here, preparing (data.RU.io) for task-markup.
+        // Important things happen here, preparing (data.RU.io) for task-markup.
 
     }
     else {
         console.error(`(router.js) Could not find (${ data.RU.signals.taskName  }) in the tasks directory.`)
-        await tasks['status-404'](data) 
+        await tasks['status-404'](data)
     }
+
+    rus.conf.frameworkDescriptionLogger.callEnds()
 
     /* EXECUTION ENDS
      ******************************************************************************/

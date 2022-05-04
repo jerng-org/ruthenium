@@ -10,7 +10,9 @@ const rus = require('/var/task/modules/r-u-s.js')
  *
  */
 
-const sessionExemption = async(data) => {
+const sessionExemption = async (data) => {
+
+    rus.conf.frameworkDescriptionLogger.callStarts()
 
     if (data.RU.request.queryStringParameters.route &&
         data.RU.request.queryStringParameters.route[0] &&
@@ -25,6 +27,8 @@ const sessionExemption = async(data) => {
         data.RU.signals.sessionExempted = true
         data.RU.signals.skipToMiddlewareName = 'sessionGuard'
     }
+
+    rus.conf.frameworkDescriptionLogger.callEnds()
 
     return data
 }

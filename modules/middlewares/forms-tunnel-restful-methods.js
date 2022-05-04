@@ -12,32 +12,36 @@
  *  TODO : check : this appears to do nothing for the time being 
  */
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rus = require('/var/task/modules/r-u-s.js')
 
-const formsTunnelRestfulMethods = async ( data ) => {
-    
-    if ( 'form-method' in data.RU.request.queryStringParameters ) {
-        
+const formsTunnelRestfulMethods = async (data) => {
+
+    rus.conf.frameworkDescriptionLogger.callStarts()
+
+    if ('form-method' in data.RU.request.queryStringParameters) {
+
         // Is there a more performant (whilst readable) way to write this?
-        switch ( data.RU.request.queryStringParameters['form-method'][0].toUpperCase() ) {
-            
+        switch (data.RU.request.queryStringParameters['form-method'][0].toUpperCase()) {
+
             case ('PUT'):
                 data.RU.request.http.method = 'PUT'
-                break            
+                break
             case ('PATCH'):
                 data.RU.request.http.method = 'PATCH'
-                break            
+                break
             case ('DELETE'):
                 data.RU.request.http.method = 'DELETE'
-                break            
+                break
             default:
                 // de nada
         }
-        
+
     }
-    
+
+    rus.conf.frameworkDescriptionLogger.callEnds()
+
     return data
 
 }
 module.exports = formsTunnelRestfulMethods
-rus.mark (`~/modules/middlewares/forms-tunnel-restful-methods.js LOADED`)
+rus.mark(`~/modules/middlewares/forms-tunnel-restful-methods.js LOADED`)

@@ -1,35 +1,35 @@
 'use strict'
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rus = require('/var/task/modules/r-u-s.js')
 
 const defaultLayoutTaskName = 'layout'
 
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (compose-response.js)
-    const markups   = {}
-    const markupFileNames = rus.node.fs.readdirSync ('/var/task/tasks', {
-        withFileTypes: true
-    })
-    markupFileNames.forEach ( ( current, index, array ) => {
+const markups = {}
+const markupFileNames = rus.node.fs.readdirSync('/var/task/tasks', {
+    withFileTypes: true
+})
+markupFileNames.forEach((current, index, array) => {
         if (current.isFile()) {
-            
+
             // console.warn(`searching in:`, current.name.slice (0, -3), `for`, '/var/task/tasks/' + current.name )
-            
-            markups[ current.name.slice (0, -3) ] = require ( '/var/task/tasks/' + current.name )
-        }        
+
+            markups[current.name.slice(0, -3)] = require('/var/task/tasks/' + current.name)
+        }
     } // , thisArg  
-    )
+)
 
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (router.js)
-    const tasks = {}
-    const taskFileNames = rus.node.fs.readdirSync ('/var/task/tasks')
-    taskFileNames.forEach ( ( current, index, array ) => {
-        if ( current.toLowerCase().slice ( -3 ) == '.js' ) {
-            tasks[ current.slice (0, -3) ] = require ( '/var/task/tasks/' + current )
-        }
-    } /* , thisArg */ ) 
+const tasks = {}
+const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
+taskFileNames.forEach((current, index, array) => {
+    if (current.toLowerCase().slice(-3) == '.js') {
+        tasks[current.slice(0, -3)] = require('/var/task/tasks/' + current)
+    }
+} /* , thisArg */ )
 
 
 /*  SUMMARY:    (apply-layout.js) will take (data.RU.response.body) and replace it
@@ -69,44 +69,41 @@ const defaultLayoutTaskName = 'layout'
  *
  */
 
-const applyLayout = async ( data ) => {
+const applyLayout = async (data) => {
+
+    rus.conf.frameworkDescriptionLogger.callStarts()
 
     //  This layer of if-elses should be isomorphic with (compose-response.js);
-    
+
     //  !!! IMPORTANT !!!
     //
     //  (data.RU.signals.noLayout) is an explicit abortion, similar in function
     //  with (compose-response.js)'s use of the explicit 
     //  (data.RU.signals.sendResponse);
-    
-    if ( data.RU.response )
-    {
-        if (        data.RU.signals.redirectRoute 
-                ||  data.RU.signals.sendBlob
-                ||  data.RU.signals.noLayout        )    
-        { 
+
+    if (data.RU.response) {
+        if (data.RU.signals.redirectRoute ||
+            data.RU.signals.sendBlob ||
+            data.RU.signals.noLayout) {
             return data // EXIT POINT 1
         }
-        
+
         else
-        if ( data.RU.signals.layoutMarkupName )
-        {
-            if ( data.RU.signals.layoutMarkupName in markups )
-            {
+        if (data.RU.signals.layoutMarkupName) {
+            if (data.RU.signals.layoutMarkupName in markups) {
                 //  Because (data.RU.signals.layoutTaskName) is NOT demanded,
                 //  presumably (data.RU.io.layoutTaskName) will be unset.
                 //
                 //  However, (data.RU.response.body) should have been set in
                 //  (compose-response.js) by this point, so a layout-markup
                 //  CAN refer to it;
-                data.RU.respose.body = 
-                    await markups [ data.RU.signals.layoutMarkupName ]( data )
-            
+                data.RU.respose.body =
+                    await markups[data.RU.signals.layoutMarkupName](data)
+
                 return data // EXIT POINT 2
             }
-            else
-            {           // EXIT POINT 2F
-                throw   Error (`(middlewares/apply-layout.js) could not find (${ 
+            else { // EXIT POINT 2F
+                throw Error(`(middlewares/apply-layout.js) could not find (${ 
                         data.RU.signals.layoutMarkupName 
                         }.js) in the (~/tasks) directory. That name was specified at
                         (data.RU.signals.layoutMarkupName).
@@ -116,46 +113,39 @@ const applyLayout = async ( data ) => {
                         ${ await rus.additionalRequestInformation ( data ) }`)
             }
         }
-        else
-        {
+        else {
             // If it has been set by the Task, or at the router middleware, then ignore the default value.
-            data.RU.signals.layoutTaskName =    data.RU.signals.layoutTaskName 
-                                                ? data.RU.signals.layoutTaskName
-                                                : defaultLayoutTaskName
+            data.RU.signals.layoutTaskName = data.RU.signals.layoutTaskName ?
+                data.RU.signals.layoutTaskName :
+                defaultLayoutTaskName
 
-            if ( data.RU.signals.layoutTaskName )
-            {
-                if ( data.RU.signals.layoutTaskName in tasks  )
-                {
+            if (data.RU.signals.layoutTaskName) {
+                if (data.RU.signals.layoutTaskName in tasks) {
                     //  Important things happen here, preparing (data.RU.io) for task-markup.
-                    await tasks [ data.RU.signals.layoutTaskName ]( data )   
+                    await tasks[data.RU.signals.layoutTaskName](data)
                 }
-                else
-                {           // EXIT POINT 3F1    
-                    throw   Error ( `Could not find (${ 
+                else { // EXIT POINT 3F1    
+                    throw Error(`Could not find (${ 
                             data.RU.signals.layoutTaskName 
-                            } ) in the tasks directory.` )
+                            } ) in the tasks directory.`)
                 }
-                
-                data.RU.signals.inferredLayoutMarkupName
-                    = data.RU.signals.layoutTaskName + '-markup'
-                
-                if ( data.RU.signals.inferredLayoutMarkupName in markups )
-                {
+
+                data.RU.signals.inferredLayoutMarkupName = data.RU.signals.layoutTaskName + '-markup'
+
+                if (data.RU.signals.inferredLayoutMarkupName in markups) {
                     //  Because (data.RU.signals.layoutTaskName) IS demanded,
                     //  presumably (data.RU.io.layoutTaskName) will be set.
                     //
                     //  (data.RU.response.body) should have been set in
                     //  (compose-response.js) by this point, so a layout-markup
                     //  CAN refer to it;
-                    data.RU.response.body = 
-                        await markups [ data.RU.signals.inferredLayoutMarkupName ]( data )
-                
+                    data.RU.response.body =
+                        await markups[data.RU.signals.inferredLayoutMarkupName](data)
+
                     return data // EXIT POINT 3
                 }
-                else
-                {           // EXIT POINT 3F2
-                    throw   Error (`(middlewares/apply-layout.js) could not find (${ 
+                else { // EXIT POINT 3F2
+                    throw Error(`(middlewares/apply-layout.js) could not find (${ 
                             data.RU.signals.inferredLayoutMarkupName 
                             }.js) in the (~/tasks) directory. That name was specified at
                             (data.RU.signals.inferredLayoutMarkupName).
@@ -164,22 +154,23 @@ const applyLayout = async ( data ) => {
                             
                             ${ await rus.additionalRequestInformation ( data ) }`)
                 }
-            }            
+            }
         }
         // else-block ends
     }
     // if data.RU.response
-    
-    else
-    {           // EXIT POINT 4
-        throw   Error (`(middlewares/apply-layout.js) found that 
+
+    else { // EXIT POINT 4
+        throw Error(`(middlewares/apply-layout.js) found that 
                 (data.RU.response) is falsy. Not sure how to proceed.
                 This is usually not a problem as it should be initiated at 
                 (ruthenium.js); and it should be caught by (compose-response.js)
                 before this middleware, anyway.`)
-    }     
+    }
     // if data.RU.response, else-block ends
+
+    rus.conf.frameworkDescriptionLogger.callEnds()
 }
 
 module.exports = applyLayout
-rus.mark (`~/modules/middlewares/apply-layout.js LOADED`)
+rus.mark(`~/modules/middlewares/apply-layout.js LOADED`)
