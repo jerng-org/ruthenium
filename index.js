@@ -11,7 +11,7 @@ try {
 
     const rus = require('/var/task/modules/r-u-s.js')
 
-    rus.frameworkDescriptionLogger.log(`(~/index.js) SUMMARY
+    rus.frameworkDescriptionLogger.summary(`(~/index.js) SUMMARY
     -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
     -   The role of (exports.handler) in this runtime is documented by AWS
     
@@ -26,7 +26,7 @@ try {
 
     rus.mark(`~/index.js loaded mark.js`)
 
-    rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
+    rus.frameworkDescriptionLogger.verbiage(`we are now in (~/index.js), and
     
     -   the first line says 'use strict', and immediately after this is a try-catch block; 
     
@@ -431,7 +431,7 @@ try {
 
     const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
 
-    rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
+    rus.frameworkDescriptionLogger.verbiage(`we are now in (~/index.js), and
     
     -   many (requires) just occured;
         
@@ -663,7 +663,7 @@ try {
     // exports.handler()
     rus.mark(`index.js LOADED`)
 
-    rus.frameworkDescriptionLogger.log(`we are still in (~/index.js), but following the definition of (exports.handler)
+    rus.frameworkDescriptionLogger.verbiage(`we are still in (~/index.js), but following the definition of (exports.handler)
     
     -   some logging occurs;
     

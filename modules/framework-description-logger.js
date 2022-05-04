@@ -39,7 +39,7 @@ if (conf.frameworkDescriptionLogging) {
                     '\n|\n|' +
                     '(' +
                     err.stack.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
-                    ')\n' +
+                    ')\n|' +
                     _input
                 )
                 .replace(
@@ -49,6 +49,18 @@ if (conf.frameworkDescriptionLogging) {
                 )
         }
     }
+
+    frameworkDescriptionLogger.summary = conf.frameworkDescriptionLogging > 1 ?
+        _input => {
+            frameworkDescriptionLogger.log(_input)
+        } :
+        _ => _
+
+    frameworkDescriptionLogger.verbiage = conf.frameworkDescriptionLogging > 2 ?
+        _input => {
+            frameworkDescriptionLogger.log(_input)
+        } :
+        _ => _
 
     frameworkDescriptionLogger.callStarts = _ => {
         frameworkDescriptionLogger.callDepth++

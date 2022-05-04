@@ -65,7 +65,9 @@ module.exports = {
      *
      *      1   :   log calls 
      *
-     *      2   :   log calls and verbose narration
+     *      2   :   1 + SUMMARY descriptors
+     *
+     *      3   :   2 + verbose narration
      */
     frameworkDescriptionLogging : 1,
 
