@@ -467,6 +467,8 @@ try {
     // LAMBDA HANDLER
     exports.handler = async function() {
 
+        rus.frameworkDescriptionLogger.callStarts()
+
         if (rus.conf.customLogging) {
             rus.customLogger.restartCustomLogString('(~/index.js/handler EXECUTION)')
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
@@ -658,6 +660,7 @@ try {
             rus.customLogger.logCustomLogString('(~/index.js/handler EXECUTION)')
         }
 
+        rus.frameworkDescriptionLogger.callEnds()
         return rutheniumResponse
     }
     // exports.handler()
