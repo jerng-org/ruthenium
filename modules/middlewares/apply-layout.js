@@ -85,6 +85,7 @@ const applyLayout = async (data) => {
         if (data.RU.signals.redirectRoute ||
             data.RU.signals.sendBlob ||
             data.RU.signals.noLayout) {
+            rus.frameworkDescriptionLogger.callEnds()
             return data // EXIT POINT 1
         }
 
@@ -100,9 +101,11 @@ const applyLayout = async (data) => {
                 data.RU.respose.body =
                     await markups[data.RU.signals.layoutMarkupName](data)
 
+                rus.frameworkDescriptionLogger.callEnds()
                 return data // EXIT POINT 2
             }
             else { // EXIT POINT 2F
+                rus.frameworkDescriptionLogger.callEnds()
                 throw Error(`(middlewares/apply-layout.js) could not find (${ 
                         data.RU.signals.layoutMarkupName 
                         }.js) in the (~/tasks) directory. That name was specified at
@@ -125,6 +128,7 @@ const applyLayout = async (data) => {
                     await tasks[data.RU.signals.layoutTaskName](data)
                 }
                 else { // EXIT POINT 3F1    
+                    rus.frameworkDescriptionLogger.callEnds()
                     throw Error(`Could not find (${ 
                             data.RU.signals.layoutTaskName 
                             } ) in the tasks directory.`)
@@ -142,9 +146,11 @@ const applyLayout = async (data) => {
                     data.RU.response.body =
                         await markups[data.RU.signals.inferredLayoutMarkupName](data)
 
+                    rus.frameworkDescriptionLogger.callEnds()
                     return data // EXIT POINT 3
                 }
                 else { // EXIT POINT 3F2
+                    rus.frameworkDescriptionLogger.callEnds()
                     throw Error(`(middlewares/apply-layout.js) could not find (${ 
                             data.RU.signals.inferredLayoutMarkupName 
                             }.js) in the (~/tasks) directory. That name was specified at
@@ -161,6 +167,7 @@ const applyLayout = async (data) => {
     // if data.RU.response
 
     else { // EXIT POINT 4
+        rus.frameworkDescriptionLogger.callEnds()
         throw Error(`(middlewares/apply-layout.js) found that 
                 (data.RU.response) is falsy. Not sure how to proceed.
                 This is usually not a problem as it should be initiated at 
@@ -169,7 +176,6 @@ const applyLayout = async (data) => {
     }
     // if data.RU.response, else-block ends
 
-    rus.frameworkDescriptionLogger.callEnds()
 }
 
 module.exports = applyLayout
