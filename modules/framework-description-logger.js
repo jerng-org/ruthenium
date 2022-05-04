@@ -38,7 +38,7 @@ if (conf.frameworkDescriptionLogging) {
                 (
                     '\n|\n|' +
                     '(' +
-                    err.stack.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
+                    err.stack+//.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
                     ')\n|' +
                     _input
                 )
