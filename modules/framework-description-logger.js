@@ -31,6 +31,8 @@ if (conf.frameworkDescriptionLogging) {
 
     frameworkDescriptionLogger.log = _input => {
         {
+            // COMBINE 
+            let result
             let err = {}
             Error.captureStackTrace(err)
 
@@ -38,14 +40,18 @@ if (conf.frameworkDescriptionLogging) {
                 (
                     '\n|\n|' +
                     '(' +
-                    err.stack.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
+                    (
+                        (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
+                        result[1] :
+                        err.stack
+                    ) + // third line 
                     ')\n|' +
                     _input
                 )
                 .replace(
                     /\n/g,
                     '\n' +
-                    '| '.repeat(frameworkDescriptionLogger.callDepth-1)
+                    '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
                 )
         }
     }
@@ -66,6 +72,8 @@ if (conf.frameworkDescriptionLogging) {
 
         frameworkDescriptionLogger.callDepth++
 
+        // COMBINE 
+        let result
         let err = {}
         Error.captureStackTrace(err)
 
@@ -73,17 +81,22 @@ if (conf.frameworkDescriptionLogging) {
             (
                 '\n│\n├' +
                 '─ STARTING call : ' +
-                err.stack.match(/\n.*\n.*at (.*)\n/)[1]  // third line 
+                (
+                    (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
+                    result[1] :
+                    err.stack
+                ) // third line 
             )
             .replace(
                 /\n/g,
                 '\n' +
-                '| '.repeat(frameworkDescriptionLogger.callDepth-1)
+                '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
             )
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
 
+        // COMBINE 
         let result
         let err = {}
         Error.captureStackTrace(err)
@@ -93,7 +106,7 @@ if (conf.frameworkDescriptionLogging) {
                 '\n└' +
                 '─ ENDING call   : ' +
                 (
-                    (result = err.stack.match(/\n.*\n.*at (.*)\n/)) ?
+                    (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
                     result[1] :
                     err.stack
                 ) + // third line 
@@ -102,7 +115,7 @@ if (conf.frameworkDescriptionLogging) {
             .replace(
                 /\n/g,
                 '\n' +
-                '| '.repeat(frameworkDescriptionLogger.callDepth-1)
+                '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
             )
 
         frameworkDescriptionLogger.callDepth--
