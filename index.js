@@ -681,12 +681,12 @@ try {
     // runs when (handler) is initialised
     if (rus.conf.frameworkDescriptionLogging) {
         rus.frameworkDescriptionLogger.endLog()
+        rus.frameworkDescriptionLogger.endLog()
     }
     if (rus.conf.customLogging) {
         rus.customLogger.logCustomLogString('(~/index.js/handler INITIALISATION)')
     }
 
-    rus.frameworkDescriptionLogger.endLog()
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
