@@ -72,9 +72,8 @@ if (conf.frameworkDescriptionLogging) {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
                 '\n|\n|' +
-                '( STARTING call : ' +
-                err.stack.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
-                ')'
+                ': STARTING call : ' +
+                err.stack.match(/\n.*\n.*at (.*)\n/)[1]  // third line 
             )
             .replace(
                 /\n/g,
@@ -98,7 +97,7 @@ if (conf.frameworkDescriptionLogging) {
                     result[1] :
                     err.stack
                 ) + // third line 
-                ')\n|'
+                '\n|'
             )
             .replace(
                 /\n/g,
