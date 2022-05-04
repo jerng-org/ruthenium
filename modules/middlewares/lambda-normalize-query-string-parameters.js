@@ -77,7 +77,6 @@ const lambdaNormalizeQueryStringParameters = async (data) => {
         }
 
     }
-    rus.frameworkDescriptionLogger.log('blah blah')
 
     rus.frameworkDescriptionLogger.callEnds()
 

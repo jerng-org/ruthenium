@@ -49,8 +49,6 @@ const lambdaNormalizeHeaders = async (data) => {
         }
     }
 
-    rus.frameworkDescriptionLogger.log('blah blah')
-
     rus.frameworkDescriptionLogger.callEnds()
 
     return data
