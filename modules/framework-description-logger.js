@@ -64,6 +64,7 @@ if (conf.frameworkDescriptionLogging) {
 
     frameworkDescriptionLogger.callStarts = _ => {
         frameworkDescriptionLogger.callDepth++
+        frameworkDescriptionLogger.log(' ... function called')
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
