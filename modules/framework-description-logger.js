@@ -45,7 +45,7 @@ if (conf.frameworkDescriptionLogging) {
                 .replace(
                     /\n/g,
                     '\n' +
-                    '... '.repeat(frameworkDescriptionLogger.callDepth)
+                    '| '.repeat(frameworkDescriptionLogger.callDepth)
                 )
         }
     }
@@ -78,7 +78,7 @@ if (conf.frameworkDescriptionLogging) {
             .replace(
                 /\n/g,
                 '\n' +
-                '... '.repeat(frameworkDescriptionLogger.callDepth)
+                '| '.repeat(frameworkDescriptionLogger.callDepth)
             )
     }
 
@@ -102,7 +102,7 @@ if (conf.frameworkDescriptionLogging) {
             .replace(
                 /\n/g,
                 '\n' +
-                '... '.repeat(frameworkDescriptionLogger.callDepth)
+                '| '.repeat(frameworkDescriptionLogger.callDepth)
             )
 
         frameworkDescriptionLogger.callDepth--
