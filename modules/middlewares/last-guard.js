@@ -4,7 +4,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const lastGuard = async (data) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     const hasStatusCode = data.RU.response.statusCode ? true : false
     const hasBody = data.RU.response.body ? true : false
@@ -78,7 +78,7 @@ const lastGuard = async (data) => {
 
     rus.conf.verbosity > 5 && console.log(await rus.print.inspectInfinity(data))
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 
     return data
 }
