@@ -12,8 +12,8 @@ const asIs = 'asIs'
 const toArrayIndex = 'toArrayIndex'
 const initiateAccumulator = nextKeyObject => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callEnds()
 
     return (nextKeyObject.keyType == toArrayIndex) ?
         Object.defineProperty([], 'isAnArray', { value: true }) : {}
@@ -27,7 +27,7 @@ const buildDeepPath = (htmlNameAttribute,
 
 ) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     // order is crucial
     const finalIteration = keyObjectList.length == 1
@@ -103,13 +103,13 @@ const buildDeepPath = (htmlNameAttribute,
         )
     }
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 
 } // const build
 
 const formsReindexNames = async (data) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
     /*
     ///////////////////////////////////////////////////////////////////////////////
 
@@ -316,7 +316,7 @@ const formsReindexNames = async (data) => {
 
     const walkTreeCondenseArrays = node => {
 
-        rus.conf.frameworkDescriptionLogger.callStarts()
+        rus.frameworkDescriptionLogger.callStarts()
 
         for (const key in node) {
 
@@ -329,7 +329,7 @@ const formsReindexNames = async (data) => {
                 walkTreeCondenseArrays(node[key])
             }
         }
-        rus.conf.frameworkDescriptionLogger.callEnds()
+        rus.frameworkDescriptionLogger.callEnds()
     }
 
     // I suppose this may become a configuration setting in the future;
@@ -337,7 +337,7 @@ const formsReindexNames = async (data) => {
 
     data.RU.request.formStringParameters = objectifiedFormData
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 
     return data
 }

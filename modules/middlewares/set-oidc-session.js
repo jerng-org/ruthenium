@@ -4,7 +4,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const setOidcSession = async(data) => {
     
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     /*  1.
      *  OIDC / Authentication mechanism has priority;
@@ -70,7 +70,7 @@ const setOidcSession = async(data) => {
             await rus.oidcSession.setSessionFromRequestCookie(data)
         }
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
     
     return data
 }

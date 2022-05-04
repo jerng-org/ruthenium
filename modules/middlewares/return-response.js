@@ -4,8 +4,8 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const returnResponse = async (data) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callEnds()
 
     return data.RU.response
 }

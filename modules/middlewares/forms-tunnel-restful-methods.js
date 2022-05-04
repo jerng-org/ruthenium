@@ -16,7 +16,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const formsTunnelRestfulMethods = async (data) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     if ('form-method' in data.RU.request.queryStringParameters) {
 
@@ -38,7 +38,7 @@ const formsTunnelRestfulMethods = async (data) => {
 
     }
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 
     return data
 

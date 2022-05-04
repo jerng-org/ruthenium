@@ -8,7 +8,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const setCookies = async (data) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     //  Nothing to do if there are no cookie signals
     if (!(data.RU.signals.sendResponse.setCookies &&
@@ -54,7 +54,7 @@ const setCookies = async (data) => {
         //, thisArg 
     )
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 
     return data
 }

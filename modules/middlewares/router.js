@@ -14,7 +14,7 @@ taskFileNames.forEach((current, index, array) => {
 
 const router = async (data) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     /*  By this point in the pipeline, (data.RU) should provide:    
      *       (.headers)
@@ -35,7 +35,7 @@ const router = async (data) => {
     // Default here
     const defaultDetermineTaskName = () => {
 
-        rus.conf.frameworkDescriptionLogger.callStarts()
+        rus.frameworkDescriptionLogger.callStarts()
 
         if (data.RU.request.queryStringParameters.route &&
             data.RU.request.queryStringParameters.route[0]) {
@@ -103,7 +103,7 @@ const router = async (data) => {
                     `&message=(via router.js)${data.RU.request.queryStringParameters.message[0]}` :
                     '')
         }
-        rus.conf.frameworkDescriptionLogger.callEnds()
+        rus.frameworkDescriptionLogger.callEnds()
     }
 
     /*******************************************************************************
@@ -144,7 +144,7 @@ const router = async (data) => {
         await tasks['status-404'](data)
     }
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 
     /* EXECUTION ENDS
      ******************************************************************************/

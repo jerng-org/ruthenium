@@ -71,7 +71,7 @@ taskFileNames.forEach((current, index, array) => {
 
 const applyLayout = async (data) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     //  This layer of if-elses should be isomorphic with (compose-response.js);
 
@@ -169,7 +169,7 @@ const applyLayout = async (data) => {
     }
     // if data.RU.response, else-block ends
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 }
 
 module.exports = applyLayout

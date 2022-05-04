@@ -23,7 +23,7 @@ const status501 = require(`/var/task/tasks/status-501.js`)
 
 const redirect = async (DATA) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     // Step 1.1 : Documentation
     DATA.RU.signals.redirectRoute = DATA.RU.request.http.path +
@@ -49,7 +49,7 @@ const redirect = async (DATA) => {
     // Step 1.2 : Implementation
     DATA.RU.response.headers.location = DATA.RU.signals.redirectRoute
 
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 }
 
 /*  1.  Throw, if (data.RU.response) is truthy.
@@ -71,7 +71,7 @@ const redirect = async (DATA) => {
  */
 const composeResponse = async (data) => {
 
-    rus.conf.frameworkDescriptionLogger.callStarts()
+    rus.frameworkDescriptionLogger.callStarts()
 
     //console.error(`(compose-response.js:top:data.RU.signals)`, data.RU.signals)
 
@@ -219,7 +219,7 @@ const composeResponse = async (data) => {
         }
         return data
     }
-    rus.conf.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.callEnds()
 }
 
 module.exports = composeResponse
