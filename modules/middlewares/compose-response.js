@@ -21,7 +21,9 @@ markupFileNames.forEach((current, index, array) => {
 const status500 = require(`/var/task/tasks/status-500.js`)
 const status501 = require(`/var/task/tasks/status-501.js`)
 
-const redirect = async(DATA) => {
+const redirect = async (DATA) => {
+
+    rus.conf.frameworkDescriptionLogger.callStarts()
 
     // Step 1.1 : Documentation
     DATA.RU.signals.redirectRoute = DATA.RU.request.http.path +
@@ -46,6 +48,8 @@ const redirect = async(DATA) => {
 
     // Step 1.2 : Implementation
     DATA.RU.response.headers.location = DATA.RU.signals.redirectRoute
+
+    rus.conf.frameworkDescriptionLogger.callEnds()
 }
 
 /*  1.  Throw, if (data.RU.response) is truthy.
@@ -65,7 +69,9 @@ const redirect = async(DATA) => {
  *  8.  Return.
  *
  */
-const composeResponse = async(data) => {
+const composeResponse = async (data) => {
+
+    rus.conf.frameworkDescriptionLogger.callStarts()
 
     //console.error(`(compose-response.js:top:data.RU.signals)`, data.RU.signals)
 
@@ -119,17 +125,16 @@ const composeResponse = async(data) => {
         return data
     }
     else
-    
-    if (data.RU.signals.sendJson)
-    {
+
+    if (data.RU.signals.sendJson) {
         console.warn('(compose-response.js) data.RU.signals.sendJson : implementation specific to Lambda payload format 2.0')
-        
+
         data.RU.response = data.RU.signals.sendJson
         data.RU.signals.skipToMiddlewareName = 'returnResponse'
         return data
     }
     else
-    
+
     if (data.RU.signals.sendResponse &&
         (data.RU.signals.sendResponse.statusCode ||
             data.RU.signals.sendResponse.body)) {
@@ -214,6 +219,7 @@ const composeResponse = async(data) => {
         }
         return data
     }
+    rus.conf.frameworkDescriptionLogger.callEnds()
 }
 
 module.exports = composeResponse

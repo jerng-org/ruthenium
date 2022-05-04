@@ -2,7 +2,9 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-const lastGuard = async(data) => {
+const lastGuard = async (data) => {
+
+    rus.conf.frameworkDescriptionLogger.callStarts()
 
     const hasStatusCode = data.RU.response.statusCode ? true : false
     const hasBody = data.RU.response.body ? true : false
@@ -51,7 +53,7 @@ const lastGuard = async(data) => {
         data.RU.response.headers['content-type'].toLowerCase()
         .includes('html')) {
         // MAKE (COPY OF ORIGINAL VALUE)
-        const response = { ... data.RU.response }
+        const response = { ...data.RU.response }
 
         // MODIFY (ORIGINAL ADDRESS) TO (NEW VALUE)
         if (typeof data.RU.response.body == 'string') {
@@ -67,7 +69,7 @@ const lastGuard = async(data) => {
             response.body +=
                 `<hr>(verbosity > 3: [ Debug of (data) by last-guard.js ] :
             <pre><code>${ 
-            await rus.print.dataDebug ( data ) }</code></pre>`    
+            await rus.print.dataDebug ( data ) }</code></pre>`
         }
 
         // INSERT (MODIFIED COPY OF ORGINAL VALUE) AT (ORIGINAL ADDRESS)
@@ -75,6 +77,8 @@ const lastGuard = async(data) => {
     }
 
     rus.conf.verbosity > 5 && console.log(await rus.print.inspectInfinity(data))
+
+    rus.conf.frameworkDescriptionLogger.callEnds()
 
     return data
 }

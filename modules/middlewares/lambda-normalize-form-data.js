@@ -8,6 +8,8 @@
 const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const lambdaNormalizeFormData = async ( data ) => {
+    
+    rus.conf.frameworkDescriptionLogger.callStarts()
 
     if (    data.LAMBDA.event.headers
             &&  
@@ -33,6 +35,7 @@ const lambdaNormalizeFormData = async ( data ) => {
             = rus.node.querystring.parse ( data.RU.request.rawFormString )
 
     }
+    rus.conf.frameworkDescriptionLogger.callEnds()
     
     return data
 }
