@@ -4,7 +4,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const status401 = require(`/var/task/tasks/status-401.js`)
 
-const sessionGuard = async(data) => {
+const sessionGuard = async (data) => {
 
     rus.frameworkDescriptionLogger.callStarts()
 
@@ -16,13 +16,15 @@ const sessionGuard = async(data) => {
     if (data.RU.signals.sessionExempted ||
         (data.RU.signals.session && data.RU.signals.session.id)) {
 
+        rus.frameworkDescriptionLogger.callEnds()
+
         return data
     }
     await status401(data)
     data.RU.signals.skipToMiddlewareName = 'composeResponse'
-    
+
     rus.frameworkDescriptionLogger.callEnds()
-    
+
     return data
 }
 
