@@ -11,7 +11,7 @@ try {
 
     const rus = require('/var/task/modules/r-u-s.js')
 
-    rus.frameworkDescriptionLogger.log(`(~/index.js) SUMMARY
+    rus.conf.verbosity > 6 && rus.frameworkDescriptionLogger.log(`(~/index.js) SUMMARY
     -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
     -   The role of (exports.handler) in this runtime is documented by AWS
     
@@ -26,7 +26,7 @@ try {
 
     rus.mark(`~/index.js loaded mark.js`)
 
-    rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
+    rus.conf.verbosity > 6 && rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
     
     -   the first line says 'use strict', and immediately after this is a try-catch block; 
     
@@ -431,7 +431,7 @@ try {
 
     const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
 
-    rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
+    rus.conf.verbosity > 6 && rus.frameworkDescriptionLogger.log(`we are now in (~/index.js), and
     
     -   many (requires) just occured;
         
@@ -471,7 +471,7 @@ try {
             rus.customLogger.restartCustomLogString('(~/index.js/handler EXECUTION)')
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
-        if (rus.conf.frameworkDescriptionLogging) {
+        if (rus.conf.verbosity > 6 && rus.conf.frameworkDescriptionLogging) {
             rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString RE-STARTED (~/index.js/handler EXECUTION)"
         }
 
@@ -651,7 +651,7 @@ try {
         )
 
         // runs when (handler) is executed 
-        if (rus.conf.frameworkDescriptionLogging) {
+        if (rus.conf.verbosity > 6 && rus.conf.frameworkDescriptionLogging) {
             rus.frameworkDescriptionLogger.endLog()
         }
         if (rus.conf.customLogging) {
@@ -663,7 +663,7 @@ try {
     // exports.handler()
     rus.mark(`index.js LOADED`)
 
-    rus.frameworkDescriptionLogger.log(`we are still in (~/index.js), but following the definition of (exports.handler)
+    rus.conf.verbosity > 6 && rus.frameworkDescriptionLogger.log(`we are still in (~/index.js), but following the definition of (exports.handler)
     
     -   some logging occurs;
     
@@ -675,7 +675,7 @@ try {
     `)
 
     // runs when (handler) is initialised
-    if (rus.conf.frameworkDescriptionLogging) {
+    if (rus.conf.verbosity > 6 && rus.conf.frameworkDescriptionLogging) {
         rus.frameworkDescriptionLogger.endLog()
     }
     if (rus.conf.customLogging) {
