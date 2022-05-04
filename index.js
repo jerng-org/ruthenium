@@ -680,7 +680,7 @@ try {
 
     // runs when (handler) is initialised
     if (rus.conf.frameworkDescriptionLogging) {
-        rus.frameworkDescriptionLogger.endLog()
+        rus.frameworkDescriptionLogger.callEnds()
         rus.frameworkDescriptionLogger.endLog()
     }
     if (rus.conf.customLogging) {
