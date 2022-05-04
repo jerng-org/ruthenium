@@ -467,14 +467,13 @@ try {
     // LAMBDA HANDLER
     exports.handler = async function() {
 
-        rus.frameworkDescriptionLogger.callStarts()
-
         if (rus.conf.customLogging) {
             rus.customLogger.restartCustomLogString('(~/index.js/handler EXECUTION)')
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
         if (rus.conf.frameworkDescriptionLogging) {
             rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString RE-STARTED (~/index.js/handler EXECUTION)"
+            rus.frameworkDescriptionLogger.callStarts()
         }
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
