@@ -38,7 +38,7 @@ if (conf.frameworkDescriptionLogging) {
                 (
                     '\n|\n|' +
                     '(' +
-                    err.stack+//.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
+                    err.stack.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
                     ')\n|' +
                     _input
                 )
@@ -63,12 +63,44 @@ if (conf.frameworkDescriptionLogging) {
         _ => _
 
     frameworkDescriptionLogger.callStarts = _ => {
+        
         frameworkDescriptionLogger.callDepth++
-        frameworkDescriptionLogger.log(' ... function called')
+        
+        let err = {}
+        Error.captureStackTrace(err)
+
+        frameworkDescriptionLogger.frameworkDescriptionLogString +=
+            (
+                '\n|\n|' +
+                '(' +
+                err.stack.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
+                ')\n| ... function called'
+            )
+            .replace(
+                /\n/g,
+                '\n' +
+                '... '.repeat(frameworkDescriptionLogger.callDepth)
+            )
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
-        frameworkDescriptionLogger.log('function returns ... ')
+        
+        let err = {}
+        Error.captureStackTrace(err)
+
+        frameworkDescriptionLogger.frameworkDescriptionLogString +=
+            (
+                '\n|\n|' +
+                '(' +
+                err.stack.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
+                ')\n| function returns ... '
+            )
+            .replace(
+                /\n/g,
+                '\n' +
+                '... '.repeat(frameworkDescriptionLogger.callDepth)
+            )
+        
         frameworkDescriptionLogger.callDepth--
     }
 
