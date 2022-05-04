@@ -653,13 +653,13 @@ try {
 
         // runs when (handler) is executed 
         if (rus.conf.frameworkDescriptionLogging) {
+            rus.frameworkDescriptionLogger.callEnds()
             rus.frameworkDescriptionLogger.endLog()
         }
         if (rus.conf.customLogging) {
             rus.customLogger.logCustomLogString('(~/index.js/handler EXECUTION)')
         }
 
-        rus.frameworkDescriptionLogger.callEnds()
         return rutheniumResponse
     }
     // exports.handler()
