@@ -59,6 +59,14 @@ module.exports = {
      */
     faultTolerance: 0,
 
+    /*  frameworkDescriptionLogging
+     *
+     *      0   :   none
+     *
+     *      1   :   log calls 
+     *
+     *      2   :   log calls and verbose narration
+     */
     frameworkDescriptionLogging : 1,
 
     /*  gitCommit
