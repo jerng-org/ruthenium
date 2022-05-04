@@ -13,8 +13,10 @@ const setCookies = async (data) => {
     //  Nothing to do if there are no cookie signals
     if (!(data.RU.signals.sendResponse.setCookies &&
             data.RU.signals.sendResponse.setCookies.length
-        )) return data
-
+        )) {
+        rus.frameworkDescriptionLogger.callEnds()
+        return data
+    }
 
     // [] is initialised in ruthenium.js
     data.RU.response.cookies = data.RU.signals.sendResponse.setCookies.map(
@@ -49,6 +51,7 @@ const setCookies = async (data) => {
                 (signal.Path ?
                     ` Path=${ signal.Path };` : ``)
 
+            rus.frameworkDescriptionLogger.callEnds()
             return cookie
         }
         //, thisArg 

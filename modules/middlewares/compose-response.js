@@ -91,6 +91,7 @@ const composeResponse = async (data) => {
     if (data.RU.signals.redirectRoute) {
 
         await redirect(data)
+        rus.frameworkDescriptionLogger.callEnds()
         return data
     }
     else
@@ -122,6 +123,7 @@ const composeResponse = async (data) => {
 
         data.RU.response.body = data.RU.signals.sendBlob.body
 
+        rus.frameworkDescriptionLogger.callEnds()
         return data
     }
     else
@@ -131,6 +133,7 @@ const composeResponse = async (data) => {
 
         data.RU.response = data.RU.signals.sendJson
         data.RU.signals.skipToMiddlewareName = 'returnResponse'
+        rus.frameworkDescriptionLogger.callEnds()
         return data
     }
     else
@@ -157,6 +160,7 @@ const composeResponse = async (data) => {
         data.RU.response.headers = data.RU.signals.sendResponse.headers ?
             data.RU.signals.sendResponse.headers : { 'content-type': 'text/html' }
 
+        rus.frameworkDescriptionLogger.callEnds()
         return data
     }
     else
@@ -185,6 +189,7 @@ const composeResponse = async (data) => {
             await status501(data)
             await composeResponse(data)
         }
+        rus.frameworkDescriptionLogger.callEnds()
         return data
     }
     else
@@ -217,9 +222,9 @@ const composeResponse = async (data) => {
             await status501(data)
             await composeResponse(data)
         }
+        rus.frameworkDescriptionLogger.callEnds()
         return data
     }
-    rus.frameworkDescriptionLogger.callEnds()
 }
 
 module.exports = composeResponse

@@ -98,7 +98,7 @@ if (conf.frameworkDescriptionLogging) {
                     result[1] :
                     err.stack
                 ) + // third line 
-                ')'
+                ')\n|'
             )
             .replace(
                 /\n/g,
