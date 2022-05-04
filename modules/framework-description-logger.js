@@ -71,7 +71,7 @@ if (conf.frameworkDescriptionLogging) {
 
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
-                '\n|\n└' +
+                '\n│\n┌' +
                 '─ STARTING call : ' +
                 err.stack.match(/\n.*\n.*at (.*)\n/)[1]  // third line 
             )
@@ -90,14 +90,14 @@ if (conf.frameworkDescriptionLogging) {
 
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
-                '\n┌' +
+                '\n└' +
                 '─ ENDING call   : ' +
                 (
                     (result = err.stack.match(/\n.*\n.*at (.*)\n/)) ?
                     result[1] :
                     err.stack
                 ) + // third line 
-                '\n|'
+                '\n│'
             )
             .replace(
                 /\n/g,
