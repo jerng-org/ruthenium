@@ -63,9 +63,9 @@ if (conf.frameworkDescriptionLogging) {
         _ => _
 
     frameworkDescriptionLogger.callStarts = _ => {
-        
+
         frameworkDescriptionLogger.callDepth++
-        
+
         let err = {}
         Error.captureStackTrace(err)
 
@@ -84,23 +84,28 @@ if (conf.frameworkDescriptionLogging) {
     }
 
     frameworkDescriptionLogger.callEnds = _ => {
-        
+
+        let result
         let err = {}
         Error.captureStackTrace(err)
 
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
                 '\n|\n|' +
-                '(' +
-                err.stack.match(/\n.*\n.*at (.*)\n/)[1] + // third line 
-                ' ... RETURNS )'
+                '( ... RETURNING from ' +
+                (
+                    (result = err.stack.match(/\n.*\n.*at (.*)\n/)) ?
+                    result[1] :
+                    err.stack
+                ) + // third line 
+                ')'
             )
             .replace(
                 /\n/g,
                 '\n' +
                 '... '.repeat(frameworkDescriptionLogger.callDepth)
             )
-        
+
         frameworkDescriptionLogger.callDepth--
     }
 
