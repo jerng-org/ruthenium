@@ -40,7 +40,7 @@ module.exports = {
      */
 
     customLogging: 1,
-    customLoggingAllowsNativeLogging: 1,
+    customLoggingAllowsNativeLogging: 0,
 
     defaults: {
 
