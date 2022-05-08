@@ -22,6 +22,8 @@ const setCookies = async (data) => {
     data.RU.response.cookies = data.RU.signals.sendResponse.setCookies.map(
         (signal, index, array) => {
 
+            rus.frameworkDescriptionLogger.callStarts()
+
             let cookie = signal.name +
                 '="' +
                 Buffer.from(`${ signal.value }`).toString('base64') +
