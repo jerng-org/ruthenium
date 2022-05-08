@@ -51,7 +51,7 @@ if (conf.frameworkDescriptionLogging) {
                 .replace(
                     /\n/g,
                     '\n' +
-                    '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
+                    '| '.repeat(frameworkDescriptionLogger.callDepth - 1) 
                 )
         }
     }
