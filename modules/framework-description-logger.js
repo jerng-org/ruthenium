@@ -51,7 +51,7 @@ if (conf.frameworkDescriptionLogging) {
                 .replace(
                     /\n/g,
                     '\n' +
-                    '| '.repeat(frameworkDescriptionLogger.callDepth - 1) 
+                    '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
                 )
         }
     }
@@ -119,6 +119,8 @@ if (conf.frameworkDescriptionLogging) {
             )
 
         frameworkDescriptionLogger.callDepth--
+        console.log('FDL callEnds, depth : ' + frameworkDescriptionLogger.callDepth)
+
     }
 
 }
