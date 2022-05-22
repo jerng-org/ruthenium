@@ -132,6 +132,8 @@ if (conf.frameworkDescriptionLogging) {
                 '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
             )
 
+        frameworkDescriptionLogger.callDepth--
+
         // Uncomment during debugging of callDepth 
         console.initialLog(
             'FDL DEBUG callEnds, depth : ' +
@@ -144,8 +146,6 @@ if (conf.frameworkDescriptionLogging) {
                 ) // third line 
             )
         )
-
-        frameworkDescriptionLogger.callDepth--
 
     }
 
