@@ -31,6 +31,7 @@ const oidcValidation = async(data) => {
             console.warn(`Middleware (oidc-validation.js) failed, (error):`, e)
         }
     }
+    
     rus.frameworkDescriptionLogger.callEnds()
     
     return data
