@@ -1,5 +1,6 @@
 'use strict'
 
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
 const mark = require(`/var/task/modules/mark.js`)
 const conf = require(`/var/task/configuration.js`)
 
@@ -147,6 +148,8 @@ const __HostDefaultAttributes = {
 
 const checkId = id => {
 
+    rusMinus1.frameworkDescriptionLogger.callStarts()
+
     switch (typeof id) {
         case ('string'):
             id = { name: id }
@@ -159,12 +162,16 @@ const checkId = id => {
     }
     // therefore, id.name by now MUST exist
 
+    rusMinus1.frameworkDescriptionLogger.callEnds()
+
     return id
 }
 
 /*  This function does NOT SET any missing EXPECTED arguments.
  */
 const checkIdObject = idObject => {
+
+    rusMinus1.frameworkDescriptionLogger.callStarts()
 
     if (!('name' in idObject)) {
         throw Error(`(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'name' was not found;`)
@@ -177,30 +184,40 @@ const checkIdObject = idObject => {
         conf.verbosity > 0 &&
             console.warn(`(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'Path' was not found; may default`)
     }
+
+    rusMinus1.frameworkDescriptionLogger.callEnds()
 }
 
 const setCookieSignal = (DATA, id, value, attributes) => {
+
+    rusMinus1.frameworkDescriptionLogger.callStarts()
 
     if (!value) throw Error(`(cookie.js) (cookie.set) third argument (value) is falsy`)
 
     const checkedId = checkId(id)
 
     // enforce defaults; give (checkedId) props precedence over (attribute)
-    return {
+    const _returned = {
 
         ...defaultAttributes,
         ...attributes,
         ...checkedId, // must have (name), but may be missing Path or Domain
         value: value // goes last to ensure it isn't overwritten
     }
+
+    rusMinus1.frameworkDescriptionLogger.callEnds()
+
+    return _returned
 }
 
 const expireCookieSignal = (DATA, id) => {
 
+    rusMinus1.frameworkDescriptionLogger.callStarts()
+
     const checkedId = checkId(id)
 
     // enforce defaults; give (checkedId) props precedence over (attribute)
-    return {
+    const _returned = {
 
         ...defaultIdAttributes,
         ...checkedId, // must have (name), but may be missing Path or Domain
@@ -209,6 +226,10 @@ const expireCookieSignal = (DATA, id) => {
         ['Max-Age']: -1, // RFC 6265.4.1.1. "non-zero digit" thus encourages a negative number
         value: 'expired'
     }
+
+    rusMinus1.frameworkDescriptionLogger.callEnds()
+
+    return _returned
 
 }
 
@@ -232,26 +253,35 @@ const cookie = {
      */
     set: async (DATA, id, value, attributes) => {
 
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         const cookieSignal = setCookieSignal(DATA, id, value, attributes)
 
         DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
 
         console.warn(`test cookie-value string='false' and check what happens`)
 
+        rusMinus1.frameworkDescriptionLogger.callEnds()
     },
 
     __SecureSet: async (DATA, suffix, value, attributes) => {
 
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         const cookieSignal = setCookieSignal(DATA, suffix, value, attributes)
 
         cookieSignal.name = `__Secure-` + cookieSignal.name
         cookieSignal.Secure = true
 
         DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
     },
 
     __HostSet: async (DATA, suffix, value, attributes) => {
 
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         const cookieSignal = setCookieSignal(DATA, suffix, value, attributes)
 
         cookieSignal.name = `__Host-` + cookieSignal.name
@@ -260,25 +290,37 @@ const cookie = {
         cookieSignal.Domain = __HostDefaultIdAttributes.Domain
 
         DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
     },
 
     expire: async (DATA, id) => {
 
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         const cookieSignal = expireCookieSignal(DATA, id)
 
         DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
     },
 
     __SecureExpire: async (DATA, suffix) => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         const cookieSignal = expireCookieSignal(DATA, suffix)
         cookieSignal.name = `__Secure-` + cookieSignal.name
         cookieSignal.Secure = true
 
         DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
     },
 
     __HostExpire: async (DATA, suffix) => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         const cookieSignal = expireCookieSignal(DATA, suffix)
         cookieSignal.name = `__Host-` + cookieSignal.name
@@ -287,6 +329,8 @@ const cookie = {
         cookieSignal.Domain = __HostDefaultIdAttributes.Domain
 
         DATA.RU.signals.sendResponse.setCookies.push(cookieSignal)
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
     },
 
 }

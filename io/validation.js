@@ -1,9 +1,11 @@
 'use strict'
 
 const conf = require(`/var/task/configuration.js`)
+
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
 
 const mark = require('/var/task/modules/mark.js')
+
 const print = require('/var/task/modules/print.js')
 
 const fs = require('fs')

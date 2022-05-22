@@ -27,7 +27,11 @@ const rus = {
     //      //
     //////////
 
-    additionalRequestInformation: async _data => `
+    additionalRequestInformation: async _data => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
+        const _returned = `
         ${ JSON.stringify( {
             
             signals:
@@ -51,9 +55,16 @@ const rus = {
             io:
                 _data.RU.io
                 
-        } , null, 4 ) }`,
+        } , null, 4 ) }`
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
+        return _returned
+    },
 
     appUrl: async pairArrays => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         const URLObject = new(url.URL)(
             conf.app.uri.path,
@@ -65,6 +76,8 @@ const rus = {
         for (const [name, value] of pairArrays) {
             URLSearchParamsObject.append(name, value)
         }
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
 
         return URLObject
 
@@ -113,7 +126,7 @@ const rus = {
         require(`/var/task/modules/custom-logger.js`) : undefined,
 
     frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,
-    
+
     html: require('/var/task/modules/html.js'),
 
     //////////
@@ -142,6 +155,8 @@ const rus = {
     limbo: {
 
         ddbDeskCellsByRowID: (_deskSchemaItem, _deskCellItems) => {
+
+            rusMinus1.frameworkDescriptionLogger.callStarts()
 
             //  Add property (D) if missing
 
@@ -178,6 +193,9 @@ const rus = {
                     const _colType = __deskColumnTypes[_colName]
                     __deskRows[__cell.R][_colName] = __cell[_colType]
                 })
+
+            rusMinus1.frameworkDescriptionLogger.callEnds()
+
             return __deskRows
         },
 
@@ -192,9 +210,14 @@ const rus = {
     log: {
 
         error: (DATA, message) => {
+
+            rusMinus1.frameworkDescriptionLogger.callStarts()
+
             const err = new Error(message)
             DATA.RU.errors.push(err)
             console.error(err.stack)
+
+            rusMinus1.frameworkDescriptionLogger.callEnds()
         }
     },
 
@@ -236,7 +259,13 @@ const rus = {
     //////////
 
     tag: async (DATA, string, optionalTruthyValue) => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         DATA.RU.signals[`TAG_` + string.toUpperCase()] = optionalTruthyValue ? optionalTruthyValue : true
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
     },
 
     //////////
@@ -275,6 +304,8 @@ const rus = {
 
     validateFormDataByMethod: async (data, httpMethodModelKey) => {
 
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         const scopedModel = await rus.validation.scopeModel(httpMethodModelKey)
 
         const _report = await rus.validation.validate({
@@ -286,6 +317,9 @@ const rus = {
         data.RU.signals.formDataMethodValidationReport = _report
         //data.RU.signals.formDataMethodValidationShortReport = _report.shortReport
         //data.RU.signals.formDataMethodValidationShortReportSummary = _report.shortReport.summary
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
         return data.RU.signals.formDataMethodValidationReport.shortReport.summary
     },
 
@@ -302,6 +336,8 @@ const rus = {
 
     validateFormData: async (data, modelKey) => {
 
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         const _report = await rus.validation.validate(
             data.RU.request.formStringParameters,
             modelKey
@@ -309,6 +345,9 @@ const rus = {
         data.RU.signals.formDataValidationReport = _report
         //data.RU.signals.formDataValidationShortReport = _report.shortReport
         //data.RU.signals.formDataValidationShortReportSummary = _report.shortReport.summary
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
         return data.RU.signals.formDataValidationReport.shortReport.summary
     },
 
@@ -320,8 +359,14 @@ const rus = {
 
 
     wasteMilliseconds: async ms => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         const start = new Date().getTime()
         while (new Date().getTime() < start + ms);
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
     },
 
 }
