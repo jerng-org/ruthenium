@@ -122,6 +122,9 @@ const router = async (data) => {
     /* redirects: short-circuit
      */
     if (data.RU.signals.redirectRoute) {
+
+        rus.frameworkDescriptionLogger.callEnds()
+
         return data
     }
 
