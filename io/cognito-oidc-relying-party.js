@@ -201,9 +201,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
     mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP ENDS; PROMISE RESOLUTIONS PENDING`)
 
-    rusMinus1.frameworkDescriptionLogger.callEnds()
-
-    return await Promise
+    const _returned = await Promise
         .all([
             issuerExchangeResponsePromise, // 4.4.
             issuerJwksResponsePromise, // 5.2.
@@ -304,9 +302,9 @@ const authorizationCodeFlowJwtValidation = async code => {
                         'expires_in' in parsedIssuerExchangeResponseBody &&
                         'token_type' in parsedIssuerExchangeResponseBody)) {
                     // EXIT_OPPORTUNITY_5
-                    
+
                     rusMinus1.frameworkDescriptionLogger.callEnds()
-                    
+
                     throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7. 
                     (parsedIssuerExchangeResponseBody) did not have all expected
                     keys; found keys:
@@ -509,6 +507,10 @@ tokenValidationArguments.access_token:
                 return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.all REJECTED'
             }
         )
+
+    rusMinus1.frameworkDescriptionLogger.callEnds()
+
+    return _returned
     // end section (7.x) 
 
 }
