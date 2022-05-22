@@ -121,7 +121,17 @@ if (conf.frameworkDescriptionLogging) {
         frameworkDescriptionLogger.callDepth--
 
         // Uncomment during debugging of callDepth 
-        console.initialLog('FDL callEnds, depth : ' + frameworkDescriptionLogger.callDepth)
+        console.initialLog(
+            'FDL callEnds, depth : ' +
+            frameworkDescriptionLogger.callDepth +
+            (
+                (
+                    (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
+                    result[1] :
+                    err.stack
+                ) // third line 
+            )
+        )
 
     }
 
