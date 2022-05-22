@@ -38,10 +38,12 @@ const html = {
         }
 
         if (!conf.action) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.form) called, without (conf.action) `)
         }
         else
         if (!conf.innerHtml) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.form) called, without (conf.innerHtml) `)
         }
 
@@ -76,10 +78,12 @@ const html = {
         }
 
         if ((!conf.name) && (!conf.type == 'submit')) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.input) called, without (conf.name) `)
         }
         else
         if (conf.labelInnerHtml && (!conf.id)) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
         }
 
@@ -123,6 +127,7 @@ const html = {
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
         if (!conf.innerHtml) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.legend) called, without (conf.InnerHtml)`)
         }
 
@@ -156,10 +161,12 @@ const html = {
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
         if (!conf.name) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.input) called, without (conf.name) `)
         }
         else
         if (conf.labelInnerHtml && (!conf.id)) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
         }
 
@@ -211,10 +218,12 @@ const html = {
         }
 
         if (!conf.name) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.textarea) called, without (conf.name) `)
         }
         else
         if (conf.labelInnerHtml && (!conf.id)) {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(rus.html.textarea) called, (conf.labelInnerHtml) without (conf.id)`)
         }
 
