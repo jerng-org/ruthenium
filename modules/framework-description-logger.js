@@ -79,6 +79,7 @@ if (conf.frameworkDescriptionLogging) {
         Error.captureStackTrace(err)
 
         // Uncomment during debugging of callDepth 
+        /*
         console.initialLog(
             'FDL DEBUG callStarts, depth : ' +
             frameworkDescriptionLogger.callDepth +
@@ -90,6 +91,7 @@ if (conf.frameworkDescriptionLogging) {
                 ) // third line 
             )
         )
+        */
 
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
@@ -133,6 +135,7 @@ if (conf.frameworkDescriptionLogging) {
             )
 
         // Uncomment during debugging of callDepth 
+        /*
         console.initialLog(
             'FDL DEBUG callEnds, depth : ' +
             frameworkDescriptionLogger.callDepth +
@@ -144,6 +147,7 @@ if (conf.frameworkDescriptionLogging) {
                 ) // third line 
             )
         )
+        */
 
         frameworkDescriptionLogger.callDepth--
 
