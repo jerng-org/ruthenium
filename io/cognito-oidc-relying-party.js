@@ -321,9 +321,15 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                     let decodedSections = compactSerialization.split('.').map(s => {
 
+                        rusMinus1.frameworkDescriptionLogger.callStarts()
+                        
+                        const _returned =
+                            Buffer.from(s, 'base64').toString('utf8')
+                            
                         rusMinus1.frameworkDescriptionLogger.callEnds()
+                        
+                        return _returned
 
-                        return Buffer.from(s, 'base64').toString('utf8')
                     })
 
                     rusMinus1.frameworkDescriptionLogger.callEnds()
