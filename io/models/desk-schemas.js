@@ -1,5 +1,6 @@
 'use strict'
 
+const mark = require('/var/task/modules/mark.js')
 const conf = require(`/var/task/configuration.js`)
 
 // Types and Sub-types
@@ -134,3 +135,5 @@ const deskSchemas = {
 
 
 module.exports = deskSchemas
+
+mark ( `~/io/models/desk-schem.js LOADED` )

@@ -1,5 +1,6 @@
 'use strict'
 
+const mark = require('/var/task/modules/mark.js')
 /*
 
 Our target data looks LIKE this:
@@ -55,3 +56,5 @@ const httpPatch = {
 // desk-schemas
 
 module.exports = httpPatch
+
+mark ( `~/io/models/http-patch.js LOADED` )

@@ -1,5 +1,6 @@
 'use strict'
 
+const rus = require('/var/task/modules/r-u-s.js')
 const mark = require('/var/task/modules/mark.js')
 
 // 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via Proxy. Using a 

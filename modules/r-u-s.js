@@ -4,6 +4,7 @@
 //  require.res()   resolves paths without execution;
 
 const conf = require(`/var/task/configuration.js`)
+const rusMinus1 = require(`/var/task/modules/r-u-s-minus-one.js`)
 const mark = require('/var/task/modules/mark.js')
 
 mark(`~/modules/r-u-s.js (ruthenium utilities) LOADING ...`)
@@ -111,10 +112,8 @@ const rus = {
     customLogger: conf.customLogging ?
         require(`/var/task/modules/custom-logger.js`) : undefined,
 
-    // Please reconsider this design decision in the future 2022-04-26 :
-    frameworkDescriptionLogger: 
-        require(`/var/task/modules/framework-description-logger.js`) ,
-
+    frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,
+    
     html: require('/var/task/modules/html.js'),
 
     //////////
