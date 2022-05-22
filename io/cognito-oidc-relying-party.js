@@ -1,5 +1,6 @@
 'use strict'
 
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
 const mark = require('/var/task/modules/mark.js')
 const conf = require(`/var/task/configuration.js`)
 
@@ -24,11 +25,17 @@ const logThisFile = false
 
 const authorizationCodeFlowJwtValidation = async code => {
 
+    rusMinus1.frameworkDescriptionLogger.callStarts()
+
     mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP & EXECUTE PROMISES`)
 
     //  EXIT_OPPORTUNITY_1
-    if (!code) throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 0. : (code) was falsy`)
+    if (!code) {
 
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
+        throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 0. : (code) was falsy`)
+    }
     //  1.1.  
     //  Node modules
     const https = require('https')
@@ -106,14 +113,25 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  REMEMBER: Promise executors are executed immediately;
     let issuerExchangeResponsePromise = new Promise((F, R) => {
 
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         const issuerExchangeRequest = https.request(issuerExchangeRequestOptions, response => {
+
+            rusMinus1.frameworkDescriptionLogger.callStarts()
+
             let data = ''
             response.on('data', chunk => { data += chunk })
             response.on('end', () => { F(data) })
+
+            rusMinus1.frameworkDescriptionLogger.callEnds()
+
         })
         issuerExchangeRequest.on('error', e => console.error(`IDP Token Exchange Request Error`, e, R(e)))
         issuerExchangeRequest.write(issuerExchangeRequestBody) // documented under Node's (http.write)
         issuerExchangeRequest.end()
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
     })
 
     //  5.
@@ -130,11 +148,21 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  REMEMBER: Promise executors are executed immediately;
     let issuerJwksResponsePromise = new Promise((F, R) => {
 
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
         https.get(issuerJwksUri, resp => {
+
+            rusMinus1.frameworkDescriptionLogger.callStarts()
+
             let data = ''
             resp.on('data', chunk => { data += chunk; })
             resp.on('end', () => { F(data) })
+
+            rusMinus1.frameworkDescriptionLogger.callEnds()
+
         }).on("error", e => console.error(`IDP JWKS Request Error`, e, R(e)))
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
 
     })
 
@@ -173,6 +201,8 @@ const authorizationCodeFlowJwtValidation = async code => {
 
     mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP ENDS; PROMISE RESOLUTIONS PENDING`)
 
+    rusMinus1.frameworkDescriptionLogger.callEnds()
+
     return await Promise
         .all([
             issuerExchangeResponsePromise, // 4.4.
@@ -182,6 +212,8 @@ const authorizationCodeFlowJwtValidation = async code => {
 
         //  (then)
         .then(resolvedValues => {
+
+                rusMinus1.frameworkDescriptionLogger.callStarts()
 
                 mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN BEGINS`)
 
@@ -198,10 +230,15 @@ const authorizationCodeFlowJwtValidation = async code => {
                     )
 
                 //  EXIT_OPPORTUNITY_2
-                if (!issuerExchangeResponseBody) throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 
+                if (!issuerExchangeResponseBody) {
+
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
+
+                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 
                 7. : (issuerExchangeResponseBody) was falsy : we sent a HTTP request 
                 containing (code) to the OIDC issuer, its HTTP response body
                 was falsy;`)
+                }
 
                 //  7.1.
                 //  See (4.)
@@ -239,13 +276,21 @@ const authorizationCodeFlowJwtValidation = async code => {
                 /*  TODO use the Ruthenium JSON validator here later: */
 
                 if (typeof parsedIssuerExchangeResponseBody != 'object') {
+
+
                     // EXIT_OPPORTUNITY_3
+
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
+
                     throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7.1.2.
                     (typeof parsedIssuerExchangeResponseBody) was (not 'object');`)
                 }
                 else
                 if ('error' in parsedIssuerExchangeResponseBody) {
                     // EXIT_OPPORTUNITY_4
+
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
+
                     throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7. 
                     (parsedIssuerExchangeResponseBody.error) was 
                     ("${ parsedIssuerExchangeResponseBody.error }");`)
@@ -259,6 +304,9 @@ const authorizationCodeFlowJwtValidation = async code => {
                         'expires_in' in parsedIssuerExchangeResponseBody &&
                         'token_type' in parsedIssuerExchangeResponseBody)) {
                     // EXIT_OPPORTUNITY_5
+                    
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
+                    
                     throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7. 
                     (parsedIssuerExchangeResponseBody) did not have all expected
                     keys; found keys:
@@ -271,9 +319,17 @@ const authorizationCodeFlowJwtValidation = async code => {
                 //  Define operations to process (7.1.)
                 const processToken = compactSerialization => {
 
+                    rusMinus1.frameworkDescriptionLogger.callStarts()
+
                     let decodedSections = compactSerialization.split('.').map(s => {
+
+                        rusMinus1.frameworkDescriptionLogger.callEnds()
+
                         return Buffer.from(s, 'base64').toString('utf8')
                     })
+
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
+
                     return decodedSections
                 }
 
@@ -338,10 +394,12 @@ processedTokens:
                 //  OIDC : (JSON Web) Key Identifiers;
                 //  from (5.);
                 const parsedIssuerJwksResponseBody = JSON.parse(issuerJwksResponseBody)
-                
+
                 mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : 7.2.2. BEFORE jwkToPem CALLS`)
 
                 parsedIssuerJwksResponseBody.keys.forEach(k => {
+
+                    rusMinus1.frameworkDescriptionLogger.callStarts()
 
                     //  7.2.2.1.
                     //  Corresponds to (7.2.1.1.);
@@ -350,10 +408,14 @@ processedTokens:
                     //  7.2.2.2.
                     //  Corresponds to (7.2.1.2.);
                     //  uses external depedency;
-                    
+
                     issuerPemFromJwksIndexed[k.kid] = jwkToPem(k)
-                    
+
                     mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : 7.2.2.2. jwkToPem CALLED`)
+
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
+
+
                 })
 
                 //  7.3.
@@ -425,17 +487,25 @@ tokenValidationArguments.access_token:
 `, validatedTokenPayloads)
 
                 mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN ENDS`)
-                
+
+                rusMinus1.frameworkDescriptionLogger.callEnds()
+
                 return { validated: validatedTokenPayloads }
 
             },
 
             rejectedReason => {
+
+                rusMinus1.frameworkDescriptionLogger.callStarts()
+
                 //callback(rReason)
                 console.error(`(~/io/cognito-oidc-relying-party.js) algorithm section 
                                 7.x; Promise.all was rejected with 
                                 reason:`, rejectedReason)
                 mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Responses REJECTED - THEN`)
+
+                rusMinus1.frameworkDescriptionLogger.callEnds()
+
                 return 'placeholder-return-value-for:authorizationCodeFlowJwtValidation: Promise.all REJECTED'
             }
         )

@@ -9,14 +9,18 @@ const markupFileNames = rus.node.fs.readdirSync('/var/task/tasks', {
     withFileTypes: true
 })
 markupFileNames.forEach((current, index, array) => {
-    rus.frameworkDescriptionLogger.callStarts()
+    
+        rus.frameworkDescriptionLogger.callStarts()
+        
         if (current.isFile()) {
 
             // console.warn(`searching in:`, current.name.slice (0, -3), `for`, '/var/task/tasks/' + current.name )
 
             markups[current.name.slice(0, -3)] = require('/var/task/tasks/' + current.name)
         }
-    rus.frameworkDescriptionLogger.callEnds()
+        
+        rus.frameworkDescriptionLogger.callEnds()
+        
     } // , thisArg  
 )
 

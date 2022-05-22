@@ -1,6 +1,7 @@
 'use strict'
 
 const conf = require(`/var/task/configuration.js`)
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
 
 const mark = require('/var/task/modules/mark.js')
 const print = require('/var/task/modules/print.js')
@@ -11,11 +12,16 @@ let models = {}
 const modelFileNames = fs.readdirSync('/var/task/io/models')
 modelFileNames.forEach((current, index, array) => {
 
-        /* TODO : these naming assumptions : centralise the documentation */
+    rusMinus1.frameworkDescriptionLogger.callStarts()
+
+    /* TODO : these naming assumptions : centralise the documentation */
     if (current[0] != '_' &&
         current.toLowerCase().slice(-3) == '.js') {
         models[current.slice(0, -3)] = require('/var/task/io/models/' + current)
     }
+
+    rusMinus1.frameworkDescriptionLogger.callEnds()
+
 } /* , thisArg */ )
 
 /*  See validate(), PARAMETER 2 - modelKey
@@ -24,6 +30,8 @@ modelFileNames.forEach((current, index, array) => {
  */
 
 const scopeModel = async _modelKey => {
+
+    rusMinus1.frameworkDescriptionLogger.callStarts()
 
     let _currentModel
 
@@ -34,6 +42,7 @@ const scopeModel = async _modelKey => {
             _currentModel = models[_modelKey]
         }
         else {
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(validation.js:scopeModel) the requested 
                                 modelKey (${_modelKey}) was not 
                                 found in (models).
@@ -43,9 +52,11 @@ const scopeModel = async _modelKey => {
     }
     else if (_modelKey instanceof Array) {
 
+        rusMinus1.frameworkDescriptionLogger.callEnds()
         throw Error(`(validation.js:scopeModel) (_modelKey instanceof Array)
                       NOT YET IMPLEMENTED - TODO`)
     }
+    rusMinus1.frameworkDescriptionLogger.callEnds()
     return _currentModel
 }
 
@@ -202,7 +213,7 @@ const scopeModel = async _modelKey => {
  */
 
 
-const validate = async(
+const validate = async (
 
     unscopedData,
 
@@ -225,12 +236,14 @@ const validate = async(
 
 ) => {
 
+    rusMinus1.frameworkDescriptionLogger.callStarts()
     scopedModel = (!scopedModel && modelKey) ? await scopeModel(modelKey) :
         scopedModel
 
     // Now, (scopedModel) should be !null under all circustances.
 
     if (!unscopedData) {
+        rusMinus1.frameworkDescriptionLogger.callEnds()
         throw Error(`validation.js: validate: (unscopedData was falsy): keyTrace ${keyTrace}`)
     }
     const _scopedData = unscopedData[modelKey]
@@ -337,6 +350,7 @@ const validate = async(
         value: shortReport
     })
 
+    rusMinus1.frameworkDescriptionLogger.callEnds()
     return report
 }
 // (validate)
@@ -414,7 +428,7 @@ const validate = async(
  *           
  */
 
-const validateRules = async(
+const validateRules = async (
 
     scopedDatum,
 
@@ -426,6 +440,7 @@ const validateRules = async(
 
 ) => {
 
+    rusMinus1.frameworkDescriptionLogger.callStarts()
     //////////
     //      //
     //  !!  //  Make way.
@@ -458,6 +473,7 @@ const validateRules = async(
         }
         else {
             report.many = ['fail', Error(`Expected Array; found not-Array.`)]
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             return report
         }
     }
@@ -465,6 +481,7 @@ const validateRules = async(
         // expect non-Array; apply rules to scopedData itself
         if (Array.isArray(scopedDatum)) {
             report.many = ['fail', Error(`Expected not-Array; found Array.`)]
+            rusMinus1.frameworkDescriptionLogger.callEnds()
             return report
         }
         else {
@@ -492,6 +509,9 @@ const validateRules = async(
 
 
         const setResult = (_maybeError, _shortErrorMessage) => {
+
+            rusMinus1.frameworkDescriptionLogger.callStarts()
+
             if (_maybeError instanceof Error) {
                 shortReport.summary = false
                 report.rules[_ruleKey].result = [`fail`, _maybeError]
@@ -503,6 +523,9 @@ const validateRules = async(
                 report.rules[_ruleKey].result = [`pass`, _maybeError]
                 shortReport[shortReport.length - 1][2] = report.rules[_ruleKey].result
             }
+
+            rusMinus1.frameworkDescriptionLogger.callEnds()
+
         }
         /* Alternatively: 
 
@@ -605,6 +628,7 @@ const validateRules = async(
 
                 if (scopedModel.self.many) {
 
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
                     throw (`validation.js: validateRules: switch(_ruleKey): keys_included_counts: (model.many:true) BRANCH BODY UNDEFINED`)
                     // define later; case where {}
 
@@ -638,6 +662,7 @@ const validateRules = async(
             case ('only_allowed_keys'):
 
                 if (scopedModel.self.many) {
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
                     throw (`validation.js: validateRules: switch(_ruleKey): only_allowed_keys: (model.many:true) BRANCH BODY UNDEFINED`)
                     // define later; case where {}
                 } // if (many); if-block ends
@@ -648,6 +673,9 @@ const validateRules = async(
                     // Perhaps this should be lifted up out of the if-else
                     conf.verbosity > 6 && console.warn(`validation.js: only_allowed_keys: see comment`)
                     const mapTest = (testFun, testModel, testDatum) => {
+
+                        rusMinus1.frameworkDescriptionLogger.callStarts()
+
                         if (testModel.self.many) {
                             for (const testSubDatum of testDatum) {
                                 testFun(testSubDatum)
@@ -657,9 +685,15 @@ const validateRules = async(
                         {
                             testFun(testDatum)
                         } // if (many); else-block ends
+
+                        rusMinus1.frameworkDescriptionLogger.callEnds()
+
                     }
 
                     const testFun1 = __datum => {
+
+                        rusMinus1.frameworkDescriptionLogger.callStarts()
+
                         for (const __key in __datum) {
                             if (!scopedModel.self.rules.only_allowed_keys.includes(__key)) {
                                 setResult(Error(`(validateRules) (${keyTrace}) 
@@ -673,6 +707,9 @@ const validateRules = async(
                             shortReport: shortReport,
                             report: report.rules[_ruleKey].resul
                         })*/
+
+                        rusMinus1.frameworkDescriptionLogger.callEnds()
+
                     }
 
                     mapTest(testFun1, scopedModel, scopedDatum)
@@ -697,6 +734,7 @@ const validateRules = async(
                 //////////
 
                 if (scopedModel.self.many) {
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
                     throw (`validation.js: validateRules: 
                         switch(_ruleKey): subs0_keys_applied_to_subs2: 
                         (model.many:true)
@@ -827,6 +865,7 @@ Reporting code copied from subs_all_fit_model, and not yet checked */
 
             case ('subs_all_fit_model'):
                 if (scopedModel.self.many) {
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
                     throw (`validation.js: validateRules: switch(_ruleKey): subs_all_fit_model: scopedModel.self.many: BRANCH BODY UNDEFINED`)
                 } // if (many); if-block ends
                 else // not-'many', ergo is not an Array
@@ -883,6 +922,7 @@ ${ await print.inspectInfinity ( subsReport, null, 4) }
 
                 if (scopedModel.self.many) {
 
+                    rusMinus1.frameworkDescriptionLogger.callEnds()
                     throw (`validation.js: validateRules: switch(_ruleKey): subs_all_test_true: scopedModel.self.many: BRANCH BODY UNDEFINED`)
                     // define later; case where {}
                 }
@@ -972,6 +1012,7 @@ ${ await print.inspectInfinity ( subsReport, null, 4) }
 
             default:
 
+                rusMinus1.frameworkDescriptionLogger.callEnds()
                 throw (Error(`(validation.js) (validateRules) : (_ruleKey : ${ _ruleKey } ) not found in (switch-case).`))
 
 
@@ -981,6 +1022,7 @@ ${ await print.inspectInfinity ( subsReport, null, 4) }
     }
     // _ruleKey in _rulesToTest
 
+    rusMinus1.frameworkDescriptionLogger.callEnds()
     return report
 }
 // (validateRules)

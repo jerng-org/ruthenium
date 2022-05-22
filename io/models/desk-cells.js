@@ -1,5 +1,6 @@
 'use strict'
 
+const mark = require('/var/task/modules/mark.js')
 const conf = require(`/var/task/configuration.js`)
 
 const deskCells = {
@@ -38,3 +39,5 @@ const deskCells = {
 }
 
 module.exports = deskCells
+
+mark ( `~/io/models/desk-cells.js LOADED` )
