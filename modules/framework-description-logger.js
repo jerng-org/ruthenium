@@ -119,9 +119,9 @@ if (conf.frameworkDescriptionLogging) {
             )
 
         frameworkDescriptionLogger.callDepth--
-       
+
         // Uncomment during debugging of callDepth 
-        console.log('FDL callEnds, depth : ' + frameworkDescriptionLogger.callDepth)
+        console.initialLog('FDL callEnds, depth : ' + frameworkDescriptionLogger.callDepth)
 
     }
 
