@@ -1,15 +1,19 @@
 'use strict'
 
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+
 const mark = require('/var/task/modules/mark.js')
 
-const node = { util : require('util') }
+const node = { util: require('util') }
 
 const print = {
 
 
     dataDebug: async rutheniumDataObject => {
 
-        return `
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
+        const _returned = `
 DEBUG HIGHLIGHTS:
                 
 [ data.RU.errors ] renders ${
@@ -66,17 +70,46 @@ DEBUG EVERYTHING:
     await print.inspectInfinity ( rutheniumDataObject.LAMBDA ) }                 
 `
         // end string
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
+        return _returned
     },
 
-    inspectInfinity: async object => node.util.inspect(object, { depth: Infinity }),
+    inspectInfinity: async object => {
 
-    stringify4: async object => (`(rus.print.stringify4( object ) returned):
-` + JSON.stringify(object, null, 4)).replace(/\\n/g, '\n'),
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
-    xml300: async xmlString =>
-        (xmlString.slice(0, 300) + '... [POSSIBLY TRUNCATED]')
-        .replace(/</g, '[')
+        const _returned = node.util.inspect(object, { depth: Infinity })
 
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
+        return _returned
+    },
+
+    stringify4: async object => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
+        const _returned = (`(rus.print.stringify4( object ) returned):
+` + JSON.stringify(object, null, 4)).replace(/\\n/g, '\n')
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
+        return _returned
+    },
+
+    xml300: async xmlString => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
+
+        const _returned = (xmlString.slice(0, 300) + '... [POSSIBLY TRUNCATED]')
+            .replace(/</g, '[')
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
+        return _returned
+    }
 
 }
 

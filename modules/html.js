@@ -1,5 +1,7 @@
 'use strict'
 
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+
 const mark = require('/var/task/modules/mark.js')
 
 const html = {
@@ -23,6 +25,8 @@ const html = {
 
 
     form: async conf => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         conf = {
 
@@ -52,10 +56,15 @@ const html = {
                                 >
                                 ${ conf.innerHtml }
                                 </form>`
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
         return markup
     },
 
     input: async conf => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         conf = {
 
@@ -104,10 +113,14 @@ const html = {
                                                 : '' }
                             >`
 
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
         return markup
     },
 
     fieldset: async conf => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         if (!conf.innerHtml) {
             throw Error(`(rus.html.legend) called, without (conf.InnerHtml)`)
@@ -134,9 +147,13 @@ const html = {
                 ${ conf.innerHtml }
             </fieldset>`
 
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
         return markup
     },
     select: conf => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         if (!conf.name) {
             throw Error(`(rus.html.input) called, without (conf.name) `)
@@ -174,11 +191,15 @@ const html = {
                                     
                             </select>`
 
+        rusMinus1.frameworkDescriptionLogger.callEnds()
+
         return markup
     },
 
     //table: conf => {}  ,
     textarea: async conf => {
+
+        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         conf = {
 
@@ -225,6 +246,8 @@ const html = {
                                 ${ conf.onkeyup    ? `onkeyup="${  conf.onkeyup }"`
                                                     : '' }
                             ></textarea>`
+
+        rusMinus1.frameworkDescriptionLogger.callEnds()
 
         return markup
     },
