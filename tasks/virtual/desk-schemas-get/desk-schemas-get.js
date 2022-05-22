@@ -6,7 +6,7 @@ const markup = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-ge
 rus.conf.verbosity > 0 &&
     console.warn(`(desk-schemas-get.js) FIXME: rendering (-markup.js) should not involve a require() here;`)
 
-const deskSchemasGet = async(data) => {
+const deskSchemasGet = async (data) => {
 
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
@@ -23,7 +23,7 @@ const deskSchemasGet = async(data) => {
             data.RU.signals.sendResponse.body = await markup(data)
     }
 
-    rus.mark ( `~/tasks/virtual/desk-schemas-get/desk-schemas-get.js EXECUTED` )
+    rus.mark(`~/tasks/virtual/desk-schemas-get/desk-schemas-get.js EXECUTED`)
 
 }
 module.exports = deskSchemasGet
