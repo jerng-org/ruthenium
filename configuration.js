@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage = `2023-02-26-2323T2327+0800 Hello, I've returned to my desk.`
+const gitCommitMessage = `runtime upgraded to Node.js 16.x`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
