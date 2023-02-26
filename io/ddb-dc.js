@@ -21,9 +21,16 @@ aws.config.apiVersions = { dynamodb: '2012-08-10' }
 const ddb = new aws.DynamoDB()
 */
 
-const ddb = require(`aws-sdk/clients/dynamodb`)
+/* deprecated SDK2 code 
 
+const ddb = require(`aws-sdk/clients/dynamodb`)
 const ddbdc = new ddb.DocumentClient()
+
+*/
+
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
+const ddbdc = new DynamoDBClient()
+
 
 module.exports = ddbdc 
 mark(`~/io/ddb-dc.js LOADED`)
