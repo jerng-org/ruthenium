@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage = `runtime upgraded to Node.js 16.x`
+const gitCommitMessage = `runtime upgraded to Node.js 18.x`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
