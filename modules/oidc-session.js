@@ -4,22 +4,22 @@ const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
 const mark = require('/var/task/modules/mark.js')
 const cookie = require('/var/task/modules/cookie.js')
 const conf = require(`/var/task/configuration.js`)
-const ddbdc = require('/var/task/io/ddb-dc.js')
+const { ddbdc, GetCommand } = require('/var/task/io/ddb-dc.js')
 
 /*  Given any DATA, exerts control over DATA.RU.signals.session;
  *
  */
 
-const setSessionIdInSignals = async(DATA, id) => {
+const setSessionIdInSignals = async (DATA, id) => {
 
     //mark(`oidc-session.js: setSessionIdInSignals: begin`)
-    
+
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
     DATA.RU.signals.session = { id: id }
 
     rusMinus1.frameworkDescriptionLogger.callEnds()
-    
+
     //mark(`oidc-session.js: setSessionIdInSignals: end`)
 }
 
@@ -29,10 +29,10 @@ const setSessionIdInSignals = async(DATA, id) => {
 //      //
 //////////
 
-const setSessionIdWithPersistence = async(validated) => {
+const setSessionIdWithPersistence = async (validated) => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
-    
+
     //mark(`oidc-session.js: setSessionIdWithPersistence: begin`)
 
     //  Consistency checks
@@ -103,13 +103,13 @@ const setSessionIdWithPersistence = async(validated) => {
     //mark(`oidc-session.js: setSessionIdWithPersistence: end`)
 
     rusMinus1.frameworkDescriptionLogger.callEnds()
-    
+
 }
 
 const setSessionFromOidcAccessToken = async DATA => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
-    
+
     //mark(`oidc-session.js: setSessionFromOidcAccessToken: begin`)
 
     //  set any session cookies;
@@ -132,7 +132,7 @@ const setSessionFromOidcAccessToken = async DATA => {
 }
 
 const setSessionFromRequestCookie = async DATA => {
-    
+
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
     //mark(`oidc-session.js: setSessionFromRequestCookie: begin`)
@@ -152,11 +152,15 @@ const setSessionFromRequestCookie = async DATA => {
     }
 
     mark(`oidc-session.js: hotspot: begin1`)
-    
-    DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
+
+    //    DATA.RU.io.sessionsGet = await ddbdc.get(params).promise()
+
+    DATA.RU.io.sessionsGet = await ddbdc.send(
+        new GetCommand(params)
+    )
 
     mark(`oidc-session.js: hotspot: end1`)
-    
+
     if (DATA.RU.io.sessionsGet.Item) {
         //  (no need to) set any session cookies; this is the source;
 
@@ -172,14 +176,14 @@ const setSessionFromRequestCookie = async DATA => {
     }
 
     //mark(`oidc-session.js: setSessionFromRequestCookie: end`)
-    
+
     rusMinus1.frameworkDescriptionLogger.callEnds()
 }
 
 const expireSession = async DATA => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
-    
+
     //mark(`oidc-session.js: expireSession: begin`)
 
     //  expire any session cookies;
