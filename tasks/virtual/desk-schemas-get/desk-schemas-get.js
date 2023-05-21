@@ -9,20 +9,12 @@ rus.conf.verbosity > 0 &&
 
 const deskSchemasGet = async (data) => {
 
-    //data.RU.io.deskSchemasScan = await rus.aws.ddbdc.send(
     data.RU.io.deskSchemasScan = await ddbdc.send(
         new rus.aws.ddbdc.ScanCommand({
             TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
             //ReturnConsumedCapacity: 'INDEXES'
         })
     )
-
-    /*
-        data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
-            TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
-            //ReturnConsumedCapacity: 'INDEXES'
-        }).promise()
-    */
 
     switch (data.RU.request.queryStringParameters.reader[0]) {
 
