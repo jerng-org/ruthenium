@@ -22,12 +22,12 @@ const ddb = new aws.DynamoDB()
 */
 
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
-const { DynamoDBDocumentClient, GetCommand, PutCommand } = require("@aws-sdk/lib-dynamodb")
+const { DynamoDBDocumentClient, GetCommand, PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb")
 
 const ddbc = new DynamoDBClient()
 const ddbdc = DynamoDBDocumentClient.from(ddbc)
 
-module.exports = { ddbdc, GetCommand, PutCommand }
+module.exports = { ddbdc, GetCommand, PutCommand, ScanCommand }
 mark(`~/io/ddb-dc.js LOADED`)
 
 /*  TODO
