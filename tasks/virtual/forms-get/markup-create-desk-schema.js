@@ -97,6 +97,7 @@ const createDeskSchema = async ( data ) => {
     
     return `
     
+        <span style="color:red"> NO VALIDATION IN UI BEFORE SUBMISSION</span>
         <h2>Desk Schema : <code>creation</code> </h2>
     
         ${  await rus.html.form ( {

@@ -12,7 +12,7 @@ rus.conf.verbosity > 0 &&
 
 // const deskSchemasModel  = require (`/var/task/io/models/desk-schemas.js`)
 
-const desksGet = async(data) => {
+const desksGet = async (data) => {
 
     const deskName = data.RU.request.queryStringParameters.thing[0]
 
@@ -23,19 +23,23 @@ const desksGet = async(data) => {
         },
         //ReturnConsumedCapacity: 'INDEXES'
     }
-    data.RU.io.deskSchemasGet = await rus.aws.ddbdc.get(params).promise()
-    if (! ('Item' in data.RU.io.deskSchemasGet) ) {
+    data.RU.io.deskSchemasGet = await rus.aws.ddb.aDynamoDBDocumentClient.send(
+        new rus.aws.ddb.GetCommand(params)
+    )
+    if (!('Item' in data.RU.io.deskSchemasGet)) {
         await status404(data)
         return
     }
 
-    data.RU.io.deskCellsQuery = await rus.aws.ddbdc.query({
-        TableName: 'TEST-APP-DESK-CELLS',
-        IndexName: 'D-GSI',
-        KeyConditionExpression: 'D = :deskName',
-        ExpressionAttributeValues: { ':deskName': deskName },
-        //ReturnConsumedCapacity: 'INDEXES'
-    }).promise()
+    data.RU.io.deskCellsQuery = await rus.aws.ddb.aDynamoDBDocumentClient.send(
+        new rus.aws.ddb.QueryCommand({
+            TableName: 'TEST-APP-DESK-CELLS',
+            IndexName: 'D-GSI',
+            KeyConditionExpression: 'D = :deskName',
+            ExpressionAttributeValues: { ':deskName': deskName },
+            //ReturnConsumedCapacity: 'INDEXES'
+        })
+    )
 
     rus.conf.verbosity > 0 &&
         console.warn(`FIXME: (desks-get.js) implement (for-of) with (Promise.allSettled)`)

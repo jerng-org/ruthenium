@@ -8,7 +8,7 @@ const status400 = require(`/var/task/tasks/status-400.js`)
 //const status409 = require(`/var/task/tasks/status-409.js`)
 const status500 = require(`/var/task/tasks/status-500.js`)
 
-const desksPatch = async(data) => {
+const desksPatch = async (data) => {
 
     const candidates = data.RU.request.formStringParameters
 
@@ -49,30 +49,27 @@ const desksPatch = async(data) => {
         for (const __deskCell of data.RU.request.formStringParameters['desk-cells'].PUT) {
 
             //  WIP Issue 5. 
-            if ('N' in __deskCell) 
-            {
-                 const coercedNumber = Number(__deskCell.N)
-                 if (isNaN(coercedNumber)) {
-                     
-                    if ( ! ( 'DELETE' in data.RU.request.formStringParameters['desk-cells'] ) ) {
-                         data.RU.request.formStringParameters['desk-cells'].DELETE = []
-                    } 
-                    data.RU.request.formStringParameters['desk-cells'].DELETE.push(
-                       {
-                           DHC: __deskCell.DHC,
-                           R:__deskCell.R
-                       }
-                    )
-                    
+            if ('N' in __deskCell) {
+                const coercedNumber = Number(__deskCell.N)
+                if (isNaN(coercedNumber)) {
+
+                    if (!('DELETE' in data.RU.request.formStringParameters['desk-cells'])) {
+                        data.RU.request.formStringParameters['desk-cells'].DELETE = []
+                    }
+                    data.RU.request.formStringParameters['desk-cells'].DELETE.push({
+                        DHC: __deskCell.DHC,
+                        R: __deskCell.R
+                    })
+
                     data.RU.request.formStringParameters['desk-cells'].PUT.splice(putIndex, 1)
-                 }
-                 else {
-                     __deskCell.N = coercedNumber
-                 }
+                }
+                else {
+                    __deskCell.N = coercedNumber
+                }
             }
             //  WIP Issue 6.
             if ('S' in __deskCell && __deskCell.S == '') __deskCell.S = ' '
-            
+
             putIndex++
         }
         // WIP: hardcoded (end)
@@ -108,7 +105,8 @@ const desksPatch = async(data) => {
     const unlimitedRequestItems = [...putItems, ...deleteItems]
 
     //  WIP Issue 2.
-    let processedCount, totalCount, limitedRequestItems, chunk = 25, batchCount = 0
+    let processedCount, totalCount, limitedRequestItems, chunk = 25,
+        batchCount = 0
 
     data.RU.io.deskCellsBatchWrite = {}
 
@@ -131,21 +129,24 @@ const desksPatch = async(data) => {
 
         // Call storage layer
         try {
-            data.RU.io.deskCellsBatchWrite[ `batch-${ batchCount }` ] = await rus.aws.ddbdc.batchWrite(params).promise()
+            data.RU.io.deskCellsBatchWrite[`batch-${ batchCount }`] =
+                await rus.aws.ddb.aDynamoDBDocumentClient.send(
+                    new rus.aws.ddb.BatchWriteCommand(params)
+                )
         }
         catch (e) {
             console.error(e)
             switch (e.code) {
                 default: // do nothing
                     await status500(data)
-                return
+                    return
             }
         }
-        
+
         rus.mark(`desks-patch.js: end batchWrite ${ batchCount }`)
     }
     //  chunking logic from: https://stackoverflow.com/posts/8495740/revisions
-    
+
     //  WIP Issue 2. (end)
 
 
