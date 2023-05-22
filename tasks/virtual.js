@@ -79,7 +79,7 @@ const deskSchemasDeleteSuccess = async (DATA, deskSchemaName) => {
         },
         //ReturnConsumedCapacity: 'INDEXES'
     }
-    DATA.RU.io.deskSchemasDelete = await rus.aws.ddb.aDynamoDBDocumentClient(
+    DATA.RU.io.deskSchemasDelete = await rus.aws.ddb.aDynamoDBDocumentClient.send(
         new rus.aws.ddb.DeleteCommand(params)
     )
 
@@ -99,7 +99,7 @@ const deskRowGetSuccess = async (DATA, deskRowID) => {
         ExpressionAttributeValues: { ':deskRowID': deskRowID },
         //ReturnConsumedCapacity: 'INDEXES'
     }
-    DATA.RU.io.deskCellsQuery = await rus.aws.ddb.aDynamoDBDocumentClient(
+    DATA.RU.io.deskCellsQuery = await rus.aws.ddb.aDynamoDBDocumentClient.send(
         new rus.aws.ddb.QueryCommand(params)
     )
 
