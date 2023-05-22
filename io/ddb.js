@@ -23,8 +23,9 @@ const ddb = new aws.DynamoDB()
 
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
 const {
-    DynamoDBDocumentClient,
     BatchWriteCommand,
+    DeleteCommand,
+    DynamoDBDocumentClient,
     GetCommand,
     PutCommand,
     ScanCommand,
@@ -37,6 +38,7 @@ const aDynamoDBDocumentClient = DynamoDBDocumentClient.from(aDynamoDBClient)
 module.exports = {
     aDynamoDBDocumentClient,
     BatchWriteCommand,
+    DeleteCommand,
     GetCommand,
     PutCommand,
     ScanCommand,
