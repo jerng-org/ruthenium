@@ -4,7 +4,7 @@ const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
 const mark = require('/var/task/modules/mark.js')
 const cookie = require('/var/task/modules/cookie.js')
 const conf = require(`/var/task/configuration.js`)
-const { ddbdc, GetCommand, PutCommand } = require('/var/task/io/ddb-dc.js')
+const { aDynamoDBDocumentClient, GetCommand, PutCommand } = require('/var/task/io/ddb.js')
 
 /*  Given any DATA, exerts control over DATA.RU.signals.session;
  *
@@ -97,7 +97,7 @@ const setSessionIdWithPersistence = async (validated) => {
     }
 
     // Call storage layer
-    const WIP = await ddbdc.send(
+    const WIP = await aDynamoDBDocumentClient.send(
         new PutCommand(params)
     )
     console.warn(`(oidc-session.js) stuff this into (data.RU.io.dynamoDB`)
@@ -155,7 +155,7 @@ const setSessionFromRequestCookie = async DATA => {
 
     mark(`oidc-session.js: hotspot: begin1`)
 
-    DATA.RU.io.sessionsGet = await ddbdc.send(
+    DATA.RU.io.sessionsGet = await aDynamoDBDocumentClient.send(
         new GetCommand(params)
     )
 

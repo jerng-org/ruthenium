@@ -34,8 +34,8 @@ const deskSchemasPost = async (data) => {
 
     try {
         //data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
-        data.RU.io.deskSchemasPost = await rus.aws.ddbdc.send(
-            new rus.aws.ddbdc.PutCommand(params)
+        data.RU.io.deskSchemasPost = await rus.aws.ddb.aDynamoDBDocumentClient.send(
+            new rus.aws.ddb.PutCommand(params)
         )
     }
     catch (e) {
