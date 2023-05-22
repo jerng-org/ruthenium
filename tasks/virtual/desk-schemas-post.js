@@ -8,7 +8,7 @@ const status409 = require(`/var/task/tasks/status-409.js`)
 const status400 = require(`/var/task/tasks/status-400.js`)
 const status500 = require(`/var/task/tasks/status-500.js`)
 
-const deskSchemasPost = async(data) => {
+const deskSchemasPost = async (data) => {
 
     const candidate = data.RU.request.formStringParameters
 
@@ -33,7 +33,10 @@ const deskSchemasPost = async(data) => {
     // Call storage layer
 
     try {
-        data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
+        //data.RU.io.deskSchemasPost = await rus.aws.ddbdc.put(params).promise()
+        data.RU.io.deskSchemasPost = await rus.aws.ddbdc.send(
+            new rus.aws.ddbdc.PutCommand(params)
+        )
     }
     catch (e) {
         console.error(e)
