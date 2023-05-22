@@ -8,7 +8,7 @@ const status404 = require(`/var/task/tasks/status-404.js`)
 const status400 = require(`/var/task/tasks/status-400.js`)
 const status500 = require(`/var/task/tasks/status-500.js`)
 
-const deskSchemasPut = async(data) => {
+const deskSchemasPut = async (data) => {
 
   const candidate = data.RU.request.formStringParameters
 
@@ -33,20 +33,22 @@ const deskSchemasPut = async(data) => {
   // Call storage layer
 
   try {
-    data.RU.io.deskSchemasPut = await rus.aws.ddbdc.put(params).promise()
+    data.RU.io.deskSchemasPut = await rus.aws.ddb.aDynamoDBDocumentClient.send(
+      new rus.aws.dbb.PutCommand(params)
+    )
   }
   catch (e) {
-        console.error(e)
-        switch (e.code) {
-            case 'ConditionalCheckFailedException':
-                await status404(data)
-                return
-            default: // do nothing
-                await status500(data)
-                return
-        }
+    console.error(e)
+    switch (e.code) {
+      case 'ConditionalCheckFailedException':
+        await status404(data)
+        return
+      default: // do nothing
+        await status500(data)
+        return
+    }
   }
-  
+
   // View
   data.RU.signals.redirectRoute = 'initial'
 
