@@ -45,6 +45,7 @@ const lambdaGitCommit = commitMessage => {
         childProcess.execSync(
             `${ shellExports }
             rm -rf /tmp/*; \
+            ls -la /opt/git/libexec/git-core
             git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git; \
             `, {
                 encoding: 'utf8',
