@@ -33,7 +33,7 @@ const childProcess = require('child_process')
 const shellExports = `
             export PATH=$PATH:/opt/git/bin; \
             export LD_LIBRARY_PATH=/opt/git/lib; \
-` // based on lambda layer "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:5"
+` // based on lambda layer "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:8"
 
 const lambdaGitCommit = commitMessage => {
     try {
@@ -85,7 +85,6 @@ const lambdaGitCommit = commitMessage => {
         console.log(' where do (notes) go from here?')
 
         mark(`~/io/lambda-git-commit.js Execution complete`)
-        ///////////////////////////////////////////////////////////////////////////////
 
         rusMinus1.frameworkDescriptionLogger.callEnds()
 
