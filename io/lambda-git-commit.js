@@ -30,7 +30,10 @@ Environmental variable with password
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
 const mark = require('/var/task/modules/mark.js')
 const childProcess = require('child_process')
-
+const shellExports = `
+            export PATH=$PATH:/opt/git/bin; \
+            export LD_LIBRARY_PATH=/opt/git/lib; \
+` // based on lambda layer "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:5"
 
 const lambdaGitCommit = commitMessage => {
     try {
@@ -40,63 +43,53 @@ const lambdaGitCommit = commitMessage => {
         let notes = {}
 
         childProcess.execSync(
-            'rm -rf /tmp/*', { encoding: 'utf8', stdio: 'inherit' })
-
-        childProcess.execSync(
-            `git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git`, { encoding: 'utf8', stdio: 'inherit', cwd: '/tmp' })
+            `${ shellExports }
+            rm -rf /tmp/*; \
+            git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git; \
+            `, {
+                encoding: 'utf8',
+                stdio: 'inherit',
+                cwd:'/tmp'
+            }
+        )
 
         mark(`~/io/lambda-git-commit.js Repository cloned ... `)
-        ///////////////////////////////////////////////////////////////////////////////
 
-        /*
-        notes.rmClonedRepoFiles = childProcess.execSync(
-            'rm -rf /tmp/ruthenium/*', 
-            { encoding: 'utf8', stdio: 'inherit' })
-        
-        notes.lsClonedRepo = childProcess.execSync(
-            'ls /tmp/ruthenium', 
-            { encoding: 'utf8' }).split('\n')
-        
-        notes.lsaClonedRepo = childProcess.execSync(
-            'ls -a /tmp/ruthenium', 
-            { encoding: 'utf8' }).split('\n')
-            
-        notes.lsVarTask = childProcess.execSync(
-            'ls /var/task', 
-            { encoding: 'utf8' }).split('\n')
-        */
-        notes.cprVarTask = childProcess.execSync(
-            'cp -r /var/task/* /tmp/ruthenium/', { encoding: 'utf8' }).split('\n')
-        /*        
-        notes.lsClonedRepoAfterCopy = childProcess.execSync(
-            'ls', 
-            { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
+        notes.cprVarTask =
+            childProcess.execSync(
+                `cp -r /var/task/* /tmp/ruthenium/;`, { encoding: 'utf8' }
+            ).split('\n')
 
-        notes.checkBranch = childProcess.execSync(
-            'git branch', 
-            { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
+        notes.gitAdd =
+            childProcess.execSync(
+                `${ shellExports }
+                git add .; \
+                `, { encoding: 'utf8', cwd: '/tmp/ruthenium' }
+            ).split('\n')
 
-        notes.testEnv = childProcess.execSync(
-            'echo $GITHUB_JERNG_MACHINES_USER_PASSWORD', 
-            { encoding: 'utf8' }).split('\n')
-        */
+        notes.gitCommmit =
+            childProcess.execSync(
+                `${ shellExports }
+                git -c user.name=jerng-machines commit -m "${ commitMessage }" ; \
+                `, { encoding: 'utf8', cwd: '/tmp/ruthenium' }
+            ).split('\n')
 
-        notes.gitAdd = childProcess.execSync(
-            'git add .', { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
+        notes.gitPush =
+            childProcess.execSync(
+                `${ shellExports }
+                git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git;\
+                `, { encoding: 'utf8', cwd: '/tmp/ruthenium' }
+            ).split('\n')
 
-        notes.gitCommmit = childProcess.execSync(
-            `git -c user.name=jerng-machines commit -m "${ commitMessage }" `, { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
+        console.log(' where do (notes) go from here?')
 
-        notes.gitPush = childProcess.execSync(
-            'git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git', { encoding: 'utf8', cwd: '/tmp/ruthenium' }).split('\n')
-
-        mark(`~/io/lambda-git-commit.js Execution complete `)
+        mark(`~/io/lambda-git-commit.js Execution complete`)
         ///////////////////////////////////////////////////////////////////////////////
 
         rusMinus1.frameworkDescriptionLogger.callEnds()
 
     }
-    catch (e) { console.error(`gitCommit.js`, e.stack) }
+    catch (e) { console.error(`lambda-git-commit.js`, e.stack) }
 }
 
 module.exports = lambdaGitCommit
