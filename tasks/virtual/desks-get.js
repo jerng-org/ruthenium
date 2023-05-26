@@ -2,9 +2,6 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-const status404 = require(`/var/task/tasks/status-404.js`)
-rus.conf.verbosity > 0 &&
-    console.warn(`(desks-get.js) FIXME: rendering an error page should not involve a require() here;`)
 
 const markup = require('/var/task/tasks/virtual/desks-get-markup.js')
 rus.conf.verbosity > 0 &&
@@ -27,7 +24,7 @@ const desksGet = async (data) => {
         new rus.aws.ddb.GetCommand(params)
     )
     if (!('Item' in data.RU.io.deskSchemasGet)) {
-        await status404(data)
+        await rus.http.status404(data)
         return
     }
 

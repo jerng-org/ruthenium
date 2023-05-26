@@ -11,4 +11,5 @@ module.exports = {
 
     frameworkDescriptionLogger: require(`/var/task/modules/framework-description-logger.js`),
 
+    mark: require('/var/task/modules/mark.js'),
 }

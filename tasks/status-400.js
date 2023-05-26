@@ -1,6 +1,6 @@
 'use strict'
 
-const rus = require ( '/var/task/modules/r-u-s.js' )
+const rusMinus1 = require(`/var/task/modules/r-u-s-minus-one.js`)
 
 const status400 = async ( data ) => {
     data.RU.signals.sendResponse.statusCode = 400
@@ -9,4 +9,4 @@ const status400 = async ( data ) => {
 }
 
 module.exports = status400 
-rus.mark ( `~/tasks/status-400.js LOADED` )
+rusMinus1.mark ( `~/tasks/status-400.js LOADED` )

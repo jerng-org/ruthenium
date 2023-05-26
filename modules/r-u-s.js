@@ -5,7 +5,7 @@
 
 const conf = require(`/var/task/configuration.js`)
 const rusMinus1 = require(`/var/task/modules/r-u-s-minus-one.js`)
-const mark = require('/var/task/modules/mark.js')
+const mark = rusMinus1.mark 
 
 mark(`~/modules/r-u-s.js (ruthenium utilities) LOADING ...`)
 
@@ -129,6 +129,17 @@ const rus = {
 
     html: require('/var/task/modules/html.js'),
 
+    http: {
+
+        status400: require('/var/task/tasks/status-400.js'),
+        status401: require('/var/task/tasks/status-401.js'),
+        status403: require('/var/task/tasks/status-403.js'),
+        status404: require('/var/task/tasks/status-404.js'),
+        status409: require('/var/task/tasks/status-409.js'),
+        status500: require('/var/task/tasks/status-500.js'),
+        status501: require('/var/task/tasks/status-501.js'),
+
+    },
     //////////
     //      //
     //  !!  //  Make way.

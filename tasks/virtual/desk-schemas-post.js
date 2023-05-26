@@ -4,16 +4,12 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
 
-const status409 = require(`/var/task/tasks/status-409.js`)
-const status400 = require(`/var/task/tasks/status-400.js`)
-const status500 = require(`/var/task/tasks/status-500.js`)
-
 const deskSchemasPost = async (data) => {
 
     const candidate = data.RU.request.formStringParameters
 
     if (!await rus.validateFormData(data, 'desk-schemas')) {
-        await status400(data)
+        await rus.http.status400(data)
         return
     }
 
@@ -42,10 +38,10 @@ const deskSchemasPost = async (data) => {
         console.error(e)
         switch (e.code) {
             case 'ConditionalCheckFailedException':
-                await status409(data)
+                await rus.http.status409(data)
                 return
             default: // do nothing
-                await status500(data)
+                await rus.httpstatus500(data)
                 return
         }
     }
