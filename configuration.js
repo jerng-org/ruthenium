@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage = `Getting git to work on Lambda ARM : layer development documented`
+const gitCommitMessage = `pre-loading tasks/status-###.js to (rus)`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {

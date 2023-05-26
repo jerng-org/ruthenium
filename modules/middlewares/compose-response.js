@@ -24,9 +24,6 @@ markupFileNames.forEach((current, index, array) => {
     } // , thisArg  
 )
 
-const status500 = require(`/var/task/tasks/status-500.js`)
-const status501 = require(`/var/task/tasks/status-501.js`)
-
 const redirect = async (DATA) => {
 
     rus.frameworkDescriptionLogger.callStarts()
@@ -85,7 +82,7 @@ const composeResponse = async (data) => {
         console.error(`(compose-response.js) found that (data.RU.response) was truthy; composition aborted; nothing should be assigned to (data.RU.response) prior to (compose-response.js); (data.RU.response): ${ await rus.print.stringify4(data.RU.response) }`)
         delete data.RU.response
 
-        await status500(data)
+        await rus.http.status500(data)
         await composeResponse(data)
     }
     // Initialisation of (data.RU.response) has moved to branches below
@@ -192,7 +189,7 @@ const composeResponse = async (data) => {
                     
                     ${ await rus.additionalRequestInformation ( data )}`)
 
-            await status501(data)
+            await rus.http.status501(data)
             await composeResponse(data)
         }
         rus.frameworkDescriptionLogger.callEnds()
@@ -209,7 +206,7 @@ const composeResponse = async (data) => {
 
             // clobber (refine this as above; WIP / TODO )
             data.RU.response = {
-                statusCode: 200,
+                rus.http.statusCode: 200,
                 headers: {
                     'content-type': 'text/html'
                 },
@@ -225,7 +222,7 @@ const composeResponse = async (data) => {
                 */
             )
 
-            await status501(data)
+            await rus.http.status501(data)
             await composeResponse(data)
         }
         rus.frameworkDescriptionLogger.callEnds()

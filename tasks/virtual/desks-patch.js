@@ -4,16 +4,12 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
 
-const status400 = require(`/var/task/tasks/status-400.js`)
-//const status409 = require(`/var/task/tasks/status-409.js`)
-const status500 = require(`/var/task/tasks/status-500.js`)
-
 const desksPatch = async (data) => {
 
     const candidates = data.RU.request.formStringParameters
 
     if (!await rus.validateFormDataByMethod(data, 'http-patch')) {
-        await status400(data)
+        await rus.http.status400(data)
         return
     }
 
@@ -138,7 +134,7 @@ const desksPatch = async (data) => {
             console.error(e)
             switch (e.code) {
                 default: // do nothing
-                    await status500(data)
+                    await rus.http.status500(data)
                     return
             }
         }
