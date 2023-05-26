@@ -479,12 +479,12 @@ try {
         }
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
-        console.log(`lambda>node>handler, ENTRY Point (~/index.js)
-            ${arguments[0].requestContext.httpMethod}
-            ${arguments[0].requestContext.domainName}
-            ${arguments[0].requestContext.http.path}
-            ?
-            ${arguments[0].rawQueryString}`)
+        console.log(`lambda>node>handler, 
+ENTRY Point      : (~/index.js)
+METHOD           : ${arguments[0].requestContext.http.method}
+DOMAIN           : ${arguments[0].requestContext.domainName}
+PATH             : ${arguments[0].requestContext.http.path}
+RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
         rus.mark(`lambda>node>handler, first mark (~/index.js)`, true)
 
