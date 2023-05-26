@@ -25,12 +25,6 @@ const formsMarkupUpdateDeskRow = require(`/var/task/tasks/virtual/forms-get/mark
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-const status400 = require(`/var/task/tasks/status-400.js`)
-const status403 = require(`/var/task/tasks/status-403.js`)
-const status404 = require(`/var/task/tasks/status-404.js`)
-const status500 = require(`/var/task/tasks/status-500.js`)
-const status501 = require(`/var/task/tasks/status-501.js`)
-
 rus.conf.verbosity > 0 &&
     (console.warn(`(~/tasks/virtual.js) all (types) are currently manually coded; RECONSIDER.`),
         console.warn(`(~/tasks/virtual.js) (dimensions) may require a bit of restructuring.`)
@@ -151,7 +145,7 @@ const virtual = async (data) => {
             }
             else {
                 rus.log.error(data, `(virtual.js) (?type=) was not provided.`)
-                await status400(data)
+                await rus.http.status400(data)
 
                 rus.frameworkDescriptionLogger.callEnds()
 
@@ -204,7 +198,7 @@ const virtual = async (data) => {
                                             }
 
                                             if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
-                                                await status404(data)
+                                                await rus.http.status404(data)
 
                                                 rus.frameworkDescriptionLogger.callEnds()
 
@@ -249,7 +243,7 @@ const virtual = async (data) => {
                                                 case (`delete-desk-schema`):
 
                                                     if (!await deskSchemasDeleteSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
-                                                        await status500(data)
+                                                        await rus.http.status500(data)
 
                                                         rus.frameworkDescriptionLogger.callEnds()
 
@@ -286,7 +280,7 @@ const virtual = async (data) => {
 
                                                     */
                                                     if (!await deskRowGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
-                                                        await status404(data)
+                                                        await rus.http.status404(data)
 
                                                         rus.frameworkDescriptionLogger.callEnds()
 
@@ -319,7 +313,7 @@ const virtual = async (data) => {
                                                             // (thing) switch level 3
                                                         default:
                                                             rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case tree)`)
-                                                            await status404(data)
+                                                            await rus.http.status404(data)
 
                                                             rus.frameworkDescriptionLogger.callEnds()
 
@@ -331,7 +325,7 @@ const virtual = async (data) => {
 
                                 default:
                                     rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
-                                    await status404(data)
+                                    await rus.http.status404(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
 
@@ -342,7 +336,7 @@ const virtual = async (data) => {
 
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
-                            await status404(data)
+                            await rus.http.status404(data)
                             console.warn(`TODO: implement status405`)
 
                             rus.frameworkDescriptionLogger.callEnds()
@@ -373,7 +367,7 @@ const virtual = async (data) => {
 
                                 default:
                                     rus.log.error(data, `(virtual.js) (?type=desk-schemas) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
-                                    await status404(data)
+                                    await rus.http.status404(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
 
@@ -400,7 +394,7 @@ const virtual = async (data) => {
 
                                 default:
                                     rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
-                                    await status404(data)
+                                    await rus.http.status404(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
 
@@ -427,7 +421,7 @@ const virtual = async (data) => {
 
                                 default:
                                     rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
-                                    await status404(data)
+                                    await rus.http.status404(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
 
@@ -438,7 +432,7 @@ const virtual = async (data) => {
 
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
-                            await status404(data)
+                            await rus.http.status404(data)
                             console.warn(`TODO: implement status405`)
 
                             rus.frameworkDescriptionLogger.callEnds()
@@ -537,7 +531,7 @@ const virtual = async (data) => {
 
                                 case ('collection'):
                                     rus.log.error(data, `(virtual.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
-                                    await status403(data)
+                                    await rus.http.status403(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
 
@@ -555,7 +549,7 @@ const virtual = async (data) => {
 
                                 default:
                                     rus.log.error(data, `(virtual.js) (?type=desks) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
-                                    await status404(data)
+                                    await rus.http.status404(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
 
@@ -589,7 +583,7 @@ const virtual = async (data) => {
 
                                 default:
                                     rus.log.error(data, `(virtual.js) (?type=desks) (PATCH) ... (queryScope): '${queryScope}' not in (switch-case)`)
-                                    await status404(data)
+                                    await rus.http.status404(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
 
@@ -598,7 +592,7 @@ const virtual = async (data) => {
 
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desks), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
-                            await status404(data)
+                            await rus.http.status404(data)
                             console.warn(`TODO: implement status405`)
 
                             rus.frameworkDescriptionLogger.callEnds()
@@ -614,7 +608,7 @@ const virtual = async (data) => {
                     // Expect a valid (desk-schema.name)
 
                     rus.log.error(data, `(virtual.js) Request query parameter (?TYPE=), first value: (${data.RU.request.queryStringParameters.type[0]}) has no (case) in (switch)`)
-                    await status404(data)
+                    await rus.http.status404(data)
 
                     rus.frameworkDescriptionLogger.callEnds()
 
