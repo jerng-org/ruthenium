@@ -32,7 +32,6 @@ rus.conf.verbosity > 0 &&
 
 //const patchDeskSchema   = require ( '/var/task/tasks/virtual/patchDeskSchema.js' )
 
-console.warn(`(virtual.js) the (rus.log.error) function defined here is a framework-level anomaly; integrate this perhaps to (rus);`)
 console.warn(`(virtual.js) we should really break up/curry the giant switch-case into a linear pipeline`)
 console.warn(`TODO: implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
 
