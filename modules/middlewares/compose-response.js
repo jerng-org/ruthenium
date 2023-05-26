@@ -206,7 +206,7 @@ const composeResponse = async (data) => {
 
             // clobber (refine this as above; WIP / TODO )
             data.RU.response = {
-                rus.http.statusCode: 200,
+                statusCode: 200,
                 headers: {
                     'content-type': 'text/html'
                 },
