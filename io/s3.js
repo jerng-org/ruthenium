@@ -1,6 +1,6 @@
 'use strict'
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
 const mark = rusMinus1.mark 
 
 //  Provide a debuggable function name, 

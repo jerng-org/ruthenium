@@ -1,6 +1,6 @@
 'use strict'
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
 const mark = rusMinus1.mark 
 
 const html = {
@@ -23,39 +23,39 @@ const html = {
     //
 
 
-    form: async conf => {
+    form: async _conf => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        conf = {
+        _conf = {
 
             /* defaults */
             method: 'POST',
 
             /* explicitly passed */
-            ...conf
+            ..._conf
         }
 
-        if (!conf.action) {
+        if (!_conf.action) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.form) called, without (conf.action) `)
+            throw Error(`(rus.html.form) called, without (_conf.action) `)
         }
         else
-        if (!conf.innerHtml) {
+        if (!_conf.innerHtml) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.form) called, without (conf.innerHtml) `)
+            throw Error(`(rus.html.form) called, without (_conf.innerHtml) `)
         }
 
-        const markup = `<form   method="${ conf.method }"
-                                action="${ conf.action }"
-                                ${ conf.id          ? `id="${conf.id}"`
+        const markup = `<form   method="${ _conf.method }"
+                                action="${ _conf.action }"
+                                ${ _conf.id          ? `id="${_conf.id}"`
                                                     : '' }
-                                ${ conf.class       ? `class="${conf.class}"`
+                                ${ _conf.class       ? `class="${_conf.class}"`
                                                     : '' }
-                                ${ conf.onsubmit    ? `onsubmit="${conf.onsubmit}"`
+                                ${ _conf.onsubmit    ? `onsubmit="${_conf.onsubmit}"`
                                                     : '' }
                                 >
-                                ${ conf.innerHtml }
+                                ${ _conf.innerHtml }
                                 </form>`
 
         rusMinus1.frameworkDescriptionLogger.callEnds()
@@ -63,56 +63,56 @@ const html = {
         return markup
     },
 
-    input: async conf => {
+    input: async _conf => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        conf = {
+        _conf = {
 
             /* defaults */
             type: 'text',
 
             /* explicitly passed */
-            ...conf
+            ..._conf
         }
 
-        if ((!conf.name) && (!conf.type == 'submit')) {
+        if ((!_conf.name) && (!_conf.type == 'submit')) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.input) called, without (conf.name) `)
+            throw Error(`(rus.html.input) called, without (_conf.name) `)
         }
         else
-        if (conf.labelInnerHtml && (!conf.id)) {
+        if (_conf.labelInnerHtml && (!_conf.id)) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
+            throw Error(`(rus.html.input) called, (_conf.labelInnerHtml) without (_conf.id)`)
         }
 
-        const markup = ` ${  conf.labelInnerHtml 
-                        ? `<label   for="${ conf.id }"
+        const markup = ` ${  _conf.labelInnerHtml 
+                        ? `<label   for="${ _conf.id }"
                                     > 
-                                    ${ conf.labelInnerHtml }
+                                    ${ _conf.labelInnerHtml }
                                     </label>` 
                         : ``
                     }
-                    <input  ${ conf.type        ? `type="${conf.type}"`
+                    <input  ${ _conf.type        ? `type="${_conf.type}"`
                                                 : '' }
-                            ${ conf.form        ? `form="${conf.form}"`
+                            ${ _conf.form        ? `form="${_conf.form}"`
                                                 : ''
                             }
-                            ${ conf.id          ? `id="${conf.id}"`
+                            ${ _conf.id          ? `id="${_conf.id}"`
                                                 : '' }
-                            ${ conf.name        ? `name="${conf.name}"` 
+                            ${ _conf.name        ? `name="${_conf.name}"` 
                                                 : '' }"
-                            ${ conf.value       ? `value="${ conf.value }"` 
+                            ${ _conf.value       ? `value="${ _conf.value }"` 
                                                 : '' }
-                            ${ conf.pattern     ? `pattern="${ conf.pattern }"` 
+                            ${ _conf.pattern     ? `pattern="${ _conf.pattern }"` 
                                                 : '' }
-                            ${ conf.placeholder ? `placeholder="${conf.placeholder}"`
+                            ${ _conf.placeholder ? `placeholder="${_conf.placeholder}"`
                                                 : '' }
-                            ${ conf.required    ? 'required'
+                            ${ _conf.required    ? 'required'
                                                 : '' }
-                            ${ conf.readonly    ? `readonly`
+                            ${ _conf.readonly    ? `readonly`
                                                 : '' }
-                            ${ conf.disabled    ? `disabled`
+                            ${ _conf.disabled    ? `disabled`
                                                 : '' }
                             >`
 
@@ -121,70 +121,70 @@ const html = {
         return markup
     },
 
-    fieldset: async conf => {
+    fieldset: async _conf => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        if (!conf.innerHtml) {
+        if (!_conf.innerHtml) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.legend) called, without (conf.InnerHtml)`)
+            throw Error(`(rus.html.legend) called, without (_conf.InnerHtml)`)
         }
 
         const markup = `
             <fieldset
-                ${ conf.disabled    ? `disabled`            
+                ${ _conf.disabled    ? `disabled`            
                                     : `` }
-                ${ conf.form        ? `form="${conf.form}"`     
+                ${ _conf.form        ? `form="${_conf.form}"`     
                                     : `` 
                     // "the id of a <form/> you want as this <fieldset/>'s parent even if the latter is not a DOM child of the former"
                 }
-                ${ conf.name        ? `name="${conf.name}"` 
+                ${ _conf.name        ? `name="${_conf.name}"` 
                                     : `` }
-                ${ conf.class       ? `class="${conf.class}"` 
+                ${ _conf.class       ? `class="${_conf.class}"` 
                                     : `` }
             >
-                ${  conf.legendInnerHtml 
-                    ? `<legend>${conf.legendInnerHtml}</legend>`
+                ${  _conf.legendInnerHtml 
+                    ? `<legend>${_conf.legendInnerHtml}</legend>`
                     : ``
                 }
                 
-                ${ conf.innerHtml }
+                ${ _conf.innerHtml }
             </fieldset>`
 
         rusMinus1.frameworkDescriptionLogger.callEnds()
 
         return markup
     },
-    select: conf => {
+    select: _conf => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        if (!conf.name) {
+        if (!_conf.name) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.input) called, without (conf.name) `)
+            throw Error(`(rus.html.input) called, without (_conf.name) `)
         }
         else
-        if (conf.labelInnerHtml && (!conf.id)) {
+        if (_conf.labelInnerHtml && (!_conf.id)) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.input) called, (conf.labelInnerHtml) without (conf.id)`)
+            throw Error(`(rus.html.input) called, (_conf.labelInnerHtml) without (_conf.id)`)
         }
 
         const defaults = {}
 
-        const markup = ` ${  conf.label 
-                                ? `<label   for="${ conf.id }"
+        const markup = ` ${  _conf.label 
+                                ? `<label   for="${ _conf.id }"
                                             > 
-                                            ${ conf.label }
+                                            ${ _conf.label }
                                             </label>` 
                                 : ``
                             }
-                            <select  name="${ conf.name }"
-                                    ${ conf.id ? conf.id : '' }
-                                    ${ conf.required ? 'required' : '' }
+                            <select  name="${ _conf.name }"
+                                    ${ _conf.id ? _conf.id : '' }
+                                    ${ _conf.required ? 'required' : '' }
                             >
                                     
                                 ${
-                                    conf.options.map( o  => `
+                                    _conf.options.map( o  => `
                                     
                                         <option value="${ o.value }"
                                         
@@ -202,56 +202,56 @@ const html = {
         return markup
     },
 
-    //table: conf => {}  ,
-    textarea: async conf => {
+    //table: _conf => {}  ,
+    textarea: async _conf => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        conf = {
+        _conf = {
 
             /* defaults */
             type: 'text',
 
             /* explicitly passed */
-            ...conf
+            ..._conf
         }
 
-        if (!conf.name) {
+        if (!_conf.name) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.textarea) called, without (conf.name) `)
+            throw Error(`(rus.html.textarea) called, without (_conf.name) `)
         }
         else
-        if (conf.labelInnerHtml && (!conf.id)) {
+        if (_conf.labelInnerHtml && (!_conf.id)) {
             rusMinus1.frameworkDescriptionLogger.callEnds()
-            throw Error(`(rus.html.textarea) called, (conf.labelInnerHtml) without (conf.id)`)
+            throw Error(`(rus.html.textarea) called, (_conf.labelInnerHtml) without (_conf.id)`)
         }
 
-        const markup = ` ${  conf.labelInnerHtml 
-                        ? `<label   for="${ conf.id }"
+        const markup = ` ${  _conf.labelInnerHtml 
+                        ? `<label   for="${ _conf.id }"
                                     > 
-                                    ${ conf.labelInnerHtml }
+                                    ${ _conf.labelInnerHtml }
                                     </label>` 
                         : ``
                         
                         /* why do we have to repeat this for <input>/<textarea> etc.? FIXME */
                     }
-                    <textarea   ${ conf.type        ? `type="${conf.type}"`
+                    <textarea   ${ _conf.type        ? `type="${_conf.type}"`
                                                     : '' }
-                                ${ conf.form        ? `form="${conf.form}"`
+                                ${ _conf.form        ? `form="${_conf.form}"`
                                                     : '' }
-                                ${ conf.id          ? `id="${conf.id}"`
+                                ${ _conf.id          ? `id="${_conf.id}"`
                                                     : '' }
-                                ${ conf.name        ? `name="${conf.name}"` 
+                                ${ _conf.name        ? `name="${_conf.name}"` 
                                                     : '' }"
-                                ${ conf.value       ? `value="${ conf.value }"` 
+                                ${ _conf.value       ? `value="${ _conf.value }"` 
                                                     : '' }
-                                ${ conf.placeholder ? `placeholder="${conf.placeholder}"`
+                                ${ _conf.placeholder ? `placeholder="${_conf.placeholder}"`
                                                     : '' }
-                                ${ conf.required    ? 'required'
+                                ${ _conf.required    ? 'required'
                                                     : '' }
-                                ${ conf.readonly    ? `readonly`
+                                ${ _conf.readonly    ? `readonly`
                                                     : '' }
-                                ${ conf.onkeyup    ? `onkeyup="${  conf.onkeyup }"`
+                                ${ _conf.onkeyup    ? `onkeyup="${  _conf.onkeyup }"`
                                                     : '' }
                             ></textarea>`
 

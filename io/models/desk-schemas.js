@@ -1,7 +1,8 @@
 'use strict'
 
-const mark = require('/var/task/modules/mark.js')
-const conf = require(`/var/task/configuration.js`)
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-1')
+const conf = rusMinus1.conf 
+const mark = rusMinus1.mark 
 
 // Types and Sub-types
 const deskSchemas = {

@@ -35,42 +35,52 @@ This defines how AWS Lambda reacts to each invocation of the FaaS
 
 0.  `/var/task/index.js` requires :
     0.  `/var/task/modules/r-u-s.js` requires :
-        0.  `/var/task/configuration.js` (leaf : should remain a leaf)
-        1.  `/var/task/modules/r-u-s-minus-one.js` requires : 
-            0.  `/var/task/modules/framework-description-logger.js` requires :
-                1.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-            1.  `/var/task/modules/mark.js` requires :
-                0.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-                1.  `/var/task/modules/custom-logger.js`(pre-`r-u-s.js`)
-        2.  `/var/task/io/ddb.js`
-        3.  `/var/task/io/cognito-oidc-relying-party.js`
-            0.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-            1.  `/var/task/modules/r-u-s-minus-one.js` 
-        4.  `/var/task/io/s3.js`
-            0.  `/var/task/modules/r-u-s-minus-one.js` 
-        5.  `/var/task/modules/cookie.js`
-            0.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-            1.  `/var/task/modules/r-u-s-minus-one.js` 
-        6.  `/var/task/modules/custom-logger.js`
-                0.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-        7.  `/var/task/modules/html.js`
-            0.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-            1.  `/var/task/modules/r-u-s-minus-one.js` 
-        8.  various `/var/task/tasks/status-###.js` files
-        9.  `var/task/io/lambda-git-commit.js` requires :
-            0.  `/var/task/modules/r-u-s-minus-one.js` 
-        10.  `var/task/modules/print.js`
-            0.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-            1.  `/var/task/modules/r-u-s-minus-one.js` 
-        11.  `var/task/modules/oidc-session.js`
-            0.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-            1.  `/var/task/modules/r-u-s-minus-one.js` 
-            2.  `/var/task/modules/cookie.js`(pre-`r-u-s.js`)  
-        12.  `var/task/io/uuid4.js`
-            0.  `/var/task/modules/r-u-s-minus-one.js` 
-        13.  `var/task/io/validation.js`
-            0.  `/var/task/configuration.js`(pre-`r-u-s.js`) 
-            1.  `/var/task/modules/r-u-s-minus-one.js` 
-            2.  `var/task/modules/print.js` ( pre-`r-u-s.js`)
-            3.  various `/var/task/io/models/###`
+            
+        0.  `/var/task/modules/r-u-s-minus-1.js` requires : 
+            0.  `/var/task/configuration.js`
+            1.  `/var/task/modules/framework-description-logger.js` requires :
+                1.  `/var/task/configuration.js`(pre-`r-u-s-minus-1.js`) 
+            2.  `/var/task/modules/mark.js` requires :
+                0.  `/var/task/configuration.js`(pre-`r-u-s-minus-1.js`) 
+                1.  `/var/task/modules/custom-logger.js`(pre-`r-u-s-minus-1.js`)
+            
+        1.  `/var/task/io/ddb.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        2.  `/var/task/io/cognito-oidc-relying-party.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        3.  `/var/task/io/s3.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        4.  `/var/task/modules/cookie.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        5.  `/var/task/modules/custom-logger.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        6.  `/var/task/modules/html.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        7.  various `/var/task/tasks/status-###.js` files require :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        8.  `var/task/io/lambda-git-commit.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        9.  `var/task/modules/print.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        10.  `var/task/modules/oidc-session.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            1.  `/var/task/modules/cookie.js`(pre-`r-u-s.js`)  
+            
+        11.  `var/task/io/uuid4.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            
+        12.  `var/task/io/validation.js` requires :
+            0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
+            1.  `/var/task/modules/print.js` ( pre-`r-u-s.js`)
+            2.  various `/var/task/io/models/###` requires :
+                0.  `/var/task/modules/r-u-s-minus-1.js` ( pre-`r-u-s.js`) 
         

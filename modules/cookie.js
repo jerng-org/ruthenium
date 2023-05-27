@@ -1,7 +1,7 @@
 'use strict'
 
-const conf = require(`/var/task/configuration.js`)
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+const conf = rusMinus1.conf 
 const mark = rusMinus1.mark 
 
 /*  QUICK START

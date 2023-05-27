@@ -27,7 +27,7 @@ Environmental variable with password
 
 */
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
 const mark = rusMinus1.mark 
 const childProcess = require('child_process')
 const shellExports = `
