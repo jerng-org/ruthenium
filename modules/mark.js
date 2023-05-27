@@ -136,26 +136,26 @@ const mark = async (taskLabel, firstInHandler) => {
             String(`+`)
             .padEnd(11, `-`) +
             String(`+`)
-            .padEnd(15, `-`) + `+`
+            .padEnd(15, `-`)
         )
         _log(
-            String(`+RAM:`)
+            String(`+RAM`)
             .padEnd(16, ` `) +
-            String(`|🕓CPU:`)
+            String(`|🕓CPU`)
             .padEnd(13, ` `) +
-            String(`|🕓WALL($):`)
+            String(`|🕓WALL($)`)
             .padEnd(11, ` `) +
-            String(`|[CPU/WALL]:`)
+            String(`|[CPU/WALL]`)
             .padEnd(15, ` `)
         )
         _log(
-            String(`|MB (Δ,Σ)`)
+            String(`|(MB: Δ,Σ)`)
             .padEnd(16, ` `) +
-            String(`|ms (Δ,Σ)`)
+            String(`|(ms: Δ,Σ)`)
             .padEnd(13, ` `) +
-            String(`|ms (Δ,Σ)`)
+            String(`|(ms:Δ,Σ)`)
             .padEnd(11, ` `) +
-            String(`|% (Δ,Σ)`)
+            String(`|(%: Δ,Σ)`)
             .padEnd(15, ` `)
         )
         _log(
@@ -228,6 +228,8 @@ const mark = async (taskLabel, firstInHandler) => {
 
         // delta of CPU time consumed;
 
+        '|' +
+        
         Math.round(
             (dCPUsum = (tempCPU = process.cpuUsage(),
                     tempCPUsum =
@@ -255,6 +257,8 @@ const mark = async (taskLabel, firstInHandler) => {
         //  dRUN : stage-to-stage difference in wallclock time in milliseconds;
         //  tRUN : to-stage total wallclock time in milliseconds;
 
+        '|' +
+        
         // delta of runtime;
         Math.round(dTime =
             (tempTime = performance.now() -
