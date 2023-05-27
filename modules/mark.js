@@ -136,20 +136,21 @@ const mark = async (taskLabel, firstInHandler) => {
             String(`+`)
             .padEnd(12, `-`) +
             String(`+`)
-            .padEnd(17, `-`) + 
+            .padEnd(16, `-`) + 
             '+'
         
         _log(columnedRowBorder)
         
         _log(
-            String(`+RAM`)
+            String(`|RAM`)
             .padEnd(16, ` `) +
             String(`|🕓CPU`)
             .padEnd(14, ` `) +
             String(`|🕓WALL($)`)
             .padEnd(12, ` `) +
             String(`|[CPU/WALL]`)
-            .padEnd(14, ` `)
+            .padEnd(13, ` `) +
+            '|'
         )
         _log(
             String(`|(MB: Δ,Σ)`)
@@ -159,7 +160,8 @@ const mark = async (taskLabel, firstInHandler) => {
             String(`|(ms:Δ,Σ)`)
             .padEnd(12, ` `) +
             String(`|(%: Δ,Σ)`)
-            .padEnd(14, ` `)
+            .padEnd(13, ` `) +
+            '|'
         )
         
         _log(columnedRowBorder)
