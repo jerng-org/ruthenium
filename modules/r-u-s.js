@@ -1,8 +1,5 @@
 'use strict'
 
-//  require()       executes modules; 
-//  require.res()   resolves paths without execution;
-
 const conf = require(`/var/task/configuration.js`)
 const rusMinus1 = require(`/var/task/modules/r-u-s-minus-one.js`)
 const mark = rusMinus1.mark 

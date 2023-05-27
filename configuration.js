@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const gitCommit = 1
-const gitCommitMessage = `fixed typo : object key`
+const gitCommitMessage = `review, refactoring, & documentation`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
@@ -70,7 +70,7 @@ module.exports = {
      *
      *      3   :   2 + verbose narration
      */
-    frameworkDescriptionLogging : 1,
+    frameworkDescriptionLogging : 2,
 
     /*  gitCommit
      *

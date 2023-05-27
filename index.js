@@ -51,14 +51,14 @@ try {
         
     !!! WARNING !!! -   ANYTHING OUTSIDE (exports.handler) 
                             persists across all  function calls, possibly for the 
-                            lifetime of the function's container;
+                            lifetime of the function's CONTAINER;
                         
                         DO NOT WRITE TO THESE OBJECTS, 
                         
                             FROM MIDDLEWARES, OR FROM ANYWHERE ELSE IN CODE CALLED
                             BY (exports.handler), AS THIS MAY RESULT IN
                             SECURITY BREACHES, OR SPACE LEAKS;
-                        DO NOT WRITE ANYTHING TO THESE OBJECTS,
+                            DO NOT WRITE ANYTHING TO THESE OBJECTS,
                         
                             MOST IMPORTANTLY DO NOT WRITE (data) from MIDDLEWARES
                             TO THESE OBJECTS;
