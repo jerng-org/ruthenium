@@ -86,31 +86,39 @@ let invocationStartCPUsum
 
 const mark = async (taskLabel, firstInHandler) => {
 
+    const columnedRowBorder =
+        String(`+`)
+        .padEnd(16, `-`) +
+        String(`+`)
+        .padEnd(14, `-`) +
+        String(`+`)
+        .padEnd(12, `-`) +
+        String(`+`)
+        .padEnd(16, `-`) +
+        '+'
+
     if (newExecutionContext) {
         if (firstInHandler) {
             const preInvocationCPU = process.cpuUsage()
-            preInvocationCPUsum = preInvocationCPU.user +
-                preInvocationCPU.system
+            preInvocationCPUsum = preInvocationCPU.user + preInvocationCPU.system
             preInvocationTime = performance.now()
 
             _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
             _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB-60MB; ⚠`)
-            _log(
-                String('').padEnd(70, `-`)
-            )
+            _log( columnedRowBorder)
             _log(
 
-                String(`"${memoryUsageKey}"`)
-                .padStart(16, ` `) +
+                String(`|"process.memoryUsage().${memoryUsageKey}"`)
+                .padEnd(16, ` `) +
 
-                String(`prior:` + Math.round(preInvocationCPUsum / 1000))
-                .padStart(14, ` `) +
+                String(`|prior:` + Math.round(preInvocationCPUsum / 1000))
+                .padEnd(14, ` `) +
 
-                String(`prior:` + Math.round(preInvocationTime))
-                .padStart(12, ` `) +
+                String(`|prior:` + Math.round(preInvocationTime))
+                .padEnd(12, ` `) +
 
-                String(`throttle⚠️ ㇏㇏`)
-                .padStart(16, ` `)
+                String(`|throttle⚠️ ㇏㇏`)
+                .padEnd(16, ` `)
             )
 
         }
@@ -127,20 +135,9 @@ const mark = async (taskLabel, firstInHandler) => {
         const invocationStartCPU = process.cpuUsage()
         invocationStartTime = performance.now()
         invocationStartCPUsum = invocationStartCPU.user + invocationStartCPU.system
-        
-        const columnedRowBorder =
-            String(`+`)
-            .padEnd(16, `-`) +
-            String(`+`)
-            .padEnd(14, `-`) +
-            String(`+`)
-            .padEnd(12, `-`) +
-            String(`+`)
-            .padEnd(16, `-`) + 
-            '+'
-        
+
         _log(columnedRowBorder)
-        
+
         _log(
             String(`|RAM`)
             .padEnd(16, ` `) +
@@ -149,7 +146,7 @@ const mark = async (taskLabel, firstInHandler) => {
             String(`|🕓WALL($)`)
             .padEnd(12, ` `) +
             String(`|[CPU/WALL]`)
-            .padEnd(13, ` `) +
+            .padEnd(16, ` `) +
             '|'
         )
         _log(
@@ -160,10 +157,10 @@ const mark = async (taskLabel, firstInHandler) => {
             String(`|(ms:Δ,Σ)`)
             .padEnd(12, ` `) +
             String(`|(%: Δ,Σ)`)
-            .padEnd(13, ` `) +
+            .padEnd(16, ` `) +
             '|'
         )
-        
+
         _log(columnedRowBorder)
     }
     nthInvocation++
@@ -195,9 +192,9 @@ const mark = async (taskLabel, firstInHandler) => {
 
         // delta of RAM usage;
 
-        
+
         '|' +
-        
+
         (Math.round(
 
                 ((tempMem = process.memoryUsage()[memoryUsageKey]) -
@@ -233,7 +230,7 @@ const mark = async (taskLabel, firstInHandler) => {
         // delta of CPU time consumed;
 
         '|' +
-        
+
         Math.round(
             (dCPUsum = (tempCPU = process.cpuUsage(),
                     tempCPUsum =
@@ -262,7 +259,7 @@ const mark = async (taskLabel, firstInHandler) => {
         //  tRUN : to-stage total wallclock time in milliseconds;
 
         '|' +
-        
+
         // delta of runtime;
         Math.round(dTime =
             (tempTime = performance.now() -
@@ -285,7 +282,7 @@ const mark = async (taskLabel, firstInHandler) => {
         //  stage-to-stage CPU allocation; volatile; subject to long-term average;
 
         '|' +
-        
+
         (Math.round(dCPUsum / dTime * 10) /
             10000
         ).toString().padStart(7, ` `) +
