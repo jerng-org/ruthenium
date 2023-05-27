@@ -394,7 +394,7 @@ try {
     //      //
     //////////
 
-    const ruthenium = require('/var/task/modules/framework/ruthenium')
+    const ruthenium = require('/var/task/modules/framework/ruthenium.js')
 
     // PROJECT - MIDDLEWARES, lexical order
     const applyLayout = require(`/var/task/modules/middlewares/apply-layout.js`)
