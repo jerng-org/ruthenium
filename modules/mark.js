@@ -130,13 +130,13 @@ const mark = async (taskLabel, firstInHandler) => {
             invocationStartCPU.system
         _log(
             String(`+`)
-            .padEnd(16, ` `) +
+            .padEnd(16, `-`) +
             String(`+`)
-            .padEnd(13, ` `) +
+            .padEnd(13, `-`) +
             String(`+`)
-            .padEnd(11, ` `) +
+            .padEnd(11, `-`) +
             String(`+`)
-            .padEnd(15, ` `)
+            .padEnd(15, `-`) + `+`
         )
         _log(
             String(`+RAM:`)
@@ -150,13 +150,13 @@ const mark = async (taskLabel, firstInHandler) => {
         )
         _log(
             String(`|MB (Δ,Σ)`)
-            .padStart(16, ` `) +
+            .padEnd(16, ` `) +
             String(`|ms (Δ,Σ)`)
-            .padStart(13, ` `) +
+            .padEnd(13, ` `) +
             String(`|ms (Δ,Σ)`)
-            .padStart(11, ` `) +
+            .padEnd(11, ` `) +
             String(`|% (Δ,Σ)`)
-            .padStart(15, ` `)
+            .padEnd(15, ` `)
         )
         _log(
             String('+').padEnd(69, `-`)
