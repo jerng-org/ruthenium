@@ -1,10 +1,10 @@
-# Framework ( ru )
-
-# ECMAScript
+# AWS Lambda
 
 # NodeJS
 
 - `require()`` executes modules; 
 - `require.res()` resolves paths without execution;
 
-# AWS Lambda
+# Framework ( ru )
+
+# ECMAScript

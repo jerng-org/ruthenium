@@ -62,10 +62,10 @@ if (conf.customLogging) {
     }
 
     // other definitions
-    customLogger.customLogString = "\n\nCustomLogString STARTED : (~/modules/custom-logger.js INITIALISATION)\n"
+    customLogger.customLogString = "\n\nCLS/CustomLogString STARTED : (~/modules/custom-logger.js INITIALISATION)\n"
 
     customLogger.restartCustomLogString = function() {
-        customLogger.customLogString = '\n\nCustomLogString RE-STARTED : ' +
+        customLogger.customLogString = '\n\nCLS/CustomLogString RE-STARTED : ' +
             Array.from(arguments).join(' : ') +
             '\n'
     }
