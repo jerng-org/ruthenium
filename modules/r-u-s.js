@@ -4,7 +4,7 @@ const conf = require(`/var/task/configuration.js`)
 const rusMinus1 = require(`/var/task/modules/r-u-s-minus-one.js`)
 const mark = rusMinus1.mark 
 
-mark(`~/modules/r-u-s.js (ruthenium utilities) LOADING ...`)
+mark(`~/modules/r-u-s.js (ruthenium utilities) \e[31mLOADING\e[0m ...`)
 
 const fs = require('fs')
 const url = require('url')
