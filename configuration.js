@@ -70,7 +70,7 @@ module.exports = {
      *
      *      3   :   2 + verbose narration
      */
-    frameworkDescriptionLogging : 2,
+    frameworkDescriptionLogging : 3,
 
     /*  gitCommit
      *
