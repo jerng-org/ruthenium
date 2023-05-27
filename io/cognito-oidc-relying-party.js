@@ -1,8 +1,8 @@
 'use strict'
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
-const mark = require('/var/task/modules/mark.js')
 const conf = require(`/var/task/configuration.js`)
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+const mark = rusMinus1.mark 
 
 const logThisFile = false
 

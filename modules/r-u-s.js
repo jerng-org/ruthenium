@@ -148,7 +148,7 @@ const rus = {
 
     jwkToPem: require('jwk-to-pem'), // LAMBDA LAYER
 
-    lambdaGitCommit: require('/var/task/io/lambda-git-commit'), // LAMBDA LAYER
+    lambdaGitCommit: require('/var/task/io/lambda-git-commit.js'), // LAMBDA LAYER
 
     //////////
     //      //
