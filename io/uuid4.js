@@ -5,7 +5,7 @@
  *    This function my block while it waits for entropy. (?)
  */
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
 const mark = rusMinus1.mark 
 const crypto = require('crypto')
 

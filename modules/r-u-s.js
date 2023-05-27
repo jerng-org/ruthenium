@@ -1,7 +1,6 @@
 'use strict'
 
-const conf = require(`/var/task/configuration.js`)
-const rusMinus1 = require(`/var/task/modules/r-u-s-minus-one.js`)
+const rusMinus1 = require(`/var/task/modules/r-u-s-minus-1.js`)
 const mark = rusMinus1.mark 
 
 mark(`~/modules/r-u-s.js (ruthenium utilities) LOADING ...`)
@@ -65,8 +64,8 @@ const rus = {
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
         const URLObject = new(url.URL)(
-            conf.app.uri.path,
-            conf.app.uri.scheme + '://' + conf.app.uri.authority.host
+            rusMinus1.conf.app.uri.path,
+            rusMinus1.conf.app.uri.scheme + '://' + rusMinus1.conf.app.uri.authority.host
         )
 
         const URLSearchParamsObject = URLObject.searchParams
@@ -117,10 +116,10 @@ const rus = {
 
     cookie: require(`/var/task/modules/cookie.js`),
 
-    conf: conf,
+    conf: rusMinus1.conf,
 
     // Please reconsider this design decision in the future 2022-04-26 :
-    customLogger: conf.customLogging ?
+    customLogger: rusMinus1.conf.customLogging ?
         require(`/var/task/modules/custom-logger.js`) : undefined,
 
     frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,

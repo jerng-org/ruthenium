@@ -1,6 +1,7 @@
 'use strict'
 
-const mark = require('/var/task/modules/mark.js')
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+const mark = rusMinus1.mark
 
 // 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via Proxy. Using a 
 //                  (get) handler for ddbdc's methods returned the error 'method 

@@ -1,6 +1,8 @@
 'use strict'
 
-const mark = require('/var/task/modules/mark.js')
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+const mark = rusMinus1.mark 
+
 /*
 
 Our target data looks LIKE this:
