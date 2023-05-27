@@ -9,6 +9,8 @@ try {
 
     //  See pertinent (nodeJS-specific) documentation at /var/task/modules/r-u-s.js
 
+    console.log(`(ru) shouldn't have a folder called (modules) as this is easily confused with that keyword in (node/ecmascript)`)
+
     const rus = require('/var/task/modules/r-u-s.js')
 
     rus.frameworkDescriptionLogger.callStarts()
