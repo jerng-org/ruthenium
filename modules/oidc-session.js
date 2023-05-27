@@ -1,9 +1,9 @@
 'use strict'
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
-const mark = require('/var/task/modules/mark.js')
-const cookie = require('/var/task/modules/cookie.js')
 const conf = require(`/var/task/configuration.js`)
+const rusMinus1 = require('/var/task/modules/r-u-s-minus-one.js')
+const mark = rusMinus1.mark 
+const cookie = require('/var/task/modules/cookie.js')
 const { aDynamoDBDocumentClient, GetCommand, PutCommand } = require('/var/task/io/ddb.js')
 
 /*  Given any DATA, exerts control over DATA.RU.signals.session;
