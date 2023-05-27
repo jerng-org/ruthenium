@@ -129,30 +129,37 @@ const mark = async (taskLabel, firstInHandler) => {
         invocationStartCPUsum = invocationStartCPU.user +
             invocationStartCPU.system
         _log(
-            String('').padEnd(70, `-`)
+            String(`+`)
+            .padEnd(16, ` `) +
+            String(`+`)
+            .padEnd(13, ` `) +
+            String(`+`)
+            .padEnd(11, ` `) +
+            String(`+`)
+            .padEnd(15, ` `)
         )
         _log(
-            String(`RAM:`)
+            String(`+RAM:`)
+            .padEnd(16, ` `) +
+            String(`|🕓CPU:`)
+            .padEnd(13, ` `) +
+            String(`|🕓WALL($):`)
+            .padEnd(11, ` `) +
+            String(`|[CPU/WALL]:`)
+            .padEnd(15, ` `)
+        )
+        _log(
+            String(`|MB (Δ,Σ)`)
             .padStart(16, ` `) +
-            String(`CPU🕓:`)
-            .padStart(14, ` `) +
-            String(`($)WALL🕓:`)
-            .padStart(12, ` `) +
-            String(`[CPU/WALL]🕓:`)
-            .padStart(16, ` `)
+            String(`|ms (Δ,Σ)`)
+            .padStart(13, ` `) +
+            String(`|ms (Δ,Σ)`)
+            .padStart(11, ` `) +
+            String(`|% (Δ,Σ)`)
+            .padStart(15, ` `)
         )
         _log(
-            String(`(Δ,Σ) MB`)
-            .padStart(16, ` `) +
-            String(`(Δ,Σ) ms`)
-            .padStart(14, ` `) +
-            String(`(Δ,Σ) ms`)
-            .padStart(12, ` `) +
-            String(`(Δ,Σ) %`)
-            .padStart(16, ` `)
-        )
-        _log(
-            String('').padEnd(70, `-`)
+            String('+').padEnd(69, `-`)
         )
     }
     nthInvocation++
@@ -184,6 +191,9 @@ const mark = async (taskLabel, firstInHandler) => {
 
         // delta of RAM usage;
 
+        
+        '|' +
+        
         (Math.round(
 
                 ((tempMem = process.memoryUsage()[memoryUsageKey]) -
