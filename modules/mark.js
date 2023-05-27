@@ -130,35 +130,36 @@ const mark = async (taskLabel, firstInHandler) => {
         
         const columnedRowBorder =
             String(`+`)
-            .padEnd(17, `-`) +
-            String(`+`)
-            .padEnd(15, `-`) +
+            .padEnd(16, `-`) +
             String(`+`)
             .padEnd(14, `-`) +
             String(`+`)
-            .padEnd(15, `-`)
+            .padEnd(12, `-`) +
+            String(`+`)
+            .padEnd(16, `-`) + 
+            '+'
         
         _log(columnedRowBorder)
         
         _log(
             String(`+RAM`)
-            .padEnd(17, ` `) +
+            .padEnd(16, ` `) +
             String(`|🕓CPU`)
-            .padEnd(15, ` `) +
-            String(`|🕓WALL($)`)
             .padEnd(14, ` `) +
+            String(`|🕓WALL($)`)
+            .padEnd(13, ` `) +
             String(`|[CPU/WALL]`)
-            .padEnd(15, ` `)
+            .padEnd(14, ` `)
         )
         _log(
             String(`|(MB: Δ,Σ)`)
-            .padEnd(17, ` `) +
+            .padEnd(16, ` `) +
             String(`|(ms: Δ,Σ)`)
-            .padEnd(15, ` `) +
-            String(`|(ms:Δ,Σ)`)
             .padEnd(14, ` `) +
+            String(`|(ms:Δ,Σ)`)
+            .padEnd(13, ` `) +
             String(`|(%: Δ,Σ)`)
-            .padEnd(15, ` `)
+            .padEnd(14, ` `)
         )
         
         _log(columnedRowBorder)
@@ -206,7 +207,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 *
                 1000) /
             1000)
-        .toString().padStart(8, ` `) +
+        .toString().padStart(7, ` `) +
 
         // total RAM usage;
 
@@ -241,7 +242,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 lastCPUsum
             ) /
             1000 // microsecond to millisecond conversion;
-        ).toString().padStart(7, ` `) +
+        ).toString().padStart(6, ` `) +
 
         // total CPU time consumed;
 
@@ -266,7 +267,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 invocationStartTime
             ) - lastTime
 
-        ).toString().padStart(6, ` `) +
+        ).toString().padStart(5, ` `) +
 
         // total runtime;
         Math.round(
@@ -285,7 +286,7 @@ const mark = async (taskLabel, firstInHandler) => {
         
         (Math.round(dCPUsum / dTime * 10) /
             10000
-        ).toString().padStart(8, ` `) +
+        ).toString().padStart(7, ` `) +
 
         //
         //
