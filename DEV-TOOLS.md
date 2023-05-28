@@ -12,13 +12,13 @@ Reference : <https://www.freecodecamp.org/news/require-module-in-node-js-everyth
 
 Reference : <https://www.sitepoint.com/understanding-module-exports-exports-node-js/>
 
-- `require()`` executes modules; 
+- `require()` executes modules; 
 - `require.res()` resolves paths without execution;
 
 # AWS Lambda
 
 ```
-AWS Lambda -> runs NodeJS -> calls /var/task/index.js
+AWS Lambda -> runs NodeJS -> calls <span style="background-color:pink">/var/task/index.js</span>
 ```
 ## `(index.js's module).exports.handler`
 
