@@ -18,7 +18,7 @@ Reference : <https://www.sitepoint.com/understanding-module-exports-exports-node
 # AWS Lambda
 
 ```
-AWS Lambda -> runs NodeJS -> calls <span style="background-color:pink">/var/task/index.js</span>
+AWS Lambda -> runs NodeJS -> calls `/var/task/index.js`
 ```
 ## `(index.js's module).exports.handler`
 
