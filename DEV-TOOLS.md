@@ -17,10 +17,9 @@ Reference : <https://www.sitepoint.com/understanding-module-exports-exports-node
 
 # AWS Lambda
 
-```
-(AWS Lambda) -> runs (NodeJS) -> calls (/var/task/index.js)
-```
-## `(index.js's module).exports.handler`
+> `AWS Lambda` -> runs `NodeJS` -> calls `/var/task/index.js`
+
+## `(/var/task/index.js).exports.handler`
 
 This defines how AWS Lambda reacts to each invocation of the FaaS
 
@@ -33,7 +32,7 @@ This defines how AWS Lambda reacts to each invocation of the FaaS
 
 ## (ru) Trace
 
-### (ru) Trace : (index.js) prior to definition of (exports.handler)
+### (ru) Trace : `/var/task/index.js` prior to definition of `exports.handler`
 
 0.  `/var/task/index.js` requires :
 
@@ -117,32 +116,32 @@ This defines how AWS Lambda reacts to each invocation of the FaaS
     
     2.  various `/var/task/modules/middlewares/###` files
     
-### (ru) Trace : (index.js) definition of (exports.handler)
+### (ru) Trace : definition of `(/var/task/index.js).exports.handler`
 
-0.  ((index.js).exports.handler) simply returns to the FaaS the result of calling 
+0.  `(index.js).exports.handler` simply returns to the FaaS the result of calling 
     
-    0.  (`/var/task/modules/framework/ruthenium`), a function, on the arguments :
+    0.  `/var/task/modules/framework/ruthenium`, a function, on the arguments :
 
-        0.  (hostInitializedData) : data from the runtime environment
+        0.  `hostInitializedData` : data from the runtime environment
         
-        1.  (middlewares) : operators that may be applied to that data
+        1.  `middlewares` : an array of operators that may be applied to that data
         
-It should be noted that the specific order of middlewares in this array
-underpins the (ru) framework's order of operations upon (hostInitializedData)
+It should be noted that the specific order of `middlewares in their array`
+underpins the (ru) framework's order of operations upon `hostInitializedData`
         
-#### (ru) Trace : what happens when (ruthenium) is called
+#### (ru) Trace : what happens when `ruthenium` is called
 
-0.  (initialData) is prepared, 
+0.  `initialData` is prepared, 
 
-    0.  by appending initialised (frameworkData), 
-    1.  to (hostInitializedData)
+    0.  by appending initialised `frameworkData`, 
+    1.  to `hostInitializedData`
 
-1.  (finalData) is prepared, 
+1.  `finalData` is prepared, 
 
-    0.  by reducing (middlewares),
-    1.  with the (ruthenium-reducer),
-    3.  as parameterised/argued with (initialData)
+    0.  by reducing `middlewares`,
+    1.  with the `ruthenium-reducer`,
+    3.  as parameterised/argued with `initialData`
     
 ### (ru) Trace : middleware architecture ( as developed )
 
-... please proceed, to read the comments in (index.js)
+... please proceed, to read the comments in `/var/task/index.js`
