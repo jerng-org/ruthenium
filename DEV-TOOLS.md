@@ -145,3 +145,17 @@ underpins the (ru) framework's order of operations upon `hostInitializedData`
 ### (ru) Trace : middleware architecture ( as developed )
 
 ... please proceed, to read the comments in `/var/task/index.js`
+
+## (ru) Logging
+
+These varieties of code need to be streamlined.
+
+### `/var/task/modules/custom-logger.js`
+
+### `/var/task/modules/framework-description-logger.js`
+
+### `/var/task/modules/mark.js`
+
+### `/var/task/modules/print.js`
+
+## (ru) Comments 
