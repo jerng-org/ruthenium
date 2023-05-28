@@ -159,3 +159,10 @@ These varieties of code need to be streamlined.
 ### `/var/task/modules/print.js`
 
 ## (ru) Comments 
+
+These varieties of code need to be streamlined.
+
+- inline ( conventions? )
+- DOCUMENTATION.MD
+- MOTIVATIONS.MD
+- README.MD
