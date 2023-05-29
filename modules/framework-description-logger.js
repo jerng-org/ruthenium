@@ -58,13 +58,23 @@ if (conf.frameworkDescriptionLogging) {
 
     frameworkDescriptionLogger.summary = conf.frameworkDescriptionLogging > 1 ?
         _input => {
-            frameworkDescriptionLogger.log(_input)
+            frameworkDescriptionLogger.log(
+                _input.replace(
+                    /\n/g, 
+                    ' '.repeat( frameworkDescriptionLogger.callDepth ) + '\n'
+                )
+            )
         } :
         _ => _
 
     frameworkDescriptionLogger.verbiage = conf.frameworkDescriptionLogging > 2 ?
         _input => {
-            frameworkDescriptionLogger.log(_input)
+            frameworkDescriptionLogger.log(
+                _input.replace(
+                    /\n/g, 
+                    ' '.repeat( frameworkDescriptionLogger.callDepth ) + '\n'
+                )
+            )
         } :
         _ => _
 
@@ -96,12 +106,12 @@ if (conf.frameworkDescriptionLogging) {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
                 '\n┐\n├' +
-                '❮❮ STARTING call : ' +
+                ' ❮❮ STARTING call : ' +
                 (
                     (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
                     result[1] :
                     err.stack
-                ) 
+                )
             )
             .replace(
                 /\n/g,
@@ -120,7 +130,7 @@ if (conf.frameworkDescriptionLogging) {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
                 '\n└' +
-                '   ENDING call   : ' +
+                '    ENDING call   : ' +
                 (
                     (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
                     result[1] :
