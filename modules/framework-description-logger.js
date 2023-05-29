@@ -46,8 +46,8 @@ if (conf.frameworkDescriptionLogging) {
                         err.stack
                     ) +
                     ')\n|' +
-                    String(_input).replace(/\n/g, '  * \n') +
-                    '  */('
+                    String(_input).replace(/\n/g, '\n * ') +
+                    '  */ '
                 )
                 .replace(
                     /\n/g,
