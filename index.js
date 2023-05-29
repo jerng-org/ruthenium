@@ -476,7 +476,7 @@ try {
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
         if (rus.conf.frameworkDescriptionLogging) {
-            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\nFrameworkDescriptionLogString RE-STARTED (~/index.js/handler EXECUTION)"
+            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\n⏸⏺ FrameworkDescriptionLogString RE-STARTED (~/index.js/handler EXECUTION)"
             rus.frameworkDescriptionLogger.callStarts()
         }
 
