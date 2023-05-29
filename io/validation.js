@@ -1,8 +1,8 @@
 'use strict'
 
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
-const conf = rusMinus1.conf 
-const mark = rusMinus1.mark 
+const conf = rusMinus1.conf
+const mark = rusMinus1.mark
 
 const print = require('/var/task/modules/print.js')
 
@@ -10,19 +10,17 @@ const fs = require('fs')
 
 let models = {}
 const modelFileNames = fs.readdirSync('/var/task/io/models')
-modelFileNames.forEach((current, index, array) => {
 
-    rusMinus1.frameworkDescriptionLogger.callStarts()
+rusMinus1.frameworkDescriptionLogger.callStarts()
+modelFileNames.forEach((current, index, array) => {
 
     /* TODO : these naming assumptions : centralise the documentation */
     if (current[0] != '_' &&
         current.toLowerCase().slice(-3) == '.js') {
         models[current.slice(0, -3)] = require('/var/task/io/models/' + current)
     }
-
-    rusMinus1.frameworkDescriptionLogger.callEnds()
-
 } /* , thisArg */ )
+rusMinus1.frameworkDescriptionLogger.callEnds()
 
 /*  See validate(), PARAMETER 2 - modelKey
  *
