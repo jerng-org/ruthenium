@@ -45,14 +45,15 @@ if (conf.frameworkDescriptionLogging) {
                         result[1] :
                         err.stack
                     ) +
-                    ')\n|' +
+                    ')\n|  * ' +
                     String(_input).replace(
                         /\n/g,
                         '\n ' +
-                        ' '.repeat(frameworkDescriptionLogger.callDepth - 1) +
+                        ' '.repeat(frameworkDescriptionLogger.callDepth) +
                         '* '
                     ) +
-                    '  */ '
+                    ' '.repeat(frameworkDescriptionLogger.callDepth) +
+                    '\n  */ '
                 )
                 .replace(
                     /\n/g,
