@@ -49,7 +49,7 @@ if (conf.frameworkDescriptionLogging) {
                     String(_input).replace(
                         /\n/g,
                         '\n ' +
-                        ' * '
+                        '  * '
                     ) +
                     '\n   */ '
                 )
