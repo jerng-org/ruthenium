@@ -28,76 +28,77 @@ Environmental variable with password
 */
 
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
-const mark = rusMinus1.mark 
+const mark = rusMinus1.mark
 const childProcess = require('child_process')
 const shellExports = `
             export PATH=$PATH:/opt/git/bin; \
             export LD_LIBRARY_PATH=/opt/git/lib; \
-`   /*  based on lambda layer "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:8"
-    
-        roughly : 
-        
-            lambda-layer.zip
-            |
-            +-git
-              |
-              +-bin
-              | |
-              | +-git ( you may want to compile this yourself, ~22MB, with --prefix=/opt/git :
-              |
-              |     ref : https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-              |
-              |         sudo yum install -y \
-              |         gcc \
-              |         autoconf automake curl-devel \
-              |         expat-devel gettext-devel \
-              |         openssl-devel \
-              |         perl-devel zlib-devel
-              |         
-              |             # git gets installed incidentally 
-              |         
-              |         wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.40.1.tar.gz
-              |         
-              |         tar -zxf git-2.40.1.tar.gz
-              |         
-              |         cd git-2.40.1
-              |         
-              |         ./configure --prefix=/opt/git --with-curl --with-openssl
-              |         
-              |         make all
-              |         
-              |         sudo make install
-              |   )
-              | 
-              +-libexec
-              | |
-              | +-git-core
-              |   |
-              |   +-git-remote-https ( ~2.2MB, you can just copy this from yum's installation )
-              |   
-              +-lib
-              | |
-              | +-( you can copy these, perhaps as below, regarding FILENAME=git, git-remote-https :
-              | 
-              |     $   ldd FILENAME | \
-              |         awk 'NF == 4 {print $3}; NF == 2 {print $1}' | \
-              |         sed 's/^/cp /' | sed 's/$/ TARGETDIR/' | bash
-              |   )
-              |
-              +-share
-                |
-                +-git-core
-                  |
-                  +-templates
-                    |
-                    +-( just copy these in from yum's installation, they are small )
-        
-    */
+`
+/*  based on lambda layer "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:8"
+ 
+     roughly : 
+     
+         lambda-layer.zip
+         |
+         +-git
+           |
+           +-bin
+           | |
+           | +-git ( you may want to compile this yourself, ~22MB, with --prefix=/opt/git :
+           |
+           |     ref : https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+           |
+           |         sudo yum install -y \
+           |         gcc \
+           |         autoconf automake curl-devel \
+           |         expat-devel gettext-devel \
+           |         openssl-devel \
+           |         perl-devel zlib-devel
+           |         
+           |             # git gets installed incidentally 
+           |         
+           |         wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.40.1.tar.gz
+           |         
+           |         tar -zxf git-2.40.1.tar.gz
+           |         
+           |         cd git-2.40.1
+           |         
+           |         ./configure --prefix=/opt/git --with-curl --with-openssl
+           |         
+           |         make all
+           |         
+           |         sudo make install
+           |   )
+           | 
+           +-libexec
+           | |
+           | +-git-core
+           |   |
+           |   +-git-remote-https ( ~2.2MB, you can just copy this from yum's installation )
+           |   
+           +-lib
+           | |
+           | +-( you can copy these, perhaps as below, regarding FILENAME=git, git-remote-https :
+           | 
+           |     $   ldd FILENAME | \
+           |         awk 'NF == 4 {print $3}; NF == 2 {print $1}' | \
+           |         sed 's/^/cp /' | sed 's/$/ TARGETDIR/' | bash
+           |   )
+           |
+           +-share
+             |
+             +-git-core
+               |
+               +-templates
+                 |
+                 +-( just copy these in from yum's installation, they are small )
+     
+ */
 
 const lambdaGitCommit = commitMessage => {
+    
+    rusMinus1.frameworkDescriptionLogger.callStarts()
     try {
-
-        rusMinus1.frameworkDescriptionLogger.callStarts()
 
         let notes = {}
 
@@ -109,7 +110,7 @@ const lambdaGitCommit = commitMessage => {
             `, {
                 encoding: 'utf8',
                 stdio: 'inherit',
-                cwd:'/tmp'
+                cwd: '/tmp'
             }
         )
 
@@ -145,10 +146,10 @@ const lambdaGitCommit = commitMessage => {
 
         mark(`~/io/lambda-git-commit.js Execution complete`)
 
-        rusMinus1.frameworkDescriptionLogger.callEnds()
 
     }
     catch (e) { console.error(`lambda-git-commit.js`, e.stack) }
+    rusMinus1.frameworkDescriptionLogger.callEnds()
 }
 
 module.exports = lambdaGitCommit
