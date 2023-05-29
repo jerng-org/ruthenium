@@ -39,14 +39,15 @@ if (conf.frameworkDescriptionLogging) {
             frameworkDescriptionLogger.frameworkDescriptionLogString +=
                 (
                     '\n|\n|' +
-                    '    (' +
+                    ' /* (' +
                     (
                         (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
                         result[1] :
                         err.stack
                     ) +
                     ')\n|' +
-                    String(_input).replace(/\n/g, '    \n')
+                    String(_input).replace(/\n/g, '  * \n') +
+                    '  */('
                 )
                 .replace(
                     /\n/g,
@@ -58,7 +59,7 @@ if (conf.frameworkDescriptionLogging) {
 
     frameworkDescriptionLogger.summary = conf.frameworkDescriptionLogging > 1 ?
         _input => {
-            frameworkDescriptionLogger.log(_input.re)
+            frameworkDescriptionLogger.log(_input)
         } :
         _ => _
 
