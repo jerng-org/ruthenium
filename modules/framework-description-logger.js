@@ -60,7 +60,7 @@ if (conf.frameworkDescriptionLogging) {
         _input => {
             frameworkDescriptionLogger.log(
                 _input.replace(
-                    /\n/g, 
+                    /[^|\n]/g, 
                     '\n' + ' '.repeat( frameworkDescriptionLogger.callDepth )
                 )
             )
@@ -71,7 +71,7 @@ if (conf.frameworkDescriptionLogging) {
         _input => {
             frameworkDescriptionLogger.log(
                 _input.replace(
-                    /\n/g, 
+                    /[^|\n]/g, 
                     '\n' + ' '.repeat( frameworkDescriptionLogger.callDepth )
                 )
             )
