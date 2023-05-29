@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const gitCommit = 1 
-const gitCommitMessage = `review, refactoring, & documentation : `
+const gitCommitMessage = `review, refactoring, & documentation : prettifying frameworkDescriptionLogger output`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {

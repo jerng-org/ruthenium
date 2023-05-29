@@ -95,7 +95,7 @@ if (conf.frameworkDescriptionLogging) {
 
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
-                '\n│\n├' +
+                '\n┐\n├' +
                 '─ STARTING call : ' +
                 (
                     (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
