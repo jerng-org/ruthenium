@@ -48,8 +48,8 @@ if (conf.frameworkDescriptionLogging) {
                     ')\n|  * ' +
                     String(_input).replace(
                         /\n/g,
-                        '\n ' +
-                        '| * '
+                        '\n' +
+                        '|  * '
                     ) +
                     '\n   */ '
                 )
