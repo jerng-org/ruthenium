@@ -51,7 +51,7 @@ if (conf.frameworkDescriptionLogging) {
                         '\n' +
                         '|  * '
                     ) +
-                    '\n   */ '
+                    '\n|  */ '
                 )
                 .replace(
                     /\n/g,
