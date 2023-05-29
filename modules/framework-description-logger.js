@@ -49,11 +49,9 @@ if (conf.frameworkDescriptionLogging) {
                     String(_input).replace(
                         /\n/g,
                         '\n ' +
-                        ' '.repeat(frameworkDescriptionLogger.callDepth) +
-                        '* '
+                        ' * '
                     ) +
-                    ' '.repeat(frameworkDescriptionLogger.callDepth) +
-                    '\n  */ '
+                    '\n   */ '
                 )
                 .replace(
                     /\n/g,
