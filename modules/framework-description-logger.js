@@ -21,11 +21,11 @@ var frameworkDescriptionLogger = {
 if (conf.frameworkDescriptionLogging) {
 
     frameworkDescriptionLogger.frameworkDescriptionLogString =
-        "\n\nFrameworkDescriptionLogString STARTED (framework-description-logger.js INITIALISATION)"
+        "\n\n⏺FrameworkDescriptionLogString STARTED (framework-description-logger.js INITIALISATION)"
 
     frameworkDescriptionLogger.endLog = _ => {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
-            '\n|\n| ... FrameworkDescriptionLogString ENDED (framework-description-logger.js/endLog EXECUTION)\n'
+            '\n\n⏹FrameworkDescriptionLogString ENDED (framework-description-logger.js/endLog EXECUTION)\n'
         console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 
