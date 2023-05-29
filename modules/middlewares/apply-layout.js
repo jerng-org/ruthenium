@@ -28,17 +28,15 @@ rus.frameworkDescriptionLogger.callEnds()
 //  THIS SECTION IS REDUNDANT WITH (router.js)
 const tasks = {}
 const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
-taskFileNames.forEach((current, index, array) => {
 
-    rus.frameworkDescriptionLogger.callStarts()
+rus.frameworkDescriptionLogger.callStarts()
+taskFileNames.forEach((current, index, array) => {
 
     if (current.toLowerCase().slice(-3) == '.js') {
         tasks[current.slice(0, -3)] = require('/var/task/tasks/' + current)
     }
-
-    rus.frameworkDescriptionLogger.callEnds()
-
 } /* , thisArg */ )
+rus.frameworkDescriptionLogger.callEnds()
 
 
 /*  SUMMARY:    (apply-layout.js) will take (data.RU.response.body) and replace it
