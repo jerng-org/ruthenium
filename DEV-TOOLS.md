@@ -24,6 +24,49 @@ Reference : <https://www.sitepoint.com/understanding-module-exports-exports-node
 This defines how AWS Lambda reacts to each invocation of the FaaS
 
 ... therefore note that the environment AROUND this handler PERSISTS across multiple FaaS invocations
+
+## API Gateway - HTTP API - logging variables :
+
+<https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-logging-variables.html>
+
+```javascript
+    const inner = ["$context.accountId", "$context.apiId", "$context.authorizer.claims.property",
+    "$context.awsEndpointRequestId", "$context.dataProcessed",
+    "$context.domainName", "$context.domainPrefix", "$context.error.message",
+    "$context.error.messageString", "$context.error.responseType",
+    "$context.extendedRequestId", "$context.httpMethod",
+    "$context.identity.sourceIp", "$context.identity.userAgent", "$context.path",
+    "$context.protocol", "$context.requestId", "$context.requestTime",
+    "$context.requestTimeEpoch", "$context.routeKey", "$context.stage",
+    "$context.integrationErrorMessage", "$context.integrationLatency",
+    "$context.integrationStatus", "$context.responseLatency",
+    "$context.responseLength", "$context.status"]
+    
+    .map(a=>(`"${a.slice(7)}":"${a}"`)).join(',')
+    
+    `{"context":{${inner}}}`
+```
+
+## LAMBDA ENVIRONMENTAL VARIABLES :
+
+```
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED	(value=1)
+    COGNITO_ISSUER_HOST	(secret)
+    COGNITO_JWKS_URI	(secret)
+    COGNITO_REDIRECT_URI	(secret)
+    COGNITO_RELYING_PARTY_ID	(secret)
+    COGNITO_RELYING_PARTY_SECRET	(secret)
+    GITHUB_BRANCH (developement)
+    GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN (secret)
+```
+
+## LAMBDA & SSE / SERVER-SENT EVENTS
+
+    Doing this in Node.js is currently expensive, and Lambdas won't stay alive
+    for very long anyway. So it is best not to try this yet, until a reasonably
+    cost-efficient architecture is discovered. (AWS may add features later.)
+    
+    <https://html.spec.whatwg.org/multipage/server-sent-events.html>
     
 # Framework ( ru )
 
