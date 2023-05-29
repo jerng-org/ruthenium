@@ -75,7 +75,7 @@ if (conf.frameworkDescriptionLogging) {
         // COMBINE 
         let result
         let err = {}
-        
+
         Error.captureStackTrace(err)
 
         // Uncomment during debugging of callDepth 
@@ -96,7 +96,7 @@ if (conf.frameworkDescriptionLogging) {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
                 '\n┐\n├' +
-                '─ STARTING call : ' +
+                '❮❮STARTING call : ' +
                 (
                     (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
                     result[1] :
@@ -120,13 +120,12 @@ if (conf.frameworkDescriptionLogging) {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
                 '\n└' +
-                '─ ENDING call   : ' +
+                '❯❯ENDING call   : ' +
                 (
                     (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
                     result[1] :
                     err.stack
-                ) + // third line 
-                '\n'
+                ) 
             )
             .replace(
                 /\n/g,
