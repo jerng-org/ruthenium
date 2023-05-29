@@ -59,9 +59,10 @@ if (conf.frameworkDescriptionLogging) {
     frameworkDescriptionLogger.summary = conf.frameworkDescriptionLogging > 1 ?
         _input => {
             frameworkDescriptionLogger.log(
+                ' '.repeat(frameworkDescriptionLogger.callDepth) +
                 _input.replace(
-                    /[^|\n]/g, 
-                    '\n' + ' '.repeat( frameworkDescriptionLogger.callDepth )
+                    /\n/g,
+                    '\n' + ' '.repeat(frameworkDescriptionLogger.callDepth)
                 )
             )
         } :
@@ -70,9 +71,10 @@ if (conf.frameworkDescriptionLogging) {
     frameworkDescriptionLogger.verbiage = conf.frameworkDescriptionLogging > 2 ?
         _input => {
             frameworkDescriptionLogger.log(
+                ' '.repeat(frameworkDescriptionLogger.callDepth) +
                 _input.replace(
-                    /[^|\n]/g, 
-                    '\n' + ' '.repeat( frameworkDescriptionLogger.callDepth )
+                    /\n/g,
+                    '\n' + ' '.repeat(frameworkDescriptionLogger.callDepth)
                 )
             )
         } :
