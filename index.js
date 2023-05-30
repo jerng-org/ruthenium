@@ -1,6 +1,6 @@
 'use strict'
 
-const defineLambdaNodeJSHandler = _ => {
+const initLambdaNodeJSHandler = _ => {
 
     //////////
     //      //
@@ -456,7 +456,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 }
 
 try {
-    defineLambdaNodeJSHandler()
+    initLambdaNodeJSHandler()
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
