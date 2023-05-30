@@ -7,9 +7,14 @@
  *
  **/
 
+const _conf = require(`/var/task/configuration.js`)
+
 module.exports = {
 
-    conf: require(`/var/task/configuration.js`),
+    conf: _conf,
+
+    customLogger: _conf.customLogging ?
+        require(`/var/task/modules/custom-logger.js`) : undefined,
 
     frameworkDescriptionLogger: require(`/var/task/modules/framework-description-logger.js`),
 
