@@ -28,8 +28,8 @@ if (conf.customLogging) {
             console.initialError.apply(this, arguments)
 
             customLogger.customLogString += "\n" +
-                conf.dateTimeFormat.format(customLogStringDate) + ' ❌ ERRO ' +
-                Array.from(arguments).join(' ')
+                conf.dateTimeFormat.format(customLogStringDate) + ' ❌ERRO ' +
+                Array.from(arguments).join(' ').replace(/\n/g,'\n'+' '.repeat(37))
         }
     } {
         console.initialWarn = console.warn
@@ -39,7 +39,7 @@ if (conf.customLogging) {
             }
             customLogger.customLogString += "\n" +
                 conf.dateTimeFormat.format(customLogStringDate) + ' 📢WARN ' +
-                Array.from(arguments).join(' ')
+                Array.from(arguments).join(' ').replace(/\n/g,'\n'+' '.repeat(37))
         }
     } {
         console.initialLog = console.log
@@ -49,7 +49,7 @@ if (conf.customLogging) {
             }
             customLogger.customLogString += "\n" +
                 conf.dateTimeFormat.format(customLogStringDate) + ' ℹ️LOG  ' +
-                Array.from(arguments).join(' ')
+                Array.from(arguments).join(' ').replace(/\n/g,'\n'+' '.repeat(37))
         }
     } {
         console.initialInfo = console.info
@@ -59,7 +59,7 @@ if (conf.customLogging) {
             }
             customLogger.customLogString += "\n" +
                 conf.dateTimeFormat.format(customLogStringDate) + ' ℹ️INFO ' +
-                Array.from(arguments).join(' ')
+                Array.from(arguments).join(' ').replace(/\n/g,'\n'+' '.repeat(37))
         }
     }
 
@@ -83,7 +83,7 @@ if (conf.customLogging) {
         console.initialLog(
             customLogger.customLogString +
             '\n' +
-            conf.dateTimeFormat.format(customLogStringDate) + ' ⏯    ' +
+            conf.dateTimeFormat.format(customLogStringDate) + ' ⏯     ' +
             'CustomLogString LOGGED : ' +
             Array.from(arguments).join(':')
         )
