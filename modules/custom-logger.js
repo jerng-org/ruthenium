@@ -25,8 +25,8 @@ if (conf.customLogging) {
         console.initialError = console.error
         console.error = function() {
             //  regardless of (conf.customLoggingAllowsNativeLogging)
-            console.initialError.apply(this, arguments) 
-            
+            console.initialError.apply(this, arguments)
+
             customLogger.customLogString += "\n" +
                 conf.dateTimeFormat.format(customLogStringDate) + ' ❌ ERRO ' +
                 Array.from(arguments).join(' ')
@@ -74,16 +74,17 @@ if (conf.customLogging) {
 
     customLogger.restartCustomLogString = function() {
         customLogger.customLogString = '\n\n' +
-            conf.dateTimeFormat.format(customLogStringDate) + ' ⏸⏺    '+
+            conf.dateTimeFormat.format(customLogStringDate) + ' ⏸⏺    ' +
             'CustomLogString RE-STARTED : ' +
             Array.from(arguments).join(' : ')
     }
 
     customLogger.logCustomLogString = function() {
         console.initialLog(
-            conf.dateTimeFormat.format(customLogStringDate) + ' ⏯    '+
             customLogger.customLogString +
-            '\nCustomLogString LOGGED : ' +
+            '\n' +
+            conf.dateTimeFormat.format(customLogStringDate) + ' ⏯    ' +
+            'CustomLogString LOGGED : ' +
             Array.from(arguments).join(':')
         )
     }
