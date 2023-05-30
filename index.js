@@ -658,7 +658,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         // runs when (handler) is executed 
         if (rus.conf.frameworkDescriptionLogging) {
             rus.frameworkDescriptionLogger.callEnds()
-            rus.frameworkDescriptionLogger.endLog()
+            rus.frameworkDescriptionLogger.logEnds()
         }
         if (rus.conf.customLogging) {
             rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler CALL)')
@@ -683,7 +683,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
     // runs when (handler) is initialised
     if (rus.conf.frameworkDescriptionLogging) {
         rus.frameworkDescriptionLogger.callEnds()
-        rus.frameworkDescriptionLogger.log()
+        rus.frameworkDescriptionLogger.logEnds()
     }
     if (rus.conf.customLogging) {
         rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler INIT)')
