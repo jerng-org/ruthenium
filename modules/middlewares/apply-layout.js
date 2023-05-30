@@ -8,36 +8,34 @@ const defaultLayoutTaskName = 'layout'
 //  THIS SECTION REQUIRES ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (compose-response.js)
 const markups = {}
-const markupFileNames = rus.node.fs.readdirSync('/var/task/tasks', {
-    withFileTypes: true
-})
 
-rus.frameworkDescriptionLogger.callStarts()
-markupFileNames.forEach((current, index, array) => {
+//  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
+//  THIS SECTION IS REDUNDANT WITH (router.js)
+const tasks = {}
 
+const initMarkupsAndTasks = _ => {
+    rus.frameworkDescriptionLogger.callStarts()
+
+    const markupFileNames = rus.node.fs.readdirSync('/var/task/tasks', {
+        withFileTypes: true
+    })
+    markupFileNames.forEach((current, index, array) => {
         if (current.isFile()) {
 
             // console.warn(`searching in:`, current.name.slice (0, -3), `for`, '/var/task/tasks/' + current.name )
             markups[current.name.slice(0, -3)] = require('/var/task/tasks/' + current.name)
         }
-    } // , thisArg  
-)
-rus.frameworkDescriptionLogger.callEnds()
+    } /* , thisArg */ )
+    const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
+    taskFileNames.forEach((current, index, array) => {
+        if (current.toLowerCase().slice(-3) == '.js') {
+            tasks[current.slice(0, -3)] = require('/var/task/tasks/' + current)
+        }
+    } /* , thisArg */ )
 
-//  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
-//  THIS SECTION IS REDUNDANT WITH (router.js)
-const tasks = {}
-const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
-
-rus.frameworkDescriptionLogger.callStarts()
-taskFileNames.forEach((current, index, array) => {
-
-    if (current.toLowerCase().slice(-3) == '.js') {
-        tasks[current.slice(0, -3)] = require('/var/task/tasks/' + current)
-    }
-} /* , thisArg */ )
-rus.frameworkDescriptionLogger.callEnds()
-
+    rus.frameworkDescriptionLogger.callEnds()
+}
+initMarkupsAndTasks()
 
 /*  SUMMARY:    (apply-layout.js) will take (data.RU.response.body) and replace it
  *              with a LAYOUT MARKUP which includes whatever was previously in
