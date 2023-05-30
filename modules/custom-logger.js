@@ -61,13 +61,17 @@ if (conf.customLogging) {
     // other definitions
 
     customLogger.startCustomLogString = function() {
-        customLogger.customLogString = '\n\nCustomLogString STARTED : ' +
+        customLogger.customLogString = '\n\n' +
+            conf.dateTimeFormat.format(customLogStringDate) + ' ⏺     ' +
+            'CustomLogString STARTED : ' +
             Array.from(arguments).join(' : ') +
             '\n'
     }
 
     customLogger.restartCustomLogString = function() {
-        customLogger.customLogString = '\n\nCustomLogString RE-STARTED : ' +
+        customLogger.customLogString = '\n\n' +
+            conf.dateTimeFormat.format(customLogStringDate) + ' ⏸⏺    ' +
+            'CustomLogString RE-STARTED : ' +
             Array.from(arguments).join(' : ') +
             '\n'
     }
