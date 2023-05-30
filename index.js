@@ -236,14 +236,9 @@ const initLambdaNodeJSHandler = _ => {
     // LAMBDA HANDLER
     exports.handler = async function() {
 
-        if (rus.conf.customLogging) {
-            rus.customLogger.restartCustomLogString('(/var/task/(index.js).exports.handler CALL)')
-            //rus.customLogStringAppender("\n\n(index.js).exports.handler : CustomLogString RE-START : ")
-        }
-        if (rus.conf.frameworkDescriptionLogging) {
-            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\n⏸⏺ FrameworkDescriptionLogString RE-STARTED (/var/task/(index.js).exports.handler CALL)"
-            rus.frameworkDescriptionLogger.callStarts()
-        }
+        rus.customLogger.restartCustomLogString('(/var/task/(index.js).exports.handler CALL)')
+        rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\n⏸⏺ FrameworkDescriptionLogString RE-STARTED (/var/task/(index.js).exports.handler CALL)"
+        rus.frameworkDescriptionLogger.callStarts()
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
         console.log(`lambda>node>handler, 
@@ -420,13 +415,8 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         )
 
         // runs when (handler) is executed 
-        if (rus.conf.frameworkDescriptionLogging) {
-            rus.frameworkDescriptionLogger.callEnds()
-            rus.frameworkDescriptionLogger.logEnds()
-        }
-        if (rus.conf.customLogging) {
-            rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler CALL)')
-        }
+        rus.frameworkDescriptionLogger.callEnds()
+        rus.frameworkDescriptionLogger.logEnds()
 
         return rutheniumResponse
     }
@@ -445,14 +435,9 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
     `)
 
     // runs when (handler) is initialised
-    if (rus.conf.frameworkDescriptionLogging) {
-        rus.frameworkDescriptionLogger.callEnds()
-        rus.frameworkDescriptionLogger.logEnds()
-    }
-    if (rus.conf.customLogging) {
-        rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler INIT)')
-    }
-
+    rus.frameworkDescriptionLogger.callEnds()
+    rus.frameworkDescriptionLogger.logEnds()
+    rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler INIT)')
 }
 
 try {

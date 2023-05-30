@@ -10,7 +10,8 @@ const conf = require(`/var/task/configuration.js`)
 
 var customLogger = {
     customLogString: '',
-    logCustomLogString: _ => _
+    startCustomLogString: _ => _,
+    restartCustomLogString : _ => _
 }
 
 if (conf.customLogging) {
@@ -18,6 +19,7 @@ if (conf.customLogging) {
     let customLogStringDate = new Date
 
     // Customisation of "console"
+    
     {
         console.initialError = console.error
         console.error = function() {
@@ -56,21 +58,17 @@ if (conf.customLogging) {
     }
 
     // other definitions
-    customLogger.customLogString = "\n\nCLS/CustomLogString STARTED : (~/modules/custom-logger.js INITIALISATION)\n"
-
-    customLogger.restartCustomLogString = function() {
-        customLogger.customLogString = '\n\nCLS/CustomLogString RE-STARTED : ' +
+    
+    customLogger.startCustomLogString = function() {
+        customLogger.customLogString = '\n\nCustomLogString STARTED : ' +
             Array.from(arguments).join(' : ') +
             '\n'
     }
-
-    customLogger.logCustomLogString = function() {
-        console.initialLog(
-            customLogger.customLogString +
-            '\nCLS LOGGED : ' +
-            Array.from(arguments).join(':') +
-            '\n\n'
-        )
+    
+    customLogger.restartCustomLogString = function() {
+        customLogger.customLogString = '\n\nCustomLogString RE-STARTED : ' +
+            Array.from(arguments).join(' : ') +
+            '\n'
     }
 
 }
