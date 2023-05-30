@@ -31,7 +31,7 @@ if (conf.customLogging) {
                 console.initialWarn.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\n📢WARN" +
+            customLogger.customLogString += "\n📢WARN " +
                 customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }
@@ -43,7 +43,7 @@ if (conf.customLogging) {
                 console.initialLog.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nℹ️LOG" +
+            customLogger.customLogString += "\nℹ️LOG  " +
                 customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }
@@ -55,7 +55,7 @@ if (conf.customLogging) {
                 console.initialInfo.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nℹ️INFO" +
+            customLogger.customLogString += "\nℹ️INFO " +
                 customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }
