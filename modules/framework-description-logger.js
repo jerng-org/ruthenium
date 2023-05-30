@@ -76,7 +76,7 @@ if (conf.frameworkDescriptionLogging) {
         } :
         _ => _
 
-    frameworkDescriptionLogger.callStarts = _ => {
+    frameworkDescriptionLogger.callStarts = function() {
 
         frameworkDescriptionLogger.callDepth++
 
