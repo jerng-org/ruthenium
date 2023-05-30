@@ -66,13 +66,13 @@ if (conf.frameworkDescriptionLogging) {
 
     frameworkDescriptionLogger.summary = conf.frameworkDescriptionLogging > 1 ?
         _input => {
-            frameworkDescriptionLogger.log('SUMMARY:\n' + _input)
+            frameworkDescriptionLogger.log('📝 SUMMARY:\n' + _input)
         } :
         _ => _
 
     frameworkDescriptionLogger.verbiage = conf.frameworkDescriptionLogging > 2 ?
         _input => {
-            frameworkDescriptionLogger.log('VERBIAGE:\n' + _input)
+            frameworkDescriptionLogger.log('📝 VERBIAGE:\n' + _input)
         } :
         _ => _
 
