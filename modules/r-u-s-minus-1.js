@@ -8,13 +8,16 @@
  **/
 
 const _conf = require(`/var/task/configuration.js`)
+const _customLogger = require(`/var/task/modules/custom-logger.js`)
+
+if (_conf.customLogging)
+    _customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
 
 module.exports = {
 
     conf: _conf,
 
-    customLogger: _conf.customLogging ?
-        require(`/var/task/modules/custom-logger.js`) : undefined,
+    customLogger: _customLogger,
 
     frameworkDescriptionLogger: require(`/var/task/modules/framework-description-logger.js`),
 
