@@ -17,6 +17,8 @@ var frameworkDescriptionLogger = {
     callEnumeration: [],
     callStarts: _ => _,
     callEnds: _ => _,
+    summary: _ => _,
+    verbiage: _ => _,
 }
 
 if (conf.frameworkDescriptionLogging) {

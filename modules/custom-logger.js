@@ -6,7 +6,7 @@ const conf = require(`/var/task/configuration.js`)
 //      //
 //  !!  //  Make way.
 //      //
-//////////
+//////////  ❌ 📢 ℹ️
 
 var customLogger = {
     customLogString: '',
@@ -31,7 +31,7 @@ if (conf.customLogging) {
                 console.initialWarn.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCLS WARN " +
+            customLogger.customLogString += "\n📢WARN" +
                 customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }
@@ -43,7 +43,7 @@ if (conf.customLogging) {
                 console.initialLog.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCLS INFO " +
+            customLogger.customLogString += "\nℹ️LOG" +
                 customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }
@@ -55,7 +55,7 @@ if (conf.customLogging) {
                 console.initialInfo.apply(this, arguments)
             }
             var customLogStringDate = new Date
-            customLogger.customLogString += "\nCLS INFO " +
+            customLogger.customLogString += "\nℹ️INFO" +
                 customLogStringDate.toISOString() + ' ' +
                 Array.from(arguments).join(' ')
         }

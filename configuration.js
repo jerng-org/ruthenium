@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const gitCommit = 1 
-const gitCommitMessage = `review, refactoring, & documentation : removed dev-junk code`
+const gitCommitMessage = `review, refactoring, & documentation : custom-logger`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 module.exports = {
@@ -40,7 +40,7 @@ module.exports = {
      *      2 : undefined ... maybe have a hybrid mode
      */
 
-    customLogging: 0,
+    customLogging: 1,
     customLoggingAllowsNativeLogging: 0,
 
     defaults: {
@@ -70,7 +70,7 @@ module.exports = {
      *
      *      3   :   2 + verbose narration
      */
-    frameworkDescriptionLogging : 3,
+    frameworkDescriptionLogging : 0,
 
     /*  gitCommit
      *
