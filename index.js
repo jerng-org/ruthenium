@@ -150,15 +150,6 @@ try {
     //
     //  If we run this, the global execution context will wait for it to finish
     //  running before shutting itself down.
-    //
-    //  IIRC : the Lambda runtime DOES allow us to leave running async processes
-    //  paused, while the overall Lambda container is paused, in between 
-    //  billable periods; this is NOT THE DEFAULT; but it can be configured in
-    //  the Lambda response control structures; by default the runtime will
-    //  wait for all asynchronous processes to finish running in the global
-    //  scope, before it then ends, not simply pauses, the execution context.
-    //  This pattern seems prone to an accumulation of async proceseses running
-    //  in the background and taking up both computation and memory, however.
 
 
     //////////
