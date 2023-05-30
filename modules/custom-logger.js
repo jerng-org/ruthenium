@@ -74,13 +74,14 @@ if (conf.customLogging) {
 
     customLogger.restartCustomLogString = function() {
         customLogger.customLogString = '\n\n' +
-            conf.dateTimeFormat.format(customLogStringDate) + ' ⏸⏺    ' +
+            conf.dateTimeFormat.format(customLogStringDate) + ' ⏸⏺    '+
             'CustomLogString RE-STARTED : ' +
             Array.from(arguments).join(' : ')
     }
 
     customLogger.logCustomLogString = function() {
         console.initialLog(
+            conf.dateTimeFormat.format(customLogStringDate) + ' ⏯    '+
             customLogger.customLogString +
             '\nCustomLogString LOGGED : ' +
             Array.from(arguments).join(':')
