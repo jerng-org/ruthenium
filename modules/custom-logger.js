@@ -15,48 +15,42 @@ var customLogger = {
 
 if (conf.customLogging) {
 
+    let customLogStringDate = new Date
+
     // Customisation of "console"
     {
         console.initialError = console.error
         console.error = function() {
-
-            //var customLogStringDate = new Date
             console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
         }
     } {
         console.initialWarn = console.warn
         console.warn = function() {
-
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialWarn.apply(this, arguments)
             }
-            var customLogStringDate = new Date
             customLogger.customLogString += "\n📢WARN " +
-                customLogStringDate.toISOString() + ' ' +
+                conf.dateTimeFormat.format(customLogStringDate) + ' ' +
                 Array.from(arguments).join(' ')
         }
     } {
         console.initialLog = console.log
         console.log = function() {
-
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialLog.apply(this, arguments)
             }
-            var customLogStringDate = new Date
             customLogger.customLogString += "\nℹ️LOG  " +
-                customLogStringDate.toISOString() + ' ' +
+                conf.dateTimeFormat.format(customLogStringDate) + ' ' +
                 Array.from(arguments).join(' ')
         }
     } {
         console.initialInfo = console.info
         console.info = function() {
-
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialInfo.apply(this, arguments)
             }
-            var customLogStringDate = new Date
             customLogger.customLogString += "\nℹ️INFO " +
-                customLogStringDate.toISOString() + ' ' +
+                conf.dateTimeFormat.format(customLogStringDate) + ' ' +
                 Array.from(arguments).join(' ')
         }
     }
