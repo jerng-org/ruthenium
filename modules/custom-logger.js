@@ -24,7 +24,12 @@ if (conf.customLogging) {
     {
         console.initialError = console.error
         console.error = function() {
-            console.initialError.apply(this, arguments) // so that the catch (e) { console.error (e) } will work
+            //  regardless of (conf.customLoggingAllowsNativeLogging)
+            console.initialError.apply(this, arguments) 
+            
+            customLogger.customLogString += "\n" +
+                conf.dateTimeFormat.format(customLogStringDate) + ' ❌ ERRO ' +
+                Array.from(arguments).join(' ')
         }
     } {
         console.initialWarn = console.warn
@@ -64,24 +69,21 @@ if (conf.customLogging) {
         customLogger.customLogString = '\n\n' +
             conf.dateTimeFormat.format(customLogStringDate) + ' ⏺     ' +
             'CustomLogString STARTED : ' +
-            Array.from(arguments).join(' : ') +
-            '\n'
+            Array.from(arguments).join(' : ')
     }
 
     customLogger.restartCustomLogString = function() {
         customLogger.customLogString = '\n\n' +
             conf.dateTimeFormat.format(customLogStringDate) + ' ⏸⏺    ' +
             'CustomLogString RE-STARTED : ' +
-            Array.from(arguments).join(' : ') +
-            '\n'
+            Array.from(arguments).join(' : ')
     }
 
     customLogger.logCustomLogString = function() {
         console.initialLog(
             customLogger.customLogString +
             '\nCustomLogString LOGGED : ' +
-            Array.from(arguments).join(':') +
-            '\n\n'
+            Array.from(arguments).join(':')
         )
     }
 
