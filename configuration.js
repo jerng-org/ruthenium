@@ -40,7 +40,7 @@ module.exports = {
      *      2 : undefined ... maybe have a hybrid mode
      */
 
-    customLogging: 1,
+    customLogging: 0,
     customLoggingAllowsNativeLogging: 0,
 
     defaults: {

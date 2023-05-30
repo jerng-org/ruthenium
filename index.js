@@ -472,11 +472,11 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.restartCustomLogString('(~/index.js/handler EXECUTION)')
+            rus.customLogger.restartCustomLogString('(~/index.js/handler CALL)')
             //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
         }
         if (rus.conf.frameworkDescriptionLogging) {
-            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\n⏸⏺ FrameworkDescriptionLogString RE-STARTED (~/index.js/handler EXECUTION)"
+            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\n⏸⏺ FrameworkDescriptionLogString RE-STARTED (~/index.js/handler CALL)"
             rus.frameworkDescriptionLogger.callStarts()
         }
 
@@ -660,7 +660,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
             rus.frameworkDescriptionLogger.endLog()
         }
         if (rus.conf.customLogging) {
-            rus.customLogger.logCustomLogString('(~/index.js/handler EXECUTION)')
+            rus.customLogger.logCustomLogString('(~/index.js/handler CALL)')
         }
 
         return rutheniumResponse
@@ -685,10 +685,9 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         rus.frameworkDescriptionLogger.endLog()
     }
     if (rus.conf.customLogging) {
-        rus.customLogger.logCustomLogString('(~/index.js/handler INITIALISATION)')
+        rus.customLogger.logCustomLogString('(~/index.js/handler INIT)')
     }
 
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
-
