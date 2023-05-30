@@ -95,6 +95,10 @@ const shellExports = `
      
  */
 
+console.log(`Backlog : childProcess.execSync : here can be upgraded to use the
+(stdio option) so we have less vomitty logs, and it's all captured under
+custom-logger instead.`)
+
 const lambdaGitCommit = commitMessage => {
     
     rusMinus1.frameworkDescriptionLogger.callStarts()
