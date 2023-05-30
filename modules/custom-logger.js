@@ -29,8 +29,8 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialWarn.apply(this, arguments)
             }
-            customLogger.customLogString += "\n📢WARN " +
-                conf.dateTimeFormat.format(customLogStringDate) + ' ' +
+            customLogger.customLogString += "\n" +
+                conf.dateTimeFormat.format(customLogStringDate) + ' 📢WARN ' +
                 Array.from(arguments).join(' ')
         }
     } {
@@ -39,8 +39,8 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialLog.apply(this, arguments)
             }
-            customLogger.customLogString += "\nℹ️LOG  " +
-                conf.dateTimeFormat.format(customLogStringDate) + ' ' +
+            customLogger.customLogString += "\n" +
+                conf.dateTimeFormat.format(customLogStringDate) + ' ℹ️LOG  ' +
                 Array.from(arguments).join(' ')
         }
     } {
@@ -49,8 +49,8 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialInfo.apply(this, arguments)
             }
-            customLogger.customLogString += "\nℹ️INFO " +
-                conf.dateTimeFormat.format(customLogStringDate) + ' ' +
+            customLogger.customLogString += "\n" +
+                conf.dateTimeFormat.format(customLogStringDate) + ' ℹ️INFO ' +
                 Array.from(arguments).join(' ')
         }
     }
