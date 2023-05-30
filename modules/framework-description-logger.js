@@ -11,7 +11,8 @@ const conf = require(`/var/task/configuration.js`)
 var frameworkDescriptionLogger = {
     frameworkDescriptionLogString: '',
     log: _ => _,
-    endLog: _ => _,
+    logStarts: _ => _,
+    logEnds: _ => _,
     callDepth: 0,
     callEnumeration: [],
     callStarts: _ => _,
@@ -20,12 +21,14 @@ var frameworkDescriptionLogger = {
 
 if (conf.frameworkDescriptionLogging) {
 
-    frameworkDescriptionLogger.frameworkDescriptionLogString =
-        "\n\n⏺ FrameworkDescriptionLogString STARTED (framework-description-logger.js INITIALISATION)"
+    frameworkDescriptionLogger.logStarts = _ => {
+        frameworkDescriptionLogger.frameworkDescriptionLogString =
+            "\n\n⏺ FrameworkDescriptionLogString STARTED (framework-description-logger.js INIT)"
+    }
 
-    frameworkDescriptionLogger.endLog = _ => {
+    frameworkDescriptionLogger.logEnds = _ => {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
-            '\n\n⏹ FrameworkDescriptionLogString ENDED (framework-description-logger.js/endLog EXECUTION)\n'
+            '\n\n⏹ FrameworkDescriptionLogString ENDED (framework-description-logger.js/logEnds CALL)\n'
         console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 

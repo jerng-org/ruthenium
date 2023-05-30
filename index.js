@@ -13,9 +13,10 @@ try {
 
     const rus = require('/var/task/modules/r-u-s.js')
 
+    rus.frameworkDescriptionLogger.logStarts()
     rus.frameworkDescriptionLogger.callStarts()
 
-    rus.frameworkDescriptionLogger.summary(`(~/index.js) SUMMARY
+    rus.frameworkDescriptionLogger.summary(`(/var/task/index.js) SUMMARY
     -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
     -   The role of (exports.handler) in this runtime is documented by AWS
     
@@ -28,9 +29,9 @@ try {
     -   (exports.handler) is then defined to capture each HTTP requests' (hostInitializedData) and (middlewares), run this through (ruthenium) and get (rutheniumResponse), then return it
     `)
 
-    rus.mark(`~/index.js loaded mark.js`)
+    rus.mark(`/var/task/index.js loaded mark.js`)
 
-    rus.frameworkDescriptionLogger.verbiage(`we are now in (~/index.js), and
+    rus.frameworkDescriptionLogger.verbiage(`we are now in (/var/task/index.js), and
     
     -   the first line says 'use strict', and immediately after this is a try-catch block; 
     
@@ -435,7 +436,7 @@ try {
 
     const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
 
-    rus.frameworkDescriptionLogger.verbiage(`we are now in (~/index.js), and
+    rus.frameworkDescriptionLogger.verbiage(`we are now in (/var/task/index.js), and
     
     -   many (requires) just occured;
         
@@ -472,23 +473,23 @@ try {
     exports.handler = async function() {
 
         if (rus.conf.customLogging) {
-            rus.customLogger.restartCustomLogString('(~/index.js/handler CALL)')
-            //rus.customLogStringAppender("\n\nindex.js/handler : CustomLogString RE-START : ")
+            rus.customLogger.restartCustomLogString('(/var/task/(index.js).exports.handler CALL)')
+            //rus.customLogStringAppender("\n\n(index.js).exports.handler : CustomLogString RE-START : ")
         }
         if (rus.conf.frameworkDescriptionLogging) {
-            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\n⏸⏺ FrameworkDescriptionLogString RE-STARTED (~/index.js/handler CALL)"
+            rus.frameworkDescriptionLogger.frameworkDescriptionLogString = "\n\n⏸⏺ FrameworkDescriptionLogString RE-STARTED (/var/task/(index.js).exports.handler CALL)"
             rus.frameworkDescriptionLogger.callStarts()
         }
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
         console.log(`lambda>node>handler, 
-ENTRY Point      : (~/index.js)
+ENTRY Point      : (/var/task/index.js)
 METHOD           : ${arguments[0].requestContext.http.method}
 DOMAIN           : ${arguments[0].requestContext.domainName}
 PATH             : ${arguments[0].requestContext.http.path}
 RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
-        rus.mark(`lambda>node>handler, first mark (~/index.js)`, true)
+        rus.mark(`lambda>node>handler, first mark (/var/task/index.js)`, true)
 
         const hostInitializedData = {
             LAMBDA: {
@@ -638,7 +639,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         const rutheniumResponse = await ruthenium(hostInitializedData, middlewares)
 
         // Minimal production logger (unsystematic; hook this up with configuration.js later) TODO:
-        console.log(`lambda>node>handler, EXIT Point (~/index.js)`,
+        console.log(`lambda>node>handler, EXIT Point (/var/task/index.js)`,
 
             (typeof rutheniumResponse == 'string') ?
             `rutheniumResponse.slice(0,50) ... [truncated]` :
@@ -660,7 +661,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
             rus.frameworkDescriptionLogger.endLog()
         }
         if (rus.conf.customLogging) {
-            rus.customLogger.logCustomLogString('(~/index.js/handler CALL)')
+            rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler CALL)')
         }
 
         return rutheniumResponse
@@ -668,7 +669,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
     // exports.handler()
     rus.mark(`index.js LOADED`)
 
-    rus.frameworkDescriptionLogger.verbiage(`we are still in (~/index.js), but following the definition of (exports.handler)
+    rus.frameworkDescriptionLogger.verbiage(`we are still in (/var/task/index.js), but following the definition of (exports.handler)
     
     -   some logging occurs;
     
@@ -682,10 +683,10 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
     // runs when (handler) is initialised
     if (rus.conf.frameworkDescriptionLogging) {
         rus.frameworkDescriptionLogger.callEnds()
-        rus.frameworkDescriptionLogger.endLog()
+        rus.frameworkDescriptionLogger.log()
     }
     if (rus.conf.customLogging) {
-        rus.customLogger.logCustomLogString('(~/index.js/handler INIT)')
+        rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler INIT)')
     }
 
 }
