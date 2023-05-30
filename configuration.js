@@ -1,8 +1,22 @@
 'use strict'
 // Dev: easy to find and edit
-const gitCommit = 1
-const gitCommitMessage = `review, refactoring, & documentation : custom-logger,dateTimeFormat`
+const _gitCommit = 1
+const _gitCommitMessage = `review, refactoring, & documentation : custom-logger,dateTimeFormat`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
+
+const _ianaTimeZone = 'Asia/Kuala_Lumpur'
+const _dateTimeFormatBcp47Tag = 'sv'
+const _dateTimeFormatOptions = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    fractionalSecondDigits: 3,
+    timeZoneName: 'short',
+    timeZone: _ianaTimeZone
+}
 
 module.exports = {
 
@@ -46,24 +60,14 @@ module.exports = {
     /*  dateTimeFormat 
      *  
      *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales 
-     */ 
-     
+     */
+
     dateTimeFormat: new Intl.DateTimeFormat(
-        module.exports.dateTimeFormatBcp47Tag,
-        module.exports.dateTimeFormatOptions
+        _dateTimeFormatBcp47Tag,
+        _dateTimeFormatOptions
     ),
-    dateTimeFormatBcp47Tag: 'sv',
-    dateTimeFormatOptions: {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        fractionalSecondDigits: 3,
-        timeZoneName: 'short',
-        timeZone: module.exports.ianaTimeZone
-    },
+    dateTimeFormatBcp47Tag: _dateTimeFormatBcp47Tag,
+    dateTimeFormatOptions: _dateTimeFormatOptions,
 
     defaults: {
 
@@ -102,8 +106,8 @@ module.exports = {
      *
      *
      */
-    gitCommit: gitCommit,
-    gitCommitMessage: gitCommitMessage,
+    gitCommit: _gitCommit,
+    gitCommitMessage: _gitCommitMessage,
     /*  USES:
      *  Merge order     :   1
      *  Name            :   git-lambda2
@@ -111,7 +115,7 @@ module.exports = {
      *  Version ARN     :   arn:aws:lambda:us-east-1:553035198032:layer:git-lambda2:6
      */
 
-    ianaTimeZone: 'Asia/Kuala_Lumpur',
+    ianaTimeZone: _ianaTimeZone,
 
     labels: {
 
