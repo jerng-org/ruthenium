@@ -76,7 +76,7 @@ if (conf.frameworkDescriptionLogging) {
         } :
         _ => _
 
-    frameworkDescriptionLogger.callStarts = _ => {
+    frameworkDescriptionLogger.callStarts = function() {
 
         frameworkDescriptionLogger.callDepth++
 
@@ -104,7 +104,7 @@ if (conf.frameworkDescriptionLogging) {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
                 '\n┐\n├' +
-                ' ❮❮ START call : ' +  err.stack +
+                ' ❮❮ START call : ' +
                 (
                     (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
                     result[1] :
