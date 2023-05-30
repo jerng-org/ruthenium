@@ -19,6 +19,8 @@ Reference : <https://www.sitepoint.com/understanding-module-exports-exports-node
 
 > `AWS Lambda` -> runs `NodeJS` -> calls `/var/task/index.js`
 
+Essential reading : <https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html>
+
 ## `(/var/task/index.js).exports.handler`
 
 This defines how AWS Lambda reacts to each invocation of the FaaS
@@ -72,6 +74,7 @@ This defines how AWS Lambda reacts to each invocation of the FaaS
 
 - **every** file must `'use strict'`
 - use **only** CommonJS [module semantics](#module-semantics)
+- AWS Lambda : use **only** [async `( index.js ).exports.handlers](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html#nodejs-handler-async), not [handlers with callbacks](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html#nodejs-handler-callback)
 
 ## (ru) Trace
 
