@@ -417,6 +417,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         // runs when (handler) is executed 
         rus.frameworkDescriptionLogger.callEnds()
         rus.frameworkDescriptionLogger.logEnds()
+        rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler CALL)')
 
         return rutheniumResponse
     }
@@ -437,6 +438,8 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
     // runs when (handler) is initialised
     rus.frameworkDescriptionLogger.callEnds()
     rus.frameworkDescriptionLogger.logEnds()
+    rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler INIT)')
+
 }
 
 try {
