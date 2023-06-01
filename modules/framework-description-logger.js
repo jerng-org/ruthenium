@@ -17,11 +17,15 @@ var frameworkDescriptionLogger = {
     callEnumeration: [],
     callStarts: _ => _,
     callEnds: _ => _,
-    summary: _ => _,
-    verbiage: _ => _,
+
+    less: _ => _,
+    more: _ => _,
+    fixme: _ => _,
+    backlog: _ => _,
+    icebox: _ => _,
 }
 
-if (conf.frameworkDescriptionLogging) {
+if (conf.frameworkDescriptionLogging.length) {
 
     frameworkDescriptionLogger.logStarts = _ => {
         frameworkDescriptionLogger.frameworkDescriptionLogString =
@@ -66,17 +70,27 @@ if (conf.frameworkDescriptionLogging) {
         }
     }
 
-    frameworkDescriptionLogger.summary = conf.frameworkDescriptionLogging > 1 ?
-        _input => {
-            frameworkDescriptionLogger.log('📝 SUMMARY:\n' + _input)
-        } :
-        _ => _
+    if (conf.frameworkDescriptionLogging.includes(0))
+        frameworkDescriptionLogger.less = _input => {
+            frameworkDescriptionLogger.log('❗ SUMMARY:\n' + _input)
+        }
 
-    frameworkDescriptionLogger.verbiage = conf.frameworkDescriptionLogging > 2 ?
-        _input => {
+    if (conf.frameworkDescriptionLogging.includes(1))
+        frameworkDescriptionLogger.more = _input => {
             frameworkDescriptionLogger.log('📝 VERBIAGE:\n' + _input)
-        } :
-        _ => _
+        }
+    if (conf.frameworkDescriptionLogging.includes(2))
+        frameworkDescriptionLogger.fixme = _input => {
+            frameworkDescriptionLogger.log('🔥 FIXME:\n' + _input)
+        }
+    if (conf.frameworkDescriptionLogging.includes(3))
+        frameworkDescriptionLogger.backlog = _input => {
+            frameworkDescriptionLogger.log('🗓️ BACKLOG:\n' + _input)
+        }
+    if (conf.frameworkDescriptionLogging.includes(5))
+        frameworkDescriptionLogger.icebox = _input => {
+            frameworkDescriptionLogger.log('🧊 ICEBOX:\n' + _input)
+        }
 
     frameworkDescriptionLogger.callStarts = _ => {
 
@@ -87,21 +101,6 @@ if (conf.frameworkDescriptionLogging) {
         let err = {}
 
         Error.captureStackTrace(err)
-
-        // Uncomment during debugging of callDepth 
-        /*
-        console.initialLog(
-            'FDL DEBUG callStarts, depth : ' +
-            frameworkDescriptionLogger.callDepth +
-            (
-                (
-                    (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
-                    result[1] :
-                    err.stack
-                ) // third line 
-            )
-        )
-        */
 
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
             (
@@ -143,21 +142,6 @@ if (conf.frameworkDescriptionLogging) {
                 '\n' +
                 '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
             )
-
-        // Uncomment during debugging of callDepth 
-        /*
-        console.initialLog(
-            'FDL DEBUG callEnds, depth : ' +
-            frameworkDescriptionLogger.callDepth +
-            (
-                (
-                    (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
-                    result[1] :
-                    err.stack
-                ) // third line 
-            )
-        )
-        */
 
         frameworkDescriptionLogger.callDepth--
 

@@ -18,7 +18,7 @@ const initLambdaNodeJSHandler = _ => {
     rus.frameworkDescriptionLogger.logStarts()
     rus.frameworkDescriptionLogger.callStarts()
 
-    rus.frameworkDescriptionLogger.summary(`(/var/task/index.js) SUMMARY
+    rus.frameworkDescriptionLogger.less(`(/var/task/index.js) SUMMARY
     -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
     -   The role of (exports.handler) in this runtime is documented by AWS
     
@@ -31,7 +31,7 @@ const initLambdaNodeJSHandler = _ => {
     -   (exports.handler) is then defined to capture each HTTP requests' (hostInitializedData) and (middlewares), run this through (ruthenium) and get (rutheniumResponse), then return it
     `)
 
-    rus.frameworkDescriptionLogger.verbiage(`we are now in (/var/task/index.js), and
+    rus.frameworkDescriptionLogger.more(`we are now in (/var/task/index.js), and
     
     -   the first line says 'use strict', and immediately after this is a try-catch block; 
     
@@ -200,7 +200,7 @@ const initLambdaNodeJSHandler = _ => {
 
     const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
 
-    rus.frameworkDescriptionLogger.verbiage(`we are now in (/var/task/index.js), and
+    rus.frameworkDescriptionLogger.more(`we are now in (/var/task/index.js), and
     
     -   many (requires) just occured;
         
@@ -424,7 +424,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
     // exports.handler()
     rus.mark(`index.js LOADED`)
 
-    rus.frameworkDescriptionLogger.verbiage(`we are still in (/var/task/index.js), but following the definition of (exports.handler)
+    rus.frameworkDescriptionLogger.more(`we are still in (/var/task/index.js), but following the definition of (exports.handler)
     
     -   some logging occurs;
     

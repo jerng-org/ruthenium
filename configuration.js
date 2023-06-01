@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `review, refactoring, & documentation : streamline customLogging, frameworkDescriptionLogging, mark`
+const _gitCommitMessage = `review, refactoring, & documentation : streamline customLogging, frameworkDescriptionLogging, mark : expanded frameworkDescription log types`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
@@ -89,15 +89,21 @@ module.exports = {
 
     /*  frameworkDescriptionLogging
      *
-     *      0   :   none
+     *      .length=0   :   none
      *
-     *      1   :   log calls 
+     *      .length>0   :   tagged function calls 
      *
-     *      2   :   1 + SUMMARY descriptors
+     *      [0] :   SUMMARY narratives
      *
-     *      3   :   2 + verbose narration
+     *      [1] :   narrative VERBIAGE
+     *
+     *      [2] :   bugs / FIXME warnings 
+     *
+     *      [3] :   todo / BACKLOG-ed items 
+     *
+     *      [4] :   ideas / ICEBOX-ed items 
      */
-    frameworkDescriptionLogging: 0,
+    frameworkDescriptionLogging: [],
 
     /*  gitCommit
      *
@@ -110,10 +116,15 @@ module.exports = {
     gitCommit: _gitCommit,
     gitCommitMessage: _gitCommitMessage,
     /*  USES:
+     *
+     *  x86 Runtime
      *  Merge order     :   1
      *  Name            :   git-lambda2
      *  Layer version   :   6
      *  Version ARN     :   arn:aws:lambda:us-east-1:553035198032:layer:git-lambda2:6
+     *
+     *  ARM Runtime - customised layer
+     *  See lambda-git-commit.js
      */
 
     ianaTimeZone: _ianaTimeZone,
