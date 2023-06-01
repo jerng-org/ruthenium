@@ -56,6 +56,7 @@ module.exports = {
 
     customLogging: 1,
     customLoggingAllowsNativeLogging: 0,
+    customLoggingEmoji1: '🌞',
 
     /*  dateTimeFormat 
      *  
@@ -96,7 +97,7 @@ module.exports = {
      *
      *      3   :   2 + verbose narration
      */
-    frameworkDescriptionLogging: 3,
+    frameworkDescriptionLogging: 0,
 
     /*  gitCommit
      *
@@ -194,7 +195,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 1,
+    performance: 0,
 
     /*  platform:
      *  
