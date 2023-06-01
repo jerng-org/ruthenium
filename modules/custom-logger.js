@@ -8,7 +8,9 @@ const conf = require(`/var/task/configuration.js`)
 //      //
 //////////  ❌ 📢 ℹ️
 
-var customLogger = {
+const e1 = conf.customLoggingEmoji1
+
+const customLogger = {
     customLogString: '',
     startCustomLogString: _ => _,
     restartCustomLogString: _ => _,
@@ -17,19 +19,27 @@ var customLogger = {
 
 if (conf.customLogging) {
 
-    let customLogStringDate = new Date
+    const customLogStringDate = new Date
+    const buildLineStyle1 = (_continue, _arguments, _postDateLabel) =>
+        customLogger.customLogString += "\n" +
+        conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
+        Array.from(_arguments)
+        .join('\n')
+        .replace(/\n/g, '\n' + ' '.repeat(35) + e1)
+    const buildLineStyle2 = (_continue, _arguments, _postDateLabel, _postEmoji) =>
+        customLogger.customLogString = (_continue ?
+            customLogger.customLogString + '\n' :
+            '\n\n') +
+        conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
+        _postEmoji + Array.from(_arguments).join('\n')
 
     // Customisation of "console"
-
     {
         console.initialError = console.error
         console.error = function() {
             //  regardless of (conf.customLoggingAllowsNativeLogging)
             console.initialError.apply(this, arguments)
-
-            customLogger.customLogString += "\n" +
-                conf.dateTimeFormat.format(customLogStringDate) + ' ❌ERRO ' +
-                Array.from(arguments).join('\n').replace(/\n/g,'\n'+' '.repeat(37))
+            buildLineStyle1(true, arguments, ' ❌ERR')
         }
     } {
         console.initialWarn = console.warn
@@ -37,9 +47,7 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialWarn.apply(this, arguments)
             }
-            customLogger.customLogString += "\n" +
-                conf.dateTimeFormat.format(customLogStringDate) + ' 📢WARN ' +
-                Array.from(arguments).join('\n').replace(/\n/g,'\n'+' '.repeat(37))
+            buildLineStyle1(true, arguments, ' 📢WAR')
         }
     } {
         console.initialLog = console.log
@@ -47,9 +55,7 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialLog.apply(this, arguments)
             }
-            customLogger.customLogString += "\n" +
-                conf.dateTimeFormat.format(customLogStringDate) + ' ℹ️LOG  ' +
-                Array.from(arguments).join('\n').replace(/\n/g,'\n'+' '.repeat(37))
+            buildLineStyle1(true, arguments, ' ℹ️LOG')
         }
     } {
         console.initialInfo = console.info
@@ -57,35 +63,24 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialInfo.apply(this, arguments)
             }
-            customLogger.customLogString += "\n" +
-                conf.dateTimeFormat.format(customLogStringDate) + ' ℹ️INFO ' +
-                Array.from(arguments).join('\n').replace(/\n/g,'\n'+' '.repeat(37))
+            buildLineStyle1(true, arguments, ' ℹ️INF')
         }
     }
 
     // other definitions
 
     customLogger.startCustomLogString = function() {
-        customLogger.customLogString = '\n\n' +
-            conf.dateTimeFormat.format(customLogStringDate) + ' ⏺     ' +
-            'CustomLogString STARTED : ' +
-            Array.from(arguments).join(' : ')
+        buildLineStyle2(false, arguments, ' ⏺   ', 'CustomLogString STARTED : ')
     }
 
     customLogger.restartCustomLogString = function() {
-        customLogger.customLogString = '\n\n' +
-            conf.dateTimeFormat.format(customLogStringDate) + ' ⏸⏺    '+
-            'CustomLogString RE-STARTED : ' +
-            Array.from(arguments).join(' : ')
+        buildLineStyle2(false, arguments, ' ⏸⏺ ', 'CustomLogString RE-STARTED : ')
     }
 
     customLogger.logCustomLogString = function() {
+        buildLineStyle2(true, arguments, ' ⏯   ', 'CustomLogString LOGGED : ')
         console.initialLog(
-            customLogger.customLogString +
-            '\n' +
-            conf.dateTimeFormat.format(customLogStringDate) + ' ⏯     ' +
-            'CustomLogString LOGGED : ' +
-            Array.from(arguments).join(':')
+            customLogger.customLogString
         )
     }
 
