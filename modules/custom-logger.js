@@ -31,9 +31,9 @@ if (conf.customLogging) {
             conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
             Array.from(_arguments)
             .join('\n')
-            .replace(/\n/g, '\n' + ' '.repeat(35) + e1) + ' 📍️' +
+            .replace(/\n/g, '\n' + ' '.repeat(35) + e1) +
             (
-                (result = err.stack.match(/\n.*\n.*\n.*( at .*)\n?/)) ?
+                (result = err.stack.match(/\n.*\n.*\n.*at (.*)\n?/)) ?
                 result[1] :
                 err.stack
             )
