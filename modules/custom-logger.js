@@ -34,6 +34,7 @@ if (conf.customLogging) {
         _postEmoji + Array.from(_arguments).join('\n')
 
     // Customisation of "console"
+    
     {
         console.initialError = console.error
         console.error = function() {
