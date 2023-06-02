@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `review, refactoring, & documentation : streamline customLogging, frameworkDescriptionLogging, mark : stack traces`
+const _gitCommitMessage = `review, refactoring, & documentation : streamline customLogging, frameworkDescriptionLogging, mark : line trac`
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
@@ -56,7 +56,9 @@ module.exports = {
 
     customLogging: 1,
     customLoggingAllowsNativeLogging: 0,
+    customLoggingLineTrace: 1,
     customLoggingEmoji1: '🌞',
+    customLoggingEmoji2: '📍',
 
     /*  dateTimeFormat 
      *  
