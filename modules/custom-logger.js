@@ -30,7 +30,7 @@ if (conf.customLogging) {
         return customLogger.customLogString += "\n" +
             conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
             (
-                (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
+                (result = err.stack.match(/\n.*\n.*\n.*at (.*)\n?/)) ?
                 result[1] :
                 err.stack
             ) +
