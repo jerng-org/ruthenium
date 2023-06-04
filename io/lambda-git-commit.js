@@ -107,7 +107,7 @@ const lambdaGitCommit = commitMessage => {
 
         let notes = {}
 
-        notes.gitClone = childProcess.execSync(
+        console.log(childProcess.execSync(
             `${ shellExports }
             rm -rf /tmp/*; \
             git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git; \
@@ -116,7 +116,7 @@ const lambdaGitCommit = commitMessage => {
                 stdio: conf.nodejs.childProcessStdio,
                 cwd: '/tmp'
             }
-        ).split('\n')
+        ))
 
         mark(`~/io/lambda-git-commit.js Repository cloned ... `)
 
@@ -161,7 +161,6 @@ const lambdaGitCommit = commitMessage => {
                 }
             ).split('\n')
 
-        console.log(' where do (notes) go from here?')
         console.log(JSON.stringify(notes, null, '  '))
 
         mark(`~/io/lambda-git-commit.js Execution complete`)
