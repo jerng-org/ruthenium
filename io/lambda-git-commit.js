@@ -28,6 +28,7 @@ Environmental variable with password
 */
 
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+const conf = rusMinus1.conf
 const mark = rusMinus1.mark
 const childProcess = require('child_process')
 const shellExports = `
@@ -100,13 +101,13 @@ be upgraded to use the (stdio option) so we have less vomitty logs, and it's all
 captured under custom-logger instead.`)
 
 const lambdaGitCommit = commitMessage => {
-    
+
     rusMinus1.frameworkDescriptionLogger.callStarts()
     try {
 
         let notes = {}
 
-        childProcess.execSync(
+        notes.gitClone = childProcess.execSync(
             `${ shellExports }
             rm -rf /tmp/*; \
             git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git; \
@@ -119,34 +120,48 @@ const lambdaGitCommit = commitMessage => {
 
         mark(`~/io/lambda-git-commit.js Repository cloned ... `)
 
-        notes.cprVarTask =
+        notes.cp =
             childProcess.execSync(
-                `cp -r /var/task/* /tmp/ruthenium/;`, { encoding: 'utf8' }
-            ).split('\n')
+                `cp -r /var/task/* /tmp/ruthenium/;`, {
+                    encoding: 'utf8'
+                }
+            )
 
         notes.gitAdd =
             childProcess.execSync(
                 `${ shellExports }
                 git add .; \
-                `, { encoding: 'utf8', cwd: '/tmp/ruthenium' }
-            ).split('\n')
+                `, {
+                    encoding: 'utf8',
+                    cwd: '/tmp/ruthenium',
+                    stdio: conf.nodejs.childProcessStdio,
+                }
+            )
 
         notes.gitCommmit =
             childProcess.execSync(
                 `${ shellExports }
                 git -c user.name=jerng-machines commit -m "${ commitMessage }" ; \
-                `, { encoding: 'utf8', cwd: '/tmp/ruthenium' }
-            ).split('\n')
+                `, {
+                    encoding: 'utf8',
+                    cwd: '/tmp/ruthenium',
+                    stdio: conf.nodejs.childProcessStdio,
+                }
+            )
 
         notes.gitPush =
             childProcess.execSync(
                 `${ shellExports }
                 git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git;\
-                `, { encoding: 'utf8', cwd: '/tmp/ruthenium' }
-            ).split('\n')
+                `, {
+                    encoding: 'utf8',
+                    cwd: '/tmp/ruthenium',
+                    stdio: conf.nodejs.childProcessStdio,
+                }
+            )
 
         console.log(' where do (notes) go from here?')
-        console.log(JSON.stringify(notes, null,'  '))
+        console.log(JSON.stringify(notes, null, '  '))
 
         mark(`~/io/lambda-git-commit.js Execution complete`)
 
