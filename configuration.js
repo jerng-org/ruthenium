@@ -105,7 +105,8 @@ module.exports = {
      *
      *      [4] :   ideas / ICEBOX-ed items 
      */
-    frameworkDescriptionLogging: [0,1,2,3,4],
+    frameworkDescriptionLogging: [],
+    //frameworkDescriptionLogging: [0,1,2,3,4],
 
     /*  gitCommit
      *
