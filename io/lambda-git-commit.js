@@ -96,39 +96,38 @@ const shellExports = `
      
  */
 
-rusMinus1.frameworkDescriptionLogger.backlog(`childProcess.execSync : here can
-be upgraded to use the (stdio option) so we have less vomitty logs, and it's all
-captured under custom-logger instead.`)
+rusMinus1.frameworkDescriptionLogger.more(`childProcess.execSync : currently there is an implementation of conf.nodejs.childProcessStdio. However, the documentation is not well understood at https://nodejs.org/docs/latest-v18.x/api/child_process.html#optionsstdio . On one hand it says, "pipe"|["pipe","pipe","pipe"] is the default, but on the other hand it says, null|undefined|"inherit"|["inherit","inherit","inherit"] is the default. Currently observed behaviour is the later.`)
 
 const lambdaGitCommit = commitMessage => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
     try {
 
-        let notes = {}
-
-        console.log(childProcess.execSync(
-            `${ shellExports }
+        console.log(
+            childProcess.execSync(
+                `${ shellExports }
             rm -rf /tmp/*; \
             git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git; \
             `, {
-                encoding: 'utf8',
-                stdio: conf.nodejs.childProcessStdio,
-                cwd: '/tmp'
-            }
-        ))
+                    encoding: 'utf8',
+                    stdio: conf.nodejs.childProcessStdio,
+                    cwd: '/tmp'
+                }
+            )
+        )
 
         mark(`~/io/lambda-git-commit.js Repository cloned ... `)
 
-        notes.cp =
+        console.log(
             childProcess.execSync(
                 `cp -r /var/task/* /tmp/ruthenium/;`, {
                     encoding: 'utf8',
                     stdio: conf.nodejs.childProcessStdio,
                 }
-            ).split('\n')
+            )
+        )
 
-        notes.gitAdd =
+        console.log(
             childProcess.execSync(
                 `${ shellExports }
                 git add .; \
@@ -137,9 +136,10 @@ const lambdaGitCommit = commitMessage => {
                     cwd: '/tmp/ruthenium',
                     stdio: conf.nodejs.childProcessStdio,
                 }
-            ).split('\n')
+            )
+        )
 
-        notes.gitCommmit =
+        console.log(
             childProcess.execSync(
                 `${ shellExports }
                 git -c user.name=jerng-machines commit -m "${ commitMessage }" ; \
@@ -148,9 +148,10 @@ const lambdaGitCommit = commitMessage => {
                     cwd: '/tmp/ruthenium',
                     stdio: conf.nodejs.childProcessStdio,
                 }
-            ).split('\n')
+            )
+        )
 
-        notes.gitPush =
+        console.log(
             childProcess.execSync(
                 `${ shellExports }
                 git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git;\
@@ -159,9 +160,8 @@ const lambdaGitCommit = commitMessage => {
                     cwd: '/tmp/ruthenium',
                     stdio: conf.nodejs.childProcessStdio,
                 }
-            ).split('\n')
-
-        console.log(JSON.stringify(notes, null, '  '))
+            )
+        )
 
         mark(`~/io/lambda-git-commit.js Execution complete`)
 
