@@ -123,7 +123,8 @@ const lambdaGitCommit = commitMessage => {
         notes.cp =
             childProcess.execSync(
                 `cp -r /var/task/* /tmp/ruthenium/;`, {
-                    encoding: 'utf8'
+                    encoding: 'utf8',
+                    stdio: conf.nodejs.childProcessStdio,
                 }
             )
 
