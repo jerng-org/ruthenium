@@ -199,7 +199,8 @@ module.exports = {
 
     /*  https://nodejs.org/api/child_process.html#optionsstdio
      */
-    nodejs : {
+    nodejs: {
+        childProcessStdio: ['pipe', 'pipe', 'pipe'] // default
         //childProcessStdio : 'pipe' // default
         //childProcessStdio : 'ignore'
     },
