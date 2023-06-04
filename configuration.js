@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `reimplementing (notes) to fit (frameworkDescriptionLogger) touch1`
+const _gitCommitMessage = `reimplementing (notes) to fit (frameworkDescriptionLogger) touch2`
 //const _gitCommitMessage = `comments : classification `
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
