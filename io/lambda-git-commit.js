@@ -96,7 +96,16 @@ const shellExports = `
      
  */
 
-rusMinus1.frameworkDescriptionLogger.more(`childProcess.execSync : currently there is an implementation of conf.nodejs.childProcessStdio. However, the documentation is not well understood at https://nodejs.org/docs/latest-v18.x/api/child_process.html#optionsstdio . On one hand it says, "pipe"|["pipe","pipe","pipe"] is the default, but on the other hand it says, null|undefined|"inherit"|["inherit","inherit","inherit"] is the default. Currently observed behaviour is the later.`)
+rusMinus1.frameworkDescriptionLogger.more(`childProcess.execSync : currently
+there is an implementation of conf.nodejs.childProcessStdio. However, the
+documentation is not well understood at
+https://nodejs.org/docs/latest-v18.x/api/child_process.html#optionsstdio . On
+one hand it says, "pipe"|["pipe","pipe","pipe"] is the default, but on the other
+hand it says, null|undefined|"inherit"|["inherit","inherit","inherit"] is the
+default. Currently observed behaviour appears to match neither.`)
+rusMinus1.frameworkDescriptionLogger.fixme(`childProcess.execSync : usage here
+has not been checked to ensure sanitisation; we should derisk from arbitrary
+shell command execution`)
 
 const lambdaGitCommit = commitMessage => {
 

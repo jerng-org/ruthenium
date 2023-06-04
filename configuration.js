@@ -1,8 +1,8 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `reimplementing (notes) to fit (frameworkDescriptionLogger): `
-//const _gitCommitMessage = `comments : classification `
+const _gitCommitMessage = `comments : classification `
+// (mark) should dynamically yank filenames from (error)
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
@@ -201,7 +201,7 @@ module.exports = {
      */
     nodejs : {
         //childProcessStdio : 'pipe' // default
-        childProcessStdio : 'inherit'
+        //childProcessStdio : 'inherit'
         //childProcessStdio : 'ignore'
     },
 
