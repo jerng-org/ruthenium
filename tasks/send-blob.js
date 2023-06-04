@@ -13,8 +13,6 @@ const blobMimeTypes = {
 if ( rus.conf.verbosity > 0 )
 {   
     const stack = (new Error).stack; 
-    console.warn ( `⚠ DEBT_NOTE ⚠`, 
-        stack.substring( stack.indexOf( '(' ), stack.indexOf( ')' ) + 1 ) )
 }
 
 const blobFileNames = rus.node.fs.readdirSync ('/var/task/io/blobs')
