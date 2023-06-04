@@ -14,8 +14,6 @@ const url = require('url')
 //      //
 //////////
 
-console.log('FIXME : customLogger, frameworkDescriptionLogger, log : STREAMLINE ')
-
 const rus = {
 
     //////////

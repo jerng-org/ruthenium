@@ -196,6 +196,13 @@ module.exports = {
         }
     },
 
+    /*  https://nodejs.org/api/child_process.html#optionsstdio
+     */
+    nodejs : {
+        //childProcessStdio : 'pipe' // default
+        childProcessStdio : 'ignore'
+    },
+
     obfuscations: {
         sessionCookieName: 'SONCHUSJD' // some random characters
     },
