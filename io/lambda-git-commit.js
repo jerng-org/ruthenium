@@ -146,7 +146,7 @@ const lambdaGitCommit = commitMessage => {
             ).split('\n')
 
         console.log(' where do (notes) go from here?')
-        console.log(notes)
+        console.log(JSON.stringify(notes.null,'  '))
 
         mark(`~/io/lambda-git-commit.js Execution complete`)
 
