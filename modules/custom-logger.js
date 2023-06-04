@@ -32,11 +32,11 @@ if (conf.customLogging) {
             conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
             Array.from(_arguments).concat(
                 (!conf.customLoggingLineTrace ? [] : [
-                    (
-                        (result = err.stack.match(/\n.*\n.*\n.*( at .*)\n?/)) ?
+                    e2 +
+                    ((result = err.stack.match(/\n.*\n.*\n.*( at .*)\n?/)) ?
                         result[1] :
-                        err.stack
-                    ) + e2
+                        err.stack) +
+                    e2
                 ])
             )
             .join('\n')
