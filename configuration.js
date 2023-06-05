@@ -68,13 +68,16 @@ module.exports = {
     customLoggingHeaderLogStart: '⏯',
     customLoggingHeaderLogRestart: '⏸',
     customLoggingHeaderLogLog: '⏹',
-    customLoggingIndentCount: 32,
+    customLoggingIndentCount: 31,
 
     /* 
     customLoggingHeaderError: ' ❌ERR',
     customLoggingHeaderWarn: ' 📢WAR',
     customLoggingHeaderLog: ' ℹ️LOG',
     customLoggingHeaderInfo: ' ℹ️INF',
+    customLoggingHeaderLogStart: '⏯   ' ,
+    customLoggingHeaderLogRestart: '⏸   ',
+    customLoggingHeaderLogLog: '⏹   ',
     customLoggingIndentCount: 35,
     */
 
