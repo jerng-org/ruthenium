@@ -28,15 +28,14 @@ if (conf.customLogging) {
         let err = {}
         Error.captureStackTrace(err)
 
-        return customLogger.customLogString += "\n" +
+        return customLogger.customLogString +=
             conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
             Array.from(_arguments).concat(
                 (!conf.customLoggingLineTrace ? [] : [
                     e2 +
                     ((result = err.stack.match(/\n.*\n.*\n.*( at .*)\n?/)) ?
                         result[1] :
-                        err.stack) +
-                    e2
+                        err.stack)
                 ])
             )
             .join('\n')
