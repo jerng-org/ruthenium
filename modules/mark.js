@@ -273,12 +273,12 @@ const mark = async (taskLabel, firstInHandler) => {
                 invocationStartTime
             ) - lastTime
 
-        ) * 100) / 100).toString().padStart(5, ` `) +
+        ) * 100) / 100).toString().padStart(7, ` `) +
 
         // total runtime;
         (Math.round((
             lastTime = tempTime
-        ) * 100) / 100).toString().padStart(6, ` `) +
+        ) * 100) / 100).toString().padStart(8, ` `) +
 
         //
         //
@@ -293,7 +293,7 @@ const mark = async (taskLabel, firstInHandler) => {
         //(Math.round(dCPUsum / dTime * 10) / 10000
         (
             (Math.round(1000 - dCPUsum / dTime) / 10) + '%'
-        ).toString().padStart(7, ` `) +
+        ).toString().padStart(6, ` `) +
 
         //
         //
@@ -312,7 +312,7 @@ const mark = async (taskLabel, firstInHandler) => {
         //(Math.round(lastCPUsum / lastTime * 10) / 10000
         (
             (Math.round(1000 - lastCPUsum / lastTime) / 10) + '%'
-        ).toString().padStart(8, ` `) +
+        ).toString().padStart(7, ` `) +
 
         '|' +
 
