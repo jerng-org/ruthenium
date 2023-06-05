@@ -42,8 +42,7 @@ if (conf.customLogging) {
             )
             .join('\n')
             .concat(
-                e2 +
-                ((result = err.stack.match(/\n.*\n.*\n.*( at .*)\n?/)) ?
+                e2 + ((result = err.stack.match(/\n.*\n.*\n.*(at .*)\n?/)) ?
                     result[1] :
                     err.stack)
             )
