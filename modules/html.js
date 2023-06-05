@@ -264,4 +264,4 @@ const html = {
 }
 
 module.exports = html
-mark(`~/modules/html.js LOADED`)
+mark('LOADED')

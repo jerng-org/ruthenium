@@ -3,7 +3,7 @@
 const rusMinus1 = require(`/var/task/modules/r-u-s-minus-1.js`)
 const mark = rusMinus1.mark 
 
-mark(`~/modules/r-u-s.js (ruthenium utilities) LOADING ...`)
+mark(`LOADING ...`)
 
 const fs = require('fs')
 const url = require('url')
@@ -384,4 +384,4 @@ const rus = {
 //////////
 
 module.exports = rus
-mark(`~/modules/r-u-s.js (ruthenium utilities) LOADED`)
+mark(`LOADED`)

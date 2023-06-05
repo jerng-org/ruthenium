@@ -9,4 +9,4 @@ const status401 = async ( data ) => {
 }
 
 module.exports = status401 
-mark ( `~/tasks/status-401.js LOADED` )
+mark('LOADED')

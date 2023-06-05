@@ -10,4 +10,4 @@ const status501 = async ( data ) => {
 }
 
 module.exports = status501 
-mark ( `~/tasks/status-501.js LOADED` )
+mark('LOADED')

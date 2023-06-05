@@ -183,4 +183,5 @@ shell command execution`)
 }
 
 module.exports = lambdaGitCommit
-mark(`~/io/lambda-git-commit.js LOADED`)
+
+mark(`LOADED`)
