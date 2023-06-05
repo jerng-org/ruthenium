@@ -67,7 +67,7 @@ if (conf.customLogging) {
         console.error = function() {
             //  regardless of (conf.customLoggingAllowsNativeLogging)
             console.initialError.apply(this, arguments)
-            buildLineStyle1(true, arguments, ' ❌ERR')
+            buildLineStyle1(true, arguments, conf.customLoggingHeaderError)
         }
     } {
         console.initialWarn = console.warn
@@ -75,7 +75,7 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialWarn.apply(this, arguments)
             }
-            buildLineStyle1(true, arguments, ' 📢WAR')
+            buildLineStyle1(true, arguments, conf.customLoggingHeaderWarn)
         }
     } {
         console.initialLog = console.log
@@ -83,7 +83,7 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialLog.apply(this, arguments)
             }
-            buildLineStyle1(true, arguments, ' ℹ️LOG')
+            buildLineStyle1(true, arguments, conf.customLoggingHeaderLog)
         }
     } {
         console.initialInfo = console.info
@@ -91,7 +91,7 @@ if (conf.customLogging) {
             if (conf.customLoggingAllowsNativeLogging) {
                 console.initialInfo.apply(this, arguments)
             }
-            buildLineStyle1(true, arguments, ' ℹ️INF')
+            buildLineStyle1(true, arguments, conf.customLoggingHeaderInfo)
         }
     }
 

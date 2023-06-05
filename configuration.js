@@ -60,6 +60,14 @@ module.exports = {
     customLoggingLineTrace: 0,
     customLoggingEmoji1: '🌞',
     customLoggingEmoji2: '📍',
+    //customLoggingHeaderError: ' ❌ERR',
+    customLoggingHeaderError: '❌',
+    //customLoggingHeaderWarn: ' 📢WAR',
+    customLoggingHeaderWarn: '📢',
+    //customLoggingHeaderLog: ' ℹ️LOG',
+    customLoggingHeaderLog: 'ℹ️',
+    //customLoggingHeaderInfo: ' ℹ️INF',
+    customLoggingHeaderInfo: 'ℹ️',
 
     /*  dateTimeFormat 
      *  
