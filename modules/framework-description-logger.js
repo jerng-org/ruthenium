@@ -13,7 +13,7 @@ var frameworkDescriptionLogger = {
     log: _ => _,
     logStarts: _ => _,
     logEnds: _ => _,
-    callDepth: 1,
+    callDepth: 0,
     callEnumeration: [],
     callStarts: _ => _,
     callEnds: _ => _,
@@ -72,12 +72,12 @@ if (conf.frameworkDescriptionLogging.length) {
 
     if (conf.frameworkDescriptionLogging.includes(0))
         frameworkDescriptionLogger.less = _input => {
-            frameworkDescriptionLogger.log('❗ SUMMARY:\n' + _input)
+            frameworkDescriptionLogger.log('❗ LESS:\n' + _input)
         }
 
     if (conf.frameworkDescriptionLogging.includes(1))
         frameworkDescriptionLogger.more = _input => {
-            frameworkDescriptionLogger.log('📝 VERBIAGE:\n' + _input)
+            frameworkDescriptionLogger.log('📝 MORE:\n' + _input)
         }
     if (conf.frameworkDescriptionLogging.includes(2))
         frameworkDescriptionLogger.fixme = _input => {

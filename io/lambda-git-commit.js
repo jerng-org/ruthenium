@@ -28,6 +28,7 @@ Environmental variable with password
 */
 
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+
 const conf = rusMinus1.conf
 const mark = rusMinus1.mark
 const childProcess = require('child_process')
@@ -95,21 +96,22 @@ const shellExports = `
                  +-( just copy these in from yum's installation, they are small )
      
  */
+const lambdaGitCommit = commitMessage => {
 
-rusMinus1.frameworkDescriptionLogger.more(`childProcess.execSync : currently
+    rusMinus1.frameworkDescriptionLogger.callStarts()
+
+    rusMinus1.frameworkDescriptionLogger.more(`childProcess.execSync : currently
 there is an implementation of conf.nodejs.childProcessStdio. However, the
 documentation is not well understood at
 https://nodejs.org/docs/latest-v18.x/api/child_process.html#optionsstdio . On
 one hand it says, "pipe"|["pipe","pipe","pipe"] is the default, but on the other
 hand it says, null|undefined|"inherit"|["inherit","inherit","inherit"] is the
 default. Currently observed behaviour appears to match neither.`)
-rusMinus1.frameworkDescriptionLogger.fixme(`childProcess.execSync : usage here
+
+    rusMinus1.frameworkDescriptionLogger.fixme(`childProcess.execSync : usage here
 has not been checked to ensure sanitisation; we should derisk from arbitrary
 shell command execution`)
 
-const lambdaGitCommit = commitMessage => {
-
-    rusMinus1.frameworkDescriptionLogger.callStarts()
     try {
 
         console.log(
