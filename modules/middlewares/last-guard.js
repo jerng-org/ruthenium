@@ -83,4 +83,5 @@ const lastGuard = async (data) => {
     return data
 }
 module.exports = lastGuard
-rus.mark(`~/modules/middlewares/last-guard.js LOADED`)
+
+rus.mark('LOADED')

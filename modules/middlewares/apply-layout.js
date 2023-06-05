@@ -184,4 +184,5 @@ const applyLayout = async (data) => {
 }
 
 module.exports = applyLayout
-rus.mark(`~/modules/middlewares/apply-layout.js LOADED`)
+
+rus.mark('LOADED')

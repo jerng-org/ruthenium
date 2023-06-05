@@ -38,7 +38,8 @@ const oidcValidation = async(data) => {
 }
 
 module.exports = oidcValidation
-rus.mark(`~/modules/middlewares/oidcValidation.js LOADED`)
+
+rus.mark('LOADED')
 
 /* SAMPLE:
 

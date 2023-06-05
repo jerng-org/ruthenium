@@ -95,4 +95,5 @@ const s3PostPolicyTest = async ( data ) => {
 // no need to return (data)
 
 module.exports = s3PostPolicyTest
-rus.mark ( `~/tasks/s3-post-policy-test.js LOADED` )
+
+rus.mark('LOADED')

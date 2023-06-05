@@ -343,4 +343,5 @@ const formsReindexNames = async (data) => {
 }
 
 module.exports = formsReindexNames
-rus.mark(`~/modules/middlewares/forms-reindex-names.js LOADED`)
+
+rus.mark('LOADED')

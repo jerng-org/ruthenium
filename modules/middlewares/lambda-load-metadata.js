@@ -25,3 +25,5 @@ const lambdaLoadMetadata = async ( data ) => {
 
 }
 module.exports = lambdaLoadMetadata
+
+rus.mark('LOADED')

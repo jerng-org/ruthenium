@@ -20,4 +20,5 @@ const sendText = async ( data ) => {
 // no need to return (data)
 
 module.exports = sendText
-rus.mark ( `~/tasks/send-text.js LOADED` )
+
+rus.mark('LOADED')

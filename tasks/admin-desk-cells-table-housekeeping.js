@@ -184,4 +184,5 @@ in case you need to undo changes. You may simply save this webpage.`,
 // no need to return (data)
 
 module.exports = adminDeskCellsTableHousekeeping
-rus.mark(`~/tasks/admin-desk-cells-table-housekeeping.js LOADED`)
+
+rus.mark('LOADED')

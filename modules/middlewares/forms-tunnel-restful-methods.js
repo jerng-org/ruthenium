@@ -44,4 +44,5 @@ const formsTunnelRestfulMethods = async (data) => {
 
 }
 module.exports = formsTunnelRestfulMethods
-rus.mark(`~/modules/middlewares/forms-tunnel-restful-methods.js LOADED`)
+
+rus.mark('LOADED')

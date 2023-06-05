@@ -24,4 +24,5 @@ const templateTaskMarkup = async ( data ) => {
 //  incoherent / unpretty.
 
 module.exports = templateTaskMarkup
-rus.mark ( `~/tasks/template-task-markup.js LOADED` )
+                                                     
+rus.mark('LOADED')

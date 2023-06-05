@@ -671,4 +671,5 @@ r2h1,r2h2
 // no need to return (data)
 
 module.exports = adminImportCsvToDeskCellsTable
-rus.mark(`~/tasks/admin-import-csv-to-desk-cells-table.js LOADED`)
+
+rus.mark('LOADED')

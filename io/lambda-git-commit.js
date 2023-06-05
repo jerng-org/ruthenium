@@ -114,6 +114,8 @@ shell command execution`)
 
     try {
 
+        mark('Attempting (git clone) ...')
+        
         console.log(
             childProcess.execSync(
                 `${ shellExports }
@@ -127,7 +129,7 @@ shell command execution`)
             )
         )
 
-        mark(`~/io/lambda-git-commit.js Repository cloned ... `)
+        mark(`... (git clone) Attempted`)
 
         console.log(
             childProcess.execSync(
@@ -174,7 +176,7 @@ shell command execution`)
             )
         )
 
-        mark(`~/io/lambda-git-commit.js Execution complete`)
+        mark(`(git push) Attempted`)
 
 
     }
