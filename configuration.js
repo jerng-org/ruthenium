@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage =  'remove redundant (mark) labels'
+const _gitCommitMessage = 'remove redundant (mark) labels'
 //`comments : classification `
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
@@ -60,14 +60,27 @@ module.exports = {
     customLoggingLineTrace: 0,
     customLoggingEmoji1: '🌞',
     customLoggingEmoji2: '📍',
-    //customLoggingHeaderError: ' ❌ERR',
+
     customLoggingHeaderError: '❌',
-    //customLoggingHeaderWarn: ' 📢WAR',
     customLoggingHeaderWarn: '📢',
-    //customLoggingHeaderLog: ' ℹ️LOG',
     customLoggingHeaderLog: 'ℹ️',
-    //customLoggingHeaderInfo: ' ℹ️INF',
     customLoggingHeaderInfo: 'ℹ️',
+    customLoggingHeaderStart: '⏺ ',
+    customLoggingHeaderRestart: '⏸⏺',
+    customLoggingHeaderLog: '⏯  ',
+    customLoggingIndentCount: 32,
+
+    /* 
+    customLoggingHeaderError: ' ❌ERR',
+    customLoggingHeaderWarn: ' 📢WAR',
+    customLoggingHeaderLog: ' ℹ️LOG',
+    customLoggingHeaderInfo: ' ℹ️INF',
+    customLoggingHeaderStart:  ' ⏺   ', 
+    customLoggingHeaderRestart: ' ⏸⏺ ', 
+    customLoggingHeaderLog: ' ⏯   ', 
+    customLoggingHeaderLog: '⏯  ',
+    customLoggingIndentCount: 35,
+    */
 
     /*  dateTimeFormat 
      *  

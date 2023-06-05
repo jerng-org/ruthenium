@@ -51,7 +51,7 @@ if (conf.customLogging) {
                     )
                 )
             )
-            .replace(/\n/g, '\n' + ' '.repeat(35) + e1)
+            .replace(/\n/g, '\n' + ' '.repeat(conf.customLoggingIndentCount) + e1)
     }
     const buildLineStyle2 = (_continue, _arguments, _postDateLabel, _postEmoji) =>
         customLogger.customLogString = (_continue ?
@@ -98,15 +98,15 @@ if (conf.customLogging) {
     // other definitions
 
     customLogger.startCustomLogString = function() {
-        buildLineStyle2(false, arguments, ' ⏺   ', 'CustomLogString STARTED : ')
+        buildLineStyle2(false, arguments, conf.customLoggingHeaderStart, 'CustomLogString STARTED : ')
     }
 
     customLogger.restartCustomLogString = function() {
-        buildLineStyle2(false, arguments, ' ⏸⏺ ', 'CustomLogString RE-STARTED : ')
+        buildLineStyle2(false, arguments, conf.customLoggingHeaderRestart, 'CustomLogString RE-STARTED : ')
     }
 
     customLogger.logCustomLogString = function() {
-        buildLineStyle2(true, arguments, ' ⏯   ', 'CustomLogString LOGGED : ')
+        buildLineStyle2(true, arguments, conf.customLoggingHeaderLog, 'CustomLogString LOGGED : ')
         console.initialLog(
             customLogger.customLogString
         )
