@@ -42,9 +42,14 @@ if (conf.customLogging) {
             )
             .join('\n')
             .concat(
-                e2 + ((result = err.stack.match(/\n.*\n.*\n.*(at .*)\n?/)) ?
-                    result[1] :
-                    err.stack)
+                e2 + (!conf.customLoggingLineTrace ?
+                    '' :
+                    (
+                        (result = err.stack.match(/\n.*\n.*\n.*(at .*)\n?/)) ?
+                        result[1] :
+                        err.stack
+                    )
+                )
             )
             .replace(/\n/g, '\n' + ' '.repeat(35) + e1)
     }
