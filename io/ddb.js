@@ -45,7 +45,9 @@ module.exports = {
     ScanCommand,
     QueryCommand
 }
-mark(`~/io/ddb.js LOADED`)
+
+mark(`LOADED`)
+
 
 /*  TODO
 

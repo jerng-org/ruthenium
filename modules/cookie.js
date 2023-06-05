@@ -336,7 +336,7 @@ const cookie = {
 }
 
 module.exports = cookie
-mark(`~/modules/cookie.js LOADED`)
+mark('LOADED')
 
 /*
 I'm not sure if it's relevant to your use case: affiliate

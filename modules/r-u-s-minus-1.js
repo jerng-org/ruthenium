@@ -8,6 +8,7 @@
  **/
 
 const _conf = require(`/var/task/configuration.js`)
+const _mark = require('/var/task/modules/mark.js')
 
 const _customLogger = require(`/var/task/modules/custom-logger.js`)
 if (_conf.customLogging)
@@ -21,5 +22,7 @@ module.exports = {
     conf: _conf,
     customLogger: _customLogger,
     frameworkDescriptionLogger: _frameworkDescriptionLogger,
-    mark: require('/var/task/modules/mark.js'),
+    mark: _mark,
 }
+
+_mark(`LOADED`)

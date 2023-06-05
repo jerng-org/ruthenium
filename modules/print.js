@@ -113,4 +113,5 @@ DEBUG EVERYTHING:
 }
 
 module.exports = print
-mark(`~/modules/print.js LOADED`)
+
+mark('LOADED')

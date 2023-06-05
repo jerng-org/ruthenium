@@ -12,8 +12,8 @@ const initLambdaNodeJSHandler = _ => {
 
     const rus = require('/var/task/modules/r-u-s.js')
 
-    rus.mark(`/var/task/index.js loaded mark.js`)
-    
+    rus.mark(`LOADED r-u-s.js`)
+
     rus.frameworkDescriptionLogger.callStarts()
 
     rus.frameworkDescriptionLogger.backlog(`(ru) shouldn't have a folder called (modules) as this is easily confused with that keyword in (node/ecmascript)`)
@@ -422,8 +422,8 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         return rutheniumResponse
     }
     // exports.handler()
-    rus.mark(`index.js LOADED`)
-
+    rus.mark('LOADED')
+    
     rus.frameworkDescriptionLogger.more(`we are still in (/var/task/index.js), but following the definition of (exports.handler)
     
     -   some logging occurs;

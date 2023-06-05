@@ -41,4 +41,4 @@ const deskCells = {
 
 module.exports = deskCells
 
-mark ( `~/io/models/desk-cells.js LOADED` )
+mark('LOADED')

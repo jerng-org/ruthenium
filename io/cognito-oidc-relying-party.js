@@ -526,7 +526,8 @@ const cognitoOidcRelyingParty = {
 }
 
 module.exports = cognitoOidcRelyingParty
-mark(`~/io/cognito-oidc-relying-party.js LOADED`)
+
+mark('LOADED')
 
 /*  
 
