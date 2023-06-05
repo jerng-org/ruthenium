@@ -320,7 +320,7 @@ const mark = async (taskLabel, firstInHandler) => {
         `[` + taskLabel + ']🚩 ' +
         (
             (result = err.stack.match(/\n.*\n.*\((.*)\)\n?/)) ?
-            result[2] :
+            result[1] :
             err.stack
         )
         // + (nthInvocation % 3 ? "" : "\n")
