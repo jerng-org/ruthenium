@@ -97,31 +97,31 @@ const mark = async (taskLabel, firstInHandler) => {
         .padEnd(16, `-`) +
         '+'
 
-    console.log('(mark.js) newExecutionContext ' + newExecutionContext + ' in ' + __filename)
-
     if (newExecutionContext) {
         if (firstInHandler) {
             const preInvocationCPU = process.cpuUsage()
             preInvocationCPUsum = preInvocationCPU.user + preInvocationCPU.system
             preInvocationTime = performance.now()
 
-            _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
+            console.warn(`mark.js : these figures are loose and fast`)
             _log(columnedRowBorder)
             _log(
 
-                String(`|"...${memoryUsageKey}"`)
+                String(`|"key:${memoryUsageKey}"`)
                 .padEnd(16, ` `) +
 
-                String(`|prior: ` + Math.round(preInvocationCPUsum / 1000) + 'ms')
+                String(`|prior:` + Math.round(preInvocationCPUsum / 1000) + 'ms')
                 .padEnd(14, ` `) +
 
-                String(`|prior: ` + Math.round(preInvocationTime) + 'ms')
+                String(`|prior:` + Math.round(preInvocationTime) + 'ms')
                 .padEnd(12, ` `) +
 
-                String(`|throttle⚠️ ㇏㇏`)
-                .padEnd(16, ` `)
+                String(`|throttled ? 🚩`)
+                .padEnd(15, ` `) +
+                
+                '|'
             )
-            _log(`⚠ Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB-60MB; ⚠`)
+            console.warn(`Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB-60MB; ⚠`)
 
         }
         else {
