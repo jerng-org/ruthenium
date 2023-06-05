@@ -107,7 +107,7 @@ const mark = async (taskLabel, firstInHandler) => {
             _log(columnedRowBorder)
             _log(
 
-                String(`|"key:${memoryUsageKey}"`)
+                String(`|key:"${memoryUsageKey}"`)
                 .padEnd(16, ` `) +
 
                 String(`|prior:` + Math.round(preInvocationCPUsum / 1000) + 'ms')
@@ -117,7 +117,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 .padEnd(12, ` `) +
 
                 String(`|throttled ? 🚩`)
-                .padEnd(15, ` `) +
+                .padEnd(16, ` `) +
                 
                 '|'
             )
@@ -290,8 +290,8 @@ const mark = async (taskLabel, firstInHandler) => {
 
         '|' +
 
-        (Math.round(dCPUsum / dTime * 10) /
-            10000
+        //(Math.round(dCPUsum / dTime * 10) / 10000
+        (dCPUsum / dTime
         ).toString().padStart(7, ` `) +
 
         //
@@ -308,8 +308,8 @@ const mark = async (taskLabel, firstInHandler) => {
         //                                      ==  80      ( us of CPU time, per 
         //                                                    ms of runtime );
 
-        (Math.round(lastCPUsum / lastTime * 10) /
-            10000
+        //(Math.round(lastCPUsum / lastTime * 10) / 10000
+        (lastCPUsum / lastTime 
         ).toString().padStart(8, ` `) +
 
         '|' +
