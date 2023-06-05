@@ -230,4 +230,5 @@ const composeResponse = async (data) => {
 }
 
 module.exports = composeResponse
-rus.mark(`~/modules/middlewares/compose-response.js LOADED`)
+
+rus.mark('LOADED')

@@ -41,3 +41,5 @@ const lambdaNormalizeFormData = async ( data ) => {
 }
 
 module.exports  = lambdaNormalizeFormData
+
+rus.mark('LOADED')

@@ -25,4 +25,5 @@ const uuid4Create = async(data) => {
 // no need to return (data)
 
 module.exports = uuid4Create
-rus.mark(`~/tasks/uuid4-create.js LOADED`)
+
+rus.mark('LOADED')

@@ -65,7 +65,8 @@ const setCookies = async (data) => {
 }
 
 module.exports = setCookies
-rus.mark(`~/modules/middlewares/set-cookies.js LOADED`)
+
+rus.mark('LOADED')
 
 /*  Ruthenium framework conventions
  *

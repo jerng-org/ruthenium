@@ -2,8 +2,6 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-
-
 const desksGetMarkup = async(data) => {
 
     let th1s = '<th scope="row" ><sup>property name</sup> <sub>type</sub></th>'
@@ -275,4 +273,5 @@ return markup
 
 
 module.exports = desksGetMarkup
-rus.mark(`~/tasks/virtual/desks-get-markup.js LOADED`)
+
+rus.mark('LOADED')

@@ -16,4 +16,5 @@ const formsValidateData = async (data) => {
 }
 
 module.exports = formsValidateData
-rus.mark(`~/modules/middlewares/forms-validate-data.js LOADED`)
+
+rus.mark('LOADED')

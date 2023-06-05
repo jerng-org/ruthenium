@@ -34,8 +34,8 @@ const spaPrototype = async(data) => {
 // no need to return (data)
 
 module.exports = spaPrototype
-rus.mark(`~/tasks/spa-prototype.js LOADED`)
 
+rus.mark('LOADED')
 
 /*
 

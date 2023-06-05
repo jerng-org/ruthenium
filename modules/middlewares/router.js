@@ -155,4 +155,5 @@ const router = async (data) => {
     return data
 }
 module.exports = router
-rus.mark(`~/modules/middlewares/router.js LOADED`)
+
+rus.mark('LOADED')

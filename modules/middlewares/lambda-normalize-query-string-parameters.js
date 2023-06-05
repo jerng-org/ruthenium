@@ -83,3 +83,5 @@ const lambdaNormalizeQueryStringParameters = async (data) => {
     return data
 }
 module.exports = lambdaNormalizeQueryStringParameters
+
+rus.mark('LOADED')

@@ -54,3 +54,5 @@ const lambdaNormalizeHeaders = async (data) => {
     return data
 }
 module.exports = lambdaNormalizeHeaders
+
+rus.mark('LOADED')

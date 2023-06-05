@@ -76,5 +76,5 @@ const setOidcSession = async(data) => {
 }
 
 module.exports = setOidcSession
-rus.mark(`~/modules/middlewares/setOidcSessions.js LOADED`)
 
+rus.mark('LOADED')

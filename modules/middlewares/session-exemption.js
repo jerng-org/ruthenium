@@ -34,4 +34,5 @@ const sessionExemption = async (data) => {
 }
 
 module.exports = sessionExemption
-rus.mark(`~/modules/middlewares/sessionExemption.js LOADED`)
+
+rus.mark('LOADED')

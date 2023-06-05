@@ -27,7 +27,7 @@ const sessionGuard = async (data) => {
 }
 
 module.exports = sessionGuard
-rus.mark(`~/modules/middlewares/sessionGuard.js LOADED`)
 
+rus.mark('LOADED')
 
 //rus.cookie.__HostExpire(data, rus.conf.obfuscations.sessionCookieName)

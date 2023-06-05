@@ -60,3 +60,5 @@ const lambdaCopyRequestParameters = async (data) => {
 }
 
 module.exports = lambdaCopyRequestParameters
+
+rus.mark('LOADED')

@@ -18,4 +18,5 @@ const templateTask = async ( data ) => {
 // no need to return (data)
 
 module.exports = templateTask
-rus.mark ( `~/tasks/_template-task.js LOADED` )
+
+rus.mark('LOADED')
