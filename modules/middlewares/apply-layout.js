@@ -2,6 +2,8 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
+rus.mark('LOADING ...')
+
 const defaultLayoutTaskName = 'layout'
 
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
@@ -185,4 +187,4 @@ const applyLayout = async (data) => {
 
 module.exports = applyLayout
 
-rus.mark('LOADED')
+rus.mark('... LOADED')
