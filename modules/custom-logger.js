@@ -42,12 +42,12 @@ if (conf.customLogging) {
             )
             .join('\n')
             .concat(
-                e2 + (!conf.customLoggingLineTrace ?
+                (!conf.customLoggingLineTrace ?
                     '' :
                     (
-                        (result = err.stack.match(/\n.*\n.*\n.*(at .*)\n?/)) ?
-                        result[1] :
-                        err.stack
+                        e2 + ((result = err.stack.match(/\n.*\n.*\n.*(at .*)\n?/)) ?
+                            result[1] :
+                            err.stack)
                     )
                 )
             )
