@@ -116,7 +116,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 String(`|prior:` + Math.round(preInvocationTime) + 'ms')
                 .padEnd(12, ` `) +
 
-                String(`|throttled ? 🚩`)
+                String(`| % 🚩`)
                 .padEnd(16, ` `) +
 
                 '|'
@@ -238,23 +238,23 @@ const mark = async (taskLabel, firstInHandler) => {
 
         '|' +
 
-        Math.round(
-            (dCPUsum = (tempCPU = process.cpuUsage(),
-                    tempCPUsum =
-                    tempCPU.user +
-                    tempCPU.system -
-                    invocationStartCPUsum
-                ) -
-                lastCPUsum
-            ) /
-            1000 // microsecond to millisecond conversion;
+        (Math.round(
+                (dCPUsum = (tempCPU = process.cpuUsage(),
+                        tempCPUsum =
+                        tempCPU.user +
+                        tempCPU.system -
+                        invocationStartCPUsum
+                    ) -
+                    lastCPUsum
+                ) / 10
+            ) / 100 // microsecond to millisecond conversion;
         ).toString().padStart(6, ` `) +
 
         // total CPU time consumed;
 
-        Math.round(
-            (lastCPUsum = tempCPUsum) /
-            1000 // microsecond to millisecond conversion;
+        (Math.round(
+                (lastCPUsum = tempCPUsum) / 10
+            ) / 100 // microsecond to millisecond conversion;
         ).toString().padStart(7, ` `) +
 
         //
