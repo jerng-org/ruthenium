@@ -1,8 +1,8 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `comments : classification `
-// (mark) should dynamically yank filenames from (error)
+const _gitCommitMessage =  '(mark) should dynamically yank filenames from (error)'
+//`comments : classification `
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
@@ -106,8 +106,8 @@ module.exports = {
      *
      *      [4] :   ideas / ICEBOX-ed items 
      */
-    //frameworkDescriptionLogging: [],
-    frameworkDescriptionLogging: [0, 1, 2, 3, 4],
+    frameworkDescriptionLogging: [],
+    //frameworkDescriptionLogging: [0, 1, 2, 3, 4],
 
     /*  gitCommit
      *
@@ -218,7 +218,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 0,
+    performance: 1,
 
     /*  platform:
      *  
