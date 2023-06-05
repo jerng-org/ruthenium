@@ -10,13 +10,13 @@ const initLambdaNodeJSHandler = _ => {
 
     //  See pertinent (nodeJS-specific) documentation at /var/task/modules/r-u-s.js
 
-    console.log(`(ru) shouldn't have a folder called (modules) as this is easily confused with that keyword in (node/ecmascript)`)
-
     const rus = require('/var/task/modules/r-u-s.js')
 
     rus.mark(`/var/task/index.js loaded mark.js`)
     rus.frameworkDescriptionLogger.logStarts()
     rus.frameworkDescriptionLogger.callStarts()
+
+    rus.frameworkDescriptionLogger.backlog(`(ru) shouldn't have a folder called (modules) as this is easily confused with that keyword in (node/ecmascript)`)
 
     rus.frameworkDescriptionLogger.less(`(/var/task/index.js) SUMMARY
     -   The role of this file in the AWS Lambda > NodeJS runtime is documented by AWS
