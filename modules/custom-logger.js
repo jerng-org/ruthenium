@@ -17,6 +17,7 @@ const customLogger = {
     restartCustomLogString: _ => _,
     logCustomLogString: _ => _
 }
+console.warn('FIXME: rename to LogStart,LogRestart,LogLog (custom-logger.js)')
 
 if (conf.customLogging) {
 
