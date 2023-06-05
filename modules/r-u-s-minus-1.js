@@ -25,4 +25,4 @@ module.exports = {
     mark: _mark,
 }
 
-_mark(`LOADED`)
+_mark(`LOADED`,true)
