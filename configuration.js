@@ -293,6 +293,11 @@ module.exports = {
      *      7   :   6       + (development meta-narrative)  -> logs
      *
      *      8   :   undefined as yet
+     *
+     *  example : 
+     *
+     *      rus.conf.verbosity > 0  && console.log ( stuff, stuff )
+     *
      */
     verbosity: 2,
 
