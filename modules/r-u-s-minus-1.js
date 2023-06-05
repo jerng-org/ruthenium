@@ -8,18 +8,18 @@
  **/
 
 const _conf = require(`/var/task/configuration.js`)
-const _customLogger = require(`/var/task/modules/custom-logger.js`)
 
+const _customLogger = require(`/var/task/modules/custom-logger.js`)
 if (_conf.customLogging)
     _customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
 
+const _frameworkDescriptionLogger = require(`/var/task/modules/framework-description-logger.js`)
+if (!_conf.frameworkDescriptionLogging.length)
+    _frameworkDescriptionLogger.logStarts()
+
 module.exports = {
-
     conf: _conf,
-
     customLogger: _customLogger,
-
-    frameworkDescriptionLogger: require(`/var/task/modules/framework-description-logger.js`),
-
+    frameworkDescriptionLogger: _frameworkDescriptionLogger,
     mark: require('/var/task/modules/mark.js'),
 }

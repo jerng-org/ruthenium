@@ -13,7 +13,7 @@ const initLambdaNodeJSHandler = _ => {
     const rus = require('/var/task/modules/r-u-s.js')
 
     rus.mark(`/var/task/index.js loaded mark.js`)
-    rus.frameworkDescriptionLogger.logStarts()
+    
     rus.frameworkDescriptionLogger.callStarts()
 
     rus.frameworkDescriptionLogger.backlog(`(ru) shouldn't have a folder called (modules) as this is easily confused with that keyword in (node/ecmascript)`)
