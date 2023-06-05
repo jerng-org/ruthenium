@@ -118,7 +118,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
                 String(`|throttled ? 🚩`)
                 .padEnd(16, ` `) +
-                
+
                 '|'
             )
             console.warn(`Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB-60MB; ⚠`)
@@ -291,7 +291,8 @@ const mark = async (taskLabel, firstInHandler) => {
         '|' +
 
         //(Math.round(dCPUsum / dTime * 10) / 10000
-        (dCPUsum / dTime
+        (
+            (Math.round(1000 - dCPUsum / dTime) / 10000) + '%'
         ).toString().padStart(7, ` `) +
 
         //
@@ -309,7 +310,8 @@ const mark = async (taskLabel, firstInHandler) => {
         //                                                    ms of runtime );
 
         //(Math.round(lastCPUsum / lastTime * 10) / 10000
-        (lastCPUsum / lastTime 
+        (
+            (Math.round(1000 - lastCPUsum / lastTime) / 10000) + '%'
         ).toString().padStart(8, ` `) +
 
         '|' +
