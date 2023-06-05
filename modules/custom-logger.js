@@ -36,7 +36,7 @@ if (conf.customLogging) {
                     ((result = err.stack.match(/\n.*\n.*\n.*( at .*)\n?/)) ?
                         result[1] :
                         err.stack) +
-                    e2 + __dirname + '/' + module.__filename
+                    e2 + __dirname + '/' + __filename
                 ])
             )
             .join('\n')
