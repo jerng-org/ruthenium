@@ -90,11 +90,11 @@ const mark = async (taskLabel, firstInHandler) => {
         String(`+`)
         .padEnd(16, `-`) +
         String(`+`)
-        .padEnd(14, `-`) +
-        String(`+`)
-        .padEnd(12, `-`) +
+        .padEnd(16, `-`) +
         String(`+`)
         .padEnd(16, `-`) +
+        String(`+`)
+        .padEnd(14, `-`) +
         '+'
 
     if (newExecutionContext) {
@@ -111,13 +111,13 @@ const mark = async (taskLabel, firstInHandler) => {
                 .padEnd(16, ` `) +
 
                 String(`|prior:` + Math.round(preInvocationCPUsum / 1000) + 'ms')
-                .padEnd(14, ` `) +
+                .padEnd(16, ` `) +
 
                 String(`|prior:` + Math.round(preInvocationTime) + 'ms')
-                .padEnd(12, ` `) +
+                .padEnd(16, ` `) +
 
                 String(`| % 🚩`)
-                .padEnd(16, ` `) +
+                .padEnd(14, ` `) +
 
                 '|'
             )
@@ -144,22 +144,22 @@ const mark = async (taskLabel, firstInHandler) => {
             String(`|RAM`)
             .padEnd(16, ` `) +
             String(`|🕓CPU`)
-            .padEnd(14, ` `) +
-            String(`|🕓WALL($)`)
-            .padEnd(12, ` `) +
-            String(`|[CPU/WALL]`)
             .padEnd(16, ` `) +
+            String(`|🕓WALL($)`)
+            .padEnd(16, ` `) +
+            String(`|[CPU/WALL]`)
+            .padEnd(14, ` `) +
             '|'
         )
         _log(
             String(`|(MB: Δ,Σ)`)
             .padEnd(16, ` `) +
             String(`|(ms: Δ,Σ)`)
-            .padEnd(14, ` `) +
-            String(`|(ms: Δ,Σ)`)
-            .padEnd(12, ` `) +
-            String(`|(line,Σ)`)
             .padEnd(16, ` `) +
+            String(`|(ms: Δ,Σ)`)
+            .padEnd(16, ` `) +
+            String(`|(line,Σ)`)
+            .padEnd(14, ` `) +
             '|'
         )
 
@@ -248,14 +248,14 @@ const mark = async (taskLabel, firstInHandler) => {
                     lastCPUsum
                 ) / 10
             ) / 100 // microsecond to millisecond conversion;
-        ).toString().padStart(6, ` `) +
+        ).toString().padStart(7, ` `) +
 
         // total CPU time consumed;
 
         (Math.round(
                 (lastCPUsum = tempCPUsum) / 10
             ) / 100 // microsecond to millisecond conversion;
-        ).toString().padStart(7, ` `) +
+        ).toString().padStart(8, ` `) +
 
         //
         //
