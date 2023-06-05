@@ -318,13 +318,13 @@ const mark = async (taskLabel, firstInHandler) => {
         //
 
         ` ` +
-        taskLabel +
-        (nthInvocation % 3 ? "" : "\n") +
+        taskLabel + ' ' + conf.customLoggingEmoji2 + ' ' +
         (
             (result = err.stack.match(/\n.*\n.*\((.*)\)\n?/)) ?
             result[1] :
             err.stack
-        )
+        ) +
+        (nthInvocation % 3 ? "" : "\n")
     )
 
     newExecutionContext = false
