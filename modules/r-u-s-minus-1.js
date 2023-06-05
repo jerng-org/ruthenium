@@ -14,7 +14,7 @@ if (_conf.customLogging)
     _customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
 
 const _frameworkDescriptionLogger = require(`/var/task/modules/framework-description-logger.js`)
-if (!_conf.frameworkDescriptionLogging.length)
+if (_conf.frameworkDescriptionLogging.length)
     _frameworkDescriptionLogger.logStarts()
 
 module.exports = {
