@@ -315,7 +315,7 @@ const mark = async (taskLabel, firstInHandler) => {
         ` ` +
         taskLabel +
         (nthInvocation % 3 ? "" : "\n") +
-        console.trace()
+        console.trace('MESSAGE')
     )
 
     newExecutionContext = false
