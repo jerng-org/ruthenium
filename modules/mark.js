@@ -98,7 +98,7 @@ const mark = async (taskLabel, firstInHandler) => {
         '+'
 
     if (newExecutionContext) {
-        console.log(__filename)
+        console.log('(mark.js) newExecutionContext TRUE in ' + __filename)
         if (firstInHandler) {
             const preInvocationCPU = process.cpuUsage()
             preInvocationCPUsum = preInvocationCPU.user + preInvocationCPU.system
