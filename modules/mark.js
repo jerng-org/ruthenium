@@ -268,17 +268,17 @@ const mark = async (taskLabel, firstInHandler) => {
         '|' +
 
         // delta of runtime;
-        Math.round(dTime =
+        (Math.round((dTime =
             (tempTime = performance.now() -
                 invocationStartTime
             ) - lastTime
 
-        ).toString().padStart(5, ` `) +
+        ) * 100) / 100).toString().padStart(5, ` `) +
 
         // total runtime;
-        Math.round(
+        (Math.round((
             lastTime = tempTime
-        ).toString().padStart(6, ` `) +
+        ) * 100) / 100).toString().padStart(6, ` `) +
 
         //
         //
