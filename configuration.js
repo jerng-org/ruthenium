@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage =  '(mark) should dynamically yank filenames from (error)'
+const _gitCommitMessage =  'remove redundant (mark) labels'
 //`comments : classification `
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
@@ -57,7 +57,7 @@ module.exports = {
 
     customLogging: 1,
     customLoggingAllowsNativeLogging: 0,
-    customLoggingLineTrace: 1,
+    customLoggingLineTrace: 0,
     customLoggingEmoji1: '🌞',
     customLoggingEmoji2: '📍',
 
