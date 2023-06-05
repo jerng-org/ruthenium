@@ -12,7 +12,7 @@ const initLambdaNodeJSHandler = _ => {
 
     const rus = require('/var/task/modules/r-u-s.js')
 
-    rus.mark(`LOADED r-u-s.js`)
+    rus.mark(`Having loaded r-u-s.js, INITIALISING ...`)
 
     rus.frameworkDescriptionLogger.callStarts()
 
@@ -248,7 +248,7 @@ DOMAIN           : ${arguments[0].requestContext.domainName}
 PATH             : ${arguments[0].requestContext.http.path}
 RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
-        rus.mark(`lambda>node>handler, first mark (/var/task/index.js)`, true)
+        rus.mark(`Handler EXECUTING ...`, true)
 
         const hostInitializedData = {
             LAMBDA: {
@@ -415,6 +415,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         )
 
         // runs when (handler) is executed 
+        rus.mark('... Handler EXECUTED')
         rus.frameworkDescriptionLogger.callEnds()
         rus.frameworkDescriptionLogger.logEnds()
         rus.customLogger.logCustomLogString('(/var/task/(index.js).exports.handler CALL)')
@@ -422,7 +423,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         return rutheniumResponse
     }
     // exports.handler()
-    rus.mark('LOADED')
+    rus.mark('... INITIALISED')
     
     rus.frameworkDescriptionLogger.more(`we are still in (/var/task/index.js), but following the definition of (exports.handler)
     
