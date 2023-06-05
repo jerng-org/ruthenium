@@ -8,11 +8,15 @@
  **/
 
 const _conf = require(`/var/task/configuration.js`)
-const _mark = require('/var/task/modules/mark.js')
+
+console.warn(`customLogger.startCustomLogString must be run before anything
+else, and not run again, otherwise things go missing; derisk this issue`)
 
 const _customLogger = require(`/var/task/modules/custom-logger.js`)
 if (_conf.customLogging)
     _customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
+
+const _mark = require('/var/task/modules/mark.js')
 
 const _frameworkDescriptionLogger = require(`/var/task/modules/framework-description-logger.js`)
 if (_conf.frameworkDescriptionLogging.length)
