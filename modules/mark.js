@@ -104,7 +104,7 @@ const mark = async (taskLabel, firstInHandler) => {
             preInvocationTime = performance.now()
 
             _log(`⚠ mark.js : these figures are loose and fast; ⚠`)
-            _log( columnedRowBorder)
+            _log(columnedRowBorder)
             _log(
 
                 String(`|"...${memoryUsageKey}"`)
@@ -113,7 +113,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 String(`|prior: ` + Math.round(preInvocationCPUsum / 1000) + 'ms')
                 .padEnd(14, ` `) +
 
-                String(`|prior: ` + Math.round(preInvocationTime)+ 'ms')
+                String(`|prior: ` + Math.round(preInvocationTime) + 'ms')
                 .padEnd(12, ` `) +
 
                 String(`|throttle⚠️ ㇏㇏`)
@@ -312,8 +312,10 @@ const mark = async (taskLabel, firstInHandler) => {
         //
         //
 
-        ` ` + taskLabel +
-        (nthInvocation % 3 ? "" : "\n")
+        ` ` +
+        taskLabel +
+        (nthInvocation % 3 ? "" : "\n") +
+        console.trace()
     )
 
     newExecutionContext = false
