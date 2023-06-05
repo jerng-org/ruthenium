@@ -321,8 +321,8 @@ const mark = async (taskLabel, firstInHandler) => {
         taskLabel +
         (nthInvocation % 3 ? "" : "\n") +
         (
-            //(result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
-            //result[1] :
+            (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
+            result[1] :
             err.stack
         )
     )
