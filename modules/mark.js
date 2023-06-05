@@ -292,7 +292,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         //(Math.round(dCPUsum / dTime * 10) / 10000
         (
-            (Math.round(1000 - dCPUsum / dTime) / 10000) + '%'
+            (Math.round(1000 - dCPUsum / dTime) / 10) + '%'
         ).toString().padStart(7, ` `) +
 
         //
@@ -311,7 +311,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         //(Math.round(lastCPUsum / lastTime * 10) / 10000
         (
-            (Math.round(1000 - lastCPUsum / lastTime) / 10000) + '%'
+            (Math.round(1000 - lastCPUsum / lastTime) / 10) + '%'
         ).toString().padStart(8, ` `) +
 
         '|' +
