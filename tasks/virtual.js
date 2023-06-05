@@ -25,10 +25,8 @@ const formsMarkupUpdateDeskRow = require(`/var/task/tasks/virtual/forms-get/mark
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-rus.conf.verbosity > 0 &&
-    (console.warn(`(~/tasks/virtual.js) all (types) are currently manually coded; RECONSIDER.`),
-        console.warn(`(~/tasks/virtual.js) (dimensions) may require a bit of restructuring.`)
-    )
+rus.frameworkDescriptionLogger.backlog(`(~/tasks/virtual.js) all (types) are currently manually coded; RECONSIDER.`)
+rus.frameworkDescriptionLogger.backlog(`(~/tasks/virtual.js) (dimensions) may require a bit of restructuring.`)
 
 //const patchDeskSchema   = require ( '/var/task/tasks/virtual/patchDeskSchema.js' )
 
@@ -632,4 +630,3 @@ const virtual = async (data) => {
 }
 
 module.exports = virtual
-

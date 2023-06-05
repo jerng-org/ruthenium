@@ -10,11 +10,6 @@ const blobMimeTypes = {
     'csv-validation-demo.html':'text/html'
 }
 
-if ( rus.conf.verbosity > 0 )
-{   
-    const stack = (new Error).stack; 
-}
-
 const blobFileNames = rus.node.fs.readdirSync ('/var/task/io/blobs')
 blobFileNames.forEach ( ( current, index, array ) => {
     blobs[ current ] = rus.node.fs.readFileSync ( '/var/task/io/blobs/' + current, 'utf8' )

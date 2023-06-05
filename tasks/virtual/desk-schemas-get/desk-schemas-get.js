@@ -3,8 +3,7 @@
 const rus = require('/var/task/modules/r-u-s.js')
 const markup = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get-markup.js')
 
-rus.conf.verbosity > 0 &&
-    console.warn(`(desk-schemas-get.js) FIXME: rendering (-markup.js) should not involve a require() here;`)
+rus.frameworkDescriptionLogger.fixme(`rendering (-markup.js) should not involve a require() here;`)
 
 const deskSchemasGet = async (data) => {
 
