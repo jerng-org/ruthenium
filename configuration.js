@@ -106,8 +106,8 @@ module.exports = {
      *
      *      [4] :   ideas / ICEBOX-ed items 
      */
-    frameworkDescriptionLogging: [],
-    //frameworkDescriptionLogging: [0,1,2,3,4],
+    //frameworkDescriptionLogging: [],
+    frameworkDescriptionLogging: [0, 1, 2, 3, 4],
 
     /*  gitCommit
      *
@@ -199,7 +199,7 @@ module.exports = {
 
     /*  https://nodejs.org/api/child_process.html#optionsstdio
      */
-    nodejs : {
+    nodejs: {
         //childProcessStdio : 'pipe' // default
         //childProcessStdio : 'inherit'
         //childProcessStdio : 'ignore'
