@@ -65,19 +65,16 @@ module.exports = {
     customLoggingHeaderWarn: '📢',
     customLoggingHeaderLog: 'ℹ️',
     customLoggingHeaderInfo: 'ℹ️',
-    customLoggingHeaderStartRecording: '⏺ ',
-    customLoggingHeaderRestartRecording: '⏸⏺',
-    customLoggingHeaderPlaybackRecording: '⏯  ',
-    customLoggingIndentCount: 33,
+    customLoggingHeaderLogStart: '⏯',
+    customLoggingHeaderLogRestart: '⏸',
+    customLoggingHeaderLogLog: '⏹',
+    customLoggingIndentCount: 32,
 
     /* 
     customLoggingHeaderError: ' ❌ERR',
     customLoggingHeaderWarn: ' 📢WAR',
     customLoggingHeaderLog: ' ℹ️LOG',
     customLoggingHeaderInfo: ' ℹ️INF',
-    customLoggingHeaderStart:  ' ⏺   ', 
-    customLoggingHeaderRestart: ' ⏸⏺ ', 
-    customLoggingHeaderLog: ' ⏯   ', 
     customLoggingIndentCount: 35,
     */
 
