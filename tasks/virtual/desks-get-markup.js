@@ -264,7 +264,7 @@ a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasGet.Item.name }</code> <
     </table>`
 
 
-rus.mark(`~/tasks/virtual/desks-get-markup.js EXECUTED`)
+rus.mark(`EXECUTED`)
 
 return markup
 }
