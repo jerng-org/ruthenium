@@ -12,7 +12,7 @@ const { aDynamoDBDocumentClient, GetCommand, PutCommand } = require('/var/task/i
 
 const setSessionIdInSignals = async (DATA, id) => {
 
-    //mark(`oidc-session.js: setSessionIdInSignals: begin`)
+    //mark (`oidc-session.js: setSessionIdInSignals: begin`)
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
@@ -20,7 +20,7 @@ const setSessionIdInSignals = async (DATA, id) => {
 
     rusMinus1.frameworkDescriptionLogger.callEnds()
 
-    //mark(`oidc-session.js: setSessionIdInSignals: end`)
+    //mark (`oidc-session.js: setSessionIdInSignals: end`)
 }
 
 //////////
@@ -33,7 +33,7 @@ const setSessionIdWithPersistence = async (validated) => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
-    //mark(`oidc-session.js: setSessionIdWithPersistence: begin`)
+    //mark (`oidc-session.js: setSessionIdWithPersistence: begin`)
 
     //  Consistency checks
     //
@@ -102,7 +102,7 @@ const setSessionIdWithPersistence = async (validated) => {
     )
     console.warn(`(oidc-session.js) stuff this into (data.RU.io.dynamoDB`)
 
-    //mark(`oidc-session.js: setSessionIdWithPersistence: end`)
+    //mark (`oidc-session.js: setSessionIdWithPersistence: end`)
 
     rusMinus1.frameworkDescriptionLogger.callEnds()
 
@@ -112,7 +112,7 @@ const setSessionFromOidcAccessToken = async DATA => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
-    //mark(`oidc-session.js: setSessionFromOidcAccessToken: begin`)
+    //mark (`oidc-session.js: setSessionFromOidcAccessToken: begin`)
 
     //  set any session cookies;
     await cookie.__HostSet(
@@ -128,7 +128,7 @@ const setSessionFromOidcAccessToken = async DATA => {
     await setSessionIdInSignals(DATA, _id)
     await setSessionIdWithPersistence(DATA.RU.signals.oidc.validated)
 
-    //mark(`oidc-session.js: setSessionFromOidcAccessToken: end`)
+    //mark (`oidc-session.js: setSessionFromOidcAccessToken: end`)
 
     rusMinus1.frameworkDescriptionLogger.callEnds()
 }
@@ -137,7 +137,7 @@ const setSessionFromRequestCookie = async DATA => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
-    //mark(`oidc-session.js: setSessionFromRequestCookie: begin`)
+    //mark (`oidc-session.js: setSessionFromRequestCookie: begin`)
 
     // DynamoDB table is currently set with TTL configuration to expire the 
     //  the object at the time specified by (access_token.exp)
