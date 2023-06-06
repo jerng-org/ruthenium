@@ -21,9 +21,9 @@ console.warn('FIXME: rename to LogStart,LogRestart,LogLog (custom-logger.js)')
 
 if (conf.customLogging) {
 
-    const customLogStringDate = new Date
-
     const buildLineStyle1 = (_continue, _arguments, _postDateLabel) => {
+
+        const customLogStringDate = new Date
 
         let result
         let err = {}
@@ -54,13 +54,16 @@ if (conf.customLogging) {
             )
             .replace(/\n/g, '\n' + ' '.repeat(conf.customLoggingIndentCount) + e1)
     }
-    const buildLineStyle2 = (_continue, _arguments, _postDateLabel, _postEmoji) =>
-        customLogger.customLogString = (_continue ?
-            customLogger.customLogString + '\n' :
-            '\n\n') +
-        conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
-        _postEmoji + Array.from(_arguments).join('\n')
+    const buildLineStyle2 = (_continue, _arguments, _postDateLabel, _postEmoji) => {
+        const customLogStringDate = new Date
 
+        customLogger.customLogString = (_continue ?
+                customLogger.customLogString + '\n' :
+                '\n\n') +
+            conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
+            _postEmoji + Array.from(_arguments).join('\n')
+    }
+    
     // Customisation of "console"
 
     {

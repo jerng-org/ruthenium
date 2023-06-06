@@ -1,13 +1,13 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `UI (mark) adjustment `//`comments : classification `
+const _gitCommitMessage = `comments : classification `
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
 const _dateTimeFormatOptions = {
-    year: 'numeric',
+    year: '2-digit',//'numeric',
     month: '2-digit',
     day: '2-digit',
     hour: '2-digit',
