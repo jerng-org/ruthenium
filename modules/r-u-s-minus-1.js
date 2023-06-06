@@ -23,6 +23,8 @@ if (_conf.frameworkDescriptionLogging.length) {
     run before anything else, and not run again, otherwise things go missing;
     derisk this issue`)
 
+    _frameworkDescriptionLogger.fixme(`the required modules here should be refactored; review and refactor`)
+
     _frameworkDescriptionLogger.backlog(`rename customLogger.xxx to
     LogStart,LogRestart,LogLog (custom-logger.js)`)
 
