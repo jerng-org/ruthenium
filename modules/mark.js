@@ -125,7 +125,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         }
         else {
-            throw new Error(`mark.js; mark(_,_,firstInHandler); firstInHandler needs to 
+            throw new Error(`mark.js; mark (_,_,firstInHandler); firstInHandler needs to 
                     be set to true, if this is the first time you are calling 
                     (mark); you can view an example in the comments of mark.js`)
         }

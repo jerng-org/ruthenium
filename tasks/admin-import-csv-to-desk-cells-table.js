@@ -7,7 +7,7 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const adminImportCsvToDeskCellsTable = async(data) => {
 
-    rus.mark(`~/tasks/admin-import-csv-to-desk-cells-table.js EXECUTION start`)
+    rus.mark(`EXECUTING ...`)
 
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
@@ -665,7 +665,7 @@ r2h1,r2h2
     
 
 
-    rus.mark(`~/tasks/admin-import-csv-to-desk-cells-table.js EXECUTION end`)
+    rus.mark(`... EXECUTED`)
 }
 // manipulate (data.RU), for example
 // no need to return (data)

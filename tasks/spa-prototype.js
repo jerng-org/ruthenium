@@ -28,7 +28,7 @@ const spaPrototype = async(data) => {
 
 
 
-    rus.mark(`~/tasks/spa-prototype.js EXECUTED`)
+    rus.mark(`EXECUTED`)
 }
 // manipulate (data.RU), for example
 // no need to return (data)

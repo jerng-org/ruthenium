@@ -153,13 +153,13 @@ const setSessionFromRequestCookie = async DATA => {
         //ReturnConsumedCapacity: 'INDEXES'
     }
 
-    mark(`oidc-session.js: hotspot: begin1`)
+    mark(`Before HOTSPOT ...`)
 
     DATA.RU.io.sessionsGet = await aDynamoDBDocumentClient.send(
         new GetCommand(params)
     )
 
-    mark(`oidc-session.js: hotspot: end1`)
+    mark(`... after HOTSPOT`)
 
     if (DATA.RU.io.sessionsGet.Item) {
         //  (no need to) set any session cookies; this is the source;
@@ -175,7 +175,7 @@ const setSessionFromRequestCookie = async DATA => {
         await expireSession(DATA)
     }
 
-    //mark(`oidc-session.js: setSessionFromRequestCookie: end`)
+    //mark (`oidc-session.js: setSessionFromRequestCookie: end`)
 
     rusMinus1.frameworkDescriptionLogger.callEnds()
 }
@@ -184,7 +184,7 @@ const expireSession = async DATA => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
-    //mark(`oidc-session.js: expireSession: begin`)
+    //mark (`oidc-session.js: expireSession: begin`)
 
     //  expire any session cookies;
     await cookie.__HostExpire(DATA, conf.obfuscations.sessionCookieName)
@@ -192,7 +192,7 @@ const expireSession = async DATA => {
     //  expire internal signals;
     delete DATA.RU.signals.session
 
-    //mark(`oidc-session.js: expireSession: end`)
+    //mark (`oidc-session.js: expireSession: end`)
     rusMinus1.frameworkDescriptionLogger.callEnds()
 
 }

@@ -7,10 +7,10 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const thisIsMyName = async ( data ) => {
     
-    // rutheniumReducer.js will mark() execution, you don't have to
+    // rutheniumReducer.js will mark () execution, you don't have to
     
     return data
 }
 
 module.exports = thisIsMyName
-rus.mark (`~/modules/middlewares/thisIsMyName.js LOADED`)
+rus.mark (`LOADED`)
