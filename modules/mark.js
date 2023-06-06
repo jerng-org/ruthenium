@@ -145,7 +145,7 @@ const mark = async (taskLabel, firstInHandler) => {
             .padEnd(16, ` `) +
             String(`|🕓:CPU`)
             .padEnd(16, ` `) +
-            String(`|🕓:WALL (billed)`)
+            String(`|🕓:WALL (bill)`)
             .padEnd(16, ` `) +
             String(`|1-CPU/WALL`)
             .padEnd(14, ` `) +
