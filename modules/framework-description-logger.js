@@ -13,7 +13,7 @@ var frameworkDescriptionLogger = {
     log: _ => _,
     logStarts: _ => _,
     logEnds: _ => _,
-    callDepth: 0,
+    callDepth: 1,
     callEnumeration: [],
     callStarts: _ => _,
     callEnds: _ => _,
