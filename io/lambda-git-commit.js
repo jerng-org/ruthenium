@@ -114,7 +114,7 @@ shell command execution`)
 
     try {
 
-        mark('Attempting (git clone) ...')
+        mark('ATTEMPTING (git clone) ...')
         
         console.log(
             childProcess.execSync(
@@ -129,7 +129,7 @@ shell command execution`)
             )
         )
 
-        mark(`... (git clone) Attempted`)
+        mark(`... (git clone) ATTEMPT`)
 
         console.log(
             childProcess.execSync(

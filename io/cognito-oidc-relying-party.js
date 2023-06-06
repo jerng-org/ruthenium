@@ -27,14 +27,14 @@ const authorizationCodeFlowJwtValidation = async code => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
-    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP & EXECUTE PROMISES`)
+    mark(`authorizationCodeFlowJwtValidation : PREP & EXECUTE PROMISES`)
 
     //  EXIT_OPPORTUNITY_1
     if (!code) {
 
         rusMinus1.frameworkDescriptionLogger.callEnds()
 
-        throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 0. : (code) was falsy`)
+        throw Error(`authorizationCodeFlowJwtValidation: 0. : (code) was falsy`)
     }
     //  1.1.  
     //  Node modules
@@ -199,7 +199,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  (.all) resolves only if (all its children) resolve; if any child rejects
     //  , then (.all) rejects also. 
 
-    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : PREP ENDS; PROMISE RESOLUTIONS PENDING`)
+    mark(`authorizationCodeFlowJwtValidation : PREP ENDS; PROMISE RESOLUTIONS PENDING`)
 
     const _returned = await Promise
         .all([
@@ -213,7 +213,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 rusMinus1.frameworkDescriptionLogger.callStarts()
 
-                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN BEGINS`)
+                mark(`authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN BEGINS`)
 
                 const [issuerExchangeResponseBody, issuerJwksResponseBody] = resolvedValues
 
@@ -399,7 +399,7 @@ processedTokens:
                 //  from (5.);
                 const parsedIssuerJwksResponseBody = JSON.parse(issuerJwksResponseBody)
 
-                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : 7.2.2. BEFORE jwkToPem CALLS`)
+                mark(`authorizationCodeFlowJwtValidation : 7.2.2. BEFORE jwkToPem CALLS`)
 
                 parsedIssuerJwksResponseBody.keys.forEach(k => {
 
@@ -415,7 +415,7 @@ processedTokens:
 
                     issuerPemFromJwksIndexed[k.kid] = jwkToPem(k)
 
-                    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : 7.2.2.2. jwkToPem CALLED`)
+                    mark(`authorizationCodeFlowJwtValidation : 7.2.2.2. jwkToPem CALLED`)
 
                     rusMinus1.frameworkDescriptionLogger.callEnds()
 
@@ -459,7 +459,7 @@ tokenValidationArguments.access_token:
                 //  7.4.2.
                 //  Attempt validation;
 
-                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : 7.4.2. BEFORE jsonwebtoken.verify CALLS`)
+                mark(`authorizationCodeFlowJwtValidation : 7.4.2. BEFORE jsonwebtoken.verify CALLS`)
 
                 try {
                     validatedTokenPayloads.id_token = jsonwebtoken.verify(
@@ -467,7 +467,7 @@ tokenValidationArguments.access_token:
                         tokenValidationArguments.id_token.pem, { algorithms: [tokenValidationArguments.id_token.alg] }
                         // neglect callback for synchronous call: function ( error, decodedToken )
                     )
-                    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : 7.4.2. jsonwebtoken.verify CALLED`)
+                    mark(`authorizationCodeFlowJwtValidation : 7.4.2. jsonwebtoken.verify CALLED`)
                 }
                 catch (e) {
                     console.error(`Failed to Validate ID_TOKEN`, e)
@@ -480,17 +480,17 @@ tokenValidationArguments.access_token:
                         tokenValidationArguments.access_token.pem, { algorithms: [tokenValidationArguments.access_token.alg] }
                         // neglect callback for synchronous call: function ( error, decodedToken )
                     )
-                    mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : 7.4.2. jsonwebtoken.verify CALLED`)
+                    mark(`authorizationCodeFlowJwtValidation : 7.4.2. jsonwebtoken.verify CALLED`)
                 }
                 catch (e) {
                     console.error(`Failed to Validate ACCESS_TOKEN`, e)
                 }
 
                 conf.verbosity > 1 && logThisFile &&
-                    console.log(`(io/cognito-oidc-relying-party.js) 7.4.2. (validatedTokenPayloads) :
+                    console.log(`7.4.2. (validatedTokenPayloads) :
 `, validatedTokenPayloads)
 
-                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN ENDS`)
+                mark(`authorizationCodeFlowJwtValidation : OIDC Issuer Response PROMISES RESOLVED - THEN ENDS`)
 
                 rusMinus1.frameworkDescriptionLogger.callEnds()
 
@@ -506,7 +506,7 @@ tokenValidationArguments.access_token:
                 console.error(`(~/io/cognito-oidc-relying-party.js) algorithm section 
                                 7.x; Promise.all was rejected with 
                                 reason:`, rejectedReason)
-                mark(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation : OIDC Issuer Responses REJECTED - THEN`)
+                mark(`authorizationCodeFlowJwtValidation : OIDC Issuer Responses REJECTED - THEN`)
 
                 rusMinus1.frameworkDescriptionLogger.callEnds()
 

@@ -6,7 +6,7 @@
 const rus = require('/var/task/modules/r-u-s.js')
 
 const adminDeskCellsTableHousekeeping = async(data) => {
-    rus.mark(`~/tasks/admindesk-cells-table-housekeeping.js EXECUTION start`)
+    rus.mark(`EXECUTING ...`)
 
     const deskSchemasByName = {}
     data.RU.io.deskSchemasScan = await rus.aws.ddbdc.scan({
@@ -178,7 +178,7 @@ in case you need to undo changes. You may simply save this webpage.`,
 
 ` }
 
-    rus.mark(`~/tasks/admin-desk-cells-table-housekeeping.js EXECUTION end`)
+    rus.mark(`... EXECUTED`)
 }
 // manipulate (data.RU), for example
 // no need to return (data)

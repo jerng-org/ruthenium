@@ -34,7 +34,7 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
                     DATA.RU.signals.skippingFromMiddleware :
                     MIDDLEWARE_QUEUE[INDEX - 1].name
 
-                rus.mark(`middleware SKIPPED: ${ CURRENT_MIDDLEWARE.name }`)
+                rus.mark(`mw SKIPPED: ${ CURRENT_MIDDLEWARE.name }`)
 
                 //  1.1.
                 //  skip to next candidate in middleware queue;
@@ -59,7 +59,7 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
 
         /* THROWN? This line does not run, if CURRENT_MIDDLEWARE erred */
 
-        rus.mark(`middleware executed: ${ CURRENT_MIDDLEWARE.name }`)
+        rus.mark(`mw EXECUTED: ${ CURRENT_MIDDLEWARE.name }`)
 
         //rus.conf.verbosity > 2 && console.log(`${CURRENT_MIDDLEWARE.name}: debug entity (): ${ await rus.print.stringify4() }`, )
 

@@ -19,7 +19,7 @@ const uuid4Create = async(data) => {
         
     } 
 
-    rus.mark(`~/tasks/_template-task.js EXECUTED`)
+    rus.mark(`EXECUTED`)
 }
 // manipulate (data.RU), for example
 // no need to return (data)
