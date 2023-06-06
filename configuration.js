@@ -67,7 +67,7 @@ module.exports = {
     customLoggingHeaderLogStart: '⏯',
     customLoggingHeaderLogRestart: '⏸',
     customLoggingHeaderLogLog: '⏹',
-    customLoggingIndentCount: 31,
+    customLoggingIndentCount: 29,
 
     /* 
     customLoggingHeaderError: ' ❌ERR',
