@@ -30,7 +30,7 @@ rus.frameworkDescriptionLogger.backlog(`(~/tasks/virtual.js) (dimensions) may re
 
 //const patchDeskSchema   = require ( '/var/task/tasks/virtual/patchDeskSchema.js' )
 
-rus.frameworkDescriptionLogger.fix(`we should really break up/curry the giant switch-case into a linear pipeline`)
+rus.frameworkDescriptionLogger.fixme(`we should really break up/curry the giant switch-case into a linear pipeline`)
 rus.frameworkDescriptionLogger.backlog(`implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
 
 //////////
