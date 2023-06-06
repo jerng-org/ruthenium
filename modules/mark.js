@@ -158,7 +158,7 @@ const mark = async (taskLabel, firstInHandler) => {
             .padEnd(16, ` `) +
             String(`|(ms: Δ,Σ)`)
             .padEnd(16, ` `) +
-            String(`|(line,Σ)`)
+            String(`|(%: line,Σ)`)
             .padEnd(14, ` `) +
             '|'
         )
@@ -311,7 +311,7 @@ const mark = async (taskLabel, firstInHandler) => {
 
         //(Math.round(lastCPUsum / lastTime * 10) / 10000
         (
-            (Math.round(1000 - lastCPUsum / lastTime) / 10) + '%'
+            (Math.round(1000 - lastCPUsum / lastTime) / 10)
         ).toString().padStart(7, ` `) +
 
         '|' +
