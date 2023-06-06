@@ -336,5 +336,4 @@ const mark = async (taskLabel, firstInHandler) => {
 
 module.exports = conf.performance ? mark : _ => _
 
-console.log(`mark.js exported`)
 mark(`LOADED/1st`, true)
