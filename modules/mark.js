@@ -103,7 +103,9 @@ const mark = async (taskLabel, firstInHandler) => {
             preInvocationCPUsum = preInvocationCPU.user + preInvocationCPU.system
             preInvocationTime = performance.now()
 
-            console.warn(`mark.js : these figures are loose and fast`)
+            conf.performance &&
+                console.warn(`mark.js : these figures are loose and fast`)
+
             _log(columnedRowBorder)
             _log(
 
@@ -121,7 +123,10 @@ const mark = async (taskLabel, firstInHandler) => {
 
                 '|'
             )
-            console.warn(`Lambda does not charge for preinvocation runtime; nodejs overhead seems to be 30MB-60MB; ⚠`)
+
+            conf.performance &&
+                console.warn(`Lambda does not charge for preinvocation runtime;
+                nodejs overhead seems to be 30MB-60MB`)
 
         }
         else {
