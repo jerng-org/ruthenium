@@ -101,15 +101,21 @@ if (conf.customLogging) {
     // other definitions
 
     customLogger.startCustomLogString = function() {
-        buildLineStyle2(false, arguments, conf.customLoggingHeaderLogStart, 'CustomLogString STARTED : ')
+        buildLineStyle2(false, arguments, conf.customLoggingHeaderLogStart,
+            'START CustomLogString ... '
+        )
     }
 
     customLogger.restartCustomLogString = function() {
-        buildLineStyle2(false, arguments, conf.customLoggingHeaderLogRestart, 'CustomLogString RE-STARTED : ')
+        buildLineStyle2(false, arguments, conf.customLoggingHeaderLogRestart,
+            '... RESTART CustomLogString ...'
+        )
     }
 
     customLogger.logCustomLogString = function() {
-        buildLineStyle2(true, arguments, conf.customLoggingHeaderLogLog, 'CustomLogString LOGGED : ')
+        buildLineStyle2(true, arguments, conf.customLoggingHeaderLogLog,
+            '... END CustomLogString'
+        )
         console.initialLog(
             customLogger.customLogString
         )
