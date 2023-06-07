@@ -7,34 +7,37 @@
  *
  **/
 
-const _conf = require(`/var/task/configuration.js`)
+const conf = require(`/var/task/configuration.js`)
 
-const _customLogger = require(`/var/task/modules/custom-logger.js`)
-if (_conf.customLogging)
-    _customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
+const customLogger = require(`/var/task/modules/custom-logger.js`)
+if (conf.customLogging)
+    customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
 
-const _mark = require('/var/task/modules/mark.js')
+const mark = require('/var/task/modules/mark.js')
 
-const _frameworkDescriptionLogger = require(`/var/task/modules/framework-description-logger.js`)
-if (_conf.frameworkDescriptionLogging.length) {
-    _frameworkDescriptionLogger.logStarts()
+const frameworkDescriptionLogger =
+    require(`/var/task/modules/framework-description-logger.js`)
 
-    _frameworkDescriptionLogger.less(`customLogger.startCustomLogString must be
+if (conf.frameworkDescriptionLogging.length) {
+    frameworkDescriptionLogger.logStarts()
+
+    frameworkDescriptionLogger.less(`customLogger.startCustomLogString must be
     run before anything else, and not run again, otherwise things go missing;
     derisk this issue`)
 
-    _frameworkDescriptionLogger.fixme(`the required modules here should be refactored; review and refactor`)
+    frameworkDescriptionLogger.fixme(`the required modules here should be
+    refactored; review and refactor`)
 
-    _frameworkDescriptionLogger.backlog(`rename customLogger.xxx to
+    frameworkDescriptionLogger.backlog(`rename customLogger.xxx to
     LogStart,LogRestart,LogLog (custom-logger.js)`)
 
 }
 
 module.exports = {
-    conf: _conf,
-    customLogger: _customLogger,
-    frameworkDescriptionLogger: _frameworkDescriptionLogger,
-    mark: _mark,
+    conf: conf,
+    customLogger: customLogger,
+    frameworkDescriptionLogger: frameworkDescriptionLogger,
+    mark: mark,
 }
 
-_mark(`LOADED`)
+mark(`LOADED`)
