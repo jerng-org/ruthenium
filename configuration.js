@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `comments : classification `
+const _gitCommitMessage = `removed unnecessary conditionals`//`comments : classification `
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
@@ -54,7 +54,7 @@ module.exports = {
      *      2 : undefined ... maybe have a hybrid mode
      */
 
-    customLogging: 1,
+    customLogging: 0,
     customLoggingAllowsNativeLogging: 0,
     customLoggingLineTrace: 0,
     customLoggingEmoji1: '🌞',
@@ -125,8 +125,8 @@ module.exports = {
      *
      *      [4] :   ideas / ICEBOX-ed items 
      */
-    //frameworkDescriptionLogging: [],
-    frameworkDescriptionLogging: [0, 1, 2, 3, 4],
+    frameworkDescriptionLogging: [],
+    //frameworkDescriptionLogging: [0, 1, 2, 3, 4],
 
     /*  gitCommit
      *
@@ -294,11 +294,11 @@ module.exports = {
 
     /*  verbosity
      *
-     *      0   :   ONLY    console.error   -> logs
+     *      0   :   ONLY    console.error           -> logs
      *      
-     *      1   :   0       + console.warn  -> logs
+     *      1   :   0       + console.warn          -> logs
      *
-     *      2   :   1       + console.info  -> logs
+     *      2   :   1       + console.(info|log)    -> logs
      *
      *      3   :   2       + (reindexed form data; 
      *                          raw database output)        -> response.body

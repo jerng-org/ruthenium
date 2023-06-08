@@ -10,8 +10,7 @@
 const conf = require(`/var/task/configuration.js`)
 
 const customLogger = require(`/var/task/modules/custom-logger.js`)
-if (conf.customLogging)
-    customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
+customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
 
 const mark = require('/var/task/modules/mark.js')
 
