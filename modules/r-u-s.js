@@ -117,8 +117,7 @@ const rus = {
     conf: rusMinus1.conf,
 
     // Please reconsider this design decision in the future 2022-04-26 :
-    customLogger: rusMinus1.conf.customLogging ?
-        require(`/var/task/modules/custom-logger.js`) : undefined,
+    customLogger: rusMinus1.customLogger,
 
     frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,
 
