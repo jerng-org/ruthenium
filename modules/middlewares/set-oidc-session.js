@@ -5,6 +5,9 @@ const rus = require('/var/task/modules/r-u-s.js')
 const setOidcSession = async(data) => {
     
     rus.frameworkDescriptionLogger.callStarts()
+    
+    rus.frameworkDescriptionLogger.backlog('logout URL')
+    rus.frameworkDescriptionLogger.fixme('Cognito user-deletion should pair with Session-deletion')
 
     /*  1.
      *  OIDC / Authentication mechanism has priority;

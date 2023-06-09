@@ -22,22 +22,72 @@ aws.config.apiVersions = { dynamodb: '2012-08-10' }
 const ddb = new aws.DynamoDB()
 */
 
+/*_______________________________!!
+!!            \\                 !!
+!!              \\               !!
+!!  Make way   //\\    Make way  !!
+!!            //  \\             !!
+!!__________//______\\___________*/
+
+// START : lock-stock-and-modified from : https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_lib_dynamodb.html#configuration
+const marshallOptions = {
+    // Whether to automatically convert empty strings, blobs, and sets to `null`.
+    convertEmptyValues: false, // false, by default.
+    // Whether to remove undefined values while marshalling.
+    removeUndefinedValues: true, // false, by default.
+    // Whether to convert typeof object to map attribute.
+    convertClassInstanceToMap: false, // false, by default.
+}
+const unmarshallOptions = {
+    // Whether to return numbers as a string instead of converting them to native JavaScript numbers.
+    wrapNumbers: false, // false, by default.
+}
+const translateConfig = { marshallOptions, unmarshallOptions }
+// END : lock-stock-and-modified
+
+/*_______________________________!!
+!!            \\                 !!
+!!              \\               !!
+!!  Make way   //\\    Make way  !!
+!!            //  \\             !!
+!!__________//______\\___________*/
+
+/* WARNING : Options A,B : AWS nomenclature is semantically retarded */
+
+// (Option A) This imports the "bare-bones" client
+//*
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
+const { DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb")
+const bareBonesClient = new DynamoDBClient()
+const aDynamoDBDocumentClient = DynamoDBDocumentClient.from(bareBonesClient, translateConfig)
+//*/
+
+// (Option B) This imports the "full" client
+/*
+const { DynamoDB } = require("@aws-sdk/client-dynamodb")
+const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb")
+const fullClient = new DynamoDB()
+const aDynamoDBDocumentClient = DynamoDBDocument.from(fullClient, translateConfig)
+//*/
+
+/*_______________________________!!
+!!            \\                 !!
+!!              \\               !!
+!!  Make way   //\\    Make way  !!
+!!            //  \\             !!
+!!__________//______\\___________*/
+
 const {
     BatchWriteCommand,
     DeleteCommand,
-    DynamoDBDocumentClient,
     GetCommand,
     PutCommand,
     ScanCommand,
     QueryCommand
 } = require("@aws-sdk/lib-dynamodb")
 
-const aDynamoDBClient = new DynamoDBClient()
-const aDynamoDBDocumentClient = DynamoDBDocumentClient.from(aDynamoDBClient)
-
 module.exports = {
-    aDynamoDBDocumentClient,
+    aDynamoDBDocumentClient, // hi !!
     BatchWriteCommand,
     DeleteCommand,
     GetCommand,
