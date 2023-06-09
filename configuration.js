@@ -54,7 +54,7 @@ module.exports = {
      *      2 : undefined ... maybe have a hybrid mode
      */
 
-    customLogging: 0,
+    customLogging: 1,
     customLoggingAllowsNativeLogging: 0,
     customLoggingLineTrace: 0,
     customLoggingEmoji1: '🌞',
@@ -237,7 +237,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    performance: 1,
+    performance: 0,
 
     /*  platform:
      *  
