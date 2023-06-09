@@ -1,8 +1,8 @@
 'use strict'
 
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
-const conf = rusMinus1.conf 
-const mark = rusMinus1.mark 
+const conf = rusMinus1.conf
+const mark = rusMinus1.mark
 const cookie = require('/var/task/modules/cookie.js')
 const { aDynamoDBDocumentClient, GetCommand, PutCommand } = require('/var/task/io/ddb.js')
 
@@ -32,6 +32,8 @@ const setSessionIdInSignals = async (DATA, id) => {
 const setSessionIdWithPersistence = async (validated) => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
+
+    rusMinus1.frameworkDescriptionLogger.backlog(`move modules required by rus to their own folder`)
 
     //mark (`oidc-session.js: setSessionIdWithPersistence: begin`)
 
@@ -153,13 +155,15 @@ const setSessionFromRequestCookie = async DATA => {
         //ReturnConsumedCapacity: 'INDEXES'
     }
 
-    mark(`Before HOTSPOT ...`)
+    mark(`Before HOTSPOT ... hitting DDB for session ...`)
 
     DATA.RU.io.sessionsGet = await aDynamoDBDocumentClient.send(
         new GetCommand(params)
     )
 
     mark(`... after HOTSPOT`)
+
+    rusMinus1.frameworkDescriptionLogger.backlog(`what's the memcache/elasticache speedup?`)
 
     if (DATA.RU.io.sessionsGet.Item) {
         //  (no need to) set any session cookies; this is the source;
