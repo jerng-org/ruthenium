@@ -15,7 +15,7 @@ const desksPatch = async (data) => {
 
     //  end PROTOTYPICAL data validation process.
 
-    console.warn(`WIP: desks-patch.js: "patching" 
+    rus.frameworkDescriptionLogger.backlog(`WIP: desks-patch.js: "patching" 
         
         COMPLETE:
         0.  PUT should be hitting DynamoDB
@@ -179,7 +179,7 @@ const desksPatch = async (data) => {
                     the moment.
                 */
 
-    rus.conf.verbosity > 6 && console.log(` Discussion:
+    rus.frameworkDescriptionLogger.more(` Discussion:
             We should really nail down how a client requests for a CREATE
                 versus how to request for an UPDATE. For example, a common
                 convention which we follow here for the time being is to simply

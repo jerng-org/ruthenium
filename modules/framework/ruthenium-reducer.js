@@ -61,8 +61,6 @@ const rutheniumReducer = async(DATA_IN_PROMISE,
 
         rus.mark(`mw EXECUTED: ${ CURRENT_MIDDLEWARE.name }`)
 
-        //rus.conf.verbosity > 2 && console.log(`${CURRENT_MIDDLEWARE.name}: debug entity (): ${ await rus.print.stringify4() }`, )
-
         //  3.
         //  Validation: as middlewares may return nonsense
         if (typeof intermediateData == 'object'

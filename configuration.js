@@ -1,7 +1,8 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = 'bugfix : DynamoDB SDK update issue' //`comments : classification `
+const _gitCommitMessage = `comments : classification `
+// (verbosity) x (fdl) x 
 //`WIP: s3.js; route=s3-post-policy-test; WIP: desks-get-markup.js: cell by cell updates`
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
@@ -315,7 +316,7 @@ module.exports = {
      *
      *  example : 
      *
-     *      rus.conf.verbosity > 0  && console.log ( stuff, stuff )
+     *      rus.conf.verbosity > 0  && console .log ( stuff, stuff )
      *
      */
     verbosity: 2,
