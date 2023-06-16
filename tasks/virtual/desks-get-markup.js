@@ -2,7 +2,7 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-const desksGetMarkup = async (data) => {
+const desksGetMarkup = async(data) => {
 
     let th1s = '<th scope="row" ><sup>property name</sup> <sub>type</sub></th>'
     let th2s = `<th scope="col" colspan="999">
@@ -15,24 +15,23 @@ const desksGetMarkup = async (data) => {
     }
 
     th1s += `<th scope="col"><sub>Operations on each Object</sub></th>`
-
+    
 
     const deskCellsByRowID = rus.limbo.ddbDeskCellsByRowID(
         data.RU.io.deskSchemasGet.Item,
         data.RU.io.deskCellsQuery.Items)
 
-    rus.frameworkDescriptionLogger.fixme(`desks-get-markup.js: the code above
-    should probably be made more framework-wise generic`)
-
-    let tbodyTrs = '',
-        rowCount = 0
-
+    rus.conf.verbosity > 6 && `desks-get-markup.js: the code above should probably be made more framework-wise generic`
+    
+    let tbodyTrs    = ''
+    ,   rowCount    = 0
+    
     for (const rowID in deskCellsByRowID) {
-
+        
         rowCount++
-
+        
         const deleteDeskRowFormID = `delete-desk-row-${ rowID }`
-
+        
         tbodyTrs += `
         <tr>
         ${ await colNames.reduce(
@@ -84,47 +83,38 @@ const desksGetMarkup = async (data) => {
                                         await rus.html.input({
                                             form: deleteDeskRowFormID,
                                             name: `desk-cells[DELETE]###${   index  }###[R]`,
-            type: `hidden`,
-            value: rowID
-    })
-}
-</td>
-`
+                                            type: `hidden`,
+                                            value: rowID 
+                                        })
+                            }
+                                        </td>`
             }, // reducer
             
-            ` < th scope = "row"
-id = "${rowID}" >
-    <i  class="material-icons toggle-set-0"
+            ` <th scope = "row" id = "${rowID}" > 
+            <i  class="material-icons toggle-set-0"
                         style="display:none;"
                         title="hide the id"
                         onclick="toggler ( this.closest('th'), '.toggle-set-0', null )"
                         >
                         visibility_off</i>
 
-    <
-    span class = "toggle-set-0"
-style = "display:none;" > & nbsp;
-$ { rowID }
-</span>
+            <span class = "toggle-set-0" style = "display:none;" > &nbsp; ${ rowID } </span>
 
-<
-i class = "material-icons toggle-set-0"
-onclick = "toggler ( this.parentElement, '.toggle-set-0', null )" >
-    fingerprint < /i>
+        <i class = "material-icons toggle-set-0"
+        onclick = "toggler ( this.parentElement, '.toggle-set-0', null )" >
+            fingerprint </i>
 
-    <
-    span class = "toggle-set-0" > $ { rowCount }. < /span> 
+            <span class = "toggle-set-0" > ${rowCount }. </span> 
 
-    <
-    /th>
-` /*initial accumulator value*/
+            </th>
+        ` /*initial accumulator value*/
         )
             
             + // after all the other cells in this row, add one more ...
             
-            ` < th >
+            ` <th>
 
-    <fieldset onclick = "toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
+            <fieldset onclick = "toggler ( this, '.toggle-set-1', '#unlock-desk-row-delete-${ rowID }' )"
         class = "toggle-set-2"
         style = "margin:0;" >
 
@@ -185,66 +175,61 @@ onclick = "toggler ( this.parentElement, '.toggle-set-0', null )" >
         }
     " > </fieldset >
 
-    <
-    div class = "ru-card toggle-set-2"
-style = "display:none;" >
+    <div class = "ru-card toggle-set-2"
+    style = "display:none;" >
 
-    $ {
-        await rus.html.form({
-
-            action: await rus.appUrl([
-                ['route', 'virtual'],
-                ['type', 'desks'],
-                ['thing', data.RU.io.deskSchemasGet.Item.name],
-                ['form-method', 'PATCH']
-            ]),
-            id: deleteDeskRowFormID,
-            innerHtml:
-
-                `<button    type="submit"
+        ${  await rus.html.form ( {
+                
+                action: await rus.appUrl([
+                    ['route', 'virtual'],
+                    ['type', 'desks'],
+                    ['thing', data.RU.io.deskSchemasGet.Item.name],
+                    ['form-method', 'PATCH']
+                ]),
+                id: deleteDeskRowFormID,
+                innerHtml: 
+                
+                    `<button    type="submit"
                                 title="delete object forever"
                                 >
                         
                         <i class="material-icons">delete_forever</i> 
                         DELETE FOREVER
                     
-                    </button>`,
-            //class: 'ru-card'
-        })
+                    </button>`
+                ,
+                //class: 'ru-card'
+            } ) 
 
-    }
-
-<button class = "button-clear"
+        }
+        
+        <button class = "button-clear"
     title = "hide the link, which deletes this object"
     onclick = "toggler ( this.closest('th'), '.toggle-set-2', '#desk-row-delete-${ rowID }' )" >
         <i class="material-icons">lock_open</i>
     hide link </button>
 
-<
-/div>
+        </div>
 
-<
-/th>`
+        </th>`
 }
-</ tr >
-`
+ </ tr > `
 }
 
-let markup = ` <
-dialog >
+let markup = `
+<dialog>
     <script>
         const tempPointer = document.getElementsByTagName('dialog')[0]
         document.getElementsByTagName('body')[0].onclick = _ => {
             if ( tempPointer.open ) tempPointer.close()
         }
     </script>
-I 'm open. <
-    /dialog>
+    I'm open.
+</dialog>
 
-    <
-    h3 > <i>GET</i>
-a Desk < /h3> <h1 > name: <code>${ data.RU.io.deskSchemasGet.Item.name }</code > </h1> <
-    table >
+<h3> <i>GET</i>
+a Desk </h3> <h1 > name: <code>${ data.RU.io.deskSchemasGet.Item.name }</code> </h1> 
+    <table >
 
     <thead>
         <tr>
@@ -271,16 +256,12 @@ a Desk < /h3> <h1 > name: <code>${ data.RU.io.deskSchemasGet.Item.name }</code >
         <tr>${ th2s }</tr>        
     </thead>
 
-    <
-    tbody > $ { tbodyTrs }
-</tbody >
+    <tbody > ${ tbodyTrs } </tbody >
 
-<
-tfoot >
+    <tfoot>
     </tfoot>
 
-    <
-    /table>`
+    </table>`
 
 
 rus.mark(`EXECUTED`)
