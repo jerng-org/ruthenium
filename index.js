@@ -458,7 +458,6 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
         /* Minimal production logger (unsystematic; hook this up with configuration.js later) TODO: */
 
-        //console.log( 
         console.log(`RESPONSE from application > handler > NodeJS > Lambda > API Gateway > Client`,
 
             (typeof rutheniumResponse == 'string') ?
@@ -504,6 +503,11 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
     rus.customLogger.logCustomLogString(
         '(/var/task/(index.js).exports.handler INIT) '
     )
+
+    rus.frameworkDescriptionLogger.backlog( `s3.js; route=s3-post-policy-test`)
+    
+    rus.frameworkDescriptionLogger.backlog(`WIP: desks-get-markup.js: cell by
+    cell updates` )
 
 }
 

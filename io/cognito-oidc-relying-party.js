@@ -1,8 +1,8 @@
 'use strict'
 
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
-const conf = rusMinus1.conf 
-const mark = rusMinus1.mark 
+const conf = rusMinus1.conf
+const mark = rusMinus1.mark
 
 const logThisFile = false
 
@@ -217,7 +217,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                 const [issuerExchangeResponseBody, issuerJwksResponseBody] = resolvedValues
 
-                conf.verbosity > 1 && logThisFile &&
+                logThisFile &&
                     console.log(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: PROMISE.ALL.THEN :
                         (issuerExchangeResponseBody):`,
                         `<<${typeof issuerExchangeResponseBody}>>`,
@@ -322,12 +322,12 @@ const authorizationCodeFlowJwtValidation = async code => {
                     let decodedSections = compactSerialization.split('.').map(s => {
 
                         rusMinus1.frameworkDescriptionLogger.callStarts()
-                        
+
                         const _returned =
                             Buffer.from(s, 'base64').toString('utf8')
-                            
+
                         rusMinus1.frameworkDescriptionLogger.callEnds()
-                        
+
                         return _returned
 
                     })
@@ -370,7 +370,7 @@ const authorizationCodeFlowJwtValidation = async code => {
                 }
 
                 //*                
-                conf.verbosity > 1 && logThisFile &&
+                logThisFile &&
                     console.log(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation:
                     
 processedTokens:
@@ -439,7 +439,7 @@ processedTokens:
                         pem: issuerPemFromJwksIndexed[processedTokens.access_token.header.kid],
                     }
                 }
-                conf.verbosity > 1 && logThisFile &&
+                logThisFile &&
                     console.log(`(io/cognito-oidc-relying-party.js) 7.4.2.: before conditionals :
 
 tokenValidationArguments.id_token:
@@ -486,7 +486,7 @@ tokenValidationArguments.access_token:
                     console.error(`Failed to Validate ACCESS_TOKEN`, e)
                 }
 
-                conf.verbosity > 1 && logThisFile &&
+                logThisFile &&
                     console.log(`7.4.2. (validatedTokenPayloads) :
 `, validatedTokenPayloads)
 
