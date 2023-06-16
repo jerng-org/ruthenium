@@ -2,10 +2,9 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-
 const markup = require('/var/task/tasks/virtual/desks-get-markup.js')
-rus.conf.verbosity > 0 &&
-    rus.frameworkDescriptionLogger.fixme(`rendering (-markup.js) should not involve a require() here;`)
+
+rus.frameworkDescriptionLogger.fixme(`rendering (-markup.js) should not involve a require() here;`)
 
 // const deskSchemasModel  = require (`/var/task/io/models/desk-schemas.js`)
 
@@ -38,7 +37,7 @@ const desksGet = async (data) => {
         })
     )
 
-        rus.frameworkDescriptionLogger.fixme(`implement (for-of) with (Promise.allSettled)`)
+    rus.frameworkDescriptionLogger.fixme(`implement (for-of) with (Promise.allSettled)`)
 
     data.RU.signals.sendResponse.body = await markup(data)
 
