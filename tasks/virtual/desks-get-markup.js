@@ -21,7 +21,8 @@ const desksGetMarkup = async(data) => {
         data.RU.io.deskSchemasGet.Item,
         data.RU.io.deskCellsQuery.Items)
 
-    rus.conf.verbosity > 6 && `desks-get-markup.js: the code above should probably be made more framework-wise generic`
+    rus.frameworkDescriptionLogger.backlog(`desks-get-markup.js: the code above
+    should probably be made more framework-wise generic`)
     
     let tbodyTrs    = ''
     ,   rowCount    = 0
