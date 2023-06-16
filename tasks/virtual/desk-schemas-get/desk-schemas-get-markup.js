@@ -8,10 +8,9 @@ const rus = require('/var/task/modules/r-u-s.js')
 
 const tableInMarkup = require(`/var/task/tasks/virtual/desk-schemas-get/markup-table-in-markup.js`)
 
-const deskSchemasMarkup = async(data) => {
+const deskSchemasMarkup = async (data) => {
 
-    rus.conf.verbosity > 6 &&
-        console.warn(`(desk-schemas-get-markup.js : rewire file naming conventions so that instead of "markup-table-in-markup.js" we have "desk-schemas-get-markup-table-in-markup.js)`)
+    rus.frameworkDescriptionLogger.backlog(`( rewire file naming conventions so that instead of "markup-table-in-markup.js" we have "desk-schemas-get-markup-table-in-markup.js)`)
 
     const markup = await tableInMarkup(data.RU.io.deskSchemasScan)
 

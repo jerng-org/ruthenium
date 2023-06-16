@@ -46,8 +46,9 @@ const deskSchemasPost = async (data) => {
         }
     }
 
-    rus.conf.versbosity > 0 &&
-        console.warn(`(desk-schemas-post.js) PROTOCOL: the HTTP POST method more accurately corresponds to the DynamoDB operation (updateItem) than (putItem) which is used here.`)
+        rus.frameworkDescriptionLogger.more(`PROTOCOL: the
+        HTTP POST method more accurately corresponds to the DynamoDB operation
+        (updateItem) than (putItem) which is used here.`)
 
     // View
     data.RU.signals.redirectRoute = 'initial'

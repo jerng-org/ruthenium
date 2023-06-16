@@ -16,7 +16,6 @@ const InitMarkups = _ => {
 
         if (current.isFile()) {
 
-            // console.warn(`searching in:`, current.name.slice (0, -3), `for`, '/var/task/tasks/' + current.name )
             markups[current.name.slice(0, -3)] = require('/var/task/tasks/' + current.name)
         }
     } /* , thisArg */ )
@@ -46,7 +45,9 @@ const redirect = async (DATA) => {
             DATA.RU.signals.sendResponse.headers : {}
     }
 
-    console.warn(`compose-response.js, branch:redirectRoute : this seems insufficiently forceful - here we should not yield to a pre-set non-300 status code;`)
+    rus.frameworkDescriptionLogger.backlog(`branch:redirectRoute : this seems
+    insufficiently forceful - here we should not yield to a pre-set non-300
+    status code;`)
 
     // Step 1.2 : Implementation
     DATA.RU.response.headers.location = DATA.RU.signals.redirectRoute
@@ -131,7 +132,8 @@ const composeResponse = async (data) => {
     else
 
     if (data.RU.signals.sendJson) {
-        console.warn('(compose-response.js) data.RU.signals.sendJson : implementation specific to Lambda payload format 2.0')
+        rus.frameworkDescriptionLogger.more(` data.RU.signals.sendJson :
+        implementation specific to Lambda payload format 2.0`)
 
         data.RU.response = data.RU.signals.sendJson
         data.RU.signals.skipToMiddlewareName = 'returnResponse'
