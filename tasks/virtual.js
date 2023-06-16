@@ -202,13 +202,14 @@ const virtual = async (data) => {
                                                 return
                                             }
 
-                                            rus.conf.verbosity > 0 &&
-                                                console.warn(`(virtual.js) manipulation of (desk-schemas) 
+                                            rus.frameworkDescriptionLogger.backlog(`(virtual.js) manipulation of (desk-schemas) 
                                                     is not RESTful (current arrangement is just to colocate code by filename); 
-                                                    some RESTful adjustments are suggested.`) &&
-                                                console.warn(`(virtual.js) manipulation of (desk-schemas) 
-                                                    is not RESTful (all CRUD is implemented via GET).`) &&
-                                                console.warn(`(virtual.js) manipulation of (desk-schemas) 
+                                                    some RESTful adjustments are suggested.`)
+
+                                            rus.frameworkDescriptionLogger.backlog(`(virtual.js) manipulation of (desk-schemas) 
+                                                    is not RESTful (all CRUD is implemented via GET).`)
+
+                                            rus.frameworkDescriptionLogger.backlog(`(virtual.js) manipulation of (desk-schemas) 
                                                     is not RESTful (HTML forms should not be their own resource/URI, 
                                                     but rather they should be REPRESENTATIONS of given resources, 
                                                     e.g. a request to POST (create) a desk-schema which is malformed 
@@ -334,7 +335,7 @@ const virtual = async (data) => {
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=forms), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await rus.http.status404(data)
-                            console.warn(`TODO: implement status405`)
+                            rus.frameworkDescriptionLogger.backlog(`TODO: implement status405`)
 
                             rus.frameworkDescriptionLogger.callEnds()
 
@@ -430,7 +431,7 @@ const virtual = async (data) => {
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await rus.http.status404(data)
-                            console.warn(`TODO: implement status405`)
+                            rus.frameworkDescriptionLogger.backlog(`TODO: implement status405`)
 
                             rus.frameworkDescriptionLogger.callEnds()
 
@@ -507,7 +508,7 @@ const virtual = async (data) => {
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-cells), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await status404(data)
-                            console.warn(`TODO: implement status405`)
+                            rus.frameworkDescriptionLogger.backlog(`TODO: implement status405`)
                             return
                     }
                     // switch 
@@ -590,7 +591,7 @@ const virtual = async (data) => {
                         default:
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desks), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await rus.http.status404(data)
-                            console.warn(`TODO: implement status405`)
+                            rus.frameworkDescriptionLogger.backlog(`TODO: implement status405`)
 
                             rus.frameworkDescriptionLogger.callEnds()
 

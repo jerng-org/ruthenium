@@ -38,8 +38,7 @@ const desksGet = async (data) => {
         })
     )
 
-    rus.conf.verbosity > 0 &&
-        console.warn(`FIXME: (desks-get.js) implement (for-of) with (Promise.allSettled)`)
+        rus.frameworkDescriptionLogger.fixme(`implement (for-of) with (Promise.allSettled)`)
 
     data.RU.signals.sendResponse.body = await markup(data)
 

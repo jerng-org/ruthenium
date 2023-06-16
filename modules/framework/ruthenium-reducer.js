@@ -2,8 +2,7 @@
 
 const rus = require('/var/task/modules/r-u-s.js')
 
-rus.conf.verbosity > 6 &&
-    console.warn(`ruthenium-reducer.js: We're using (Function.name) here,
+    rus.frameworkDescriptionLogger.more(`ruthenium-reducer.js: We're using (Function.name) here,
     and this needs to be 
     examined a bit more, because it may be too JavaScript-specific; i.e.
     it may not be able to be implemented the same way in other languages;

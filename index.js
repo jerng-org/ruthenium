@@ -65,8 +65,7 @@ const initLambdaNodeJSHandler = _ => {
     !!            //  \\             !!
     !!__________//______\\___________*/
 
-    rus.conf.verbosity > 6 && (
-        console.warn(`
+        rus.frameworkDescriptionLogger.more(`
         
     !!! WARNING !!! -   ANYTHING OUTSIDE (exports.handler) persists across all
     function calls, possibly for the lifetime of the function's CONTAINER;
@@ -90,8 +89,8 @@ const initLambdaNodeJSHandler = _ => {
                             
     !!! GUIDELINE !!!   -   If any code is (lambda)-specific, prefix that file
                             immediately, and figure out how to write a runtime
-                            agnostic version later. `),
-        console.warn(
+                            agnostic version later. `)
+        rus.frameworkDescriptionLogger.more(
 
             `ARCHITECTURE_NOTE`, [
 
@@ -160,7 +159,7 @@ const initLambdaNodeJSHandler = _ => {
                     not overwritten
                 
                     `
-            ]))
+            ])
 
     if (rus.conf.gitCommit) rus.lambdaGitCommit(rus.conf.gitCommitMessage)
 
@@ -287,8 +286,7 @@ const initLambdaNodeJSHandler = _ => {
 
         //  Minimal production logger (unsystematic; hook this up with configuration.js later) 
 
-        console.log(`lambda>node>handler, 
-ENTRY Point      : (/var/task/index.js)
+        console.log(`REQUEST to application < handler < NodeJS < Lambda < API Gateway < 
 METHOD           : ${arguments[0].requestContext.http.method} 
 DOMAIN           : ${arguments[0].requestContext.domainName} 
 PATH             : ${arguments[0].requestContext.http.path}
@@ -460,7 +458,8 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
         /* Minimal production logger (unsystematic; hook this up with configuration.js later) TODO: */
 
-        console.log(`lambda>node>handler, EXIT Point (/var/task/index.js)`,
+        //console.log( 
+        console.log(`RESPONSE from application > handler > NodeJS > Lambda > API Gateway > Client`,
 
             (typeof rutheniumResponse == 'string') ?
             `rutheniumResponse.slice(0,50) ... [truncated]` : (

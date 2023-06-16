@@ -669,7 +669,7 @@ const validateRules = async (
                 {
 
                     // Perhaps this should be lifted up out of the if-else
-                    conf.verbosity > 6 && console.warn(`validation.js: only_allowed_keys: see comment`)
+                    rusMinus1.frameworkDescriptionLogger.backlog(`only_allowed_keys: see comment`)
                     const mapTest = (testFun, testModel, testDatum) => {
 
                         rusMinus1.frameworkDescriptionLogger.callStarts()

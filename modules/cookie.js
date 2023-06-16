@@ -1,8 +1,8 @@
 'use strict'
 
 const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
-const conf = rusMinus1.conf 
-const mark = rusMinus1.mark 
+const conf = rusMinus1.conf
+const mark = rusMinus1.mark
 
 /*  QUICK START
  *
@@ -158,7 +158,9 @@ const checkId = id => {
             checkIdObject(id) // throws if id.name is missing
             break
         default:
-            throw Error(`(cookie.js) (cookie.checkId) argument (id) (usually the 2nd argument of Xset or Xexpire) was typeof neither (string) nor (object)`)
+            throw Error(`(cookie.checkId) argument (id) (usually the
+            2nd argument of Xset or Xexpire) was typeof neither (string) nor
+            (object)`)
     }
     // therefore, id.name by now MUST exist
 
@@ -174,15 +176,16 @@ const checkIdObject = idObject => {
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
     if (!('name' in idObject)) {
-        throw Error(`(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'name' was not found;`)
+        throw Error(`(cookie.checkIdObject) second argument (id) has
+        typeof 'object' but key 'name' was not found;`)
     }
     if (!('Path' in idObject)) {
-        conf.verbosity > 0 &&
-            console.warn(`(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'Path' was not found; may default`)
+        console.warn(`(cookie.checkIdObject) second argument
+            (id) has typeof 'object' but key 'Path' was not found; may default`)
     }
     if (!('Domain' in idObject)) {
-        conf.verbosity > 0 &&
-            console.warn(`(cookie.js) (cookie.checkIdObject) second argument (id) has typeof 'object' but key 'Path' was not found; may default`)
+        console.warn(`(cookie.checkIdObject) second argument
+            (id) has typeof 'object' but key 'Path' was not found; may default`)
     }
 
     rusMinus1.frameworkDescriptionLogger.callEnds()
@@ -192,7 +195,7 @@ const setCookieSignal = (DATA, id, value, attributes) => {
 
     rusMinus1.frameworkDescriptionLogger.callStarts()
 
-    if (!value) throw Error(`(cookie.js) (cookie.set) third argument (value) is falsy`)
+    if (!value) throw Error(`(cookie.set) third argument (value) is falsy`)
 
     const checkedId = checkId(id)
 
