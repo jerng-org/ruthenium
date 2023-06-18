@@ -59,9 +59,8 @@ if (conf.frameworkDescriptionLogging.length) {
                         Object
                         .values(arguments)
                         .reduce(
-                            (accumulator, currentValue, currentIndex, array) => {
-                                return accumulator + '\n' + currentValue
-                            }
+                            (acc, cur) => acc + '\n' + cur,
+                            ''
                         )
                     ).replace(
                         /\n/g,
