@@ -55,10 +55,15 @@ if (conf.frameworkDescriptionLogging.length) {
                         err.stack
                     ) +
                     ')\n|  * ' +
-                    JSON.stringify(
-                        Object.values(arguments),
-                        null,
-                        2
+                    (
+                        Object
+                        .values(arguments)
+                        .reduce(
+                            (accumulator, currentValue, currentIndex, array) => {
+                                return accumulator + '\n' + currentValue
+                            },
+                            ''
+                        )
                     ).replace(
                         /\n/g,
                         '\n' +
