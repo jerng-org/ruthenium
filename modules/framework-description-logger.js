@@ -55,7 +55,11 @@ if (conf.frameworkDescriptionLogging.length) {
                         err.stack
                     ) +
                     ')\n|  * ' +
-                    JSON.stringify(arguments, null, 2).replace(
+                    JSON.stringify(
+                        Object.values(arguments),
+                        null,
+                        2
+                    ).replace(
                         /\n/g,
                         '\n' +
                         '|  * '
