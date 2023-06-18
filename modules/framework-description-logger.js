@@ -72,24 +72,33 @@ if (conf.frameworkDescriptionLogging.length) {
 
     if (conf.frameworkDescriptionLogging.includes(0))
         frameworkDescriptionLogger.less = function() {
-            frameworkDescriptionLogger.log('❗ LESS:\n' + JSON.stringify(arguments, null, 2))
+            const a = Object.values(arguments)
+            a.unshift('❗ LESS:\n')
+            frameworkDescriptionLogger.log(a)
         }
-
     if (conf.frameworkDescriptionLogging.includes(1))
         frameworkDescriptionLogger.more = function() {
-            frameworkDescriptionLogger.log('📝 MORE:\n' + JSON.stringify(arguments, null, 2))
+            const a = Object.values(arguments)
+            a.unshift('📝 MORE:\n')
+            frameworkDescriptionLogger.log(a)
         }
     if (conf.frameworkDescriptionLogging.includes(2))
         frameworkDescriptionLogger.fixme = function() {
-            frameworkDescriptionLogger.log('🔥 FIXME:\n' + JSON.stringify(arguments, null, 2))
+            const a = Object.values(arguments)
+            a.unshift('🔥 FIXME:\n')
+            frameworkDescriptionLogger.log(a)
         }
     if (conf.frameworkDescriptionLogging.includes(3))
         frameworkDescriptionLogger.backlog = function() {
-            frameworkDescriptionLogger.log('🗓️ BACKLOG:\n' + JSON.stringify(arguments, null, 2))
+            const a = Object.values(arguments)
+            a.unshift('🗓️ BACKLOG:\n')
+            frameworkDescriptionLogger.log(a)
         }
     if (conf.frameworkDescriptionLogging.includes(5))
         frameworkDescriptionLogger.icebox = function() {
-            frameworkDescriptionLogger.log('🧊 ICEBOX:\n' + JSON.stringify(arguments, null, 2))
+            const a = Object.values(arguments)
+            a.unshift('🧊 ICEBOX:\n')
+            frameworkDescriptionLogger.log(a)
         }
 
     frameworkDescriptionLogger.callStarts = _ => {
