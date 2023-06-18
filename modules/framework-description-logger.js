@@ -61,8 +61,7 @@ if (conf.frameworkDescriptionLogging.length) {
                         .reduce(
                             (accumulator, currentValue, currentIndex, array) => {
                                 return accumulator + '\n' + currentValue
-                            },
-                            ''
+                            }
                         )
                     ).replace(
                         /\n/g,
@@ -83,31 +82,31 @@ if (conf.frameworkDescriptionLogging.length) {
         frameworkDescriptionLogger.less = function() {
             const a = Object.values(arguments)
             a.unshift('❗ LESS:\n')
-            frameworkDescriptionLogger.log(a)
+            frameworkDescriptionLogger.log.apply(this, a)
         }
     if (conf.frameworkDescriptionLogging.includes(1))
         frameworkDescriptionLogger.more = function() {
             const a = Object.values(arguments)
             a.unshift('📝 MORE:\n')
-            frameworkDescriptionLogger.log(a)
+            frameworkDescriptionLogger.log.apply(this, a)
         }
     if (conf.frameworkDescriptionLogging.includes(2))
         frameworkDescriptionLogger.fixme = function() {
             const a = Object.values(arguments)
             a.unshift('🔥 FIXME:\n')
-            frameworkDescriptionLogger.log(a)
+            frameworkDescriptionLogger.log.apply(this, a)
         }
     if (conf.frameworkDescriptionLogging.includes(3))
         frameworkDescriptionLogger.backlog = function() {
             const a = Object.values(arguments)
             a.unshift('🗓️ BACKLOG:\n')
-            frameworkDescriptionLogger.log(a)
+            frameworkDescriptionLogger.log.apply(this, a)
         }
     if (conf.frameworkDescriptionLogging.includes(5))
         frameworkDescriptionLogger.icebox = function() {
             const a = Object.values(arguments)
             a.unshift('🧊 ICEBOX:\n')
-            frameworkDescriptionLogger.log(a)
+            frameworkDescriptionLogger.log.apply(this, a)
         }
 
     frameworkDescriptionLogger.callStarts = _ => {
