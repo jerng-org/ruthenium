@@ -38,7 +38,7 @@ if (conf.frameworkDescriptionLogging.length) {
         console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 
-    frameworkDescriptionLogger.log = _input => {
+    frameworkDescriptionLogger.log = function() {
         {
             // COMBINE 
             let result
@@ -55,7 +55,7 @@ if (conf.frameworkDescriptionLogging.length) {
                         err.stack
                     ) +
                     ')\n|  * ' +
-                    String(_input).replace(
+                    String( arguments ).replace(
                         /\n/g,
                         '\n' +
                         '|  * '
@@ -71,25 +71,25 @@ if (conf.frameworkDescriptionLogging.length) {
     }
 
     if (conf.frameworkDescriptionLogging.includes(0))
-        frameworkDescriptionLogger.less = _input => {
-            frameworkDescriptionLogger.log('❗ LESS:\n' + _input)
+        frameworkDescriptionLogger.less = function() {
+            frameworkDescriptionLogger.log('❗ LESS:\n' + String( arguments ))
         }
 
     if (conf.frameworkDescriptionLogging.includes(1))
-        frameworkDescriptionLogger.more = _input => {
-            frameworkDescriptionLogger.log('📝 MORE:\n' + _input)
+        frameworkDescriptionLogger.more = function() {
+            frameworkDescriptionLogger.log('📝 MORE:\n' + String( arguments ))
         }
     if (conf.frameworkDescriptionLogging.includes(2))
-        frameworkDescriptionLogger.fixme = _input => {
-            frameworkDescriptionLogger.log('🔥 FIXME:\n' + _input)
+        frameworkDescriptionLogger.fixme = function() {
+            frameworkDescriptionLogger.log('🔥 FIXME:\n' + String( arguments ))
         }
     if (conf.frameworkDescriptionLogging.includes(3))
-        frameworkDescriptionLogger.backlog = _input => {
-            frameworkDescriptionLogger.log('🗓️ BACKLOG:\n' + _input)
+        frameworkDescriptionLogger.backlog = function() {
+            frameworkDescriptionLogger.log('🗓️ BACKLOG:\n' + String( arguments ))
         }
     if (conf.frameworkDescriptionLogging.includes(5))
-        frameworkDescriptionLogger.icebox = _input => {
-            frameworkDescriptionLogger.log('🧊 ICEBOX:\n' + _input)
+        frameworkDescriptionLogger.icebox = function() {
+            frameworkDescriptionLogger.log('🧊 ICEBOX:\n' + String( arguments ))
         }
 
     frameworkDescriptionLogger.callStarts = _ => {
