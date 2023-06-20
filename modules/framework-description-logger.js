@@ -12,6 +12,7 @@ const frameworkDescriptionLogger = {
     frameworkDescriptionLogString: '',
     log: _ => _,
     logStarts: _ => _,
+    logRestarts: _ => _,
     logEnds: _ => _,
     callDepth: 1,
     callEnumeration: [],
@@ -30,14 +31,19 @@ if (conf.frameworkDescriptionLogging.length) {
     const e1 = conf.frameworkDescriptionLoggingEmoji1
     const i1 = conf.frameworkDescriptionLoggingIndent1
 
-    frameworkDescriptionLogger.logStarts = _ => {
+    frameworkDescriptionLogger.logStarts = _note => {
         frameworkDescriptionLogger.frameworkDescriptionLogString =
-            "\n\n⏺ FrameworkDescriptionLogString STARTED (framework-description-logger.js INIT)"
+            "\n\n⏺ FrameworkDescriptionLogString STARTED ( " + _note + " )"
     }
 
-    frameworkDescriptionLogger.logEnds = _ => {
+    frameworkDescriptionLogger.logRestarts = _note => {
+        frameworkDescriptionLogger.frameworkDescriptionLogString =
+            "\n\n⏺ FrameworkDescriptionLogString RESTARTED  ( " + _note + " )"
+    }
+
+    frameworkDescriptionLogger.logEnds = _note => {
         frameworkDescriptionLogger.frameworkDescriptionLogString +=
-            '\n\n⏹ FrameworkDescriptionLogString ENDED (framework-description-logger.js/logEnds CALL)\n'
+            '\n\n⏹ FrameworkDescriptionLogString ENDED ( ' + _note + ' )\n'
         console.log(frameworkDescriptionLogger.frameworkDescriptionLogString)
     }
 
@@ -159,7 +165,7 @@ if (conf.frameworkDescriptionLogging.length) {
             .replace(
                 /\n/g,
                 '\n' +
-                (e1+i1).repeat(frameworkDescriptionLogger.callDepth - 1)
+                (e1 + i1).repeat(frameworkDescriptionLogger.callDepth - 1)
             )
 
         frameworkDescriptionLogger.callDepth--
