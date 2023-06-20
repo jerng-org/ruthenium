@@ -59,8 +59,8 @@ if (conf.frameworkDescriptionLogging.length) {
                     '\n' + e1 + '\n' + e1 +
                     ' /* (' +
                     (
-                        (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
-                        result[1] :
+                        //(result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
+                        //result[1] :
                         err.stack
                     ) +
                     ')\n' + e1 + '  * ' +
