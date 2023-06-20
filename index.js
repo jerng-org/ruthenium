@@ -23,40 +23,25 @@ const initLambdaNodeJSHandler = _ => {
 
     rus.frameworkDescriptionLogger.less(`(/var/task/index.js) SUMMARY
     
-    -   The role of this file in the AWS Lambda > NodeJS runtime is documented
-    by AWS
+    -   The roles of [this file] in the [AWS Lambda > NodeJS], and
+    [exports.handler] are documented by AWS.
     
-    -   The role of (exports.handler) in this runtime is documented by AWS - -
-    We run everything in a try-catch block
-    
-    -   We include miscellaneous documentation here
-    
-    -   We perform various logging activities throughout, including this log
-    
-    -   DEVELOPMENT : We commit the codebase to (git) here
-    
-    -   We (require) framework and middleware files
-    
-    -   (exports.handler) is then defined to capture each HTTP requests'
-    (hostInitializedData) and (middlewares), run this through (ruthenium) and
-    get (rutheniumResponse), then return it
+    -   We run everything in a [try-catch block], including miscellaneous
+    documentation. [rus.conf] can modify the original [console] with a
+    [customLogger]. 
 
-    `)
-
-    rus.frameworkDescriptionLogger.more(`we are now in (/var/task/index.js), and
+    -   A [frameworkDescriptionLogger] allows for the framework [documentation
+    AND backlog note varieties] to be embedded in the codebase, near the relevant
+    LOCs. [rus.conf.frameworkDescriptionLogging] determines verbosity.
     
-    -   the first line says 'use strict', and immediately after this is a
-    try-catch block; 
+    -   DEVELOPMENT : We commit the codebase to (git) here.
     
-        -   right below us, is a WARNING on how the AWS Lambda environment
-        handles (exports.handler) in the (node.js) runtime, which we are in; 
+    -   We (require) framework and middleware files.
     
-        -   immediately after this we have some key technical DEBT NOTES;
-    
-        -   then, a hack that commits this codebase to git ! ;
-        
-        -   many (requires) occur next, including the framework sources, and
-        middlewares;`)
+    -   We then define (exports.handler) which is called whenever the Lamba is
+    executed. It captures each HTTP requests' (hostInitializedData) and
+    (middlewares), run this through (ruthenium) and get (rutheniumResponse),
+    then return it`)
 
     /*_______________________________!!
     !!            \\                 !!
@@ -65,37 +50,35 @@ const initLambdaNodeJSHandler = _ => {
     !!            //  \\             !!
     !!__________//______\\___________*/
 
-        rus.frameworkDescriptionLogger.more(`
-        
-    !!! WARNING !!! -   ANYTHING OUTSIDE (exports.handler) persists across all
-    function calls, possibly for the lifetime of the function's CONTAINER;
+    rus.frameworkDescriptionLogger.more(` !!! WARNING !!! -   ANYTHING OUTSIDE
+    (exports.handler) persists across all function calls, possibly for the
+    lifetime of the function's CONTAINER;
                         
-                        DO NOT WRITE TO THESE OBJECTS, 
-                        
-                            FROM MIDDLEWARES, OR FROM ANYWHERE ELSE IN CODE
-                            CALLED BY (exports.handler), AS THIS MAY RESULT IN
-                            SECURITY BREACHES, OR SPACE LEAKS; DO NOT WRITE
-                            ANYTHING TO THESE OBJECTS,
-                        
-                            MOST IMPORTANTLY DO NOT WRITE (data) from
-                            MIDDLEWARES TO THESE OBJECTS;
-                            
-                        ... SOONER, we need to test how (require()) handles
-                        these, to determine exactly what data persists between
-                            function calls;
-                            
-                        ... LATER, we need to implement a checker to block this
-                        from happening at commit-time;
-                            
-    !!! GUIDELINE !!!   -   If any code is (lambda)-specific, prefix that file
-                            immediately, and figure out how to write a runtime
-                            agnostic version later. `)
-        rus.frameworkDescriptionLogger.more(
+    DO NOT WRITE TO THESE OBJECTS, 
+    
+    FROM MIDDLEWARES, OR FROM ANYWHERE ELSE IN CODE CALLED BY (exports.handler),
+    AS THIS MAY RESULT IN SECURITY BREACHES, OR SPACE LEAKS; DO NOT WRITE
+    ANYTHING TO THESE OBJECTS,
+    
+    MOST IMPORTANTLY DO NOT WRITE (data) from MIDDLEWARES TO THESE OBJECTS.`)
 
-            `ARCHITECTURE_NOTE`, [
+    rus.frameworkDescriptionLogger.backlog(`... SOONER, we need to test how
+    (require()) handles these, to determine exactly what data persists between
+    function calls;`)
+
+    rus.frameworkDescriptionLogger.backlog(`... LATER, we need to implement a
+    checker to block this from happening at commit-time;`)
+
+    rus.frameworkDescriptionLogger.less(`If any code is (lambda)-specific,
+    prefix that file immediately, and figure out how to write a runtime agnostic
+    version later. `)
+
+    rus.frameworkDescriptionLogger.more(
+
+        `ARCHITECTURE_NOTE`, [
 
 
-                `RULE:
+            `RULE:
                 
                     1.  A web server's hypertext graph should be defined in
                         minimalistic form as-if for a machine reader, first.
@@ -107,11 +90,11 @@ const initLambdaNodeJSHandler = _ => {
                                 (URIs may be names or locations of resources.)
                             
                             2.  HTTP responses for machine readers should
-                                include a list of 
+                                include a list of (some?) available URIs
                     
                     2. `,
 
-                `We're currently working with something that looks like:
+            `We're currently working with something that looks like:
                 
                     - ? route=virtual
                     
@@ -132,34 +115,28 @@ const initLambdaNodeJSHandler = _ => {
                     thing=Deskname#Columnname,Rowid" (we've stopped caring if
                     "type" and "Columnname" are singular or plural)        
                     
-                    User-story:     
+                User-story:     
                     
-                    1.  Define traits for desks, in desk-schemas 2.  All desks
-                    which share a desk-schema trait all work the same way
+                    1.  Define traits for desks, in desk-schemas 
                     
-                    
-                        But we really shouldn't bother until v2. `,
+                    2.  All desks which share a desk-schema trait all work the
+                    same way But we really shouldn't bother until v2. `,
 
-                `consider upgrading performance of DynamoDB Document Client
-                https://www.npmjs.com/package/aws-thin-dynamo`,
-
-                `$.stuff for aliasing`,
-
-                `https://www.npmjs.com/package/require-directory`,
-
-                `Things that could be done in JavaScript, but which may not be
+            `Things that could be done in JavaScript, but which may not be
                 simply portable to other languages:
                 
-                -   setting non-enumerable properties on (data) which allow 
+                -   setting non-enumerable properties on (rus.data) which allow 
                     hidden safety checks, for example (did someone delete keyX),
                     also non-writeable, non-configurable, etc.
                     
                 -   one possible paradigm for managing this, is to replace all
                     prop-assignment with array-pushes, so that data already set
-                    not overwritten
-                
-                    `
-            ])
+                    is not overwritten `
+        ])
+
+    rus.frameworkDescriptionLogger.backlog(
+        `https://www.npmjs.com/package/require-directory`
+    )
 
     if (rus.conf.gitCommit) rus.lambdaGitCommit(rus.conf.gitCommitMessage)
 
@@ -503,10 +480,10 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         '(/var/task/(index.js).exports.handler INIT) '
     )
 
-    rus.frameworkDescriptionLogger.backlog( `s3.js; route=s3-post-policy-test`)
-    
+    rus.frameworkDescriptionLogger.backlog(`s3.js; route=s3-post-policy-test`)
+
     rus.frameworkDescriptionLogger.backlog(`WIP: desks-get-markup.js: cell by
-    cell updates` )
+    cell updates`)
 
 }
 
