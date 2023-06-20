@@ -56,7 +56,7 @@ module.exports = {
     customLogging: 1,
     customLoggingAllowsNativeLogging: 0,
     customLoggingLineTrace: 1,
-    customLoggingEmoji1: '🌞',
+    customLoggingEmoji1: '|',//'🌞',
     customLoggingEmoji2: '📍',
 
     customLoggingHeaderError: '❌',
@@ -126,7 +126,7 @@ module.exports = {
      */
     //frameworkDescriptionLogging: [],
     frameworkDescriptionLogging: [0, 1, 2, 3, 4],
-    frameworkDescriptionLoggingEmoji1 : '|',
+    frameworkDescriptionLoggingEmoji1 : '🌞',//'|',
 
     /*  gitCommit
      *
