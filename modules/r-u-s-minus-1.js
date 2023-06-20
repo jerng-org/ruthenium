@@ -20,7 +20,7 @@ const frameworkDescriptionLogger =
 if (conf.frameworkDescriptionLogging.length) {
     frameworkDescriptionLogger.logStarts('r-u-s-minus-1.js / handler INITIALISING')
 
-    frameworkDescriptionLogger.less(`customLogger.startCustomLogString must be
+    frameworkDescriptionLogger.fixme(`customLogger.startCustomLogString must be
     run before anything else, and not run again, otherwise things go missing;
     derisk this issue`)
 
