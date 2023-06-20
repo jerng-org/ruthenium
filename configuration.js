@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `frameworkDescriptionLogger.log should process all (arguments)` //`comments : classification `
+const _gitCommitMessage = `prettification of logs`//`comments : classification `
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
@@ -126,6 +126,7 @@ module.exports = {
      */
     //frameworkDescriptionLogging: [],
     frameworkDescriptionLogging: [0, 1, 2, 3, 4],
+    frameworkDescriptionLoggingEmoji1 : '|',
 
     /*  gitCommit
      *

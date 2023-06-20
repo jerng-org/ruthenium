@@ -29,7 +29,6 @@ if (conf.frameworkDescriptionLogging.length) {
 
     frameworkDescriptionLogger.backlog(`rename customLogger.xxx to
     LogStart,LogRestart,LogLog (custom-logger.js)`)
-
 }
 
 module.exports = {
