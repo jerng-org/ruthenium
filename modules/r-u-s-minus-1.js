@@ -18,7 +18,7 @@ const frameworkDescriptionLogger =
     require(`/var/task/modules/framework-description-logger.js`)
 
 if (conf.frameworkDescriptionLogging.length) {
-    frameworkDescriptionLogger.logStarts()
+    frameworkDescriptionLogger.logStarts('r-u-s-minus-1.js')
 
     frameworkDescriptionLogger.less(`customLogger.startCustomLogString must be
     run before anything else, and not run again, otherwise things go missing;

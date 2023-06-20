@@ -280,8 +280,7 @@ const initLambdaNodeJSHandler = _ => {
 
         rus.customLogger.restartCustomLogString(
             '(/var/task/(index.js).exports.handler CALL) ')
-        rus.frameworkDescriptionLogger.frameworkDescriptionLogString =
-            "\n\n⏸⏺ FrameworkDescriptionLogString RE-STARTED (/var/task / index.js).exports.handler CALL) "
+        rus.frameworkDescriptionLogger.logRestarts('index.js / handler EXECUTING')
         rus.frameworkDescriptionLogger.callStarts()
 
         //  Minimal production logger (unsystematic; hook this up with configuration.js later) 
@@ -475,7 +474,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
         // runs when (handler) is executed rus.mark('... Handler EXECUTED')
         rus.frameworkDescriptionLogger.callEnds()
-        rus.frameworkDescriptionLogger.logEnds()
+        rus.frameworkDescriptionLogger.logEnds('index.js / handler EXECUTING')
         rus.customLogger.logCustomLogString(
             '(/var/task/(index.js).exports.handler CALL) '
         )
@@ -499,7 +498,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
     // runs when (handler) is initialised
     rus.frameworkDescriptionLogger.callEnds()
-    rus.frameworkDescriptionLogger.logEnds()
+    rus.frameworkDescriptionLogger.logEnds('index.js / handler INITIALISING')
     rus.customLogger.logCustomLogString(
         '(/var/task/(index.js).exports.handler INIT) '
     )
