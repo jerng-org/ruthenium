@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = 'interface to frameworkDescriptionLogger'//`comments : classification `
+const _gitCommitMessage = `comments : classification `
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
