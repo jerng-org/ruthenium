@@ -28,6 +28,7 @@ const frameworkDescriptionLogger = {
 if (conf.frameworkDescriptionLogging.length) {
 
     const e1 = conf.frameworkDescriptionLoggingEmoji1
+    const e2 = conf.frameworkDescriptionLoggingEmoji2
 
     frameworkDescriptionLogger.logStarts = _ => {
         frameworkDescriptionLogger.frameworkDescriptionLogString =
@@ -74,7 +75,7 @@ if (conf.frameworkDescriptionLogging.length) {
                 .replace(
                     /\n/g,
                     '\n' +
-                    (e1 + ' ').repeat(frameworkDescriptionLogger.callDepth - 1)
+                    (e1 + e2).repeat(frameworkDescriptionLogger.callDepth - 1)
                 )
         }
     }
@@ -133,7 +134,7 @@ if (conf.frameworkDescriptionLogging.length) {
             .replace(
                 /\n/g,
                 '\n' +
-                (e1 + ' ').repeat(frameworkDescriptionLogger.callDepth - 1)
+                (e1 + e2).repeat(frameworkDescriptionLogger.callDepth - 1)
             )
     }
 
@@ -158,7 +159,7 @@ if (conf.frameworkDescriptionLogging.length) {
             .replace(
                 /\n/g,
                 '\n' +
-                (e1+' ').repeat(frameworkDescriptionLogger.callDepth - 1)
+                (e1+e2).repeat(frameworkDescriptionLogger.callDepth - 1)
             )
 
         frameworkDescriptionLogger.callDepth--
