@@ -126,8 +126,8 @@ module.exports = {
      */
     //frameworkDescriptionLogging: [],
     frameworkDescriptionLogging: [0, 1, 2, 3, 4],
-    frameworkDescriptionLoggingEmoji1 : '🌞',//'|',
-    frameworkDescriptionLoggingEmoji2 : '',//'|',
+    frameworkDescriptionLoggingEmoji1 : '⬜',//'🌞',//'|',
+    frameworkDescriptionLoggingIndent1 : '',//'|',
 
     /*  gitCommit
      *
