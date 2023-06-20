@@ -8,7 +8,7 @@ const conf = require(`/var/task/configuration.js`)
 //      //
 //////////
 
-var frameworkDescriptionLogger = {
+const frameworkDescriptionLogger = {
     frameworkDescriptionLogString: '',
     log: _ => _,
     logStarts: _ => _,
@@ -26,6 +26,8 @@ var frameworkDescriptionLogger = {
 }
 
 if (conf.frameworkDescriptionLogging.length) {
+
+    const e1 = conf.frameworkDescriptionLoggingEmoji1
 
     frameworkDescriptionLogger.logStarts = _ => {
         frameworkDescriptionLogger.frameworkDescriptionLogString =
@@ -47,14 +49,14 @@ if (conf.frameworkDescriptionLogging.length) {
 
             frameworkDescriptionLogger.frameworkDescriptionLogString +=
                 (
-                    '\n|\n|' +
+                    '\n' + e1 + '\n' + e1 +
                     ' /* (' +
                     (
                         (result = err.stack.match(/\n.*\n.*at (.*)\n?/)) ?
                         result[1] :
                         err.stack
                     ) +
-                    ')\n|  * ' +
+                    ')\n' + e1 + '  * ' +
                     (
                         Object
                         .values(arguments)
@@ -65,14 +67,14 @@ if (conf.frameworkDescriptionLogging.length) {
                     ).replace(
                         /\n/g,
                         '\n' +
-                        '|  * '
+                        e1 + '  * '
                     ) +
-                    '\n|  */ '
+                    '\n' + e1 + '  */ '
                 )
                 .replace(
                     /\n/g,
                     '\n' +
-                    '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
+                    (e1 + ' ').repeat(frameworkDescriptionLogger.callDepth - 1)
                 )
         }
     }
@@ -131,7 +133,7 @@ if (conf.frameworkDescriptionLogging.length) {
             .replace(
                 /\n/g,
                 '\n' +
-                '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
+                (e1 + ' ').repeat(frameworkDescriptionLogger.callDepth - 1)
             )
     }
 
@@ -156,7 +158,7 @@ if (conf.frameworkDescriptionLogging.length) {
             .replace(
                 /\n/g,
                 '\n' +
-                '| '.repeat(frameworkDescriptionLogger.callDepth - 1)
+                (e1+' ').repeat(frameworkDescriptionLogger.callDepth - 1)
             )
 
         frameworkDescriptionLogger.callDepth--
