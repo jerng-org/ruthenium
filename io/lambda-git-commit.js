@@ -64,7 +64,14 @@ const shellExports = `
 
     2) the files, roughly : 
      
-         lambda-layer.zip
+        "Copy from yum's installation" and "compile yourself", refer to any
+        live system based on the (disk image / ARN ) used by AWS Lambda when
+        executing Lambdas on the ARM architecture. You can get find these 
+        image ARNs in AWS' documentation, or simply try to run a similar Linux
+        on EC2 with the same Graviton chips that AWS Lambda is using - look it
+        up.
+     
+        lambda-layer.zip
          |
          +-git
            |
