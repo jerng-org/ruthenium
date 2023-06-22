@@ -36,9 +36,32 @@ const shellExports = `
             export PATH=$PATH:/opt/git/bin; \
             export LD_LIBRARY_PATH=/opt/git/lib; \
 `
-/*  based on lambda layer "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:8"
- 
-     roughly : 
+/*  2023-06-23 : based on lambda layer
+        "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:8"
+
+    1) the environmental variables, roughly :
+    
+        1.1) export PATH=$PATH:/opt/git/bin; 
+            
+            This will fail with " Unable to find remote helper for 'https' " :
+    
+                $ /path/to/bin/git clone etc.
+    
+            But this will work :
+    
+                $ export PATH=$PATH:/path/to/bin
+    
+                $ git clone etc.
+    
+            It's probably because (git) is trying to call itself but can't find
+            itself ... that's a horrible default behaviour ... but we know (git)
+            has legacy issues.
+            
+        1.2) export LD_LIBRARY_PATH=/opt/git/lib; 
+    
+            This ensures (git) can find its (.so : shared object files)
+
+    2) the files, roughly : 
      
          lambda-layer.zip
          |
