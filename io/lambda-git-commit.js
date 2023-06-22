@@ -43,11 +43,12 @@ const shellExports = `
     
         1.1) export PATH=$PATH:/opt/git/bin; 
             
-            This will fail with " Unable to find remote helper for 'https' " :
+            The following will fail with 
+            " Unable to find remote helper for 'https' " :
     
                 $ /path/to/bin/git clone etc.
     
-            But this will work :
+            But the following will work :
     
                 $ export PATH=$PATH:/path/to/bin
     
