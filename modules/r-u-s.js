@@ -3,8 +3,6 @@
 const rusMinus1 = require(`/var/task/modules/r-u-s-minus-1.js`)
 const mark = rusMinus1.mark 
 
-mark(`LOADING ...`)
-
 const fs = require('fs')
 const url = require('url')
 
