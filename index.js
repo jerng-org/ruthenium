@@ -11,6 +11,10 @@ const initLambdaNodeJSHandler = _ => {
 
     //  See pertinent (nodeJS-specific) documentation at /var/task / modules / r - u - s.js
 
+    {
+        a:1    }
+
+
     const rus = require('/var/task/modules/r-u-s.js')
 
     rus.mark(`INITIALISING Handler (having loaded r-u-s.js) ...`)
