@@ -22,14 +22,15 @@ if (conf.customLogging) {
 
     const buildLineStyle1 = (_continue, _arguments, _postDateLabel) => {
 
-        const customLogStringDate = new Date
-
+        const _dateTimeString = conf.customLoggingDateTimes ?
+            conf.dateTimeFormat.format(new Date) :
+            ''
         let result
         let err = {}
         Error.captureStackTrace(err)
 
         return customLogger.customLogString += "\n" +
-            conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
+            _dateTimeString + _postDateLabel + e1 +
             Array.from(_arguments).concat([]
                 /*
                 (!conf.customLoggingLineTrace ? [] : [
@@ -54,12 +55,14 @@ if (conf.customLogging) {
             .replace(/\n/g, '\n' + ' '.repeat(conf.customLoggingIndentCount) + e1)
     }
     const buildLineStyle2 = (_continue, _arguments, _postDateLabel, _postEmoji) => {
-        const customLogStringDate = new Date
 
+        const _dateTimeString = conf.customLoggingDateTimes ?
+            conf.dateTimeFormat.format(new Date) :
+            ''
         customLogger.customLogString = (_continue ?
                 customLogger.customLogString + '\n' :
                 '\n\n') +
-            conf.dateTimeFormat.format(customLogStringDate) + _postDateLabel + e1 +
+            _dateTimeString + _postDateLabel + e1 +
             _postEmoji + Array.from(_arguments).join('\n')
     }
 
