@@ -56,7 +56,7 @@ module.exports = {
     customLogging: 1,
     customLoggingAllowsNativeLogging: false,
     customLoggingDateTimes: false,
-    customLoggingLineTrace: true,
+    customLoggingLineTrace: false,
     customLoggingEmoji1: '|',//'🌞',
     customLoggingEmoji2: '📍',
 
