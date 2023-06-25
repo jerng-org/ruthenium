@@ -184,4 +184,4 @@ const applyLayout = async (data) => {
 
 module.exports = applyLayout
 
-rus.mark('... LOADED')
+rus.mark('LOADED')

@@ -381,4 +381,4 @@ const rus = {
 //////////
 
 module.exports = rus
-mark(`... LOADED`)
+mark(`LOADED`)
