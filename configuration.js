@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = 'frameworkDescriptionLogger can autostart'//`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
+const _gitCommitMessage = 'conf.mark renamed from conf.performance; removed unnecessary assignment in mark.js'//`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
@@ -218,6 +218,17 @@ module.exports = {
         }
     },
 
+    /*  performance marking / monitoring
+     *
+     *      0   :   none
+     *
+     *      1   :   some
+     *
+     *      2   :   undefined, as yet
+     *
+     */
+    markPerformance: 1,
+
     /*  https://nodejs.org/api/child_process.html#optionsstdio
      */
     nodejs: {
@@ -229,17 +240,6 @@ module.exports = {
     obfuscations: {
         sessionCookieName: 'SONCHUSJD' // some random characters
     },
-
-    /*  performance monitoring
-     *
-     *      0   :   none
-     *
-     *      1   :   some
-     *
-     *      2   :   undefined, as yet
-     *
-     */
-    performance: 0,
 
     /*  platform:
      *  
