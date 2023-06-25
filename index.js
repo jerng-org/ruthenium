@@ -11,16 +11,9 @@ const initLambdaNodeJSHandler = _ => {
 
     //  See pertinent (nodeJS-specific) documentation at /var/task / modules / r - u - s.js
 
-    const y = {
-        a:1, a:2
-    }
-
-
     const rus = require('/var/task/modules/r-u-s.js')
 
     rus.mark(`INITIALISING Handler (having loaded r-u-s.js) ...`)
-
-    rus.frameworkDescriptionLogger.callStarts()
 
     rus.frameworkDescriptionLogger.backlog(`(ru) shouldn't have a folder called
     (modules) as this is easily confused with that keyword in

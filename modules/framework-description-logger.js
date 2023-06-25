@@ -180,4 +180,7 @@ if (conf.frameworkDescriptionLogging.length) {
 //      //
 //////////
 
+if (conf.frameworkDescriptionLoggingAutoStart)
+    frameworkDescriptionLogger.callStarts()
+
 module.exports = frameworkDescriptionLogger
