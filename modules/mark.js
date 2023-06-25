@@ -3,7 +3,7 @@
 const conf = require(`/var/task/configuration.js`)
 const customLogger = require(`/var/task/modules/custom-logger.js`)
 
-const _log = conf.performance ? console.log : _ => _
+const _log = conf.mark ? console.log : _ => _
 
 // The following code is written for the `nodejs` (12.x) runtime on AWS Lambda.
 // FWIW: `nodejs.process` also has: .resourceUsage() and .httime.bigint()
@@ -84,7 +84,7 @@ let invocationStartCPUsum
 //
 //  Core functionality:
 
-const mark = async (taskLabel, firstInHandler) => {
+const mark = (!conf.mark) ? _ => _ : async (taskLabel, firstInHandler) => {
 
     const columnedRowBorder =
         String(`+`)
@@ -103,7 +103,7 @@ const mark = async (taskLabel, firstInHandler) => {
             preInvocationCPUsum = preInvocationCPU.user + preInvocationCPU.system
             preInvocationTime = performance.now()
 
-            conf.performance &&
+            conf.mark &&
                 console.warn(`mark.js : these figures are loose and fast`)
 
             _log(columnedRowBorder)
@@ -124,7 +124,7 @@ const mark = async (taskLabel, firstInHandler) => {
                 '|'
             )
 
-            conf.performance &&
+            conf.mark &&
                 console.warn(`Lambda does not charge for preinvocation runtime;
                 nodejs overhead seems to be 30MB-60MB`)
 
@@ -339,6 +339,6 @@ const mark = async (taskLabel, firstInHandler) => {
 
 }
 
-module.exports = conf.performance ? mark : _ => _
+module.exports = mark 
 
 mark(`LOADED/1st`, true)
