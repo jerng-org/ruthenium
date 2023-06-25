@@ -1,7 +1,8 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = 'conf.mark renamed from conf.performance; removed unnecessary assignment in mark.js'//`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
+const _gitCommitMessage = 'customLogger : make datetimes optional'
+//`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
@@ -55,6 +56,7 @@ module.exports = {
 
     customLogging: 1,
     customLoggingAllowsNativeLogging: 0,
+    customLoggingDateTimes:0,
     customLoggingLineTrace: 1,
     customLoggingEmoji1: '|',//'🌞',
     customLoggingEmoji2: '📍',
