@@ -64,25 +64,14 @@ module.exports = {
     customLoggingEmoji1: '|', //'🌞',
     customLoggingEmoji2: '📍',
 
-    customLoggingHeaderError: '❌',
-    customLoggingHeaderWarn: '📢',
-    customLoggingHeaderLog: 'ℹ️',
-    customLoggingHeaderInfo: 'ℹ️',
+    customLoggingHeaderError: '❌',   // 'ERR',
+    customLoggingHeaderWarn: '📢',    // 'WAR',
+    customLoggingHeaderLog: 'ℹ️',     // 'LOG',
+    customLoggingHeaderInfo: 'ℹ️',   // 'INF',
     customLoggingHeaderLogStart: '⏯',
     customLoggingHeaderLogRestart: '⏸',
     customLoggingHeaderLogLog: '⏹',
-    customLoggingIndentCount: _dateTimeFormat.format(new Date).length + 1,
-
-    /* 
-    customLoggingHeaderError: ' ❌ERR',
-    customLoggingHeaderWarn: ' 📢WAR',
-    customLoggingHeaderLog: ' ℹ️LOG',
-    customLoggingHeaderInfo: ' ℹ️INF',
-    customLoggingHeaderLogStart: '⏯   ' ,
-    customLoggingHeaderLogRestart: '⏸   ',
-    customLoggingHeaderLogLog: '⏹   ',
-    customLoggingIndentCount: 35,
-    */
+    customLoggingDateLength: _dateTimeFormat.format(new Date).length + 1,
 
     /*  dateTimeFormat 
      *  
