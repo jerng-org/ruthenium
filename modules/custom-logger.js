@@ -26,7 +26,7 @@ if (conf.customLogging) {
             conf.dateTimeFormat.format(new Date) :
             ''
         const _indentLength = conf.customLoggingDateLength
-        
+
         let result
         let err = {}
         Error.captureStackTrace(err)
@@ -54,7 +54,11 @@ if (conf.customLogging) {
                     )
                 )
             )
-            .replace(/\n/g, '\n' + ' '.repeat(conf.customLoggingIndentLength) + e1)
+            .replace(/\n/g, '\n' + ' '.repeat(
+                    conf.customLoggingDateTimes ?
+                    conf.customLoggingIndentLength :
+                    0) +
+                e1)
     }
     const buildLineStyle2 = (_continue, _arguments, _postDateLabel, _postEmoji) => {
 
