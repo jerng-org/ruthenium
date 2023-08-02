@@ -61,7 +61,7 @@ module.exports = {
     customLoggingAllowsNativeLogging: false,
     customLoggingDateTimes: true,
     customLoggingLineTrace: false,
-    customLoggingEmoji1: '⬛', //'|', //'🌞',
+    customLoggingEmoji1: '⬜', //'|', //'🌞',
     customLoggingEmoji2: '📍',
 
     /*  JavaScript cannot easily count unicode rendered lengths 
@@ -123,7 +123,7 @@ module.exports = {
     frameworkDescriptionLoggingAutostart: true,
     //frameworkDescriptionLogging: [],
     frameworkDescriptionLogging: [0, 1, 2, 3, 4],
-    frameworkDescriptionLoggingEmoji1: '⬜', //'🌞',//'|',
+    frameworkDescriptionLoggingEmoji1: '⬛', //'🌞',//'|',
     frameworkDescriptionLoggingIndent1: '', //'|',
 
     /*  gitCommit
