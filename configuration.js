@@ -1,12 +1,12 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = `refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
+const _gitCommitMessage = 'customLogger indent bug' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
 const _dateTimeFormatOptions = {
-    year: '2-digit',//'numeric',
+    year: '2-digit', //'numeric',
     month: '2-digit',
     day: '2-digit',
     hour: '2-digit',
@@ -16,6 +16,10 @@ const _dateTimeFormatOptions = {
     timeZoneName: 'short',
     timeZone: _ianaTimeZone
 }
+const _dateTimeFormat = new Intl.DateTimeFormat(
+    _dateTimeFormatBcp47Tag,
+    _dateTimeFormatOptions
+)
 
 module.exports = {
 
@@ -55,9 +59,9 @@ module.exports = {
 
     customLogging: 1,
     customLoggingAllowsNativeLogging: false,
-    customLoggingDateTimes: false,
+    customLoggingDateTimes: true,
     customLoggingLineTrace: false,
-    customLoggingEmoji1: '|',//'🌞',
+    customLoggingEmoji1: '|', //'🌞',
     customLoggingEmoji2: '📍',
 
     customLoggingHeaderError: '❌',
@@ -67,7 +71,7 @@ module.exports = {
     customLoggingHeaderLogStart: '⏯',
     customLoggingHeaderLogRestart: '⏸',
     customLoggingHeaderLogLog: '⏹',
-    customLoggingIndentCount: 29,
+    customLoggingIndentCount: _dateTimeFormat.format(new Date).length + 1,
 
     /* 
     customLoggingHeaderError: ' ❌ERR',
@@ -85,10 +89,7 @@ module.exports = {
      *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales 
      */
 
-    dateTimeFormat: new Intl.DateTimeFormat(
-        _dateTimeFormatBcp47Tag,
-        _dateTimeFormatOptions
-    ),
+    dateTimeFormat: _dateTimeFormat,
     dateTimeFormatBcp47Tag: _dateTimeFormatBcp47Tag,
     dateTimeFormatOptions: _dateTimeFormatOptions,
 
@@ -125,11 +126,11 @@ module.exports = {
      *
      *      [4] :   ideas / ICEBOX-ed items 
      */
-    frameworkDescriptionLoggingAutostart:true,
+    frameworkDescriptionLoggingAutostart: true,
     //frameworkDescriptionLogging: [],
     frameworkDescriptionLogging: [0, 1, 2, 3, 4],
-    frameworkDescriptionLoggingEmoji1 : '⬜',//'🌞',//'|',
-    frameworkDescriptionLoggingIndent1 : '',//'|',
+    frameworkDescriptionLoggingEmoji1: '⬜', //'🌞',//'|',
+    frameworkDescriptionLoggingIndent1: '', //'|',
 
     /*  gitCommit
      *
