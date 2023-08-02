@@ -61,7 +61,7 @@ module.exports = {
     customLoggingAllowsNativeLogging: false,
     customLoggingDateTimes: true,
     customLoggingLineTrace: false,
-    customLoggingEmoji1: '|', //'🌞',
+    customLoggingEmoji1: '⬛', //'|', //'🌞',
     customLoggingEmoji2: '📍',
 
     /*  JavaScript cannot easily count unicode rendered lengths 
