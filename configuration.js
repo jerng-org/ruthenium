@@ -75,7 +75,8 @@ module.exports = {
     customLoggingHeaderLogRestart: '⏸',
     customLoggingHeaderLogLog: '⏹',
     
-    customLoggingIndentLength: _dateTimeFormat.format(new Date).length + 2,
+    customLoggingDateTimeLength: _dateTimeFormat.format(new Date).length,
+    customLoggingPostDateTimeIndentLength: 2,
 
     /*  dateTimeFormat 
      *  
