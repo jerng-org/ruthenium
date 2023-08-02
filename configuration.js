@@ -64,6 +64,9 @@ module.exports = {
     customLoggingEmoji1: '|', //'🌞',
     customLoggingEmoji2: '📍',
 
+    /*  JavaScript cannot easily count unicode rendered lengths 
+        ( 2 bytes long, rendered in 1 monospace width ), so 
+        keep these Headers to the same total rendered length */
     customLoggingHeaderError: '❌',   // 'ERR',
     customLoggingHeaderWarn: '📢',    // 'WAR',
     customLoggingHeaderLog: 'ℹ️',     // 'LOG',
@@ -71,7 +74,8 @@ module.exports = {
     customLoggingHeaderLogStart: '⏯',
     customLoggingHeaderLogRestart: '⏸',
     customLoggingHeaderLogLog: '⏹',
-    customLoggingDateLength: _dateTimeFormat.format(new Date).length + 1,
+    
+    customLoggingIndentLength: _dateTimeFormat.format(new Date).length + 2,
 
     /*  dateTimeFormat 
      *  
