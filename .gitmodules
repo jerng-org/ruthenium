@@ -1,6 +1,6 @@
 [submodule "io/submodule.validation"]
 	path = io/submodule.validation
-	url = https://github.com/jerng/validation.js.git
+	url = https://github.com/jerng-org/validation.js.git
 [submodule "modules/submodule.mark.js"]
 	path = modules/submodule.mark.js
-	url = https://github.com/jerng/mark.js.git
+	url = https://github.com/jerng-org/mark.js.git
