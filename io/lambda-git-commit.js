@@ -234,7 +234,9 @@ shell command execution`)
                     echo "DEBUG : $PWD" 1>&2 &&
                     git add . 1>&2 &&
                     git checkout -b ${ process.env.GITHUB_BRANCH } 1>&2 &&
-                    git -c user.name=jerng-machines commit --allow-empty -m "${ _escapedCommitMessage }" 1>&2 &&
+                    (   git diff-index --quiet HEAD || 
+                        git -c user.name=jerng-machines commit -m "${ _escapedCommitMessage }" 1>&2 
+                        ) &&
                        
                     echo "DEBUG : (git config --get remote.origin.url) in ($PWD)" 1>&2 &&
                     git config --get remote.origin.url 1>&2  &&
@@ -254,7 +256,9 @@ shell command execution`)
                 echo "DEBUG : (git SUPERPROJECT : add, checkout -b, commit)" 1>&2 &&
                 git add . 1>&2 &&
                 
-                git -c user.name=jerng-machines commit --allow-empty -m "${ _escapedCommitMessage }" 1>&2 &&
+                (   git diff-index --quiet HEAD || 
+                    git -c user.name=jerng-machines commit -m "${ _escapedCommitMessage }" 1>&2 
+                    ) &&
                 git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git 1>&2
                 `, {
                     encoding: 'utf8',
