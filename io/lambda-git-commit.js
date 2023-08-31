@@ -33,11 +33,11 @@ const conf = rusMinus1.conf
 const mark = rusMinus1.mark
 const childProcess = require('child_process')
 const shellExports = `
-            export PATH=$PATH:/opt/git/bin; \
-            export LD_LIBRARY_PATH=/opt/git/lib; \
-`
-/*  2023-06-23 : based on lambda layer
-        "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:8"
+    export PATH=$PATH:/opt/git/bin 
+    export LD_LIBRARY_PATH=/opt/git/lib 
+    `
+/*  2023-08-30 : based on lambda layer
+        "arn:aws:lambda:us-east-1:674588274689:layer:git-arm-lambda:11"
 
     1) the environmental variables, roughly :
     
@@ -107,7 +107,12 @@ const shellExports = `
            | |
            | +-git-core
            |   |
-           |   +-git-remote-https ( ~2.2MB, you can just copy this from yum's installation )
+           |   +-git-remote-https       ( ~2.2MB,   you can just copy this from yum's installation )
+           |   +-git-submodule          ( ~10kB,    ibid. ) 
+           |   +-git-submodule--helper  ( ~3.7MB,   ibid. )
+           |   +-git-sh-setup           ( ~9kB,     ibid. )
+           |   +-git-sh-i18n            ( ~2kB,     ibid. )
+           |   +-git-sh-i18n--encsubst  ( ~2.2MB,   ibid. )
            |   
            +-lib
            | |
@@ -146,13 +151,36 @@ shell command execution`)
     try {
 
         mark('ATTEMPTING (git clone) ...')
-        
+
+        // TODO : upgrade this to foreach --recursive 
         console.log(
             childProcess.execSync(
-                `${ shellExports }
-            rm -rf /tmp/*; \
-            git clone -n --depth 1 -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git; \
-            `, {
+                `
+                ${ shellExports }
+                
+                # clear the way in /tmp
+                rm -rf /tmp/* &&
+                
+                # clone and checkout superproject to /tmp/ruthenium
+                git clone --depth 1 --recurse-submodules --shallow-submodules -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git &&
+                
+                # scaffold a new worktree at /tmp/commit-this, which will later receive files to be committed
+                mkdir /tmp/commit-this &&
+                cp -r /tmp/ruthenium/.[^.]* /tmp/commit-this &&
+                
+                cd /tmp/ruthenium &&
+                
+                git submodule foreach '
+                    mkdir -p /tmp/commit-this/$sm_path &&
+                    cp -r .[^.]* /tmp/commit-this/$sm_path
+                    '
+                
+## DEBUG results
+# cd /tmp/commit-this &&
+# ls -la 1>&2 &&
+# git submodule foreach 'echo $PWD && ls -la 1>&2' 1>&2
+                
+                `, {
                     encoding: 'utf8',
                     stdio: conf.nodejs.childProcessStdio,
                     cwd: '/tmp'
@@ -160,55 +188,83 @@ shell command execution`)
             )
         )
 
-        mark(`... (git clone) ATTEMPT`)
-
+/*
         console.log(
             childProcess.execSync(
-                `cp -r /var/task/* /tmp/ruthenium/;`, {
+                `echo "BEFORE COPY" 1>&2 && ls -ah /tmp/ruthenium 1>&2`, { 
                     encoding: 'utf8',
                     stdio: conf.nodejs.childProcessStdio,
                 }
             )
         )
+*/        
+        console.log(
+            childProcess.execSync(
+                `cp -rT /var/task /tmp/commit-this`, { // -T is --no-target-directory
+                    encoding: 'utf8',
+                    stdio: conf.nodejs.childProcessStdio,
+                }
+            )
+        )
+/*
+        console.log(
+            childProcess.execSync(
+                `echo "AFTER COPY" 1>&2 && ls -ah /tmp/ruthenium 1>&2`, { 
+                    encoding: 'utf8',
+                    stdio: conf.nodejs.childProcessStdio,
+                }
+            )
+        )
+*/
+
+
+        const _escapedCommitMessage = commitMessage
+            .replace(/"/g, "\\\"")
+            .replace(/\\/g, "\\\\")
 
         console.log(
             childProcess.execSync(
-                `${ shellExports }
-                git add .; \
+                `
+                ${ shellExports }
+                
+                # Git the SUBMODULES : 
+                echo "DEBUG : (git submodule foreach : add, checkout -b, commit)" 1>&2 &&
+                git submodule foreach --recursive '
+                
+                    echo "DEBUG : $PWD" 1>&2 &&
+                    git add . 1>&2 &&
+                    git checkout -b ${ process.env.GITHUB_BRANCH } 1>&2 &&
+                    git -c user.name=jerng-machines commit --allow-empty -m "${ _escapedCommitMessage }" 1>&2 &&
+                       
+                    echo "DEBUG : (git config --get remote.origin.url) in ($PWD)" 1>&2 &&
+                    git config --get remote.origin.url 1>&2  &&
+                       
+                    echo "DEBUG : ( ... | sed ) in ($PWD)" 1>&2 &&
+                    git config --get remote.origin.url | sed -e "s#https://\\(.*\\)#https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@\\1#g" 1>&2 &&
+                       
+                    git log 1>&2 &&
+                    
+                    echo "DEBUG : Actually Try : ( ... | git push -u ) in $PWD" 1>&2 &&
+                    GIT_REMOTE=$(git config --get remote.origin.url | sed -e "s#https://\\(.*\\)#https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@\\1#g") &&
+                    echo "... where GIT_REMOTE is $GIT_REMOTE" 1>&2 &&
+                    git push -u $GIT_REMOTE 1>&2
+                    ' 1>&2 &&
+                
+                # Git the SUPERPROJECT : 
+                echo "DEBUG : (git SUPERPROJECT : add, checkout -b, commit)" 1>&2 &&
+                git add . 1>&2 &&
+                
+                git -c user.name=jerng-machines commit --allow-empty -m "${ _escapedCommitMessage }" 1>&2 &&
+                git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git 1>&2
                 `, {
                     encoding: 'utf8',
-                    cwd: '/tmp/ruthenium',
+                    cwd: '/tmp/commit-this',
                     stdio: conf.nodejs.childProcessStdio,
                 }
             )
         )
 
-        console.log(
-            childProcess.execSync(
-                `${ shellExports }
-                git -c user.name=jerng-machines commit -m "${ commitMessage }" ; \
-                `, {
-                    encoding: 'utf8',
-                    cwd: '/tmp/ruthenium',
-                    stdio: conf.nodejs.childProcessStdio,
-                }
-            )
-        )
-
-        console.log(
-            childProcess.execSync(
-                `${ shellExports }
-                git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git;\
-                `, {
-                    encoding: 'utf8',
-                    cwd: '/tmp/ruthenium',
-                    stdio: conf.nodejs.childProcessStdio,
-                }
-            )
-        )
-
-        mark(`(git push) Attempted`)
-
+        mark(`... (git push) ATTEMPTED`)
 
     }
     catch (e) { console.error(`lambda-git-commit.js`, e.stack) }
