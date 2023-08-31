@@ -150,7 +150,7 @@ shell command execution`)
 
     try {
 
-        mark('ATTEMPTING (git clone) ...')
+        mark('ATTEMPTING (git clone-s), and commit-directory preparation ...')
 
         // TODO : upgrade this to foreach --recursive 
         console.log(
@@ -168,18 +168,13 @@ shell command execution`)
                 mkdir /tmp/commit-this &&
                 cp -r /tmp/ruthenium/.[^.]* /tmp/commit-this &&
                 
-                cd /tmp/ruthenium &&
+                (   cd /tmp/ruthenium &&
                 
-                git submodule foreach '
-                    mkdir -p /tmp/commit-this/$sm_path &&
-                    cp -r .[^.]* /tmp/commit-this/$sm_path
-                    '
-                
-## DEBUG results
-# cd /tmp/commit-this &&
-# ls -la 1>&2 &&
-# git submodule foreach 'echo $PWD && ls -la 1>&2' 1>&2
-                
+                    git submodule foreach '
+                        mkdir -p /tmp/commit-this/$sm_path &&
+                        cp -r .[^.]* /tmp/commit-this/$sm_path
+                        '
+                )
                 `, {
                     encoding: 'utf8',
                     stdio: conf.nodejs.childProcessStdio,
@@ -188,16 +183,8 @@ shell command execution`)
             )
         )
 
-/*
-        console.log(
-            childProcess.execSync(
-                `echo "BEFORE COPY" 1>&2 && ls -ah /tmp/ruthenium 1>&2`, { 
-                    encoding: 'utf8',
-                    stdio: conf.nodejs.childProcessStdio,
-                }
-            )
-        )
-*/        
+        mark('... END of prior attempt; ATTEMPTING source-copy to commit-directory, and (git push-es) .. ')
+        
         console.log(
             childProcess.execSync(
                 `cp -rT /var/task /tmp/commit-this`, { // -T is --no-target-directory
@@ -206,18 +193,7 @@ shell command execution`)
                 }
             )
         )
-/*
-        console.log(
-            childProcess.execSync(
-                `echo "AFTER COPY" 1>&2 && ls -ah /tmp/ruthenium 1>&2`, { 
-                    encoding: 'utf8',
-                    stdio: conf.nodejs.childProcessStdio,
-                }
-            )
-        )
-*/
-
-
+        
         const _escapedCommitMessage = commitMessage
             .replace(/"/g, "\\\"")
             .replace(/\\/g, "\\\\")
@@ -228,36 +204,23 @@ shell command execution`)
                 ${ shellExports }
                 
                 # Git the SUBMODULES : 
-                echo "DEBUG : (git submodule foreach : add, checkout -b, commit)" 1>&2 &&
                 git submodule foreach --recursive '
                 
-                    echo "DEBUG : $PWD" 1>&2 &&
-                    git add . 1>&2 &&
-                    git checkout -b ${ process.env.GITHUB_BRANCH } 1>&2 &&
+                    git add . &&
+                    git checkout -b ${ process.env.GITHUB_BRANCH } &&
                     (   git diff-index --quiet HEAD || 
-                        git -c user.name=jerng-machines commit -m "${ _escapedCommitMessage }" 1>&2 
+                        git -c user.name=jerng-machines commit -m "${ _escapedCommitMessage }" 
                         ) &&
                        
-                    echo "DEBUG : (git config --get remote.origin.url) in ($PWD)" 1>&2 &&
-                    git config --get remote.origin.url 1>&2  &&
-                       
-                    echo "DEBUG : ( ... | sed ) in ($PWD)" 1>&2 &&
-                    git config --get remote.origin.url | sed -e "s#https://\\(.*\\)#https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@\\1#g" 1>&2 &&
-                       
-                    git log 1>&2 &&
-                    
-                    echo "DEBUG : Actually Try : ( ... | git push -u ) in $PWD" 1>&2 &&
                     GIT_REMOTE=$(git config --get remote.origin.url | sed -e "s#https://\\(.*\\)#https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@\\1#g") &&
-                    echo "... where GIT_REMOTE is $GIT_REMOTE" 1>&2 &&
                     git push -u $GIT_REMOTE 1>&2
-                    ' 1>&2 &&
+                    ' &&
                 
                 # Git the SUPERPROJECT : 
-                echo "DEBUG : (git SUPERPROJECT : add, checkout -b, commit)" 1>&2 &&
-                git add . 1>&2 &&
+                git add . &&
                 
                 (   git diff-index --quiet HEAD || 
-                    git -c user.name=jerng-machines commit -m "${ _escapedCommitMessage }" 1>&2 
+                    git -c user.name=jerng-machines commit -m "${ _escapedCommitMessage }" 
                     ) &&
                 git push https://jerng-machines:$GITHUB_JERNG_MACHINES_USER_PERSONAL_ACCESS_TOKEN@github.com/jerng-org/ruthenium.git 1>&2
                 `, {
@@ -268,7 +231,7 @@ shell command execution`)
             )
         )
 
-        mark(`... (git push) ATTEMPTED`)
+        mark(`... END of prior attempt.`)
 
     }
     catch (e) { console.error(`lambda-git-commit.js`, e.stack) }
