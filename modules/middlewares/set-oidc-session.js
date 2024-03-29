@@ -30,7 +30,7 @@ const setOidcSession = async(data) => {
 
             //  set any session cookies;
             //  set internal signals;
-            await rus.oidcSession.expireSession(data)
+            await rus.oidcSession.expireSession(data) 
             return data
         }
 
