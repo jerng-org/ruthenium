@@ -102,7 +102,7 @@ const setSessionIdWithPersistence = async (validated) => {
     const WIP = await aDynamoDBDocumentClient.send(
         new PutCommand(params)
     )
-    rusMinus1.frameworkDescriptionLogger(`stuff this into (data.RU.io.dynamoDB`)
+    rusMinus1.frameworkDescriptionLogger.log(`stuff this into (data.RU.io.dynamoDB`)
 
     //mark (`oidc-session.js: setSessionIdWithPersistence: end`)
 
