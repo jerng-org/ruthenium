@@ -280,7 +280,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                     rusMinus1.frameworkDescriptionLogger.callEnds()
 
-                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7.1.2.
+                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7.1.2.a
                     (typeof parsedIssuerExchangeResponseBody) was (not 'object');`)
                 }
                 else
@@ -289,7 +289,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                     rusMinus1.frameworkDescriptionLogger.callEnds()
 
-                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7. 
+                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7.1.2.b 
                     (parsedIssuerExchangeResponseBody.error) was 
                     ("${ parsedIssuerExchangeResponseBody.error }");`)
 
@@ -305,7 +305,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                     rusMinus1.frameworkDescriptionLogger.callEnds()
 
-                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7. 
+                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7.1.2. 
                     (parsedIssuerExchangeResponseBody) did not have all expected
                     keys; found keys:
                     ("${ Object.keys( parsedIssuerExchangeResponseBody ) }");`)
