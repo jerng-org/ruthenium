@@ -15,9 +15,11 @@ const rus = require('/var/task/modules/r-u-s.js')
  *
  */
 
-const oidcValidation = async(data) => {
-    
+const oidcValidation = async (data) => {
+
     rus.frameworkDescriptionLogger.callStarts()
+
+    rus.frameworkDescriptionLogger.log('QUERYSTRINGPARAMETERS' + data.LAMBDA.event.queryStringParameters)
 
     if (data.LAMBDA.event.queryStringParameters &&
         data.LAMBDA.event.queryStringParameters.code) {
@@ -31,9 +33,9 @@ const oidcValidation = async(data) => {
             console.warn(`Middleware (oidc-validation.js) failed, (error):`, e)
         }
     }
-    
+
     rus.frameworkDescriptionLogger.callEnds()
-    
+
     return data
 }
 
