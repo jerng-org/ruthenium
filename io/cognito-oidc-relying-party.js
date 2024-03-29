@@ -119,6 +119,10 @@ const authorizationCodeFlowJwtValidation = async code => {
 
             rusMinus1.frameworkDescriptionLogger.callStarts()
 
+            rusMinus1.frameworkDescriptionLogger.log('OPTIONS: ' + issuerExchangeRequestOptions)
+            rusMinus1.frameworkDescriptionLogger.log('BODY: ' + issuerExchangeRequestBody)
+
+
             let data = ''
             response.on('data', chunk => { data += chunk })
             response.on('end', () => { F(data) })
@@ -305,7 +309,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
                     rusMinus1.frameworkDescriptionLogger.callEnds()
 
-                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7.1.2. 
+                    throw Error(`(cognito-oidc-relying-party.js):authorizationCodeFlowJwtValidation: 7.1.2.c 
                     (parsedIssuerExchangeResponseBody) did not have all expected
                     keys; found keys:
                     ("${ Object.keys( parsedIssuerExchangeResponseBody ) }");`)
