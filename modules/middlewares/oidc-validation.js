@@ -19,7 +19,7 @@ const oidcValidation = async (data) => {
 
     rus.frameworkDescriptionLogger.callStarts()
 
-    rus.frameworkDescriptionLogger.log('QUERYSTRINGPARAMETERS' + data.LAMBDA.event.queryStringParameters)
+    rus.frameworkDescriptionLogger.log('QUERYSTRINGPARAMETERS' + JSON.stringify(data.LAMBDA.event.queryStringParameters, null, 2))
 
     if (data.LAMBDA.event.queryStringParameters &&
         data.LAMBDA.event.queryStringParameters.code) {
