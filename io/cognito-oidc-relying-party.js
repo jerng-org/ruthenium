@@ -119,7 +119,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
             rusMinus1.frameworkDescriptionLogger.callStarts()
 
-            rusMinus1.frameworkDescriptionLogger.log('OPTIONS: ' + issuerExchangeRequestOptions)
+            rusMinus1.frameworkDescriptionLogger.log('OPTIONS: ' + JSON.stringify(issuerExchangeRequestOptions, null, 2))
             rusMinus1.frameworkDescriptionLogger.log('BODY: ' + issuerExchangeRequestBody)
 
 
