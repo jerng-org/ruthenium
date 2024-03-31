@@ -150,7 +150,7 @@ DRAFT 4.2
             Facilitated reads:
                 -   SCAN    : gets all data for ALL DESKS
                 -   QUERY   : on "DHC", gets all data for ONE COLUMN
-                -   GETITEM : gets all data for ONE CELL
+                -   GETITEM : on ("DHC","R") gets all data for ONE CELL
     
     GSI : "R-GSI"  
             -   HASHKEY :   "R"         <<string:"rowID">>
