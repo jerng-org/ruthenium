@@ -138,11 +138,11 @@ const rus = {
     //      //
     //////////
 
-    jsonwebtoken: require('jsonwebtoken'), // LAMBDA LAYER
+    jsonwebtoken: require('jsonwebtoken'), // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
-    jwkToPem: require('jwk-to-pem'), // LAMBDA LAYER
+    jwkToPem: require('jwk-to-pem'), // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
-    lambdaGitCommit: require('/var/task/io/lambda-git-commit.js'), // LAMBDA LAYER
+    lambdaGitCommit: require('/var/task/io/lambda-git-commit.js'), // LAMBDA LAYERarn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
 
     //////////
     //      //

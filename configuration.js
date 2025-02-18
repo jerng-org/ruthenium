@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = 'rolled back attempt to store lambda layer zips'// 'dev : submodules : test3' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
+const _gitCommitMessage = 'added Lambda Layer ARNs ' //dev : submodules : test3' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
