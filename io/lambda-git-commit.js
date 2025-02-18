@@ -34,7 +34,7 @@ const mark = rusMinus1.mark
 const childProcess = require('child_process')
 const shellExports = `
     export PATH=$PATH:/opt/git/bin 
-    export LD_LIBRARY_PATH=/opt/git/lib 
+    export LD_LIBRARY_PATH=/opt/git/lib
     `
 /*  2023-08-30 : based on lambda layer
         "arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:11"
