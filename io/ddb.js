@@ -58,7 +58,13 @@ const translateConfig = { marshallOptions, unmarshallOptions }
 //*
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
 const { DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb")
-const bareBonesClient = new DynamoDBClient()
+
+const config = process.env.AWS_SAM_LOCAL === 'true' ? { 
+    endpoint : "http://dynamodb-local:8000",
+    region : "localhost" /* apparently trivial */
+} : {}
+const bareBonesClient = new DynamoDBClient(config)
+
 const aDynamoDBDocumentClient = DynamoDBDocumentClient.from(bareBonesClient, translateConfig)
 //*/
 
