@@ -27,12 +27,12 @@ module.exports = {
 
         uri: {
 
-            scheme: 'https',
+            scheme: process.env.AWS_SAM_LOCAL === 'true' ? 'http' : 'https',
 
             authority: {
                 userinfo: null,
-                host: 'ruthenium-v1.dev.theunicorn.coffee',
-                port: null
+                host: process.env.AWS_SAM_LOCAL === 'true' ? 'localhost:3000' : 'ruthenium-v1.dev.theunicorn.coffee',
+                port: null /* TODO */
             },
 
             path: '',
@@ -57,7 +57,7 @@ module.exports = {
      *      2 : undefined ... maybe have a hybrid mode
      */
 
-    customLogging: 0,
+    customLogging: 1,
     customLoggingAllowsNativeLogging: false,
     customLoggingDateTimes: true,
     customLoggingLineTrace: false,
@@ -223,7 +223,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    markPerformance: 0,
+    markPerformance: 1,
 
     /*  https://nodejs.org/api/child_process.html#optionsstdio
      */
@@ -316,7 +316,7 @@ module.exports = {
      *      rus.conf.verbosity > 0  && console .log ( stuff, stuff )
      *
      */
-    verbosity: 2,
+    verbosity: 4,
 
 
 }
