@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = 'test upgrade runtime node.js.24.x' //dev : submodules : test3' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
+const _gitCommitMessage = 'WIP : migration to localhost' //dev : submodules : test3' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
@@ -57,7 +57,7 @@ module.exports = {
      *      2 : undefined ... maybe have a hybrid mode
      */
 
-    customLogging: 1,
+    customLogging: 0,
     customLoggingAllowsNativeLogging: false,
     customLoggingDateTimes: true,
     customLoggingLineTrace: false,
@@ -120,9 +120,9 @@ module.exports = {
      *
      *      [4] :   ideas / ICEBOX-ed items 
      */
-    frameworkDescriptionLoggingAutostart: true,
+    frameworkDescriptionLoggingAutoStart: true,
     //frameworkDescriptionLogging: [],
-    frameworkDescriptionLogging: [0, 1, 2, 3, 4],
+    frameworkDescriptionLogging: [],//[0, 1, 2, 3, 4],
     frameworkDescriptionLoggingEmoji1: '⬛', //'🌞',//'|',
     frameworkDescriptionLoggingIndent1: '', //'|',
 
@@ -223,7 +223,7 @@ module.exports = {
      *      2   :   undefined, as yet
      *
      */
-    markPerformance: 1,
+    markPerformance: 0,
 
     /*  https://nodejs.org/api/child_process.html#optionsstdio
      */
