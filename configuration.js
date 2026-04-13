@@ -121,8 +121,8 @@ module.exports = {
      *      [4] :   ideas / ICEBOX-ed items 
      */
     frameworkDescriptionLoggingAutoStart: true,
-    //frameworkDescriptionLogging: [],
-    frameworkDescriptionLogging: [],//[0, 1, 2, 3, 4],
+    frameworkDescriptionLogging: [],
+    //frameworkDescriptionLogging: [],//[0, 1, 2, 3, 4],
     frameworkDescriptionLoggingEmoji1: '⬛', //'🌞',//'|',
     frameworkDescriptionLoggingIndent1: '', //'|',
 
