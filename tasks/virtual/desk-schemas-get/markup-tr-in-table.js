@@ -45,9 +45,8 @@ const trInTable = async(item) => {
                     
                         await rus.appUrl ([
                             [ 'route', 'virtual' ],
-                            [ 'type', 'forms' ],
-                            [ 'thing', 'read-desk-schema' ],
-                            [ 'desk-schema-name', item['name'] ], 
+                            [ 'type', 'desk-schemas' ],
+                            [ 'thing', item['name'] ], 
                             [ 'reader', 'human']
                         ])
 
