@@ -10,10 +10,6 @@ rus.frameworkDescriptionLogger.fixme(`rendering (-markup.js) should not involve 
 
 const desksGet = async (data) => {
 
-    if (!data.RU.request.queryStringParameters['desk-schema-name'] ||
-        !data.RU.request.queryStringParameters['desk-schema-name'][0]) {
-        rus.log.error(data, `(virtual.js) (?type=desk-rows) (GET) (?desk-schema-name ... was unspecified.)`)
-    }
     const deskName = data.RU.request.queryStringParameters.['desk-schema-name'][0]
 
     const params = {

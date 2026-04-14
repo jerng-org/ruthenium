@@ -526,6 +526,10 @@ const virtual = async (data) => {
                     //  METHODS for (desks)
                     switch (data.RU.request.http.method) {
                         case ('GET'): {
+                            if (!data.RU.request.queryStringParameters['desk-schema-name'] ||
+                                !data.RU.request.queryStringParameters['desk-schema-name'][0]) {
+                                rus.log.error(data, `(virtual.js) (?type=desk-rows) (GET) (?desk-schema-name ... was unspecified.)`)
+                            }
                             await desksGet(data)
                             rus.frameworkDescriptionLogger.callEnds()
                             return
