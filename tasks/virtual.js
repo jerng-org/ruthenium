@@ -358,7 +358,7 @@ const virtual = async (data) => {
 
                                 case ('item'):
                                     
-                                    if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['hing'][0])) {
+                                    if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])) {
                                         await rus.http.status404(data)
 
                                         rus.frameworkDescriptionLogger.callEnds()
