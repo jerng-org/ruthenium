@@ -154,7 +154,7 @@ const virtual = async (data) => {
             //  TODO: reconsider: is this really necessary?
             switch (data.RU.request.queryStringParameters.type[0]) {
 
-                case ('forms'):
+                case ('forms'): {
 
                     //  DIMENSION B
                     //  METHODS for (forms)
@@ -343,8 +343,8 @@ const virtual = async (data) => {
                     }
                     // switch
                     // ( .method )
-
-                case ('desk-schemas'):
+                }
+                case ('desk-schemas'): {
 
                     //  DIMENSION B
                     //  METHODS for (desk-schemas)
@@ -514,8 +514,8 @@ const virtual = async (data) => {
                     // switch 
                     // ( .method )
                 */
-
-                case ('desks'):
+                }
+                case ('desks'): {
 
                     //  DIMENSION B
                     //  METHODS for (desks)
@@ -611,6 +611,7 @@ const virtual = async (data) => {
                     rus.frameworkDescriptionLogger.callEnds()
 
                     return
+                }
             }
             // switch
             // ( .type[0] )
