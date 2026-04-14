@@ -358,7 +358,7 @@ const virtual = async (data) => {
 
                                 case ('item'):
                                     
-                                    if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])) {
+                                    if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['hing'][0])) {
                                         await rus.http.status404(data)
 
                                         rus.frameworkDescriptionLogger.callEnds()
@@ -520,6 +520,23 @@ const virtual = async (data) => {
                     // switch 
                     // ( .method )
                 */
+                }
+                case ('desk-rows'): {
+                    //  DIMENSION B
+                    //  METHODS for (desks)
+                    switch (data.RU.request.http.method) {
+                        case ('GET'): {
+                            await desksGet(data)
+                            rus.frameworkDescriptionLogger.callEnds()
+                            return
+                        }
+                        default : {
+                            rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-rows), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
+                            await rus.http.status404(data)
+                            rus.frameworkDescriptionLogger.callEnds()
+                            return
+                        }                    
+                    }
                 }
                 case ('desks'): {
 
