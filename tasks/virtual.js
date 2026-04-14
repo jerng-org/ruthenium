@@ -221,13 +221,6 @@ const virtual = async (data) => {
                                                 //  !!  //  special (cases) don't require (deskRowGetSuccess)
                                                 //      //
                                                 //////////
-                                                //  This is not RESTful; the following may be RESTful: ?type=desk-schema &thing=x, method: GET
-                                                case (`read-desk-schema`):
-                                                    data.RU.signals.sendResponse.body = await formsMarkupReadDeskSchema(data)
-
-                                                    rus.frameworkDescriptionLogger.callEnds()
-
-                                                    return
 
                                                     //  This is RESTful;
                                                 case (`update-desk-schema`):
@@ -361,6 +354,23 @@ const virtual = async (data) => {
 
                                     rus.frameworkDescriptionLogger.callEnds()
 
+                                    return
+
+                                case ('item'):
+                                    
+                                    if (!data.RU.request.queryStringParameters['desk-schema-name'] ||
+                                        !data.RU.request.queryStringParameters['desk-schema-name'][0]) {
+                                        rus.log.error(data, `(virtual.js) (?type=desk-schemas) (GET) (?desk-schema-name ... was unspecified.)`)
+                                    }
+                                    if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
+                                        await rus.http.status404(data)
+
+                                        rus.frameworkDescriptionLogger.callEnds()
+
+                                        return
+                                    }
+                                    data.RU.signals.sendResponse.body = await formsMarkupReadDeskSchema(data)
+                                    rus.frameworkDescriptionLogger.callEnds()
                                     return
 
                                 default:
