@@ -599,8 +599,8 @@ const virtual = async (data) => {
                     }
                     // switch 
                     // ( .method )
-
-                default:
+                }
+                default: {
                     //  (NOT desk-schemas) (NOT desk-cells) (NOT desks) and (NOT forms)
 
                     // Expect a valid (desk-schema.name)
