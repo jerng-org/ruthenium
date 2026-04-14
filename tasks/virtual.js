@@ -549,37 +549,10 @@ const virtual = async (data) => {
                     switch (data.RU.request.http.method) {
 
                         case ('GET'):
-
-                            //  DIMENSION C
-                            //  GET (desks) ... all of them, or just one?
-                            switch (queryScope) {
-
-                                case ('collection'):
-                                    rus.log.error(data, `(virtual.js) (?type=desks) (GET) (?thing=) was not provided. You should specify the (desk) you wish to GET.`)
-                                    await rus.http.status403(data)
-
-                                    rus.frameworkDescriptionLogger.callEnds()
-
-                                    return
-
-                                case ('item'):
-
-                                    //  DIMENSION D
-                                    //  GET (desks), which one? 
-                                    await desksGet(data)
-
-                                    rus.frameworkDescriptionLogger.callEnds()
-
-                                    return
-
-                                default:
-                                    rus.log.error(data, `(virtual.js) (?type=desks) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
-                                    await rus.http.status404(data)
-
-                                    rus.frameworkDescriptionLogger.callEnds()
-
-                                    return
-                            }
+                            rus.log.error(data, `(virtual.js) (?type=desks) (GET) ... (queryScope): '${queryScope}' not in (switch-case)`)
+                            await rus.http.status404(data)
+                            rus.frameworkDescriptionLogger.callEnds()
+                            return
 
                         case ('PATCH'):
 
