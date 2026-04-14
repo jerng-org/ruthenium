@@ -316,7 +316,7 @@ module.exports = {
      *      rus.conf.verbosity > 0  && console .log ( stuff, stuff )
      *
      */
-    verbosity: 4,
+    verbosity: 7,
 
 
 }
