@@ -10,7 +10,7 @@ rus.frameworkDescriptionLogger.fixme(`rendering (-markup.js) should not involve 
 
 const desksGet = async (data) => {
 
-    const deskName = data.RU.request.queryStringParameters.['desk-schema-name'][0]
+    const deskName = data.RU.request.queryStringParameters['desk-schema-name'][0]
 
     const params = {
         TableName: 'RUTHENIUM-V1-DESK-SCHEMAS',
