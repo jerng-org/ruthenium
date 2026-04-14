@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = 1
-const _gitCommitMessage = 'WIP : migration to localhost' //dev : submodules : test3' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
+const _gitCommitMessage = 'normalising resource ontology : (item, collection) terms standardised to RFC' //dev : submodules : test3' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
