@@ -439,7 +439,8 @@ const virtual = async (data) => {
                             rus.frameworkDescriptionLogger.callEnds()
                             return
                         }
-                        case ('PUT'): {
+                        case ('PUT'): 
+                        case ('DELETE'): {
                             //  PROTOCOL: HTTP PUT - request encloses an entity, for server to accept as a 
                             //              CREATION or DESTRUCTIVE UPDATE of the URI's resource 
 
