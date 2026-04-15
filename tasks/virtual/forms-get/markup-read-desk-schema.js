@@ -14,7 +14,7 @@ const readDeskSchema = async ( data ) => {
             href="${                         
                         await rus.appUrl ([
                             [ 'route', 'virtual' ],
-                            [ 'type', 'desk-rows' ],
+                            [ 'type', 'desk-cells' ],
                             [ 'desk-schema-name', data.RU.io.deskSchemasGet.Item.name ],
                             [ 'reader', 'human']
                         ])
