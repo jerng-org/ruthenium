@@ -370,23 +370,22 @@ const virtual = async (data) => {
                             // ( queryScope )
                         }
                         case ('PUT'): {
-                            //  DIMENSION C
-                            //  PUT (desk-schemas) ... no check for (queryScope)
-
                             //  PROTOCOL: HTTP PUT - request encloses an entity, for server to accept as a 
                             //              CREATION or DESTRUCTIVE UPDATE of the URI's resource 
 
-                            if (    data.RU.request.queryStringParameters['desk-schema-name']
-                                    && data.RU.request.queryStringParameters['desk-schema-name'][0]) {
-                                        
+                            //  DIMENSION C
+                            //  PUT (desk-schemas) ... no check for (queryScope)
+                            if ( queryHasThing ) {
                                 // NAME WAS SPECIFIED : this is an UPDATE, which must fail if NAME cannot be found
-                                if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
+                                if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])) {
                                     await rus.http.status404(data)
                                     rus.frameworkDescriptionLogger.callEnds()
                                     return
                                 }
                             }
                             else {
+                                /* NOTE THIS A BREAKAGE : of the 'item' 'collection' dichotomy */
+
                                 // NO NAME WAS SPECIFIED : this is a CREATION, which must fail if NAME already exists
                                 if (await deskSchemasGetSuccess(data, data.RU.request.formStringParameters['desk-schemas'].name)) {
                                     await rus.http.status409(data)
