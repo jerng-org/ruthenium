@@ -343,7 +343,7 @@ const virtual = async (data) => {
                     //  METHODS for (desk-schemas)
                     switch (data.RU.request.http.method) {
 
-                        case ('GET'):
+                        case ('GET'): {
 
                             //  DIMENSION C
                             //  GET (desk-schemas) ... all of them, or just one?
@@ -379,25 +379,18 @@ const virtual = async (data) => {
                             }
                             // switch
                             // ( queryScope )
+                        }
+                        case ('POST'): {
 
-                        case ('POST'):
+                            //  PROTOCOL: HTTP POST - request encloses an entity, for server to accept as a 
+                            //              SUBORDINATE of the URI's resource 
 
                             //  DIMENSION C
                             //  POST (desk-schemas) ... all of them, or just one?
                             switch (queryScope) {
 
-                                case ('collection'):
-
-                                    //  PROTOCOL: HTTP POST - request encloses an entity, for server to accept as a 
-                                    //              SUBORDINATE of the URI's resource 
-                                    await deskSchemasPost(data)
-
-                                    rus.frameworkDescriptionLogger.callEnds()
-
-                                    return
-
                                 default:
-                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (switch-case) has nothing to do`)
                                     await rus.http.status404(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
@@ -406,13 +399,14 @@ const virtual = async (data) => {
                             }
                             // switch
                             // ( queryScope )
-
-                        case ('PUT'):
+                        }
+                        case ('PUT'): {
 
                             //  DIMENSION C
                             //  POST (desk-schemas) ... all of them, or just one?
                             switch (queryScope) {
 
+                                case ('collection'):
                                 case ('item'):
 
                                     //  PROTOCOL: HTTP PUT - request encloses an entity, for server to accept as a 
@@ -424,7 +418,7 @@ const virtual = async (data) => {
                                     return
 
                                 default:
-                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (POST) ... (queryScope): '${queryScope}' not in (switch-case)`)
+                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (PUT) ... (queryScope): '${queryScope}' not in (switch-case)`)
                                     await rus.http.status404(data)
 
                                     rus.frameworkDescriptionLogger.callEnds()
@@ -433,8 +427,8 @@ const virtual = async (data) => {
                             }
                             // switch
                             // ( queryScope )
-
-                        default:
+                        }
+                        default:{
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await rus.http.status404(data)
                             rus.frameworkDescriptionLogger.backlog(`TODO: implement status405`)
@@ -442,6 +436,7 @@ const virtual = async (data) => {
                             rus.frameworkDescriptionLogger.callEnds()
 
                             return
+                        }
                     }
                     // switch 
                     // ( .method )
