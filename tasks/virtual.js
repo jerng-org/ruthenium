@@ -443,7 +443,7 @@ const virtual = async (data) => {
                                 }
                                 case 'collection' : {
                                     // Typical (desk-cells) PUT will be per-(desk-row)
-                                    if (!await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'])) {
+                                    if (!await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
                                         await rus.http.status404(data)
                                         rus.frameworkDescriptionLogger.callEnds()
                                         return
