@@ -233,21 +233,6 @@ const virtual = async (data) => {
                                                     return
 
                                                     //  This is not RESTful; the following may be RESTful: ?type=desk-schema &thing=x, method: DELETE
-                                                case (`delete-desk-schema`):
-
-                                                    if (!await deskSchemasDeleteSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0])) {
-                                                        await rus.http.status500(data)
-
-                                                        rus.frameworkDescriptionLogger.callEnds()
-
-                                                        return
-                                                    }
-
-                                                    data.RU.signals.sendResponse.body = await formsMarkupDeleteDeskSchema(data)
-
-                                                    rus.frameworkDescriptionLogger.callEnds()
-
-                                                    return
 
                                                 case (`create-desk-row`):
                                                     data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(data)
@@ -399,6 +384,18 @@ const virtual = async (data) => {
                             rus.frameworkDescriptionLogger.callEnds()
                             return
                         }
+                        case ('DELETE') {
+                            //  DIMENSION C
+                            //  DELETE (desk-schemas) ... no check for (queryScope)
+                            if (!deskSchemasDeleteSuccess(data,data.RU.request.queryStringParameters['desk-schema-name'][0])){
+                                await rus.http.status400(data)
+                                rus.frameworkDescriptionLogger.callEnds()
+                                return
+                            }
+                            data.RU.signals.sendResponse.body = formsMarkupDeleteDeskSchema(data)
+                            rus.frameworkDescriptionLogger.callEnds()
+                            return
+                        }
                         default:{
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                             await rus.http.status404(data)
@@ -414,6 +411,7 @@ const virtual = async (data) => {
 
 
                 }
+
                 case ('desk-cells'): {
                     //  DIMENSION B
                     //  METHODS for (desks)
