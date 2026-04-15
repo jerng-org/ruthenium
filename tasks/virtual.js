@@ -91,7 +91,6 @@ const deskCellsGetSuccess = async (DATA, deskRowID) => {
         ExpressionAttributeValues: { ':deskRowID': deskRowID },
         //ReturnConsumedCapacity: 'INDEXES'
     }
-    console.log(`debug`,await rus.print.stringify4(params))
     DATA.RU.io.deskCellsQuery = await rus.aws.ddb.aDynamoDBDocumentClient.send(
         new rus.aws.ddb.QueryCommand(params)
     )
@@ -450,7 +449,7 @@ const virtual = async (data) => {
                                     }
                                 }
                             }
-                            await deskSchemasPut(data)
+                            await desksPatch(data)
                             rus.frameworkDescriptionLogger.callEnds()
                             return
                         }
