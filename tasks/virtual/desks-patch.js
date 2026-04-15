@@ -289,7 +289,7 @@ const desksPatch = async (data) => {
     */
 
     // View
-    data.RU.signals.redirectRoute = `virtual&type=desk-cells&desk-schema-name=${data.RU.request.queryStringParameters['desk-schema-name'][0]}`
+    data.RU.signals.redirectRoute = `virtual&type=desk-cells&desk-schema-name=${data.RU.request.queryStringParameters['desk-schema-name']}`
 
     // manipulate (data.RU), for example
 
