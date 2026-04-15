@@ -289,8 +289,7 @@ const desksPatch = async (data) => {
     */
 
     // View
-    data.RU.signals.sendResponse.body = '(desks-patch.js) WIP'
-
+    data.RU.signals.redirectRoute = `virtual&type=desk-cells&desk-schema-name=${data.RU.request.queryStringParameters['desk-schema-name'][0]}`
 
     // manipulate (data.RU), for example
 
