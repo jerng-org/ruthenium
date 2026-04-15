@@ -394,7 +394,7 @@ const virtual = async (data) => {
                                         rus.frameworkDescriptionLogger.callEnds()
                                         return
                                     }
-                                    data.RU.signals.sendResponse.body = formsMarkupDeleteDeskSchema(data)
+                                    data.RU.signals.sendResponse.body = await formsMarkupDeleteDeskSchema(data)
                                     rus.frameworkDescriptionLogger.callEnds()
                                     return
                                 }
