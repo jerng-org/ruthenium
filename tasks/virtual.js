@@ -67,7 +67,7 @@ const deskSchemasDeleteSuccess = async (DATA, deskSchemaName) => {
         Key: {
             name: deskSchemaName
         },
-        ReturnValues: 'ALL_OLD'
+        //ReturnValues: 'ALL_OLD'
         //ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskSchemasDelete = await rus.aws.ddb.aDynamoDBDocumentClient.send(
