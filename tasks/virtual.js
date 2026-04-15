@@ -386,15 +386,31 @@ const virtual = async (data) => {
                         }
                         case ('DELETE') : {
                             //  DIMENSION C
-                            //  DELETE (desk-schemas) ... no check for (queryScope)
-                            if (!deskSchemasDeleteSuccess(data,data.RU.request.queryStringParameters['desk-schema-name'][0])){
-                                await rus.http.status400(data)
-                                rus.frameworkDescriptionLogger.callEnds()
-                                return
-                            }
-                            data.RU.signals.sendResponse.body = formsMarkupDeleteDeskSchema(data)
-                            rus.frameworkDescriptionLogger.callEnds()
-                            return
+                            //  DELETE (desk-schemas) ... all or just one?
+                            switch (queryScope) {
+                                case ('item') :{
+                                    if (!deskSchemasDeleteSuccess(data,data.RU.request.queryStringParameters['thing'][0])){
+                                        await rus.http.status400(data)
+                                        rus.frameworkDescriptionLogger.callEnds()
+                                        return
+                                    }
+                                    data.RU.signals.sendResponse.body = formsMarkupDeleteDeskSchema(data)
+                                    rus.frameworkDescriptionLogger.callEnds()
+                                    return
+                                }
+                                case ('collection') : {
+                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (DELETE) ... (queryScope): '${queryScope}' branch in (switch-case) does nothing`)
+                                    await rus.http.status404(data)
+                                    rus.frameworkDescriptionLogger.callEnds()
+                                    return
+                                }
+                                default : {
+                                    rus.log.error(data, `(virtual.js) (?type=desk-schemas) (DELETE) ... (queryScope): '${queryScope}' branch missing in (switch-case)`)
+                                    await rus.http.status404(data)
+                                    rus.frameworkDescriptionLogger.callEnds()
+                                    return
+                                }
+                            } 
                         }
                         default:{
                             rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-schemas), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
