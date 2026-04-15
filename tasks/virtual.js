@@ -389,13 +389,8 @@ const virtual = async (data) => {
                             //  DELETE (desk-schemas) ... all or just one?
                             switch (queryScope) {
                                 case ('item') :{
-                                    if (!deskSchemasGetSuccess(data,data.RU.request.queryStringParameters['thing'][0])){
-                                        await rus.http.status404(data)
-                                        rus.frameworkDescriptionLogger.callEnds()
-                                        return
-                                    }
                                     if (!deskSchemasDeleteSuccess(data,data.RU.request.queryStringParameters['thing'][0])){
-                                        await rus.http.status500(data)
+                                        await rus.http.status400(data)
                                         rus.frameworkDescriptionLogger.callEnds()
                                         return
                                     }
