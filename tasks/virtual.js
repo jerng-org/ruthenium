@@ -67,22 +67,16 @@ const deskSchemasDeleteSuccess = async (DATA, deskSchemaName) => {
         Key: {
             name: deskSchemaName
         },
-        //ReturnValues: 'ALL_OLD'
+        ReturnValues: 'ALL_OLD'
         //ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskSchemasDelete = await rus.aws.ddb.aDynamoDBDocumentClient.send(
         new rus.aws.ddb.DeleteCommand(params)
     )
 
-console.error('debug String()', String(DATA.RU.io.deskSchemasDelete))
-console.error('debug typeof',typeof DATA.RU.io.deskSchemasDelete)
-console.error('debug Object.keys()',Object.keys(DATA.RU.io.deskSchemasDelete))
-
     rus.frameworkDescriptionLogger.callEnds()
 
-    return ( DATA.RU.io.deskSchemasDelete 
-        && Object.keys(DATA.RU.io.deskSchemasDelete).length === 0 
-        && DATA.RU.io.deskSchemasDelete.constructor === Object ) 
+    return ( 'Attributes' in DATA.RU.io.deskSchemasDelete ) 
 }
 
 const deskCellsGetSuccess = async (DATA, deskRowID) => {
@@ -394,15 +388,8 @@ const virtual = async (data) => {
                             //  DELETE (desk-schemas) ... all or just one?
                             switch (queryScope) {
                                 case ('item') :{
-                                    /*
-                                    if (!await deskSchemasGetSuccess(data,data.RU.request.queryStringParameters['thing'][0])){
-                                        await rus.http.status404(data)
-                                        rus.frameworkDescriptionLogger.callEnds()
-                                        return
-                                    }
-                                    */
                                     if (!await deskSchemasDeleteSuccess(data,data.RU.request.queryStringParameters['thing'][0])){
-                                        await rus.http.status500(data)
+                                        await rus.http.status404(data)
                                         rus.frameworkDescriptionLogger.callEnds()
                                         return
                                     }
