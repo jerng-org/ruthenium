@@ -91,7 +91,7 @@ const deskCellsGetSuccess = async (DATA, deskRowID) => {
         ExpressionAttributeValues: { ':deskRowID': deskRowID },
         //ReturnConsumedCapacity: 'INDEXES'
     }
-    console.log(`debug`,rus.print.stringify4(params))
+    console.log(`debug`,await rus.print.stringify4(params))
     DATA.RU.io.deskCellsQuery = await rus.aws.ddb.aDynamoDBDocumentClient.send(
         new rus.aws.ddb.QueryCommand(params)
     )
