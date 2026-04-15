@@ -67,6 +67,7 @@ const deskSchemasDeleteSuccess = async (DATA, deskSchemaName) => {
         Key: {
             name: deskSchemaName
         },
+        ReturnValues: 'ALL_OLD'
         //ReturnConsumedCapacity: 'INDEXES'
     }
     DATA.RU.io.deskSchemasDelete = await rus.aws.ddb.aDynamoDBDocumentClient.send(
@@ -394,7 +395,6 @@ const virtual = async (data) => {
                                         rus.frameworkDescriptionLogger.callEnds()
                                         return
                                     }
-                                    console.error(await rus.print.stringify4('debug virtual.js', data.RU.request.io))
                                     if (!await deskSchemasDeleteSuccess(data,data.RU.request.queryStringParameters['thing'][0])){
                                         await rus.http.status500(data)
                                         rus.frameworkDescriptionLogger.callEnds()
