@@ -423,10 +423,7 @@ const virtual = async (data) => {
                     }
                     // switch 
                     // ( .method )
-
-
                 }
-
                 case ('desk-cells'): {
                     //  DIMENSION B
                     //  METHODS for (desks)

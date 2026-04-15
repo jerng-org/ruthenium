@@ -183,9 +183,10 @@ const desksGetMarkup = async(data) => {
                 
                 action: await rus.appUrl([
                     ['route', 'virtual'],
-                    ['type', 'desks'],
-                    ['thing', data.RU.io.deskSchemasGet.Item.name],
-                    ['form-method', 'PATCH']
+                    ['type', 'desk-cells'],
+                    [ 'desk-row-id', data.RU.io.deskCellsQuery.Items[0].R ], 
+                    [ 'desk-schema-name',data.RU.io.deskSchemasGet.Item.name],
+                    ['form-method', 'DELETE']
                 ]),
                 id: deleteDeskRowFormID,
                 innerHtml: 
