@@ -13,7 +13,7 @@ const deleteDeskSchema = async ( data ) => {
             Please save this transcription if you wish to reimport it later.
         </h3>
         
-        <pre><code>${ await rus.print.stringify4 ( data.RU.request.queryStringParameters['thing'][0] ) }</code></pre>
+        <pre><code>${ await rus.print.stringify4 ( data.RU.io.deskSchemasGet.Item ) }</code></pre>
         
         
         `
