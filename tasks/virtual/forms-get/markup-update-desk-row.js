@@ -69,8 +69,8 @@ const updateDeskRow = async(data) => {
         ${  await rus.html.form ( {
                 action: await rus.appUrl( [
                     [ 'route','virtual' ], 
-                    [ 'type','desks' ], 
-                    [ 'thing', data.RU.io.deskSchemasGet.Item.name ], 
+                    [ 'type','desk-cells' ], 
+                    [ 'desk-row-id', data.RU.io.deskCellsQuery.Items[0].R ], 
                     [ 'form-method','PATCH' ] 
                 ] ),
                 innerHtml: await innerHtml(data, deskCellsByRowID),
