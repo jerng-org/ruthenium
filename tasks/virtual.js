@@ -12,7 +12,6 @@ const desksGet = require('/var/task/tasks/virtual/desks-get.js')
 const desksPatch = require('/var/task/tasks/virtual/desks-patch.js')
 
 const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js')
-const deskSchemasPost = require('/var/task/tasks/virtual/desk-schemas-post.js')
 const deskSchemasPut = require('/var/task/tasks/virtual/desk-schemas-put.js')
 
 const formsMarkupCreateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)
