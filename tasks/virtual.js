@@ -220,7 +220,7 @@ const virtual = async (data) => {
                                             switch (data.RU.request.queryStringParameters.thing[0]) {
                                                 //////////
                                                 //      //
-                                                //  !!  //  special (cases) don't require (deskRowGetSuccess)
+                                                //  !!  //  special (cases) don't require (deskCellsGetSuccess)
                                                 //      //
                                                 //////////
 
@@ -259,7 +259,7 @@ const virtual = async (data) => {
                                                 default:
                                                     //////////
                                                     //      //
-                                                    //  !!  //  the following (things of type 'form') require (deskRowGetSuccess)
+                                                    //  !!  //  the following (things of type 'form') require (deskCellsGetSuccess)
                                                     //      //
                                                     //////////
 
@@ -272,7 +272,7 @@ const virtual = async (data) => {
                                                     WIP HERE ----v
 
                                                     */
-                                                    if (!await deskRowGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
+                                                    if (!await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
                                                         await rus.http.status404(data)
 
                                                         rus.frameworkDescriptionLogger.callEnds()
@@ -435,7 +435,7 @@ const virtual = async (data) => {
                             //  PUT (desk-schemas) ... no check for (queryScope)
                             if ( queryHasThing ) {
                                 // NAME WAS SPECIFIED : this is an UPDATE, which must fail if NAME cannot be found
-                                if (!await deskRowGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])) {
+                                if (!await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])) {
                                     await rus.http.status404(data)
                                     rus.frameworkDescriptionLogger.callEnds()
                                     return
@@ -445,7 +445,7 @@ const virtual = async (data) => {
                                 /* NOTE THIS A BREAKAGE : of the 'item' 'collection' dichotomy */
 
                                 // NO NAME WAS SPECIFIED : this is a CREATION, which must fail if NAME already exists
-                                if (await deskRowGetSuccess(data, data.RU.request.formStringParameters['desk-schemas'].name)) {
+                                if (await deskCellsGetSuccess(data, data.RU.request.formStringParameters['desk-schemas'].name)) {
                                     await rus.http.status409(data)
                                     rus.frameworkDescriptionLogger.callEnds()
                                     return
