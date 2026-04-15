@@ -4,7 +4,7 @@ const rus = require ( '/var/task/modules/r-u-s.js' )
 
 const deleteDeskSchema = async ( data ) => {
     
-    console.log(rus.print.stringify4('debug markup-delete-desk-schema.js', data.RU.request.io))
+    console.error(rus.print.stringify4('debug markup-delete-desk-schema.js', data.RU.request.io))
     return `
     
         <h2>Desk Schema : <code>delete one</code> </h2>
