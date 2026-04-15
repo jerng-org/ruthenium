@@ -394,6 +394,7 @@ const virtual = async (data) => {
                                         rus.frameworkDescriptionLogger.callEnds()
                                         return
                                     }
+                                    rus.print.stringify4('debug virtual.js', data.RU.request.io.deskSchemasGet)
                                     if (!deskSchemasDeleteSuccess(data,data.RU.request.queryStringParameters['thing'][0])){
                                         await rus.http.status500(data)
                                         rus.frameworkDescriptionLogger.callEnds()
