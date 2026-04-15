@@ -433,9 +433,9 @@ const virtual = async (data) => {
 
                             //  DIMENSION C
                             //  PUT (desk-schemas) (queryScope)
-                            switch (queryScope) :{
+                            switch (queryScope) {
                                 case 'item' : {
-                                    
+
                                 }
                                 case 'collection' : {
 
