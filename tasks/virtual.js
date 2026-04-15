@@ -432,7 +432,18 @@ const virtual = async (data) => {
                             //              CREATION or DESTRUCTIVE UPDATE of the URI's resource 
 
                             //  DIMENSION C
-                            //  PUT (desk-schemas) ... no check for (queryScope)
+                            //  PUT (desk-schemas) (queryScope)
+                            switch (queryScope) :{
+                                case 'item' : {
+                                    
+                                }
+                                case 'collection' : {
+
+                                }
+                                default : {
+
+                                }
+                            }
                             if ( queryHasThing ) {
                                 // NAME WAS SPECIFIED : this is an UPDATE, which must fail if NAME cannot be found
                                 if (!await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])) {

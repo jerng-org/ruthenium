@@ -49,6 +49,7 @@ const desksPatch = async (data) => {
                 const coercedNumber = Number(__deskCell.N)
                 if (isNaN(coercedNumber)) {
 
+                    // if FORM INPUT has resulted in a JS NaN, add CELL (coordinates : DHC,R) to DELETE, and remove it from PUT
                     if (!('DELETE' in data.RU.request.formStringParameters['desk-cells'])) {
                         data.RU.request.formStringParameters['desk-cells'].DELETE = []
                     }
@@ -56,7 +57,6 @@ const desksPatch = async (data) => {
                         DHC: __deskCell.DHC,
                         R: __deskCell.R
                     })
-
                     data.RU.request.formStringParameters['desk-cells'].PUT.splice(putIndex, 1)
                 }
                 else {
@@ -64,6 +64,7 @@ const desksPatch = async (data) => {
                 }
             }
             //  WIP Issue 6.
+            // DynamoDB KEY ATTRIBUTE values, cannot be EMPTY STRINGS, so insert a SPACE
             if ('S' in __deskCell && __deskCell.S == '') __deskCell.S = ' '
 
             putIndex++

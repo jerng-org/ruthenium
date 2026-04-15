@@ -71,7 +71,7 @@ const updateDeskRow = async(data) => {
                     [ 'route','virtual' ], 
                     [ 'type','desk-cells' ], 
                     [ 'desk-row-id', data.RU.io.deskCellsQuery.Items[0].R ], 
-                    [ 'form-method','PATCH' ] 
+                    [ 'form-method','PUT' ] 
                 ] ),
                 innerHtml: await innerHtml(data, deskCellsByRowID),
                 class: 'ru-card'
