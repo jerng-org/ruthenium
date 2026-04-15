@@ -388,7 +388,7 @@ const virtual = async (data) => {
                             }
                             else {
                                 // NO NAME WAS SPECIFIED : this is a CREATION, which must fail if NAME already exists
-                                if (await deskSchemasGetSuccess(data, data.RU.request.formStringParameters['desk-schems'].name)) {
+                                if (await deskSchemasGetSuccess(data, data.RU.request.formStringParameters['desk-schemas'].name)) {
                                     await rus.http.status409(data)
                                     rus.frameworkDescriptionLogger.callEnds()
                                     return
