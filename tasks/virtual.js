@@ -265,37 +265,15 @@ const virtual = async (data) => {
                                                     }
 
                                                     switch (data.RU.request.queryStringParameters.thing[0]) {
-
-                                                        case ('update-desk-cell'):
-                                                            /* UNIMPLEMENTED PUT to DESK-CELLS */
-
-                                                            rus.frameworkDescriptionLogger.callEnds()
-
-                                                            return
-
                                                         case (`update-desk-row`):
                                                             data.RU.signals.sendResponse.body = await formsMarkupUpdateDeskRow(data)
-
                                                             rus.frameworkDescriptionLogger.callEnds()
-
                                                             return
-
-                                                        case ('delete-desk-row'):
-                                                            /* UNIMPLEMENTED DELETE to DESK-CELLS */
-
-                                                            rus.frameworkDescriptionLogger.callEnds()
-
-                                                            return
-
-                                                            // (thing) switch level 3
                                                         default:
                                                             rus.log.error(data, `(virtual.js) (?type=forms) (GET) ... (?THING=), first value: ${data.RU.request.queryStringParameters.thing[0]} not in (switch-case tree)`)
                                                             await rus.http.status404(data)
-
                                                             rus.frameworkDescriptionLogger.callEnds()
-
                                                             return
-
                                                     }
                                             }
                                     }
