@@ -419,6 +419,8 @@ const virtual = async (data) => {
                     //  METHODS for (desks)
                     switch (data.RU.request.http.method) {
                         case ('GET'): {
+                            //  DIMENSION C
+                            //  PUT (desk-cells) (queryScope) not checked for item/collection
                             if (!data.RU.request.queryStringParameters['desk-schema-name'] ||
                                 !data.RU.request.queryStringParameters['desk-schema-name'][0]) {
                                 rus.log.error(data, `(virtual.js) (?type=desk-rows) (GET) (?desk-schema-name ... was unspecified.)`)
@@ -427,39 +429,24 @@ const virtual = async (data) => {
                             rus.frameworkDescriptionLogger.callEnds()
                             return
                         }
-                        case ('PUT'):{
+                        case ('PUT'): {
                             //  PROTOCOL: HTTP PUT - request encloses an entity, for server to accept as a 
                             //              CREATION or DESTRUCTIVE UPDATE of the URI's resource 
 
-                            //  DIMENSION C
-                            //  PUT (desk-schemas) (queryScope)
                             switch (queryScope) {
                                 case 'item' : {
-
-                                }
-                                case 'collection' : {
-
-                                }
-                                default : {
-
-                                }
-                            }
-                            if ( queryHasThing ) {
-                                // NAME WAS SPECIFIED : this is an UPDATE, which must fail if NAME cannot be found
-                                if (!await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])) {
+                                    rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-cells), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
                                     await rus.http.status404(data)
                                     rus.frameworkDescriptionLogger.callEnds()
                                     return
                                 }
-                            }
-                            else {
-                                /* NOTE THIS A BREAKAGE : of the 'item' 'collection' dichotomy */
-
-                                // NO NAME WAS SPECIFIED : this is a CREATION, which must fail if NAME already exists
-                                if (await deskCellsGetSuccess(data, data.RU.request.formStringParameters['desk-schemas'].name)) {
-                                    await rus.http.status409(data)
-                                    rus.frameworkDescriptionLogger.callEnds()
-                                    return
+                                case 'collection' : {
+                                    // Typical (desk-cells) PUT will be per-(desk-row)
+                                    if (!await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'])) {
+                                        await rus.http.status404(data)
+                                        rus.frameworkDescriptionLogger.callEnds()
+                                        return
+                                    }
                                 }
                             }
                             await deskSchemasPut(data)
