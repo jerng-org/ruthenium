@@ -74,7 +74,9 @@ const deskSchemasDeleteSuccess = async (DATA, deskSchemaName) => {
         new rus.aws.ddb.DeleteCommand(params)
     )
 
-console.error('debug', String(DATA.RU.io.deskSchemasDelete))
+console.error('debug String()', String(DATA.RU.io.deskSchemasDelete))
+console.error('debug typeof',typeof DATA.RU.io.deskSchemasDelete)
+console.error('debug Object.keys()',Object.keys(DATA.RU.io.deskSchemasDelete))
 
     rus.frameworkDescriptionLogger.callEnds()
 
