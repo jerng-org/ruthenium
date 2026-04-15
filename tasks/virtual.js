@@ -384,7 +384,7 @@ const virtual = async (data) => {
                             rus.frameworkDescriptionLogger.callEnds()
                             return
                         }
-                        case ('DELETE') {
+                        case ('DELETE') : {
                             //  DIMENSION C
                             //  DELETE (desk-schemas) ... no check for (queryScope)
                             if (!deskSchemasDeleteSuccess(data,data.RU.request.queryStringParameters['desk-schema-name'][0])){
