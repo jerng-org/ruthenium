@@ -293,7 +293,7 @@ const virtual = async (data) => {
                                 if (queryHasThing) {
                                     // NAME WAS SPECIFIED : this is an UPDATE, which must fail if NAME cannot be found
                                     if (!await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])) {
-                                        await rus.http.status404(data)
+                                        await rus.http.status403(data)
                                         return
                                     }
                                 }
@@ -301,6 +301,7 @@ const virtual = async (data) => {
                                     /* NOTE THIS A BREAKAGE : of the 'item' 'collection' dichotomy */
 
                                     // NO NAME WAS SPECIFIED : this is a CREATION, which must fail if NAME already exists
+                                    //  Philosophical : should the method be POST not PUT ?
                                     if (await deskSchemasGetSuccess(data, data.RU.request.formStringParameters['desk-schemas'].name)) {
                                         await rus.http.status409(data)
                                         return
@@ -362,18 +363,25 @@ const virtual = async (data) => {
                                 //  PROTOCOL: HTTP PUT - request encloses an entity, for server to accept as a 
                                 //              CREATION or DESTRUCTIVE UPDATE of the URI's resource 
 
-                                switch (queryScope) {
-                                    case 'item': {
-                                        rus.log.error(data, `(virtual.js) Request query parameter (?type=desk-cells), METHOD: (${data.RU.request.http.method}) has no (case) in (switch)`)
-                                        await rus.http.status404(data)
+                                //  DIMENSION C
+                                //  PUT (desk-cells) ... no check for (queryScope)
+                                if (queryHasThing) {
+                                    // NAME WAS SPECIFIED : this is an UPDATE, which must fail if NAME cannot be found
+                                    if (    !await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['thing'][0])
+                                            || !await deskSchemasGetSuccess(data, data.RU.request.queryStringParameters['desk-schema-name'][0]))
+                                    {
+                                        await rus.http.status403(data)
                                         return
                                     }
-                                    case 'collection': {
-                                        // Typical (desk-cells) PUT will be per-(desk-row)
-                                        if (!await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
-                                            await rus.http.status404(data)
-                                            return
-                                        }
+                                }
+                                else {
+                                    /* NOTE THIS A BREAKAGE : of the 'item' 'collection' dichotomy */
+
+                                    // NO NAME WAS SPECIFIED : this is a CREATION, which must fail if NAME already exists
+                                    //  Philosophical : should the method be POST not PUT ?
+                                    if (await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
+                                        await rus.http.status409(data)
+                                        return
                                     }
                                 }
                                 await desksPatch(data)
