@@ -11,11 +11,13 @@ const lambdaNormalizeFormData = async ( data ) => {
     
     rus.frameworkDescriptionLogger.callStarts()
 
+    const contentTypeKeyString = ( process.env.AWS_SAM_LOCAL === 'true' ? 'Content-Type' : 'content-type' )
+
     if (    data.LAMBDA.event.headers
             &&  
-            ( 'content-type' in data.LAMBDA.event.headers )
+            ( contentTypeKeyString in data.LAMBDA.event.headers )
             &&
-            (   data.LAMBDA.event.headers['content-type']
+            (   data.LAMBDA.event.headers[contentTypeKeyString]
                         .toLowerCase()
                         .indexOf( 
                             'application/x-www-form-urlencoded'
