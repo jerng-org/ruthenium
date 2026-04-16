@@ -70,7 +70,7 @@ const updateDeskRow = async(data) => {
                 action: await rus.appUrl( [
                     [ 'route','virtual' ], 
                     [ 'type','desk-cells' ], 
-                    [ 'desk-row-id', data.RU.io.deskCellsQuery.Items[0].R ], 
+                    [ 'thing', data.RU.io.deskCellsQuery.Items[0].R ], 
                     [ 'desk-schema-name',data.RU.io.deskSchemasGet.Item.name],
                     [ 'form-method','PUT' ] 
                 ] ),
