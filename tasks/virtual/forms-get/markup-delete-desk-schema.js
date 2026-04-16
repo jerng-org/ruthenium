@@ -14,7 +14,7 @@ const deleteDeskSchema = async ( data ) => {
         </h3>
         
         <pre><code>
-            ${ await rus.print.stringify4(data.RU.io.deskSchemasDelete.Attributes) }
+            ${ await JSON.stringify4(data.RU.io.deskSchemasDelete.Attributes) }
         </code></pre>
         
         `
