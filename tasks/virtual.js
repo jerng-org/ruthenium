@@ -205,8 +205,7 @@ const virtual = async (data) => {
 
                                                     case (`create-desk-row`):
                                                         data.RU.signals.sendResponse.body = await formsMarkupCreateDeskRow(data)
-
-                                                        rus.frameworkDescriptionLogger.callEnds()
+                                                        return
                                                     default:
                                                         //////////
                                                         //      //
