@@ -118,7 +118,7 @@ const desksPatch = async (data) => {
         // Configure DB client parameters
         const params = {
             RequestItems: {
-                'TEST-APP-DESK-CELLS': limitedRequestItems
+                'RUTHENIUM-V1-DESK-CELLS': limitedRequestItems
             },
             //ReturnConsumedCapacity: `INDEXES`,
             //ReturnItemCollectionMetrics: `SIZE`

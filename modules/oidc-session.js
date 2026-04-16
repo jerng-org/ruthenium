@@ -145,7 +145,7 @@ const setSessionFromRequestCookie = async DATA => {
     //  the object at the time specified by (access_token.exp)
 
     const params = {
-        TableName: 'TEST-APP-SESSIONS',
+        TableName: 'RUTHENIUM-V1-SESSIONS',
         Key: {
             [conf.platform.dynamoDB.sessions
                 .primaryKey

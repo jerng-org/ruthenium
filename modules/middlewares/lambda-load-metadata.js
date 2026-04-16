@@ -11,7 +11,7 @@ const lambdaLoadMetadata = async ( data ) => {
     data.RU.metadata = ( 
         
         await rus.aws.ddbdc.get ( {
-            TableName:              'TEST-APP-STASH',
+            TableName:              'RUTHENIUM-V1-STASH',
             Key:                    { key: 'metadata' },
             //ReturnConsumedCapacity: 'INDEXES'
         } ) 

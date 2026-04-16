@@ -28,7 +28,7 @@ const adminDeskCellsTableHousekeeping = async(data) => {
     let hiddenInputs = ``
 
     data.RU.io.deskCellsScan = await rus.aws.ddbdc.scan({
-        TableName: 'TEST-APP-DESK-CELLS',
+        TableName: 'RUTHENIUM-V1-DESK-CELLS',
     }).promise()
 
     for (const _deskCell of data.RU.io.deskCellsScan.Items) {
@@ -52,7 +52,7 @@ const adminDeskCellsTableHousekeeping = async(data) => {
                 /*    
                 let result
                 data.RU.io.deskCellsDeletes.push(result = await rus.aws.ddbdc.delete({
-                    TableName: 'TEST-APP-DESK-CELLS',
+                    TableName: 'RUTHENIUM-V1-DESK-CELLS',
                     Key: {
                         DHC: _deskCell.DHC,
                         R: _deskCell.R

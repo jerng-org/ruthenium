@@ -74,7 +74,7 @@ const deskSchemasDeleteSuccess = async (DATA, deskSchemaName) => {
 const deskCellsGetSuccess = async (DATA, deskRowID) => {
     rus.frameworkDescriptionLogger.callStarts()
     const params = {
-        TableName: 'TEST-APP-DESK-CELLS',
+        TableName: 'RUTHENIUM-V1-DESK-CELLS',
         IndexName: 'R-GSI',
         KeyConditionExpression: 'R = :deskRowID',
         ExpressionAttributeValues: { ':deskRowID': deskRowID },

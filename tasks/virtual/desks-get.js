@@ -29,7 +29,7 @@ const desksGet = async (data) => {
 
     data.RU.io.deskCellsQuery = await rus.aws.ddb.aDynamoDBDocumentClient.send(
         new rus.aws.ddb.QueryCommand({
-            TableName: 'TEST-APP-DESK-CELLS',
+            TableName: 'RUTHENIUM-V1-DESK-CELLS',
             IndexName: 'D-GSI',
             KeyConditionExpression: 'D = :deskName',
             ExpressionAttributeValues: { ':deskName': deskName },
