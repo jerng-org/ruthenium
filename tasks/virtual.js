@@ -379,7 +379,7 @@ const virtual = async (data) => {
 
                                     // NO NAME WAS SPECIFIED : this is a CREATION, which must fail if NAME already exists
                                     //  Philosophical : should the method be POST not PUT ?
-                                    if (await deskCellsGetSuccess(data, data.RU.request.queryStringParameters['desk-row-id'][0])) {
+                                    if (await deskCellsGetSuccess(data, data.RU.request.formStringParameters['desk-cells'].PUT[0].R)) {
                                         await rus.http.status409(data)
                                         return
                                     }
