@@ -95,7 +95,7 @@ const deskCellsGetSuccess = async (DATA, deskRowID) => {
 
 const virtual = async (data) => {
     rus.frameworkDescriptionLogger.callStarts()
-    const IIFEResult = (_ => {
+    const IIFEResult = await ( async _ => {
         //  ?batch=1
         if (data.RU.request.queryStringParameters.batch &&
             data.RU.request.queryStringParameters.batch[0]) {
