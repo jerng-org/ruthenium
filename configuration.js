@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = process.env.AWS_SAM_LOCAL === 'true' ? 0 : 1
-const _gitCommitMessage = 'normalisation of ontology : continued' //dev : submodules : test3' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
+const _gitCommitMessage = 'normalisation of ontology : stabilised' //dev : submodules : test3' //`refactoring : [ /var/task/index.js ]` // mark.js x frameworkDescriptionLogger?
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'

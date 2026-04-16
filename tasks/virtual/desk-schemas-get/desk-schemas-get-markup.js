@@ -18,8 +18,7 @@ const deskSchemasMarkup = async (data) => {
         (rus.conf.verbosity < 4 ?
             '' :
             ` <h6>all-desk-schemas/markup.js:</h6>
-              <pre><code>${ JSON.stringify( data.RU.io.deskSchemasScan, null, 4 )
-              }</code></pre>`)
+              <pre><code>${ JSON.stringify( data.RU.io.deskSchemasScan, null, 4 ) }</code></pre>`)
 
     return markup
 }
