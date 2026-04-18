@@ -1,4 +1,5 @@
-2026-04-(11-17) RECAP
+ 2026-04-(11-17) : AWS Node.js Runtime 
+( has a native Node.js plugin to talk to the AWS Lambda Runtime Interface / Emulator at the C level)
 
 ```
 PROJECT_DIR
@@ -10,7 +11,7 @@ PROJECT_DIR
 |                               ( gets clobbered upon rebuild )
 ```
 
-# TEMPLATE
+## TEMPLATE
 - remove any arm64 layers if building on x86
 - Identity Provider
     - in order to correctly interface between (localhost) and (cognito)
@@ -18,7 +19,7 @@ PROJECT_DIR
         - (cognito) was adjusted to accept the (localhost) redirect url
     - (cognito) can then redirect user from login page to (localhost) redirect url
 
-# EXECUTABLES
+## EXECUTABLES
 - `sam` uses : `aws` and `docker`       ( install these )
     - ( serverless applicable model ) 
 - AWS's (dynamodb-local) is already containerised on dockerhub
@@ -40,14 +41,14 @@ PROJECT_DIR
     - import (dynamodb-tables-template.json) to model
     - commit model to (dynamodb-local)
 
-# ACCESS CONTROL
+## ACCESS CONTROL
 - web console : AWS Identity Center :
   - create user
   - create permission
     - `lambda:GetLayerVersion` permission is required
   - attach user, to account, with permission
 
-# COMMANDS
+## COMMANDS
 - `aws configure sso`           ( requires setup in AWS Identity Center web console )
     - perform the web login with the Identity Center sso user
     - specifies a (profile), which can be used like this :
@@ -62,7 +63,7 @@ PROJECT_DIR
      --warm-containers lazy` \
     `
 
-# SOURCE ADAPTATION
+## SOURCE ADAPTATION
 - `./ruthenium/io/ddb.js` modified with 
       ```
       const config = process.env.AWS_SAM_LOCAL === 'true' ? { 
@@ -83,8 +84,106 @@ PROJECT_DIR
         - (API Gateway) uses `content-type`, 
           (sam local) uses `Content-Type`, so these must be adaptable
 
-# OUTSTANDING
+## OUTSTANDING
   - (validation.js) is bugging out
     - IMPRESSION : the design of [ model objects ] i.e. criteria for
       validation is poor; future designs should refer to the JSONPath
       RFCs for any better ideas; and also to other precedent designs.
+
+# 2026-04-19 : AWS Custom Runtime : Node.js installed
+( initial implementation, uses Node.js's (http) library which may be less efficient than C )
+
+## delta : `.yaml`
+- `template.yaml` was copied to `template-os-only.yaml`, and inside :
+    - modified to, `Runtime: provided.al2023`
+    - modified to, `Handler: bootstrap`, for consistency, though it
+      doesn't seem to matter what the value is, and (sam local) will
+      still try to run `/var/task/bootstrap`
+    - despite NO addition of `Metadata:\n\s\sBuildMethod:`, (sam local)
+      is going to try and run `./ruthenium/Makefile` which is mounted as
+      `/tmp/samcli/source/Makefile` during the build process
+
+## delta : `node` binary and `node_modules`
+- chuck the `node` binary in `./ruthenium`
+- cd to `ruthenium`
+    - then run `npm i @aws-sdk/client-dynamodb \
+                    @aws-sdk/lib-dynamodb \
+                    @aws-sdk/client-s3 \
+                    jsonwebtoken \
+                    jwk-to-pem \
+ 
+ ## delta : new files, for the Custom Runtime                  `
+- the following goes in `./ruthenium/Makefile` (where `build-FUNCTION_NAME`)
+    ```
+build-rutheniumv1devTHEUNICORN:
+	cp -R /tmp/samcli/source/. ${ARTIFACTS_DIR}
+    ```
+- the following goes in `./ruthenium/bootstrap`
+    `./node -e "require('./index')"`
+
+## delta : `index.js`
+- the following is inserted in index.js after `initLambdaNodeJSHandler()`
+    ```
+    /* CUSTOM RUNTIME BEGIN */
+    ;( async _ => {
+        const _handlerIsBootstrap = process.env._HANDLER === 'bootstrap'
+        if ( _handlerIsBootstrap ) {
+
+            const lambdaRuntimeAPI = process.env.AWS_LAMBDA_RUNTIME_API
+            const getURI           = `http://${lambdaRuntimeAPI}/2018-06-01/runtime/invocation/next`
+            const postHostname     = lambdaRuntimeAPI.split(':')[0]
+            const postPort         = lambdaRuntimeAPI.split(':')[1]
+
+            async function startRuntime() {
+              while (true) {
+                // 1. GET Request to poll for the next invocation
+                const { event, requestID } = await getNextInvocation()
+
+                try {
+                  // 2. Process the event (e.g., call your handler)
+                  const result = await module.exports.handler(event)
+
+                  // 3. POST Request to send the successful response
+                  await sendResponse(requestID, result)
+
+                } catch (error) {
+                  // POST Request to report an invocation error
+                  // sendError(requestID, error)
+                }
+              }
+            }
+
+            // Helper: GET next invocation event
+            async function getNextInvocation() {
+              return new Promise((resolve) => {
+                http.get(getURI, (res) => {
+                  let data = ''
+                  res.on('data', chunk => data += chunk)
+                  res.on('end', () => {
+                    resolve({
+                      event: JSON.parse(data),
+                      requestID: res.headers['lambda-runtime-aws-request-id']
+                    })
+                  })
+                })
+              })
+            }
+
+            // Helper: POST response
+            async function sendResponse(requestID, responseBody) {
+              const options = {
+                hostname: postHostname,
+                port: postPort,
+                path: `/2018-06-01/runtime/invocation/${requestID}/response`,
+                method: 'POST'
+              }
+              const req = http.request(options)
+              req.write(JSON.stringify(responseBody))
+              req.end()
+            }
+            
+            await startRuntime()
+        }
+    })()
+    /* CUSTOM RUNTIME END */
+    ```

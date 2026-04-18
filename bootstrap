@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Example minimal bootstrap for Node.js
+# Using the os-only runtime
+
+## 1. In this example, Node.js's (http) will GET and POST, in a loop 
+./node -e "require('./index')"
+
+## 2. In this example, the slower BASH script (curl)s GET and POST, in a loop
+#
+#while true
+#do
+#  HEADERS="$(mktemp)"
+#  EVENT_DATA=$(curl -sS -LD "$HEADERS" "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next")
+#  REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
+#
+#  # Execute your code with the bundled node binary
+#  RESPONSE=$(./node -e "require('./index').handler($EVENT_DATA)")
+#
+#  echo $EVENT_DATA
+#
+#  #RESPONSE='{ "statusCode": 200, "headers": { "Content-Type": "application/json" }, "body": "{\"message\": \"success\"}" }'
+#
+#
+#  curl -sS -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "$RESPONSE"
+#done

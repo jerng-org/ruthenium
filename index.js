@@ -290,6 +290,74 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
 }
 
-try { initLambdaNodeJSHandler() }
+try { 
+
+    initLambdaNodeJSHandler() 
+    
+    /* CUSTOM RUNTIME BEGIN */
+    ;( async _ => {
+        const _handlerIsBootstrap = process.env._HANDLER === 'bootstrap'
+        if ( _handlerIsBootstrap ) {
+
+            const lambdaRuntimeAPI = process.env.AWS_LAMBDA_RUNTIME_API
+            const getURI           = `http://${lambdaRuntimeAPI}/2018-06-01/runtime/invocation/next`
+            const postHostname     = lambdaRuntimeAPI.split(':')[0]
+            const postPort         = lambdaRuntimeAPI.split(':')[1]
+
+            async function startRuntime() {
+              while (true) {
+                // 1. GET Request to poll for the next invocation
+                const { event, requestID } = await getNextInvocation()
+
+                try {
+                  // 2. Process the event (e.g., call your handler)
+                  const result = await module.exports.handler(event)
+
+                  // 3. POST Request to send the successful response
+                  await sendResponse(requestID, result)
+
+                } catch (error) {
+                  // POST Request to report an invocation error
+                  // sendError(requestID, error)
+                }
+              }
+            }
+
+            // Helper: GET next invocation event
+            async function getNextInvocation() {
+              return new Promise((resolve) => {
+                http.get(getURI, (res) => {
+                  let data = ''
+                  res.on('data', chunk => data += chunk)
+                  res.on('end', () => {
+                    resolve({
+                      event: JSON.parse(data),
+                      requestID: res.headers['lambda-runtime-aws-request-id']
+                    })
+                  })
+                })
+              })
+            }
+
+            // Helper: POST response
+            async function sendResponse(requestID, responseBody) {
+              const options = {
+                hostname: postHostname,
+                port: postPort,
+                path: `/2018-06-01/runtime/invocation/${requestID}/response`,
+                method: 'POST'
+              }
+              const req = http.request(options)
+              req.write(JSON.stringify(responseBody))
+              req.end()
+            }
+            
+            await startRuntime()
+        }
+    })()
+    /* CUSTOM RUNTIME END */
+
+
+}
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }

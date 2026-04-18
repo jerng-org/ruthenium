@@ -111,19 +111,19 @@ if (conf.customLogging) {
 
     customLogger.startCustomLogString = function() {
         buildLineStyle2(false, arguments, conf.customLoggingHeaderLogStart,
-            'START CustomLogString ... '
+            'START CustomLogString ... you may turn of the custom logger in (configuration)'
         )
     }
 
     customLogger.restartCustomLogString = function() {
         buildLineStyle2(false, arguments, conf.customLoggingHeaderLogRestart,
-            '... RESTART CustomLogString ...'
+            '... RESTART CustomLogString ... you may turn of the custom logger in (configuration)'
         )
     }
 
     customLogger.logCustomLogString = function() {
         buildLineStyle2(true, arguments, conf.customLoggingHeaderLogLog,
-            '... END CustomLogString'
+            '... END CustomLogString ... you may turn of the custom logger in (configuration)'
         )
         console.initialLog(
             customLogger.customLogString

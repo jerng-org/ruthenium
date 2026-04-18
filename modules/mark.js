@@ -104,7 +104,7 @@ const mark = (!conf.markPerformance) ? _ => _ : async (taskLabel, firstInHandler
             preInvocationTime = performance.now()
 
             conf.markPerformance &&
-                console.warn(`mark.js : these figures are loose and fast`)
+                console.warn(`mark.js : you may turn of perf code in (configuration) ; these figures are loose and fast`)
 
             _log(columnedRowBorder)
             _log(
