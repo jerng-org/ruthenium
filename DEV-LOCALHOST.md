@@ -187,3 +187,35 @@ build-rutheniumv1devTHEUNICORN:
     })()
     /* CUSTOM RUNTIME END */
     ```
+
+# 2026-04-22 : AWS Custom Runtime : Txiki.js installed
+
+## compilation
+
+Mainly : https://txikijs.org/docs/building/
+
+
+### On Debian / Ubuntu
+- version `>= 24.04` required
+- `sudo apt install build-essential cmake libffi-dev`
+
+### Amazon Linux, al.2023
+```bash
+dnf install -y git gcc14 gcc14-c++ cmake libffi-devel libatomic
+ln -s /usr/bin/gcc14-gcc /usr/bin/cc
+ln -s /usr/bin/gcc14-c++ /usr/bin/c++
+```
+
+### delta : `ruthenium/Makefile`
+( this is a hack : `libatomic` and `libstdc++.so.6.0.33` should just be built into a docker image )
+```bash
+	cp /tmp/samcli/source/libstdc++.so.6.0.33 /lib64/libstdc++.so.6.0.33
+	ln -sf /lib64/libstdc++.so.6.0.33 /lib64/libstdc++.so.6
+```
+
+### delta : `ruthenium/bootstrap`
+( this is a hack : `libatomic` and `libstdc++.so.6.0.33` should just be built into a docker image )
+```bash
+dnf install -y libatomic
+./tjs-al.2023.bin run ./index.js
+```
