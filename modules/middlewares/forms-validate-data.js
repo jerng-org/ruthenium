@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const formsValidateData = async (data) => {
 
     rus.frameworkDescriptionLogger.callStarts()
@@ -15,6 +14,5 @@ const formsValidateData = async (data) => {
 
 }
 
-module.exports = formsValidateData
-
+export default formsValidateData;
 rus.mark('LOADED')

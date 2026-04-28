@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 /*  This middleware looks in (data.RU.signals.sendResponse.setCookies)
  *
  */
@@ -64,8 +63,7 @@ const setCookies = async (data) => {
     return data
 }
 
-module.exports = setCookies
-
+export default setCookies;
 rus.mark('LOADED')
 
 /*  Ruthenium framework conventions

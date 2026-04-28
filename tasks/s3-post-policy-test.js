@@ -1,10 +1,9 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const s3PostPolicyTest = async ( data ) => {
 
     // YOUR CODE HERE
@@ -93,7 +92,5 @@ const s3PostPolicyTest = async ( data ) => {
 }
 // manipulate (data.RU), for example
 // no need to return (data)
-
-module.exports = s3PostPolicyTest
-
+export default s3PostPolicyTest;
 rus.mark('LOADED')

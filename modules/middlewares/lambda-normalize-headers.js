@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
 const lambdaNormalizeHeaders = async (data) => {
@@ -53,6 +52,6 @@ const lambdaNormalizeHeaders = async (data) => {
 
     return data
 }
-module.exports = lambdaNormalizeHeaders
 
+export default lambdaNormalizeHeaders;
 rus.mark('LOADED')

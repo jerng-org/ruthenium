@@ -1,6 +1,6 @@
 'use strict'
 
-const rusMinus1 = require(`/var/task/modules/r-u-s-minus-1.js`)
+import rusMinus1 from '/var/task/modules/r-u-s-minus-1.js'
 const mark = rusMinus1.mark
 
 const status401 = async ( data ) => {
@@ -8,5 +8,5 @@ const status401 = async ( data ) => {
     data.RU.signals.sendResponse.body = '<h3>HTTP Response Status Code</h3><h2>401 Unauthorized</h2>Perhaps you have not logged in.'
 }
 
-module.exports = status401 
+export default status401;
 mark('LOADED')

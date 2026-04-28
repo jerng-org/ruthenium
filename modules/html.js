@@ -1,6 +1,6 @@
-'use strict'
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+'use strict'
 const mark = rusMinus1.mark 
 
 const html = {
@@ -263,5 +263,5 @@ const html = {
 
 }
 
-module.exports = html
+export default html;
 mark('LOADED')

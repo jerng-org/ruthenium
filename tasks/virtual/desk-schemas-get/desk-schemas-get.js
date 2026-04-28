@@ -1,8 +1,7 @@
+import rus from "/var/task/modules/r-u-s.js";
+import markup from "/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get-markup.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-const markup = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get-markup.js')
-
 rus.frameworkDescriptionLogger.fixme(`rendering (-markup.js) should not involve a require() here;`)
 
 const deskSchemasGet = async (data) => {
@@ -27,4 +26,5 @@ const deskSchemasGet = async (data) => {
     rus.mark(`EXECUTED`)
 
 }
-module.exports = deskSchemasGet
+
+export default deskSchemasGet;

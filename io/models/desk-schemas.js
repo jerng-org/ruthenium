@@ -1,6 +1,6 @@
-'use strict'
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1')
+'use strict'
 const conf = rusMinus1.conf 
 const mark = rusMinus1.mark 
 
@@ -133,8 +133,5 @@ const deskSchemas = {
         // desk-schemas/columns
     ]
 */
-
-
-module.exports = deskSchemas
-
+export default deskSchemas;
 mark('LOADED')

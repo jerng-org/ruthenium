@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
     rus.frameworkDescriptionLogger.more(`ruthenium-reducer.js: We're using (Function.name) here,
     and this needs to be 
     examined a bit more, because it may be too JavaScript-specific; i.e.
@@ -166,6 +165,6 @@ ${
         }
     }
 }
-module.exports = rutheniumReducer
 
+export default rutheniumReducer;
 rus.mark('LOADED')

@@ -1,10 +1,9 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const adminDeskCellsTableHousekeeping = async(data) => {
     rus.mark(`EXECUTING ...`)
 
@@ -182,7 +181,5 @@ in case you need to undo changes. You may simply save this webpage.`,
 }
 // manipulate (data.RU), for example
 // no need to return (data)
-
-module.exports = adminDeskCellsTableHousekeeping
-
+export default adminDeskCellsTableHousekeeping;
 rus.mark('LOADED')

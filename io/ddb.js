@@ -1,6 +1,16 @@
-'use strict'
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import {
+    BatchWriteCommand,
+    DeleteCommand,
+    GetCommand,
+    PutCommand,
+    ScanCommand,
+    QueryCommand
+} from "@aws-sdk/lib-dynamodb";
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+'use strict'
 const mark = rusMinus1.mark
 
 // 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via Proxy. Using a 
@@ -56,9 +66,6 @@ const translateConfig = { marshallOptions, unmarshallOptions }
 
 // (Option A) This imports the "bare-bones" client
 //*
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
-const { DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb")
-
 const config = process.env.AWS_SAM_LOCAL === 'true' ? { 
     endpoint : "http://dynamodb-local:8000",
     region : "localhost" /* apparently trivial */
@@ -83,16 +90,7 @@ const aDynamoDBDocumentClient = DynamoDBDocument.from(fullClient, translateConfi
 !!            //  \\             !!
 !!__________//______\\___________*/
 
-const {
-    BatchWriteCommand,
-    DeleteCommand,
-    GetCommand,
-    PutCommand,
-    ScanCommand,
-    QueryCommand
-} = require("@aws-sdk/lib-dynamodb")
-
-module.exports = {
+export {
     aDynamoDBDocumentClient, // hi !!
     BatchWriteCommand,
     DeleteCommand,

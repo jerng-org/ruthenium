@@ -1,7 +1,6 @@
+import mark from "/var/task/modules/mark.js";
+
 'use strict'
-
-const mark = require ( '/var/task/modules/mark.js' )
-
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
@@ -14,5 +13,5 @@ const thisIsMyName = async ( data ) => {
     mark ( `(this-is-my-name.js) EXECUTED` )
 }
 
-module.exports = thisIsMyName
+export default thisIsMyName;
 mark ( `(this-is-my-name.js) LOADED` )

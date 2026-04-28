@@ -1,14 +1,13 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (apply-layout.js)
 const tasks = {}
 const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
 taskFileNames.forEach((current, index, array) => {
     if (current.toLowerCase().slice(-3) == '.js') {
-        tasks[current.slice(0, -3)] = require('/var/task/tasks/' + current)
+        tasks[current.slice(0, -3)] = (import('/var/task/tasks/' + current)).default
     }
 } /* , thisArg */ )
 
@@ -154,6 +153,6 @@ const router = async (data) => {
 
     return data
 }
-module.exports = router
 
+export default router;
 rus.mark('LOADED')

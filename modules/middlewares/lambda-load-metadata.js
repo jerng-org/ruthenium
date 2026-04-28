@@ -1,9 +1,8 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const lambdaLoadMetadata = async ( data ) => {
     
     rus.frameworkDescriptionLogger.callStarts()
@@ -24,6 +23,6 @@ const lambdaLoadMetadata = async ( data ) => {
     return data
 
 }
-module.exports = lambdaLoadMetadata
 
+export default lambdaLoadMetadata;
 rus.mark('LOADED')

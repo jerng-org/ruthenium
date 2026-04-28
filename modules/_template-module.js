@@ -1,10 +1,9 @@
+import mark from "/var/task/modules/mark.js";
+
 'use strict'
-
-const mark      = require ( '/var/task/modules/mark.js' )
-
 const thisIsMyName     = async () => {
   
 }
 
-module.exports  = thisIsMyName
+export default thisIsMyName;
 mark (`~/modules/thisIsMyName.js LOADED`)

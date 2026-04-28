@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const deleteDeskSchema = async ( data ) => {
     
     return `
@@ -20,4 +19,5 @@ const deleteDeskSchema = async ( data ) => {
         `
         
 }
-module.exports = deleteDeskSchema
+
+export default deleteDeskSchema;

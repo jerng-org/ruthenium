@@ -11,4 +11,5 @@ const initial = async ( data ) => {
     // no need to return data
     
 }
-module.exports = initial
+
+export default initial;

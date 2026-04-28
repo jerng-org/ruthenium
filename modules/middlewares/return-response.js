@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const returnResponse = async (data) => {
 
     rus.frameworkDescriptionLogger.callStarts()
@@ -9,6 +8,6 @@ const returnResponse = async (data) => {
 
     return data.RU.response
 }
-module.exports = returnResponse
 
+export default returnResponse;
 rus.mark('LOADED')

@@ -1,12 +1,11 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
 //  PLEASE CAREFULLY refer to notes 
 //  in (lambda-normalize-query-string-parameters.js)
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const lambdaNormalizeFormData = async ( data ) => {
     
     rus.frameworkDescriptionLogger.callStarts()
@@ -42,6 +41,5 @@ const lambdaNormalizeFormData = async ( data ) => {
     return data
 }
 
-module.exports  = lambdaNormalizeFormData
-
+export default lambdaNormalizeFormData;
 rus.mark('LOADED')

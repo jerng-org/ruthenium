@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const readDeskSchema = async ( data ) => {
     
     return `
@@ -26,4 +25,5 @@ const readDeskSchema = async ( data ) => {
         `
     
 }
-module.exports = readDeskSchema
+
+export default readDeskSchema;

@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
 /*      AWS API Gateway's (event.queryStringParameters) treats comma literals as
@@ -82,6 +81,6 @@ const lambdaNormalizeQueryStringParameters = async (data) => {
 
     return data
 }
-module.exports = lambdaNormalizeQueryStringParameters
 
+export default lambdaNormalizeQueryStringParameters;
 rus.mark('LOADED')

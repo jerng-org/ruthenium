@@ -20,4 +20,5 @@ const liOfColumnsInTr = async ( column ) => {
         
     return markup
 }
-module.exports  = liOfColumnsInTr
+
+export default liOfColumnsInTr;

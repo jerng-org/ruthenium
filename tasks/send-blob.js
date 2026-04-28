@@ -1,6 +1,6 @@
-'use strict'
+import rus from "/var/task/modules/r-u-s.js";
 
-const rus   = require ( '/var/task/modules/r-u-s.js' )
+'use strict'
 const blobs = {}
 
 // SAFELIST - until we add something like https://www.npmjs.com/package/mime
@@ -27,4 +27,4 @@ const sendBlob = async ( data ) => {
     // no need to return data
 }
 
-module.exports  = sendBlob
+export default sendBlob;

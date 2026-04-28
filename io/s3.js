@@ -1,14 +1,12 @@
-'use strict'
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
+import { S3Client } from "@aws-sdk/client-s3";
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+'use strict'
 const mark = rusMinus1.mark 
 
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
-
-const { S3Client } = require("@aws-sdk/client-s3")
-
-module.exports = new S3Client()
+export default new S3Client()
 
 mark('LOADED')

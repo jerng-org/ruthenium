@@ -1,60 +1,45 @@
-'use strict'
-const rus = require('/var/task/modules/r-u-s.js')
+import rus from "/var/task/modules/r-u-s.js";
 
+'use strict'
 // PROJECT - MIDDLEWARES, lexical order 
 
-const applyLayout =
-    require(`/var/task/modules/middlewares/apply-layout.js`)
+import applyLayout from '/var/task/modules/middlewares/apply-layout.js'
 
-const composeResponse =
-    require(`/var/task/modules/middlewares/compose-response.js`)
+import composeResponse from '/var/task/modules/middlewares/compose-response.js'
 
-const formsReindexNames =
-    require(`/var/task/modules/middlewares/forms-reindex-names.js`)
+import formsReindexNames from '/var/task/modules/middlewares/forms-reindex-names.js'
 
-const formsTunnelRestfulMethods =
-    require(`/var/task/modules/middlewares/forms-tunnel-restful-methods.js`)
+import formsTunnelRestfulMethods from '/var/task/modules/middlewares/forms-tunnel-restful-methods.js'
 
-const formsValidateData =
-    require(`/var/task/modules/middlewares/forms-validate-data.js`)
+import formsValidateData from '/var/task/modules/middlewares/forms-validate-data.js'
 
-const lastGuard = require(`/var/task/modules/middlewares/last-guard.js`)
+import lastGuard from '/var/task/modules/middlewares/last-guard.js'
 
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
-const lambdaCopyRequestParameters =
-    require(`/var/task/modules/middlewares/lambda-copy-request-parameters.js`)
+import lambdaCopyRequestParameters from '/var/task/modules/middlewares/lambda-copy-request-parameters.js'
 
-const lambdaLoadMetadata =
-    require(`/var/task/modules/middlewares/lambda-load-metadata.js`)
+import lambdaLoadMetadata from '/var/task/modules/middlewares/lambda-load-metadata.js'
 
-const lambdaNormalizeFormData =
-    require(`/var/task/modules/middlewares/lambda-normalize-form-data.js`)
+import lambdaNormalizeFormData from '/var/task/modules/middlewares/lambda-normalize-form-data.js'
 
-const lambdaNormalizeHeaders =
-    require(`/var/task/modules/middlewares/lambda-normalize-headers.js`)
+import lambdaNormalizeHeaders from '/var/task/modules/middlewares/lambda-normalize-headers.js'
 
-const lambdaNormalizeQueryStringParameters =
-    require(`/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js`)
+import lambdaNormalizeQueryStringParameters from '/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js'
 
-const oidcValidation =
-    require(`/var/task/modules/middlewares/oidc-validation.js`)
+import oidcValidation from '/var/task/modules/middlewares/oidc-validation.js'
 
-const returnResponse =
-    require(`/var/task/modules/middlewares/return-response.js`)
+import returnResponse from '/var/task/modules/middlewares/return-response.js'
 
-const router = require(`/var/task/modules/middlewares/router.js`)
+import router from '/var/task/modules/middlewares/router.js'
 
-const sessionExemption =
-    require(`/var/task/modules/middlewares/session-exemption.js`)
+import sessionExemption from '/var/task/modules/middlewares/session-exemption.js'
 
-const sessionGuard =
-    require(`/var/task/modules/middlewares/session-guard.js`)
+import sessionGuard from '/var/task/modules/middlewares/session-guard.js'
 
-const setOidcSession =
-    require(`/var/task/modules/middlewares/set-oidc-session.js`)
+import setOidcSession from '/var/task/modules/middlewares/set-oidc-session.js'
 
-const setCookies = require(`/var/task/modules/middlewares/set-cookies.js`)
+import setCookies from '/var/task/modules/middlewares/set-cookies.js'
 
 const middlewares = [ // MIDDLEWARES, in execution order
 
@@ -199,4 +184,4 @@ const middlewares = [ // MIDDLEWARES, in execution order
 
 ]
 
-module.exports = middlewares
+export default middlewares;

@@ -1,6 +1,6 @@
-'use strict'
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+'use strict'
 const conf = rusMinus1.conf 
 const mark = rusMinus1.mark 
 
@@ -39,6 +39,5 @@ const deskCells = {
     }
 }
 
-module.exports = deskCells
-
+export default deskCells;
 mark('LOADED')

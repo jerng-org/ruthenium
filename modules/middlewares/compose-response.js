@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (apply-layout.js)
 const markups = {}
@@ -231,6 +230,5 @@ const composeResponse = async (data) => {
     }
 }
 
-module.exports = composeResponse
-
+export default composeResponse;
 rus.mark('LOADED')

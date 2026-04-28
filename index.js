@@ -1,6 +1,10 @@
-'use strict'
+import rus from '/var/task/modules/r-u-s.js'
+import ruthenium from '/var/task/modules/framework/ruthenium.js'
+import middlewares from '/var/task/index-middlewares.js'
 
-const initLambdaNodeJSHandler = _ => {
+let handler
+
+const initLambdaNodeJSHandler = () => {
 
     /*_______________________________!!
     !!            \\                 !!
@@ -10,8 +14,6 @@ const initLambdaNodeJSHandler = _ => {
     !!__________//______\\___________*/
 
     //  See pertinent (nodeJS-specific) documentation at /var/task / modules / r - u - s.js
-
-    const rus = require('/var/task/modules/r-u-s.js')
 
     rus.mark(`INITIALISING Handler (having loaded r-u-s.js) ...`)
 
@@ -147,13 +149,10 @@ const initLambdaNodeJSHandler = _ => {
     /*_______________________________!!
     !!            \\                 !!
     !!              \\               !!
-    !!  Make way   //\\    Make way  !!
+    !!  Make way   //\\    Make way  !!n
     !!            //  \\             !!
     !!__________//______\\___________*/
-
-    const ruthenium = require('/var/task/modules/framework/ruthenium.js')
-
-    const middlewares = require('/var/task/index-middlewares.js')
+    
 
     rus.frameworkDescriptionLogger.more(`we are now in (/var/task/index.js), and
     
@@ -199,7 +198,7 @@ const initLambdaNodeJSHandler = _ => {
 
     // LAMBDA HANDLER
 
-    module.exports.handler = async function() {
+    handler = function (/* event,context */) {
 
         rus.customLogger.restartCustomLogString(
             '(/var/task/(index.js).exports.handler CALL) ')
@@ -207,7 +206,6 @@ const initLambdaNodeJSHandler = _ => {
         rus.frameworkDescriptionLogger.callStarts()
 
         //  Minimal production logger (unsystematic; hook this up with configuration.js later) 
-
         console.log(`REQUEST to application < handler < NodeJS < Lambda < API Gateway < 
 METHOD           : ${arguments[0].requestContext.http.method} 
 DOMAIN           : ${arguments[0].requestContext.domainName} 
@@ -232,8 +230,7 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
             }
         }
 
-        const rutheniumResponse = await ruthenium(hostInitializedData,
-            middlewares)
+        const rutheniumResponse =  ruthenium(hostInitializedData, middlewares)
 
         /* Minimal production logger (unsystematic; hook this up with configuration.js later) TODO: */
 
@@ -260,7 +257,8 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
         )
 
         return rutheniumResponse
-    } // exports.handler() 
+    } // defines handler() 
+
 
     rus.mark('... Handler INITIALISED ')
 
@@ -290,12 +288,8 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
 }
 
-try { 
-
-    initLambdaNodeJSHandler() 
-    
+const initCustomRuntimeClient =  async _ => {
     /* CUSTOM RUNTIME BEGIN */
-    ;( async _ => {
         const _handlerIsBootstrap = process.env._HANDLER === 'bootstrap'
         if ( _handlerIsBootstrap ) {
 
@@ -354,10 +348,27 @@ try {
             
             await startRuntime()
         }
-    })()
     /* CUSTOM RUNTIME END */
+}
 
-
+try { 
+    initLambdaNodeJSHandler() 
+    initCustomRuntimeClient()
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
+
+/* TEST SHIM :
+const handler = async (event, context) => {
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify({
+            message: "Hello from ESM Lambda!",
+            input: event,
+        }),
+    };
+    return response;
+};
+//*/
+
+export { handler }

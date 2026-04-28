@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const setOidcSession = async(data) => {
     
     rus.frameworkDescriptionLogger.callStarts()
@@ -78,6 +77,5 @@ const setOidcSession = async(data) => {
     return data
 }
 
-module.exports = setOidcSession
-
+export default setOidcSession;
 rus.mark('LOADED')

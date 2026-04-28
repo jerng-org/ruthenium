@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
 
@@ -22,7 +21,5 @@ const templateTaskMarkup = async ( data ) => {
 //
 //  You may also manipulate (data) directly, but that would be semantically
 //  incoherent / unpretty.
-
-module.exports = templateTaskMarkup
-                                                     
+export default templateTaskMarkup;
 rus.mark('LOADED')

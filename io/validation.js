@@ -1,13 +1,10 @@
-'use strict'
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
+import print from "/var/task/modules/print.js";
+import fs from "fs";
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+'use strict'
 const conf = rusMinus1.conf
 const mark = rusMinus1.mark
-
-const print = require('/var/task/modules/print.js')
-
-const fs = require('fs')
-
 let models = {}
 const modelFileNames = fs.readdirSync('/var/task/io/models')
 
@@ -17,7 +14,7 @@ modelFileNames.forEach((current, index, array) => {
     /* TODO : these naming assumptions : centralise the documentation */
     if (current[0] != '_' &&
         current.toLowerCase().slice(-3) == '.js') {
-        models[current.slice(0, -3)] = require('/var/task/io/models/' + current)
+        models[current.slice(0, -3)] = import('/var/task/io/models/' + current).default
     }
 } /* , thisArg */ )
 rusMinus1.frameworkDescriptionLogger.callEnds()
@@ -1024,12 +1021,4 @@ ${ await print.inspectInfinity ( subsReport, null, 4) }
     return report
 }
 // (validateRules)
-
-
-module.exports = {
-    validate: validate,
-    validateRules: validateRules,
-    models: models,
-    scopeModel: scopeModel
-}
 mark('LOADED')

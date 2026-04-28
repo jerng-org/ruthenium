@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = process.env.AWS_SAM_LOCAL === 'true' ? 0 : 1
-const _gitCommitMessage = 'txiki.js' 
+const _gitCommitMessage = 'ts2esm migration' 
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
@@ -21,7 +21,7 @@ const _dateTimeFormat = new Intl.DateTimeFormat(
     _dateTimeFormatOptions
 )
 
-module.exports = {
+export default {
 
     app: {
 
@@ -57,8 +57,8 @@ module.exports = {
      *      2 : undefined ... maybe have a hybrid mode
      */
 
-    customLogging: 1,
-    customLoggingAllowsNativeLogging: false,
+    customLogging: 0,
+    customLoggingAllowsNativeLogging: true,
     customLoggingDateTimes: true,
     customLoggingLineTrace: false,
     customLoggingEmoji1: '⬜', //'|', //'🌞',
@@ -316,7 +316,7 @@ module.exports = {
      *      rus.conf.verbosity > 0  && console .log ( stuff, stuff )
      *
      */
-    verbosity: 7,
+    verbosity: 2,
 
 
 }

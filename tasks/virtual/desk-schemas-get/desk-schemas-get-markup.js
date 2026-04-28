@@ -1,12 +1,10 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 //const htmlIndex
 //    = rus.node.fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
 
-const tableInMarkup = require(`/var/task/tasks/virtual/desk-schemas-get/markup-table-in-markup.js`)
+import tableInMarkup from '/var/task/tasks/virtual/desk-schemas-get/markup-table-in-markup.js'
 
 const deskSchemasMarkup = async (data) => {
 
@@ -22,4 +20,5 @@ const deskSchemasMarkup = async (data) => {
 
     return markup
 }
-module.exports = deskSchemasMarkup
+
+export default deskSchemasMarkup;

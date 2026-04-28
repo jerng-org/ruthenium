@@ -1,14 +1,13 @@
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
+import crypto from "crypto";
+
 'use strict'
 
 /*    https://stackoverflow.com/posts/2117523/revisions
  *   
  *    This function my block while it waits for entropy. (?)
  */
-
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
 const mark = rusMinus1.mark 
-const crypto = require('crypto')
-
 const uuid4 = async () => {
 
   rusMinus1.frameworkDescriptionLogger.callStarts()
@@ -24,6 +23,5 @@ const uuid4 = async () => {
   return _returned
 }
 
-module.exports = uuid4
-
+export default uuid4;
 mark('LOADED')

@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 /*  This middleware checks the (route) query parameter, and compares it to
  *  configuration; if (routeValue) is included in (the array of 
  *  sessionExemptedRouteStrings) of matched by at least one of (the array of
@@ -33,6 +32,5 @@ const sessionExemption = async (data) => {
     return data
 }
 
-module.exports = sessionExemption
-
+export default sessionExemption;
 rus.mark('LOADED')

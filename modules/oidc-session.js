@@ -1,11 +1,10 @@
-'use strict'
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
+import cookie from "/var/task/modules/cookie.js";
+import { aDynamoDBDocumentClient, GetCommand, PutCommand } from "/var/task/io/ddb.js";
 
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
+'use strict'
 const conf = rusMinus1.conf
 const mark = rusMinus1.mark
-const cookie = require('/var/task/modules/cookie.js')
-const { aDynamoDBDocumentClient, GetCommand, PutCommand } = require('/var/task/io/ddb.js')
-
 /*  Given any DATA, exerts control over DATA.RU.signals.session;
  *
  */
@@ -210,6 +209,5 @@ const oidcSession = {
     expireSession: expireSession,
 }
 
-module.exports = oidcSession
-
+export default oidcSession;
 mark('LOADED')

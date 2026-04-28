@@ -1,3 +1,9 @@
+import desksGet from "/var/task/tasks/virtual/desks-get.js";
+import desksPatch from "/var/task/tasks/virtual/desks-patch.js";
+import deskSchemasGet from "/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js";
+import deskSchemasPut from "/var/task/tasks/virtual/desk-schemas-put.js";
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 /*  This TASK is special.
@@ -7,28 +13,16 @@
  *
  *
  */
-
-const desksGet = require('/var/task/tasks/virtual/desks-get.js')
-const desksPatch = require('/var/task/tasks/virtual/desks-patch.js')
-
-const deskSchemasGet = require('/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js')
-const deskSchemasPut = require('/var/task/tasks/virtual/desk-schemas-put.js')
-
-const formsMarkupCreateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)
-const formsMarkupReadDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)
-const formsMarkupUpdateDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)
-const formsMarkupDeleteDeskSchema = require(`/var/task/tasks/virtual/forms-get/markup-delete-desk-schema.js`)
-
-const formsMarkupCreateDeskRow = require(`/var/task/tasks/virtual/forms-get/markup-create-desk-row.js`)
-const formsMarkupUpdateDeskRow = require(`/var/task/tasks/virtual/forms-get/markup-update-desk-row.js`)
-
-const rus = require('/var/task/modules/r-u-s.js')
+const formsMarkupCreateDeskSchema = ((`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)).default
+const formsMarkupReadDeskSchema = ((`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)).default
+const formsMarkupUpdateDeskSchema = ((`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)).default
+const formsMarkupDeleteDeskSchema = ((`/var/task/tasks/virtual/forms-get/markup-delete-desk-schema.js`)).default
+const formsMarkupCreateDeskRow = ((`/var/task/tasks/virtual/forms-get/markup-create-desk-row.js`)).default
+const formsMarkupUpdateDeskRow = ((`/var/task/tasks/virtual/forms-get/markup-update-desk-row.js`)).default
+//const patchDeskSchema   = require ( '/var/task/tasks/virtual/patchDeskSchema.js' )
 
 rus.frameworkDescriptionLogger.backlog(`(~/tasks/virtual.js) all (types) are currently manually coded; RECONSIDER.`)
 rus.frameworkDescriptionLogger.backlog(`(~/tasks/virtual.js) (dimensions) may require a bit of restructuring.`)
-
-//const patchDeskSchema   = require ( '/var/task/tasks/virtual/patchDeskSchema.js' )
-
 rus.frameworkDescriptionLogger.fixme(`we should really break up/curry the giant switch-case into a linear pipeline`)
 rus.frameworkDescriptionLogger.backlog(`implement status405, reading linked in comment :`) // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
 
@@ -423,4 +417,4 @@ const virtual = async (data) => {
     return IIFEResult
 }
 
-module.exports = virtual
+export default virtual;

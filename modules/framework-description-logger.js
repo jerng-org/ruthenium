@@ -1,6 +1,6 @@
 'use strict'
 
-const conf = require(`/var/task/configuration.js`)
+import conf from '/var/task/configuration.js'
 
 //////////
 //      //
@@ -183,4 +183,4 @@ if (conf.frameworkDescriptionLogging.length) {
 if (conf.frameworkDescriptionLoggingAutoStart)
     frameworkDescriptionLogger.callStarts()
 
-module.exports = frameworkDescriptionLogger
+export default frameworkDescriptionLogger;

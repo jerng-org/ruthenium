@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
 const lambdaCopyRequestParameters = async (data) => {
@@ -59,6 +58,5 @@ const lambdaCopyRequestParameters = async (data) => {
     return data
 }
 
-module.exports = lambdaCopyRequestParameters
-
+export default lambdaCopyRequestParameters;
 rus.mark('LOADED')

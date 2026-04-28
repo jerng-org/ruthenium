@@ -1,11 +1,10 @@
+import fs from "fs";
+import url from "url";
+import rusMinus1 from '/var/task/modules/r-u-s-minus-1.js'
+
 'use strict'
 
-const rusMinus1 = require(`/var/task/modules/r-u-s-minus-1.js`)
 const mark = rusMinus1.mark 
-
-const fs = require('fs')
-const url = require('url')
-
 //////////
 //      //
 //  !!  //  Make way.
@@ -99,9 +98,9 @@ const rus = {
     //////////
 
     aws: {
-        ddb: require('/var/task/io/ddb.js'),
-        cognito: require(`/var/task/io/cognito-oidc-relying-party.js`),
-        s3: require('/var/task/io/s3.js')
+        ddb: await import('/var/task/io/ddb.js'),
+        cognito: await import('/var/task/io/cognito-oidc-relying-party.js'),
+        s3: await import('/var/task/io/s3.js')
     },
 
     //////////
@@ -110,7 +109,7 @@ const rus = {
     //      //
     //////////
 
-    cookie: require(`/var/task/modules/cookie.js`),
+    cookie: (await import('/var/task/modules/cookie.js')).default,
 
     conf: rusMinus1.conf,
 
@@ -119,17 +118,17 @@ const rus = {
 
     frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,
 
-    html: require('/var/task/modules/html.js'),
+    html: (await import('/var/task/modules/html.js')).default,
 
     http: {
 
-        status400: require('/var/task/tasks/status-400.js'),
-        status401: require('/var/task/tasks/status-401.js'),
-        status403: require('/var/task/tasks/status-403.js'),
-        status404: require('/var/task/tasks/status-404.js'),
-        status409: require('/var/task/tasks/status-409.js'),
-        status500: require('/var/task/tasks/status-500.js'),
-        status501: require('/var/task/tasks/status-501.js'),
+        status400: (await import('/var/task/tasks/status-400.js')).default,
+        status401: (await import('/var/task/tasks/status-401.js')).default,
+        status403: (await import('/var/task/tasks/status-403.js')).default,
+        status404: (await import('/var/task/tasks/status-404.js')).default,
+        status409: (await import('/var/task/tasks/status-409.js')).default,
+        status500: (await import('/var/task/tasks/status-500.js')).default,
+        status501: (await import('/var/task/tasks/status-501.js')).default,
 
     },
     //////////
@@ -138,11 +137,11 @@ const rus = {
     //      //
     //////////
 
-    jsonwebtoken: require('jsonwebtoken'), // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+    jsonwebtoken: (await import('jsonwebtoken')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
-    jwkToPem: require('jwk-to-pem'), // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+    jwkToPem: (await import('jwk-to-pem')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
-    lambdaGitCommit: require('/var/task/io/lambda-git-commit.js'), // LAMBDA LAYERarn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
+    lambdaGitCommit: (await import('/var/task/io/lambda-git-commit.js')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
 
     //////////
     //      //
@@ -234,18 +233,16 @@ const rus = {
 
     node: {
 
-        //childProcess : require('child_process'),
+        fs: await import('fs'),
 
-        fs: require('fs'),
-
-        querystring: require('querystring'),
+        querystring: await import('querystring'),
 
         url: url,
 
-        util: require('util')
+        util: await import('util')
     },
 
-    print: require(`/var/task/modules/print.js`),
+    print: (await import('/var/task/modules/print.js')).default,
 
     //////////
     //      //
@@ -253,7 +250,7 @@ const rus = {
     //      //
     //////////
 
-    oidcSession: require(`/var/task/modules/oidc-session.js`),
+    oidcSession: (await import('/var/task/modules/oidc-session.js')).default,
 
     //////////
     //      //
@@ -283,7 +280,7 @@ const rus = {
     //      //
     //////////
 
-    uuid4: require('/var/task/io/uuid4.js'),
+    uuid4: (await import('/var/task/io/uuid4.js')).default,
 
     //////////
     //      //
@@ -291,7 +288,7 @@ const rus = {
     //      //
     //////////
 
-    validation: require(`/var/task/io/validation.js`),
+    validation: (await import('/var/task/io/validation.js')).default,
 
     /*  VALIDATE_FORM_METHOD
      * 
@@ -379,6 +376,5 @@ const rus = {
 //  !!  //  Make way.
 //      //
 //////////
-
-module.exports = rus
+export default rus;
 mark(`LOADED`)

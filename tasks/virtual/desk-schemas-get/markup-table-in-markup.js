@@ -1,9 +1,6 @@
-const trInTable = require(`/var/task/tasks/virtual/desk-schemas-get/markup-tr-in-table.js`)
+import rus from "/var/task/modules/r-u-s.js";
 
-
-const rus = require('/var/task/modules/r-u-s.js')
-
-
+import trInTable from '/var/task/tasks/virtual/desk-schemas-get/markup-tr-in-table.js'
 const tableInMarkup = async(deskSchemasScan) => {
 
     const markup = `
@@ -59,4 +56,5 @@ const tableInMarkup = async(deskSchemasScan) => {
 
     return markup
 }
-module.exports = tableInMarkup
+
+export default tableInMarkup;

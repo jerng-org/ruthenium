@@ -1,8 +1,7 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
-const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
+import deskSchemasModel from '/var/task/io/models/desk-schemas.js'
 
 const desksPatch = async (data) => {
 
@@ -294,4 +293,5 @@ const desksPatch = async (data) => {
 
     // no need to return (data)
 }
-module.exports = desksPatch
+
+export default desksPatch;

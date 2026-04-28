@@ -1,10 +1,9 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const adminImportCsvToDeskCellsTable = async(data) => {
 
     rus.mark(`EXECUTING ...`)
@@ -669,7 +668,5 @@ r2h1,r2h2
 }
 // manipulate (data.RU), for example
 // no need to return (data)
-
-module.exports = adminImportCsvToDeskCellsTable
-
+export default adminImportCsvToDeskCellsTable;
 rus.mark('LOADED')

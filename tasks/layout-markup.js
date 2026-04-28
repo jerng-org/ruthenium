@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const layoutMarkup = async(data) => {
 
     // get data from ( data.RU.io.layout )
@@ -211,4 +210,4 @@ await rus.appUrl ( [
 
 }
 
-module.exports = layoutMarkup
+export default layoutMarkup;

@@ -1,3 +1,5 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 /*
@@ -5,9 +7,6 @@ object  =>  Object.values ( object )    =>  array       // retains (null), disca
 object  <=  { ... array }               <=  array       // retails (null), 
 
 */
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const asIs = 'asIs'
 const toArrayIndex = 'toArrayIndex'
 const initiateAccumulator = nextKeyObject => {
@@ -342,6 +341,5 @@ const formsReindexNames = async (data) => {
     return data
 }
 
-module.exports = formsReindexNames
-
+export default formsReindexNames;
 rus.mark('LOADED')

@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const innerHtml = async ( DATA, deskCellsByRowID ) => (await Promise.all(Object.keys(deskCellsByRowID).map(
 
     // FOR EACH ROW ...
@@ -81,4 +80,5 @@ const updateDeskRow = async(data) => {
     `
 
 }
-module.exports = updateDeskRow
+
+export default updateDeskRow;

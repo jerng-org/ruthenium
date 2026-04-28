@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 /*  Roughly, this middleware tries to ...
  *
  *  validate                   (data.RU.queryStringParameters.code) ...
@@ -37,8 +36,7 @@ const oidcValidation = async (data) => {
     return data
 }
 
-module.exports = oidcValidation
-
+export default oidcValidation;
 rus.mark('LOADED')
 
 /* SAMPLE:

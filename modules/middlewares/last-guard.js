@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const lastGuard = async (data) => {
 
     rus.frameworkDescriptionLogger.callStarts()
@@ -82,6 +81,6 @@ const lastGuard = async (data) => {
 
     return data
 }
-module.exports = lastGuard
 
+export default lastGuard;
 rus.mark('LOADED')

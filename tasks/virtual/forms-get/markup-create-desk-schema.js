@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const innerHtml = async () => `
 <fieldset>
 
@@ -112,4 +111,5 @@ const createDeskSchema = async ( data ) => {
         }
     `
 }
-module.exports = createDeskSchema
+
+export default createDeskSchema;

@@ -1,7 +1,9 @@
+import { performance } from "perf_hooks";
+
 'use strict'
 
-const conf = require(`/var/task/configuration.js`)
-const customLogger = require(`/var/task/modules/custom-logger.js`)
+import conf from '/var/task/configuration.js'
+import customLogger from '/var/task/modules/custom-logger.js'
 
 const _log = conf.markPerformance ? console.log : _ => _
 
@@ -54,7 +56,6 @@ let preInvocationCPUsum
 //
 //  Measuring wallclock run time.
 //      There exists a similar Web API
-const { performance } = require('perf_hooks')
 let lastTime
 let invocationStartTime
 
@@ -328,7 +329,7 @@ const mark = (!conf.markPerformance) ? _ => _ : async (taskLabel, firstInHandler
 
         '🚩' + taskLabel + '🚩' +
         (
-            (result = err.stack.match(/\n.*\n.*\((.*)\)\n?/)) ?
+            (result = err.stack.match(/\n.*\n(.*)\n?/)) ?
             result[1] :
             err.stack
         )
@@ -339,6 +340,5 @@ const mark = (!conf.markPerformance) ? _ => _ : async (taskLabel, firstInHandler
 
 }
 
-module.exports = mark 
-
+export default mark;
 mark(`LOADED/1st`, true)

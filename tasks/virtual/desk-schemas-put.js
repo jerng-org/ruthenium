@@ -1,8 +1,8 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 /*  CREATES / UPDATES (CLOBBERS) A DESK-SCHEMA */
-
-const rus = require('/var/task/modules/r-u-s.js')
-const deskSchemasModel = require(`/var/task/io/models/desk-schemas.js`)
+import deskSchemasModel from '/var/task/io/models/desk-schemas.js'
 
 const deskSchemasPut = async (data) => {
 
@@ -35,4 +35,5 @@ const deskSchemasPut = async (data) => {
   // View
   data.RU.signals.redirectRoute = 'initial'
 }
-module.exports = deskSchemasPut
+
+export default deskSchemasPut;

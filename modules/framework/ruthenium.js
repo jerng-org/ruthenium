@@ -1,7 +1,7 @@
+import rus from "/var/task/modules/r-u-s.js";
+import reducer from "/var/task/modules/framework/ruthenium-reducer.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 rus.frameworkDescriptionLogger.more(`
 //  Uncertain theoretical proposition about dependency injection :
 //
@@ -16,9 +16,6 @@ rus.frameworkDescriptionLogger.more(`
 //          (~/modules/middlewares/composeResponse.js)  is another injector,
 //              (~/markup/*)                            are its dependencies;             
 `)
-
-const reducer = require('/var/task/modules/framework/ruthenium-reducer.js')
-
 const ruthenium = async (HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE) => {
 
     const frameworkData = {
@@ -84,6 +81,6 @@ const ruthenium = async (HOST_INITIALIZED_DATA, MIDDLEWARE_QUEUE) => {
 
     return finalData
 }
-module.exports = ruthenium
 
+export default ruthenium;
 rus.mark('LOADED')

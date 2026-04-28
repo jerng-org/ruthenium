@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const defaultLayoutTaskName = 'layout'
 
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
@@ -21,14 +20,13 @@ const initMarkupsAndTasks = _ => {
     })
     markupFileNames.forEach((current, index, array) => {
         if (current.isFile()) {
-
-            markups[current.name.slice(0, -3)] = require('/var/task/tasks/' + current.name)
+            markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
         }
     } /* , thisArg */ )
     const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
     taskFileNames.forEach((current, index, array) => {
         if (current.toLowerCase().slice(-3) == '.js') {
-            tasks[current.slice(0, -3)] = require('/var/task/tasks/' + current)
+            tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
         }
     } /* , thisArg */ )
 
@@ -129,7 +127,8 @@ const applyLayout = async (data) => {
             if (data.RU.signals.layoutTaskName) {
                 if (data.RU.signals.layoutTaskName in tasks) {
                     //  Important things happen here, preparing (data.RU.io) for task-markup.
-                    await tasks[data.RU.signals.layoutTaskName](data)
+                    let { default : temp } = await tasks[data.RU.signals.layoutTaskName]
+                    await temp(data)
                 }
                 else { // EXIT POINT 3F1    
                     rus.frameworkDescriptionLogger.callEnds()
@@ -147,8 +146,8 @@ const applyLayout = async (data) => {
                     //  (data.RU.response.body) should have been set in
                     //  (compose-response.js) by this point, so a layout-markup
                     //  CAN refer to it;
-                    data.RU.response.body =
-                        await markups[data.RU.signals.inferredLayoutMarkupName](data)
+                    let { default : temp } = await markups[data.RU.signals.inferredLayoutMarkupName]
+                    data.RU.response.body = await temp(data)
 
                     rus.frameworkDescriptionLogger.callEnds()
                     return data // EXIT POINT 3
@@ -182,6 +181,5 @@ const applyLayout = async (data) => {
 
 }
 
-module.exports = applyLayout
-
+export default applyLayout;
 rus.mark('LOADED')

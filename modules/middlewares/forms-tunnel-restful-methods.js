@@ -1,3 +1,5 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 /*  rewrites the contents of (data.RU.request.http),
@@ -11,9 +13,6 @@
  * 
  *  TODO : check : this appears to do nothing for the time being 
  */
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const formsTunnelRestfulMethods = async (data) => {
 
     rus.frameworkDescriptionLogger.callStarts()
@@ -43,6 +42,6 @@ const formsTunnelRestfulMethods = async (data) => {
     return data
 
 }
-module.exports = formsTunnelRestfulMethods
 
+export default formsTunnelRestfulMethods;
 rus.mark('LOADED')

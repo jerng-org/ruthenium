@@ -1,6 +1,6 @@
 'use strict'
 
-const conf = require(`/var/task/configuration.js`)
+import conf from '/var/task/configuration.js'
 
 //////////
 //      //
@@ -137,5 +137,4 @@ if (conf.customLogging) {
 //  !!  //  Make way.
 //      //
 //////////
-
-module.exports = customLogger
+export default customLogger;

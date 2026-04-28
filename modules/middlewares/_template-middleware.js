@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 //  Provide a debuggable function name, 
 //  in order to avoid debugging (function).toString()
 
@@ -12,5 +11,5 @@ const thisIsMyName = async ( data ) => {
     return data
 }
 
-module.exports = thisIsMyName
+export default thisIsMyName;
 rus.mark (`LOADED`)

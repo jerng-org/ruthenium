@@ -1,3 +1,6 @@
+import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
+import childProcess from "child_process";
+
 'use strict'
 
 /*  WHAT THIS CODE DEMONSTRATES: during the initialization phase of an AWS
@@ -26,12 +29,8 @@ Environmental variable with password
                     :   $GITHUB_JERNG_MACHINES_USER_PASSWORD
 
 */
-
-const rusMinus1 = require('/var/task/modules/r-u-s-minus-1.js')
-
 const conf = rusMinus1.conf
 const mark = rusMinus1.mark
-const childProcess = require('child_process')
 const shellExports = `
     export PATH=$PATH:/opt/git/bin 
     export LD_LIBRARY_PATH=/opt/git/lib
@@ -153,6 +152,23 @@ shell command execution`)
         mark('ATTEMPTING (git clone-s), and commit-directory preparation ...')
 
         // TODO : upgrade this to foreach --recursive 
+        /*
+        console.log(
+            childProcess.execSync(
+                `
+                ${ shellExports }
+                
+                # clear the way in /tmp
+                rm -rf /tmp/* 
+                `, {
+                    encoding: 'utf8',
+                    stdio: conf.nodejs.childProcessStdio,
+                    cwd: '/tmp'
+                }
+            )
+        )
+        console.log(`CLEARED HURDLE`)
+        */
         console.log(
             childProcess.execSync(
                 `
@@ -238,6 +254,5 @@ shell command execution`)
     rusMinus1.frameworkDescriptionLogger.callEnds()
 }
 
-module.exports = lambdaGitCommit
-
+export default lambdaGitCommit;
 mark(`LOADED`)

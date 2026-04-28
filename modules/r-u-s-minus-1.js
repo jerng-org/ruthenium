@@ -1,3 +1,5 @@
+import mark from "/var/task/modules/mark.js";
+
 'use strict'
 
 /*  2022-05-22 this file was developed to resolve circular dependencies in
@@ -7,15 +9,12 @@
  *
  **/
 
-const conf = require(`/var/task/configuration.js`)
+import conf from '/var/task/configuration.js'
+import customLogger from '/var/task/modules/custom-logger.js'
 
-const customLogger = require(`/var/task/modules/custom-logger.js`)
 customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
 
-const mark = require('/var/task/modules/mark.js')
-
-const frameworkDescriptionLogger =
-    require(`/var/task/modules/framework-description-logger.js`)
+import frameworkDescriptionLogger from '/var/task/modules/framework-description-logger.js'
 
 if (conf.frameworkDescriptionLogging.length) {
     frameworkDescriptionLogger.logStarts('r-u-s-minus-1.js / handler INITIALISING')
@@ -31,7 +30,7 @@ if (conf.frameworkDescriptionLogging.length) {
     LogStart,LogRestart,LogLog (custom-logger.js)`)
 }
 
-module.exports = {
+export default {
     conf: conf,
     customLogger: customLogger,
     frameworkDescriptionLogger: frameworkDescriptionLogger,

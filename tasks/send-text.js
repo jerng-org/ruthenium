@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require ( '/var/task/modules/r-u-s.js' )
-
 const sendText = async ( data ) => {
 
     // YOUR CODE HERE
@@ -18,7 +17,5 @@ const sendText = async ( data ) => {
 }
 // manipulate (data.RU), for example
 // no need to return (data)
-
-module.exports = sendText
-
+export default sendText;
 rus.mark('LOADED')

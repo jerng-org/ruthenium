@@ -1,10 +1,9 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
 
 //  Provide a debuggable function name, 
 //  in order to avoid debuggin (function).toString()
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const spaPrototype = async(data) => {
 
     // YOUR CODE HERE
@@ -32,9 +31,7 @@ const spaPrototype = async(data) => {
 }
 // manipulate (data.RU), for example
 // no need to return (data)
-
-module.exports = spaPrototype
-
+export default spaPrototype;
 rus.mark('LOADED')
 
 /*

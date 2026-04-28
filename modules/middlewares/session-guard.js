@@ -1,7 +1,6 @@
+import rus from "/var/task/modules/r-u-s.js";
+
 'use strict'
-
-const rus = require('/var/task/modules/r-u-s.js')
-
 const sessionGuard = async (data) => {
 
     rus.frameworkDescriptionLogger.callStarts()
@@ -26,8 +25,7 @@ const sessionGuard = async (data) => {
     return data
 }
 
-module.exports = sessionGuard
-
+export default sessionGuard;
 rus.mark('LOADED')
 
 //rus.cookie.__HostExpire(data, rus.conf.obfuscations.sessionCookieName)
