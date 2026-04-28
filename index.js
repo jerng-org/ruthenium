@@ -353,7 +353,7 @@ const initCustomRuntimeClient =  async _ => {
 
 try { 
     initLambdaNodeJSHandler() 
-    initCustomRuntimeClient()
+    //initCustomRuntimeClient()
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
