@@ -14,7 +14,7 @@ modelFileNames.forEach((current, index, array) => {
     /* TODO : these naming assumptions : centralise the documentation */
     if (current[0] != '_' &&
         current.toLowerCase().slice(-3) == '.js') {
-        models[current.slice(0, -3)] = import('/var/task/io/models/' + current).default
+        models[current.slice(0, -3)] = import('/var/task/io/models/' + current)
     }
 } /* , thisArg */ )
 rusMinus1.frameworkDescriptionLogger.callEnds()
@@ -32,11 +32,13 @@ const scopeModel = async _modelKey => {
 
     if (typeof _modelKey == 'string') {
 
-        if (_modelKey in models) {
-
-            _currentModel = models[_modelKey]
+        //if (_modelKey in models) {
+        let temp = await models[_modelKey]
+        if ( temp  ) {           
+            _currentModel = temp.default
         }
         else {
+
             rusMinus1.frameworkDescriptionLogger.callEnds()
             throw Error(`(validation.js:scopeModel) the requested 
                                 modelKey (${_modelKey}) was not 
@@ -230,7 +232,14 @@ const validate = async (
     })
 
 ) => {
-
+    /*
+console.error(`VALIDATE()`)    
+console.error(`unscopedData`, unscopedData )
+console.error(`modelKey`, modelKey )
+console.error(`scopedModel`, scopedModel )
+console.error(`keyTrace`, keyTrace )
+console.error(`report`, report )
+*/
     rusMinus1.frameworkDescriptionLogger.callStarts()
     scopedModel = (!scopedModel && modelKey) ? await scopeModel(modelKey) :
         scopedModel
@@ -434,7 +443,13 @@ const validateRules = async (
     shortReport
 
 ) => {
-
+    /*
+console.error(`VALIDATERULES()`)    
+console.error(`scopedDatum`, scopedDatum )
+console.error(`scopedModel`, scopedModel )
+console.error(`keyTrace`, keyTrace )
+console.error(`shortReport`, shortReport )
+*/
     rusMinus1.frameworkDescriptionLogger.callStarts()
     //////////
     //      //
@@ -1021,4 +1036,11 @@ ${ await print.inspectInfinity ( subsReport, null, 4) }
     return report
 }
 // (validateRules)
+export default {
+    validate: validate,
+    validateRules: validateRules,
+    models: models,
+    scopeModel: scopeModel
+}
+
 mark('LOADED')

@@ -13,12 +13,12 @@ import rus from "/var/task/modules/r-u-s.js";
  *
  *
  */
-const formsMarkupCreateDeskSchema = ((`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)).default
-const formsMarkupReadDeskSchema = ((`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)).default
-const formsMarkupUpdateDeskSchema = ((`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)).default
-const formsMarkupDeleteDeskSchema = ((`/var/task/tasks/virtual/forms-get/markup-delete-desk-schema.js`)).default
-const formsMarkupCreateDeskRow = ((`/var/task/tasks/virtual/forms-get/markup-create-desk-row.js`)).default
-const formsMarkupUpdateDeskRow = ((`/var/task/tasks/virtual/forms-get/markup-update-desk-row.js`)).default
+const formsMarkupCreateDeskSchema = (await import(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)).default
+const formsMarkupReadDeskSchema = (await import(`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)).default
+const formsMarkupUpdateDeskSchema = (await import(`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)).default
+const formsMarkupDeleteDeskSchema = (await import(`/var/task/tasks/virtual/forms-get/markup-delete-desk-schema.js`)).default
+const formsMarkupCreateDeskRow = (await import(`/var/task/tasks/virtual/forms-get/markup-create-desk-row.js`)).default
+const formsMarkupUpdateDeskRow = (await import(`/var/task/tasks/virtual/forms-get/markup-update-desk-row.js`)).default
 //const patchDeskSchema   = require ( '/var/task/tasks/virtual/patchDeskSchema.js' )
 
 rus.frameworkDescriptionLogger.backlog(`(~/tasks/virtual.js) all (types) are currently manually coded; RECONSIDER.`)

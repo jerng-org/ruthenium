@@ -1,5 +1,18 @@
 import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
 
+//  1.1.  
+//  Node modules
+import https  from 'https'
+import querystring  from 'querystring'
+
+//  1.2.  
+//  Other modules
+//
+//  Related manuals:
+//  https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
+import jsonwebtoken  from 'jsonwebtoken'
+import jwkToPem  from 'jwk-to-pem'
+
 'use strict'
 const conf = rusMinus1.conf
 const mark = rusMinus1.mark
@@ -36,18 +49,6 @@ const authorizationCodeFlowJwtValidation = async code => {
 
         throw Error(`authorizationCodeFlowJwtValidation: 0. : (code) was falsy`)
     }
-    //  1.1.  
-    //  Node modules
-    const https = require('https')
-    const querystring = require('querystring')
-
-    //  1.2.  
-    //  Other modules
-    //
-    //  Related manuals:
-    //  https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
-    const jsonwebtoken = require('jsonwebtoken')
-    const jwkToPem = require('jwk-to-pem')
 
     //  2.
     //  OAuth : AUTHORISATION SERVER ; OIDC : Issuer

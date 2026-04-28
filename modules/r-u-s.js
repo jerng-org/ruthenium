@@ -99,7 +99,7 @@ const rus = {
 
     aws: {
         ddb: await import('/var/task/io/ddb.js'),
-        cognito: await import('/var/task/io/cognito-oidc-relying-party.js'),
+        cognito: (await import('/var/task/io/cognito-oidc-relying-party.js')).default,
         s3: await import('/var/task/io/s3.js')
     },
 

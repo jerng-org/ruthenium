@@ -7,7 +7,7 @@ const tasks = {}
 const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
 taskFileNames.forEach((current, index, array) => {
     if (current.toLowerCase().slice(-3) == '.js') {
-        tasks[current.slice(0, -3)] = (import('/var/task/tasks/' + current)).default
+        tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
     }
 } /* , thisArg */ )
 
@@ -137,13 +137,15 @@ const router = async (data) => {
     else
     if (data.RU.signals.taskName in tasks) {
 
-        await tasks[data.RU.signals.taskName](data)
+        let { default : temp } = await tasks[data.RU.signals.taskName]
+        await temp(data)
         // Important things happen here, preparing (data.RU.io) for task-markup.
 
     }
     else {
         console.error(`(router.js) Could not find (${ data.RU.signals.taskName  }) in the tasks directory.`)
-        await tasks['status-404'](data)
+        let { default : temp } = await tasks['status-404']
+        await temp(data)
     }
 
     rus.frameworkDescriptionLogger.callEnds()
