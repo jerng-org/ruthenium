@@ -15,7 +15,7 @@ const InitMarkups = _ => {
 
         if (current.isFile()) {
 
-            markups[current.name.slice(0, -3)] = require('/var/task/tasks/' + current.name)
+            markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
         }
     } /* , thisArg */ )
     rus.frameworkDescriptionLogger.callEnds()
@@ -169,7 +169,10 @@ const composeResponse = async (data) => {
     else
 
     if (data.RU.signals.markupName) {
-        if (data.RU.signals.markupName in markups) {
+       
+        let markup = await markups[data.RU.signals.markupName]
+        //if (data.RU.signals.markupName in markups) {
+        if (markup) {
 
             data.RU.response = {}
 
@@ -179,7 +182,7 @@ const composeResponse = async (data) => {
                 headers: {
                     'content-type': 'text/html'
                 },
-                body: await markups[data.RU.signals.markupName](data)
+                body: await markup(data)
             }
         }
         else {
@@ -200,7 +203,9 @@ const composeResponse = async (data) => {
     if (data.RU.signals.taskName) {
         data.RU.signals.inferredMarkupName = data.RU.signals.taskName + '-markup'
 
-        if (data.RU.signals.inferredMarkupName in markups) {
+        let markup = markups[data.RU.signals.inferredMarkupName]
+        //if (data.RU.signals.inferredMarkupName in markups) {
+        if (markup) {
 
             data.RU.response = {}
 
@@ -210,7 +215,7 @@ const composeResponse = async (data) => {
                 headers: {
                     'content-type': 'text/html'
                 },
-                body: await markups[data.RU.signals.inferredMarkupName](data)
+                body: await markup(data)
             }
         }
         else {

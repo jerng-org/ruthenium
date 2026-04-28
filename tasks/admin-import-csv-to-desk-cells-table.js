@@ -15,7 +15,7 @@ const adminImportCsvToDeskCellsTable = async(data) => {
 
     const csvSubmissionFormResponseBody =  async _ => { 
     
-        const deskSchemasModel = require('/var/task/io/models/desk-schemas.js')
+        const deskSchemasModel = await import('/var/task/io/models/desk-schemas.js')
         const namePattern = deskSchemasModel.subs.name.self.rules.regex_test
         
         return `

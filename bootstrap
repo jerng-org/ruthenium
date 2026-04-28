@@ -4,7 +4,7 @@
 # Using the os-only runtime
 
 ## 1. In this example, Node.js's (http) will GET and POST, in a loop 
-./node -e "require('./index')"
+./node ./index.js
 
 ## 2. In this example, the slower BASH script (curl)s GET and POST, in a loop
 #

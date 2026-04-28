@@ -4,8 +4,6 @@ import markup from "/var/task/tasks/virtual/desks-get-markup.js";
 'use strict'
 rus.frameworkDescriptionLogger.fixme(`rendering (-markup.js) should not involve a require() here;`)
 
-// const deskSchemasModel  = require (`/var/task/io/models/desk-schemas.js`)
-
 const desksGet = async (data) => {
 
     const deskName = data.RU.request.queryStringParameters['desk-schema-name'][0]

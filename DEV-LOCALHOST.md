@@ -53,7 +53,7 @@ PROJECT_DIR
     - perform the web login with the Identity Center sso user
     - specifies a (profile), which can be used like this :
         - `aws sts get-caller-identity --profile sam-cli-ruthenium-layers-ABC`
-- `sam build --use-container`
+- `sam build --use-container --cached --template ABC.yaml`
     - `newgrp docker` may be used prior, to assume membership in the (docker) user group
 - `sam local start-api \
     --region us-east-1 \
@@ -119,7 +119,7 @@ build-rutheniumv1devTHEUNICORN:
 	cp -R /tmp/samcli/source/. ${ARTIFACTS_DIR}
     ```
 - the following goes in `./ruthenium/bootstrap`
-    `./node -e "require('./index')"`
+    `./node ./index`
 
 ## delta : `index.js`
 - the following is inserted in index.js after `initLambdaNodeJSHandler()`
