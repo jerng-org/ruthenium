@@ -106,21 +106,26 @@ PROJECT_DIR
 ## delta : `node` binary and `node_modules`
 - chuck the `node` binary in `./ruthenium`
 - cd to `ruthenium`
-    - then run `npm i @aws-sdk/client-dynamodb \
+    - then run
+      ```bash
+      npm i @aws-sdk/client-dynamodb \
                     @aws-sdk/lib-dynamodb \
                     @aws-sdk/client-s3 \
                     jsonwebtoken \
-                    jwk-to-pem \
- 
+                    jwk-to-pem
+      ```
+
  ## delta : new files, for the Custom Runtime                  `
 - the following goes in `./ruthenium/Makefile` (where `build-FUNCTION_NAME`)
     ```
-build-rutheniumv1devTHEUNICORN:
-	cp -R /tmp/samcli/source/. ${ARTIFACTS_DIR}
+    build-rutheniumv1devTHEUNICORN:
+	      cp -R /tmp/samcli/source/. ${ARTIFACTS_DIR}
     ```
 - the following goes in `./ruthenium/bootstrap`
-    `./node ./index`
-
+    ```
+    ./node ./index`
+    ```
+    
 ## delta : `index.js`
 - the following is inserted in index.js after `initLambdaNodeJSHandler()`
     ```
