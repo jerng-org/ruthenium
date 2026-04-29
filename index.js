@@ -304,6 +304,7 @@ const initCustomRuntimeClient =  async _ => {
               while (true) {
                 // 1. GET Request to poll for the next invocation
                 const { event, requestID } = await getNextInvocation()
+                    // context : may be reconstructed from ENV variables
 
                 try {
                   // 2. Process the event (e.g., call your handler)

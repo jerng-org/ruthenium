@@ -24,12 +24,13 @@ PROJECT_DIR
     - ( serverless applicable model ) 
 - AWS's (dynamodb-local) is already containerised on dockerhub
     - `docker pull amazon/dynamodb-local`
-    - `docker run -d \
+    - ```bash
+      docker run -d \
         --name dynamodb-local \
         --network lambda-local \
         -p 8000:8000 \
         amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb
-        `
+      ```
         - LINUX : ensuring (dynamodb-local) and (sam local) can find each other
             on the same network
         - (amazon/dynamodb-local) Docker container run locally on port 8000,
@@ -55,17 +56,18 @@ PROJECT_DIR
         - `aws sts get-caller-identity --profile sam-cli-ruthenium-layers-ABC`
 - `sam build --use-container --cached --template ABC.yaml`
     - `newgrp docker` may be used prior, to assume membership in the (docker) user group
-- `sam local start-api \
+- ```bash
+  sam local start-api \
     --region us-east-1 \
     --profile sam-cli-ruthenium-layers-ABC \
     --log-file logfile.txt \
      --docker-network lambda-local \
-     --warm-containers lazy` \
-    `
+     --warm-containers lazy
+  ```
 
 ## SOURCE ADAPTATION
 - `./ruthenium/io/ddb.js` modified with 
-      ```
+      ```js
       const config = process.env.AWS_SAM_LOCAL === 'true' ? { 
           endpoint : "http://dynamodb-local:8000",
           region : "localhost" /* apparently trivial */
@@ -122,13 +124,13 @@ PROJECT_DIR
 	      cp -R /tmp/samcli/source/. ${ARTIFACTS_DIR}
     ```
 - the following goes in `./ruthenium/bootstrap`
-    ```
+    ```bash
     ./node --input-type=module -e 'import { handler } from "./index.js"'
     ```
 
 ## delta : `index.js`
 - the following is inserted in index.js after `initLambdaNodeJSHandler()`
-    ```
+    ```js
     /* CUSTOM RUNTIME BEGIN */
     ;( async _ => {
         const _handlerIsBootstrap = process.env._HANDLER === 'bootstrap'
@@ -143,6 +145,7 @@ PROJECT_DIR
               while (true) {
                 // 1. GET Request to poll for the next invocation
                 const { event, requestID } = await getNextInvocation()
+                    // context : may be reconstructed from ENV variables
 
                 try {
                   // 2. Process the event (e.g., call your handler)
