@@ -293,6 +293,8 @@ const initCustomRuntimeClient =  async _ => {
         const _handlerIsBootstrap = process.env._HANDLER === 'bootstrap'
         if ( _handlerIsBootstrap ) {
 
+            const { http } = await import('http')
+
             const lambdaRuntimeAPI = process.env.AWS_LAMBDA_RUNTIME_API
             const getURI           = `http://${lambdaRuntimeAPI}/2018-06-01/runtime/invocation/next`
             const postHostname     = lambdaRuntimeAPI.split(':')[0]
@@ -305,7 +307,7 @@ const initCustomRuntimeClient =  async _ => {
 
                 try {
                   // 2. Process the event (e.g., call your handler)
-                  const result = await module.exports.handler(event)
+                  const result = await handler(event)
 
                   // 3. POST Request to send the successful response
                   await sendResponse(requestID, result)
@@ -353,7 +355,7 @@ const initCustomRuntimeClient =  async _ => {
 
 try { 
     initLambdaNodeJSHandler() 
-    //initCustomRuntimeClient()
+    initCustomRuntimeClient()
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
@@ -371,4 +373,5 @@ const handler = async (event, context) => {
 };
 //*/
 
+// For AWS vendored : Node.js client
 export { handler }

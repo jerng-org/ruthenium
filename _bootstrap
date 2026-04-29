@@ -3,8 +3,10 @@
 # Example minimal bootstrap for Node.js
 # Using the os-only runtime
 
+# REMOVE / RENAME this file for the [ AWS vendored Node.js runtime ]
+
 ## 1. In this example, Node.js's (http) will GET and POST, in a loop 
-./node ./index.js
+./node --input-type=module -e 'import { handler } from "./index.js"'
 
 ## 2. In this example, the slower BASH script (curl)s GET and POST, in a loop
 #

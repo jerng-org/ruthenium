@@ -123,9 +123,9 @@ PROJECT_DIR
     ```
 - the following goes in `./ruthenium/bootstrap`
     ```
-    ./node ./index`
+    ./node --input-type=module -e 'import { handler } from "./index.js"'
     ```
-    
+
 ## delta : `index.js`
 - the following is inserted in index.js after `initLambdaNodeJSHandler()`
     ```
@@ -146,7 +146,7 @@ PROJECT_DIR
 
                 try {
                   // 2. Process the event (e.g., call your handler)
-                  const result = await module.exports.handler(event)
+                  const result = await handler(event)
 
                   // 3. POST Request to send the successful response
                   await sendResponse(requestID, result)
