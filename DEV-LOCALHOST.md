@@ -67,13 +67,13 @@ PROJECT_DIR
 
 ## SOURCE ADAPTATION
 - `./ruthenium/io/ddb.js` modified with 
-      ```js
-      const config = process.env.AWS_SAM_LOCAL === 'true' ? { 
+  ```js
+  const config = process.env.AWS_SAM_LOCAL === 'true' ? { 
           endpoint : "http://dynamodb-local:8000",
           region : "localhost" /* apparently trivial */
       } : {}
-      const bareBonesClient = new DynamoDBClient(config)
-      ```
+  const bareBonesClient = new DynamoDBClient(config)
+  ```
 - `configuration.js` must then have 
     - `scheme: process.env.AWS_SAM_LOCAL === 'true' ? 'http' : 'https'`
     - `host: process.env.AWS_SAM_LOCAL === 'true' ? 'localhost:3000' : 'ruthenium-v1.dev.theunicorn.coffee'`
