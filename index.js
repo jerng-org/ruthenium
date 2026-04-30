@@ -294,16 +294,17 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 const initCustomRuntimeClient =  async _ => {
     /* CUSTOM RUNTIME BEGIN */
         if ( rus.conf.platform.lambdaContainerBase == 'AWS_OS_ONLY' ) {
-
+            
+            let http
             switch(conf.platform.javascriptEngine) {
                 case ('NODEJS'): {
-                    const { http } = await import('http')
+                    ({ http } = await import('http'))
                     break
                 }
                 case ('TXIKIJS'): {
                     break
                 }
-                default : { throw new Error('mark.js : branch not implemented') }
+                default : { throw new Error('index.js : branch not implemented') }
             }
 
             const lambdaRuntimeAPI = rus.conf.env.AWS_LAMBDA_RUNTIME_API
@@ -319,10 +320,10 @@ const initCustomRuntimeClient =  async _ => {
 
                 try {
                   // 2. Process the event (e.g., call your handler)
-                  const result = await handler(event)
+                  const lambdaHandlerResponse = await handler(event)
 
                   // 3. POST Request to send the successful response
-                  await sendResponse(requestID, result)
+                  await sendResponse(requestID, lambdaHandlerResponse)
 
                 } catch (error) {
                   // POST Request to report an invocation error
@@ -333,31 +334,59 @@ const initCustomRuntimeClient =  async _ => {
 
             // Helper: GET next invocation event
             async function getNextInvocation() {
-              return new Promise((resolve) => {
-                http.get(getURI, (res) => {
-                  let data = ''
-                  res.on('data', chunk => data += chunk)
-                  res.on('end', () => {
-                    resolve({
-                      event: JSON.parse(data),
-                      requestID: res.headers['lambda-runtime-aws-request-id']
-                    })
-                  })
-                })
-              })
+                switch(conf.platform.javascriptEngine) {
+                    case ('NODEJS'): {
+                        return new Promise((resolve) => {
+                            http.get(getURI, (res) => {
+                            let data = ''
+                            res.on('data', chunk => data += chunk)
+                            res.on('end', () => {
+                                resolve({
+                                event: JSON.parse(data),
+                                requestID: res.headers['lambda-runtime-aws-request-id']
+                                })
+                            })
+                            })
+                        })
+                        break
+                    }
+                    case ('TXIKIJS'): {
+                        const response = await fetch(getURI);
+                        return {
+                            event : await response.json(),
+                            requestID : response.headers.get('lambda-runtime-aws-request-id')
+                        }
+                        break
+                    }
+                    default : { throw new Error('index.js : custom runtime : GET invocation : branch not implemented') }
+                }
             }
 
             // Helper: POST response
-            async function sendResponse(requestID, responseBody) {
-              const options = {
-                hostname: postHostname,
-                port: postPort,
-                path: `/2018-06-01/runtime/invocation/${requestID}/response`,
-                method: 'POST'
-              }
-              const req = http.request(options)
-              req.write(JSON.stringify(responseBody))
-              req.end()
+            async function sendResponse(requestID, lambdaHandlerResponse) {
+                switch(conf.platform.javascriptEngine) {
+                    case ('NODEJS'): {
+                        const options = {
+                            hostname: postHostname,
+                            port: postPort,
+                            path: `/2018-06-01/runtime/invocation/${requestID}/response`,
+                            method: 'POST'
+                        }
+                        const req = http.request(options)
+                        req.write(JSON.stringify(lambdaHandlerResponse))
+                        req.end()
+                        break
+                    }
+                    case ('TXIKIJS'): {
+                        const response = await fetch(`${postHostname}:${postPort}/2018-06-01/runtime/invocation/${requestID}/response`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(lambdaHandlerResponse)
+                        })
+                        break
+                    }
+                    default : { throw new Error('index.js : custom runtime : POST invocation : branch not implemented') }
+                }
             }
             
             await startRuntime()
