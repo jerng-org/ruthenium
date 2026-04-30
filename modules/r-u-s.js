@@ -1,7 +1,20 @@
 import rusMinus1 from '/var/task/modules/r-u-s-minus-1.js'
 
-import fs from "fs";
-import url from "url";
+let fs, querystring, url, util
+
+switch(rusMinus1.conf.platform.javascriptEngine) {
+    case ('NODEJS'): {
+        fs = await import ( "node:fs" )
+        querystring = await import ( "node:querystring")
+        url = await import ( "node:url")
+        util = await import ( "node:util")
+        break
+    }
+    case ('TXIKIJS'): {
+        break
+    }
+    default : { throw new Error('mark.js : branch not implemented') }
+}
 
 const mark = rusMinus1.mark 
 //////////
@@ -232,13 +245,13 @@ const rus = {
 
     node: {
 
-        fs: await import('fs'),
+        fs: fs,
 
-        querystring: await import('querystring'),
+        querystring: querystring,
 
         url: url,
 
-        util: await import('util')
+        util: util 
     },
 
     print: (await import('/var/task/modules/print.js')).default,

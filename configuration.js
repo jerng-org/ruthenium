@@ -280,7 +280,6 @@ export default {
 
             }
         },
-        env : env,
         javascriptEngine : javascriptEngine,
         lambdaContainerBase : lambdaContainerBase, 
         lambdaService : lambdaService, 

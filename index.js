@@ -292,7 +292,16 @@ const initCustomRuntimeClient =  async _ => {
     /* CUSTOM RUNTIME BEGIN */
         if ( rus.conf.platform.lambdaContainerBase == 'AWS_OS_ONLY' ) {
 
-            const { http } = await import('http')
+            switch(conf.platform.javascriptEngine) {
+                case ('NODEJS'): {
+                    const { http } = await import('http')
+                    break
+                }
+                case ('TXIKIJS'): {
+                    break
+                }
+                default : { throw new Error('mark.js : branch not implemented') }
+            }
 
             const lambdaRuntimeAPI = rus.conf.env.AWS_LAMBDA_RUNTIME_API
             const getURI           = `http://${lambdaRuntimeAPI}/2018-06-01/runtime/invocation/next`

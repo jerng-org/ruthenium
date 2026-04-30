@@ -1,7 +1,18 @@
 import conf from '/var/task/configuration.js'
 import customLogger from '/var/task/modules/custom-logger.js'
 
-import { performance } from "perf_hooks";
+let performance
+
+switch(conf.platform.javascriptEngine) {
+    case ('NODEJS'): {
+        performance = (await import( "node:perf_hooks")).performance
+        break
+    }
+    case ('TXIKIJS'): {
+        break
+    }
+    default : { throw new Error('mark.js : branch not implemented') }
+}
 
 const _log = conf.markPerformance ? console.log : _ => _
 
