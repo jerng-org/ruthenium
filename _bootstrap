@@ -10,7 +10,7 @@
 
 ## 2. In this example, txiki.js will GET and POST, in a loop 
 dnf install -y libatomic
-./tjs run --verbose ./index.js
+./tjs run ./index.js
 
 ## 3. In this example, the slower BASH script (curl)s GET and POST, in a loop
 #
