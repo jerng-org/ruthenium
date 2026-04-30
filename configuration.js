@@ -21,11 +21,6 @@ const _dateTimeFormat = new Intl.DateTimeFormat(
 )
 
 // For now : guesswork : perhaps other options in the future
-const lambdaService = process.env.AWS_SAM_LOCAL === '' ? 'AWS_SAM' : 'AWS_CLOUD'
-const lambdaContainerBase = 
-    process.env.AWS_EXECUTION_ENV.startsWith("AWS_Lambda_nodejs") ? 'AWS_NODEJS' : 
-    process.env.AWS_EXECUTION_ENV.includes("provided") ? 'AWS_OS_ONLY' :
-    'UNIDENTIFIED' 
 const javascriptEngine = 
     ( typeof Bun !== 'undefined' ) ? 'BUN' : 
     ( typeof Deno !== 'undefined' ) ? 'DENO' :
@@ -36,6 +31,12 @@ const env =
     javascriptEngine == 'NODEJS' ? process.env :
     javascriptEngine == 'TXIKIJS' ? tjs.env :
     'UNIDENTIFIED'
+    
+const lambdaContainerBase = 
+    env.AWS_EXECUTION_ENV.startsWith("AWS_Lambda_nodejs") ? 'AWS_NODEJS' : 
+    env.AWS_EXECUTION_ENV.includes("provided") ? 'AWS_OS_ONLY' :
+    'UNIDENTIFIED' 
+const lambdaService = env.AWS_SAM_LOCAL === '' ? 'AWS_SAM' : 'AWS_CLOUD'
 
 export default {
 
