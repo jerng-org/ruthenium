@@ -1,9 +1,12 @@
 import rus from '/var/task/modules/r-u-s.js'
 console.log(`LOADED RUS`)
+console.error(`LOADED RUS`)
 import ruthenium from '/var/task/modules/framework/ruthenium.js'
 console.log(`LOADED RUTHENIUM`)
+console.error(`LOADED RUTHENIUM`)
 import middlewares from '/var/task/index-middlewares.js'
 console.log(`LOADED MIDDLEWARES`)
+console.error(`LOADED MIDDLEWARES`)
 
 let handler
 
@@ -396,10 +399,13 @@ const initCustomRuntimeClient =  async _ => {
 
 try { 
     console.log(`TOP OF TRY`)
+    console.error(`TOP OF TRY`)
     initLambdaNodeJSHandler() 
     console.log(`MID OF TRY`)
+    console.error(`MID OF TRY`)
     initCustomRuntimeClient()
     console.log(`BOTTOM OF TRY`)
+    console.error(`BOTTOM OF TRY`)
 }
 catch (e) { console.error(`
 (/var/task/index.js) outer 'try' block.`, e) }
