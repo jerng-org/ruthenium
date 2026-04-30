@@ -10,15 +10,15 @@ const env =
     javascriptEngine == 'TXIKIJS' ? tjs.env :
     'UNIDENTIFIED'
     
-// Dev: easy to find and edit
-const _gitCommit = env.AWS_SAM_LOCAL === 'true' ? 0 : 1
-const _gitCommitMessage = 'refactoring towards txikijs tests' 
-
 const lambdaContainerBase = 
     env?.AWS_EXECUTION_ENV.startsWith("AWS_Lambda_nodejs") ? 'AWS_NODEJS' : 
     env?.AWS_EXECUTION_ENV.includes("provided") ? 'AWS_OS_ONLY' :
     'UNIDENTIFIED' 
 const lambdaService = env.AWS_SAM_LOCAL === 'true' ? 'AWS_SAM' : 'AWS_CLOUD'
+
+// Dev: easy to find and edit
+const _gitCommit = lambdaService == 'AWS_CLOUD' && 1
+const _gitCommitMessage = 'refactoring towards txikijs tests' 
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
