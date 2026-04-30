@@ -76,7 +76,10 @@ let invocationStartTime
 //      `node.process.memoryUsage` keys: rss, heapTotal, heapUsed, external
 //      AWS Lambda: Billed memory seems to include 35-40MB over ['rss'].
 const memoryUsageKey = 'rss'
-let lastMem = process.memoryUsage()[memoryUsageKey]
+let lastMem = 
+conf.platform.javascriptEngine == 'NODEJS'
+    ? process.memoryUsage()[memoryUsageKey]
+    : 'UNIMPLEMENTED'
 // There exists a similar Web API
 
 //
@@ -109,7 +112,10 @@ const mark = (!conf.markPerformance) ? _ => _ : async (taskLabel, firstInHandler
 
     if (newExecutionContext) {
         if (firstInHandler) {
-            const preInvocationCPU = process.cpuUsage()
+            const preInvocationCPU = 
+                conf.platform.javascriptEngine == 'NODEJS'
+                    ? process.cpuUsage()
+                    : 'UNIMPLEMENTED'
             preInvocationCPUsum = preInvocationCPU.user + preInvocationCPU.system
             preInvocationTime = performance.now()
 
@@ -149,7 +155,10 @@ const mark = (!conf.markPerformance) ? _ => _ : async (taskLabel, firstInHandler
     if (firstInHandler) {
         nthInvocation = 0
 
-        const invocationStartCPU = process.cpuUsage()
+        const invocationStartCPU = 
+            conf.platform.javascriptEngine == 'NODEJS'
+                ? process.cpuUsage()
+                : 'UNIMPLEMENTED'
         invocationStartTime = performance.now()
         invocationStartCPUsum = invocationStartCPU.user + invocationStartCPU.system
 
@@ -219,7 +228,11 @@ const mark = (!conf.markPerformance) ? _ => _ : async (taskLabel, firstInHandler
 
         (Math.round(
 
-                ((tempMem = process.memoryUsage()[memoryUsageKey]) -
+                ((tempMem = 
+                    conf.platform.javascriptEngine == 'NODEJS'
+                        ?  process.memoryUsage()[memoryUsageKey]
+                        : 'UNIMPLEMENTED'
+                ) -
                     lastMem)
 
                 /
@@ -254,7 +267,10 @@ const mark = (!conf.markPerformance) ? _ => _ : async (taskLabel, firstInHandler
         '|' +
 
         (Math.round(
-                (dCPUsum = (tempCPU = process.cpuUsage(),
+                (dCPUsum = (tempCPU = 
+                    ( conf.platform.javascriptEngine == 'NODEJS'
+                        ? process.cpuUsage() 
+                        : 'UNIMPLEMENTED' ),
                         tempCPUsum =
                         tempCPU.user +
                         tempCPU.system -
