@@ -1,14 +1,60 @@
 import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import {
+
+let DynamoDBClient, 
+    DynamoDBDocumentClient,
     BatchWriteCommand,
     DeleteCommand,
     GetCommand,
     PutCommand,
     ScanCommand,
     QueryCommand
-} from "@aws-sdk/lib-dynamodb";
+
+switch ( rusMinus1.conf.platform.javascriptEngine ) {
+    case ('NODEJS') : {
+        ({ DynamoDBClient } = await import("@aws-sdk/client-dynamodb"));
+        ({
+            DynamoDBDocumentClient,
+            BatchWriteCommand,
+            DeleteCommand,
+            GetCommand,
+            PutCommand,
+            ScanCommand,
+            QueryCommand
+        } = await import("@aws-sdk/lib-dynamodb"))
+        /*
+        const clientDynamodb = await import( "@aws-sdk/client-dynamodb")
+        { DynamoDBClient } = clientDynamodb
+
+        const libDynamodb = await import( "@aws-sdk/lib-dynamodb")
+        {
+            DynamoDBDocumentClient,
+            BatchWriteCommand,
+            DeleteCommand,
+            GetCommand,
+            PutCommand,
+            ScanCommand,
+            QueryCommand
+        } = libDynamodb
+        */
+        break
+    }
+    case ('TXIKIJS') : {
+        /*
+        { DynamoDBClient } = await import("../node_modules/@aws-sdk/client-dynamodb/dist-es/index.js")
+        {
+            DynamoDBDocumentClient,
+            BatchWriteCommand,
+            DeleteCommand,
+            GetCommand,
+            PutCommand,
+            ScanCommand,
+            QueryCommand
+        } = await import("../node_modules/@aws-sdk/lib-dynamodb/dist-es/index.js")
+        */
+        break
+    }
+    default :  { throw new Error('ddb.js : branch not implemented') }
+}
 
 'use strict'
 const mark = rusMinus1.mark
