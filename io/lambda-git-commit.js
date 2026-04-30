@@ -178,7 +178,7 @@ shell command execution`)
                 rm -rf /tmp/* &&
                 
                 # clone and checkout superproject to /tmp/ruthenium
-                git clone --depth 1 --recurse-submodules --shallow-submodules -b ${ process.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git &&
+                git clone --depth 1 --recurse-submodules --shallow-submodules -b ${ rusMinus1.conf.env.GITHUB_BRANCH } https://github.com/jerng-org/ruthenium.git &&
                 
                 # scaffold a new worktree at /tmp/commit-this, which will later receive files to be committed
                 mkdir /tmp/commit-this &&
@@ -223,7 +223,7 @@ shell command execution`)
                 git submodule foreach --recursive '
                 
                     git add . &&
-                    git checkout -b ${ process.env.GITHUB_BRANCH } &&
+                    git checkout -b ${ rusMinus1.conf.env.GITHUB_BRANCH } &&
                     (   git diff-index --quiet HEAD || 
                         git -c user.name=jerng-machines commit -m "${ _escapedCommitMessage }" 
                         ) &&

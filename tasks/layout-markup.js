@@ -168,11 +168,11 @@ await rus.appUrl ( [
         ${  data.RU.signals.session 
             ?   '' 
             :   '<a href="https://' + 
-                process.env.COGNITO_ISSUER_HOST + 
+                rus.conf.env.COGNITO_ISSUER_HOST + 
                 '/login?client_id=' + 
-                process.env.COGNITO_RELYING_PARTY_ID +
+                rus.conf.env.COGNITO_RELYING_PARTY_ID +
                 '&response_type=code&scope=openid&redirect_uri=' +
-                encodeURIComponent ( process.env.COGNITO_REDIRECT_URI ) +
+                encodeURIComponent ( rus.conf.env.COGNITO_REDIRECT_URI ) +
                 '">Log In</a>' 
         }
         

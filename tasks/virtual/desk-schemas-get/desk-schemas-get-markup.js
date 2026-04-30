@@ -1,8 +1,6 @@
 import rus from "/var/task/modules/r-u-s.js";
 
 'use strict'
-//const htmlIndex
-//    = rus.node.fs.readFileSync ( '/var/task/io/blobs/index.html', { encoding: 'utf8' } )
 
 import tableInMarkup from '/var/task/tasks/virtual/desk-schemas-get/markup-table-in-markup.js'
 

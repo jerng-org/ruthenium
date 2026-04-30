@@ -4,12 +4,30 @@ import rus from "/var/task/modules/r-u-s.js";
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
 //  THIS SECTION IS REDUNDANT WITH (apply-layout.js)
 const tasks = {}
-const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
-taskFileNames.forEach((current, index, array) => {
-    if (current.toLowerCase().slice(-3) == '.js') {
-        tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+let taskFileNames
+switch ( rus.conf.platform.javascriptEngine ) {
+    case ( 'NODEJS' ) : {
+        taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
+        taskFileNames.forEach((current, index, array) => {
+            if (current.toLowerCase().slice(-3) == '.js') {
+                tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+            }
+        } /* , thisArg */ )
+        break
     }
-} /* , thisArg */ )
+    case ( 'TXIKIJS' ) : {
+        taskFileNames = await tjs.readDir('/var/task/tasks')
+        for await (current of taskFileNames){                                                          
+            if (current.toLowerCase().slice(-3) == '.js') {
+                tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+            }
+        }
+        break
+    }
+    default : { 
+        throw new Error ('router.js : branch undefined')
+    }
+}
 
 const router = async (data) => {
 

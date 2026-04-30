@@ -290,12 +290,11 @@ RAW QUERY STRING : ?${arguments[0].rawQueryString}`)
 
 const initCustomRuntimeClient =  async _ => {
     /* CUSTOM RUNTIME BEGIN */
-        const _handlerIsBootstrap = process.env._HANDLER === 'bootstrap'
-        if ( _handlerIsBootstrap ) {
+        if ( rus.conf.platform.lambdaContainerBase == 'AWS_OS_ONLY' ) {
 
             const { http } = await import('http')
 
-            const lambdaRuntimeAPI = process.env.AWS_LAMBDA_RUNTIME_API
+            const lambdaRuntimeAPI = rus.conf.env.AWS_LAMBDA_RUNTIME_API
             const getURI           = `http://${lambdaRuntimeAPI}/2018-06-01/runtime/invocation/next`
             const postHostname     = lambdaRuntimeAPI.split(':')[0]
             const postPort         = lambdaRuntimeAPI.split(':')[1]

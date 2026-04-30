@@ -10,7 +10,7 @@ const lambdaNormalizeFormData = async ( data ) => {
     
     rus.frameworkDescriptionLogger.callStarts()
 
-    const contentTypeKeyString = ( process.env.AWS_SAM_LOCAL === 'true' ? 'Content-Type' : 'content-type' )
+    const contentTypeKeyString = ( rus.conf.platform.lambdaService == 'AWS_SAM' ? 'Content-Type' : 'content-type' )
 
     if (    data.LAMBDA.event.headers
             &&  

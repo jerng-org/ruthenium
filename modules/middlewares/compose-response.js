@@ -5,21 +5,40 @@ import rus from "/var/task/modules/r-u-s.js";
 //  THIS SECTION IS REDUNDANT WITH (apply-layout.js)
 const markups = {}
 
-const InitMarkups = _ => {
+const initMarkups = async _ => {
     rus.frameworkDescriptionLogger.callStarts()
 
-    const markupFileNames = rus.node.fs.readdirSync('/var/task/tasks', {
-        withFileTypes: true
-    })
-    markupFileNames.forEach((current, index, array) => {
+    let markupFileNames 
+    switch ( rus.conf.platform.javascriptEngine ) {
+        case ( 'NODEJS' ) : {
+            markupFileNames = rus.node.fs.readdirSync('/var/task/tasks', {
+                withFileTypes: true
+            })
+            markupFileNames.forEach((current, index, array) => {
 
-        if (current.isFile()) {
+                if (current.isFile()) {
 
-            markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                    markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                }
+            } /* , thisArg */ )
+            break
         }
-    } /* , thisArg */ )
+        case ( 'TXIKIJS' ) : {
+            markupFileNames = await tjs.readDir('/var/task/tasks')
+            for await ( current of markupFileNames ){
+                if (current.isFile) {
+                    markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                }
+            } 
+            break
+        }
+        default : { 
+            throw new Error ('compose-response.js : branch undefined')
+        }
+    }
     rus.frameworkDescriptionLogger.callEnds()
 }
+await initMarkups()
 
 const redirect = async (DATA) => {
 
@@ -203,7 +222,7 @@ const composeResponse = async (data) => {
     if (data.RU.signals.taskName) {
         data.RU.signals.inferredMarkupName = data.RU.signals.taskName + '-markup'
 
-        let markup = markups[data.RU.signals.inferredMarkupName]
+        let markup = await markups[data.RU.signals.inferredMarkupName]
         //if (data.RU.signals.inferredMarkupName in markups) {
         if (markup) {
 

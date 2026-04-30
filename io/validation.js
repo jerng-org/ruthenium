@@ -6,17 +6,36 @@ import fs from "fs";
 const conf = rusMinus1.conf
 const mark = rusMinus1.mark
 let models = {}
-const modelFileNames = fs.readdirSync('/var/task/io/models')
+let modelFileNames 
 
 rusMinus1.frameworkDescriptionLogger.callStarts()
-modelFileNames.forEach((current, index, array) => {
-
-    /* TODO : these naming assumptions : centralise the documentation */
-    if (current[0] != '_' &&
-        current.toLowerCase().slice(-3) == '.js') {
-        models[current.slice(0, -3)] = import('/var/task/io/models/' + current)
+switch ( rusMinus1.conf.platform.javascriptEngine ) {
+    case ( 'NODEJS' ) : {
+        modelFileNames = fs.readdirSync('/var/task/io/models')
+        modelFileNames.forEach((current, index, array) => {
+            /* TODO : these naming assumptions : centralise the documentation */
+            if (current[0] != '_' &&
+                current.toLowerCase().slice(-3) == '.js') {
+                models[current.slice(0, -3)] = import('/var/task/io/models/' + current)
+            }
+        } /* , thisArg */ )
+        break
     }
-} /* , thisArg */ )
+    case ( 'TXIKIJS' ) : {
+        modelFileNames = await tjs.readDir('/var/task/io/models')
+        for await ( current of modelFileNames){                                                           
+            /* TODO : these naming assumptions : centralise the documentation */
+            if (current[0] != '_' &&
+                current.toLowerCase().slice(-3) == '.js') {
+                models[current.slice(0, -3)] = import('/var/task/io/models/' + current)
+            }
+        } 
+        break
+    }
+    default : {
+        throw new Error ('validation.js : branch undefined')
+    }
+}
 rusMinus1.frameworkDescriptionLogger.callEnds()
 
 /*  See validate(), PARAMETER 2 - modelKey

@@ -68,15 +68,15 @@ PROJECT_DIR
 ## SOURCE ADAPTATION
 - `./ruthenium/io/ddb.js` modified with 
   ```js
-  const config = process.env.AWS_SAM_LOCAL === 'true' ? { 
+  const config = rus.conf.platform.lambdaService == 'AWS_SAM' ? { 
           endpoint : "http://dynamodb-local:8000",
           region : "localhost" /* apparently trivial */
       } : {}
   const bareBonesClient = new DynamoDBClient(config)
   ```
 - `configuration.js` must then have 
-    - `scheme: process.env.AWS_SAM_LOCAL === 'true' ? 'http' : 'https'`
-    - `host: process.env.AWS_SAM_LOCAL === 'true' ? 'localhost:3000' : 'ruthenium-v1.dev.theunicorn.coffee'`
+    - `scheme: rus.conf.platform.lambdaService == 'AWS_SAM' ? 'http' : 'https'`
+    - `host: rus.conf.platform.lambdaService == 'AWS_SAM' ? 'localhost:3000' : 'ruthenium-v1.dev.theunicorn.coffee'`
     - `port: null` : so there is still a bug here
 - well-known issue
     - (API Gateway) will automatically base64-encode POST bodies, 
@@ -129,14 +129,15 @@ PROJECT_DIR
     ```
 
 ## delta : `index.js`
-- the following is inserted in index.js after `initLambdaNodeJSHandler()`
+- the following function is called after `initLambdaNodeJSHandler()`
     ```js
+    const initCustomRuntimeClient =  async _ => {
     /* CUSTOM RUNTIME BEGIN */
-    ;( async _ => {
-        const _handlerIsBootstrap = process.env._HANDLER === 'bootstrap'
-        if ( _handlerIsBootstrap ) {
+        if ( rus.conf.platform.lambdaContainerBase == 'AWS_OS_ONLY' ) {
 
-            const lambdaRuntimeAPI = process.env.AWS_LAMBDA_RUNTIME_API
+            const { http } = await import('http')
+
+            const lambdaRuntimeAPI = rus.conf.env.AWS_LAMBDA_RUNTIME_API
             const getURI           = `http://${lambdaRuntimeAPI}/2018-06-01/runtime/invocation/next`
             const postHostname     = lambdaRuntimeAPI.split(':')[0]
             const postPort         = lambdaRuntimeAPI.split(':')[1]
@@ -192,8 +193,8 @@ PROJECT_DIR
             
             await startRuntime()
         }
-    })()
     /* CUSTOM RUNTIME END */
+    }
     ```
 
 # 2026-04-22 : AWS Custom Runtime : Txiki.js installed

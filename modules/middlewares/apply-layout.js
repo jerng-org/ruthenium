@@ -12,27 +12,64 @@ const markups = {}
 //  THIS SECTION IS REDUNDANT WITH (router.js)
 const tasks = {}
 
-const initMarkupsAndTasks = _ => {
+const initMarkupsAndTasks = async _ => {
     rus.frameworkDescriptionLogger.callStarts()
 
-    const markupFileNames = rus.node.fs.readdirSync('/var/task/tasks', {
-        withFileTypes: true
-    })
-    markupFileNames.forEach((current, index, array) => {
-        if (current.isFile()) {
-            markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+    let markupFileNames 
+    switch ( rus.conf.platform.javascriptEngine ) {
+        case ( 'NODEJS' ) : {
+            markupFileNames = rus.node.fs.readdirSync('/var/task/tasks', {
+                withFileTypes: true
+            })
+            markupFileNames.forEach((current, index, array) => {
+                if (current.isFile()) {
+                    markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                }
+            } /* , thisArg */ )
+            break
         }
-    } /* , thisArg */ )
-    const taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
-    taskFileNames.forEach((current, index, array) => {
-        if (current.toLowerCase().slice(-3) == '.js') {
-            tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+        case ( 'TXIKIJS' ) : {
+            markupFileNames = await tjs.readDir('/var/task/tasks')
+            for await (current of markupFileNames){
+                if (current.isFile) {
+                    markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                }
+            } 
+            break
         }
-    } /* , thisArg */ )
+        default : {
+            throw new Error ('apply-layout.js : branch undefined')
+        }
+    }
+    
+    let taskFileNames 
+    switch ( rus.conf.platform.javascriptEngine ) {
+        case ( 'NODEJS' ) : {
+            taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
+            taskFileNames.forEach((current, index, array) => {
+                if (current.toLowerCase().slice(-3) == '.js') {
+                    tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+                }
+            } /* , thisArg */ )
+            break
+        }
+        case ( 'TXIKIJS' ) : {
+            taskFileNames = await tjs.readDir('/var/task/tasks')
+            for await (current of taskFileNames){
+                if (current.toLowerCase().slice(-3) == '.js') {
+                    tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+                }
+            } 
+            break
+        }
+        default : { 
+            throw new Error ('apply-layout.js : branch undefined')
+        }
+    }
 
     rus.frameworkDescriptionLogger.callEnds()
 }
-initMarkupsAndTasks()
+await initMarkupsAndTasks()
 
 /*  SUMMARY:    (apply-layout.js) will take (data.RU.response.body) and replace it
  *              with a LAYOUT MARKUP which includes whatever was previously in

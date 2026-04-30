@@ -66,7 +66,7 @@ const translateConfig = { marshallOptions, unmarshallOptions }
 
 // (Option A) This imports the "bare-bones" client
 //*
-const config = process.env.AWS_SAM_LOCAL === 'true' ? { 
+const config = rusMinus1.conf.platform.lambdaService == 'AWS_SAM' ? { 
     endpoint : "http://dynamodb-local:8000",
     region : "localhost" /* apparently trivial */
 } : {}

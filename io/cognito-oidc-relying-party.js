@@ -62,16 +62,16 @@ const authorizationCodeFlowJwtValidation = async code => {
 
     //  2.2.
     //  OIDC Discovery : JSON Web Key : https://tools.ietf.org/html/draft-ietf-jose-json-web-key-41
-    const issuerJwksUri = process.env.COGNITO_JWKS_URI
+    const issuerJwksUri = rus.conf.env.COGNITO_JWKS_URI
 
     //  2.3.
     //  OIDC redirect_url
-    const issuerRedirectUri = process.env.COGNITO_REDIRECT_URI
+    const issuerRedirectUri = rus.conf.env.COGNITO_REDIRECT_URI
 
     //  3.
     //  OIDC Relying Party (RP) / Client Application / theu.coffee;
-    const relyingPartyId = process.env.COGNITO_RELYING_PARTY_ID
-    const relyingPartySecret = process.env.COGNITO_RELYING_PARTY_SECRET
+    const relyingPartyId = rus.conf.env.COGNITO_RELYING_PARTY_ID
+    const relyingPartySecret = rus.conf.env.COGNITO_RELYING_PARTY_SECRET
 
     //  4.
     //  OAuth : Access Token, ID Token, Refresh Token
@@ -83,7 +83,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  UPSTREAM_FROM > https.request() > issuerExchangeRequest;
     const issuerExchangeRequestOptions = {
         protocol: 'https:',
-        hostname: process.env.COGNITO_ISSUER_HOST, // 2. OAuth : AUTHORISATION SERVER ; OIDC : Issuer;
+        hostname: rus.conf.env.COGNITO_ISSUER_HOST, // 2. OAuth : AUTHORISATION SERVER ; OIDC : Issuer;
         port: 443,
         path: '/oauth2/token',
         method: 'POST',

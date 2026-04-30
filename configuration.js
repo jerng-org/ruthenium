@@ -1,7 +1,7 @@
 'use strict'
 // Dev: easy to find and edit
 const _gitCommit = process.env.AWS_SAM_LOCAL === 'true' ? 0 : 1
-const _gitCommitMessage = 'debugging os-only-runtime initialisation' 
+const _gitCommitMessage = 'refactoring towards txikijs tests' 
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
@@ -21,17 +21,34 @@ const _dateTimeFormat = new Intl.DateTimeFormat(
     _dateTimeFormatOptions
 )
 
+// For now : guesswork : perhaps other options in the future
+const lambdaService = process.env.AWS_SAM_LOCAL === '' ? 'AWS_SAM' : 'AWS_CLOUD'
+const lambdaContainerBase = 
+    process.env.AWS_EXECUTION_ENV.startsWith("AWS_Lambda_nodejs") ? 'AWS_NODEJS' : 
+    process.env.AWS_EXECUTION_ENV.includes("provided") ? 'AWS_OS_ONLY' :
+    'UNIDENTIFIED' 
+const javascriptEngine = 
+    ( typeof Bun !== 'undefined' ) ? 'BUN' : 
+    ( typeof Deno !== 'undefined' ) ? 'DENO' :
+    ( typeof tjs !== 'undefined' ) ? 'TXIKIJS' :
+    ( typeof process !== 'undefined' ) ? 'NODEJS' :
+    'UNIDENTIFIED'
+const env = 
+    javascriptEngine == 'NODEJS' ? process.env :
+    javascriptEngine == 'TXIKIJS' ? tjs.env :
+    'UNIDENTIFIED'
+
 export default {
 
     app: {
 
         uri: {
 
-            scheme: process.env.AWS_SAM_LOCAL === 'true' ? 'http' : 'https',
+            scheme: lambdaService == 'AWS_SAM' ? 'http' : 'https',
 
             authority: {
                 userinfo: null,
-                host: process.env.AWS_SAM_LOCAL === 'true' ? 'localhost:3000' : 'ruthenium-v1.dev.theunicorn.coffee',
+                host: lambdaService == 'AWS_SAM' ? 'localhost:3000' : 'ruthenium-v1.dev.theunicorn.coffee',
                 port: null /* TODO */
             },
 
@@ -94,6 +111,8 @@ export default {
         }
 
     },
+
+    env : env,
 
     /*  faultTolerance:
      *
@@ -261,7 +280,11 @@ export default {
                 ttlKey: 'exp'
 
             }
-        }
+        },
+        env : env,
+        javascriptEngine : javascriptEngine,
+        lambdaContainerBase : lambdaContainerBase, 
+        lambdaService : lambdaService, 
     },
 
     /*  session exempted routes
