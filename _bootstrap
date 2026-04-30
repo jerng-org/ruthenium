@@ -6,9 +6,13 @@
 # REMOVE / RENAME this file for the [ AWS vendored Node.js runtime ]
 
 ## 1. In this example, Node.js's (http) will GET and POST, in a loop 
-./node --input-type=module -e 'import { handler } from "./index.js"'
+#./node --input-type=module -e 'import { handler } from "./index.js"'
 
-## 2. In this example, the slower BASH script (curl)s GET and POST, in a loop
+## 2. In this example, txiki.js will GET and POST, in a loop 
+dnf install -y libatomic
+./tjs run ./index.js
+
+## 3. In this example, the slower BASH script (curl)s GET and POST, in a loop
 #
 #while true
 #do
