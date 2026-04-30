@@ -12,7 +12,7 @@ const env =
     
 const lambdaContainerBase = 
     env?.AWS_EXECUTION_ENV?.startsWith("AWS_Lambda_nodejs") ? 'AWS_NODEJS' : 
-    env?.AWS_EXECUTION_ENV.includes("provided") ? 'AWS_OS_ONLY' :
+    env?.AWS_EXECUTION_ENV?.includes("provided") ? 'AWS_OS_ONLY' :
     'UNIDENTIFIED' 
 const lambdaService = env.AWS_SAM_LOCAL === 'true' ? 'AWS_SAM' : 'AWS_CLOUD'
 
