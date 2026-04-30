@@ -12,7 +12,7 @@ const env =
     
 const lambdaContainerBase = 
     env?.AWS_EXECUTION_ENV?.startsWith("AWS_Lambda_nodejs") ? 'AWS_NODEJS' : 
-    env?.AWS_EXECUTION_ENV?.includes("provided") ? 'AWS_OS_ONLY' :
+    env?.AWS_EXECUTION_ENV.includes("provided") ? 'AWS_OS_ONLY' :
     'UNIDENTIFIED' 
 const lambdaService = env.AWS_SAM_LOCAL === 'true' ? 'AWS_SAM' : 'AWS_CLOUD'
 
@@ -33,10 +33,11 @@ const _dateTimeFormatOptions = {
     timeZoneName: 'short',
     timeZone: _ianaTimeZone
 }
-const _dateTimeFormat = new Intl.DateTimeFormat(
-    _dateTimeFormatBcp47Tag,
-    _dateTimeFormatOptions
-)
+const _dateTimeFormat =  javascriptEngine == 'NODEJS' 
+    ? new Intl.DateTimeFormat(
+        _dateTimeFormatBcp47Tag,
+        _dateTimeFormatOptions)
+    : { format : a => a }  
 
 export default {
 
