@@ -21,7 +21,7 @@ switch ( rus.conf.platform.javascriptEngine ) {
     }
     case ( 'TXIKIJS' ) : {
         blobFileNames = await tjs.readDir('/var/task/io/blobs')
-        for await (current in blobFileNames) {
+        for await (current of blobFileNames) {
             blobs[ current ] = await tjs.readFile ( '/var/task/io/blobs/' + current)
         }  
         break
