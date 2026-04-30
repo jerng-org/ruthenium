@@ -1,6 +1,24 @@
+// For now : guesswork : perhaps other options in the future
+const javascriptEngine = 
+    ( typeof Bun !== 'undefined' ) ? 'BUN' : 
+    ( typeof Deno !== 'undefined' ) ? 'DENO' :
+    ( typeof tjs !== 'undefined' ) ? 'TXIKIJS' :
+    ( typeof process !== 'undefined' ) ? 'NODEJS' :
+    'UNIDENTIFIED'
+const env = 
+    javascriptEngine == 'NODEJS' ? process.env :
+    javascriptEngine == 'TXIKIJS' ? tjs.env :
+    'UNIDENTIFIED'
+    
 // Dev: easy to find and edit
-const _gitCommit = process.env.AWS_SAM_LOCAL === 'true' ? 0 : 1
+const _gitCommit = env.AWS_SAM_LOCAL === 'true' ? 0 : 1
 const _gitCommitMessage = 'refactoring towards txikijs tests' 
+
+const lambdaContainerBase = 
+    env.AWS_EXECUTION_ENV.startsWith("AWS_Lambda_nodejs") ? 'AWS_NODEJS' : 
+    env.AWS_EXECUTION_ENV.includes("provided") ? 'AWS_OS_ONLY' :
+    'UNIDENTIFIED' 
+const lambdaService = env.AWS_SAM_LOCAL === '' ? 'AWS_SAM' : 'AWS_CLOUD'
 
 const _ianaTimeZone = 'Asia/Kuala_Lumpur'
 const _dateTimeFormatBcp47Tag = 'sv'
@@ -19,24 +37,6 @@ const _dateTimeFormat = new Intl.DateTimeFormat(
     _dateTimeFormatBcp47Tag,
     _dateTimeFormatOptions
 )
-
-// For now : guesswork : perhaps other options in the future
-const javascriptEngine = 
-    ( typeof Bun !== 'undefined' ) ? 'BUN' : 
-    ( typeof Deno !== 'undefined' ) ? 'DENO' :
-    ( typeof tjs !== 'undefined' ) ? 'TXIKIJS' :
-    ( typeof process !== 'undefined' ) ? 'NODEJS' :
-    'UNIDENTIFIED'
-const env = 
-    javascriptEngine == 'NODEJS' ? process.env :
-    javascriptEngine == 'TXIKIJS' ? tjs.env :
-    'UNIDENTIFIED'
-    
-const lambdaContainerBase = 
-    env.AWS_EXECUTION_ENV.startsWith("AWS_Lambda_nodejs") ? 'AWS_NODEJS' : 
-    env.AWS_EXECUTION_ENV.includes("provided") ? 'AWS_OS_ONLY' :
-    'UNIDENTIFIED' 
-const lambdaService = env.AWS_SAM_LOCAL === '' ? 'AWS_SAM' : 'AWS_CLOUD'
 
 export default {
 
