@@ -1,6 +1,6 @@
+import conf from '/var/task/configuration.js'
 import mark from "/var/task/modules/mark.js";
-
-'use strict'
+import customLogger from '/var/task/modules/custom-logger.js'
 
 /*  2022-05-22 this file was developed to resolve circular dependencies in
  *  'r-u-s.js'. The naming of this file as 'r-u-s-minus-1.js' 
@@ -8,9 +8,6 @@ import mark from "/var/task/modules/mark.js";
  *  'r-u-s-minus-2.js' etc.
  *
  **/
-
-import conf from '/var/task/configuration.js'
-import customLogger from '/var/task/modules/custom-logger.js'
 
 customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
 

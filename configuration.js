@@ -1,4 +1,3 @@
-'use strict'
 // Dev: easy to find and edit
 const _gitCommit = process.env.AWS_SAM_LOCAL === 'true' ? 0 : 1
 const _gitCommitMessage = 'refactoring towards txikijs tests' 
@@ -242,7 +241,7 @@ export default {
      *      2   :   undefined, as yet
      *
      */
-    markPerformance: 1,
+    markPerformance: 0,
 
     /*  https://nodejs.org/api/child_process.html#optionsstdio
      */

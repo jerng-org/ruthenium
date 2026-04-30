@@ -1,8 +1,7 @@
-import fs from "fs";
-import url from "url";
 import rusMinus1 from '/var/task/modules/r-u-s-minus-1.js'
 
-'use strict'
+import fs from "fs";
+import url from "url";
 
 const mark = rusMinus1.mark 
 //////////

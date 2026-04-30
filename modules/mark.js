@@ -1,9 +1,7 @@
-import { performance } from "perf_hooks";
-
-'use strict'
-
 import conf from '/var/task/configuration.js'
 import customLogger from '/var/task/modules/custom-logger.js'
+
+import { performance } from "perf_hooks";
 
 const _log = conf.markPerformance ? console.log : _ => _
 
