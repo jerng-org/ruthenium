@@ -124,7 +124,6 @@ const rus = {
     //      //
     //////////
 
-    // CRASHY 
     cookie: (await import('/var/task/modules/cookie.js')).default,
 
     conf: rusMinus1.conf,
@@ -134,12 +133,10 @@ const rus = {
 
     frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,
 
-    // CRASHY 
     html: (await import('/var/task/modules/html.js')).default,
 
     http: {
 
-        // CRASHY 
         status400: (await import('/var/task/tasks/status-400.js')).default,
         status401: (await import('/var/task/tasks/status-401.js')).default,
         status403: (await import('/var/task/tasks/status-403.js')).default,
@@ -161,7 +158,6 @@ const rus = {
     // CRASHY 
     //jwkToPem: (await import('jwk-to-pem')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
-    // CRASHY 
     lambdaGitCommit: (await import('/var/task/io/lambda-git-commit.js')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
 
     //////////
