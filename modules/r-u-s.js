@@ -124,7 +124,8 @@ const rus = {
     //      //
     //////////
 
-    cookie: (await import('/var/task/modules/cookie.js')).default,
+    // CRASHY 
+//    cookie: (await import('/var/task/modules/cookie.js')).default,
 
     conf: rusMinus1.conf,
 
@@ -133,17 +134,19 @@ const rus = {
 
     frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,
 
-    html: (await import('/var/task/modules/html.js')).default,
+    // CRASHY 
+//    html: (await import('/var/task/modules/html.js')).default,
 
     http: {
 
-        status400: (await import('/var/task/tasks/status-400.js')).default,
-        status401: (await import('/var/task/tasks/status-401.js')).default,
-        status403: (await import('/var/task/tasks/status-403.js')).default,
-        status404: (await import('/var/task/tasks/status-404.js')).default,
-        status409: (await import('/var/task/tasks/status-409.js')).default,
-        status500: (await import('/var/task/tasks/status-500.js')).default,
-        status501: (await import('/var/task/tasks/status-501.js')).default,
+    // CRASHY 
+//        status400: (await import('/var/task/tasks/status-400.js')).default,
+//        status401: (await import('/var/task/tasks/status-401.js')).default,
+//        status403: (await import('/var/task/tasks/status-403.js')).default,
+//        status404: (await import('/var/task/tasks/status-404.js')).default,
+//        status409: (await import('/var/task/tasks/status-409.js')).default,
+//        status500: (await import('/var/task/tasks/status-500.js')).default,
+//        status501: (await import('/var/task/tasks/status-501.js')).default,
 
     },
     //////////

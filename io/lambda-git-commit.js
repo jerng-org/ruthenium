@@ -1,7 +1,23 @@
 import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
-import childProcess from "child_process";
 
-'use strict'
+const conf = rusMinus1.conf
+const mark = rusMinus1.mark
+const shellExports = `
+    export PATH=$PATH:/opt/git/bin 
+    export LD_LIBRARY_PATH=/opt/git/lib`
+
+let childProcess 
+
+switch(conf.platform.javascriptEngine) {
+    case ('NODEJS'): {
+        childProcess = await import( "node:child_process")
+        break
+    }
+    case ('TXIKIJS'): {
+        break
+    }
+    default : { throw new Error('lambda-git-commit.js : branch not implemented') }
+}
 
 /*  WHAT THIS CODE DEMONSTRATES: during the initialization phase of an AWS
     Lambda function's invocation ... you can commit the Deployment Package
@@ -29,12 +45,6 @@ Environmental variable with password
                     :   $GITHUB_JERNG_MACHINES_USER_PASSWORD
 
 */
-const conf = rusMinus1.conf
-const mark = rusMinus1.mark
-const shellExports = `
-    export PATH=$PATH:/opt/git/bin 
-    export LD_LIBRARY_PATH=/opt/git/lib
-    `
 /*  2023-08-30 : based on lambda layer
         "arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:11"
 
