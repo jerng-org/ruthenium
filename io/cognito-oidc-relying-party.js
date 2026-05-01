@@ -2,18 +2,27 @@ import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
 
 //  1.1.  
 //  Node modules
-import https  from 'https'
-import querystring  from 'querystring'
+let querystring, https 
 
+switch(rusMinus1.conf.platform.javascriptEngine) {
+    case ('NODEJS'): {
+        querystring = await import ( "node:querystring")
+        https = await import ( "node:https")
+        break
+    }
+    case ('TXIKIJS'): {
+        break
+    }
+    default : { throw new Error('cognito-oidc-relying-party.js : branch not implemented') }
+}
 //  1.2.  
 //  Other modules
 //
 //  Related manuals:
 //  https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
-import jsonwebtoken  from 'jsonwebtoken'
-import jwkToPem  from 'jwk-to-pem'
+import jsonwebtoken  from '../node_modules/jsonwebtoken/index.js'
+import jwkToPem  from '../node_modules/jwk-to-pem/src/jwk-to-pem.js'
 
-'use strict'
 const conf = rusMinus1.conf
 const mark = rusMinus1.mark
 

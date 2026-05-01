@@ -13,7 +13,7 @@ switch(rusMinus1.conf.platform.javascriptEngine) {
     case ('TXIKIJS'): {
         break
     }
-    default : { throw new Error('mark.js : branch not implemented') }
+    default : { throw new Error('r-u-s.js : branch not implemented') }
 }
 
 const mark = rusMinus1.mark 
@@ -110,8 +110,11 @@ const rus = {
     //////////
 
     aws: {
+        // CRASHY 
         ddb: await import('/var/task/io/ddb.js'),
+        // CRASHY : uses jsonwebtoken which seems to be CJS
         cognito: (await import('/var/task/io/cognito-oidc-relying-party.js')).default,
+        // CRASHY 
         s3: await import('/var/task/io/s3.js')
     },
 
@@ -121,6 +124,7 @@ const rus = {
     //      //
     //////////
 
+    // CRASHY 
     cookie: (await import('/var/task/modules/cookie.js')).default,
 
     conf: rusMinus1.conf,
@@ -130,10 +134,12 @@ const rus = {
 
     frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,
 
+    // CRASHY 
     html: (await import('/var/task/modules/html.js')).default,
 
     http: {
 
+        // CRASHY 
         status400: (await import('/var/task/tasks/status-400.js')).default,
         status401: (await import('/var/task/tasks/status-401.js')).default,
         status403: (await import('/var/task/tasks/status-403.js')).default,
@@ -149,10 +155,13 @@ const rus = {
     //      //
     //////////
 
+    // CRASHY 
     jsonwebtoken: (await import('jsonwebtoken')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
+    // CRASHY 
     jwkToPem: (await import('jwk-to-pem')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
+    // CRASHY 
     lambdaGitCommit: (await import('/var/task/io/lambda-git-commit.js')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
 
     //////////
@@ -254,6 +263,7 @@ const rus = {
         util: util 
     },
 
+    // CRASHY 
     print: (await import('/var/task/modules/print.js')).default,
 
     //////////
@@ -262,6 +272,7 @@ const rus = {
     //      //
     //////////
 
+    // CRASHY 
     oidcSession: (await import('/var/task/modules/oidc-session.js')).default,
 
     //////////
@@ -292,6 +303,7 @@ const rus = {
     //      //
     //////////
 
+    // CRASHY  : crypto
     uuid4: (await import('/var/task/io/uuid4.js')).default,
 
     //////////
@@ -300,6 +312,7 @@ const rus = {
     //      //
     //////////
 
+    // CRASHY  : fs 
     validation: (await import('/var/task/io/validation.js')).default,
 
     /*  VALIDATE_FORM_METHOD
