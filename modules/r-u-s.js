@@ -111,11 +111,11 @@ const rus = {
 
     aws: {
         // CRASHY 
-        ddb: await import('/var/task/io/ddb.js'),
+        //ddb: await import('/var/task/io/ddb.js'),
         // CRASHY : uses jsonwebtoken which seems to be CJS
-        cognito: (await import('/var/task/io/cognito-oidc-relying-party.js')).default,
+        //cognito: (await import('/var/task/io/cognito-oidc-relying-party.js')).default,
         // CRASHY 
-        s3: await import('/var/task/io/s3.js')
+        //s3: await import('/var/task/io/s3.js')
     },
 
     //////////
@@ -156,10 +156,10 @@ const rus = {
     //////////
 
     // CRASHY 
-    jsonwebtoken: (await import('jsonwebtoken')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+    //jsonwebtoken: (await import('jsonwebtoken')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
     // CRASHY 
-    jwkToPem: (await import('jwk-to-pem')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+    //jwkToPem: (await import('jwk-to-pem')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
     // CRASHY 
     lambdaGitCommit: (await import('/var/task/io/lambda-git-commit.js')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
@@ -273,7 +273,7 @@ const rus = {
     //////////
 
     // CRASHY 
-    oidcSession: (await import('/var/task/modules/oidc-session.js')).default,
+    //oidcSession: (await import('/var/task/modules/oidc-session.js')).default,
 
     //////////
     //      //
@@ -304,7 +304,7 @@ const rus = {
     //////////
 
     // CRASHY  : crypto
-    uuid4: (await import('/var/task/io/uuid4.js')).default,
+    //uuid4: (await import('/var/task/io/uuid4.js')).default,
 
     //////////
     //      //
@@ -313,7 +313,7 @@ const rus = {
     //////////
 
     // CRASHY  : fs 
-    validation: (await import('/var/task/io/validation.js')).default,
+    //validation: (await import('/var/task/io/validation.js')).default,
 
     /*  VALIDATE_FORM_METHOD
      * 
