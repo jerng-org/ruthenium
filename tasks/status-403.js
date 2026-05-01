@@ -1,6 +1,6 @@
 'use strict'
 
-import rusMinus1 from '/var/task/modules/r-u-s-minus-1.js'
+import rusMinus1 from '../modules/r-u-s-minus-1.js'
 const mark =rusMinus1.mark
 
 const status403 = async ( data ) => {

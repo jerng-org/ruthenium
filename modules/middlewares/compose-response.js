@@ -1,4 +1,4 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../modules/r-u-s.js";
 
 'use strict'
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
@@ -18,7 +18,7 @@ const initMarkups = async _ => {
 
                 if (current.isFile()) {
 
-                    markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                    markups[current.name.slice(0, -3)] = import('../../tasks/' + current.name)
                 }
             } /* , thisArg */ )
             break
@@ -27,7 +27,7 @@ const initMarkups = async _ => {
             markupFileNames = await tjs.readDir('/var/task/tasks')
             for await ( current of markupFileNames ){
                 if (current.isFile) {
-                    markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                    markups[current.name.slice(0, -3)] = import('../../tasks/' + current.name)
                 }
             } 
             break

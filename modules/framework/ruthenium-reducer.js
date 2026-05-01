@@ -1,4 +1,4 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../modules/r-u-s.js";
 
 'use strict'
     rus.frameworkDescriptionLogger.more(`ruthenium-reducer.js: We're using (Function.name) here,

@@ -1,4 +1,4 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../modules/r-u-s.js";
 
 'use strict'
 /*  This middleware checks the (route) query parameter, and compares it to

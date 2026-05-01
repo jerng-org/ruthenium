@@ -1,4 +1,4 @@
-import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
+import rusMinus1 from "../modules/r-u-s-minus-1.js";
 
 'use strict'
 const conf = rusMinus1.conf

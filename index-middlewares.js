@@ -1,45 +1,45 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "./modules/r-u-s.js";
 
 'use strict'
 // PROJECT - MIDDLEWARES, lexical order 
 
-import applyLayout from '/var/task/modules/middlewares/apply-layout.js'
+import applyLayout from './modules/middlewares/apply-layout.js'
 
-import composeResponse from '/var/task/modules/middlewares/compose-response.js'
+import composeResponse from './modules/middlewares/compose-response.js'
 
-import formsReindexNames from '/var/task/modules/middlewares/forms-reindex-names.js'
+import formsReindexNames from './modules/middlewares/forms-reindex-names.js'
 
-import formsTunnelRestfulMethods from '/var/task/modules/middlewares/forms-tunnel-restful-methods.js'
+import formsTunnelRestfulMethods from './modules/middlewares/forms-tunnel-restful-methods.js'
 
-import formsValidateData from '/var/task/modules/middlewares/forms-validate-data.js'
+import formsValidateData from './modules/middlewares/forms-validate-data.js'
 
-import lastGuard from '/var/task/modules/middlewares/last-guard.js'
+import lastGuard from './modules/middlewares/last-guard.js'
 
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
-import lambdaCopyRequestParameters from '/var/task/modules/middlewares/lambda-copy-request-parameters.js'
+import lambdaCopyRequestParameters from './modules/middlewares/lambda-copy-request-parameters.js'
 
-import lambdaLoadMetadata from '/var/task/modules/middlewares/lambda-load-metadata.js'
+import lambdaLoadMetadata from './modules/middlewares/lambda-load-metadata.js'
 
-import lambdaNormalizeFormData from '/var/task/modules/middlewares/lambda-normalize-form-data.js'
+import lambdaNormalizeFormData from './modules/middlewares/lambda-normalize-form-data.js'
 
-import lambdaNormalizeHeaders from '/var/task/modules/middlewares/lambda-normalize-headers.js'
+import lambdaNormalizeHeaders from './modules/middlewares/lambda-normalize-headers.js'
 
-import lambdaNormalizeQueryStringParameters from '/var/task/modules/middlewares/lambda-normalize-query-string-parameters.js'
+import lambdaNormalizeQueryStringParameters from './modules/middlewares/lambda-normalize-query-string-parameters.js'
 
-import oidcValidation from '/var/task/modules/middlewares/oidc-validation.js'
+import oidcValidation from './modules/middlewares/oidc-validation.js'
 
-import returnResponse from '/var/task/modules/middlewares/return-response.js'
+import returnResponse from './modules/middlewares/return-response.js'
 
-import router from '/var/task/modules/middlewares/router.js'
+import router from './modules/middlewares/router.js'
 
-import sessionExemption from '/var/task/modules/middlewares/session-exemption.js'
+import sessionExemption from './modules/middlewares/session-exemption.js'
 
-import sessionGuard from '/var/task/modules/middlewares/session-guard.js'
+import sessionGuard from './modules/middlewares/session-guard.js'
 
-import setOidcSession from '/var/task/modules/middlewares/set-oidc-session.js'
+import setOidcSession from './modules/middlewares/set-oidc-session.js'
 
-import setCookies from '/var/task/modules/middlewares/set-cookies.js'
+import setCookies from './modules/middlewares/set-cookies.js'
 
 const middlewares = [ // MIDDLEWARES, in execution order
 

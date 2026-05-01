@@ -1,8 +1,8 @@
-import desksGet from "/var/task/tasks/virtual/desks-get.js";
-import desksPatch from "/var/task/tasks/virtual/desks-patch.js";
-import deskSchemasGet from "/var/task/tasks/virtual/desk-schemas-get/desk-schemas-get.js";
-import deskSchemasPut from "/var/task/tasks/virtual/desk-schemas-put.js";
-import rus from "/var/task/modules/r-u-s.js";
+import desksGet from "../tasks/virtual/desks-get.js";
+import desksPatch from "../tasks/virtual/desks-patch.js";
+import deskSchemasGet from "../tasks/virtual/desk-schemas-get/desk-schemas-get.js";
+import deskSchemasPut from "../tasks/virtual/desk-schemas-put.js";
+import rus from "../modules/r-u-s.js";
 
 'use strict'
 
@@ -13,12 +13,12 @@ import rus from "/var/task/modules/r-u-s.js";
  *
  *
  */
-const formsMarkupCreateDeskSchema = (await import(`/var/task/tasks/virtual/forms-get/markup-create-desk-schema.js`)).default
-const formsMarkupReadDeskSchema = (await import(`/var/task/tasks/virtual/forms-get/markup-read-desk-schema.js`)).default
-const formsMarkupUpdateDeskSchema = (await import(`/var/task/tasks/virtual/forms-get/markup-update-desk-schema.js`)).default
-const formsMarkupDeleteDeskSchema = (await import(`/var/task/tasks/virtual/forms-get/markup-delete-desk-schema.js`)).default
-const formsMarkupCreateDeskRow = (await import(`/var/task/tasks/virtual/forms-get/markup-create-desk-row.js`)).default
-const formsMarkupUpdateDeskRow = (await import(`/var/task/tasks/virtual/forms-get/markup-update-desk-row.js`)).default
+const formsMarkupCreateDeskSchema = (await import(`../tasks/virtual/forms-get/markup-create-desk-schema.js`)).default
+const formsMarkupReadDeskSchema = (await import(`../tasks/virtual/forms-get/markup-read-desk-schema.js`)).default
+const formsMarkupUpdateDeskSchema = (await import(`../tasks/virtual/forms-get/markup-update-desk-schema.js`)).default
+const formsMarkupDeleteDeskSchema = (await import(`../tasks/virtual/forms-get/markup-delete-desk-schema.js`)).default
+const formsMarkupCreateDeskRow = (await import(`../tasks/virtual/forms-get/markup-create-desk-row.js`)).default
+const formsMarkupUpdateDeskRow = (await import(`../tasks/virtual/forms-get/markup-update-desk-row.js`)).default
 //const patchDeskSchema   = require ( '/var/task/tasks/virtual/patchDeskSchema.js' )
 
 rus.frameworkDescriptionLogger.backlog(`(~/tasks/virtual.js) all (types) are currently manually coded; RECONSIDER.`)

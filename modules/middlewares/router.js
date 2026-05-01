@@ -1,4 +1,4 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../modules/r-u-s.js";
 
 'use strict'
 //  THIS SECTION REQUIRES REFACTORING TOWARDS ELEGANT RECURSION INTO SUB-DIRECTORIES
@@ -10,7 +10,7 @@ switch ( rus.conf.platform.javascriptEngine ) {
         taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
         taskFileNames.forEach((current, index, array) => {
             if (current.toLowerCase().slice(-3) == '.js') {
-                tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+                tasks[current.slice(0, -3)] = import('../../tasks/' + current)
             }
         } /* , thisArg */ )
         break
@@ -19,7 +19,7 @@ switch ( rus.conf.platform.javascriptEngine ) {
         taskFileNames = await tjs.readDir('/var/task/tasks')
         for await (current of taskFileNames){                                                          
             if (current.toLowerCase().slice(-3) == '.js') {
-                tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+                tasks[current.slice(0, -3)] = import('../../tasks/' + current)
             }
         }
         break

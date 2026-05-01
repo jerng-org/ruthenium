@@ -1,8 +1,8 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../../modules/r-u-s.js";
 
 'use strict'
 
-import tableInMarkup from '/var/task/tasks/virtual/desk-schemas-get/markup-table-in-markup.js'
+import tableInMarkup from '../../../tasks/virtual/desk-schemas-get/markup-table-in-markup.js'
 
 const deskSchemasMarkup = async (data) => {
 

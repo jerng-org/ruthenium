@@ -1,5 +1,5 @@
-import conf from '/var/task/configuration.js'
-import customLogger from '/var/task/modules/custom-logger.js'
+import conf from '../configuration.js'
+import customLogger from '../modules/custom-logger.js'
 
 let performance
 

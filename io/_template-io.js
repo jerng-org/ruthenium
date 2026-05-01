@@ -1,4 +1,4 @@
-import mark from "/var/task/modules/mark.js";
+import mark from "../modules/mark.js";
 
 'use strict'
 //  Provide a debuggable function name, 

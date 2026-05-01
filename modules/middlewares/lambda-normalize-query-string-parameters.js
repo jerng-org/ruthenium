@@ -1,4 +1,4 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../modules/r-u-s.js";
 
 'use strict'
 // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0

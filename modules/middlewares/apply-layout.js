@@ -1,4 +1,4 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../modules/r-u-s.js";
 
 'use strict'
 const defaultLayoutTaskName = 'layout'
@@ -23,7 +23,7 @@ const initMarkupsAndTasks = async _ => {
             })
             markupFileNames.forEach((current, index, array) => {
                 if (current.isFile()) {
-                    markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                    markups[current.name.slice(0, -3)] = import('../../tasks/' + current.name)
                 }
             } /* , thisArg */ )
             break
@@ -32,7 +32,7 @@ const initMarkupsAndTasks = async _ => {
             markupFileNames = await tjs.readDir('/var/task/tasks')
             for await (current of markupFileNames){
                 if (current.isFile) {
-                    markups[current.name.slice(0, -3)] = import('/var/task/tasks/' + current.name)
+                    markups[current.name.slice(0, -3)] = import('../../tasks/' + current.name)
                 }
             } 
             break
@@ -48,7 +48,7 @@ const initMarkupsAndTasks = async _ => {
             taskFileNames = rus.node.fs.readdirSync('/var/task/tasks')
             taskFileNames.forEach((current, index, array) => {
                 if (current.toLowerCase().slice(-3) == '.js') {
-                    tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+                    tasks[current.slice(0, -3)] = import('../../tasks/' + current)
                 }
             } /* , thisArg */ )
             break
@@ -57,7 +57,7 @@ const initMarkupsAndTasks = async _ => {
             taskFileNames = await tjs.readDir('/var/task/tasks')
             for await (current of taskFileNames){
                 if (current.toLowerCase().slice(-3) == '.js') {
-                    tasks[current.slice(0, -3)] = import('/var/task/tasks/' + current)
+                    tasks[current.slice(0, -3)] = import('../../tasks/' + current)
                 }
             } 
             break

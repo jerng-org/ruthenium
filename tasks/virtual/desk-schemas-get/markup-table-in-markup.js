@@ -1,6 +1,6 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../../modules/r-u-s.js";
 
-import trInTable from '/var/task/tasks/virtual/desk-schemas-get/markup-tr-in-table.js'
+import trInTable from '../../../tasks/virtual/desk-schemas-get/markup-tr-in-table.js'
 const tableInMarkup = async(deskSchemasScan) => {
 
     const markup = `

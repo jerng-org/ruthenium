@@ -1,6 +1,6 @@
-import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
-import cookie from "/var/task/modules/cookie.js";
-import { aDynamoDBDocumentClient, GetCommand, PutCommand } from "/var/task/io/ddb.js";
+import rusMinus1 from "../modules/r-u-s-minus-1.js";
+import cookie from "../modules/cookie.js";
+import { aDynamoDBDocumentClient, GetCommand, PutCommand } from "../io/ddb.js";
 
 'use strict'
 const conf = rusMinus1.conf

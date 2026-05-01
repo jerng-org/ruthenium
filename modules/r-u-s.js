@@ -1,4 +1,4 @@
-import rusMinus1 from '/var/task/modules/r-u-s-minus-1.js'
+import rusMinus1 from '../modules/r-u-s-minus-1.js'
 
 let fs, querystring, url, util
 
@@ -111,11 +111,11 @@ const rus = {
 
     aws: {
         // CRASHY 
-        //ddb: await import('/var/task/io/ddb.js'),
+        //ddb: await import('../io/ddb.js'),
         // CRASHY : uses jsonwebtoken which seems to be CJS
-        //cognito: (await import('/var/task/io/cognito-oidc-relying-party.js')).default,
+        //cognito: (await import('../io/cognito-oidc-relying-party.js')).default,
         // CRASHY 
-        //s3: await import('/var/task/io/s3.js')
+        //s3: await import('../io/s3.js')
     },
 
     //////////
@@ -125,7 +125,7 @@ const rus = {
     //////////
 
     // CRASHY 
-//    cookie: (await import('/var/task/modules/cookie.js')).default,
+//    cookie: (await import('../modules/cookie.js')).default,
 
     conf: rusMinus1.conf,
 
@@ -135,18 +135,18 @@ const rus = {
     frameworkDescriptionLogger: rusMinus1.frameworkDescriptionLogger,
 
     // CRASHY 
-//    html: (await import('/var/task/modules/html.js')).default,
+//    html: (await import('../modules/html.js')).default,
 
     http: {
 
     // CRASHY 
-//        status400: (await import('/var/task/tasks/status-400.js')).default,
-//        status401: (await import('/var/task/tasks/status-401.js')).default,
-//        status403: (await import('/var/task/tasks/status-403.js')).default,
-//        status404: (await import('/var/task/tasks/status-404.js')).default,
-//        status409: (await import('/var/task/tasks/status-409.js')).default,
-//        status500: (await import('/var/task/tasks/status-500.js')).default,
-//        status501: (await import('/var/task/tasks/status-501.js')).default,
+//        status400: (await import('../tasks/status-400.js')).default,
+//        status401: (await import('../tasks/status-401.js')).default,
+//        status403: (await import('../tasks/status-403.js')).default,
+//        status404: (await import('../tasks/status-404.js')).default,
+//        status409: (await import('../tasks/status-409.js')).default,
+//        status500: (await import('../tasks/status-500.js')).default,
+//        status501: (await import('../tasks/status-501.js')).default,
 
     },
     //////////
@@ -161,7 +161,7 @@ const rus = {
     // CRASHY 
     //jwkToPem: (await import('jwk-to-pem')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
-    lambdaGitCommit: (await import('/var/task/io/lambda-git-commit.js')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
+    lambdaGitCommit: (await import('../io/lambda-git-commit.js')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
 
     //////////
     //      //
@@ -263,7 +263,7 @@ const rus = {
     },
 
     // CRASHY 
-    print: (await import('/var/task/modules/print.js')).default,
+    print: (await import('../modules/print.js')).default,
 
     //////////
     //      //
@@ -272,7 +272,7 @@ const rus = {
     //////////
 
     // CRASHY 
-    //oidcSession: (await import('/var/task/modules/oidc-session.js')).default,
+    //oidcSession: (await import('../modules/oidc-session.js')).default,
 
     //////////
     //      //
@@ -303,7 +303,7 @@ const rus = {
     //////////
 
     // CRASHY  : crypto
-    //uuid4: (await import('/var/task/io/uuid4.js')).default,
+    //uuid4: (await import('../io/uuid4.js')).default,
 
     //////////
     //      //
@@ -312,7 +312,7 @@ const rus = {
     //////////
 
     // CRASHY  : fs 
-    //validation: (await import('/var/task/io/validation.js')).default,
+    //validation: (await import('../io/validation.js')).default,
 
     /*  VALIDATE_FORM_METHOD
      * 

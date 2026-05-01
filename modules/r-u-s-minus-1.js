@@ -1,7 +1,7 @@
-import conf from '/var/task/configuration.js'
-import mark from "/var/task/modules/mark.js";
-import customLogger from '/var/task/modules/custom-logger.js'
-import frameworkDescriptionLogger from '/var/task/modules/framework-description-logger.js'
+import conf from '../configuration.js'
+import mark from "../modules/mark.js";
+import customLogger from '../modules/custom-logger.js'
+import frameworkDescriptionLogger from '../modules/framework-description-logger.js'
 
 /*  2022-05-22 this file was developed to resolve circular dependencies in
  *  'r-u-s.js'. The naming of this file as 'r-u-s-minus-1.js' 

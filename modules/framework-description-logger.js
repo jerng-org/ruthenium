@@ -1,6 +1,6 @@
 'use strict'
 
-import conf from '/var/task/configuration.js'
+import conf from '../configuration.js'
 
 //////////
 //      //

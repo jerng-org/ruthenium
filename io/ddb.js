@@ -1,4 +1,4 @@
-import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
+import rusMinus1 from "../modules/r-u-s-minus-1.js";
 
 let DynamoDBClient, 
     DynamoDBDocumentClient,
@@ -11,7 +11,7 @@ let DynamoDBClient,
 
 switch ( rusMinus1.conf.platform.javascriptEngine ) {
     case ('NODEJS') : {
-        ({ DynamoDBClient } = await import("@aws-sdk/client-dynamodb"))
+        ({ DynamoDBClient } = await import("../node_modules/@aws-sdk/client-dynamodb"))
         ;
         ({
             DynamoDBDocumentClient,
@@ -21,7 +21,7 @@ switch ( rusMinus1.conf.platform.javascriptEngine ) {
             PutCommand,
             ScanCommand,
             QueryCommand
-        } = await import("@aws-sdk/lib-dynamodb"))
+        } = await import("../node_modules/@aws-sdk/lib-dynamodb"))
         break
     }
     case ('TXIKIJS') : {
@@ -104,14 +104,6 @@ const config = rusMinus1.conf.platform.lambdaService == 'AWS_SAM' ? {
 const bareBonesClient = new DynamoDBClient(config)
 
 const aDynamoDBDocumentClient = DynamoDBDocumentClient.from(bareBonesClient, translateConfig)
-//*/
-
-// (Option B) This imports the "full" client
-/*
-const { DynamoDB } = require("@aws-sdk/client-dynamodb")
-const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb")
-const fullClient = new DynamoDB()
-const aDynamoDBDocumentClient = DynamoDBDocument.from(fullClient, translateConfig)
 //*/
 
 /*_______________________________!!

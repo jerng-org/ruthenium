@@ -1,10 +1,10 @@
-import rus from '/var/task/modules/r-u-s.js'
+import rus from './modules/r-u-s.js'
 console.log(`LOADED RUS`)
 console.error(`LOADED RUS`)
-import ruthenium from '/var/task/modules/framework/ruthenium.js'
+import ruthenium from './modules/framework/ruthenium.js'
 console.log(`LOADED RUTHENIUM`)
 console.error(`LOADED RUTHENIUM`)
-import middlewares from '/var/task/index-middlewares.js'
+import middlewares from './index-middlewares.js'
 console.log(`LOADED MIDDLEWARES`)
 console.error(`LOADED MIDDLEWARES`)
 

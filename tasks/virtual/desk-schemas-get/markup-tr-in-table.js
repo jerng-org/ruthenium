@@ -1,5 +1,5 @@
-import rus from "/var/task/modules/r-u-s.js";
-import liOfColumnsInTr from '/var/task/tasks/virtual/desk-schemas-get/markup-li-of-columns-in-tr.js'
+import rus from "../../../modules/r-u-s.js";
+import liOfColumnsInTr from '../../../tasks/virtual/desk-schemas-get/markup-li-of-columns-in-tr.js'
 
 const trInTable = async(item) => {
 

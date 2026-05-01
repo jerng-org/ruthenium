@@ -1,5 +1,5 @@
-import rusMinus1 from "/var/task/modules/r-u-s-minus-1.js";
-import print from "/var/task/modules/print.js";
+import rusMinus1 from "../modules/r-u-s-minus-1.js";
+import print from "../modules/print.js";
 import fs from "fs";
 
 'use strict'
@@ -16,7 +16,7 @@ switch ( rusMinus1.conf.platform.javascriptEngine ) {
             /* TODO : these naming assumptions : centralise the documentation */
             if (current[0] != '_' &&
                 current.toLowerCase().slice(-3) == '.js') {
-                models[current.slice(0, -3)] = import('/var/task/io/models/' + current)
+                models[current.slice(0, -3)] = import('../io/models/' + current)
             }
         } /* , thisArg */ )
         break
@@ -27,7 +27,7 @@ switch ( rusMinus1.conf.platform.javascriptEngine ) {
             /* TODO : these naming assumptions : centralise the documentation */
             if (current[0] != '_' &&
                 current.toLowerCase().slice(-3) == '.js') {
-                models[current.slice(0, -3)] = import('/var/task/io/models/' + current)
+                models[current.slice(0, -3)] = import('../io/models/' + current)
             }
         } 
         break

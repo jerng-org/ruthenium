@@ -1,4 +1,4 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../modules/r-u-s.js";
 
 'use strict'
 
@@ -15,7 +15,7 @@ const adminImportCsvToDeskCellsTable = async(data) => {
 
     const csvSubmissionFormResponseBody =  async _ => { 
     
-        const deskSchemasModel = await import('/var/task/io/models/desk-schemas.js')
+        const deskSchemasModel = await import('../io/models/desk-schemas.js')
         const namePattern = deskSchemasModel.subs.name.self.rules.regex_test
         
         return `

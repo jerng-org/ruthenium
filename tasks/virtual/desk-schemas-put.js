@@ -1,8 +1,8 @@
-import rus from "/var/task/modules/r-u-s.js";
+import rus from "../../modules/r-u-s.js";
 
 'use strict'
 /*  CREATES / UPDATES (CLOBBERS) A DESK-SCHEMA */
-import deskSchemasModel from '/var/task/io/models/desk-schemas.js'
+import deskSchemasModel from '../../io/models/desk-schemas.js'
 
 const deskSchemasPut = async (data) => {
 

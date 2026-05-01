@@ -1,5 +1,5 @@
-import rus from "/var/task/modules/r-u-s.js";
-import reducer from "/var/task/modules/framework/ruthenium-reducer.js";
+import rus from "../../modules/r-u-s.js";
+import reducer from "../../modules/framework/ruthenium-reducer.js";
 
 'use strict'
 rus.frameworkDescriptionLogger.more(`

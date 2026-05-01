@@ -1,5 +1,5 @@
-import rus from "/var/task/modules/r-u-s.js";
-import markup from "/var/task/tasks/virtual/desks-get-markup.js";
+import rus from "../../modules/r-u-s.js";
+import markup from "../../tasks/virtual/desks-get-markup.js";
 
 'use strict'
 rus.frameworkDescriptionLogger.fixme(`rendering (-markup.js) should not involve a require() here;`)
