@@ -413,7 +413,7 @@ processedTokens:
                     //  Corresponds to (7.2.1.2.);
                     //  uses external depedency;
 
-                    console.log(`cognito-oidc-relying-party : rusMinus1.jwkToPem : `, jwkToPem )
+                    console.log(`cognito-oidc-relying-party : rusMinus1.jwkToPem : `, rusMinus1.jwkToPem )
 
                     issuerPemFromJwksIndexed[k.kid] = rusMinus1.jwkToPem.jwkToBuffer(k)
 
