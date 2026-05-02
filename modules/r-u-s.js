@@ -173,7 +173,7 @@ const { default :  rusMinus1 } = await import ('../modules/r-u-s-minus-1.js')
         jsonwebtoken: (await import('jsonwebtoken')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
         // CRASHY 
-        jwkToPem: (await import('jwk-to-pem')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+        jwkToPem: await import('jwk-to-pem'), // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 
         lambdaGitCommit: (await import('../io/lambda-git-commit.js')).default, // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:git-arm-lambda:12
 
