@@ -266,6 +266,8 @@ const { default :  rusMinus1 } = await import ('../modules/r-u-s-minus-1.js')
 
             fs: fs,
 
+            https: rusMinus1.https,
+
             querystring: rusMinus1.querystring,
 
             url: url,
