@@ -1,16 +1,28 @@
-let conf, mark, customLogger, frameworkDescriptionLogger, jsonwebtoken, jwkToPem
+let conf, mark, customLogger, frameworkDescriptionLogger, jsonwebtoken, jwkToPem, querystring, https
 
 try {
 
 console.log(`r-u-s-minus-1 : TOP of try`);
 
-     ({ default : conf } = await import('../configuration.js'));
-     ({ default : mark} = await import("../modules/mark.js"));
-     ({ default : customLogger } = await import('../modules/custom-logger.js') );
-     ({ default : frameworkDescriptionLogger } = await import('../modules/framework-description-logger.js'));
-     ({ default : jwkToPem } = await import('jwk-to-pem')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
-     (jsonwebtoken = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
-console.log(`r-u-s-minus-1 : typeof mark :`, typeof mark)
+    ({ default: conf } = await import('../configuration.js'));
+    ({ default: mark } = await import("../modules/mark.js"));
+    ({ default: customLogger } = await import('../modules/custom-logger.js'));
+    ({ default: frameworkDescriptionLogger } = await import('../modules/framework-description-logger.js'));
+    switch (rusMinus1.conf.platform.javascriptEngine) {
+        case ('NODEJS'): {
+            (jwkToPem = await import('jwk-to-pem')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            (jsonwebtoken = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            querystring = await import("node:querystring")
+            https = await import("node:https")
+            break
+        }
+        case ('TXIKIJS'): {
+            (jwkToPem = await import('../node_modules/jwk-to-pem/src/jwk-to-pem.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            (jsonwebtoken = await import('../node_modules/jsonwebtoken/index.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            break
+        }
+        default: { throw new Error('r-u-s-minus-1 : branch not implemented') }
+    }
 
     /*  2022-05-22 this file was developed to resolve circular dependencies in
      *  'r-u-s.js'. The naming of this file as 'r-u-s-minus-1.js' 
@@ -46,4 +58,8 @@ export default {
     customLogger: customLogger,
     frameworkDescriptionLogger: frameworkDescriptionLogger,
     mark: mark,
+    jsonwebtoken:jsonwebtoken,
+    jwkToPem:jwkToPem,
+    querystring:querystring,
+    https:https
 }

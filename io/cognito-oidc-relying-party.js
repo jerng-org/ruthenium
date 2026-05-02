@@ -4,19 +4,7 @@ import rusMinus1 from "../modules/r-u-s-minus-1.js";
 
 //  1.1.  
 //  Node modules
-let querystring, https 
 
-switch(rusMinus1.conf.platform.javascriptEngine) {
-    case ('NODEJS'): {
-        querystring = await import ( "node:querystring")
-        https = await import ( "node:https")
-        break
-    }
-    case ('TXIKIJS'): {
-        break
-    }
-    default : { throw new Error('cognito-oidc-relying-party.js : branch not implemented') }
-}
 //  1.2.  
 //  Other modules
 //
@@ -105,7 +93,7 @@ const authorizationCodeFlowJwtValidation = async code => {
     //  4.2.
     //  The request body for (4.)
     //  UPSTREAM_FROM > https.request() > issuerExchangeRequest;
-    const issuerExchangeRequestBody = querystring.stringify({
+    const issuerExchangeRequestBody = rusMinus1.querystring.stringify({
         grant_type: 'authorization_code',
         client_id: relyingPartyId,
         code: code,
@@ -125,7 +113,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        const issuerExchangeRequest = https.request(issuerExchangeRequestOptions, response => {
+        const issuerExchangeRequest = rusMinus1.https.request(issuerExchangeRequestOptions, response => {
 
             rusMinus1.frameworkDescriptionLogger.callStarts()
 

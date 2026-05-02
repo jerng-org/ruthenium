@@ -1,7 +1,7 @@
 console.log(`r-u-s : TOP`)
 
 let rus
-let fs, querystring, url, util
+let fs, url, util
 
 try {
 
@@ -13,7 +13,6 @@ const { default :  rusMinus1 } = await import ('../modules/r-u-s-minus-1.js')
     switch(rusMinus1.conf.platform.javascriptEngine) {
         case ('NODEJS'): {
             fs = await import ( "node:fs" )
-            querystring = await import ( "node:querystring")
             url = await import ( "node:url")
             util = await import ( "node:util")
             break
@@ -267,7 +266,7 @@ const { default :  rusMinus1 } = await import ('../modules/r-u-s-minus-1.js')
 
             fs: fs,
 
-            querystring: querystring,
+            querystring: rusMinus1.querystring,
 
             url: url,
 
