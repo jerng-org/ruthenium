@@ -423,7 +423,7 @@ processedTokens:
                     //  Corresponds to (7.2.1.2.);
                     //  uses external depedency;
 
-                    issuerPemFromJwksIndexed[k.kid] = rusMinus1.conf.jwkToPem(k)
+                    issuerPemFromJwksIndexed[k.kid] = rusMinus1.jwkToPem(k)
 
                     mark(`authorizationCodeFlowJwtValidation : 7.2.2.2. jwkToPem CALLED`)
 
@@ -472,7 +472,7 @@ tokenValidationArguments.access_token:
                 mark(`authorizationCodeFlowJwtValidation : 7.4.2. BEFORE jsonwebtoken.verify CALLS`)
 
                 try {
-                    validatedTokenPayloads.id_token = rusMinus1.conf.jsonwebtoken.verify(
+                    validatedTokenPayloads.id_token = rusMinus1.jsonwebtoken.verify(
                         tokenValidationArguments.id_token.token_as_string,
                         tokenValidationArguments.id_token.pem, { algorithms: [tokenValidationArguments.id_token.alg] }
                         // neglect callback for synchronous call: function ( error, decodedToken )
@@ -485,7 +485,7 @@ tokenValidationArguments.access_token:
 
 
                 try {
-                    validatedTokenPayloads.access_token = rusMinus1.conf.jsonwebtoken.verify(
+                    validatedTokenPayloads.access_token = rusMinus1.jsonwebtoken.verify(
                         tokenValidationArguments.access_token.token_as_string,
                         tokenValidationArguments.access_token.pem, { algorithms: [tokenValidationArguments.access_token.alg] }
                         // neglect callback for synchronous call: function ( error, decodedToken )

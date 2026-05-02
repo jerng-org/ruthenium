@@ -1,4 +1,4 @@
-let conf, mark, customLogger, frameworkDescriptionLogger
+let conf, mark, customLogger, frameworkDescriptionLogger, jsonwebtoken, jwkToPem
 
 try {
 
@@ -8,7 +8,8 @@ console.log(`r-u-s-minus-1 : TOP of try`);
      ({ default : mark} = await import("../modules/mark.js"));
      ({ default : customLogger } = await import('../modules/custom-logger.js') );
      ({ default : frameworkDescriptionLogger } = await import('../modules/framework-description-logger.js'));
-
+     ({ default : jsonwebtoken } = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+     ({ default : jwkToPem } = await import('jwk-to-pem')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
 console.log(`r-u-s-minus-1 : typeof mark :`, typeof mark)
 
     /*  2022-05-22 this file was developed to resolve circular dependencies in
