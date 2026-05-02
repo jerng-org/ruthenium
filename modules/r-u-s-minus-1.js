@@ -8,7 +8,7 @@ console.log(`r-u-s-minus-1 : TOP of try`);
     ({ default: mark } = await import("../modules/mark.js"));
     ({ default: customLogger } = await import('../modules/custom-logger.js'));
     ({ default: frameworkDescriptionLogger } = await import('../modules/framework-description-logger.js'));
-    switch (rusMinus1.conf.platform.javascriptEngine) {
+    switch (conf.platform.javascriptEngine) {
         case ('NODEJS'): {
             (jwkToPem = await import('jwk-to-pem')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             (jsonwebtoken = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
