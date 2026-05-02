@@ -411,7 +411,7 @@ processedTokens:
                     //  Corresponds to (7.2.1.2.);
                     //  uses external depedency;
 
-                    issuerPemFromJwksIndexed[k.kid] = rusMinus1.jwkToPem(k)
+                    issuerPemFromJwksIndexed[k.kid] = rusMinus1.jwkToPem.jwkToBuffer(k)
 
                     mark(`authorizationCodeFlowJwtValidation : 7.2.2.2. jwkToPem CALLED`)
 

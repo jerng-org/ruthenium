@@ -10,15 +10,16 @@ console.log(`r-u-s-minus-1 : TOP of try`);
     ({ default: frameworkDescriptionLogger } = await import('../modules/framework-description-logger.js'));
     switch (conf.platform.javascriptEngine) {
         case ('NODEJS'): {
-            (jwkToPem = await import('jwk-to-pem')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
-            console.log(`r-u-s-minus-1 : jwkToPem : `, jwkToPem)
-            (jsonwebtoken = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            ({default : jwkToPem } = await import('jwk-to-pem')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            console.log(`r-u-s-minus-1 : jwkToPem : `, jwkToPem);
+            
+            ({default :jsonwebtoken} = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             querystring = await import("node:querystring")
             https = await import("node:https")
             break
         }
         case ('TXIKIJS'): {
-            (jwkToPem = await import('../node_modules/jwk-to-pem/src/jwk-to-pem.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            ({default:jwkToPem} = await import('../node_modules/jwk-to-pem/src/jwk-to-pem.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             (jsonwebtoken = await import('../node_modules/jsonwebtoken/index.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             break
         }
