@@ -15,7 +15,7 @@ console.log(`r-u-s-minus-1 : TOP of try`);
 
             ({default :jsonwebtoken} = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             ({default : querystring } = await import("node:querystring"));
-            ({https : https } = await import("node:https"));
+            ({default : https } = await import("node:https"));
             break
         }
         case ('TXIKIJS'): {

@@ -62,7 +62,7 @@ const lambdaNormalizeQueryStringParameters = async (data) => {
 
     if (data.LAMBDA.event.rawQueryString) {
 
-        console.log(`lambda-normalize-query-string-parameters : rus.node.querystring : `, rus.node.querystring)
+        //console.log(`lambda-normalize-query-string-parameters : rus.node.querystring : `, rus.node.querystring)
 
         data.RU.request.queryStringParameters = rus.node.querystring.parse(data.LAMBDA.event.rawQueryString)
 
