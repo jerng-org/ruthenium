@@ -12,10 +12,10 @@ console.log(`r-u-s-minus-1 : TOP of try`);
         case ('NODEJS'): {
             ({default : jwkToPem } = await import('jwk-to-pem')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             console.log(`r-u-s-minus-1 : jwkToPem : `, jwkToPem);
-            
+
             ({default :jsonwebtoken} = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
-            querystring = await import("node:querystring")
-            https = await import("node:https")
+            ({default : querystring } = await import("node:querystring"));
+            ({https : https } = await import("node:https"));
             break
         }
         case ('TXIKIJS'): {
