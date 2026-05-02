@@ -1,7 +1,6 @@
 import rus from "../../modules/r-u-s.js";
 import reducer from "../../modules/framework/ruthenium-reducer.js";
 
-'use strict'
 rus.frameworkDescriptionLogger.more(`
 //  Uncertain theoretical proposition about dependency injection :
 //

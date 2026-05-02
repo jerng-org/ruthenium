@@ -1,49 +1,49 @@
 let middlewares
 
 try { 
-    const rus = await import("./modules/r-u-s.js")
+    const { default :rus } = await import("./modules/r-u-s.js")
 
     console.log(`TOP OF index-middlewares`)
 
     // PROJECT - MIDDLEWARES, lexical order 
 
-    const applyLayout = await import('./modules/middlewares/apply-layout.js')
+    const { default :applyLayout } = await import('./modules/middlewares/apply-layout.js')
 
-    const composeResponse = await import('./modules/middlewares/compose-response.js')
+    const { default :composeResponse } = await import('./modules/middlewares/compose-response.js')
 
-    const formsReindexNames = await import('./modules/middlewares/forms-reindex-names.js')
+    const { default :formsReindexNames } = await import('./modules/middlewares/forms-reindex-names.js')
 
-    const formsTunnelRestfulMethods = await import('./modules/middlewares/forms-tunnel-restful-methods.js')
+    const { default :formsTunnelRestfulMethods } = await import('./modules/middlewares/forms-tunnel-restful-methods.js')
 
-    const formsValidateData = await import('./modules/middlewares/forms-validate-data.js')
+    const { default :formsValidateData } = await import('./modules/middlewares/forms-validate-data.js')
 
-    const lastGuard = await import('./modules/middlewares/last-guard.js')
+    const { default :lastGuard } = await import('./modules/middlewares/last-guard.js')
 
     // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
-    const lambdaCopyRequestParameters = await import('./modules/middlewares/lambda-copy-request-parameters.js')
+    const { default :lambdaCopyRequestParameters } = await import('./modules/middlewares/lambda-copy-request-parameters.js')
 
-    const lambdaLoadMetadata = await import('./modules/middlewares/lambda-load-metadata.js')
+    const { default :lambdaLoadMetadata } = await import('./modules/middlewares/lambda-load-metadata.js')
 
-    const lambdaNormalizeFormData = await import('./modules/middlewares/lambda-normalize-form-data.js')
+    const { default :lambdaNormalizeFormData } = await import('./modules/middlewares/lambda-normalize-form-data.js')
 
-    const lambdaNormalizeHeaders = await import('./modules/middlewares/lambda-normalize-headers.js')
+    const { default :lambdaNormalizeHeaders } = await import('./modules/middlewares/lambda-normalize-headers.js')
 
-    const lambdaNormalizeQueryStringParameters = await import('./modules/middlewares/lambda-normalize-query-string-parameters.js')
+    const { default :lambdaNormalizeQueryStringParameters } = await import('./modules/middlewares/lambda-normalize-query-string-parameters.js')
 
-    const oidcValidation = await import('./modules/middlewares/oidc-validation.js')
+    const { default :oidcValidation } = await import('./modules/middlewares/oidc-validation.js')
 
-    const returnResponse = await import('./modules/middlewares/return-response.js')
+    const { default :returnResponse } = await import('./modules/middlewares/return-response.js')
 
-    const router = await import('./modules/middlewares/router.js')
+    const { default :router } = await import('./modules/middlewares/router.js')
 
-    const sessionExemption = await import('./modules/middlewares/session-exemption.js')
+    const { default :sessionExemption } = await import('./modules/middlewares/session-exemption.js')
 
-    const sessionGuard = await import('./modules/middlewares/session-guard.js')
+    const { default :sessionGuard } = await import('./modules/middlewares/session-guard.js')
 
-    const setOidcSession = await import('./modules/middlewares/set-oidc-session.js')
+    const { default :setOidcSession } = await import('./modules/middlewares/set-oidc-session.js')
 
-    const setCookies = await import('./modules/middlewares/set-cookies.js')
+    const { default :setCookies } = await import('./modules/middlewares/set-cookies.js')
 
     middlewares = [ // MIDDLEWARES, in execution order
 
