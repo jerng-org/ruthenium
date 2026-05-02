@@ -148,7 +148,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        https.get(issuerJwksUri, resp => {
+        rusMinus1.https.get(issuerJwksUri, resp => {
 
             rusMinus1.frameworkDescriptionLogger.callStarts()
 
