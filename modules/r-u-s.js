@@ -277,7 +277,7 @@ const { default :  rusMinus1 } = await import ('../modules/r-u-s-minus-1.js')
         },
 
         // CRASHY 
-        // print: (await import('../modules/print.js')).default,
+        print: (await import('../modules/print.js')).default,
 
         //////////
         //      //
