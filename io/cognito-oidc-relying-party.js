@@ -113,6 +113,8 @@ const authorizationCodeFlowJwtValidation = async code => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
+        console.log(`cognito-oidc-relying-party : rusMinus1.https : `, rusMinus1.https)
+
         const issuerExchangeRequest = rusMinus1.https.request(issuerExchangeRequestOptions, response => {
 
             rusMinus1.frameworkDescriptionLogger.callStarts()
