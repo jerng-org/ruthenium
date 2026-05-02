@@ -1,9 +1,17 @@
 import rusMinus1 from "../modules/r-u-s-minus-1.js";
 
-'use strict'
-const mark = rusMinus1.mark 
+const mark = rusMinus1.mark
 
-const node = { util: await import('util') }
+switch (rusMinus1.conf.platform.javascriptEngine) {
+    case ('NODEJS'): {
+        const node = { util: await import('util') }
+        break
+    }
+    case ('TXIKIJS'): {
+        break
+    }
+    default: { throw new Error('print.js : branch not implemented') }
+}
 
 const print = {
 
@@ -79,7 +87,17 @@ DEBUG EVERYTHING:
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        const _returned = node.util.inspect(object, { depth: Infinity })
+        let _returned
+        switch (rusMinus1.conf.platform.javascriptEngine) {
+            case ('NODEJS'): {
+                _returned = node.util.inspect(object, { depth: Infinity })
+                break
+            }
+            case ('TXIKIJS'): {
+                break
+            }
+            default: { throw new Error('print.js : branch not implemented') }
+        }
 
         rusMinus1.frameworkDescriptionLogger.callEnds()
 
