@@ -1,4 +1,4 @@
-let conf, mark, customLogger, frameworkDescriptionLogger, jsonwebtoken, jwkToPem, querystring, https
+let conf, mark, customLogger, frameworkDescriptionLogger, jsonwebtoken, jwkToPem, jose, querystring, https
 
 try {
 
@@ -19,8 +19,9 @@ console.log(`r-u-s-minus-1 : TOP of try`);
             break
         }
         case ('TXIKIJS'): {
-            ({default:jwkToPem} = await import('../node_modules/jwk-to-pem/src/jwk-to-pem.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
-            ({default:jsonwebtoken} = await import('../node_modules/jsonwebtoken/index.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            ({default: jose} = await import('../node_modules/jose/dist/webapi/index.js'));
+            //(jwkToPem = await import('../node_modules/jwk-to-pem/src/jwk-to-pem.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            //({default:jsonwebtoken} = await import('../node_modules/jsonwebtoken/index.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             break
         }
         default: { throw new Error('r-u-s-minus-1 : branch not implemented') }
