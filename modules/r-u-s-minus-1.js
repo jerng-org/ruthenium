@@ -20,7 +20,7 @@ console.log(`r-u-s-minus-1 : TOP of try`);
         }
         case ('TXIKIJS'): {
             ({default:jwkToPem} = await import('../node_modules/jwk-to-pem/src/jwk-to-pem.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
-            (jsonwebtoken = await import('../node_modules/jsonwebtoken/index.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            ({default:jsonwebtoken} = await import('../node_modules/jsonwebtoken/index.js')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             break
         }
         default: { throw new Error('r-u-s-minus-1 : branch not implemented') }

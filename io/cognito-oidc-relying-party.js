@@ -113,7 +113,7 @@ const authorizationCodeFlowJwtValidation = async code => {
 
         rusMinus1.frameworkDescriptionLogger.callStarts()
 
-        console.log(`cognito-oidc-relying-party : rusMinus1.https : `, rusMinus1.https)
+        //console.log(`cognito-oidc-relying-party : rusMinus1.https : `, rusMinus1.https)
 
         const issuerExchangeRequest = rusMinus1.https.request(issuerExchangeRequestOptions, response => {
 
@@ -412,6 +412,8 @@ processedTokens:
                     //  7.2.2.2.
                     //  Corresponds to (7.2.1.2.);
                     //  uses external depedency;
+
+                    console.log(`cognito-oidc-relying-party : rusMinus1.jwkToPem : `, jwkToPem )
 
                     issuerPemFromJwksIndexed[k.kid] = rusMinus1.jwkToPem.jwkToBuffer(k)
 
