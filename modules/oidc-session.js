@@ -1,3 +1,4 @@
+console.log(`oidc-session : TOP`)
 import rusMinus1 from "../modules/r-u-s-minus-1.js";
 import cookie from "../modules/cookie.js";
 import { aDynamoDBDocumentClient, GetCommand, PutCommand } from "../io/ddb.js";

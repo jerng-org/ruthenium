@@ -1,3 +1,5 @@
+console.log(`cognito-oidc-relying-party : TOP`)
+
 import rusMinus1 from "../modules/r-u-s-minus-1.js";
 
 //  1.1.  

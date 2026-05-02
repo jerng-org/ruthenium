@@ -1,10 +1,10 @@
+console.log(`virtual : TOP`)
+
 import desksGet from "../tasks/virtual/desks-get.js";
 import desksPatch from "../tasks/virtual/desks-patch.js";
 import deskSchemasGet from "../tasks/virtual/desk-schemas-get/desk-schemas-get.js";
 import deskSchemasPut from "../tasks/virtual/desk-schemas-put.js";
 import rus from "../modules/r-u-s.js";
-
-'use strict'
 
 /*  This TASK is special.
  *

@@ -1,5 +1,4 @@
-'use strict'
-
+console.log('framework-description-logger : TOP ')
 import conf from '../configuration.js'
 
 //////////

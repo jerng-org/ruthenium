@@ -1,4 +1,8 @@
+console.log(`ddb : TOP`)
+
 import rusMinus1 from "../modules/r-u-s-minus-1.js";
+    
+const mark = rusMinus1.mark
 
 let DynamoDBClient, 
     DynamoDBDocumentClient,
@@ -9,102 +13,104 @@ let DynamoDBClient,
     ScanCommand,
     QueryCommand
 
-switch ( rusMinus1.conf.platform.javascriptEngine ) {
-    case ('NODEJS') : {
-        ({ DynamoDBClient } = await import("../node_modules/@aws-sdk/client-dynamodb"))
-        ;
-        ({
-            DynamoDBDocumentClient,
-            BatchWriteCommand,
-            DeleteCommand,
-            GetCommand,
-            PutCommand,
-            ScanCommand,
-            QueryCommand
-        } = await import("../node_modules/@aws-sdk/lib-dynamodb"))
-        break
+let aDynamoDBDocumentClient
+
+try {
+    switch ( rusMinus1.conf.platform.javascriptEngine ) {
+        case ('NODEJS') : {
+            ({ DynamoDBClient } = await import("@aws-sdk/client-dynamodb"));
+            ({
+                DynamoDBDocumentClient,
+                BatchWriteCommand,
+                DeleteCommand,
+                GetCommand,
+                PutCommand,
+                ScanCommand,
+                QueryCommand
+            } = await import("@aws-sdk/lib-dynamodb"));
+            break
+        }
+        case ('TXIKIJS') : {
+            ({ DynamoDBClient } = await import("../node_modules/@aws-sdk/client-dynamodb/dist-es/index.js"));
+            ({
+                DynamoDBDocumentClient,
+                BatchWriteCommand,
+                DeleteCommand,
+                GetCommand,
+                PutCommand,
+                ScanCommand,
+                QueryCommand
+            } = await import("../node_modules/@aws-sdk/lib-dynamodb/dist-es/index.js"));
+            break
+        }
+        default :  { throw new Error('ddb.js : branch not implemented') }
     }
-    case ('TXIKIJS') : {
-        ({ DynamoDBClient } = await import("../node_modules/@aws-sdk/client-dynamodb/dist-es/index.js"))
-        ;
-        ({
-            DynamoDBDocumentClient,
-            BatchWriteCommand,
-            DeleteCommand,
-            GetCommand,
-            PutCommand,
-            ScanCommand,
-            QueryCommand
-        } = await import("../node_modules/@aws-sdk/lib-dynamodb/dist-es/index.js"))
-        break
+
+
+    // 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via Proxy. Using a 
+    //                  (get) handler for ddbdc's methods returned the error 'method 
+    //                  name is not a property of undefined'
+    //
+    //              Also failed to get this to work using (extends) and (super) :(
+    //
+    //  TODO - get help, or figure it out;
+    //
+    //  All this does is make debugging easier; moreover it is rather platform
+    //  specific; so it doesn't really matter if this
+    //  is not implemented in other language patterns of the Ruthenium pattern.
+
+    /*
+    const aws = require('aws-sdk')
+    aws.config.apiVersions = { dynamodb: '2012-08-10' }
+
+    const ddb = new aws.DynamoDB()
+    */
+
+    /*_______________________________!!
+    !!            \\                 !!
+    !!              \\               !!
+    !!  Make way   //\\    Make way  !!
+    !!            //  \\             !!
+    !!__________//______\\___________*/
+
+    // START : lock-stock-and-modified from : https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_lib_dynamodb.html#configuration
+    const marshallOptions = {
+        // Whether to automatically convert empty strings, blobs, and sets to `null`.
+        convertEmptyValues: false, // false, by default.
+        // Whether to remove undefined values while marshalling.
+        removeUndefinedValues: true, // false, by default.
+        // Whether to convert typeof object to map attribute.
+        convertClassInstanceToMap: false, // false, by default.
     }
-    default :  { throw new Error('ddb.js : branch not implemented') }
+    const unmarshallOptions = {
+        // Whether to return numbers as a string instead of converting them to native JavaScript numbers.
+        wrapNumbers: false, // false, by default.
+    }
+    const translateConfig = { marshallOptions, unmarshallOptions }
+    // END : lock-stock-and-modified
+
+    /*_______________________________!!
+    !!            \\                 !!
+    !!              \\               !!
+    !!  Make way   //\\    Make way  !!
+    !!            //  \\             !!
+    !!__________//______\\___________*/
+
+    /* WARNING : Options A,B : AWS nomenclature is semantically retarded */
+
+    // (Option A) This imports the "bare-bones" client
+    //*
+    const config = rusMinus1.conf.platform.lambdaService == 'AWS_SAM' ? { 
+        endpoint : "http://dynamodb-local:8000",
+        region : "localhost" /* apparently trivial */
+    } : {}
+    const bareBonesClient = new DynamoDBClient(config)
+
+    aDynamoDBDocumentClient = DynamoDBDocumentClient.from(bareBonesClient, translateConfig)
+    //*/
 }
-
-'use strict'
-const mark = rusMinus1.mark
-
-// 2020-07-11 : failed attempt to wrap (ddbdc) in a (try-catch) via Proxy. Using a 
-//                  (get) handler for ddbdc's methods returned the error 'method 
-//                  name is not a property of undefined'
-//
-//              Also failed to get this to work using (extends) and (super) :(
-//
-//  TODO - get help, or figure it out;
-//
-//  All this does is make debugging easier; moreover it is rather platform
-//  specific; so it doesn't really matter if this
-//  is not implemented in other language patterns of the Ruthenium pattern.
-
-/*
-const aws = require('aws-sdk')
-aws.config.apiVersions = { dynamodb: '2012-08-10' }
-
-const ddb = new aws.DynamoDB()
-*/
-
-/*_______________________________!!
-!!            \\                 !!
-!!              \\               !!
-!!  Make way   //\\    Make way  !!
-!!            //  \\             !!
-!!__________//______\\___________*/
-
-// START : lock-stock-and-modified from : https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_lib_dynamodb.html#configuration
-const marshallOptions = {
-    // Whether to automatically convert empty strings, blobs, and sets to `null`.
-    convertEmptyValues: false, // false, by default.
-    // Whether to remove undefined values while marshalling.
-    removeUndefinedValues: true, // false, by default.
-    // Whether to convert typeof object to map attribute.
-    convertClassInstanceToMap: false, // false, by default.
-}
-const unmarshallOptions = {
-    // Whether to return numbers as a string instead of converting them to native JavaScript numbers.
-    wrapNumbers: false, // false, by default.
-}
-const translateConfig = { marshallOptions, unmarshallOptions }
-// END : lock-stock-and-modified
-
-/*_______________________________!!
-!!            \\                 !!
-!!              \\               !!
-!!  Make way   //\\    Make way  !!
-!!            //  \\             !!
-!!__________//______\\___________*/
-
-/* WARNING : Options A,B : AWS nomenclature is semantically retarded */
-
-// (Option A) This imports the "bare-bones" client
-//*
-const config = rusMinus1.conf.platform.lambdaService == 'AWS_SAM' ? { 
-    endpoint : "http://dynamodb-local:8000",
-    region : "localhost" /* apparently trivial */
-} : {}
-const bareBonesClient = new DynamoDBClient(config)
-
-const aDynamoDBDocumentClient = DynamoDBDocumentClient.from(bareBonesClient, translateConfig)
-//*/
+catch (e) { console.error(`
+ddb : outer 'try' block.`, e) }
 
 /*_______________________________!!
 !!            \\                 !!

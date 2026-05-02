@@ -1,4 +1,4 @@
-'use strict'
+console.log('custom-logger : TOP ')
 
 import conf from '../configuration.js'
 

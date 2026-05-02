@@ -1,7 +1,20 @@
+console.log(`s3 : TOP`)
 import rusMinus1 from "../modules/r-u-s-minus-1.js";
-import { S3Client } from "../node_modules/@aws-sdk/client-s3";
 
-'use strict'
+let S3Client
+
+switch (rusMinus1.conf.platform.javascriptEngine) {
+    case ('NODEJS'): {
+        ({ S3Client } = await import ("@aws-sdk/client-s3"));
+        break
+    }
+    case ('TXIKIJS'): {
+        ({ S3Client } = await import ("../node_modules/@aws-sdk/client-s3"));
+        break
+    }
+    default: { throw new Error('s3 : branch not implemented') }
+}
+
 const mark = rusMinus1.mark 
 
 //  Provide a debuggable function name, 
