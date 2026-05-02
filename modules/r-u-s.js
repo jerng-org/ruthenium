@@ -139,7 +139,7 @@ const { default :  rusMinus1 } = await import ('../modules/r-u-s-minus-1.js')
         //////////
 
         // CRASHY 
-    //    cookie: (await import('../modules/cookie.js')).default,
+        cookie: (await import('../modules/cookie.js')).default,
 
         conf: rusMinus1.conf,
 
