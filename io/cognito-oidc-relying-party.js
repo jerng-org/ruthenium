@@ -415,7 +415,7 @@ processedTokens:
 
                     console.log(`cognito-oidc-relying-party : rusMinus1.jwkToPem : `, rusMinus1.jwkToPem )
 
-                    issuerPemFromJwksIndexed[k.kid] = rusMinus1.jwkToPem.jwkToBuffer(k)
+                    issuerPemFromJwksIndexed[k.kid] = rusMinus1.jwkToPem(k)
 
                     mark(`authorizationCodeFlowJwtValidation : 7.2.2.2. jwkToPem CALLED`)
 
