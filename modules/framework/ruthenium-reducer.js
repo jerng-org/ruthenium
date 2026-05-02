@@ -1,6 +1,7 @@
 import rus from "../../modules/r-u-s.js";
 
-'use strict'
+console.log(`ruthenium-reducer : typeof rus :`, typeof rus )
+
     rus.frameworkDescriptionLogger.more(`ruthenium-reducer.js: We're using (Function.name) here,
     and this needs to be 
     examined a bit more, because it may be too JavaScript-specific; i.e.

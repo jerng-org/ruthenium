@@ -1,30 +1,44 @@
-import conf from '../configuration.js'
-import mark from "../modules/mark.js";
-import customLogger from '../modules/custom-logger.js'
-import frameworkDescriptionLogger from '../modules/framework-description-logger.js'
+let conf, mark, customLogger, frameworkDescriptionLogger
 
-/*  2022-05-22 this file was developed to resolve circular dependencies in
- *  'r-u-s.js'. The naming of this file as 'r-u-s-minus-1.js' 
- *  is in order to set precedent in case there should arise any need for 
- *  'r-u-s-minus-2.js' etc.
- *
- **/
+try {
 
-customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
+console.log(`r-u-s-minus-1 : TOP of try`);
 
-if (conf.frameworkDescriptionLogging.length) {
-    frameworkDescriptionLogger.logStarts('r-u-s-minus-1.js / handler INITIALISING')
+     ({ default : conf } = await import('../configuration.js'));
+     ({ default : mark} = await import("../modules/mark.js"));
+     ({ default : customLogger } = await import('../modules/custom-logger.js') );
+     ({ default : frameworkDescriptionLogger } = await import('../modules/framework-description-logger.js'));
 
-    frameworkDescriptionLogger.fixme(`customLogger.startCustomLogString must be
-    run before anything else, and not run again, otherwise things go missing;
-    derisk this issue`)
+console.log(`r-u-s-minus-1 : typeof mark :`, typeof mark)
 
-    frameworkDescriptionLogger.fixme(`the required modules here should be
-    refactored; review and refactor`)
+    /*  2022-05-22 this file was developed to resolve circular dependencies in
+     *  'r-u-s.js'. The naming of this file as 'r-u-s-minus-1.js' 
+     *  is in order to set precedent in case there should arise any need for 
+     *  'r-u-s-minus-2.js' etc.
+     *
+     **/
 
-    frameworkDescriptionLogger.backlog(`rename customLogger.xxx to
-    LogStart,LogRestart,LogLog (custom-logger.js)`)
+    customLogger.startCustomLogString('/var/task/modules/r-u-s-minus-1.js')
+
+    if (conf.frameworkDescriptionLogging.length) {
+        frameworkDescriptionLogger.logStarts('r-u-s-minus-1.js / handler INITIALISING')
+
+        frameworkDescriptionLogger.fixme(`customLogger.startCustomLogString must be
+        run before anything else, and not run again, otherwise things go missing;
+        derisk this issue`)
+
+        frameworkDescriptionLogger.fixme(`the required modules here should be
+        refactored; review and refactor`)
+
+        frameworkDescriptionLogger.backlog(`rename customLogger.xxx to
+        LogStart,LogRestart,LogLog (custom-logger.js)`)
+    }
+
+
+    mark(`LOADED`)
 }
+catch (e) { console.error(`
+r-u-s-minus-1 : outer 'try' block.`, e) }
 
 export default {
     conf: conf,
@@ -32,5 +46,3 @@ export default {
     frameworkDescriptionLogger: frameworkDescriptionLogger,
     mark: mark,
 }
-
-mark(`LOADED`)

@@ -1,187 +1,193 @@
-import rus from "./modules/r-u-s.js";
+let middlewares
 
-'use strict'
-// PROJECT - MIDDLEWARES, lexical order 
+try { 
+    const rus = await import("./modules/r-u-s.js")
 
-import applyLayout from './modules/middlewares/apply-layout.js'
+    console.log(`TOP OF index-middlewares`)
 
-import composeResponse from './modules/middlewares/compose-response.js'
+    // PROJECT - MIDDLEWARES, lexical order 
 
-import formsReindexNames from './modules/middlewares/forms-reindex-names.js'
+    const applyLayout = await import('./modules/middlewares/apply-layout.js')
 
-import formsTunnelRestfulMethods from './modules/middlewares/forms-tunnel-restful-methods.js'
+    const composeResponse = await import('./modules/middlewares/compose-response.js')
 
-import formsValidateData from './modules/middlewares/forms-validate-data.js'
+    const formsReindexNames = await import('./modules/middlewares/forms-reindex-names.js')
 
-import lastGuard from './modules/middlewares/last-guard.js'
+    const formsTunnelRestfulMethods = await import('./modules/middlewares/forms-tunnel-restful-methods.js')
 
-// AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
+    const formsValidateData = await import('./modules/middlewares/forms-validate-data.js')
 
-import lambdaCopyRequestParameters from './modules/middlewares/lambda-copy-request-parameters.js'
+    const lastGuard = await import('./modules/middlewares/last-guard.js')
 
-import lambdaLoadMetadata from './modules/middlewares/lambda-load-metadata.js'
+    // AWS API Gateway, HTTP APIs, Lambda Integration, Payload Format 2.0
 
-import lambdaNormalizeFormData from './modules/middlewares/lambda-normalize-form-data.js'
+    const lambdaCopyRequestParameters = await import('./modules/middlewares/lambda-copy-request-parameters.js')
 
-import lambdaNormalizeHeaders from './modules/middlewares/lambda-normalize-headers.js'
+    const lambdaLoadMetadata = await import('./modules/middlewares/lambda-load-metadata.js')
 
-import lambdaNormalizeQueryStringParameters from './modules/middlewares/lambda-normalize-query-string-parameters.js'
+    const lambdaNormalizeFormData = await import('./modules/middlewares/lambda-normalize-form-data.js')
 
-import oidcValidation from './modules/middlewares/oidc-validation.js'
+    const lambdaNormalizeHeaders = await import('./modules/middlewares/lambda-normalize-headers.js')
 
-import returnResponse from './modules/middlewares/return-response.js'
+    const lambdaNormalizeQueryStringParameters = await import('./modules/middlewares/lambda-normalize-query-string-parameters.js')
 
-import router from './modules/middlewares/router.js'
+    const oidcValidation = await import('./modules/middlewares/oidc-validation.js')
 
-import sessionExemption from './modules/middlewares/session-exemption.js'
+    const returnResponse = await import('./modules/middlewares/return-response.js')
 
-import sessionGuard from './modules/middlewares/session-guard.js'
+    const router = await import('./modules/middlewares/router.js')
 
-import setOidcSession from './modules/middlewares/set-oidc-session.js'
+    const sessionExemption = await import('./modules/middlewares/session-exemption.js')
 
-import setCookies from './modules/middlewares/set-cookies.js'
+    const sessionGuard = await import('./modules/middlewares/session-guard.js')
 
-const middlewares = [ // MIDDLEWARES, in execution order
+    const setOidcSession = await import('./modules/middlewares/set-oidc-session.js')
 
-    /* HTTP Request - Host System Integration (AWS Lambda) Protocols &
-    Data Structures*/
+    const setCookies = await import('./modules/middlewares/set-cookies.js')
 
-    lambdaCopyRequestParameters,
-    /* Query string values with same key
-               stored as: CSV string */
+    middlewares = [ // MIDDLEWARES, in execution order
 
-    lambdaNormalizeHeaders,
-    /* Cookie header values with same key stored
-               as: Array of values */
+        /* HTTP Request - Host System Integration (AWS Lambda) Protocols &
+        Data Structures*/
 
-    lambdaNormalizeQueryStringParameters,
-    /* Query string with same key
-               stored as: Array of values */
+        lambdaCopyRequestParameters,
+        /* Query string values with same key
+                   stored as: CSV string */
 
-    lambdaNormalizeFormData,
-    /* Form string values with same name stored
-               as: Array of values */
+        lambdaNormalizeHeaders,
+        /* Cookie header values with same key stored
+                   as: Array of values */
 
-    //lambdaLoadMetadata,
+        lambdaNormalizeQueryStringParameters,
+        /* Query string with same key
+                   stored as: Array of values */
 
-    /*_______________________________!!
-    !!            \\                 !!
-    !!              \\               !!
-    !!  Make way   //\\    Make way  !!
-    !!            //  \\             !!
-    !!__________//______\\___________*/
+        lambdaNormalizeFormData,
+        /* Form string values with same name stored
+                   as: Array of values */
 
-    /*  Middlewares below SHOULD be independent on host system (e.g.
-    Lambda) implementation details Nevertheless, everything below
-    targets Lambda's (response) format, so if we implement somewhere
-    other than Lambda, we'll need a final (somewhere-response-formatter)
-    middleware after (last-guard.js) */
+        //lambdaLoadMetadata,
 
-    /*  HTTP Request - Session Protocols & Data Structures */
-    /* CONSIDER RENAMING / NORMALISING NAMES OF THESE : TODO */
+        /*_______________________________!!
+        !!            \\                 !!
+        !!              \\               !!
+        !!  Make way   //\\    Make way  !!
+        !!            //  \\             !!
+        !!__________//______\\___________*/
 
-    sessionExemption,
+        /*  Middlewares below SHOULD be independent on host system (e.g.
+        Lambda) implementation details Nevertheless, everything below
+        targets Lambda's (response) format, so if we implement somewhere
+        other than Lambda, we'll need a final (somewhere-response-formatter)
+        middleware after (last-guard.js) */
 
-    oidcValidation,
+        /*  HTTP Request - Session Protocols & Data Structures */
+        /* CONSIDER RENAMING / NORMALISING NAMES OF THESE : TODO */
 
-    setOidcSession,
+        sessionExemption,
 
-    sessionGuard,
+        oidcValidation,
 
-    /*  HTML Request - Form Protocols & Data Structures
-      
-            Discussion:     Why do we not put (formsXYZ) before
-            (sessionExemption)? This seems to sit on the presumption
-            that (session state) will NEVER depend on form data. */
+        setOidcSession,
 
-    formsTunnelRestfulMethods,
-    /* CONSIDER removing "restful" from this name: TODO */
+        sessionGuard,
 
-    formsReindexNames,
+        /*  HTML Request - Form Protocols & Data Structures
+          
+                Discussion:     Why do we not put (formsXYZ) before
+                (sessionExemption)? This seems to sit on the presumption
+                that (session state) will NEVER depend on form data. */
 
-    formsValidateData,
+        formsTunnelRestfulMethods,
+        /* CONSIDER removing "restful" from this name: TODO */
 
-    /*  Business Logic
-      
-            Discussion :    Why do we put (router) after (formsXYZ) and
-            not before 
-            (sessionExemption)? This seems to be required IF we make
-            the assertion that (routes ... i.e. business logic) may
-            depend on form data.
+        formsReindexNames,
+
+        formsValidateData,
+
+        /*  Business Logic
+          
+                Discussion :    Why do we put (router) after (formsXYZ) and
+                not before 
+                (sessionExemption)? This seems to be required IF we make
+                the assertion that (routes ... i.e. business logic) may
+                depend on form data.
+        */
+
+        /*  2020-08-05 follow-up on notes from spa-prototype.js (2020-08-04)
+                  
+                    NEW ROUTING ARCHITECTURE PROPOSAL
+                  
+                   routeResponseStrategy,
+
+                   for example:     << simple HTTP >>
+                                    << RESTful >>
+                                    << CORBA >>
+                                    << TEAPOT >> etc.
+
+                   routeResponseMimeType,
+
+                   routeCodePath,
+
+                   currently under << router >>
+
+                   << routeCodePath >> will have to include all of what is
+                    currently under     << composeResponse >>
+                                        << setCookies >>
+                                        << applyLayout >>
+
+                   attributeBasedAccessControl,
+                   currently NO implementation
+
+                    DISCUSS : design on DynamoDB
+                  
+                    Accessor
+                        1ry/Partition   Key : STRING : USER_ID
+                        2dy/Sort        Key : unnecessary?
+                        Attribute           : MAP : TAGS 
+                                                    ... as TAG_NAME => TAG_VALUE
+                  
+                  
+                  
+                    Resource
+                        1ry/Partition   Key : STRING : RESOURCE_ID
+                        2dy/Sort        Key : unnecessary?
+                        Attribute           : MAP : TAGS 
+                                                    ... as TAG_NAME => TAG_VALUE
+                  
+
+
+                   executeCodePath,
+
+                   currently under << router >>
+
+                   << executeCodePath >> should terminate in a decisive opinion 
+                    on  << response headers, including status code>>, and
+                        << response body >>
+
+                    << lastGuard >> follows as is currently the case, where missing
+                                    opinons are caught and handled;   
     */
 
-    /*  2020-08-05 follow-up on notes from spa-prototype.js (2020-08-04)
-              
-                NEW ROUTING ARCHITECTURE PROPOSAL
-              
-               routeResponseStrategy,
+        /* each route points to a tree of tasks ("sub-routines")
+                  
+                        Question :      Why do we not separate the router and the 
+                        "dispatcher" (Rails terminology)? TODO : consider it.
+    */
+        router,
 
-               for example:     << simple HTTP >>
-                                << RESTful >>
-                                << CORBA >>
-                                << TEAPOT >> etc.
+        /*   HTTP Response*/
+        composeResponse,
+        setCookies,
+        applyLayout, /* - can this switch places with (setCookies)?*/
+        lastGuard, /*  Final Checkpoint*/
+        returnResponse
 
-               routeResponseMimeType,
+        /* HTTP Response - Host System Integration (AWS Lambda) Protocols &
+        Data Structures (none at this time)*/
 
-               routeCodePath,
+    ]
+} catch (e) { console.error(`
+( index-middlewares.js ) outer 'try' block.`, e) }
 
-               currently under << router >>
-
-               << routeCodePath >> will have to include all of what is
-                currently under     << composeResponse >>
-                                    << setCookies >>
-                                    << applyLayout >>
-
-               attributeBasedAccessControl,
-               currently NO implementation
-
-                DISCUSS : design on DynamoDB
-              
-                Accessor
-                    1ry/Partition   Key : STRING : USER_ID
-                    2dy/Sort        Key : unnecessary?
-                    Attribute           : MAP : TAGS 
-                                                ... as TAG_NAME => TAG_VALUE
-              
-              
-              
-                Resource
-                    1ry/Partition   Key : STRING : RESOURCE_ID
-                    2dy/Sort        Key : unnecessary?
-                    Attribute           : MAP : TAGS 
-                                                ... as TAG_NAME => TAG_VALUE
-              
-
-
-               executeCodePath,
-
-               currently under << router >>
-
-               << executeCodePath >> should terminate in a decisive opinion 
-                on  << response headers, including status code>>, and
-                    << response body >>
-
-                << lastGuard >> follows as is currently the case, where missing
-                                opinons are caught and handled;   
-*/
-
-    /* each route points to a tree of tasks ("sub-routines")
-              
-                    Question :      Why do we not separate the router and the 
-                    "dispatcher" (Rails terminology)? TODO : consider it.
-*/
-    router,
-
-    /*   HTTP Response*/
-    composeResponse,
-    setCookies,
-    applyLayout, /* - can this switch places with (setCookies)?*/
-    lastGuard, /*  Final Checkpoint*/
-    returnResponse
-
-    /* HTTP Response - Host System Integration (AWS Lambda) Protocols &
-    Data Structures (none at this time)*/
-
-]
-
-export default middlewares;
+export default middlewares
