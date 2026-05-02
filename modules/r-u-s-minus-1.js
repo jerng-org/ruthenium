@@ -11,6 +11,7 @@ console.log(`r-u-s-minus-1 : TOP of try`);
     switch (conf.platform.javascriptEngine) {
         case ('NODEJS'): {
             (jwkToPem = await import('jwk-to-pem')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
+            console.log(`r-u-s-minus-1 : jwkToPem : `, jwkToPem)
             (jsonwebtoken = await import('jsonwebtoken')); // LAMBDA LAYER arn:aws:lambda:us-east-1:ABC:layer:oidc-jwt-validation-tools:1
             querystring = await import("node:querystring")
             https = await import("node:https")
